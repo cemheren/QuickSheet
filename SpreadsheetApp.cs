@@ -10,6 +10,10 @@ public class SpreadsheetApp
     private const int MinColWidth = 10;
     private const int RowHeaderWidth = 4;
 
+    private static readonly string StateDir = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ExcelConsole");
+    private static readonly string AutoSavePath = Path.Combine(StateDir, "autosave.csv");
+
     public SpreadsheetApp(string? csvPath = null)
     {
         int w = Console.WindowWidth;
@@ -19,6 +23,10 @@ public class SpreadsheetApp
         {
             _loadedFile = csvPath;
             _grid.LoadFromCsv(csvPath);
+        }
+        else if (File.Exists(AutoSavePath))
+        {
+            _grid.LoadFromCsv(AutoSavePath);
         }
     }
 
@@ -131,6 +139,10 @@ public class SpreadsheetApp
 
             Render();
         }
+
+        // Auto-save state on exit
+        Directory.CreateDirectory(StateDir);
+        _grid.SaveToCsv(AutoSavePath);
 
         Console.ResetColor();
         Console.CursorVisible = true;
