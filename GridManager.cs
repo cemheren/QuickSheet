@@ -1,0 +1,134 @@
+namespace ExcelConsole;
+
+public class GridManager
+{
+    private readonly string[,] _data;
+    public int ColumnCount { get; }
+    public int RowCount { get; }
+
+    public GridManager(int availableWidth, int availableHeight)
+    {
+        const int columnWidth = 12;
+        const int rowHeaderWidth = 4;
+
+        ColumnCount = Math.Min(6, Math.Max(1, (availableWidth - rowHeaderWidth) / columnWidth));
+        RowCount = Math.Max(1, availableHeight);
+
+        _data = new string[RowCount, ColumnCount];
+        for (int r = 0; r < RowCount; r++)
+            for (int c = 0; c < ColumnCount; c++)
+                _data[r, c] = "";
+    }
+
+    public static string GetColumnName(int index)
+    {
+        string name = "";
+        index++;
+        while (index > 0)
+        {
+            index--;
+            name = (char)('A' + index % 26) + name;
+            index /= 26;
+        }
+        return name;
+    }
+
+    public string GetCellReference(int row, int col)
+    {
+        return $"{GetColumnName(col)}{row + 1}";
+    }
+
+    public string GetCellValue(int row, int col)
+    {
+        if (row >= 0 && row < RowCount && col >= 0 && col < ColumnCount)
+            return _data[row, col];
+        return "";
+    }
+
+    public void SetCellValue(int row, int col, string value)
+    {
+        if (row >= 0 && row < RowCount && col >= 0 && col < ColumnCount)
+            _data[row, col] = value;
+    }
+
+    public void ClearRow(int row)
+    {
+        if (row < 0 || row >= RowCount) return;
+        for (int c = 0; c < ColumnCount; c++)
+            _data[row, c] = "";
+    }
+
+    public void DeleteRow(int row)
+    {
+        if (row < 0 || row >= RowCount) return;
+        for (int r = row; r < RowCount - 1; r++)
+            for (int c = 0; c < ColumnCount; c++)
+                _data[r, c] = _data[r + 1, c];
+        for (int c = 0; c < ColumnCount; c++)
+            _data[RowCount - 1, c] = "";
+    }
+
+    public void ShiftRowsDown(int fromRow)
+    {
+        if (fromRow < 0 || fromRow >= RowCount) return;
+        // Shift rows down from the bottom, inserting empty row at fromRow
+        for (int r = RowCount - 1; r > fromRow; r--)
+            for (int c = 0; c < ColumnCount; c++)
+                _data[r, c] = _data[r - 1, c];
+        for (int c = 0; c < ColumnCount; c++)
+            _data[fromRow, c] = "";
+    }
+
+    public void ShiftRowsUp(int fromRow)
+    {
+        if (fromRow < 0 || fromRow >= RowCount) return;
+        // Shift rows up, discarding fromRow, empty row at bottom
+        for (int r = fromRow; r < RowCount - 1; r++)
+            for (int c = 0; c < ColumnCount; c++)
+                _data[r, c] = _data[r + 1, c];
+        for (int c = 0; c < ColumnCount; c++)
+            _data[RowCount - 1, c] = "";
+    }
+
+    public double? GetColumnSum(int col)
+    {
+        if (col < 0 || col >= ColumnCount)
+            return null;
+
+        double sum = 0;
+        bool hasNumber = false;
+
+        for (int r = 0; r < RowCount; r++)
+        {
+            if (double.TryParse(_data[r, col], System.Globalization.NumberStyles.Any,
+                System.Globalization.CultureInfo.InvariantCulture, out double num))
+            {
+                sum += num;
+                hasNumber = true;
+            }
+        }
+
+        return hasNumber ? sum : null;
+    }
+
+    public double? GetRowProduct(int row)
+    {
+        if (row < 0 || row >= RowCount)
+            return null;
+
+        double product = 1;
+        bool hasNumber = false;
+
+        for (int c = 0; c < ColumnCount; c++)
+        {
+            if (double.TryParse(_data[row, c], System.Globalization.NumberStyles.Any,
+                System.Globalization.CultureInfo.InvariantCulture, out double num))
+            {
+                product *= num;
+                hasNumber = true;
+            }
+        }
+
+        return hasNumber ? product : null;
+    }
+}
