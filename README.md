@@ -19,8 +19,8 @@ A lightweight interactive spreadsheet application for the terminal, built with C
 
 ```bash
 # Clone the repo
-git clone https://github.com/akif/ExcelConsole.git
-cd ExcelConsole
+git clone https://github.com/cemheren/QuickSheet.git
+cd QuickSheet
 
 # Run
 dotnet run
