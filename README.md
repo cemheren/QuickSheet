@@ -1,4 +1,4 @@
-# ExcelConsole
+# QuickSheet
 
 A lightweight interactive spreadsheet application for the terminal, built with C# and raw `System.Console` — zero dependencies.
 
