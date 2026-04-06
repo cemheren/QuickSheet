@@ -16,6 +16,7 @@ internal class DesktopForm : Form
     private readonly GridManager _grid;
     private int _selectedRow;
     private int _selectedCol;
+    private readonly HashSet<(int row, int col)> _selection = new();
     private string _clipboard = "";
     private string? _loadedFile;
 
@@ -166,6 +167,36 @@ internal class DesktopForm : Form
         catch { }
     }
 
+    private void OpenAllSelected()
+    {
+        // Collect all cells: current cursor + multi-selection
+        var cells = new HashSet<(int row, int col)>(_selection)
+        {
+            (_selectedRow, _selectedCol)
+        };
+
+        bool opened = false;
+        foreach (var (r, c) in cells)
+        {
+            if (_grid.IsFileEntry(r, c))
+            {
+                string path = _grid.GetFilePath(r, c);
+                if (!string.IsNullOrEmpty(path))
+                    try { Process.Start(new ProcessStartInfo(path) { UseShellExecute = true }); opened = true; } catch { }
+            }
+            else
+            {
+                string val = _grid.GetCellValue(r, c);
+                if (IsHyperlink(val))
+                    try { Process.Start(new ProcessStartInfo(val) { UseShellExecute = true }); opened = true; } catch { }
+            }
+        }
+
+        // If nothing was opened, move down as default Enter behavior
+        if (!opened && _selectedRow < _grid.RowCount - 1)
+            _selectedRow++;
+    }
+
     // ── Desktop mode ─────────────────────────────────────────────────
 
     /// <summary>
@@ -302,10 +333,12 @@ internal class DesktopForm : Form
                 int w = colWidths[c];
                 string cellVal = _grid.GetCellValue(r, c);
                 string display = cellVal.Length >= w ? cellVal[..w] : cellVal.PadRight(w);
-                bool isSelected = r == _selectedRow && c == _selectedCol;
+                bool isCursor = r == _selectedRow && c == _selectedCol;
+                bool isMultiSel = _selection.Contains((r, c));
                 bool isFile = _grid.IsFileEntry(r, c);
                 bool isLink = IsHyperlink(cellVal);
-                Color bg = isSelected ? Color.FromArgb(64, 64, 64)
+                Color bg = isCursor   ? Color.FromArgb(64, 64, 64)
+                         : isMultiSel ? Color.FromArgb(50, 50, 80)
                          : isFile     ? Color.FromArgb(0, 40, 60)
                          : isLink     ? Color.FromArgb(40, 0, 60)
                          : Color.Black;
@@ -370,7 +403,6 @@ internal class DesktopForm : Form
                     break;
                 case Keys.V:
                     string paste = Clipboard.ContainsText() ? Clipboard.GetText() : _clipboard;
-                    // Take first line only to keep it in one cell
                     int nl = paste.IndexOfAny(new[] { '\r', '\n' });
                     if (nl >= 0) paste = paste[..nl];
                     _grid.SetCellValue(_selectedRow, _selectedCol, paste);
@@ -381,21 +413,42 @@ internal class DesktopForm : Form
                 default: handled = false; break;
             }
         }
-        else
+        else if (e.Shift)
         {
+            // Shift+Arrow: extend multi-selection
+            _selection.Add((_selectedRow, _selectedCol));
             switch (e.KeyCode)
             {
                 case Keys.Up: if (_selectedRow > 0) _selectedRow--; break;
                 case Keys.Down: if (_selectedRow < _grid.RowCount - 1) _selectedRow++; break;
                 case Keys.Left: if (_selectedCol > 0) _selectedCol--; break;
                 case Keys.Right: if (_selectedCol < _grid.ColumnCount - 1) _selectedCol++; break;
+                default: handled = false; break;
+            }
+            if (handled) _selection.Add((_selectedRow, _selectedCol));
+        }
+        else
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Up:
+                    if (_selectedRow > 0) _selectedRow--;
+                    _selection.Clear();
+                    break;
+                case Keys.Down:
+                    if (_selectedRow < _grid.RowCount - 1) _selectedRow++;
+                    _selection.Clear();
+                    break;
+                case Keys.Left:
+                    if (_selectedCol > 0) _selectedCol--;
+                    _selection.Clear();
+                    break;
+                case Keys.Right:
+                    if (_selectedCol < _grid.ColumnCount - 1) _selectedCol++;
+                    _selection.Clear();
+                    break;
                 case Keys.Enter:
-                    if (_grid.IsFileEntry(_selectedRow, _selectedCol))
-                        OpenSelectedFile();
-                    else if (IsHyperlink(_grid.GetCellValue(_selectedRow, _selectedCol)))
-                        OpenHyperlink();
-                    else if (_selectedRow < _grid.RowCount - 1)
-                        _selectedRow++;
+                    OpenAllSelected();
                     break;
                 case Keys.Back:
                     var val = _grid.GetCellValue(_selectedRow, _selectedCol);
@@ -405,8 +458,11 @@ internal class DesktopForm : Form
                 case Keys.Tab:
                     if (_selectedCol < _grid.ColumnCount - 1) _selectedCol++;
                     else if (_selectedRow < _grid.RowCount - 1) { _selectedCol = 0; _selectedRow++; }
+                    _selection.Clear();
                     break;
-                case Keys.Escape: break;
+                case Keys.Escape:
+                    _selection.Clear();
+                    break;
                 default: handled = false; break;
             }
         }
@@ -446,6 +502,17 @@ internal class DesktopForm : Form
         }
         if (col < 0) return;
 
+        if (ModifierKeys.HasFlag(Keys.Control))
+        {
+            // Ctrl+click: toggle cell in multi-selection
+            if (!_selection.Remove((row, col)))
+                _selection.Add((row, col));
+        }
+        else
+        {
+            _selection.Clear();
+        }
+
         _selectedRow = row;
         _selectedCol = col;
         Invalidate();
@@ -453,10 +520,7 @@ internal class DesktopForm : Form
 
     private void OnFormDoubleClick(object? sender, MouseEventArgs e)
     {
-        if (_grid.IsFileEntry(_selectedRow, _selectedCol))
-            OpenSelectedFile();
-        else if (IsHyperlink(_grid.GetCellValue(_selectedRow, _selectedCol)))
-            OpenHyperlink();
+        OpenAllSelected();
     }
 
     // ── File operations ──────────────────────────────────────────────
