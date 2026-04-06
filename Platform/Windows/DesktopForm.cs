@@ -24,6 +24,8 @@ internal class DesktopForm : Form
 
     private readonly NotifyIcon _trayIcon;
     private bool _lockZOrder;
+    private IntPtr _winEventHook;
+    private NativeMethods.WinEventDelegate? _winEventDelegate;
 
     private const int DefaultColWidth = 20;
     private const int RowHeaderWidth = 4;
@@ -108,9 +110,49 @@ internal class DesktopForm : Form
             0, 0, 0, 0,
             NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOSIZE | NativeMethods.SWP_NOACTIVATE);
 
-        // Now lock Z-order so it stays there
+        // Lock Z-order so clicking doesn't bring it above other apps
         _lockZOrder = true;
+
+        // Hook foreground window changes to detect Win+D ("Show Desktop").
+        // When WorkerW becomes the foreground, Windows has issued "Show Desktop"
+        // — make ourselves topmost so we appear above it. When any other window
+        // becomes foreground, drop back to non-topmost.
+        _winEventDelegate = OnForegroundChanged;
+        _winEventHook = NativeMethods.SetWinEventHook(
+            NativeMethods.EVENT_SYSTEM_FOREGROUND,
+            NativeMethods.EVENT_SYSTEM_FOREGROUND,
+            IntPtr.Zero, _winEventDelegate, 0, 0,
+            NativeMethods.WINEVENT_OUTOFCONTEXT);
+
         Invalidate();
+    }
+
+    private void OnForegroundChanged(IntPtr hWinEventHook, uint eventType,
+        IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
+    {
+        var sb = new System.Text.StringBuilder(32);
+        NativeMethods.GetClassName(hwnd, sb, sb.Capacity);
+        string cls = sb.ToString();
+
+        // Temporarily unlock Z-order so SetWindowPos can change it
+        _lockZOrder = false;
+
+        if (cls is "WorkerW" or "Progman")
+        {
+            // "Show Desktop" was triggered — become topmost to appear above it
+            NativeMethods.SetWindowPos(Handle, NativeMethods.HWND_TOPMOST,
+                0, 0, 0, 0,
+                NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOSIZE | NativeMethods.SWP_NOACTIVATE);
+        }
+        else
+        {
+            // A real app took focus — drop topmost so we go behind apps again
+            NativeMethods.SetWindowPos(Handle, NativeMethods.HWND_NOTOPMOST,
+                0, 0, 0, 0,
+                NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOSIZE | NativeMethods.SWP_NOACTIVATE);
+        }
+
+        _lockZOrder = true;
     }
 
     protected override bool ShowWithoutActivation => true;
@@ -329,6 +371,8 @@ internal class DesktopForm : Form
 
     private void OnFormClosing(object? sender, FormClosingEventArgs e)
     {
+        if (_winEventHook != IntPtr.Zero)
+            NativeMethods.UnhookWinEvent(_winEventHook);
         Directory.CreateDirectory(StateDir);
         _grid.SaveToCsv(AutoSavePath);
         _trayIcon.Visible = false;
