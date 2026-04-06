@@ -151,6 +151,21 @@ internal class DesktopForm : Form
         catch { }
     }
 
+    private static bool IsHyperlink(string value) =>
+        value.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
+        value.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
+
+    private void OpenHyperlink()
+    {
+        string url = _grid.GetCellValue(_selectedRow, _selectedCol);
+        if (!IsHyperlink(url)) return;
+        try
+        {
+            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+        }
+        catch { }
+    }
+
     // ── Desktop mode ─────────────────────────────────────────────────
 
     /// <summary>
@@ -289,10 +304,14 @@ internal class DesktopForm : Form
                 string display = cellVal.Length >= w ? cellVal[..w] : cellVal.PadRight(w);
                 bool isSelected = r == _selectedRow && c == _selectedCol;
                 bool isFile = _grid.IsFileEntry(r, c);
+                bool isLink = IsHyperlink(cellVal);
                 Color bg = isSelected ? Color.FromArgb(64, 64, 64)
                          : isFile     ? Color.FromArgb(0, 40, 60)
+                         : isLink     ? Color.FromArgb(40, 0, 60)
                          : Color.Black;
-                Color fg = isFile ? Color.FromArgb(100, 200, 255) : Color.White;
+                Color fg = isFile ? Color.FromArgb(100, 200, 255)
+                         : isLink ? Color.FromArgb(180, 140, 255)
+                         : Color.White;
                 DrawText(g, display, x, y, fg, bg);
                 x += w * cw;
             }
@@ -373,6 +392,8 @@ internal class DesktopForm : Form
                 case Keys.Enter:
                     if (_grid.IsFileEntry(_selectedRow, _selectedCol))
                         OpenSelectedFile();
+                    else if (IsHyperlink(_grid.GetCellValue(_selectedRow, _selectedCol)))
+                        OpenHyperlink();
                     else if (_selectedRow < _grid.RowCount - 1)
                         _selectedRow++;
                     break;
@@ -434,6 +455,8 @@ internal class DesktopForm : Form
     {
         if (_grid.IsFileEntry(_selectedRow, _selectedCol))
             OpenSelectedFile();
+        else if (IsHyperlink(_grid.GetCellValue(_selectedRow, _selectedCol)))
+            OpenHyperlink();
     }
 
     // ── File operations ──────────────────────────────────────────────
