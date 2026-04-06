@@ -87,6 +87,7 @@ internal class DesktopForm : Form
 
         KeyDown += OnFormKeyDown;
         KeyPress += OnFormKeyPress;
+        MouseDown += OnFormMouseDown;
         FormClosing += OnFormClosing;
     }
 
@@ -292,6 +293,28 @@ internal class DesktopForm : Form
             e.Handled = true;
             Invalidate();
         }
+    }
+
+    private void OnFormMouseDown(object? sender, MouseEventArgs e)
+    {
+        int headerRows = 2; // column header + underline
+        int row = (e.Y / _charHeight) - headerRows;
+        if (row < 0 || row >= _grid.RowCount) return;
+
+        int[] colWidths = GetColumnWidths();
+        int x = RowHeaderWidth * _charWidth;
+        int col = -1;
+        for (int c = 0; c < _grid.ColumnCount; c++)
+        {
+            int colPx = colWidths[c] * _charWidth;
+            if (e.X >= x && e.X < x + colPx) { col = c; break; }
+            x += colPx;
+        }
+        if (col < 0) return;
+
+        _selectedRow = row;
+        _selectedCol = col;
+        Invalidate();
     }
 
     // ── File operations ──────────────────────────────────────────────
