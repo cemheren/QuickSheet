@@ -1,6 +1,5 @@
 using System.Drawing;
 using System.Drawing.Text;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace ExcelConsole.Platform.Windows;
@@ -22,9 +21,7 @@ internal class DesktopForm : Form
     private readonly int _charWidth;
     private readonly int _charHeight;
 
-    private bool _isDesktopMode = true;
     private readonly NotifyIcon _trayIcon;
-    private System.Threading.Timer? _watchdog;
 
     private const int MinColWidth = 10;
     private const int RowHeaderWidth = 4;
@@ -94,8 +91,7 @@ internal class DesktopForm : Form
     // ── Desktop mode ─────────────────────────────────────────────────
 
     /// <summary>
-    /// Configures the form as a desktop replacement: hidden from Alt+Tab,
-    /// resistant to Win+D minimization.
+    /// Configures the form as a desktop replacement: hidden from Alt+Tab.
     /// </summary>
     public void EnterDesktopMode()
     {
@@ -103,60 +99,7 @@ internal class DesktopForm : Form
         var exStyle = (long)NativeMethods.GetWindowLongPtr(Handle, NativeMethods.GWL_EXSTYLE);
         exStyle |= NativeMethods.WS_EX_TOOLWINDOW;
         NativeMethods.SetWindowLongPtr(Handle, NativeMethods.GWL_EXSTYLE, (IntPtr)exStyle);
-
-        _isDesktopMode = true;
-
-        // Thread-pool watchdog: Win+D on Windows 11 bypasses standard window
-        // messages AND may stall the UI message pump during the minimize
-        // animation, so a WinForms timer can't fire in time. A thread-pool
-        // timer fires independently and marshals the restore via BeginInvoke.
-        var hwnd = Handle;
-        var workingArea = Screen.PrimaryScreen!.WorkingArea;
-        _watchdog = new System.Threading.Timer(_ =>
-        {
-            if (NativeMethods.IsIconic(hwnd) || !NativeMethods.IsWindowVisible(hwnd))
-            {
-                NativeMethods.ShowWindow(hwnd, NativeMethods.SW_RESTORE);
-                NativeMethods.SetWindowPos(hwnd, IntPtr.Zero,
-                    workingArea.X, workingArea.Y, workingArea.Width, workingArea.Height,
-                    NativeMethods.SWP_NOACTIVATE | NativeMethods.SWP_SHOWWINDOW);
-            }
-        }, null, 0, 100);
-
         Invalidate();
-    }
-
-    protected override void WndProc(ref Message m)
-    {
-        if (_isDesktopMode)
-        {
-            // Block SC_MINIMIZE (e.g. from taskbar context menu)
-            if (m.Msg == NativeMethods.WM_SYSCOMMAND
-                && (m.WParam.ToInt32() & 0xFFF0) == NativeMethods.SC_MINIMIZE)
-                return;
-
-            // Win+D calls ShowWindow(SW_MINIMIZE) which sends WM_WINDOWPOSCHANGING
-            // with SWP_HIDEWINDOW. Strip that flag so the window stays visible.
-            if (m.Msg == NativeMethods.WM_WINDOWPOSCHANGING)
-            {
-                var pos = Marshal.PtrToStructure<NativeMethods.WINDOWPOS>(m.LParam);
-                if ((pos.flags & NativeMethods.SWP_HIDEWINDOW) != 0)
-                {
-                    pos.flags &= ~NativeMethods.SWP_HIDEWINDOW;
-                    Marshal.StructureToPtr(pos, m.LParam, false);
-                }
-            }
-
-            // Safety net: if the window still ends up minimized, restore immediately
-            if (m.Msg == NativeMethods.WM_SIZE
-                && m.WParam.ToInt32() == NativeMethods.SIZE_MINIMIZED)
-            {
-                BeginInvoke(() => WindowState = FormWindowState.Normal);
-                return;
-            }
-        }
-
-        base.WndProc(ref m);
     }
 
     // ── Rendering ────────────────────────────────────────────────────
@@ -347,7 +290,6 @@ internal class DesktopForm : Form
     {
         if (disposing)
         {
-            _watchdog?.Dispose();
             _monoFont.Dispose();
             _trayIcon.Dispose();
         }
