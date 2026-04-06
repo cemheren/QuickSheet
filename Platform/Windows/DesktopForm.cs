@@ -29,7 +29,7 @@ internal class DesktopForm : Form
     private NativeMethods.WinEventDelegate? _winEventDelegate;
     private System.Threading.Timer? _autoSaveTimer;
 
-    private const int DefaultColWidth = 20;
+    private readonly int _colWidth;
     private const int RowHeaderWidth = 4;
 
     private static readonly string StateDir = Path.Combine(
@@ -66,6 +66,10 @@ internal class DesktopForm : Form
         int availableWidth = Bounds.Width / _charWidth;
         int availableHeight = Bounds.Height / _charHeight - 3;
         _grid = new GridManager(availableWidth, availableHeight);
+
+        // Distribute available width evenly so columns fill the screen
+        int usableChars = availableWidth - RowHeaderWidth;
+        _colWidth = _grid.ColumnCount > 0 ? usableChars / _grid.ColumnCount : 20;
 
         if (csvPath is not null)
         {
@@ -230,7 +234,7 @@ internal class DesktopForm : Form
     {
         var widths = new int[_grid.ColumnCount];
         for (int c = 0; c < _grid.ColumnCount; c++)
-            widths[c] = DefaultColWidth;
+            widths[c] = _colWidth;
         return widths;
     }
 
