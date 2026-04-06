@@ -22,14 +22,28 @@ A lightweight interactive spreadsheet application for the terminal, built with C
 git clone https://github.com/cemheren/QuickSheet.git
 cd QuickSheet
 
-# Run
+# Run (console mode)
 dotnet run
 
 # Load a CSV file
 dotnet run -- data.csv
+
+# Run as desktop background (Windows)
+dotnet run -- --desktop
+dotnet run -- --desktop data.csv
 ```
 
 Requires [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0).
+
+## Desktop Background Mode
+
+Run with `--desktop` to embed the spreadsheet behind your desktop icons as a live wallpaper.
+
+- **Alt + \`** — Toggle between desktop (view-only) and focused (interactive) mode
+- **System tray icon** — Right-click for Toggle Focus, Save, and Exit
+- All standard keyboard shortcuts work in focused mode
+
+The status bar shows `[DESKTOP]` or `[FOCUSED]` to indicate the current mode.
 
 ## Keyboard Shortcuts
 
