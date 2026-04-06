@@ -4,7 +4,7 @@ namespace ExcelConsole.Platform.Windows;
 
 /// <summary>
 /// Windows implementation of IDesktopHost.
-/// Launches a WinForms application and embeds it into the desktop WorkerW layer.
+/// Launches a borderless WinForms window that acts as a desktop replacement.
 /// </summary>
 public class WindowsDesktopHost : Platform.IDesktopHost
 {
@@ -17,12 +17,8 @@ public class WindowsDesktopHost : Platform.IDesktopHost
         Application.SetCompatibleTextRenderingDefault(false);
 
         _form = new DesktopForm(csvPath);
+        _form.Shown += (_, _) => _form.EnterDesktopMode();
 
-        // Force window handle creation without showing, so we can embed first
-        _ = _form.Handle;
-        _form.EmbedIntoDesktop();
-
-        // Application.Run makes the form visible — it's already parented to WorkerW
         Application.Run(_form);
     }
 

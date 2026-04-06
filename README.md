@@ -35,15 +35,20 @@ dotnet run -- --desktop data.csv
 
 Requires [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0).
 
-## Desktop Background Mode
+## Desktop Mode
 
-Run with `--desktop` to embed the spreadsheet behind your desktop icons as a live wallpaper.
+Run with `--desktop` to replace the Windows desktop with an interactive spreadsheet.
+The form fills the working area (behind the taskbar) and resists Win+D minimization,
+so it appears as your desktop when all other windows are minimized.
 
-- **Alt + \`** — Toggle between desktop (view-only) and focused (interactive) mode
-- **System tray icon** — Right-click for Toggle Focus, Save, and Exit
-- All standard keyboard shortcuts work in focused mode
+- **Alt + \`** — Bring QuickSheet to the foreground from any application
+- **System tray icon** — Right-click for Show, Save, and Exit
+- Click directly on the grid to focus it, then use all standard keyboard shortcuts
+- The taskbar remains fully visible and functional
 
-The status bar shows `[DESKTOP]` or `[FOCUSED]` to indicate the current mode.
+> **Cross-platform note:** All Windows-specific code is isolated behind the
+> `IDesktopHost` interface in `Platform/`. A Linux implementation can be added
+> without touching the core `GridManager` or console UI.
 
 ## Keyboard Shortcuts
 

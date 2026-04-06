@@ -5,9 +5,9 @@ using System.Windows.Forms;
 namespace ExcelConsole.Platform.Windows;
 
 /// <summary>
-/// Borderless fullscreen form that renders the spreadsheet grid using GDI+.
-/// Designed to be embedded into the Windows desktop WorkerW layer as a live wallpaper,
-/// or popped out for interactive editing via Alt+` hotkey.
+/// Borderless form that replaces the desktop experience. Covers the working area
+/// (behind the taskbar) and resists minimization so Win+D reveals it instead of
+/// the normal desktop. Fully interactable — click to focus, type to edit cells.
 /// </summary>
 internal class DesktopForm : Form
 {
@@ -21,8 +21,7 @@ internal class DesktopForm : Form
     private readonly int _charWidth;
     private readonly int _charHeight;
 
-    private bool _isEmbedded;
-    private IntPtr _workerW;
+    private bool _isDesktopMode = true;
     private readonly NotifyIcon _trayIcon;
 
     private const int MinColWidth = 10;
@@ -38,7 +37,6 @@ internal class DesktopForm : Form
         BackColor = Color.Black;
         FormBorderStyle = FormBorderStyle.None;
         StartPosition = FormStartPosition.Manual;
-        Bounds = Screen.PrimaryScreen!.Bounds;
         ShowInTaskbar = false;
         KeyPreview = true;
         SetStyle(
@@ -46,8 +44,10 @@ internal class DesktopForm : Form
             ControlStyles.AllPaintingInWmPaint |
             ControlStyles.UserPaint, true);
 
-        // Monospace font — measure character cell size
-        _monoFont = new Font("Consolas", 12f, FontStyle.Regular);
+        // Fill the working area (screen minus taskbar)
+        Bounds = Screen.PrimaryScreen!.WorkingArea;
+
+        _monoFont = new Font("Consolas", 14f, FontStyle.Regular);
         using (var bmp = new Bitmap(1, 1))
         using (var g = Graphics.FromImage(bmp))
         {
@@ -58,12 +58,10 @@ internal class DesktopForm : Form
             _charHeight = size.Height;
         }
 
-        // Create grid sized to fill the screen
         int availableWidth = Bounds.Width / _charWidth;
-        int availableHeight = Bounds.Height / _charHeight - 3; // header, underline, status bar
+        int availableHeight = Bounds.Height / _charHeight - 3;
         _grid = new GridManager(availableWidth, availableHeight);
 
-        // Load data
         if (csvPath is not null)
         {
             _loadedFile = csvPath;
@@ -74,7 +72,6 @@ internal class DesktopForm : Form
             _grid.LoadFromCsv(AutoSavePath);
         }
 
-        // System tray icon
         _trayIcon = new NotifyIcon
         {
             Text = "QuickSheet Desktop",
@@ -82,74 +79,64 @@ internal class DesktopForm : Form
             Visible = true,
         };
         var menu = new ContextMenuStrip();
-        menu.Items.Add("Toggle Focus (Alt+`)", null, (_, _) => ToggleEmbed());
+        menu.Items.Add("Show QuickSheet", null, (_, _) => BringToFocus());
         menu.Items.Add("Save", null, (_, _) => SaveFile());
         menu.Items.Add(new ToolStripSeparator());
         menu.Items.Add("Exit", null, (_, _) => Close());
         _trayIcon.ContextMenuStrip = menu;
-        _trayIcon.DoubleClick += (_, _) => ToggleEmbed();
+        _trayIcon.DoubleClick += (_, _) => BringToFocus();
 
         KeyDown += OnFormKeyDown;
         KeyPress += OnFormKeyPress;
-        Paint += OnFormPaint;
-        Resize += (_, _) => Invalidate();
         FormClosing += OnFormClosing;
     }
 
-    // ── Desktop embedding ────────────────────────────────────────────
+    // ── Desktop mode ─────────────────────────────────────────────────
 
-    public void EmbedIntoDesktop()
+    /// <summary>
+    /// Configures the form as a desktop replacement: hidden from Alt+Tab,
+    /// resistant to minimization, and at the bottom of the Z-order.
+    /// </summary>
+    public void EnterDesktopMode()
     {
-        _workerW = DesktopEmbedder.GetDesktopWorkerW();
-        if (_workerW == IntPtr.Zero)
-        {
-            // Fallback: run as a normal borderless window
-            _isEmbedded = false;
-            return;
-        }
+        // Hide from Alt+Tab
+        var exStyle = (long)NativeMethods.GetWindowLongPtr(Handle, NativeMethods.GWL_EXSTYLE);
+        exStyle |= NativeMethods.WS_EX_TOOLWINDOW;
+        NativeMethods.SetWindowLongPtr(Handle, NativeMethods.GWL_EXSTYLE, (IntPtr)exStyle);
 
-        NativeMethods.SetParent(Handle, _workerW);
-        // As a child of WorkerW, position is relative to parent — origin at (0,0)
-        Location = Point.Empty;
-        Size = Screen.PrimaryScreen!.Bounds.Size;
-        _isEmbedded = true;
+        _isDesktopMode = true;
 
         NativeMethods.RegisterHotKey(Handle, NativeMethods.HOTKEY_ID,
             NativeMethods.MOD_ALT | NativeMethods.MOD_NOREPEAT, NativeMethods.VK_OEM_3);
+
+        Invalidate();
     }
 
-    private void ToggleEmbed()
+    private void BringToFocus()
     {
-        if (_isEmbedded)
-        {
-            // Pop out for interactive editing — detach from WorkerW, use screen coordinates
-            NativeMethods.SetParent(Handle, IntPtr.Zero);
-            Location = Screen.PrimaryScreen!.Bounds.Location;
-            Size = Screen.PrimaryScreen!.Bounds.Size;
-            TopMost = true;
-            NativeMethods.SetForegroundWindow(Handle);
-            _isEmbedded = false;
-            Focus();
-        }
-        else if (_workerW != IntPtr.Zero)
-        {
-            // Sink back behind desktop icons — child coordinates relative to WorkerW
-            TopMost = false;
-            NativeMethods.SetParent(Handle, _workerW);
-            Location = Point.Empty;
-            Size = Screen.PrimaryScreen!.Bounds.Size;
-            _isEmbedded = true;
-        }
-        Invalidate();
+        if (WindowState == FormWindowState.Minimized)
+            WindowState = FormWindowState.Normal;
+        NativeMethods.SetForegroundWindow(Handle);
+        Focus();
     }
 
     protected override void WndProc(ref Message m)
     {
+        // Resist Win+D minimization — stay visible as the "desktop"
+        const int WM_SYSCOMMAND = 0x0112;
+        const int SC_MINIMIZE = 0xF020;
+        if (m.Msg == WM_SYSCOMMAND && (m.WParam.ToInt32() & 0xFFF0) == SC_MINIMIZE && _isDesktopMode)
+        {
+            return; // swallow minimize
+        }
+
+        // Alt+` hotkey: bring to foreground
         if (m.Msg == NativeMethods.WM_HOTKEY && m.WParam.ToInt32() == NativeMethods.HOTKEY_ID)
         {
-            ToggleEmbed();
+            BringToFocus();
             return;
         }
+
         base.WndProc(ref m);
     }
 
@@ -171,18 +158,22 @@ internal class DesktopForm : Form
         return widths;
     }
 
-    private void OnFormPaint(object? sender, PaintEventArgs e)
+    protected override void OnPaint(PaintEventArgs e)
     {
         var g = e.Graphics;
         g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+        RenderGrid(g, ClientSize.Width, ClientSize.Height);
+    }
 
+    private void RenderGrid(Graphics g, int formWidth, int formHeight)
+    {
         int cw = _charWidth;
         int ch = _charHeight;
         int[] colWidths = GetColumnWidths();
-
+        g.Clear(Color.Black);
         int y = 0;
 
-        // ── Column headers ──
+        // Column headers
         DrawText(g, new string(' ', RowHeaderWidth), 0, y, Color.White, Color.Black);
         int x = RowHeaderWidth * cw;
         for (int c = 0; c < _grid.ColumnCount; c++)
@@ -193,19 +184,17 @@ internal class DesktopForm : Form
             DrawText(g, header, x, y, Color.White, bg);
             x += w * cw;
         }
-        ClearToRight(g, x, y, ch);
         y += ch;
 
-        // ── Underline ──
-        string underline = new string('─', RowHeaderWidth);
+        // Underline
+        string underline = new string('-', RowHeaderWidth);
         for (int c = 0; c < _grid.ColumnCount; c++)
-            underline += new string('─', colWidths[c]);
+            underline += new string('-', colWidths[c]);
         DrawText(g, underline, 0, y, Color.White, Color.Black);
-        ClearToRight(g, underline.Length * cw, y, ch);
         y += ch;
 
-        // ── Data rows ──
-        int statusY = Height - ch;
+        // Data rows
+        int statusY = formHeight - ch;
         for (int r = 0; r < _grid.RowCount && y + ch <= statusY; r++)
         {
             x = 0;
@@ -213,45 +202,32 @@ internal class DesktopForm : Form
             Color rowBg = r == _selectedRow ? Color.FromArgb(64, 64, 64) : Color.Black;
             DrawText(g, rowNum, x, y, Color.White, rowBg);
             x = RowHeaderWidth * cw;
-
             for (int c = 0; c < _grid.ColumnCount; c++)
             {
                 int w = colWidths[c];
                 string cellVal = _grid.GetCellValue(r, c);
                 string display = cellVal.Length >= w ? cellVal[..w] : cellVal.PadRight(w);
-
                 bool isSelected = r == _selectedRow && c == _selectedCol;
                 Color bg = isSelected ? Color.FromArgb(64, 64, 64) : Color.Black;
                 DrawText(g, display, x, y, Color.White, bg);
                 x += w * cw;
             }
-
-            ClearToRight(g, x, y, ch);
             y += ch;
         }
 
-        // Clear empty area between last row and status bar
-        if (y < statusY)
-            g.FillRectangle(Brushes.Black, 0, y, Width, statusY - y);
-
-        // ── Status bar ──
+        // Status bar
         string cellRef = _grid.GetCellReference(_selectedRow, _selectedCol);
         string value = _grid.GetCellValue(_selectedRow, _selectedCol);
         string valueDisplay = string.IsNullOrEmpty(value) ? "" : $" = {value}";
-
         double? sum = _grid.GetColumnSum(_selectedCol);
         string colName = GridManager.GetColumnName(_selectedCol);
         string sumDisplay = sum.HasValue ? $"  \u03a3{colName} = {sum.Value}" : "";
-
         double? product = _grid.GetRowProduct(_selectedRow);
-        string productDisplay = product.HasValue ? $"  \u03a0{_selectedRow + 1} = {product.Value}" : "";
-
-        string mode = _isEmbedded ? "DESKTOP" : "FOCUSED";
-        string status = $" {cellRef}{valueDisplay}{sumDisplay}{productDisplay}  \u2502  Alt+`: Toggle  Ctrl+Q: Quit  [{mode}]";
-        int maxChars = Width / cw;
+        string productDisplay = product.HasValue ? $"  \u03a0{(_selectedRow + 1)} = {product.Value}" : "";
+        string status = $" {cellRef}{valueDisplay}{sumDisplay}{productDisplay}  |  Alt+`: Focus  Ctrl+S: Save  Ctrl+Q: Quit";
+        int maxChars = formWidth / cw;
         status = status.PadRight(maxChars);
-
-        g.FillRectangle(Brushes.White, 0, statusY, Width, ch);
+        g.FillRectangle(Brushes.White, 0, statusY, formWidth, ch);
         DrawText(g, status, 0, statusY, Color.Black, Color.White);
     }
 
@@ -264,92 +240,54 @@ internal class DesktopForm : Form
             TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix);
     }
 
-    private void ClearToRight(Graphics g, int fromX, int y, int rowHeight)
-    {
-        if (fromX < Width)
-            g.FillRectangle(Brushes.Black, fromX, y, Width - fromX, rowHeight);
-    }
-
     // ── Input ────────────────────────────────────────────────────────
 
     private void OnFormKeyDown(object? sender, KeyEventArgs e)
     {
         bool handled = true;
-
         if (e.Control)
         {
             switch (e.KeyCode)
             {
-                case Keys.Q:
-                    Close();
-                    return;
+                case Keys.Q: Close(); return;
                 case Keys.D:
                     _grid.DeleteRow(_selectedRow);
                     if (_selectedRow >= _grid.RowCount) _selectedRow = _grid.RowCount - 1;
                     break;
-                case Keys.C:
-                    _clipboard = _grid.GetCellValue(_selectedRow, _selectedCol);
-                    break;
+                case Keys.C: _clipboard = _grid.GetCellValue(_selectedRow, _selectedCol); break;
                 case Keys.X:
                     _clipboard = _grid.GetCellValue(_selectedRow, _selectedCol);
                     _grid.SetCellValue(_selectedRow, _selectedCol, "");
                     break;
-                case Keys.V:
-                    _grid.SetCellValue(_selectedRow, _selectedCol, _clipboard);
-                    break;
-                case Keys.O:
-                    _grid.ShiftRowsDown(_selectedRow);
-                    break;
-                case Keys.P:
-                    _grid.ShiftRowsUp(_selectedRow);
-                    break;
-                case Keys.S:
-                    SaveFile();
-                    break;
-                default:
-                    handled = false;
-                    break;
+                case Keys.V: _grid.SetCellValue(_selectedRow, _selectedCol, _clipboard); break;
+                case Keys.O: _grid.ShiftRowsDown(_selectedRow); break;
+                case Keys.P: _grid.ShiftRowsUp(_selectedRow); break;
+                case Keys.S: SaveFile(); break;
+                default: handled = false; break;
             }
         }
         else
         {
             switch (e.KeyCode)
             {
-                case Keys.Up:
-                    if (_selectedRow > 0) _selectedRow--;
-                    break;
-                case Keys.Down:
-                    if (_selectedRow < _grid.RowCount - 1) _selectedRow++;
-                    break;
-                case Keys.Left:
-                    if (_selectedCol > 0) _selectedCol--;
-                    break;
-                case Keys.Right:
-                    if (_selectedCol < _grid.ColumnCount - 1) _selectedCol++;
-                    break;
-                case Keys.Enter:
-                    if (_selectedRow < _grid.RowCount - 1) _selectedRow++;
-                    break;
+                case Keys.Up: if (_selectedRow > 0) _selectedRow--; break;
+                case Keys.Down: if (_selectedRow < _grid.RowCount - 1) _selectedRow++; break;
+                case Keys.Left: if (_selectedCol > 0) _selectedCol--; break;
+                case Keys.Right: if (_selectedCol < _grid.ColumnCount - 1) _selectedCol++; break;
+                case Keys.Enter: if (_selectedRow < _grid.RowCount - 1) _selectedRow++; break;
                 case Keys.Back:
                     var val = _grid.GetCellValue(_selectedRow, _selectedCol);
-                    if (val.Length > 0)
-                        _grid.SetCellValue(_selectedRow, _selectedCol, val[..^1]);
+                    if (val.Length > 0) _grid.SetCellValue(_selectedRow, _selectedCol, val[..^1]);
                     break;
-                case Keys.Delete:
-                    _grid.SetCellValue(_selectedRow, _selectedCol, "");
-                    break;
+                case Keys.Delete: _grid.SetCellValue(_selectedRow, _selectedCol, ""); break;
                 case Keys.Tab:
                     if (_selectedCol < _grid.ColumnCount - 1) _selectedCol++;
                     else if (_selectedRow < _grid.RowCount - 1) { _selectedCol = 0; _selectedRow++; }
                     break;
-                case Keys.Escape:
-                    break;
-                default:
-                    handled = false;
-                    break;
+                case Keys.Escape: break;
+                default: handled = false; break;
             }
         }
-
         if (handled)
         {
             e.Handled = true;
