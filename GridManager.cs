@@ -8,10 +8,10 @@ public class GridManager
 
     public GridManager(int availableWidth, int availableHeight)
     {
-        const int columnWidth = 12;
+        const int columnWidth = 20;
         const int rowHeaderWidth = 4;
 
-        ColumnCount = Math.Min(6, Math.Max(1, (availableWidth - rowHeaderWidth) / columnWidth));
+        ColumnCount = Math.Max(1, (availableWidth - rowHeaderWidth) / columnWidth);
         RowCount = Math.Max(1, availableHeight);
 
         _data = new string[RowCount, ColumnCount];

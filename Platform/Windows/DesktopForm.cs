@@ -25,7 +25,7 @@ internal class DesktopForm : Form
     private readonly NotifyIcon _trayIcon;
     private bool _lockZOrder;
 
-    private const int MinColWidth = 10;
+    private const int DefaultColWidth = 20;
     private const int RowHeaderWidth = 4;
 
     private static readonly string StateDir = Path.Combine(
@@ -140,7 +140,7 @@ internal class DesktopForm : Form
                 int len = _grid.GetCellValue(r, c).Length;
                 if (len > max) max = len;
             }
-            widths[c] = Math.Max(MinColWidth, max + 2);
+            widths[c] = Math.Max(DefaultColWidth, max + 2);
         }
         return widths;
     }
