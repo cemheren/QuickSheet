@@ -41,9 +41,9 @@ Run with `--desktop` to replace the Windows desktop with an interactive spreadsh
 The form fills the working area (behind the taskbar) and resists Win+D minimization,
 so it appears as your desktop when all other windows are minimized.
 
-- **Alt + \`** — Bring QuickSheet to the foreground from any application
-- **System tray icon** — Right-click for Show, Save, and Exit
+- **System tray icon** — Right-click for Save and Exit
 - Click directly on the grid to focus it, then use all standard keyboard shortcuts
+- Press **Win+D** — all apps minimize but QuickSheet stays visible as your desktop
 - The taskbar remains fully visible and functional
 
 > **Cross-platform note:** All Windows-specific code is isolated behind the

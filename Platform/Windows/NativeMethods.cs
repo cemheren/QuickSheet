@@ -3,18 +3,10 @@ using System.Runtime.InteropServices;
 namespace ExcelConsole.Platform.Windows;
 
 /// <summary>
-/// Win32 P/Invoke declarations for global hotkeys and window management.
+/// Win32 P/Invoke declarations for window management.
 /// </summary>
 internal static class NativeMethods
 {
-    [DllImport("user32.dll", SetLastError = true)]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    public static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
-
-    [DllImport("user32.dll", SetLastError = true)]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-
     [DllImport("user32.dll")]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static extern bool SetForegroundWindow(IntPtr hWnd);
@@ -25,11 +17,26 @@ internal static class NativeMethods
     [DllImport("user32.dll", EntryPoint = "SetWindowLongPtr")]
     public static extern IntPtr SetWindowLongPtr(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
 
-    public const uint MOD_ALT = 0x0001;
-    public const uint MOD_NOREPEAT = 0x4000;
-    public const uint VK_OEM_3 = 0xC0; // ` (backtick)
-    public const int WM_HOTKEY = 0x0312;
-    public const int HOTKEY_ID = 9000;
     public const int GWL_EXSTYLE = -20;
     public const int WS_EX_TOOLWINDOW = 0x00000080;
+
+    // Messages used to resist Win+D minimization
+    public const int WM_SYSCOMMAND = 0x0112;
+    public const int SC_MINIMIZE = 0xF020;
+    public const int WM_WINDOWPOSCHANGING = 0x0046;
+    public const int WM_SIZE = 0x0005;
+    public const int SIZE_MINIMIZED = 1;
+    public const int SWP_HIDEWINDOW = 0x0080;
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct WINDOWPOS
+    {
+        public IntPtr hwnd;
+        public IntPtr hwndInsertAfter;
+        public int x;
+        public int y;
+        public int cx;
+        public int cy;
+        public int flags;
+    }
 }

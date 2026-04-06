@@ -1,5 +1,6 @@
 using System.Drawing;
 using System.Drawing.Text;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace ExcelConsole.Platform.Windows;
@@ -23,6 +24,7 @@ internal class DesktopForm : Form
 
     private bool _isDesktopMode = true;
     private readonly NotifyIcon _trayIcon;
+    private System.Windows.Forms.Timer? _watchdog;
 
     private const int MinColWidth = 10;
     private const int RowHeaderWidth = 4;
@@ -79,12 +81,10 @@ internal class DesktopForm : Form
             Visible = true,
         };
         var menu = new ContextMenuStrip();
-        menu.Items.Add("Show QuickSheet", null, (_, _) => BringToFocus());
         menu.Items.Add("Save", null, (_, _) => SaveFile());
         menu.Items.Add(new ToolStripSeparator());
         menu.Items.Add("Exit", null, (_, _) => Close());
         _trayIcon.ContextMenuStrip = menu;
-        _trayIcon.DoubleClick += (_, _) => BringToFocus();
 
         KeyDown += OnFormKeyDown;
         KeyPress += OnFormKeyPress;
@@ -95,7 +95,7 @@ internal class DesktopForm : Form
 
     /// <summary>
     /// Configures the form as a desktop replacement: hidden from Alt+Tab,
-    /// resistant to minimization, and at the bottom of the Z-order.
+    /// resistant to Win+D minimization.
     /// </summary>
     public void EnterDesktopMode()
     {
@@ -106,35 +106,55 @@ internal class DesktopForm : Form
 
         _isDesktopMode = true;
 
-        NativeMethods.RegisterHotKey(Handle, NativeMethods.HOTKEY_ID,
-            NativeMethods.MOD_ALT | NativeMethods.MOD_NOREPEAT, NativeMethods.VK_OEM_3);
+        // Watchdog: Win+D on Windows 11 bypasses standard window messages,
+        // so we poll to detect and undo minimization/hiding.
+        _watchdog = new System.Windows.Forms.Timer { Interval = 250 };
+        _watchdog.Tick += (_, _) =>
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                WindowState = FormWindowState.Normal;
+                Bounds = Screen.PrimaryScreen!.WorkingArea;
+            }
+            if (!Visible)
+            {
+                Visible = true;
+                Bounds = Screen.PrimaryScreen!.WorkingArea;
+            }
+        };
+        _watchdog.Start();
 
         Invalidate();
     }
 
-    private void BringToFocus()
-    {
-        if (WindowState == FormWindowState.Minimized)
-            WindowState = FormWindowState.Normal;
-        NativeMethods.SetForegroundWindow(Handle);
-        Focus();
-    }
-
     protected override void WndProc(ref Message m)
     {
-        // Resist Win+D minimization — stay visible as the "desktop"
-        const int WM_SYSCOMMAND = 0x0112;
-        const int SC_MINIMIZE = 0xF020;
-        if (m.Msg == WM_SYSCOMMAND && (m.WParam.ToInt32() & 0xFFF0) == SC_MINIMIZE && _isDesktopMode)
+        if (_isDesktopMode)
         {
-            return; // swallow minimize
-        }
+            // Block SC_MINIMIZE (e.g. from taskbar context menu)
+            if (m.Msg == NativeMethods.WM_SYSCOMMAND
+                && (m.WParam.ToInt32() & 0xFFF0) == NativeMethods.SC_MINIMIZE)
+                return;
 
-        // Alt+` hotkey: bring to foreground
-        if (m.Msg == NativeMethods.WM_HOTKEY && m.WParam.ToInt32() == NativeMethods.HOTKEY_ID)
-        {
-            BringToFocus();
-            return;
+            // Win+D calls ShowWindow(SW_MINIMIZE) which sends WM_WINDOWPOSCHANGING
+            // with SWP_HIDEWINDOW. Strip that flag so the window stays visible.
+            if (m.Msg == NativeMethods.WM_WINDOWPOSCHANGING)
+            {
+                var pos = Marshal.PtrToStructure<NativeMethods.WINDOWPOS>(m.LParam);
+                if ((pos.flags & NativeMethods.SWP_HIDEWINDOW) != 0)
+                {
+                    pos.flags &= ~NativeMethods.SWP_HIDEWINDOW;
+                    Marshal.StructureToPtr(pos, m.LParam, false);
+                }
+            }
+
+            // Safety net: if the window still ends up minimized, restore immediately
+            if (m.Msg == NativeMethods.WM_SIZE
+                && m.WParam.ToInt32() == NativeMethods.SIZE_MINIMIZED)
+            {
+                BeginInvoke(() => WindowState = FormWindowState.Normal);
+                return;
+            }
         }
 
         base.WndProc(ref m);
@@ -224,7 +244,7 @@ internal class DesktopForm : Form
         string sumDisplay = sum.HasValue ? $"  \u03a3{colName} = {sum.Value}" : "";
         double? product = _grid.GetRowProduct(_selectedRow);
         string productDisplay = product.HasValue ? $"  \u03a0{(_selectedRow + 1)} = {product.Value}" : "";
-        string status = $" {cellRef}{valueDisplay}{sumDisplay}{productDisplay}  |  Alt+`: Focus  Ctrl+S: Save  Ctrl+Q: Quit";
+        string status = $" {cellRef}{valueDisplay}{sumDisplay}{productDisplay}  |  Ctrl+S: Save  Ctrl+Q: Quit";
         int maxChars = formWidth / cw;
         status = status.PadRight(maxChars);
         g.FillRectangle(Brushes.White, 0, statusY, formWidth, ch);
@@ -321,7 +341,6 @@ internal class DesktopForm : Form
     {
         Directory.CreateDirectory(StateDir);
         _grid.SaveToCsv(AutoSavePath);
-        NativeMethods.UnregisterHotKey(Handle, NativeMethods.HOTKEY_ID);
         _trayIcon.Visible = false;
     }
 
@@ -329,6 +348,8 @@ internal class DesktopForm : Form
     {
         if (disposing)
         {
+            _watchdog?.Stop();
+            _watchdog?.Dispose();
             _monoFont.Dispose();
             _trayIcon.Dispose();
         }
