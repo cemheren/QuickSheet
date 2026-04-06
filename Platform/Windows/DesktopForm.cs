@@ -158,6 +158,41 @@ internal class DesktopForm : Form
         value.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
         value.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
 
+    private static bool IsCommand(string value) =>
+        value.StartsWith("r: ", StringComparison.OrdinalIgnoreCase);
+
+    private static (string exe, string args) ParseCommand(string value)
+    {
+        // Strip the "r: " prefix
+        string cmd = value[3..].Trim();
+        // Support quoted executable: r: cmd "qs autosave.csv" or unquoted: r: notepad
+        if (cmd.Length == 0) return ("", "");
+        if (cmd[0] == '"')
+        {
+            int close = cmd.IndexOf('"', 1);
+            if (close > 0)
+                return (cmd[1..close], cmd[(close + 1)..].Trim());
+        }
+        int space = cmd.IndexOf(' ');
+        if (space < 0) return (cmd, "");
+        return (cmd[..space], cmd[(space + 1)..].Trim());
+    }
+
+    private static void RunCommand(string cellValue)
+    {
+        if (!IsCommand(cellValue)) return;
+        var (exe, args) = ParseCommand(cellValue);
+        if (string.IsNullOrEmpty(exe)) return;
+        try
+        {
+            Process.Start(new ProcessStartInfo(exe, args)
+            {
+                UseShellExecute = true
+            });
+        }
+        catch { }
+    }
+
     private void OpenHyperlink()
     {
         string url = _grid.GetCellValue(_selectedRow, _selectedCol);
@@ -189,7 +224,9 @@ internal class DesktopForm : Form
             else
             {
                 string val = _grid.GetCellValue(r, c);
-                if (IsHyperlink(val))
+                if (IsCommand(val))
+                    { RunCommand(val); opened = true; }
+                else if (IsHyperlink(val))
                     try { Process.Start(new ProcessStartInfo(val) { UseShellExecute = true }); opened = true; } catch { }
             }
         }
@@ -339,13 +376,16 @@ internal class DesktopForm : Form
                 bool isMultiSel = _selection.Contains((r, c));
                 bool isFile = _grid.IsFileEntry(r, c);
                 bool isLink = IsHyperlink(cellVal);
+                bool isCmd = IsCommand(cellVal);
                 Color bg = isCursor   ? Color.FromArgb(64, 64, 64)
                          : isMultiSel ? Color.FromArgb(50, 50, 80)
                          : isFile     ? Color.FromArgb(0, 40, 60)
                          : isLink     ? Color.FromArgb(40, 0, 60)
+                         : isCmd      ? Color.FromArgb(40, 40, 0)
                          : Color.Black;
                 Color fg = isFile ? Color.FromArgb(100, 200, 255)
                          : isLink ? Color.FromArgb(180, 140, 255)
+                         : isCmd  ? Color.FromArgb(255, 220, 100)
                          : Color.White;
                 DrawText(g, display, x, y, fg, bg);
                 x += w * cw;
