@@ -97,12 +97,12 @@ internal class DesktopForm : Form
         MouseDoubleClick += OnFormDoubleClick;
         FormClosing += OnFormClosing;
 
-        // Autosave every 60 seconds in case of crash/termination
+        // Autosave every 5 seconds in case of crash/termination
         Directory.CreateDirectory(StateDir);
         _autoSaveTimer = new System.Threading.Timer(_ =>
         {
             try { _grid.SaveToCsv(AutoSavePath); } catch { }
-        }, null, TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1));
+        }, null, TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(5));
     }
 
     // ── Desktop files ───────────────────────────────────────────────
@@ -230,15 +230,7 @@ internal class DesktopForm : Form
     {
         var widths = new int[_grid.ColumnCount];
         for (int c = 0; c < _grid.ColumnCount; c++)
-        {
-            int max = GridManager.GetColumnName(c).Length;
-            for (int r = 0; r < _grid.RowCount; r++)
-            {
-                int len = _grid.GetCellValue(r, c).Length;
-                if (len > max) max = len;
-            }
-            widths[c] = Math.Max(DefaultColWidth, max + 2);
-        }
+            widths[c] = DefaultColWidth;
         return widths;
     }
 
