@@ -1,5 +1,6 @@
 using System.Drawing;
 using System.Drawing.Text;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace ExcelConsole.Platform.Windows;
@@ -22,6 +23,7 @@ internal class DesktopForm : Form
     private readonly int _charHeight;
 
     private readonly NotifyIcon _trayIcon;
+    private bool _lockZOrder;
 
     private const int MinColWidth = 10;
     private const int RowHeaderWidth = 4;
@@ -95,10 +97,14 @@ internal class DesktopForm : Form
     /// </summary>
     public void EnterDesktopMode()
     {
-        // Hide from Alt+Tab + prevent activation on click (behave like the desktop)
+        // Hide from Alt+Tab
         var exStyle = (long)NativeMethods.GetWindowLongPtr(Handle, NativeMethods.GWL_EXSTYLE);
-        exStyle |= NativeMethods.WS_EX_TOOLWINDOW | NativeMethods.WS_EX_NOACTIVATE;
+        exStyle |= NativeMethods.WS_EX_TOOLWINDOW;
         NativeMethods.SetWindowLongPtr(Handle, NativeMethods.GWL_EXSTYLE, (IntPtr)exStyle);
+
+        // From now on, prevent Z-order changes so the form stays behind
+        // other windows but still accepts keyboard focus when clicked.
+        _lockZOrder = true;
         Invalidate();
     }
 
@@ -106,11 +112,13 @@ internal class DesktopForm : Form
 
     protected override void WndProc(ref Message m)
     {
-        // Clicking the form should not bring it to the foreground
-        if (m.Msg == NativeMethods.WM_MOUSEACTIVATE)
+        // Prevent the form from rising in Z-order (covers other apps) while
+        // still allowing activation for keyboard focus.
+        if (m.Msg == NativeMethods.WM_WINDOWPOSCHANGING && _lockZOrder)
         {
-            m.Result = (IntPtr)NativeMethods.MA_NOACTIVATE;
-            return;
+            var pos = Marshal.PtrToStructure<NativeMethods.WINDOWPOS>(m.LParam);
+            pos.flags |= NativeMethods.SWP_NOZORDER;
+            Marshal.StructureToPtr(pos, m.LParam, false);
         }
         base.WndProc(ref m);
     }
