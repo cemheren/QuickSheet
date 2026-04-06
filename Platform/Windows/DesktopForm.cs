@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Text;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -391,21 +392,43 @@ internal class DesktopForm : Form
                     if (_selectedRow >= _grid.RowCount) _selectedRow = _grid.RowCount - 1;
                     break;
                 case Keys.C:
-                    _clipboard = _grid.GetCellValue(_selectedRow, _selectedCol);
+                    if (_selection.Count > 0)
+                    {
+                        var copyCells = new List<(int row, int col)>(_selection) { (_selectedRow, _selectedCol) };
+                        copyCells.Sort((a, b) => a.row != b.row ? a.row.CompareTo(b.row) : a.col.CompareTo(b.col));
+                        _clipboard = string.Join(Environment.NewLine, copyCells.Select(c => _grid.GetCellValue(c.row, c.col)));
+                    }
+                    else
+                        _clipboard = _grid.GetCellValue(_selectedRow, _selectedCol);
                     if (!string.IsNullOrEmpty(_clipboard))
                         Clipboard.SetText(_clipboard);
                     break;
                 case Keys.X:
-                    _clipboard = _grid.GetCellValue(_selectedRow, _selectedCol);
+                    if (_selection.Count > 0)
+                    {
+                        var cutCells = new List<(int row, int col)>(_selection) { (_selectedRow, _selectedCol) };
+                        cutCells.Sort((a, b) => a.row != b.row ? a.row.CompareTo(b.row) : a.col.CompareTo(b.col));
+                        _clipboard = string.Join(Environment.NewLine, cutCells.Select(c => _grid.GetCellValue(c.row, c.col)));
+                        foreach (var (r, c) in cutCells) _grid.SetCellValue(r, c, "");
+                        _selection.Clear();
+                    }
+                    else
+                    {
+                        _clipboard = _grid.GetCellValue(_selectedRow, _selectedCol);
+                        _grid.SetCellValue(_selectedRow, _selectedCol, "");
+                    }
                     if (!string.IsNullOrEmpty(_clipboard))
                         Clipboard.SetText(_clipboard);
-                    _grid.SetCellValue(_selectedRow, _selectedCol, "");
                     break;
                 case Keys.V:
                     string paste = Clipboard.ContainsText() ? Clipboard.GetText() : _clipboard;
-                    int nl = paste.IndexOfAny(new[] { '\r', '\n' });
-                    if (nl >= 0) paste = paste[..nl];
-                    _grid.SetCellValue(_selectedRow, _selectedCol, paste);
+                    string[] lines = paste.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+                    for (int i = 0; i < lines.Length; i++)
+                    {
+                        int targetRow = _selectedRow + i;
+                        if (targetRow >= _grid.RowCount) break;
+                        _grid.SetCellValue(targetRow, _selectedCol, lines[i]);
+                    }
                     break;
                 case Keys.O: _grid.ShiftRowsDown(_selectedRow); break;
                 case Keys.P: _grid.ShiftRowsUp(_selectedRow); break;
