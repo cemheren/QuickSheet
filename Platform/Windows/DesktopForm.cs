@@ -95,11 +95,24 @@ internal class DesktopForm : Form
     /// </summary>
     public void EnterDesktopMode()
     {
-        // Hide from Alt+Tab
+        // Hide from Alt+Tab + prevent activation on click (behave like the desktop)
         var exStyle = (long)NativeMethods.GetWindowLongPtr(Handle, NativeMethods.GWL_EXSTYLE);
-        exStyle |= NativeMethods.WS_EX_TOOLWINDOW;
+        exStyle |= NativeMethods.WS_EX_TOOLWINDOW | NativeMethods.WS_EX_NOACTIVATE;
         NativeMethods.SetWindowLongPtr(Handle, NativeMethods.GWL_EXSTYLE, (IntPtr)exStyle);
         Invalidate();
+    }
+
+    protected override bool ShowWithoutActivation => true;
+
+    protected override void WndProc(ref Message m)
+    {
+        // Clicking the form should not bring it to the foreground
+        if (m.Msg == NativeMethods.WM_MOUSEACTIVATE)
+        {
+            m.Result = (IntPtr)NativeMethods.MA_NOACTIVATE;
+            return;
+        }
+        base.WndProc(ref m);
     }
 
     // ── Rendering ────────────────────────────────────────────────────
