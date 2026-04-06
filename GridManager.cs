@@ -3,6 +3,8 @@ namespace ExcelConsole;
 public class GridManager
 {
     private readonly string[,] _data;
+    private readonly bool[,] _isFile;
+    private readonly string[,] _filePath;
     public int ColumnCount { get; }
     public int RowCount { get; }
 
@@ -15,9 +17,14 @@ public class GridManager
         RowCount = Math.Max(1, availableHeight);
 
         _data = new string[RowCount, ColumnCount];
+        _isFile = new bool[RowCount, ColumnCount];
+        _filePath = new string[RowCount, ColumnCount];
         for (int r = 0; r < RowCount; r++)
             for (int c = 0; c < ColumnCount; c++)
+            {
                 _data[r, c] = "";
+                _filePath[r, c] = "";
+            }
     }
 
     public static string GetColumnName(int index)
@@ -49,6 +56,26 @@ public class GridManager
     {
         if (row >= 0 && row < RowCount && col >= 0 && col < ColumnCount)
             _data[row, col] = value;
+    }
+
+    public void SetFileEntry(int row, int col, string displayName, string fullPath)
+    {
+        if (row < 0 || row >= RowCount || col < 0 || col >= ColumnCount) return;
+        _data[row, col] = displayName;
+        _isFile[row, col] = true;
+        _filePath[row, col] = fullPath;
+    }
+
+    public bool IsFileEntry(int row, int col)
+    {
+        if (row < 0 || row >= RowCount || col < 0 || col >= ColumnCount) return false;
+        return _isFile[row, col];
+    }
+
+    public string GetFilePath(int row, int col)
+    {
+        if (row < 0 || row >= RowCount || col < 0 || col >= ColumnCount) return "";
+        return _filePath[row, col];
     }
 
     public void ClearRow(int row)

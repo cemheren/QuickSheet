@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Runtime.InteropServices;
@@ -76,6 +77,8 @@ internal class DesktopForm : Form
             _grid.LoadFromCsv(AutoSavePath);
         }
 
+        PopulateDesktopFiles();
+
         _trayIcon = new NotifyIcon
         {
             Text = "QuickSheet Desktop",
@@ -91,6 +94,7 @@ internal class DesktopForm : Form
         KeyDown += OnFormKeyDown;
         KeyPress += OnFormKeyPress;
         MouseDown += OnFormMouseDown;
+        MouseDoubleClick += OnFormDoubleClick;
         FormClosing += OnFormClosing;
 
         // Autosave every 60 seconds in case of crash/termination
@@ -99,6 +103,48 @@ internal class DesktopForm : Form
         {
             try { _grid.SaveToCsv(AutoSavePath); } catch { }
         }, null, TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1));
+    }
+
+    // ── Desktop files ───────────────────────────────────────────────
+
+    private void PopulateDesktopFiles()
+    {
+        string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+        if (!Directory.Exists(desktopPath)) return;
+
+        var entries = Directory.GetFileSystemEntries(desktopPath)
+            .OrderBy(e => Directory.Exists(e) ? 0 : 1)  // folders first
+            .ThenBy(Path.GetFileName)
+            .ToArray();
+
+        // Place files in the last column, flowing to previous columns if needed
+        int col = _grid.ColumnCount - 1;
+        int row = 0;
+        foreach (var entry in entries)
+        {
+            if (row >= _grid.RowCount)
+            {
+                row = 0;
+                col--;
+                if (col < 0) break;
+            }
+            string name = Path.GetFileName(entry);
+            if (Directory.Exists(entry)) name = "\ud83d\udcc1 " + name;
+            _grid.SetFileEntry(row, col, name, entry);
+            row++;
+        }
+    }
+
+    private void OpenSelectedFile()
+    {
+        if (!_grid.IsFileEntry(_selectedRow, _selectedCol)) return;
+        string path = _grid.GetFilePath(_selectedRow, _selectedCol);
+        if (string.IsNullOrEmpty(path)) return;
+        try
+        {
+            Process.Start(new ProcessStartInfo(path) { UseShellExecute = true });
+        }
+        catch { }
     }
 
     // ── Desktop mode ─────────────────────────────────────────────────
@@ -246,8 +292,12 @@ internal class DesktopForm : Form
                 string cellVal = _grid.GetCellValue(r, c);
                 string display = cellVal.Length >= w ? cellVal[..w] : cellVal.PadRight(w);
                 bool isSelected = r == _selectedRow && c == _selectedCol;
-                Color bg = isSelected ? Color.FromArgb(64, 64, 64) : Color.Black;
-                DrawText(g, display, x, y, Color.White, bg);
+                bool isFile = _grid.IsFileEntry(r, c);
+                Color bg = isSelected ? Color.FromArgb(64, 64, 64)
+                         : isFile     ? Color.FromArgb(0, 40, 60)
+                         : Color.Black;
+                Color fg = isFile ? Color.FromArgb(100, 200, 255) : Color.White;
+                DrawText(g, display, x, y, fg, bg);
                 x += w * cw;
             }
             y += ch;
@@ -312,7 +362,12 @@ internal class DesktopForm : Form
                 case Keys.Down: if (_selectedRow < _grid.RowCount - 1) _selectedRow++; break;
                 case Keys.Left: if (_selectedCol > 0) _selectedCol--; break;
                 case Keys.Right: if (_selectedCol < _grid.ColumnCount - 1) _selectedCol++; break;
-                case Keys.Enter: if (_selectedRow < _grid.RowCount - 1) _selectedRow++; break;
+                case Keys.Enter:
+                    if (_grid.IsFileEntry(_selectedRow, _selectedCol))
+                        OpenSelectedFile();
+                    else if (_selectedRow < _grid.RowCount - 1)
+                        _selectedRow++;
+                    break;
                 case Keys.Back:
                     var val = _grid.GetCellValue(_selectedRow, _selectedCol);
                     if (val.Length > 0) _grid.SetCellValue(_selectedRow, _selectedCol, val[..^1]);
@@ -365,6 +420,12 @@ internal class DesktopForm : Form
         _selectedRow = row;
         _selectedCol = col;
         Invalidate();
+    }
+
+    private void OnFormDoubleClick(object? sender, MouseEventArgs e)
+    {
+        if (_grid.IsFileEntry(_selectedRow, _selectedCol))
+            OpenSelectedFile();
     }
 
     // ── File operations ──────────────────────────────────────────────
