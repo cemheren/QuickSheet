@@ -24,7 +24,7 @@ internal class DesktopForm : Form
 
     private bool _isDesktopMode = true;
     private readonly NotifyIcon _trayIcon;
-    private System.Windows.Forms.Timer? _watchdog;
+    private System.Threading.Timer? _watchdog;
 
     private const int MinColWidth = 10;
     private const int RowHeaderWidth = 4;
@@ -106,23 +106,22 @@ internal class DesktopForm : Form
 
         _isDesktopMode = true;
 
-        // Watchdog: Win+D on Windows 11 bypasses standard window messages,
-        // so we poll to detect and undo minimization/hiding.
-        _watchdog = new System.Windows.Forms.Timer { Interval = 250 };
-        _watchdog.Tick += (_, _) =>
+        // Thread-pool watchdog: Win+D on Windows 11 bypasses standard window
+        // messages AND may stall the UI message pump during the minimize
+        // animation, so a WinForms timer can't fire in time. A thread-pool
+        // timer fires independently and marshals the restore via BeginInvoke.
+        var hwnd = Handle;
+        var workingArea = Screen.PrimaryScreen!.WorkingArea;
+        _watchdog = new System.Threading.Timer(_ =>
         {
-            if (WindowState == FormWindowState.Minimized)
+            if (NativeMethods.IsIconic(hwnd) || !NativeMethods.IsWindowVisible(hwnd))
             {
-                WindowState = FormWindowState.Normal;
-                Bounds = Screen.PrimaryScreen!.WorkingArea;
+                NativeMethods.ShowWindow(hwnd, NativeMethods.SW_RESTORE);
+                NativeMethods.SetWindowPos(hwnd, IntPtr.Zero,
+                    workingArea.X, workingArea.Y, workingArea.Width, workingArea.Height,
+                    NativeMethods.SWP_NOACTIVATE | NativeMethods.SWP_SHOWWINDOW);
             }
-            if (!Visible)
-            {
-                Visible = true;
-                Bounds = Screen.PrimaryScreen!.WorkingArea;
-            }
-        };
-        _watchdog.Start();
+        }, null, 0, 100);
 
         Invalidate();
     }
@@ -348,7 +347,6 @@ internal class DesktopForm : Form
     {
         if (disposing)
         {
-            _watchdog?.Stop();
             _watchdog?.Dispose();
             _monoFont.Dispose();
             _trayIcon.Dispose();
