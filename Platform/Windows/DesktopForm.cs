@@ -43,6 +43,7 @@ internal class DesktopForm : Form
         Text = "QuickSheet";
         BackColor = Color.Black;
         FormBorderStyle = FormBorderStyle.None;
+        Opacity = 0.85;
         StartPosition = FormStartPosition.Manual;
         ShowInTaskbar = false;
         KeyPreview = true;
