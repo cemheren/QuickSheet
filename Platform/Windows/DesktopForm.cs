@@ -26,6 +26,7 @@ internal class DesktopForm : Form
     private bool _lockZOrder;
     private IntPtr _winEventHook;
     private NativeMethods.WinEventDelegate? _winEventDelegate;
+    private System.Threading.Timer? _autoSaveTimer;
 
     private const int DefaultColWidth = 20;
     private const int RowHeaderWidth = 4;
@@ -91,6 +92,13 @@ internal class DesktopForm : Form
         KeyPress += OnFormKeyPress;
         MouseDown += OnFormMouseDown;
         FormClosing += OnFormClosing;
+
+        // Autosave every 60 seconds in case of crash/termination
+        Directory.CreateDirectory(StateDir);
+        _autoSaveTimer = new System.Threading.Timer(_ =>
+        {
+            try { _grid.SaveToCsv(AutoSavePath); } catch { }
+        }, null, TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1));
     }
 
     // ── Desktop mode ─────────────────────────────────────────────────
@@ -382,6 +390,7 @@ internal class DesktopForm : Form
     {
         if (disposing)
         {
+            _autoSaveTimer?.Dispose();
             _monoFont.Dispose();
             _trayIcon.Dispose();
         }
