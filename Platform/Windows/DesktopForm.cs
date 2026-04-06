@@ -342,12 +342,24 @@ internal class DesktopForm : Form
                     _grid.DeleteRow(_selectedRow);
                     if (_selectedRow >= _grid.RowCount) _selectedRow = _grid.RowCount - 1;
                     break;
-                case Keys.C: _clipboard = _grid.GetCellValue(_selectedRow, _selectedCol); break;
+                case Keys.C:
+                    _clipboard = _grid.GetCellValue(_selectedRow, _selectedCol);
+                    if (!string.IsNullOrEmpty(_clipboard))
+                        Clipboard.SetText(_clipboard);
+                    break;
                 case Keys.X:
                     _clipboard = _grid.GetCellValue(_selectedRow, _selectedCol);
+                    if (!string.IsNullOrEmpty(_clipboard))
+                        Clipboard.SetText(_clipboard);
                     _grid.SetCellValue(_selectedRow, _selectedCol, "");
                     break;
-                case Keys.V: _grid.SetCellValue(_selectedRow, _selectedCol, _clipboard); break;
+                case Keys.V:
+                    string paste = Clipboard.ContainsText() ? Clipboard.GetText() : _clipboard;
+                    // Take first line only to keep it in one cell
+                    int nl = paste.IndexOfAny(new[] { '\r', '\n' });
+                    if (nl >= 0) paste = paste[..nl];
+                    _grid.SetCellValue(_selectedRow, _selectedCol, paste);
+                    break;
                 case Keys.O: _grid.ShiftRowsDown(_selectedRow); break;
                 case Keys.P: _grid.ShiftRowsUp(_selectedRow); break;
                 case Keys.S: SaveFile(); break;
