@@ -1,7 +1,14 @@
+using System.Runtime.InteropServices;
 using ExcelConsole;
 
 public class Program
 {
+    [DllImport("kernel32.dll")]
+    private static extern IntPtr GetConsoleWindow();
+
+    [DllImport("user32.dll")]
+    private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
     [STAThread]
     public static void Main(string[] args)
     {
@@ -10,6 +17,9 @@ public class Program
 
         if (desktopMode)
         {
+            IntPtr console = GetConsoleWindow();
+            if (console != IntPtr.Zero)
+                ShowWindow(console, 0); // SW_HIDE
             if (!OperatingSystem.IsWindows())
             {
                 Console.Error.WriteLine("Desktop mode is currently only supported on Windows.");
