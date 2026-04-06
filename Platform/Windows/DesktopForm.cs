@@ -102,8 +102,12 @@ internal class DesktopForm : Form
         exStyle |= NativeMethods.WS_EX_TOOLWINDOW;
         NativeMethods.SetWindowLongPtr(Handle, NativeMethods.GWL_EXSTYLE, (IntPtr)exStyle);
 
-        // From now on, prevent Z-order changes so the form stays behind
-        // other windows but still accepts keyboard focus when clicked.
+        // Send to bottom of Z-order so it starts behind all existing windows
+        NativeMethods.SetWindowPos(Handle, NativeMethods.HWND_BOTTOM,
+            0, 0, 0, 0,
+            NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOSIZE | NativeMethods.SWP_NOACTIVATE);
+
+        // Now lock Z-order so it stays there
         _lockZOrder = true;
         Invalidate();
     }
