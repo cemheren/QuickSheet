@@ -18,6 +18,9 @@ internal static class DesktopEmbedder
         // Tell Progman to spawn a WorkerW window behind the desktop icons
         NativeMethods.SendMessage(progman, 0x052C, new IntPtr(0xD), new IntPtr(0x1));
 
+        // Give Windows a moment to create the WorkerW
+        Thread.Sleep(100);
+
         IntPtr workerW = IntPtr.Zero;
         NativeMethods.EnumWindows((hwnd, _) =>
         {

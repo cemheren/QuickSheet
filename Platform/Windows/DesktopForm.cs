@@ -109,7 +109,9 @@ internal class DesktopForm : Form
         }
 
         NativeMethods.SetParent(Handle, _workerW);
-        Bounds = Screen.PrimaryScreen!.Bounds;
+        // As a child of WorkerW, position is relative to parent — origin at (0,0)
+        Location = Point.Empty;
+        Size = Screen.PrimaryScreen!.Bounds.Size;
         _isEmbedded = true;
 
         NativeMethods.RegisterHotKey(Handle, NativeMethods.HOTKEY_ID,
@@ -120,9 +122,10 @@ internal class DesktopForm : Form
     {
         if (_isEmbedded)
         {
-            // Pop out for interactive editing
+            // Pop out for interactive editing — detach from WorkerW, use screen coordinates
             NativeMethods.SetParent(Handle, IntPtr.Zero);
-            Bounds = Screen.PrimaryScreen!.Bounds;
+            Location = Screen.PrimaryScreen!.Bounds.Location;
+            Size = Screen.PrimaryScreen!.Bounds.Size;
             TopMost = true;
             NativeMethods.SetForegroundWindow(Handle);
             _isEmbedded = false;
@@ -130,10 +133,11 @@ internal class DesktopForm : Form
         }
         else if (_workerW != IntPtr.Zero)
         {
-            // Sink back behind desktop icons
+            // Sink back behind desktop icons — child coordinates relative to WorkerW
             TopMost = false;
             NativeMethods.SetParent(Handle, _workerW);
-            Bounds = Screen.PrimaryScreen!.Bounds;
+            Location = Point.Empty;
+            Size = Screen.PrimaryScreen!.Bounds.Size;
             _isEmbedded = true;
         }
         Invalidate();

@@ -17,9 +17,12 @@ public class WindowsDesktopHost : Platform.IDesktopHost
         Application.SetCompatibleTextRenderingDefault(false);
 
         _form = new DesktopForm(csvPath);
-        _form.Show();
+
+        // Force window handle creation without showing, so we can embed first
+        _ = _form.Handle;
         _form.EmbedIntoDesktop();
 
+        // Application.Run makes the form visible — it's already parented to WorkerW
         Application.Run(_form);
     }
 
