@@ -324,9 +324,11 @@ internal class DesktopWindow : IDisposable
         {
             string fullCmd = string.IsNullOrEmpty(args) ? exe : $"{exe} {args}";
             var (terminal, termArgs) = FindTerminal();
+            // Wrap so the shell stays open after the command completes
+            string wrapped = $"bash -c '{fullCmd.Replace("'", "'\\''")}; exec bash'";
             if (!string.IsNullOrEmpty(terminal))
             {
-                Process.Start(new ProcessStartInfo(terminal, $"{termArgs} {fullCmd}")
+                Process.Start(new ProcessStartInfo(terminal, $"{termArgs} {wrapped}")
                 {
                     UseShellExecute = false,
                     CreateNoWindow = false
