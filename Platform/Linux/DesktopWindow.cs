@@ -164,7 +164,7 @@ internal class DesktopWindow : IDisposable
     {
         IntPtr atomAtom = XInternAtom(_display, "ATOM", false);
 
-        // Remove window decorations via Motif hints (works on both X11 and XWayland)
+        // Remove window decorations via Motif hints
         IntPtr motifHints = XInternAtom(_display, "_MOTIF_WM_HINTS", false);
         long[] mwmHints = [2, 0, 0, 0, 0]; // flags=MWM_HINTS_DECORATIONS, decorations=0
         IntPtr mwmPtr = Marshal.AllocHGlobal(mwmHints.Length * 8);
@@ -172,8 +172,6 @@ internal class DesktopWindow : IDisposable
         XChangeProperty(_display, _window, motifHints, motifHints,
             32, PropModeReplace, mwmPtr, mwmHints.Length);
         Marshal.FreeHGlobal(mwmPtr);
-
-        IntPtr wmState = XInternAtom(_display, "_NET_WM_STATE", false);
 
         if (_isNativeX11)
         {
@@ -183,28 +181,20 @@ internal class DesktopWindow : IDisposable
             IntPtr[] typeValue = [wmWindowTypeDesktop];
             XChangeProperty(_display, _window, wmWindowType, atomAtom,
                 32, PropModeReplace, typeValue, 1);
-
-            // State: below, sticky, skip taskbar/pager
-            IntPtr stateBelow = XInternAtom(_display, "_NET_WM_STATE_BELOW", false);
-            IntPtr stateSticky = XInternAtom(_display, "_NET_WM_STATE_STICKY", false);
-            IntPtr stateSkipTaskbar = XInternAtom(_display, "_NET_WM_STATE_SKIP_TASKBAR", false);
-            IntPtr stateSkipPager = XInternAtom(_display, "_NET_WM_STATE_SKIP_PAGER", false);
-
-            IntPtr[] states = [stateBelow, stateSticky, stateSkipTaskbar, stateSkipPager];
-            XChangeProperty(_display, _window, wmState, atomAtom,
-                32, PropModeReplace, states, states.Length);
         }
-        else
-        {
-            // On XWayland, use fullscreen to fill the screen
-            IntPtr stateFullscreen = XInternAtom(_display, "_NET_WM_STATE_FULLSCREEN", false);
-            IntPtr stateSkipTaskbar = XInternAtom(_display, "_NET_WM_STATE_SKIP_TASKBAR", false);
-            IntPtr stateSkipPager = XInternAtom(_display, "_NET_WM_STATE_SKIP_PAGER", false);
 
-            IntPtr[] states = [stateFullscreen, stateSkipTaskbar, stateSkipPager];
-            XChangeProperty(_display, _window, wmState, atomAtom,
-                32, PropModeReplace, states, states.Length);
-        }
+        // State: below other windows, sticky across workspaces, skip taskbar/pager
+        IntPtr wmState = XInternAtom(_display, "_NET_WM_STATE", false);
+        IntPtr stateBelow = XInternAtom(_display, "_NET_WM_STATE_BELOW", false);
+        IntPtr stateSticky = XInternAtom(_display, "_NET_WM_STATE_STICKY", false);
+        IntPtr stateSkipTaskbar = XInternAtom(_display, "_NET_WM_STATE_SKIP_TASKBAR", false);
+        IntPtr stateSkipPager = XInternAtom(_display, "_NET_WM_STATE_SKIP_PAGER", false);
+        IntPtr stateMaxH = XInternAtom(_display, "_NET_WM_STATE_MAXIMIZED_HORZ", false);
+        IntPtr stateMaxV = XInternAtom(_display, "_NET_WM_STATE_MAXIMIZED_VERT", false);
+
+        IntPtr[] states = [stateBelow, stateSticky, stateSkipTaskbar, stateSkipPager, stateMaxH, stateMaxV];
+        XChangeProperty(_display, _window, wmState, atomAtom,
+            32, PropModeReplace, states, states.Length);
     }
 
     // ── Desktop files ────────────────────────────────────────────────
