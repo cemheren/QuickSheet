@@ -984,7 +984,8 @@ internal class DesktopWindow : IDisposable
 
     private void SaveFile()
     {
-        string filename = _loadedFile ?? "spreadsheet.csv";
+        string filename = _loadedFile ?? Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "spreadsheet.csv");
         _grid.SaveToCsv(filename);
         _loadedFile = filename;
     }

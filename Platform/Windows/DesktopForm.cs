@@ -591,7 +591,8 @@ internal class DesktopForm : Form
 
     private void SaveFile()
     {
-        string filename = _loadedFile ?? "spreadsheet.csv";
+        string filename = _loadedFile ?? Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "spreadsheet.csv");
         _grid.SaveToCsv(filename);
         _loadedFile = filename;
         _trayIcon.ShowBalloonTip(2000, "QuickSheet", $"Saved to {filename}", ToolTipIcon.Info);
