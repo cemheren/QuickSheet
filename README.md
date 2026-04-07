@@ -1,171 +1,84 @@
 # QuickSheet
 
-A lightweight interactive spreadsheet that lives on your desktop — built with C# and zero external dependencies. Use it as a terminal spreadsheet or replace your desktop wallpaper with a fully interactive grid.
+**Your desktop is a spreadsheet.**
+
+QuickSheet replaces your wallpaper with a transparent, interactive grid. Pin notes, launch apps, track tasks — all without opening a window. I wanted to give a always present feeling, there is always something lightweight in the background to achieve things. I normally find the default desktop experience pretty useless. 
 
 ![.NET 9](https://img.shields.io/badge/.NET-9.0-purple)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Windows](https://img.shields.io/badge/platform-Windows-0078D6?logo=windows)
 ![Linux](https://img.shields.io/badge/platform-Linux-FCC624?logo=linux&logoColor=black)
 
-<!-- Add your own screenshots here:
-![Console mode](docs/screenshots/console.png)
-![Desktop mode on Windows](docs/screenshots/desktop-windows.png)
-![Desktop mode on Linux](docs/screenshots/desktop-linux.png)
--->
+## Disclaimers
 
-## Features
+This repo contains lots of AI coding, so I can't attest for the code quality. It's meant to be a side project. I'm however taking the time to ensure it has no downstream dependencies, I wanted to be cognizant of supply chain attacks. So download locally and build locally (shouldn't need any packages for the moment.) 
 
-### Spreadsheet
+I also highly recommend setting it as a startup application, this way every time there is a restart you have your notes etc. 
 
-- **Excel-like grid** that scales to your terminal or screen size
-- **Inline editing** — click a cell or just start typing
-- **Arrow key navigation** between cells
-- **Dynamic column widths** computed to fill the screen exactly
-- **Auto-sum** (Σ) per column and **auto-product** (Π) per row in the status bar
-- **CSV import/export** — load and save standard CSV files
+## Quick Start
 
-### Selection & Clipboard
-
-- **Multi-cell selection** — Shift+Arrow to extend, Ctrl+Click to toggle individual cells
-- **Multi-line copy/paste** — copies selected cells as newline-separated text; paste splits lines across rows
-- **System clipboard integration** — Ctrl+C/X/V use the OS clipboard (Windows & X11)
-- **Row operations** — insert, delete, shift rows up/down
-
-### Desktop Integration
-
-- **Desktop file browser** — files from your `~/Desktop` folder appear in the grid
-- **Double-click or Enter to open** files, folders, and hyperlinks
-- **Clickable hyperlinks** — `http://` and `https://` URLs are highlighted and open in your browser
-- **Runnable command cells** — prefix a cell with `r: ` to make it executable (e.g. `r: firefox`, `r: bash "echo hello"`)
-- **Semi-transparent background** — see your wallpaper through the grid (85% opacity on Windows, ~80% on Linux)
-
-### Reliability
-
-- **Autosave every 5 seconds** — never lose work, even on a crash
-- **Atomic file writes** — saves to a temp file first, then renames, to prevent corruption
-
-## Getting Started
+I recommend running in release mode so things feel snappier. 
 
 ```bash
-# Clone the repo
 git clone https://github.com/cemheren/QuickSheet.git
 cd QuickSheet
-
-# Run in console mode
-dotnet run
-
-# Load a CSV file
-dotnet run -- data.csv
-
-# Run as a desktop background
-dotnet run -- --desktop
-dotnet run -- --desktop data.csv
+dotnet run -c Release --desktop
 ```
 
 Requires [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0).
 
-## Desktop Mode
+## Desktop environment for developers 
+### Type directly into cells 
+For quick notes, todos. Everything autosaves every 5 seconds. You can point and click to any part of your desktop to take some quick notes, use it as a buffer etc without losing focus of the application you are running. 
+  
+### Launcher
+<!-- ![Launcher example](docs/screenshots/use-case-launcher.png) -->
+Prefix any cell with `r: ` to make it a runnable command — e.g. `r: code .` or `r: firefox`.
+You can open or launch multiple repos with a single operation. Multi select cells, and hit enter to run. 
 
-### Windows
+I've used it to start the repos I want to work on for the day, and launch copilot with some saved prompts like summarize emails. Not sure how others solve this problem, but this to me is simpler than running startup scripts. 
 
-Run with `--desktop` to replace the Windows desktop with an interactive spreadsheet.
-The form fills the working area (behind the taskbar) and resists Win+D minimization,
-so it appears as your desktop when all other windows are minimized.
+![alt text](image-4.png)
 
-<!-- ![Windows desktop mode](docs/screenshots/desktop-windows.png) -->
+### Hyper-Link Dashboard
+<!-- ![Links example](docs/screenshots/use-case-links.png) -->
+Paste URLs into cells. They're highlighted and open in your browser on Enter/double-click.
+Similar to the launcher funcitonality you can open and run multiple by selecting multiple cells. I was going for a emacs buffer type of feel to save and run multiple cells. 
 
-- **System tray icon** — right-click for Save and Exit
-- **Win+D resistant** — all apps minimize but QuickSheet stays visible
-- **Click to select** cells, then use all keyboard shortcuts
-- **Semi-transparent** — your wallpaper shows through at 85% opacity
-- **Desktop files** from `~/Desktop` are loaded into the grid automatically
-- **Open anything** — double-click or press Enter on files, URLs, or `r:` commands
-- The taskbar remains fully visible and functional
+![alt text](image-1.png)
 
-### Linux (X11)
+### Lightweight Data Tracking
+<!-- ![Data example](docs/screenshots/use-case-data.png) -->
+Auto-sum (Σ) per column and auto-product (Π) per row in the status bar. Import/export CSV. I hate opening the calculator for simple operations. This helps with that. 
 
-Run with `--desktop` to place a spreadsheet window at the desktop layer using
-`_NET_WM_WINDOW_TYPE_DESKTOP` — the same mechanism used by GNOME's desktop icons.
-Uses raw X11 P/Invoke with zero NuGet dependencies.
+![alt text](image-2.png)
 
-<!-- ![Linux desktop mode](docs/screenshots/desktop-linux.png) -->
+<!-- 
+## Add your own sections here!
+Some ideas:
+- Daily standups / sprint tracking
+- Monitoring dashboard with r: commands
+- Project-specific bookmarks
+-->
 
-```bash
-# Requires an X11 session (select "GNOME on Xorg" at the login screen)
-dotnet run -- --desktop
-dotnet run -- --desktop data.csv
-```
+### Desktop files
+Desktop files are added to cells (padded to right), which can be used in a multi-select way. Helpful for finding/launching multiple files. Not sure about usability of these yet, likely I'm going to tweak this. 
 
-- Works on any X11-based desktop environment (GNOME on Xorg, KDE, XFCE, etc.)
-- **No external dependencies** — uses system libraries (`libX11.so.6`, `libXft.so.2`) via P/Invoke
-- **ARGB transparency** — uses a 32-bit visual when available for true alpha blending
-- **Desktop files** from `~/Desktop` are loaded into the grid (XDG fallback supported)
-- **Right-click to open** files, hyperlinks, and runnable commands
-- **X11 clipboard integration** — copy/paste works with other X11 applications
-- **Terminal-aware commands** — `r:` shell commands open in your system terminal (ptyxis, kgx, gnome-terminal, etc.)
-
-> **Wayland note:** True desktop-layer windows require X11. On a Wayland session,
-> the app will attempt to run via XWayland but may not behave as a true desktop layer.
-> Select "GNOME on Xorg" at the login screen for full support.
+![alt text](image-3.png)
 
 ## Keyboard Shortcuts
-
-### General
 
 | Shortcut | Action |
 |----------|--------|
 | Arrow Keys | Navigate cells |
-| Tab | Move to next cell |
-| Enter | Move down / open selected item (desktop mode) |
-| Backspace | Delete last character |
-| Delete | Clear cell |
+| F2 | Edit cell in status bar |
+| Enter | Open file / URL / command |
 | Ctrl+S | Save to CSV |
-| Ctrl+H | Show help |
+| Ctrl+C / X / V | Copy / Cut / Paste |
+| Shift+Arrow | Extend selection/Multi select |
+| Ctrl+D | Delete row |
+| Ctrl+O and Ctrl+P | Insert row |
 | Ctrl+Q | Quit |
-
-### Clipboard & Selection
-
-| Shortcut | Action |
-|----------|--------|
-| Ctrl+C | Copy cell(s) to clipboard |
-| Ctrl+X | Cut cell(s) to clipboard |
-| Ctrl+V | Paste from clipboard (multi-line splits across rows) |
-| Shift+Arrow | Extend selection |
-| Ctrl+Click | Toggle individual cell selection |
-
-### Row Operations
-
-| Shortcut | Action |
-|----------|--------|
-| Ctrl+D | Delete current row |
-| Ctrl+O | Insert row (shift down) |
-| Ctrl+P | Remove row (shift up) |
-
-### Desktop Mode
-
-| Action | Trigger |
-|--------|---------|
-| Open file / URL / command | Double-click, Enter, or right-click (Linux) |
-| Run a command cell | Enter on a cell prefixed with `r: ` |
-
-## Architecture
-
-All platform-specific code is isolated behind the `IDesktopHost` interface in `Platform/`.
-
-```
-Program.cs              → Entry point, CLI args, mode selection
-SpreadsheetApp.cs       → Console-mode UI (raw System.Console)
-GridManager.cs          → Pure data layer (no platform deps)
-Platform/
-  IDesktopHost.cs       → Cross-platform desktop interface
-  Windows/
-    WindowsDesktopHost.cs → WinForms + Win32 P/Invoke
-    DesktopForm.cs        → Windows desktop window
-  Linux/
-    LinuxDesktopHost.cs   → X11 bootstrap
-    DesktopWindow.cs      → X11 rendering, input, clipboard
-    X11Methods.cs         → libX11/libXft P/Invoke bindings
-```
 
 ## License
 

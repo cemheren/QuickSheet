@@ -21,6 +21,10 @@ internal class DesktopForm : Form
     private string _clipboard = "";
     private string? _loadedFile;
 
+    private bool _editing;
+    private string _editText = "";
+    private int _editCursorPos;
+
     private readonly Font _monoFont;
     private readonly int _charWidth;
     private readonly int _charHeight;
@@ -394,16 +398,26 @@ internal class DesktopForm : Form
         }
 
         // Status bar
-        string cellRef = _grid.GetCellReference(_selectedRow, _selectedCol);
-        string value = _grid.GetCellValue(_selectedRow, _selectedCol);
-        string valueDisplay = string.IsNullOrEmpty(value) ? "" : $" = {value}";
-        double? sum = _grid.GetColumnSum(_selectedCol);
-        string colName = GridManager.GetColumnName(_selectedCol);
-        string sumDisplay = sum.HasValue ? $"  \u03a3{colName} = {sum.Value}" : "";
-        double? product = _grid.GetRowProduct(_selectedRow);
-        string productDisplay = product.HasValue ? $"  \u03a0{(_selectedRow + 1)} = {product.Value}" : "";
-        string status = $" {cellRef}{valueDisplay}{sumDisplay}{productDisplay}  |  Ctrl+S: Save  Ctrl+Q: Quit";
         int maxChars = formWidth / cw;
+        string status;
+        if (_editing)
+        {
+            string prefix = " Edit: ";
+            string cursor = _editText.Insert(_editCursorPos, "\u2502");
+            status = $"{prefix}{cursor}  (Enter=OK  Esc=Cancel)";
+        }
+        else
+        {
+            string cellRef = _grid.GetCellReference(_selectedRow, _selectedCol);
+            string value = _grid.GetCellValue(_selectedRow, _selectedCol);
+            string valueDisplay = string.IsNullOrEmpty(value) ? "" : $" = {value}";
+            double? sum = _grid.GetColumnSum(_selectedCol);
+            string colName = GridManager.GetColumnName(_selectedCol);
+            string sumDisplay = sum.HasValue ? $"  \u03a3{colName} = {sum.Value}" : "";
+            double? product = _grid.GetRowProduct(_selectedRow);
+            string productDisplay = product.HasValue ? $"  \u03a0{(_selectedRow + 1)} = {product.Value}" : "";
+            status = $" {cellRef}{valueDisplay}{sumDisplay}{productDisplay}  |  F2: Edit  Ctrl+S: Save  Ctrl+Q: Quit";
+        }
         status = status.PadRight(maxChars);
         g.FillRectangle(Brushes.White, 0, statusY, formWidth, ch);
         DrawText(g, status, 0, statusY, Color.Black, Color.White);
@@ -420,9 +434,74 @@ internal class DesktopForm : Form
 
     // ── Input ────────────────────────────────────────────────────────
 
+    private void EnterEditMode()
+    {
+        _editing = true;
+        _editText = _grid.GetCellValue(_selectedRow, _selectedCol);
+        _editCursorPos = _editText.Length;
+    }
+
+    private void CommitEdit()
+    {
+        _grid.SetCellValue(_selectedRow, _selectedCol, _editText);
+        _editing = false;
+    }
+
+    private void CancelEdit()
+    {
+        _editing = false;
+    }
+
     private void OnFormKeyDown(object? sender, KeyEventArgs e)
     {
-        bool handled = true;
+        if (_editing)
+        {
+            bool handled = true;
+            switch (e.KeyCode)
+            {
+                case Keys.Left:
+                    if (_editCursorPos > 0) _editCursorPos--;
+                    break;
+                case Keys.Right:
+                    if (_editCursorPos < _editText.Length) _editCursorPos++;
+                    break;
+                case Keys.Home:
+                    _editCursorPos = 0;
+                    break;
+                case Keys.End:
+                    _editCursorPos = _editText.Length;
+                    break;
+                case Keys.Back:
+                    if (_editCursorPos > 0)
+                    {
+                        _editText = _editText.Remove(_editCursorPos - 1, 1);
+                        _editCursorPos--;
+                    }
+                    break;
+                case Keys.Delete:
+                    if (_editCursorPos < _editText.Length)
+                        _editText = _editText.Remove(_editCursorPos, 1);
+                    break;
+                case Keys.Enter:
+                    CommitEdit();
+                    break;
+                case Keys.Escape:
+                    CancelEdit();
+                    break;
+                default:
+                    handled = false;
+                    break;
+            }
+            if (handled)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                Invalidate();
+            }
+            return;
+        }
+
+        bool handled2 = true;
         if (e.Control)
         {
             switch (e.KeyCode)
@@ -474,7 +553,7 @@ internal class DesktopForm : Form
                 case Keys.O: _grid.ShiftRowsDown(_selectedRow); break;
                 case Keys.P: _grid.ShiftRowsUp(_selectedRow); break;
                 case Keys.S: SaveFile(); break;
-                default: handled = false; break;
+                default: handled2 = false; break;
             }
         }
         else if (e.Shift)
@@ -487,9 +566,9 @@ internal class DesktopForm : Form
                 case Keys.Down: if (_selectedRow < _grid.RowCount - 1) _selectedRow++; break;
                 case Keys.Left: if (_selectedCol > 0) _selectedCol--; break;
                 case Keys.Right: if (_selectedCol < _grid.ColumnCount - 1) _selectedCol++; break;
-                default: handled = false; break;
+                default: handled2 = false; break;
             }
-            if (handled) _selection.Add((_selectedRow, _selectedCol));
+            if (handled2) _selection.Add((_selectedRow, _selectedCol));
         }
         else
         {
@@ -514,6 +593,9 @@ internal class DesktopForm : Form
                 case Keys.Enter:
                     OpenAllSelected();
                     break;
+                case Keys.F2:
+                    EnterEditMode();
+                    break;
                 case Keys.Back:
                     var val = _grid.GetCellValue(_selectedRow, _selectedCol);
                     if (val.Length > 0) _grid.SetCellValue(_selectedRow, _selectedCol, val[..^1]);
@@ -527,10 +609,10 @@ internal class DesktopForm : Form
                 case Keys.Escape:
                     _selection.Clear();
                     break;
-                default: handled = false; break;
+                default: handled2 = false; break;
             }
         }
-        if (handled)
+        if (handled2)
         {
             e.Handled = true;
             e.SuppressKeyPress = true;
@@ -542,8 +624,16 @@ internal class DesktopForm : Form
     {
         if (e.KeyChar >= 32 && e.KeyChar <= 126)
         {
-            var cur = _grid.GetCellValue(_selectedRow, _selectedCol);
-            _grid.SetCellValue(_selectedRow, _selectedCol, cur + e.KeyChar);
+            if (_editing)
+            {
+                _editText = _editText.Insert(_editCursorPos, e.KeyChar.ToString());
+                _editCursorPos++;
+            }
+            else
+            {
+                var cur = _grid.GetCellValue(_selectedRow, _selectedCol);
+                _grid.SetCellValue(_selectedRow, _selectedCol, cur + e.KeyChar);
+            }
             e.Handled = true;
             Invalidate();
         }
