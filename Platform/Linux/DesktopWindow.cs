@@ -39,6 +39,7 @@ internal class DesktopWindow : IDisposable
     private const string FontName = "monospace:size=14";
 
     private bool _running;
+    private bool _isNativeX11;
     private System.Threading.Timer? _autoSaveTimer;
 
     // X11 atoms
@@ -61,10 +62,16 @@ internal class DesktopWindow : IDisposable
         _screenWidth = XDisplayWidth(display, _screen);
         _screenHeight = XDisplayHeight(display, _screen);
 
+        string sessionType = Environment.GetEnvironmentVariable("XDG_SESSION_TYPE") ?? "";
+        _isNativeX11 = sessionType.Equals("x11", StringComparison.OrdinalIgnoreCase)
+                     || string.IsNullOrEmpty(sessionType);
+
         // Open font and measure character size
         _xftFont = XftFontOpenName(display, _screen, FontName);
         if (_xftFont == IntPtr.Zero)
+        {
             _xftFont = XftFontOpenName(display, _screen, "monospace:size=12");
+        }
         MeasureFont();
 
         int availableWidth = _screenWidth / _charWidth;
@@ -149,15 +156,28 @@ internal class DesktopWindow : IDisposable
 
     public void EnterDesktopMode()
     {
-        IntPtr wmWindowType = XInternAtom(_display, "_NET_WM_WINDOW_TYPE", false);
-        IntPtr wmWindowTypeDesktop = XInternAtom(_display, "_NET_WM_WINDOW_TYPE_DESKTOP", false);
         IntPtr atomAtom = XInternAtom(_display, "ATOM", false);
 
-        IntPtr[] typeValue = [wmWindowTypeDesktop];
-        XChangeProperty(_display, _window, wmWindowType, atomAtom,
-            32, PropModeReplace, typeValue, 1);
+        // Remove window decorations via Motif hints (works on both X11 and XWayland)
+        IntPtr motifHints = XInternAtom(_display, "_MOTIF_WM_HINTS", false);
+        long[] mwmHints = [2, 0, 0, 0, 0]; // flags=MWM_HINTS_DECORATIONS, decorations=0
+        IntPtr mwmPtr = Marshal.AllocHGlobal(mwmHints.Length * 8);
+        Marshal.Copy(mwmHints, 0, mwmPtr, mwmHints.Length);
+        XChangeProperty(_display, _window, motifHints, motifHints,
+            32, PropModeReplace, mwmPtr, mwmHints.Length);
+        Marshal.FreeHGlobal(mwmPtr);
 
-        // Set additional state hints
+        if (_isNativeX11)
+        {
+            // On native X11, set window type to desktop — WM will treat it as the desktop
+            IntPtr wmWindowType = XInternAtom(_display, "_NET_WM_WINDOW_TYPE", false);
+            IntPtr wmWindowTypeDesktop = XInternAtom(_display, "_NET_WM_WINDOW_TYPE_DESKTOP", false);
+            IntPtr[] typeValue = [wmWindowTypeDesktop];
+            XChangeProperty(_display, _window, wmWindowType, atomAtom,
+                32, PropModeReplace, typeValue, 1);
+        }
+
+        // State hints: below, sticky, skip taskbar/pager
         IntPtr wmState = XInternAtom(_display, "_NET_WM_STATE", false);
         IntPtr stateBelow = XInternAtom(_display, "_NET_WM_STATE_BELOW", false);
         IntPtr stateSticky = XInternAtom(_display, "_NET_WM_STATE_STICKY", false);
@@ -306,7 +326,11 @@ internal class DesktopWindow : IDisposable
     {
         EnterDesktopMode();
         XMapWindow(_display, _window);
-        XFlush(_display);
+        XSync(_display, false);
+
+        // Create XftDraw now that window is mapped
+        _xftDraw = XftDrawCreate(_display, _window, _visual, _colormap);
+
         _running = true;
 
         IntPtr eventPtr = Marshal.AllocHGlobal(XEventSize);
@@ -320,9 +344,7 @@ internal class DesktopWindow : IDisposable
                 switch (eventType)
                 {
                     case Expose:
-                        var expose = Marshal.PtrToStructure<XExposeEvent>(eventPtr);
-                        if (expose.count == 0)
-                            Render();
+                        Render();
                         break;
 
                     case KeyPress:
@@ -380,7 +402,7 @@ internal class DesktopWindow : IDisposable
         int ch = _charHeight;
         int[] colWidths = GetColumnWidths();
 
-        // Clear background to black
+        // Clear background
         SetGCColor(0, 0, 0);
         XFillRectangle(_display, _window, _gc, 0, 0, (uint)_screenWidth, (uint)_screenHeight);
 
@@ -500,9 +522,6 @@ internal class DesktopWindow : IDisposable
             alpha = 0xFFFF
         };
         XftColorAllocValue(_display, _visual, _colormap, ref renderColor, out XftColor xftColor);
-
-        if (_xftDraw == IntPtr.Zero)
-            _xftDraw = XftDrawCreate(_display, _window, _visual, _colormap);
 
         byte[] utf8 = Encoding.UTF8.GetBytes(text);
         XftDrawStringUtf8(_xftDraw, ref xftColor, _xftFont, x, y + _fontAscent, utf8, utf8.Length);

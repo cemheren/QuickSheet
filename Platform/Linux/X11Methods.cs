@@ -297,12 +297,15 @@ internal static class X11Methods
     // XEvent is a union of 192 bytes on 64-bit
     public const int XEventSize = 192;
 
+    // NOTE: X11's Bool is typedef'd to int (4 bytes), NOT C# bool (1 byte).
+    // All structs use int for Bool fields to match the native layout.
+
     [StructLayout(LayoutKind.Sequential)]
     public struct XAnyEvent
     {
         public int type;
         public ulong serial;
-        public bool send_event;
+        public int send_event; // Bool
         public IntPtr display;
         public IntPtr window;
     }
@@ -312,7 +315,7 @@ internal static class X11Methods
     {
         public int type;
         public ulong serial;
-        public bool send_event;
+        public int send_event; // Bool
         public IntPtr display;
         public IntPtr window;
         public IntPtr root;
@@ -322,7 +325,7 @@ internal static class X11Methods
         public int x_root, y_root;
         public uint state;
         public uint keycode;
-        public bool same_screen;
+        public int same_screen; // Bool
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -330,7 +333,7 @@ internal static class X11Methods
     {
         public int type;
         public ulong serial;
-        public bool send_event;
+        public int send_event; // Bool
         public IntPtr display;
         public IntPtr window;
         public IntPtr root;
@@ -340,7 +343,7 @@ internal static class X11Methods
         public int x_root, y_root;
         public uint state;
         public uint button;
-        public bool same_screen;
+        public int same_screen; // Bool
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -348,7 +351,7 @@ internal static class X11Methods
     {
         public int type;
         public ulong serial;
-        public bool send_event;
+        public int send_event; // Bool
         public IntPtr display;
         public IntPtr window;
         public int x, y;
@@ -361,14 +364,14 @@ internal static class X11Methods
     {
         public int type;
         public ulong serial;
-        public bool send_event;
+        public int send_event; // Bool
         public IntPtr display;
-        public IntPtr window; // event window
+        public IntPtr window;
         public int x, y;
         public int width, height;
         public int border_width;
         public IntPtr above;
-        public bool override_redirect;
+        public int override_redirect; // Bool
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -376,7 +379,7 @@ internal static class X11Methods
     {
         public int type;
         public ulong serial;
-        public bool send_event;
+        public int send_event; // Bool
         public IntPtr display;
         public IntPtr owner;
         public IntPtr requestor;
@@ -391,7 +394,7 @@ internal static class X11Methods
     {
         public int type;
         public ulong serial;
-        public bool send_event;
+        public int send_event; // Bool
         public IntPtr display;
         public IntPtr requestor;
         public IntPtr selection;
@@ -405,7 +408,7 @@ internal static class X11Methods
     {
         public int type;
         public ulong serial;
-        public bool send_event;
+        public int send_event; // Bool
         public IntPtr display;
         public IntPtr window;
         public IntPtr message_type;
