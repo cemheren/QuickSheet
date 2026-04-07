@@ -36,7 +36,7 @@ internal class DesktopWindow : IDisposable
 
     private readonly int _colWidth;
     private const int RowHeaderWidth = 4;
-    private const string FontName = "monospace:size=14";
+    private const int FontPointSize = 14;
 
     private bool _running;
     private bool _isNativeX11;
@@ -77,11 +77,20 @@ internal class DesktopWindow : IDisposable
         _isNativeX11 = sessionType.Equals("x11", StringComparison.OrdinalIgnoreCase)
                      || string.IsNullOrEmpty(sessionType);
 
-        // Open font and measure character size
-        _xftFont = XftFontOpenName(display, _screen, FontName);
+        // Open font — compute DPI explicitly so it works even before Xresources load on autostart
+        int dpi = GetXftDpi(display);
+        if (dpi <= 0)
+        {
+            int screenWidthPx = XDisplayWidth(display, _screen);
+            int screenWidthMm = XDisplayWidthMM(display, _screen);
+            int rawDpi = screenWidthMm > 0 ? (int)(screenWidthPx * 25.4 / screenWidthMm) : 96;
+            dpi = Math.Max(96, (rawDpi + 24) / 48 * 48);
+        }
+        string fontName = $"monospace:size={FontPointSize}:dpi={dpi}";
+        _xftFont = XftFontOpenName(display, _screen, fontName);
         if (_xftFont == IntPtr.Zero)
         {
-            _xftFont = XftFontOpenName(display, _screen, "monospace:size=12");
+            _xftFont = XftFontOpenName(display, _screen, $"monospace:size=12:dpi={dpi}");
         }
         MeasureFont();
 
@@ -197,6 +206,26 @@ internal class DesktopWindow : IDisposable
         XftTextExtentsUtf8(_display, _xftFont, sample, sample.Length, out XGlyphInfo extents);
         _charWidth = (int)Math.Ceiling(extents.xOff / 10.0);
         if (_charWidth < 1) _charWidth = maxAdvance > 0 ? maxAdvance : 8;
+    }
+
+    /// <summary>
+    /// Read Xft.dpi from the X resource manager string. Returns 0 if not found.
+    /// </summary>
+    private static int GetXftDpi(IntPtr display)
+    {
+        IntPtr rms = XResourceManagerString(display);
+        if (rms == IntPtr.Zero) return 0;
+        string? resources = Marshal.PtrToStringUTF8(rms);
+        if (resources is null) return 0;
+        foreach (string line in resources.Split('\n'))
+        {
+            if (line.StartsWith("Xft.dpi:", StringComparison.OrdinalIgnoreCase))
+            {
+                string val = line["Xft.dpi:".Length..].Trim();
+                if (int.TryParse(val, out int dpi) && dpi > 0) return dpi;
+            }
+        }
+        return 0;
     }
 
     // ── Desktop mode ─────────────────────────────────────────────────
