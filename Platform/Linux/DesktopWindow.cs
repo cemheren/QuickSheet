@@ -324,19 +324,17 @@ internal class DesktopWindow : IDisposable
         {
             string fullCmd = string.IsNullOrEmpty(args) ? exe : $"{exe} {args}";
             var (terminal, termArgs) = FindTerminal();
-            // Wrap so the shell stays open after the command completes
-            string wrapped = $"bash -c '{fullCmd.Replace("'", "'\\''")}; exec bash'";
             if (!string.IsNullOrEmpty(terminal))
             {
-                Process.Start(new ProcessStartInfo(terminal, $"{termArgs} {wrapped}")
-                {
-                    UseShellExecute = false,
-                    CreateNoWindow = false
-                });
+                var psi = new ProcessStartInfo(terminal) { UseShellExecute = false, CreateNoWindow = false };
+                psi.ArgumentList.Add(termArgs);
+                psi.ArgumentList.Add("bash");
+                psi.ArgumentList.Add("-c");
+                psi.ArgumentList.Add($"{fullCmd}; exec bash");
+                Process.Start(psi);
             }
             else
             {
-                // Fallback: run detached with nohup so it doesn't share our terminal
                 Process.Start(new ProcessStartInfo("/bin/sh", $"-c \"nohup {fullCmd} &\"")
                 {
                     UseShellExecute = false,
