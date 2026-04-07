@@ -366,7 +366,8 @@ internal static class X11Methods
         public ulong serial;
         public int send_event; // Bool
         public IntPtr display;
-        public IntPtr window;
+        public IntPtr @event;  // event window
+        public IntPtr window;  // configured window
         public int x, y;
         public int width, height;
         public int border_width;

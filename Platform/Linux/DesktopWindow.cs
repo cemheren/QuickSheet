@@ -139,17 +139,23 @@ internal class DesktopWindow : IDisposable
 
     private void MeasureFont()
     {
+        // Read font metrics directly from the XftFont struct
+        // Layout: int ascent, int descent, int height, int max_advance_width
+        int ascent = Marshal.ReadInt32(_xftFont, 0);
+        int descent = Marshal.ReadInt32(_xftFont, 4);
+        int height = Marshal.ReadInt32(_xftFont, 8);
+        int maxAdvance = Marshal.ReadInt32(_xftFont, 12);
+
+        _fontAscent = ascent;
+        _charHeight = height;
+        if (_charHeight < 1) _charHeight = ascent + descent;
+        if (_charHeight < 1) _charHeight = 18;
+
+        // Measure character width with a sample string
         byte[] sample = "MMMMMMMMMM"u8.ToArray();
         XftTextExtentsUtf8(_display, _xftFont, sample, sample.Length, out XGlyphInfo extents);
         _charWidth = (int)Math.Ceiling(extents.xOff / 10.0);
-        if (_charWidth < 1) _charWidth = 8;
-
-        // Measure height with a tall string
-        byte[] heightSample = "Mg|"u8.ToArray();
-        XftTextExtentsUtf8(_display, _xftFont, heightSample, heightSample.Length, out XGlyphInfo hExtents);
-        _charHeight = hExtents.height + 4;
-        _fontAscent = hExtents.y;
-        if (_charHeight < 1) _charHeight = 18;
+        if (_charWidth < 1) _charWidth = maxAdvance > 0 ? maxAdvance : 8;
     }
 
     // ── Desktop mode ─────────────────────────────────────────────────
@@ -167,26 +173,38 @@ internal class DesktopWindow : IDisposable
             32, PropModeReplace, mwmPtr, mwmHints.Length);
         Marshal.FreeHGlobal(mwmPtr);
 
+        IntPtr wmState = XInternAtom(_display, "_NET_WM_STATE", false);
+
         if (_isNativeX11)
         {
-            // On native X11, set window type to desktop — WM will treat it as the desktop
+            // On native X11, set window type to desktop — WM treats it as the desktop
             IntPtr wmWindowType = XInternAtom(_display, "_NET_WM_WINDOW_TYPE", false);
             IntPtr wmWindowTypeDesktop = XInternAtom(_display, "_NET_WM_WINDOW_TYPE_DESKTOP", false);
             IntPtr[] typeValue = [wmWindowTypeDesktop];
             XChangeProperty(_display, _window, wmWindowType, atomAtom,
                 32, PropModeReplace, typeValue, 1);
+
+            // State: below, sticky, skip taskbar/pager
+            IntPtr stateBelow = XInternAtom(_display, "_NET_WM_STATE_BELOW", false);
+            IntPtr stateSticky = XInternAtom(_display, "_NET_WM_STATE_STICKY", false);
+            IntPtr stateSkipTaskbar = XInternAtom(_display, "_NET_WM_STATE_SKIP_TASKBAR", false);
+            IntPtr stateSkipPager = XInternAtom(_display, "_NET_WM_STATE_SKIP_PAGER", false);
+
+            IntPtr[] states = [stateBelow, stateSticky, stateSkipTaskbar, stateSkipPager];
+            XChangeProperty(_display, _window, wmState, atomAtom,
+                32, PropModeReplace, states, states.Length);
         }
+        else
+        {
+            // On XWayland, use fullscreen to fill the screen
+            IntPtr stateFullscreen = XInternAtom(_display, "_NET_WM_STATE_FULLSCREEN", false);
+            IntPtr stateSkipTaskbar = XInternAtom(_display, "_NET_WM_STATE_SKIP_TASKBAR", false);
+            IntPtr stateSkipPager = XInternAtom(_display, "_NET_WM_STATE_SKIP_PAGER", false);
 
-        // State hints: below, sticky, skip taskbar/pager
-        IntPtr wmState = XInternAtom(_display, "_NET_WM_STATE", false);
-        IntPtr stateBelow = XInternAtom(_display, "_NET_WM_STATE_BELOW", false);
-        IntPtr stateSticky = XInternAtom(_display, "_NET_WM_STATE_STICKY", false);
-        IntPtr stateSkipTaskbar = XInternAtom(_display, "_NET_WM_STATE_SKIP_TASKBAR", false);
-        IntPtr stateSkipPager = XInternAtom(_display, "_NET_WM_STATE_SKIP_PAGER", false);
-
-        IntPtr[] states = [stateBelow, stateSticky, stateSkipTaskbar, stateSkipPager];
-        XChangeProperty(_display, _window, wmState, atomAtom,
-            32, PropModeReplace, states, states.Length);
+            IntPtr[] states = [stateFullscreen, stateSkipTaskbar, stateSkipPager];
+            XChangeProperty(_display, _window, wmState, atomAtom,
+                32, PropModeReplace, states, states.Length);
+        }
     }
 
     // ── Desktop files ────────────────────────────────────────────────
@@ -365,6 +383,10 @@ internal class DesktopWindow : IDisposable
                         {
                             _screenWidth = configEvent.width;
                             _screenHeight = configEvent.height;
+                            if (_xftDraw != IntPtr.Zero)
+                                XftDrawDestroy(_xftDraw);
+                            _xftDraw = XftDrawCreate(_display, _window, _visual, _colormap);
+                            Render();
                         }
                         break;
 
@@ -438,7 +460,7 @@ internal class DesktopWindow : IDisposable
             if (r == _selectedRow)
                 DrawTextWithBg(rowNum, x, y, 255, 255, 255, 64, 64, 64);
             else
-                DrawTextWithBg(rowNum, x, y, 255, 255, 255, 0, 0, 0);
+                DrawTextWithBg(rowNum, x, y, 200, 200, 200, 15, 15, 15);
 
             x = RowHeaderWidth * cw;
             for (int c = 0; c < _grid.ColumnCount; c++)
@@ -459,7 +481,7 @@ internal class DesktopWindow : IDisposable
                 else if (isFile) { bgR = 0; bgG = 40; bgB = 60; }
                 else if (isLink) { bgR = 40; bgG = 0; bgB = 60; }
                 else if (isCmd) { bgR = 40; bgG = 40; bgB = 0; }
-                else { bgR = 0; bgG = 0; bgB = 0; }
+                else { bgR = 15; bgG = 15; bgB = 15; }
 
                 if (isFile) { fgR = 100; fgG = 200; fgB = 255; }
                 else if (isLink) { fgR = 180; fgG = 140; fgB = 255; }
@@ -469,6 +491,9 @@ internal class DesktopWindow : IDisposable
                 DrawTextWithBg(display, x, y, fgR, fgG, fgB, bgR, bgG, bgB);
                 x += w * cw;
             }
+            // Subtle horizontal grid line at the bottom of each row
+            SetGCColor(40, 40, 40);
+            XDrawLine(_display, _window, _gc, 0, y + ch - 1, _screenWidth, y + ch - 1);
             y += ch;
         }
 
