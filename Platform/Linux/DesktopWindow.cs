@@ -332,7 +332,8 @@ internal class DesktopWindow : IDisposable
                 if (!string.IsNullOrEmpty(terminal))
                 {
                     var psi = new ProcessStartInfo(terminal) { UseShellExecute = false, CreateNoWindow = false };
-                    psi.ArgumentList.Add(termArgs);
+                    foreach (var part in termArgs.Split(' ', StringSplitOptions.RemoveEmptyEntries))
+                        psi.ArgumentList.Add(part);
                     psi.ArgumentList.Add(exe);
                     if (!string.IsNullOrEmpty(args))
                     {
@@ -356,9 +357,10 @@ internal class DesktopWindow : IDisposable
     private static (string terminal, string launchArg) FindTerminal()
     {
         // (terminal, argument to launch a command)
+        // ptyxis uses -s (standalone) + -- to avoid D-Bus activation issues
         (string, string)[] terminals =
         [
-            ("ptyxis", "--"),
+            ("ptyxis", "-s --"),
             ("gnome-terminal", "--"),
             ("kgx", "-e"),
             ("konsole", "-e"),
