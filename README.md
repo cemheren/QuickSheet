@@ -64,7 +64,7 @@ Some ideas:
 ### Desktop files
 Desktop files are added to cells (padded to right), which can be used in a multi-select way. Helpful for finding/launching multiple files. Not sure about usability of these yet, likely I'm going to tweak this. 
 
-![alt text](image-3.png)
+![alt text](image.png)
 
 ## Keyboard Shortcuts
 
