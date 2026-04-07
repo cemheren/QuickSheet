@@ -41,6 +41,7 @@ internal class DesktopWindow : IDisposable
     private bool _running;
     private bool _isNativeX11;
     private System.Threading.Timer? _autoSaveTimer;
+    private readonly object _saveLock = new();
 
     // X11 atoms
     private IntPtr _atomWmDeleteWindow;
@@ -125,7 +126,16 @@ internal class DesktopWindow : IDisposable
         Directory.CreateDirectory(StateDir);
         _autoSaveTimer = new System.Threading.Timer(_ =>
         {
-            try { _grid.SaveToCsv(AutoSavePath); } catch { }
+            lock (_saveLock)
+            {
+                try
+                {
+                    string tmp = AutoSavePath + ".tmp";
+                    _grid.SaveToCsv(tmp);
+                    File.Move(tmp, AutoSavePath, overwrite: true);
+                }
+                catch { }
+            }
         }, null, TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(5));
     }
 
