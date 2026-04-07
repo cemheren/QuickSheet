@@ -17,19 +17,10 @@ public class Program
             host.Run(csvPath);
 #elif PLATFORM_LINUX
             string sessionType = Environment.GetEnvironmentVariable("XDG_SESSION_TYPE") ?? "";
-            if (sessionType.Equals("wayland", StringComparison.OrdinalIgnoreCase))
-            {
-                Console.Error.WriteLine("Warning: Desktop mode requires an X11 session.");
-                Console.Error.WriteLine("You are running Wayland. Select 'GNOME on Xorg' at the login screen,");
-                Console.Error.WriteLine("or set DISPLAY and try with XWayland (may not work as true desktop layer).");
-                Console.Error.WriteLine();
-                Console.Error.WriteLine("Attempting via XWayland anyway...");
-            }
-
             using var host = new ExcelConsole.Platform.Linux.LinuxDesktopHost();
             host.Run(csvPath);
 #else
-            Console.Error.WriteLine("Desktop mode is only supported on Windows and Linux (X11).");
+            return;
 #endif
         }
         else

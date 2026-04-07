@@ -16,10 +16,7 @@ public class LinuxDesktopHost : Platform.IDesktopHost
     {
         _display = XOpenDisplay(null);
         if (_display == IntPtr.Zero)
-        {
-            Console.Error.WriteLine("Error: Cannot open X11 display. Is DISPLAY set? Desktop mode requires X11.");
             return;
-        }
 
         try
         {
