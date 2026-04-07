@@ -291,8 +291,8 @@ internal class DesktopWindow : IDisposable
             }
             else
             {
-                // Fallback: run directly (won't have its own terminal)
-                Process.Start(new ProcessStartInfo(exe, args)
+                // Fallback: run detached with nohup so it doesn't share our terminal
+                Process.Start(new ProcessStartInfo("/bin/sh", $"-c \"nohup {fullCmd} &\"")
                 {
                     UseShellExecute = false,
                     CreateNoWindow = false
@@ -307,7 +307,9 @@ internal class DesktopWindow : IDisposable
         // (terminal, argument to launch a command)
         (string, string)[] terminals =
         [
+            ("ptyxis", "--"),
             ("gnome-terminal", "--"),
+            ("kgx", "-e"),
             ("konsole", "-e"),
             ("xfce4-terminal", "-e"),
             ("mate-terminal", "-e"),
