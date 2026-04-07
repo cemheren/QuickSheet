@@ -315,6 +315,9 @@ internal class DesktopWindow : IDisposable
         return (cmd[..space], cmd[(space + 1)..].Trim());
     }
 
+    private static readonly HashSet<string> ShellCommands = new(StringComparer.OrdinalIgnoreCase)
+        { "bash", "sh", "zsh", "fish", "csh", "tcsh", "ksh", "dash" };
+
     private static void RunCommand(string cellValue)
     {
         if (!IsCommand(cellValue)) return;
@@ -322,25 +325,30 @@ internal class DesktopWindow : IDisposable
         if (string.IsNullOrEmpty(exe)) return;
         try
         {
-            string fullCmd = string.IsNullOrEmpty(args) ? exe : $"{exe} {args}";
-            var (terminal, termArgs) = FindTerminal();
-            if (!string.IsNullOrEmpty(terminal))
+            bool needsTerminal = ShellCommands.Contains(Path.GetFileName(exe));
+            if (needsTerminal)
             {
-                var psi = new ProcessStartInfo(terminal) { UseShellExecute = false, CreateNoWindow = false };
-                psi.ArgumentList.Add(termArgs);
-                psi.ArgumentList.Add("bash");
-                psi.ArgumentList.Add("-c");
-                psi.ArgumentList.Add($"{fullCmd}; exec bash");
-                Process.Start(psi);
-            }
-            else
-            {
-                Process.Start(new ProcessStartInfo("/bin/sh", $"-c \"nohup {fullCmd} &\"")
+                var (terminal, termArgs) = FindTerminal();
+                if (!string.IsNullOrEmpty(terminal))
                 {
-                    UseShellExecute = false,
-                    CreateNoWindow = false
-                });
+                    var psi = new ProcessStartInfo(terminal) { UseShellExecute = false, CreateNoWindow = false };
+                    psi.ArgumentList.Add(termArgs);
+                    psi.ArgumentList.Add(exe);
+                    if (!string.IsNullOrEmpty(args))
+                    {
+                        psi.ArgumentList.Add("-c");
+                        psi.ArgumentList.Add(args);
+                    }
+                    Process.Start(psi);
+                    return;
+                }
             }
+
+            // Run directly (GUI apps, or fallback)
+            var direct = new ProcessStartInfo(exe) { UseShellExecute = false, CreateNoWindow = false };
+            if (!string.IsNullOrEmpty(args))
+                direct.Arguments = args;
+            Process.Start(direct);
         }
         catch { }
     }
