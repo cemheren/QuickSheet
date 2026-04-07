@@ -43,6 +43,16 @@ internal class DesktopWindow : IDisposable
     private System.Threading.Timer? _autoSaveTimer;
     private readonly object _saveLock = new();
 
+    // Double-click tracking
+    private ulong _lastClickTime;
+    private int _lastClickRow = -1;
+    private int _lastClickCol = -1;
+    private const ulong DoubleClickMs = 400;
+
+    // Transparency
+    private bool _hasArgbVisual;
+    private int _bgAlpha = 204; // ~80% opacity (0-255)
+
     // X11 atoms
     private IntPtr _atomWmDeleteWindow;
     private IntPtr _atomClipboard;
@@ -82,11 +92,32 @@ internal class DesktopWindow : IDisposable
         int usableChars = availableWidth - RowHeaderWidth;
         _colWidth = _grid.ColumnCount > 0 ? usableChars / _grid.ColumnCount : 20;
 
-        // Create the window
+        // Create the window (try 32-bit ARGB visual for transparency)
         IntPtr root = XDefaultRootWindow(display);
-        _window = XCreateSimpleWindow(display, root,
-            0, 0, (uint)_screenWidth, (uint)_screenHeight,
-            0, 0, 0);
+        if (XMatchVisualInfo(display, _screen, 32, TrueColor, out var vinfo) != 0)
+        {
+            _visual = vinfo.visual;
+            _colormap = XCreateColormap(display, root, _visual, AllocNone);
+            _hasArgbVisual = true;
+
+            var attrs = new XSetWindowAttributes
+            {
+                background_pixel = 0, // fully transparent black
+                border_pixel = 0,
+                colormap = _colormap
+            };
+            _window = XCreateWindow(display, root,
+                0, 0, (uint)_screenWidth, (uint)_screenHeight, 0,
+                32, InputOutput, _visual,
+                CWBackPixel | CWBorderPixel | CWColormap, ref attrs);
+        }
+        else
+        {
+            _hasArgbVisual = false;
+            _window = XCreateSimpleWindow(display, root,
+                0, 0, (uint)_screenWidth, (uint)_screenHeight,
+                0, 0, 0);
+        }
 
         XStoreName(display, _window, "QuickSheet");
 
@@ -472,8 +503,8 @@ internal class DesktopWindow : IDisposable
         int ch = _charHeight;
         int[] colWidths = GetColumnWidths();
 
-        // Clear background
-        SetGCColor(0, 0, 0);
+        // Clear background (semi-transparent if ARGB visual available)
+        SetGCColor(0, 0, 0, _hasArgbVisual ? _bgAlpha : 255);
         XFillRectangle(_display, _window, _gc, 0, 0, (uint)_screenWidth, (uint)_screenHeight);
 
         int y = 0;
@@ -540,7 +571,7 @@ internal class DesktopWindow : IDisposable
                 x += w * cw;
             }
             // Subtle horizontal grid line at the bottom of each row
-            SetGCColor(40, 40, 40);
+            SetGCColor(40, 40, 40, _hasArgbVisual ? _bgAlpha : 255);
             XDrawLine(_display, _window, _gc, 0, y + ch - 1, _screenWidth, y + ch - 1);
             y += ch;
         }
@@ -558,8 +589,8 @@ internal class DesktopWindow : IDisposable
         int maxChars = _screenWidth / cw;
         status = status.PadRight(maxChars);
 
-        // White background status bar
-        DrawTextWithBg(status, 0, statusY, 0, 0, 0, 255, 255, 255);
+        // White background status bar (fully opaque)
+        DrawTextWithBg(status, 0, statusY, 0, 0, 0, 255, 255, 255, 255);
 
         XFlush(_display);
     }
@@ -572,18 +603,21 @@ internal class DesktopWindow : IDisposable
         return widths;
     }
 
-    private void SetGCColor(int r, int g, int b)
+    private void SetGCColor(int r, int g, int b, int a = 255)
     {
-        ulong pixel = (ulong)(r << 16 | g << 8 | b);
+        ulong pixel = _hasArgbVisual
+            ? (ulong)(a << 24 | r << 16 | g << 8 | b)
+            : (ulong)(r << 16 | g << 8 | b);
         XSetForeground(_display, _gc, pixel);
     }
 
-    private void DrawTextWithBg(string text, int x, int y, int fgR, int fgG, int fgB, int bgR, int bgG, int bgB)
+    private void DrawTextWithBg(string text, int x, int y, int fgR, int fgG, int fgB, int bgR, int bgG, int bgB, int bgA = -1)
     {
         int w = text.Length * _charWidth;
 
-        // Draw background rectangle
-        SetGCColor(bgR, bgG, bgB);
+        // Draw background rectangle (use per-cell alpha, or default _bgAlpha for normal cells)
+        int alpha = bgA >= 0 ? bgA : (_hasArgbVisual ? _bgAlpha : 255);
+        SetGCColor(bgR, bgG, bgB, alpha);
         XFillRectangle(_display, _window, _gc, x, y, (uint)w, (uint)_charHeight);
 
         // Draw text with Xft
@@ -773,6 +807,21 @@ internal class DesktopWindow : IDisposable
             }
             if (col < 0) return;
 
+            // Double-click detection
+            bool isDoubleClick = row == _lastClickRow && col == _lastClickCol
+                && buttonEvent.time - _lastClickTime < DoubleClickMs;
+            _lastClickTime = buttonEvent.time;
+            _lastClickRow = row;
+            _lastClickCol = col;
+
+            if (isDoubleClick)
+            {
+                _selectedRow = row;
+                _selectedCol = col;
+                OpenAllSelected();
+                return;
+            }
+
             if ((buttonEvent.state & ControlMask) != 0)
             {
                 if (!_selection.Remove((row, col)))
@@ -786,7 +835,7 @@ internal class DesktopWindow : IDisposable
             _selectedRow = row;
             _selectedCol = col;
         }
-        else if (buttonEvent.button == 3) // Right click — double-click handled via rapid clicks
+        else if (buttonEvent.button == 3) // Right click
         {
             OpenAllSelected();
         }

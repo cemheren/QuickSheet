@@ -46,6 +46,20 @@ internal static class X11Methods
         ulong border, ulong background);
 
     [DllImport(LibX11)]
+    public static extern IntPtr XCreateWindow(IntPtr display, IntPtr parent,
+        int x, int y, uint width, uint height, uint borderWidth,
+        int depth, uint @class, IntPtr visual, ulong valueMask,
+        ref XSetWindowAttributes attributes);
+
+    [DllImport(LibX11)]
+    public static extern int XMatchVisualInfo(IntPtr display, int screen,
+        int depth, int @class, out XVisualInfo vinfo);
+
+    [DllImport(LibX11)]
+    public static extern IntPtr XCreateColormap(IntPtr display, IntPtr window,
+        IntPtr visual, int alloc);
+
+    [DllImport(LibX11)]
     public static extern int XMapWindow(IntPtr display, IntPtr window);
 
     [DllImport(LibX11)]
@@ -416,4 +430,53 @@ internal static class X11Methods
         public int format;
         public long data0, data1, data2, data3, data4;
     }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct XVisualInfo
+    {
+        public IntPtr visual;
+        public ulong visualid;
+        public int screen;
+        public int depth;
+        public int @class;
+        public ulong red_mask;
+        public ulong green_mask;
+        public ulong blue_mask;
+        public int colormap_size;
+        public int bits_per_rgb;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct XSetWindowAttributes
+    {
+        public IntPtr background_pixmap;
+        public ulong background_pixel;
+        public IntPtr border_pixmap;
+        public ulong border_pixel;
+        public int bit_gravity;
+        public int win_gravity;
+        public int backing_store;
+        public ulong backing_planes;
+        public ulong backing_pixel;
+        public int save_under; // Bool
+        public long event_mask;
+        public long do_not_propagate_mask;
+        public int override_redirect; // Bool
+        public IntPtr colormap;
+        public IntPtr cursor;
+    }
+
+    // XCreateWindow class values
+    public const uint InputOutput = 1;
+
+    // XSetWindowAttributes value mask bits
+    public const ulong CWBackPixel = 1L << 1;
+    public const ulong CWBorderPixel = 1L << 3;
+    public const ulong CWColormap = 1L << 13;
+
+    // XCreateColormap alloc values
+    public const int AllocNone = 0;
+
+    // Visual class for XMatchVisualInfo
+    public const int TrueColor = 4;
 }
