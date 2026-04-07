@@ -286,7 +286,9 @@ internal class DesktopWindow : IDisposable
         if (string.IsNullOrEmpty(path)) return;
         try
         {
-            Process.Start(new ProcessStartInfo("xdg-open", path) { UseShellExecute = false });
+            var psi = new ProcessStartInfo("xdg-open") { UseShellExecute = false };
+            psi.ArgumentList.Add(path);
+            Process.Start(psi);
         }
         catch { }
     }
@@ -379,7 +381,9 @@ internal class DesktopWindow : IDisposable
         if (!IsHyperlink(url)) return;
         try
         {
-            Process.Start(new ProcessStartInfo("xdg-open", url) { UseShellExecute = false });
+            var psi = new ProcessStartInfo("xdg-open") { UseShellExecute = false };
+            psi.ArgumentList.Add(url);
+            Process.Start(psi);
         }
         catch { }
     }
@@ -398,7 +402,13 @@ internal class DesktopWindow : IDisposable
             {
                 string path = _grid.GetFilePath(r, c);
                 if (!string.IsNullOrEmpty(path))
-                    try { Process.Start(new ProcessStartInfo("xdg-open", path) { UseShellExecute = false }); opened = true; } catch { }
+                    try
+                    {
+                        var psi = new ProcessStartInfo("xdg-open") { UseShellExecute = false };
+                        psi.ArgumentList.Add(path);
+                        Process.Start(psi);
+                        opened = true;
+                    } catch { }
             }
             else
             {
@@ -409,7 +419,13 @@ internal class DesktopWindow : IDisposable
                     opened = true;
                 }
                 else if (IsHyperlink(val))
-                    try { Process.Start(new ProcessStartInfo("xdg-open", val) { UseShellExecute = false }); opened = true; } catch { }
+                    try
+                    {
+                        var psi = new ProcessStartInfo("xdg-open") { UseShellExecute = false };
+                        psi.ArgumentList.Add(val);
+                        Process.Start(psi);
+                        opened = true;
+                    } catch { }
             }
         }
 
