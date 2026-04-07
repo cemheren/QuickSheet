@@ -32,15 +32,6 @@ internal static class X11Methods
     public static extern int XDisplayHeight(IntPtr display, int screen);
 
     [DllImport(LibX11)]
-    public static extern int XDisplayWidthMM(IntPtr display, int screen);
-
-    [DllImport(LibX11)]
-    public static extern int XDisplayHeightMM(IntPtr display, int screen);
-
-    [DllImport(LibX11)]
-    public static extern IntPtr XResourceManagerString(IntPtr display);
-
-    [DllImport(LibX11)]
     public static extern int XDefaultDepth(IntPtr display, int screen);
 
     [DllImport(LibX11)]
