@@ -279,9 +279,55 @@ internal class DesktopWindow : IDisposable
         if (string.IsNullOrEmpty(exe)) return;
         try
         {
-            Process.Start(new ProcessStartInfo(exe, args) { UseShellExecute = false });
+            string fullCmd = string.IsNullOrEmpty(args) ? exe : $"{exe} {args}";
+            var (terminal, termArgs) = FindTerminal();
+            if (!string.IsNullOrEmpty(terminal))
+            {
+                Process.Start(new ProcessStartInfo(terminal, $"{termArgs} {fullCmd}")
+                {
+                    UseShellExecute = false,
+                    CreateNoWindow = false
+                });
+            }
+            else
+            {
+                // Fallback: run directly (won't have its own terminal)
+                Process.Start(new ProcessStartInfo(exe, args)
+                {
+                    UseShellExecute = false,
+                    CreateNoWindow = false
+                });
+            }
         }
         catch { }
+    }
+
+    private static (string terminal, string launchArg) FindTerminal()
+    {
+        // (terminal, argument to launch a command)
+        (string, string)[] terminals =
+        [
+            ("gnome-terminal", "--"),
+            ("konsole", "-e"),
+            ("xfce4-terminal", "-e"),
+            ("mate-terminal", "-e"),
+            ("xterm", "-e")
+        ];
+        foreach (var (t, arg) in terminals)
+        {
+            try
+            {
+                var result = Process.Start(new ProcessStartInfo("which", t)
+                {
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false
+                });
+                result?.WaitForExit(500);
+                if (result?.ExitCode == 0) return (t, arg);
+            }
+            catch { }
+        }
+        return ("", "");
     }
 
     private void OpenHyperlink()
