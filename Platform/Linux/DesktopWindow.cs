@@ -338,7 +338,7 @@ internal class DesktopWindow : IDisposable
                     if (!string.IsNullOrEmpty(args))
                     {
                         psi.ArgumentList.Add("-c");
-                        psi.ArgumentList.Add(args);
+                        psi.ArgumentList.Add($"{args}; exec {exe}");
                     }
                     Process.Start(psi);
                     return;
