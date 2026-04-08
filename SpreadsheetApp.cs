@@ -314,7 +314,8 @@ public class SpreadsheetApp
         Console.ForegroundColor = ConsoleColor.Black;
         int totalWidth = Console.WindowWidth;
 
-        string defaultName = _loadedFile ?? "spreadsheet.csv";
+        string defaultName = _loadedFile ?? Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "spreadsheet.csv");
         Console.Write($" Save as [{defaultName}]: ".PadRight(totalWidth));
         Console.SetCursorPosition($" Save as [{defaultName}]: ".Length, statusY);
         Console.CursorVisible = true;
