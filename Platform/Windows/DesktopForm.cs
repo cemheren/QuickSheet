@@ -25,6 +25,10 @@ internal class DesktopForm : Form
     private string _editText = "";
     private int _editCursorPos;
 
+    private bool _dragging;
+    private int _dragAnchorRow;
+    private int _dragAnchorCol;
+
     private readonly Font _monoFont;
     private readonly int _charWidth;
     private readonly int _charHeight;
@@ -105,6 +109,8 @@ internal class DesktopForm : Form
         KeyDown += OnFormKeyDown;
         KeyPress += OnFormKeyPress;
         MouseDown += OnFormMouseDown;
+        MouseMove += OnFormMouseMove;
+        MouseUp += OnFormMouseUp;
         MouseDoubleClick += OnFormDoubleClick;
         FormClosing += OnFormClosing;
 
@@ -600,7 +606,18 @@ internal class DesktopForm : Form
                     var val = _grid.GetCellValue(_selectedRow, _selectedCol);
                     if (val.Length > 0) _grid.SetCellValue(_selectedRow, _selectedCol, val[..^1]);
                     break;
-                case Keys.Delete: _grid.SetCellValue(_selectedRow, _selectedCol, ""); break;
+                case Keys.Delete:
+                    if (_selection.Count > 0)
+                    {
+                        foreach (var (r, c) in _selection) _grid.SetCellValue(r, c, "");
+                        _grid.SetCellValue(_selectedRow, _selectedCol, "");
+                        _selection.Clear();
+                    }
+                    else
+                    {
+                        _grid.SetCellValue(_selectedRow, _selectedCol, "");
+                    }
+                    break;
                 case Keys.Tab:
                     if (_selectedCol < _grid.ColumnCount - 1) _selectedCol++;
                     else if (_selectedRow < _grid.RowCount - 1) { _selectedCol = 0; _selectedRow++; }
@@ -639,37 +656,75 @@ internal class DesktopForm : Form
         }
     }
 
-    private void OnFormMouseDown(object? sender, MouseEventArgs e)
+    private (int row, int col)? HitTestCell(int mouseX, int mouseY)
     {
-        int headerRows = 2; // column header + underline
-        int row = (e.Y / _charHeight) - headerRows;
-        if (row < 0 || row >= _grid.RowCount) return;
+        int headerRows = 2;
+        int row = (mouseY / _charHeight) - headerRows;
+        if (row < 0 || row >= _grid.RowCount) return null;
 
         int[] colWidths = GetColumnWidths();
         int x = RowHeaderWidth * _charWidth;
-        int col = -1;
         for (int c = 0; c < _grid.ColumnCount; c++)
         {
             int colPx = colWidths[c] * _charWidth;
-            if (e.X >= x && e.X < x + colPx) { col = c; break; }
+            if (mouseX >= x && mouseX < x + colPx) return (row, c);
             x += colPx;
         }
-        if (col < 0) return;
+        return null;
+    }
+
+    private void SelectRectangle(int anchorRow, int anchorCol, int endRow, int endCol)
+    {
+        _selection.Clear();
+        int r1 = Math.Min(anchorRow, endRow);
+        int r2 = Math.Max(anchorRow, endRow);
+        int c1 = Math.Min(anchorCol, endCol);
+        int c2 = Math.Max(anchorCol, endCol);
+        for (int r = r1; r <= r2; r++)
+            for (int c = c1; c <= c2; c++)
+                _selection.Add((r, c));
+    }
+
+    private void OnFormMouseDown(object? sender, MouseEventArgs e)
+    {
+        var cell = HitTestCell(e.X, e.Y);
+        if (cell is null) return;
+        var (row, col) = cell.Value;
 
         if (ModifierKeys.HasFlag(Keys.Control))
         {
-            // Ctrl+click: toggle cell in multi-selection
             if (!_selection.Remove((row, col)))
                 _selection.Add((row, col));
         }
         else
         {
             _selection.Clear();
+            _dragging = true;
+            _dragAnchorRow = row;
+            _dragAnchorCol = col;
         }
 
         _selectedRow = row;
         _selectedCol = col;
         Invalidate();
+    }
+
+    private void OnFormMouseMove(object? sender, MouseEventArgs e)
+    {
+        if (!_dragging) return;
+        var cell = HitTestCell(e.X, e.Y);
+        if (cell is null) return;
+        var (row, col) = cell.Value;
+
+        _selectedRow = row;
+        _selectedCol = col;
+        SelectRectangle(_dragAnchorRow, _dragAnchorCol, row, col);
+        Invalidate();
+    }
+
+    private void OnFormMouseUp(object? sender, MouseEventArgs e)
+    {
+        _dragging = false;
     }
 
     private void OnFormDoubleClick(object? sender, MouseEventArgs e)
