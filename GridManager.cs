@@ -166,7 +166,7 @@ public class GridManager
         {
             var fields = new string[ColumnCount];
             for (int c = 0; c < ColumnCount; c++)
-                fields[c] = EscapeCsvField(_data[r, c]);
+                fields[c] = EscapeCsvField(_isFile[r, c] ? "" : _data[r, c]);
             writer.WriteLine(string.Join(",", fields));
         }
     }
