@@ -14,7 +14,7 @@ namespace ExcelConsole.Platform.Windows;
 /// </summary>
 internal class DesktopForm : Form
 {
-    private readonly GridManager _grid;
+    private GridManager _grid;
     private int _selectedRow;
     private int _selectedCol;
     private readonly HashSet<(int row, int col)> _selection = new();
@@ -38,8 +38,9 @@ internal class DesktopForm : Form
     private IntPtr _winEventHook;
     private NativeMethods.WinEventDelegate? _winEventDelegate;
     private System.Threading.Timer? _autoSaveTimer;
+    private System.Threading.Timer? _csvReloadTimer;
 
-    private readonly int _colWidth;
+    private int _colWidth;
     private const int RowHeaderWidth = 4;
 
     private static readonly string StateDir = Path.Combine(
@@ -120,6 +121,18 @@ internal class DesktopForm : Form
         {
             try { _grid.SaveToCsv(AutoSavePath); } catch { }
         }, null, TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(5));
+
+        // Reload CSV every 60 seconds to pick up external (OneDrive) changes
+        _csvReloadTimer = new System.Threading.Timer(_ =>
+        {
+            try
+            {
+                string? path = _loadedFile ?? (File.Exists(AutoSavePath) ? AutoSavePath : null);
+                if (path is not null && _grid.MergeFromCsv(path))
+                    BeginInvoke(() => Invalidate());
+            }
+            catch { }
+        }, null, TimeSpan.FromSeconds(60), TimeSpan.FromSeconds(60));
     }
 
     // ── Desktop files ───────────────────────────────────────────────
@@ -150,6 +163,35 @@ internal class DesktopForm : Form
             _grid.SetFileEntry(row, col, name, entry);
             row++;
         }
+    }
+
+    private void RebuildGrid()
+    {
+        Bounds = Screen.PrimaryScreen!.WorkingArea;
+        int availableWidth = Bounds.Width / _charWidth;
+        int availableHeight = Bounds.Height / _charHeight - 3;
+        var newGrid = new GridManager(availableWidth, availableHeight);
+
+        // Copy data from old grid into new grid
+        for (int r = 0; r < Math.Min(_grid.RowCount, newGrid.RowCount); r++)
+            for (int c = 0; c < Math.Min(_grid.ColumnCount, newGrid.ColumnCount); c++)
+                newGrid.SetCellValue(r, c, _grid.GetCellValue(r, c));
+
+        _grid = newGrid;
+        int usableChars = availableWidth - RowHeaderWidth;
+        _colWidth = _grid.ColumnCount > 0 ? usableChars / _grid.ColumnCount : 20;
+
+        if (_loadedFile is not null)
+            _grid.LoadFromCsv(_loadedFile);
+        else if (File.Exists(AutoSavePath))
+            _grid.LoadFromCsv(AutoSavePath);
+
+        PopulateDesktopFiles();
+
+        _selectedRow = Math.Min(_selectedRow, _grid.RowCount - 1);
+        _selectedCol = Math.Min(_selectedCol, _grid.ColumnCount - 1);
+        _selection.Clear();
+        Invalidate();
     }
 
     private void OpenSelectedFile()
@@ -387,13 +429,16 @@ internal class DesktopForm : Form
                 bool isFile = _grid.IsFileEntry(r, c);
                 bool isLink = IsHyperlink(cellVal);
                 bool isCmd = IsCommand(cellVal);
+                bool isConflict = cellVal.StartsWith("c: ", StringComparison.Ordinal);
                 Color bg = isCursor   ? Color.FromArgb(64, 64, 64)
                          : isMultiSel ? Color.FromArgb(50, 50, 80)
+                         : isConflict ? Color.FromArgb(100, 0, 0)
                          : isFile     ? Color.FromArgb(0, 40, 60)
                          : isLink     ? Color.FromArgb(40, 0, 60)
                          : isCmd      ? Color.FromArgb(40, 40, 0)
                          : Color.Black;
-                Color fg = isFile ? Color.FromArgb(100, 200, 255)
+                Color fg = isConflict ? Color.FromArgb(255, 180, 180)
+                         : isFile ? Color.FromArgb(100, 200, 255)
                          : isLink ? Color.FromArgb(180, 140, 255)
                          : isCmd  ? Color.FromArgb(255, 220, 100)
                          : Color.White;
@@ -602,6 +647,9 @@ internal class DesktopForm : Form
                 case Keys.F2:
                     EnterEditMode();
                     break;
+                case Keys.F3:
+                    RebuildGrid();
+                    break;
                 case Keys.Back:
                     var val = _grid.GetCellValue(_selectedRow, _selectedCol);
                     if (val.Length > 0) _grid.SetCellValue(_selectedRow, _selectedCol, val[..^1]);
@@ -757,6 +805,7 @@ internal class DesktopForm : Form
         if (disposing)
         {
             _autoSaveTimer?.Dispose();
+            _csvReloadTimer?.Dispose();
             _monoFont.Dispose();
             _trayIcon.Dispose();
         }

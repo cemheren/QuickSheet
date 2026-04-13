@@ -183,6 +183,46 @@ public class GridManager
         }
     }
 
+    /// <summary>
+    /// Re-reads the CSV and merges external changes into the grid.
+    /// Empty local cells are overwritten. Conflicts produce a "c: " marker.
+    /// File-entry cells are skipped.
+    /// </summary>
+    public bool MergeFromCsv(string path)
+    {
+        if (!File.Exists(path)) return false;
+        string[] lines;
+        try { lines = File.ReadAllLines(path); }
+        catch { return false; }
+
+        bool changed = false;
+        for (int r = 0; r < Math.Min(lines.Length, RowCount); r++)
+        {
+            var fields = ParseCsvLine(lines[r]);
+            for (int c = 0; c < Math.Min(fields.Count, ColumnCount); c++)
+            {
+                if (_isFile[r, c]) continue;
+
+                string external = fields[c];
+                string local = _data[r, c];
+
+                if (local == external) continue;
+
+                if (string.IsNullOrEmpty(local))
+                {
+                    _data[r, c] = external;
+                    changed = true;
+                }
+                else if (!string.IsNullOrEmpty(external))
+                {
+                    _data[r, c] = $"c: {external}({local})";
+                    changed = true;
+                }
+            }
+        }
+        return changed;
+    }
+
     private static string EscapeCsvField(string field)
     {
         if (field.Contains(',') || field.Contains('"') || field.Contains('\n'))
