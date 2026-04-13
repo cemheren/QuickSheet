@@ -114,10 +114,10 @@ internal class DesktopForm : Form
         MouseDoubleClick += OnFormDoubleClick;
         FormClosing += OnFormClosing;
 
-        // Autosave every 5 seconds in case of crash/termination
+        // Autosave every 5 seconds if there are pending changes
         _autoSaveTimer = new System.Threading.Timer(_ =>
         {
-            try { _grid.SaveToCsv(AutoSavePath); } catch { }
+            try { if (_grid.IsDirty) _grid.SaveToCsv(AutoSavePath); } catch { }
         }, null, TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(5));
 
         // Reload CSV every 60 seconds to pick up external (OneDrive) changes

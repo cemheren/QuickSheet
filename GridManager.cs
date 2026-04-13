@@ -7,6 +7,7 @@ public class GridManager
     private readonly string[,] _filePath;
     public int ColumnCount { get; }
     public int RowCount { get; }
+    public bool IsDirty { get; private set; }
 
     public GridManager(int availableWidth, int availableHeight)
     {
@@ -55,7 +56,10 @@ public class GridManager
     public void SetCellValue(int row, int col, string value)
     {
         if (row >= 0 && row < RowCount && col >= 0 && col < ColumnCount)
+        {
             _data[row, col] = value;
+            IsDirty = true;
+        }
     }
 
     public void SetFileEntry(int row, int col, string displayName, string fullPath)
@@ -83,6 +87,7 @@ public class GridManager
         if (row < 0 || row >= RowCount) return;
         for (int c = 0; c < ColumnCount; c++)
             _data[row, c] = "";
+        IsDirty = true;
     }
 
     public void DeleteRow(int row)
@@ -93,28 +98,29 @@ public class GridManager
                 _data[r, c] = _data[r + 1, c];
         for (int c = 0; c < ColumnCount; c++)
             _data[RowCount - 1, c] = "";
+        IsDirty = true;
     }
 
     public void ShiftRowsDown(int fromRow)
     {
         if (fromRow < 0 || fromRow >= RowCount) return;
-        // Shift rows down from the bottom, inserting empty row at fromRow
         for (int r = RowCount - 1; r > fromRow; r--)
             for (int c = 0; c < ColumnCount; c++)
                 _data[r, c] = _data[r - 1, c];
         for (int c = 0; c < ColumnCount; c++)
             _data[fromRow, c] = "";
+        IsDirty = true;
     }
 
     public void ShiftRowsUp(int fromRow)
     {
         if (fromRow < 0 || fromRow >= RowCount) return;
-        // Shift rows up, discarding fromRow, empty row at bottom
         for (int r = fromRow; r < RowCount - 1; r++)
             for (int c = 0; c < ColumnCount; c++)
                 _data[r, c] = _data[r + 1, c];
         for (int c = 0; c < ColumnCount; c++)
             _data[RowCount - 1, c] = "";
+        IsDirty = true;
     }
 
     public double? GetColumnSum(int col)
@@ -169,6 +175,7 @@ public class GridManager
                 fields[c] = EscapeCsvField(_isFile[r, c] ? "" : _data[r, c]);
             writer.WriteLine(string.Join(",", fields));
         }
+        IsDirty = false;
     }
 
     public void LoadFromCsv(string path)
