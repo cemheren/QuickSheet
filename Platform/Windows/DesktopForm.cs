@@ -43,9 +43,8 @@ internal class DesktopForm : Form
     private int _colWidth;
     private const int RowHeaderWidth = 4;
 
-    private static readonly string StateDir = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ExcelConsole");
-    private static readonly string AutoSavePath = Path.Combine(StateDir, "autosave.csv");
+    private static readonly string AutoSavePath = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "autosave.csv");
 
     public DesktopForm(string? csvPath)
     {
@@ -116,7 +115,6 @@ internal class DesktopForm : Form
         FormClosing += OnFormClosing;
 
         // Autosave every 5 seconds in case of crash/termination
-        Directory.CreateDirectory(StateDir);
         _autoSaveTimer = new System.Threading.Timer(_ =>
         {
             try { _grid.SaveToCsv(AutoSavePath); } catch { }
@@ -795,7 +793,6 @@ internal class DesktopForm : Form
     {
         if (_winEventHook != IntPtr.Zero)
             NativeMethods.UnhookWinEvent(_winEventHook);
-        Directory.CreateDirectory(StateDir);
         _grid.SaveToCsv(AutoSavePath);
         _trayIcon.Visible = false;
     }
