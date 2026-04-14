@@ -21,6 +21,12 @@ internal class DesktopForm : Form
     private string _clipboard = "";
     private string? _loadedFile;
 
+    private bool _searching;
+    private string _searchInput = "";
+    private string? _searchTerm;
+    private List<(int row, int col)> _searchMatches = new();
+    private int _searchMatchIndex = -1;
+
     private bool _editing;
     private string _editText = "";
     private int _editCursorPos;
@@ -439,12 +445,15 @@ internal class DesktopForm : Form
                 string display = cellVal.Length >= w ? cellVal[..w] : cellVal.PadRight(w);
                 bool isCursor = r == _selectedRow && c == _selectedCol;
                 bool isMultiSel = _selection.Contains((r, c));
+                bool isSearchMatch = _searchTerm != null && _searchMatches.Contains((r, c));
                 bool isFile = _grid.IsFileEntry(r, c);
                 bool isLink = IsHyperlink(cellVal);
                 bool isCmd = IsCommand(cellVal);
                 bool isConflict = cellVal.StartsWith("c: ", StringComparison.Ordinal);
-                Color bg = isCursor   ? Color.FromArgb(64, 64, 64)
+                Color bg = isCursor && isSearchMatch ? Color.FromArgb(0, 180, 0)
+                         : isCursor   ? Color.FromArgb(64, 64, 64)
                          : isMultiSel ? Color.FromArgb(50, 50, 80)
+                         : isSearchMatch ? Color.FromArgb(80, 80, 0)
                          : isConflict ? Color.FromArgb(100, 0, 0)
                          : isFile     ? Color.FromArgb(0, 40, 60)
                          : isLink     ? Color.FromArgb(40, 0, 60)
@@ -464,7 +473,11 @@ internal class DesktopForm : Form
         // Status bar
         int maxChars = formWidth / cw;
         string status;
-        if (_editing)
+        if (_searching)
+        {
+            status = $" Find: {_searchInput}\u2502  (Enter=Search  Esc=Cancel)";
+        }
+        else if (_editing)
         {
             string prefix = " Edit: ";
             string cursor = _editText.Insert(_editCursorPos, "\u2502");
@@ -480,7 +493,10 @@ internal class DesktopForm : Form
             string sumDisplay = sum.HasValue ? $"  \u03a3{colName} = {sum.Value}" : "";
             double? product = _grid.GetRowProduct(_selectedRow);
             string productDisplay = product.HasValue ? $"  \u03a0{(_selectedRow + 1)} = {product.Value}" : "";
-            status = $" {cellRef}{valueDisplay}{sumDisplay}{productDisplay}  |  F2: Edit  Ctrl+S: Save  Ctrl+Q: Quit";
+            string searchDisplay = _searchTerm != null
+                ? $"  \U0001f50d\"{_searchTerm}\" {(_searchMatches.Count > 0 ? $"{_searchMatchIndex + 1}/{_searchMatches.Count}" : "no matches")}"
+                : "";
+            status = $" {cellRef}{valueDisplay}{sumDisplay}{productDisplay}{searchDisplay}  |  F2: Edit  Ctrl+S: Save  Ctrl+Q: Quit";
         }
         status = status.PadRight(maxChars);
         g.FillRectangle(Brushes.White, 0, statusY, formWidth, ch);
@@ -518,6 +534,34 @@ internal class DesktopForm : Form
 
     private void OnFormKeyDown(object? sender, KeyEventArgs e)
     {
+        if (_searching)
+        {
+            bool handled = true;
+            switch (e.KeyCode)
+            {
+                case Keys.Enter:
+                    CommitSearch();
+                    break;
+                case Keys.Escape:
+                    CancelSearch();
+                    break;
+                case Keys.Back:
+                    if (_searchInput.Length > 0)
+                        _searchInput = _searchInput[..^1];
+                    break;
+                default:
+                    handled = false;
+                    break;
+            }
+            if (handled)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                Invalidate();
+            }
+            return;
+        }
+
         if (_editing)
         {
             bool handled = true;
@@ -617,22 +661,33 @@ internal class DesktopForm : Form
                 case Keys.O: _grid.ShiftRowsDown(_selectedRow); break;
                 case Keys.P: _grid.ShiftRowsUp(_selectedRow); break;
                 case Keys.S: SaveFile(); break;
+                case Keys.F: EnterSearchMode(); break;
                 default: handled2 = false; break;
             }
         }
         else if (e.Shift)
         {
-            // Shift+Arrow: extend multi-selection
-            _selection.Add((_selectedRow, _selectedCol));
-            switch (e.KeyCode)
+            // Shift+Enter: previous search match
+            if (e.KeyCode == Keys.Enter && _searchMatches.Count > 0)
             {
-                case Keys.Up: if (_selectedRow > 0) _selectedRow--; break;
-                case Keys.Down: if (_selectedRow < _grid.RowCount - 1) _selectedRow++; break;
-                case Keys.Left: if (_selectedCol > 0) _selectedCol--; break;
-                case Keys.Right: if (_selectedCol < _grid.ColumnCount - 1) _selectedCol++; break;
-                default: handled2 = false; break;
+                _searchMatchIndex = (_searchMatchIndex - 1 + _searchMatches.Count) % _searchMatches.Count;
+                _selectedRow = _searchMatches[_searchMatchIndex].row;
+                _selectedCol = _searchMatches[_searchMatchIndex].col;
             }
-            if (handled2) _selection.Add((_selectedRow, _selectedCol));
+            else
+            {
+                // Shift+Arrow: extend multi-selection
+                _selection.Add((_selectedRow, _selectedCol));
+                switch (e.KeyCode)
+                {
+                    case Keys.Up: if (_selectedRow > 0) _selectedRow--; break;
+                    case Keys.Down: if (_selectedRow < _grid.RowCount - 1) _selectedRow++; break;
+                    case Keys.Left: if (_selectedCol > 0) _selectedCol--; break;
+                    case Keys.Right: if (_selectedCol < _grid.ColumnCount - 1) _selectedCol++; break;
+                    default: handled2 = false; break;
+                }
+                if (handled2) _selection.Add((_selectedRow, _selectedCol));
+            }
         }
         else
         {
@@ -655,7 +710,16 @@ internal class DesktopForm : Form
                     _selection.Clear();
                     break;
                 case Keys.Enter:
-                    OpenAllSelected();
+                    if (_searchMatches.Count > 0)
+                    {
+                        _searchMatchIndex = (_searchMatchIndex + 1) % _searchMatches.Count;
+                        _selectedRow = _searchMatches[_searchMatchIndex].row;
+                        _selectedCol = _searchMatches[_searchMatchIndex].col;
+                    }
+                    else
+                    {
+                        OpenAllSelected();
+                    }
                     break;
                 case Keys.F2:
                     EnterEditMode();
@@ -700,6 +764,9 @@ internal class DesktopForm : Form
                     break;
                 case Keys.Escape:
                     _selection.Clear();
+                    _searchTerm = null;
+                    _searchMatches.Clear();
+                    _searchMatchIndex = -1;
                     break;
                 default: handled2 = false; break;
             }
@@ -712,11 +779,57 @@ internal class DesktopForm : Form
         }
     }
 
+    private void EnterSearchMode()
+    {
+        _searching = true;
+        _searchInput = "";
+    }
+
+    private void CommitSearch()
+    {
+        _searching = false;
+        if (string.IsNullOrEmpty(_searchInput))
+        {
+            _searchTerm = null;
+            _searchMatches.Clear();
+            _searchMatchIndex = -1;
+            return;
+        }
+
+        _searchTerm = _searchInput;
+        _searchMatches.Clear();
+        for (int r = 0; r < _grid.RowCount; r++)
+            for (int c = 0; c < _grid.ColumnCount; c++)
+                if (_grid.GetCellValue(r, c).Contains(_searchInput, StringComparison.OrdinalIgnoreCase))
+                    _searchMatches.Add((r, c));
+
+        if (_searchMatches.Count > 0)
+        {
+            _searchMatchIndex = 0;
+            _selectedRow = _searchMatches[0].row;
+            _selectedCol = _searchMatches[0].col;
+        }
+        else
+        {
+            _searchMatchIndex = -1;
+        }
+    }
+
+    private void CancelSearch()
+    {
+        _searching = false;
+        _searchInput = "";
+    }
+
     private void OnFormKeyPress(object? sender, KeyPressEventArgs e)
     {
         if (e.KeyChar >= 32 && e.KeyChar <= 126)
         {
-            if (_editing)
+            if (_searching)
+            {
+                _searchInput += e.KeyChar;
+            }
+            else if (_editing)
             {
                 _editText = _editText.Insert(_editCursorPos, e.KeyChar.ToString());
                 _editCursorPos++;

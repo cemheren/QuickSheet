@@ -7,6 +7,9 @@ public class SpreadsheetApp
     private int _selectedCol;
     private string _clipboard = "";
     private string? _loadedFile;
+    private string? _searchTerm;
+    private List<(int row, int col)> _searchMatches = new();
+    private int _searchMatchIndex = -1;
     private const int MinColWidth = 10;
     private const int RowHeaderWidth = 4;
 
@@ -92,6 +95,9 @@ public class SpreadsheetApp
                     case ConsoleKey.S:
                         PromptSave();
                         break;
+                    case ConsoleKey.F:
+                        PromptSearch();
+                        break;
                 }
                 Render();
                 continue;
@@ -112,7 +118,20 @@ public class SpreadsheetApp
                     if (_selectedCol < _grid.ColumnCount - 1) _selectedCol++;
                     break;
                 case ConsoleKey.Enter:
-                    if (_selectedRow < _grid.RowCount - 1) _selectedRow++;
+                    if (_searchMatches.Count > 0)
+                    {
+                        if (key.Modifiers.HasFlag(ConsoleModifiers.Shift))
+                            _searchMatchIndex = (_searchMatchIndex - 1 + _searchMatches.Count) % _searchMatches.Count;
+                        else
+                            _searchMatchIndex = (_searchMatchIndex + 1) % _searchMatches.Count;
+                        var match = _searchMatches[_searchMatchIndex];
+                        _selectedRow = match.row;
+                        _selectedCol = match.col;
+                    }
+                    else
+                    {
+                        if (_selectedRow < _grid.RowCount - 1) _selectedRow++;
+                    }
                     break;
                 case ConsoleKey.Backspace:
                     var val = _grid.GetCellValue(_selectedRow, _selectedCol);
@@ -123,6 +142,9 @@ public class SpreadsheetApp
                     _grid.SetCellValue(_selectedRow, _selectedCol, "");
                     break;
                 case ConsoleKey.Escape:
+                    _searchTerm = null;
+                    _searchMatches.Clear();
+                    _searchMatchIndex = -1;
                     break;
                 case ConsoleKey.Tab:
                     if (_selectedCol < _grid.ColumnCount - 1) _selectedCol++;
@@ -213,15 +235,26 @@ public class SpreadsheetApp
                 string display = cellVal.PadRight(w)[..w];
 
                 bool isSelected = r == _selectedRow && c == _selectedCol;
-                if (isSelected)
+                bool isMatch = _searchTerm != null && _searchMatches.Contains((r, c));
+                if (isSelected && isMatch)
+                {
+                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                }
+                else if (isSelected)
                 {
                     Console.BackgroundColor = ConsoleColor.DarkGray;
                     Console.ForegroundColor = ConsoleColor.White;
                 }
+                else if (isMatch)
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkYellow;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                }
 
                 Console.Write(display);
 
-                if (isSelected)
+                if (isSelected || isMatch)
                 {
                     Console.BackgroundColor = ConsoleColor.Black;
                     Console.ForegroundColor = ConsoleColor.White;
@@ -249,7 +282,11 @@ public class SpreadsheetApp
         double? product = _grid.GetRowProduct(_selectedRow);
         string productDisplay = product.HasValue ? $"  Π{_selectedRow + 1} = {product.Value}" : "";
 
-        string status = $" {cellRef}{valueDisplay}{sumDisplay}{productDisplay}  │  Ctrl+Q: Quit ";
+        string searchDisplay = _searchTerm != null
+            ? $"  🔍\"{_searchTerm}\" {(_searchMatches.Count > 0 ? $"{_searchMatchIndex + 1}/{_searchMatches.Count}" : "no matches")}"
+            : "";
+
+        string status = $" {cellRef}{valueDisplay}{sumDisplay}{productDisplay}{searchDisplay}  │  Ctrl+Q: Quit ";
         Console.Write(status.PadRight(totalWidth));
 
         Console.BackgroundColor = ConsoleColor.Black;
@@ -290,7 +327,11 @@ public class SpreadsheetApp
             "  ║  Ctrl+O         Insert row (shift down)  ║",
             "  ║  Ctrl+P         Remove row (shift up)    ║",
             "  ║  Ctrl+S         Save to CSV              ║",
-            "  ║  Ctrl+H         Show this help           ║",
+            "  ║  Ctrl+F         Find (contains search)   ║",
+            "  ║  Enter          Next search match         ║",
+            "  ║  Shift+Enter    Previous search match     ║",
+            "  ║  Escape         Clear search              ║",
+            "  ║  Ctrl+H         Show this help            ║",
             "  ║  Ctrl+Q         Quit                     ║",
             "  ║                                          ║",
             "  ║  Usage: dotnet run [file.csv]            ║",
@@ -304,6 +345,75 @@ public class SpreadsheetApp
             Console.WriteLine(line);
 
         Console.ReadKey(intercept: true);
+    }
+
+    private void PromptSearch()
+    {
+        int statusY = Console.WindowHeight - 1;
+        Console.SetCursorPosition(0, statusY);
+        Console.BackgroundColor = ConsoleColor.White;
+        Console.ForegroundColor = ConsoleColor.Black;
+        int totalWidth = Console.WindowWidth;
+
+        Console.Write(" Find: ".PadRight(totalWidth));
+        Console.SetCursorPosition(" Find: ".Length, statusY);
+        Console.CursorVisible = true;
+
+        string input = "";
+        while (true)
+        {
+            var k = Console.ReadKey(intercept: true);
+            if (k.Key == ConsoleKey.Enter) break;
+            if (k.Key == ConsoleKey.Escape)
+            {
+                Console.CursorVisible = false;
+                return;
+            }
+            if (k.Key == ConsoleKey.Backspace)
+            {
+                if (input.Length > 0)
+                {
+                    input = input[..^1];
+                    Console.SetCursorPosition(" Find: ".Length, statusY);
+                    Console.Write(input.PadRight(totalWidth - " Find: ".Length));
+                    Console.SetCursorPosition(" Find: ".Length + input.Length, statusY);
+                }
+                continue;
+            }
+            if (k.KeyChar >= 32 && k.KeyChar <= 126)
+            {
+                input += k.KeyChar;
+                Console.Write(k.KeyChar);
+            }
+        }
+
+        Console.CursorVisible = false;
+
+        if (string.IsNullOrEmpty(input))
+        {
+            _searchTerm = null;
+            _searchMatches.Clear();
+            _searchMatchIndex = -1;
+            return;
+        }
+
+        _searchTerm = input;
+        _searchMatches.Clear();
+        for (int r = 0; r < _grid.RowCount; r++)
+            for (int c = 0; c < _grid.ColumnCount; c++)
+                if (_grid.GetCellValue(r, c).Contains(input, StringComparison.OrdinalIgnoreCase))
+                    _searchMatches.Add((r, c));
+
+        if (_searchMatches.Count > 0)
+        {
+            _searchMatchIndex = 0;
+            _selectedRow = _searchMatches[0].row;
+            _selectedCol = _searchMatches[0].col;
+        }
+        else
+        {
+            _searchMatchIndex = -1;
+        }
     }
 
     private void PromptSave()

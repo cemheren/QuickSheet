@@ -19,6 +19,12 @@ internal class DesktopWindow : IDisposable
     private string _clipboard = "";
     private string? _loadedFile;
 
+    private bool _searching;
+    private string _searchInput = "";
+    private string? _searchTerm;
+    private List<(int row, int col)> _searchMatches = new();
+    private int _searchMatchIndex = -1;
+
     private IntPtr _display;
     private IntPtr _window;
     private IntPtr _gc;
@@ -575,14 +581,17 @@ internal class DesktopWindow : IDisposable
                 string display = cellVal.Length >= w ? cellVal[..w] : cellVal.PadRight(w);
                 bool isCursor = r == _selectedRow && c == _selectedCol;
                 bool isMultiSel = _selection.Contains((r, c));
+                bool isSearchMatch = _searchTerm != null && _searchMatches.Contains((r, c));
                 bool isFile = _grid.IsFileEntry(r, c);
                 bool isLink = IsHyperlink(cellVal);
                 bool isCmd = IsCommand(cellVal);
 
                 int bgR, bgG, bgB, fgR, fgG, fgB;
 
-                if (isCursor) { bgR = 64; bgG = 64; bgB = 64; }
+                if (isCursor && isSearchMatch) { bgR = 0; bgG = 180; bgB = 0; }
+                else if (isCursor) { bgR = 64; bgG = 64; bgB = 64; }
                 else if (isMultiSel) { bgR = 50; bgG = 50; bgB = 80; }
+                else if (isSearchMatch) { bgR = 80; bgG = 80; bgB = 0; }
                 else if (isFile) { bgR = 0; bgG = 40; bgB = 60; }
                 else if (isLink) { bgR = 40; bgG = 0; bgB = 60; }
                 else if (isCmd) { bgR = 40; bgG = 40; bgB = 0; }
@@ -603,15 +612,26 @@ internal class DesktopWindow : IDisposable
         }
 
         // Status bar
-        string cellRef = _grid.GetCellReference(_selectedRow, _selectedCol);
-        string value = _grid.GetCellValue(_selectedRow, _selectedCol);
-        string valueDisplay = string.IsNullOrEmpty(value) ? "" : $" = {value}";
-        double? sum = _grid.GetColumnSum(_selectedCol);
-        string colName = GridManager.GetColumnName(_selectedCol);
-        string sumDisplay = sum.HasValue ? $"  \u03a3{colName} = {sum.Value}" : "";
-        double? product = _grid.GetRowProduct(_selectedRow);
-        string productDisplay = product.HasValue ? $"  \u03a0{(_selectedRow + 1)} = {product.Value}" : "";
-        string status = $" {cellRef}{valueDisplay}{sumDisplay}{productDisplay}  |  Ctrl+S: Save  Ctrl+Q: Quit";
+        string status;
+        if (_searching)
+        {
+            status = $" Find: {_searchInput}\u2502  (Enter=Search  Esc=Cancel)";
+        }
+        else
+        {
+            string cellRef = _grid.GetCellReference(_selectedRow, _selectedCol);
+            string value = _grid.GetCellValue(_selectedRow, _selectedCol);
+            string valueDisplay = string.IsNullOrEmpty(value) ? "" : $" = {value}";
+            double? sum = _grid.GetColumnSum(_selectedCol);
+            string colName = GridManager.GetColumnName(_selectedCol);
+            string sumDisplay = sum.HasValue ? $"  \u03a3{colName} = {sum.Value}" : "";
+            double? product = _grid.GetRowProduct(_selectedRow);
+            string productDisplay = product.HasValue ? $"  \u03a0{(_selectedRow + 1)} = {product.Value}" : "";
+            string searchDisplay = _searchTerm != null
+                ? $"  \U0001f50d\"{_searchTerm}\" {(_searchMatches.Count > 0 ? $"{_searchMatchIndex + 1}/{_searchMatches.Count}" : "no matches")}"
+                : "";
+            status = $" {cellRef}{valueDisplay}{sumDisplay}{productDisplay}{searchDisplay}  |  Ctrl+S: Save  Ctrl+Q: Quit";
+        }
         int maxChars = _screenWidth / cw;
         status = status.PadRight(maxChars);
 
@@ -670,6 +690,66 @@ internal class DesktopWindow : IDisposable
         bool ctrl = (keyEvent.state & ControlMask) != 0;
         bool shift = (keyEvent.state & ShiftMask) != 0;
 
+        if (_searching)
+        {
+            switch (keysym)
+            {
+                case XK_Return:
+                    _searching = false;
+                    if (string.IsNullOrEmpty(_searchInput))
+                    {
+                        _searchTerm = null;
+                        _searchMatches.Clear();
+                        _searchMatchIndex = -1;
+                    }
+                    else
+                    {
+                        _searchTerm = _searchInput;
+                        _searchMatches.Clear();
+                        for (int r = 0; r < _grid.RowCount; r++)
+                            for (int c = 0; c < _grid.ColumnCount; c++)
+                                if (_grid.GetCellValue(r, c).Contains(_searchInput, StringComparison.OrdinalIgnoreCase))
+                                    _searchMatches.Add((r, c));
+                        if (_searchMatches.Count > 0)
+                        {
+                            _searchMatchIndex = 0;
+                            _selectedRow = _searchMatches[0].row;
+                            _selectedCol = _searchMatches[0].col;
+                        }
+                        else
+                            _searchMatchIndex = -1;
+                    }
+                    return;
+                case XK_Escape:
+                    _searching = false;
+                    _searchInput = "";
+                    return;
+                case XK_BackSpace:
+                    if (_searchInput.Length > 0)
+                        _searchInput = _searchInput[..^1];
+                    return;
+                default:
+                    if (!ctrl)
+                    {
+                        IntPtr buf = Marshal.AllocHGlobal(32);
+                        try
+                        {
+                            int len = XLookupString(ref keyEvent, buf, 32, out _, IntPtr.Zero);
+                            if (len > 0)
+                            {
+                                byte[] bytes = new byte[len];
+                                Marshal.Copy(buf, bytes, 0, len);
+                                string ch = Encoding.UTF8.GetString(bytes);
+                                if (ch.Length > 0 && ch[0] >= 32 && ch[0] <= 126)
+                                    _searchInput += ch;
+                            }
+                        }
+                        finally { Marshal.FreeHGlobal(buf); }
+                    }
+                    return;
+            }
+        }
+
         if (ctrl)
         {
             switch (keysym)
@@ -727,11 +807,23 @@ internal class DesktopWindow : IDisposable
                 case XK_s:
                     SaveFile();
                     return;
+                case XK_f:
+                    _searching = true;
+                    _searchInput = "";
+                    return;
             }
         }
 
         if (shift)
         {
+            if (keysym == XK_Return && _searchMatches.Count > 0)
+            {
+                _searchMatchIndex = (_searchMatchIndex - 1 + _searchMatches.Count) % _searchMatches.Count;
+                _selectedRow = _searchMatches[_searchMatchIndex].row;
+                _selectedCol = _searchMatches[_searchMatchIndex].col;
+                return;
+            }
+
             _selection.Add((_selectedRow, _selectedCol));
             bool handled = true;
             switch (keysym)
@@ -768,7 +860,16 @@ internal class DesktopWindow : IDisposable
                 _selection.Clear();
                 break;
             case XK_Return:
-                OpenAllSelected();
+                if (_searchMatches.Count > 0)
+                {
+                    _searchMatchIndex = (_searchMatchIndex + 1) % _searchMatches.Count;
+                    _selectedRow = _searchMatches[_searchMatchIndex].row;
+                    _selectedCol = _searchMatches[_searchMatchIndex].col;
+                }
+                else
+                {
+                    OpenAllSelected();
+                }
                 break;
             case XK_BackSpace:
                 var val = _grid.GetCellValue(_selectedRow, _selectedCol);
@@ -784,6 +885,9 @@ internal class DesktopWindow : IDisposable
                 break;
             case XK_Escape:
                 _selection.Clear();
+                _searchTerm = null;
+                _searchMatches.Clear();
+                _searchMatchIndex = -1;
                 break;
             default:
                 // Printable character input
