@@ -63,6 +63,31 @@ public class SpreadsheetApp
             if (key.Modifiers.HasFlag(ConsoleModifiers.Control) && key.Key == ConsoleKey.Q)
                 break;
 
+            // While search results active, only allow navigation/clear
+            if (_searchTerm != null)
+            {
+                if (key.Key == ConsoleKey.Enter)
+                {
+                    if (key.Modifiers.HasFlag(ConsoleModifiers.Shift))
+                        _searchMatchIndex = (_searchMatchIndex - 1 + _searchMatches.Count) % _searchMatches.Count;
+                    else
+                        _searchMatchIndex = (_searchMatchIndex + 1) % _searchMatches.Count;
+                    if (_searchMatches.Count > 0)
+                    {
+                        _selectedRow = _searchMatches[_searchMatchIndex].row;
+                        _selectedCol = _searchMatches[_searchMatchIndex].col;
+                    }
+                }
+                else if (key.Key == ConsoleKey.Escape)
+                {
+                    _searchTerm = null;
+                    _searchMatches.Clear();
+                    _searchMatchIndex = -1;
+                }
+                Render();
+                continue;
+            }
+
             // Ctrl shortcuts
             if (key.Modifiers.HasFlag(ConsoleModifiers.Control))
             {
@@ -118,20 +143,7 @@ public class SpreadsheetApp
                     if (_selectedCol < _grid.ColumnCount - 1) _selectedCol++;
                     break;
                 case ConsoleKey.Enter:
-                    if (_searchMatches.Count > 0)
-                    {
-                        if (key.Modifiers.HasFlag(ConsoleModifiers.Shift))
-                            _searchMatchIndex = (_searchMatchIndex - 1 + _searchMatches.Count) % _searchMatches.Count;
-                        else
-                            _searchMatchIndex = (_searchMatchIndex + 1) % _searchMatches.Count;
-                        var match = _searchMatches[_searchMatchIndex];
-                        _selectedRow = match.row;
-                        _selectedCol = match.col;
-                    }
-                    else
-                    {
-                        if (_selectedRow < _grid.RowCount - 1) _selectedRow++;
-                    }
+                    if (_selectedRow < _grid.RowCount - 1) _selectedRow++;
                     break;
                 case ConsoleKey.Backspace:
                     var val = _grid.GetCellValue(_selectedRow, _selectedCol);
@@ -142,9 +154,6 @@ public class SpreadsheetApp
                     _grid.SetCellValue(_selectedRow, _selectedCol, "");
                     break;
                 case ConsoleKey.Escape:
-                    _searchTerm = null;
-                    _searchMatches.Clear();
-                    _searchMatchIndex = -1;
                     break;
                 case ConsoleKey.Tab:
                     if (_selectedCol < _grid.ColumnCount - 1) _selectedCol++;

@@ -750,6 +750,34 @@ internal class DesktopWindow : IDisposable
             }
         }
 
+        // While search results active, only allow navigation/clear
+        if (_searchTerm != null)
+        {
+            if (keysym == XK_Return && shift && _searchMatches.Count > 0)
+            {
+                _searchMatchIndex = (_searchMatchIndex - 1 + _searchMatches.Count) % _searchMatches.Count;
+                _selectedRow = _searchMatches[_searchMatchIndex].row;
+                _selectedCol = _searchMatches[_searchMatchIndex].col;
+            }
+            else if (keysym == XK_Return && _searchMatches.Count > 0)
+            {
+                _searchMatchIndex = (_searchMatchIndex + 1) % _searchMatches.Count;
+                _selectedRow = _searchMatches[_searchMatchIndex].row;
+                _selectedCol = _searchMatches[_searchMatchIndex].col;
+            }
+            else if (keysym == XK_Escape)
+            {
+                _searchTerm = null;
+                _searchMatches.Clear();
+                _searchMatchIndex = -1;
+            }
+            else if (ctrl && keysym == XK_q)
+            {
+                _running = false;
+            }
+            return;
+        }
+
         if (ctrl)
         {
             switch (keysym)
@@ -816,14 +844,6 @@ internal class DesktopWindow : IDisposable
 
         if (shift)
         {
-            if (keysym == XK_Return && _searchMatches.Count > 0)
-            {
-                _searchMatchIndex = (_searchMatchIndex - 1 + _searchMatches.Count) % _searchMatches.Count;
-                _selectedRow = _searchMatches[_searchMatchIndex].row;
-                _selectedCol = _searchMatches[_searchMatchIndex].col;
-                return;
-            }
-
             _selection.Add((_selectedRow, _selectedCol));
             bool handled = true;
             switch (keysym)
@@ -860,16 +880,7 @@ internal class DesktopWindow : IDisposable
                 _selection.Clear();
                 break;
             case XK_Return:
-                if (_searchMatches.Count > 0)
-                {
-                    _searchMatchIndex = (_searchMatchIndex + 1) % _searchMatches.Count;
-                    _selectedRow = _searchMatches[_searchMatchIndex].row;
-                    _selectedCol = _searchMatches[_searchMatchIndex].col;
-                }
-                else
-                {
-                    OpenAllSelected();
-                }
+                OpenAllSelected();
                 break;
             case XK_BackSpace:
                 var val = _grid.GetCellValue(_selectedRow, _selectedCol);
@@ -885,9 +896,6 @@ internal class DesktopWindow : IDisposable
                 break;
             case XK_Escape:
                 _selection.Clear();
-                _searchTerm = null;
-                _searchMatches.Clear();
-                _searchMatchIndex = -1;
                 break;
             default:
                 // Printable character input
