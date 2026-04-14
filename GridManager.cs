@@ -9,9 +9,8 @@ public class GridManager
     public int RowCount { get; }
     public bool IsDirty { get; private set; }
 
-    public GridManager(int availableWidth, int availableHeight)
+    public GridManager(int availableWidth, int availableHeight, int columnWidth = 20)
     {
-        const int columnWidth = 20;
         const int rowHeaderWidth = 4;
 
         ColumnCount = Math.Max(1, (availableWidth - rowHeaderWidth) / columnWidth);

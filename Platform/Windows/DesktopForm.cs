@@ -41,6 +41,10 @@ internal class DesktopForm : Form
     private System.Threading.Timer? _csvReloadTimer;
 
     private int _colWidth;
+    private int _columnWidth = 20;
+    private const int MinColumnWidth = 8;
+    private const int MaxColumnWidth = 40;
+    private const int ColumnWidthStep = 4;
     private const int RowHeaderWidth = 4;
 
     private static readonly string AutoSavePath = Path.Combine(
@@ -76,7 +80,7 @@ internal class DesktopForm : Form
 
         int availableWidth = Bounds.Width / _charWidth;
         int availableHeight = Bounds.Height / _charHeight - 3;
-        _grid = new GridManager(availableWidth, availableHeight);
+        _grid = new GridManager(availableWidth, availableHeight, _columnWidth);
 
         // Distribute available width evenly so columns fill the screen
         int usableChars = availableWidth - RowHeaderWidth;
@@ -165,17 +169,14 @@ internal class DesktopForm : Form
 
     private void RebuildGrid()
     {
+        // Save current state so the reload picks up unsaved edits
+        try { if (_grid.IsDirty) _grid.SaveToCsv(_loadedFile ?? AutoSavePath); } catch { }
+
         Bounds = Screen.PrimaryScreen!.WorkingArea;
         int availableWidth = Bounds.Width / _charWidth;
         int availableHeight = Bounds.Height / _charHeight - 3;
-        var newGrid = new GridManager(availableWidth, availableHeight);
+        _grid = new GridManager(availableWidth, availableHeight, _columnWidth);
 
-        // Copy data from old grid into new grid
-        for (int r = 0; r < Math.Min(_grid.RowCount, newGrid.RowCount); r++)
-            for (int c = 0; c < Math.Min(_grid.ColumnCount, newGrid.ColumnCount); c++)
-                newGrid.SetCellValue(r, c, _grid.GetCellValue(r, c));
-
-        _grid = newGrid;
         int usableChars = availableWidth - RowHeaderWidth;
         _colWidth = _grid.ColumnCount > 0 ? usableChars / _grid.ColumnCount : 20;
 
@@ -647,6 +648,20 @@ internal class DesktopForm : Form
                     break;
                 case Keys.F3:
                     RebuildGrid();
+                    break;
+                case Keys.F4:
+                    if (_columnWidth > MinColumnWidth)
+                    {
+                        _columnWidth -= ColumnWidthStep;
+                        RebuildGrid();
+                    }
+                    break;
+                case Keys.F5:
+                    if (_columnWidth < MaxColumnWidth)
+                    {
+                        _columnWidth += ColumnWidthStep;
+                        RebuildGrid();
+                    }
                     break;
                 case Keys.Back:
                     var val = _grid.GetCellValue(_selectedRow, _selectedCol);
