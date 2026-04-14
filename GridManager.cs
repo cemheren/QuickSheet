@@ -166,12 +166,52 @@ public class GridManager
 
     public void SaveToCsv(string path)
     {
-        using var writer = new StreamWriter(path);
-        for (int r = 0; r < RowCount; r++)
+        // Read existing file to preserve rows/columns beyond the grid bounds
+        List<List<string>>? existingRows = null;
+        int existingRowCount = 0;
+        int existingMaxCols = 0;
+        if (File.Exists(path))
         {
-            var fields = new string[ColumnCount];
-            for (int c = 0; c < ColumnCount; c++)
-                fields[c] = EscapeCsvField(_isFile[r, c] ? "" : _data[r, c]);
+            try
+            {
+                var lines = File.ReadAllLines(path);
+                existingRows = new List<List<string>>(lines.Length);
+                foreach (var line in lines)
+                {
+                    var parsed = ParseCsvLine(line);
+                    existingRows.Add(parsed);
+                    if (parsed.Count > existingMaxCols)
+                        existingMaxCols = parsed.Count;
+                }
+                existingRowCount = existingRows.Count;
+            }
+            catch { /* If we can't read, just save what we have */ }
+        }
+
+        int totalRows = Math.Max(RowCount, existingRowCount);
+        int totalCols = Math.Max(ColumnCount, existingMaxCols);
+
+        using var writer = new StreamWriter(path);
+        for (int r = 0; r < totalRows; r++)
+        {
+            var fields = new string[totalCols];
+            for (int c = 0; c < totalCols; c++)
+            {
+                if (r < RowCount && c < ColumnCount)
+                {
+                    // Within grid bounds: use grid data
+                    fields[c] = EscapeCsvField(_isFile[r, c] ? "" : _data[r, c]);
+                }
+                else if (existingRows != null && r < existingRows.Count && c < existingRows[r].Count)
+                {
+                    // Beyond grid bounds: preserve existing file data
+                    fields[c] = EscapeCsvField(existingRows[r][c]);
+                }
+                else
+                {
+                    fields[c] = "";
+                }
+            }
             writer.WriteLine(string.Join(",", fields));
         }
         IsDirty = false;

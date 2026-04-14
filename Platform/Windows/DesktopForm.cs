@@ -29,9 +29,9 @@ internal class DesktopForm : Form
     private int _dragAnchorRow;
     private int _dragAnchorCol;
 
-    private readonly Font _monoFont;
-    private readonly int _charWidth;
-    private readonly int _charHeight;
+    private Font _monoFont;
+    private int _charWidth;
+    private int _charHeight;
 
     private readonly NotifyIcon _trayIcon;
     private bool _lockZOrder;
@@ -67,16 +67,7 @@ internal class DesktopForm : Form
         // Fill the working area (screen minus taskbar)
         Bounds = Screen.PrimaryScreen!.WorkingArea;
 
-        _monoFont = new Font("Consolas", 14f, FontStyle.Regular);
-        using (var bmp = new Bitmap(1, 1))
-        using (var g = Graphics.FromImage(bmp))
-        {
-            g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-            var size = TextRenderer.MeasureText(g, "MMMMMMMMMM", _monoFont,
-                new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPadding);
-            _charWidth = (int)Math.Ceiling(size.Width / 10.0);
-            _charHeight = size.Height;
-        }
+        UpdateFontMetrics();
 
         int availableWidth = Bounds.Width / _charWidth;
         int availableHeight = Bounds.Height / _charHeight - 3;
@@ -167,18 +158,41 @@ internal class DesktopForm : Form
         }
     }
 
+    private void UpdateFontMetrics()
+    {
+        float fontSize = Math.Clamp(_columnWidth * 0.7f, 6f, 22f);
+        _monoFont?.Dispose();
+        _monoFont = new Font("Consolas", fontSize, FontStyle.Regular);
+        using var bmp = new Bitmap(1, 1);
+        using var g = Graphics.FromImage(bmp);
+        g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+        var size = TextRenderer.MeasureText(g, "MMMMMMMMMM", _monoFont,
+            new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPadding);
+        _charWidth = (int)Math.Ceiling(size.Width / 10.0);
+        _charHeight = size.Height;
+    }
+
     private void RebuildGrid()
     {
-        // Save current state so the reload picks up unsaved edits
+        // Save only if there are unsaved user edits
         try { if (_grid.IsDirty) _grid.SaveToCsv(_loadedFile ?? AutoSavePath); } catch { }
 
+        UpdateFontMetrics();
         Bounds = Screen.PrimaryScreen!.WorkingArea;
         int availableWidth = Bounds.Width / _charWidth;
         int availableHeight = Bounds.Height / _charHeight - 3;
-        _grid = new GridManager(availableWidth, availableHeight, _columnWidth);
+        var newGrid = new GridManager(availableWidth, availableHeight, _columnWidth);
 
         int usableChars = availableWidth - RowHeaderWidth;
-        _colWidth = _grid.ColumnCount > 0 ? usableChars / _grid.ColumnCount : 20;
+        _colWidth = newGrid.ColumnCount > 0 ? usableChars / newGrid.ColumnCount : 20;
+
+        // Copy user data (skip file entries — they'll be re-populated at new positions)
+        for (int r = 0; r < Math.Min(_grid.RowCount, newGrid.RowCount); r++)
+            for (int c = 0; c < Math.Min(_grid.ColumnCount, newGrid.ColumnCount); c++)
+                if (!_grid.IsFileEntry(r, c))
+                    newGrid.SetCellValue(r, c, _grid.GetCellValue(r, c));
+
+        _grid = newGrid;
 
         if (_loadedFile is not null)
             _grid.LoadFromCsv(_loadedFile);
