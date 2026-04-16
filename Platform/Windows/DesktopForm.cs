@@ -633,14 +633,33 @@ internal class DesktopForm : Form
             string cellRef = _grid.GetCellReference(span.anchorRow, span.anchorCol);
             DrawText(g, cellRef, spanX + 2, spanY + 1, Color.FromArgb(80, 140, 160), spanBg);
 
-            // Word-wrapped content
+            // Word-wrapped content — show last lines that fit (auto-scroll to bottom)
             if (!string.IsNullOrEmpty(span.content))
             {
-                var contentRect = new Rectangle(spanX + 4, spanY + ch + 2, spanWidth - 8, spanHeight - ch - 4);
-                Color contentFg = span.isCmd ? Color.FromArgb(100, 255, 150) : Color.FromArgb(180, 220, 255);
-                using var contentBrush = new SolidBrush(contentFg);
-                var format = new StringFormat { Trimming = StringTrimming.EllipsisCharacter };
-                g.DrawString(span.content, _monoFont, contentBrush, contentRect, format);
+                int contentTop = spanY + ch + 2;
+                int contentHeight = spanHeight - ch - 4;
+                int contentWidth = spanWidth - 8;
+                if (contentHeight > 0 && contentWidth > 0)
+                {
+                    var contentRect = new Rectangle(spanX + 4, contentTop, contentWidth, contentHeight);
+                    Color contentFg = span.isCmd ? Color.FromArgb(100, 255, 150) : Color.FromArgb(180, 220, 255);
+                    using var contentBrush = new SolidBrush(contentFg);
+
+                    // Split into lines (respect existing newlines)
+                    string[] allLines = span.content.Split('\n');
+
+                    // Estimate how many lines fit (using char height)
+                    int linesPerWindow = Math.Max(1, contentHeight / ch);
+
+                    // Take last N lines that fit
+                    string[] visibleLines = allLines.Length > linesPerWindow
+                        ? allLines[^linesPerWindow..]
+                        : allLines;
+
+                    string displayText = string.Join("\n", visibleLines);
+                    var format = new StringFormat { Trimming = StringTrimming.EllipsisCharacter };
+                    g.DrawString(displayText, _monoFont, contentBrush, contentRect, format);
+                }
             }
         }
 
