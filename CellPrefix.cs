@@ -119,6 +119,20 @@ public static class CellPrefix
     }
 
     /// <summary>
+    /// Returns the length of the "w: RANGE " prefix (including trailing space).
+    /// Used to protect the prefix during backspace. Returns cellValue.Length if no content.
+    /// </summary>
+    public static int GetWindowPrefixLength(string cellValue)
+    {
+        if (!IsWindow(cellValue)) return 0;
+        string afterW = cellValue[3..].TrimStart();
+        int rangeStart = cellValue.Length - afterW.Length; // position where range starts
+        int spaceAfterRange = afterW.IndexOf(' ');
+        if (spaceAfterRange < 0) return cellValue.Length; // no content, entire string is prefix
+        return rangeStart + spaceAfterRange + 1; // include space after range
+    }
+
+    /// <summary>
     /// Parses an "i: A10" cell value. Returns the source cell reference.
     /// </summary>
     public static (int row, int col)? ParseInlineRef(string cellValue)
