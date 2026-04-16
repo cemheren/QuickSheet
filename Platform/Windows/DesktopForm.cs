@@ -289,6 +289,23 @@ internal class DesktopForm : Form
         catch { }
     }
 
+    /// <summary>
+    /// If the cell is an inline ref pointing to a command, kill the cached process
+    /// so it re-runs on the next render. Returns true if it handled the action.
+    /// </summary>
+    private bool TryRerunInlineCommand(int row, int col)
+    {
+        string val = _grid.GetCellValue(row, col);
+        if (!CellPrefix.IsInline(val)) return false;
+
+        string? resolved = _grid.ResolveInline(row, col);
+        if (resolved == null || !CellPrefix.IsCommand(resolved)) return false;
+
+        _processManager.StopProcess(row, col);
+        Invalidate();
+        return true;
+    }
+
     private void OpenAllSelected()
     {
         // Collect all cells: current cursor + multi-selection
@@ -906,6 +923,9 @@ internal class DesktopForm : Form
                     _selection.Clear();
                     break;
                 case Keys.Enter:
+                    // If current cell is an inline ref to a command, re-run it
+                    if (TryRerunInlineCommand(_selectedRow, _selectedCol))
+                        break;
                     OpenAllSelected();
                     break;
                 case Keys.F2:
