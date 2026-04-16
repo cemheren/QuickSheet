@@ -65,10 +65,12 @@ public class InlineProcessManager : IDisposable
 
         if (_processes.TryGetValue(key, out var existing))
         {
-            // Same command already running → skip
-            if (existing.Command == command && existing.Process != null && !existing.Process.HasExited)
+            if (existing.Command == command)
+            {
+                // Same command — whether running or finished, keep it (preserve output)
                 return;
-            // Different command or exited → stop old, start new
+            }
+            // Different command → stop old, start new
             StopProcess(pointerRow, pointerCol);
         }
 
