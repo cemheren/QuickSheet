@@ -174,10 +174,9 @@ public class GridManager
         {
             try
             {
-                var text = File.ReadAllText(path);
-                var csvLines = SplitCsvRows(text);
-                existingRows = new List<List<string>>(csvLines.Count);
-                foreach (var line in csvLines)
+                var lines = File.ReadAllLines(path);
+                existingRows = new List<List<string>>(lines.Length);
+                foreach (var line in lines)
                 {
                     var parsed = ParseCsvLine(line);
                     existingRows.Add(parsed);
@@ -221,9 +220,8 @@ public class GridManager
     public void LoadFromCsv(string path)
     {
         if (!File.Exists(path)) return;
-        var text = File.ReadAllText(path);
-        var lines = SplitCsvRows(text);
-        for (int r = 0; r < Math.Min(lines.Count, RowCount); r++)
+        var lines = File.ReadAllLines(path);
+        for (int r = 0; r < Math.Min(lines.Length, RowCount); r++)
         {
             var fields = ParseCsvLine(lines[r]);
             for (int c = 0; c < Math.Min(fields.Count, ColumnCount); c++)
@@ -239,16 +237,12 @@ public class GridManager
     public bool MergeFromCsv(string path)
     {
         if (!File.Exists(path)) return false;
-        List<string> lines;
-        try
-        {
-            var text = File.ReadAllText(path);
-            lines = SplitCsvRows(text);
-        }
+        string[] lines;
+        try { lines = File.ReadAllLines(path); }
         catch { return false; }
 
         bool changed = false;
-        for (int r = 0; r < Math.Min(lines.Count, RowCount); r++)
+        for (int r = 0; r < Math.Min(lines.Length, RowCount); r++)
         {
             var fields = ParseCsvLine(lines[r]);
             for (int c = 0; c < Math.Min(fields.Count, ColumnCount); c++)
@@ -329,71 +323,6 @@ public class GridManager
             }
         }
         return fields;
-    }
-
-    /// <summary>
-    /// Splits raw CSV text into logical row strings, correctly handling
-    /// quoted fields that contain embedded newlines.
-    /// </summary>
-    private static List<string> SplitCsvRows(string text)
-    {
-        var rows = new List<string>();
-        var current = new System.Text.StringBuilder();
-        bool inQuote = false;
-
-        for (int i = 0; i < text.Length; i++)
-        {
-            char c = text[i];
-            if (inQuote)
-            {
-                if (c == '"')
-                {
-                    if (i + 1 < text.Length && text[i + 1] == '"')
-                    {
-                        current.Append('"');
-                        current.Append('"');
-                        i++;
-                    }
-                    else
-                    {
-                        current.Append(c);
-                        inQuote = false;
-                    }
-                }
-                else
-                {
-                    current.Append(c);
-                }
-            }
-            else
-            {
-                if (c == '"')
-                {
-                    current.Append(c);
-                    inQuote = true;
-                }
-                else if (c == '\r')
-                {
-                    rows.Add(current.ToString());
-                    current.Clear();
-                    if (i + 1 < text.Length && text[i + 1] == '\n') i++;
-                }
-                else if (c == '\n')
-                {
-                    rows.Add(current.ToString());
-                    current.Clear();
-                }
-                else
-                {
-                    current.Append(c);
-                }
-            }
-        }
-
-        if (current.Length > 0)
-            rows.Add(current.ToString());
-
-        return rows;
     }
 
     // ── Inline resolution ────────────────────────────────────────────
