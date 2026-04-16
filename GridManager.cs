@@ -1,5 +1,13 @@
 namespace ExcelConsole;
 
+/// <summary>
+/// Represents a visual window region defined by a "w:" prefix cell.
+/// The anchor cell (anchorRow, anchorCol) contains the "w:" definition and content.
+/// </summary>
+public record WindowRegion(
+    int StartRow, int StartCol, int EndRow, int EndCol,
+    int AnchorRow, int AnchorCol, string Content);
+
 public class GridManager
 {
     private readonly string[,] _data;
@@ -8,6 +16,10 @@ public class GridManager
     public int ColumnCount { get; }
     public int RowCount { get; }
     public bool IsDirty { get; private set; }
+
+    // Cached window regions, rebuilt on demand
+    private List<WindowRegion>? _cachedWindows;
+    private bool _windowsCacheDirty = true;
 
     public GridManager(int availableWidth, int availableHeight, int columnWidth = 20)
     {
@@ -58,6 +70,7 @@ public class GridManager
         {
             _data[row, col] = value;
             IsDirty = true;
+            _windowsCacheDirty = true;
         }
     }
 
@@ -323,5 +336,136 @@ public class GridManager
             }
         }
         return fields;
+    }
+
+    // ── Window regions ──────────────────────────────────────────────
+
+    /// <summary>
+    /// Scans all cells for "w:" definitions and returns validated window regions.
+    /// Results are cached and only recomputed when cell data changes.
+    /// </summary>
+    public List<WindowRegion> GetWindows()
+    {
+        if (!_windowsCacheDirty && _cachedWindows != null)
+            return _cachedWindows;
+
+        var windows = new List<WindowRegion>();
+        var occupied = new HashSet<(int, int)>();
+
+        for (int r = 0; r < RowCount; r++)
+        {
+            for (int c = 0; c < ColumnCount; c++)
+            {
+                var parsed = CellPrefix.ParseWindowDef(_data[r, c]);
+                if (parsed == null) continue;
+
+                var (sr, sc, er, ec, content) = parsed.Value;
+
+                // Anchor must be at top-left of the defined range
+                if (r != sr || c != sc) continue;
+
+                // Clamp to grid bounds
+                er = Math.Min(er, RowCount - 1);
+                ec = Math.Min(ec, ColumnCount - 1);
+                if (sr > er || sc > ec) continue;
+
+                // Check for overlaps with already-claimed cells
+                bool overlaps = false;
+                for (int wr = sr; wr <= er && !overlaps; wr++)
+                    for (int wc = sc; wc <= ec && !overlaps; wc++)
+                        if (occupied.Contains((wr, wc)))
+                            overlaps = true;
+
+                if (overlaps) continue;
+
+                // Claim cells
+                for (int wr = sr; wr <= er; wr++)
+                    for (int wc = sc; wc <= ec; wc++)
+                        occupied.Add((wr, wc));
+
+                windows.Add(new WindowRegion(sr, sc, er, ec, r, c, content));
+            }
+        }
+
+        _cachedWindows = windows;
+        _windowsCacheDirty = false;
+        return windows;
+    }
+
+    /// <summary>
+    /// Returns the window region containing (row, col), or null.
+    /// </summary>
+    public WindowRegion? GetWindowAt(int row, int col)
+    {
+        foreach (var w in GetWindows())
+            if (row >= w.StartRow && row <= w.EndRow &&
+                col >= w.StartCol && col <= w.EndCol)
+                return w;
+        return null;
+    }
+
+    /// <summary>
+    /// Returns true if the cell at (row, col) is inside a window but is NOT the anchor.
+    /// These cells are visually occluded.
+    /// </summary>
+    public bool IsOccludedByWindow(int row, int col)
+    {
+        var w = GetWindowAt(row, col);
+        return w != null && !(row == w.AnchorRow && col == w.AnchorCol);
+    }
+
+    // ── Inline resolution ────────────────────────────────────────────
+
+    /// <summary>
+    /// Resolves an inline reference chain starting from (row, col).
+    /// Returns the final resolved cell value, or null if the cell isn't an inline ref.
+    /// Uses a visited set for cycle detection.
+    /// </summary>
+    public string? ResolveInline(int row, int col, HashSet<(int, int)>? visited = null)
+    {
+        string value = GetCellValue(row, col);
+        if (!CellPrefix.IsInline(value)) return null;
+
+        visited ??= new HashSet<(int, int)>();
+        if (!visited.Add((row, col))) return "[circular]";
+        if (visited.Count > 20) return "[too deep]";
+
+        var target = CellPrefix.ParseInlineRef(value);
+        if (target == null) return "[invalid ref]";
+
+        int tr = target.Value.row, tc = target.Value.col;
+        if (tr < 0 || tr >= RowCount || tc < 0 || tc >= ColumnCount)
+            return "[out of bounds]";
+
+        string targetValue = GetCellValue(tr, tc);
+
+        // If target is also inline, resolve recursively
+        if (CellPrefix.IsInline(targetValue))
+            return ResolveInline(tr, tc, visited);
+
+        return targetValue;
+    }
+
+    /// <summary>
+    /// Gets the display value for a cell, resolving inline refs if applicable.
+    /// For window cells, returns the window content.
+    /// </summary>
+    public string GetDisplayValue(int row, int col, HashSet<(int, int)>? visited = null)
+    {
+        string raw = GetCellValue(row, col);
+
+        if (CellPrefix.IsInline(raw))
+        {
+            visited ??= new HashSet<(int, int)>();
+            return ResolveInline(row, col, visited) ?? raw;
+        }
+
+        if (CellPrefix.IsWindow(raw))
+        {
+            var parsed = CellPrefix.ParseWindowDef(raw);
+            return parsed?.content ?? raw;
+        }
+
+        return raw;
     }
 }

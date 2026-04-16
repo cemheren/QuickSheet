@@ -53,6 +53,9 @@ internal class DesktopForm : Form
     private const int ColumnWidthStep = 4;
     private const int RowHeaderWidth = 4;
 
+    private readonly InlineProcessManager _processManager = new();
+    private System.Threading.Timer? _inlineRefreshTimer;
+
     private static readonly string AutoSavePath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "autosave.csv");
 
@@ -132,6 +135,17 @@ internal class DesktopForm : Form
             }
             catch { }
         }, null, TimeSpan.FromSeconds(60), TimeSpan.FromSeconds(60));
+
+        // Refresh inline process output every 500ms
+        _inlineRefreshTimer = new System.Threading.Timer(_ =>
+        {
+            try
+            {
+                if (_processManager.HasAnyNewOutput())
+                    BeginInvoke(() => Invalidate());
+            }
+            catch { }
+        }, null, TimeSpan.FromMilliseconds(500), TimeSpan.FromMilliseconds(500));
     }
 
     // ── Desktop files ───────────────────────────────────────────────
@@ -409,6 +423,18 @@ internal class DesktopForm : Form
         g.Clear(Color.Black);
         int y = 0;
 
+        // Pre-compute window regions and occluded cells
+        var windows = _grid.GetWindows();
+        var occludedCells = new HashSet<(int, int)>();
+        foreach (var w in windows)
+            for (int wr = w.StartRow; wr <= w.EndRow; wr++)
+                for (int wc = w.StartCol; wc <= w.EndCol; wc++)
+                    if (wr != w.AnchorRow || wc != w.AnchorCol)
+                        occludedCells.Add((wr, wc));
+
+        // Track inline cells that need process management
+        var activeInlineCmds = new HashSet<(int, int)>();
+
         // Column headers
         DrawText(g, new string(' ', RowHeaderWidth), 0, y, Color.White, Color.Black);
         int x = RowHeaderWidth * cw;
@@ -431,6 +457,7 @@ internal class DesktopForm : Form
 
         // Data rows
         int statusY = formHeight - ch;
+        int headerPixelY = y; // remember where data rows start for window rendering
         for (int r = 0; r < _grid.RowCount && y + ch <= statusY; r++)
         {
             x = 0;
@@ -441,8 +468,55 @@ internal class DesktopForm : Form
             for (int c = 0; c < _grid.ColumnCount; c++)
             {
                 int w = colWidths[c];
+
+                // Skip occluded cells (inside a window but not the anchor)
+                if (occludedCells.Contains((r, c)))
+                {
+                    x += w * cw;
+                    continue;
+                }
+
                 string cellVal = _grid.GetCellValue(r, c);
-                string display = cellVal.Length >= w ? cellVal[..w] : cellVal.PadRight(w);
+                string displayVal = cellVal;
+                bool isInline = CellPrefix.IsInline(cellVal);
+                bool isWindowDef = CellPrefix.IsWindow(cellVal);
+                bool isInlineCmd = false;
+
+                // Resolve inline references
+                if (isInline)
+                {
+                    string? resolved = _grid.ResolveInline(r, c);
+                    if (resolved != null)
+                    {
+                        // If resolved value is a command, show process output
+                        if (CellPrefix.IsCommand(resolved))
+                        {
+                            isInlineCmd = true;
+                            activeInlineCmds.Add((r, c));
+                            string expandedCmd = CellPrefix.ExpandCellReferences(resolved, _grid);
+                            _processManager.EnsureRunning(r, c, expandedCmd);
+                            displayVal = _processManager.GetOutput(r, c) ?? "[running...]";
+                        }
+                        else
+                        {
+                            displayVal = CellPrefix.ExpandCellReferences(resolved, _grid);
+                        }
+                    }
+                }
+                else if (!isWindowDef)
+                {
+                    // Expand cell references in normal cells
+                    displayVal = CellPrefix.ExpandCellReferences(cellVal, _grid);
+                }
+
+                // Window anchor cells are drawn later as merged regions
+                if (isWindowDef)
+                {
+                    x += w * cw;
+                    continue;
+                }
+
+                string display = displayVal.Length >= w ? displayVal[..w] : displayVal.PadRight(w);
                 bool isCursor = r == _selectedRow && c == _selectedCol;
                 bool isMultiSel = _selection.Contains((r, c));
                 bool isSearchMatch = _searchTerm != null && _searchMatches.Contains((r, c));
@@ -455,11 +529,15 @@ internal class DesktopForm : Form
                          : isMultiSel ? Color.FromArgb(50, 50, 80)
                          : isSearchMatch ? Color.FromArgb(80, 80, 0)
                          : isConflict ? Color.FromArgb(100, 0, 0)
+                         : isInlineCmd ? Color.FromArgb(20, 50, 20)
+                         : isInline   ? Color.FromArgb(0, 40, 50)
                          : isFile     ? Color.FromArgb(0, 40, 60)
                          : isLink     ? Color.FromArgb(40, 0, 60)
                          : isCmd      ? Color.FromArgb(40, 40, 0)
                          : Color.Black;
                 Color fg = isConflict ? Color.FromArgb(255, 180, 180)
+                         : isInlineCmd ? Color.FromArgb(100, 255, 150)
+                         : isInline   ? Color.FromArgb(100, 220, 240)
                          : isFile ? Color.FromArgb(100, 200, 255)
                          : isLink ? Color.FromArgb(180, 140, 255)
                          : isCmd  ? Color.FromArgb(255, 220, 100)
@@ -469,6 +547,83 @@ internal class DesktopForm : Form
             }
             y += ch;
         }
+
+        // Draw window regions as merged rectangles with word-wrapped content
+        foreach (var win in windows)
+        {
+            // Calculate pixel rectangle for the window
+            int winX = RowHeaderWidth * cw;
+            for (int c = 0; c < win.StartCol && c < _grid.ColumnCount; c++)
+                winX += colWidths[c] * cw;
+
+            int winY = headerPixelY + win.StartRow * ch;
+            int winWidth = 0;
+            for (int c = win.StartCol; c <= win.EndCol && c < _grid.ColumnCount; c++)
+                winWidth += colWidths[c] * cw;
+            int winHeight = (win.EndRow - win.StartRow + 1) * ch;
+
+            // Clamp to visible area
+            if (winY + winHeight > statusY)
+                winHeight = statusY - winY;
+            if (winWidth <= 0 || winHeight <= 0) continue;
+
+            // Determine content to display
+            string rawVal = _grid.GetCellValue(win.AnchorRow, win.AnchorCol);
+            string content = win.Content;
+
+            // If window content is an inline ref, resolve it
+            if (CellPrefix.IsInline(rawVal))
+            {
+                string? resolved = _grid.ResolveInline(win.AnchorRow, win.AnchorCol);
+                if (resolved != null)
+                {
+                    if (CellPrefix.IsCommand(resolved))
+                    {
+                        activeInlineCmds.Add((win.AnchorRow, win.AnchorCol));
+                        string expandedCmd = CellPrefix.ExpandCellReferences(resolved, _grid);
+                        _processManager.EnsureRunning(win.AnchorRow, win.AnchorCol, expandedCmd);
+                        content = _processManager.GetOutput(win.AnchorRow, win.AnchorCol) ?? "[running...]";
+                    }
+                    else
+                    {
+                        content = CellPrefix.ExpandCellReferences(resolved, _grid);
+                    }
+                }
+            }
+            else
+            {
+                content = CellPrefix.ExpandCellReferences(content, _grid);
+            }
+
+            // Background
+            bool winHasCursor = _selectedRow >= win.StartRow && _selectedRow <= win.EndRow &&
+                                _selectedCol >= win.StartCol && _selectedCol <= win.EndCol;
+            Color winBg = winHasCursor ? Color.FromArgb(30, 40, 60) : Color.FromArgb(20, 30, 50);
+            using (var bgBrush = new SolidBrush(winBg))
+                g.FillRectangle(bgBrush, winX, winY, winWidth, winHeight);
+
+            // Border
+            Color borderColor = winHasCursor ? Color.FromArgb(80, 140, 200) : Color.FromArgb(50, 80, 120);
+            using (var borderPen = new Pen(borderColor, 1))
+                g.DrawRectangle(borderPen, winX, winY, winWidth - 1, winHeight - 1);
+
+            // Word-wrapped content
+            if (!string.IsNullOrEmpty(content))
+            {
+                var contentRect = new Rectangle(winX + 4, winY + 2, winWidth - 8, winHeight - 4);
+                using var contentBrush = new SolidBrush(Color.FromArgb(200, 220, 255));
+                var format = new StringFormat
+                {
+                    FormatFlags = StringFormatFlags.NoClip,
+                    Trimming = StringTrimming.EllipsisCharacter
+                };
+                g.DrawString(content, _monoFont, contentBrush, contentRect, format);
+            }
+        }
+
+        // Stop processes for inline cells that are no longer active
+        // (deferred to avoid modifying collection during enumeration above)
+        // This is handled by the process manager's EnsureRunning logic
 
         // Status bar
         int maxChars = formWidth / cw;
@@ -517,12 +672,46 @@ internal class DesktopForm : Form
     private void EnterEditMode()
     {
         _editing = true;
-        _editText = _grid.GetCellValue(_selectedRow, _selectedCol);
+        string raw = _grid.GetCellValue(_selectedRow, _selectedCol);
+
+        // For window cells, edit only the content portion
+        if (CellPrefix.IsWindow(raw))
+        {
+            var parsed = CellPrefix.ParseWindowDef(raw);
+            if (parsed != null)
+            {
+                _editText = parsed.Value.content;
+                _editCursorPos = _editText.Length;
+                return;
+            }
+        }
+
+        _editText = raw;
         _editCursorPos = _editText.Length;
     }
 
     private void CommitEdit()
     {
+        string raw = _grid.GetCellValue(_selectedRow, _selectedCol);
+
+        // For window cells, preserve the w: prefix and range, replace content
+        if (CellPrefix.IsWindow(raw))
+        {
+            var parsed = CellPrefix.ParseWindowDef(raw);
+            if (parsed != null)
+            {
+                string rangeStr = raw[3..].Trim(); // after "w: "
+                int spaceIdx = rangeStr.IndexOf(' ');
+                string rangeOnly = spaceIdx >= 0 ? rangeStr[..spaceIdx] : rangeStr;
+                string newVal = string.IsNullOrEmpty(_editText)
+                    ? $"w: {rangeOnly}"
+                    : $"w: {rangeOnly} {_editText}";
+                _grid.SetCellValue(_selectedRow, _selectedCol, newVal);
+                _editing = false;
+                return;
+            }
+        }
+
         _grid.SetCellValue(_selectedRow, _selectedCol, _editText);
         _editing = false;
     }
@@ -734,19 +923,44 @@ internal class DesktopForm : Form
             switch (e.KeyCode)
             {
                 case Keys.Up:
-                    if (_selectedRow > 0) _selectedRow--;
+                    if (_selectedRow > 0)
+                    {
+                        _selectedRow--;
+                        // Skip over occluded window cells
+                        var winUp = _grid.GetWindowAt(_selectedRow, _selectedCol);
+                        if (winUp != null && (_selectedRow != winUp.AnchorRow || _selectedCol != winUp.AnchorCol))
+                            _selectedRow = winUp.StartRow - 1 >= 0 ? winUp.StartRow - 1 : winUp.AnchorRow;
+                    }
                     _selection.Clear();
                     break;
                 case Keys.Down:
-                    if (_selectedRow < _grid.RowCount - 1) _selectedRow++;
+                    if (_selectedRow < _grid.RowCount - 1)
+                    {
+                        _selectedRow++;
+                        var winDown = _grid.GetWindowAt(_selectedRow, _selectedCol);
+                        if (winDown != null && (_selectedRow != winDown.AnchorRow || _selectedCol != winDown.AnchorCol))
+                            _selectedRow = winDown.EndRow + 1 < _grid.RowCount ? winDown.EndRow + 1 : winDown.AnchorRow;
+                    }
                     _selection.Clear();
                     break;
                 case Keys.Left:
-                    if (_selectedCol > 0) _selectedCol--;
+                    if (_selectedCol > 0)
+                    {
+                        _selectedCol--;
+                        var winLeft = _grid.GetWindowAt(_selectedRow, _selectedCol);
+                        if (winLeft != null && (_selectedRow != winLeft.AnchorRow || _selectedCol != winLeft.AnchorCol))
+                            _selectedCol = winLeft.StartCol - 1 >= 0 ? winLeft.StartCol - 1 : winLeft.AnchorCol;
+                    }
                     _selection.Clear();
                     break;
                 case Keys.Right:
-                    if (_selectedCol < _grid.ColumnCount - 1) _selectedCol++;
+                    if (_selectedCol < _grid.ColumnCount - 1)
+                    {
+                        _selectedCol++;
+                        var winRight = _grid.GetWindowAt(_selectedRow, _selectedCol);
+                        if (winRight != null && (_selectedRow != winRight.AnchorRow || _selectedCol != winRight.AnchorCol))
+                            _selectedCol = winRight.EndCol + 1 < _grid.ColumnCount ? winRight.EndCol + 1 : winRight.AnchorCol;
+                    }
                     _selection.Clear();
                     break;
                 case Keys.Enter:
@@ -907,6 +1121,14 @@ internal class DesktopForm : Form
         if (cell is null) return;
         var (row, col) = cell.Value;
 
+        // If clicking inside a window region, redirect to anchor cell
+        var win = _grid.GetWindowAt(row, col);
+        if (win != null)
+        {
+            row = win.AnchorRow;
+            col = win.AnchorCol;
+        }
+
         if (ModifierKeys.HasFlag(Keys.Control))
         {
             if (!_selection.Remove((row, col)))
@@ -963,6 +1185,7 @@ internal class DesktopForm : Form
     {
         if (_winEventHook != IntPtr.Zero)
             NativeMethods.UnhookWinEvent(_winEventHook);
+        _processManager.StopAll();
         _grid.SaveToCsv(AutoSavePath);
         _trayIcon.Visible = false;
     }
@@ -971,8 +1194,10 @@ internal class DesktopForm : Form
     {
         if (disposing)
         {
+            _inlineRefreshTimer?.Dispose();
             _autoSaveTimer?.Dispose();
             _csvReloadTimer?.Dispose();
+            _processManager.Dispose();
             _monoFont.Dispose();
             _trayIcon.Dispose();
         }
