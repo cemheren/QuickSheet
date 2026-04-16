@@ -638,7 +638,7 @@ internal class DesktopForm : Form
             string cellRef = _grid.GetCellReference(span.anchorRow, span.anchorCol);
             DrawText(g, cellRef, spanX + 2, spanY + 1, Color.FromArgb(80, 140, 160), spanBg);
 
-            // Word-wrapped content — show last lines that fit (auto-scroll to bottom)
+            // Render content — strip markdown, show last lines that fit
             if (!string.IsNullOrEmpty(span.content))
             {
                 int contentTop = spanY + ch + 2;
@@ -646,24 +646,30 @@ internal class DesktopForm : Form
                 int contentWidth = spanWidth - 8;
                 if (contentHeight > 0 && contentWidth > 0)
                 {
-                    var contentRect = new Rectangle(spanX + 4, contentTop, contentWidth, contentHeight);
-                    Color contentFg = span.isCmd ? Color.FromArgb(100, 255, 150) : Color.FromArgb(180, 220, 255);
-                    using var contentBrush = new SolidBrush(contentFg);
+                    string cleaned = StripMarkdown(span.content);
+                    string[] allLines = cleaned.Split('\n');
 
-                    // Split into lines (respect existing newlines)
-                    string[] allLines = span.content.Split('\n');
-
-                    // Estimate how many lines fit (using char height)
+                    // How many lines fit
                     int linesPerWindow = Math.Max(1, contentHeight / ch);
 
-                    // Take last N lines that fit
-                    string[] visibleLines = allLines.Length > linesPerWindow
-                        ? allLines[^linesPerWindow..]
-                        : allLines;
+                    // Take last N lines
+                    int startIdx = Math.Max(0, allLines.Length - linesPerWindow);
+                    int count = Math.Min(linesPerWindow, allLines.Length);
 
-                    string displayText = string.Join("\n", visibleLines);
-                    var format = new StringFormat { Trimming = StringTrimming.EllipsisCharacter };
-                    g.DrawString(displayText, _monoFont, contentBrush, contentRect, format);
+                    Color contentFg = span.isCmd ? Color.FromArgb(100, 255, 150) : Color.FromArgb(180, 220, 255);
+
+                    // Render line by line for precise control
+                    int charsPerLine = Math.Max(1, contentWidth / cw);
+                    int lineY = contentTop;
+                    for (int li = startIdx; li < startIdx + count && lineY + ch <= contentTop + contentHeight; li++)
+                    {
+                        string line = allLines[li];
+                        // Truncate to fit width
+                        if (line.Length > charsPerLine)
+                            line = line[..charsPerLine];
+                        DrawText(g, line.PadRight(charsPerLine), spanX + 4, lineY, contentFg, spanBg);
+                        lineY += ch;
+                    }
                 }
             }
         }
@@ -732,6 +738,43 @@ internal class DesktopForm : Form
         g.FillRectangle(bgBrush, x, y, w, _charHeight);
         TextRenderer.DrawText(g, text, _monoFont, new Point(x, y), fg, bg,
             TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix);
+    }
+
+    /// <summary>
+    /// Strips common markdown syntax for cleaner display in span windows.
+    /// </summary>
+    private static string StripMarkdown(string text)
+    {
+        if (string.IsNullOrEmpty(text)) return text;
+        var sb = new System.Text.StringBuilder(text.Length);
+        var lines = text.Split('\n');
+        for (int i = 0; i < lines.Length; i++)
+        {
+            string line = lines[i];
+            // Strip heading markers: ### heading → heading
+            if (line.StartsWith('#'))
+            {
+                int j = 0;
+                while (j < line.Length && line[j] == '#') j++;
+                line = line[j..].TrimStart();
+            }
+            // Strip horizontal rules
+            if (line.Length >= 3 && line.All(c => c == '-' || c == '*' || c == '_' || c == ' '))
+            {
+                int dashes = line.Count(c => c == '-' || c == '*' || c == '_');
+                if (dashes >= 3) { sb.AppendLine(""); continue; }
+            }
+            // Strip bold/italic markers
+            line = line.Replace("***", "").Replace("**", "").Replace("__", "");
+            // Strip inline code backticks
+            line = line.Replace("`", "");
+            // Strip bullet markers: - item or * item → item
+            string trimmed = line.TrimStart();
+            if (trimmed.Length > 1 && (trimmed[0] == '-' || trimmed[0] == '*') && trimmed[1] == ' ')
+                line = "  " + trimmed[2..];
+            sb.AppendLine(line);
+        }
+        return sb.ToString().TrimEnd();
     }
 
     // ── Input ────────────────────────────────────────────────────────
