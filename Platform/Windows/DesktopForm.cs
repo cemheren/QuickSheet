@@ -845,17 +845,22 @@ internal class DesktopForm : Form
                 case Keys.C:
                     if (e.Shift)
                     {
-                        // Ctrl+Shift+C: copy resolved/displayed content (inline output, command output, etc.)
-                        string display = _grid.GetDisplayValue(_selectedRow, _selectedCol);
+                        // Ctrl+Shift+C: copy resolved/displayed content
+                        string raw = _grid.GetCellValue(_selectedRow, _selectedCol);
+                        string display;
                         string? resolved = _grid.ResolveInline(_selectedRow, _selectedCol);
                         if (resolved != null && CellPrefix.IsCommand(resolved))
                         {
-                            string? output = _processManager.GetOutput(_selectedRow, _selectedCol);
-                            if (output != null) display = output;
+                            display = _processManager.GetOutput(_selectedRow, _selectedCol) ?? "[running...]";
                         }
                         else if (resolved != null)
                         {
                             display = CellPrefix.ExpandCellReferences(resolved, _grid);
+                        }
+                        else
+                        {
+                            // Normal cell — expand any {A1::C10} references
+                            display = CellPrefix.ExpandCellReferences(raw, _grid);
                         }
                         _clipboard = display;
                         if (!string.IsNullOrEmpty(_clipboard))
