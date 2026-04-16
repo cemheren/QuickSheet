@@ -452,7 +452,8 @@ internal class DesktopForm : Form
             {
                 string val = _grid.GetCellValue(r, c);
                 if (!CellPrefix.IsInline(val)) continue;
-                var parsed = CellPrefix.ParseInlineRef(val);
+                string expandedVal = CellPrefix.ExpandCellReferences(val, _grid);
+                var parsed = CellPrefix.ParseInlineRef(expandedVal);
                 if (parsed == null || (parsed.Value.spanCols <= 1 && parsed.Value.spanRows <= 1)) continue;
 
                 int sc = parsed.Value.spanCols, sr = parsed.Value.spanRows;

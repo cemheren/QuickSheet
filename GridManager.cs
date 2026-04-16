@@ -341,7 +341,9 @@ public class GridManager
         if (!visited.Add((row, col))) return "[circular]";
         if (visited.Count > 20) return "[too deep]";
 
-        var target = CellPrefix.ParseInlineRef(value);
+        // Expand {A1::C10} refs in the i: value before parsing the target cell
+        string expanded = CellPrefix.ExpandCellReferences(value, this);
+        var target = CellPrefix.ParseInlineRef(expanded);
         if (target == null) return "[invalid ref]";
 
         int tr = target.Value.row, tc = target.Value.col;
