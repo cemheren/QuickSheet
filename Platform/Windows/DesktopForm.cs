@@ -41,6 +41,7 @@ internal class DesktopForm : Form
 
     private readonly NotifyIcon _trayIcon;
     private bool _lockZOrder;
+    private bool _showResolved;
     private IntPtr _winEventHook;
     private NativeMethods.WinEventDelegate? _winEventDelegate;
     private System.Threading.Timer? _autoSaveTimer;
@@ -661,6 +662,29 @@ internal class DesktopForm : Form
             string cellRef = _grid.GetCellReference(_selectedRow, _selectedCol);
             string value = _grid.GetCellValue(_selectedRow, _selectedCol);
             string valueDisplay = string.IsNullOrEmpty(value) ? "" : $" = {value}";
+
+            // F1 toggle: show resolved/expanded value
+            string resolvedDisplay = "";
+            if (_showResolved && !string.IsNullOrEmpty(value))
+            {
+                string resolved;
+                string? inlineResult = _grid.ResolveInline(_selectedRow, _selectedCol);
+                if (inlineResult != null && CellPrefix.IsCommand(inlineResult))
+                {
+                    resolved = _processManager.GetOutput(_selectedRow, _selectedCol) ?? "[running...]";
+                }
+                else if (inlineResult != null)
+                {
+                    resolved = CellPrefix.ExpandCellReferences(inlineResult, _grid);
+                }
+                else
+                {
+                    resolved = CellPrefix.ExpandCellReferences(value, _grid);
+                }
+                if (resolved != value)
+                    resolvedDisplay = $" \u2192 {resolved}";
+            }
+
             double? sum = _grid.GetColumnSum(_selectedCol);
             string colName = GridManager.GetColumnName(_selectedCol);
             string sumDisplay = sum.HasValue ? $"  \u03a3{colName} = {sum.Value}" : "";
@@ -669,7 +693,8 @@ internal class DesktopForm : Form
             string searchDisplay = _searchTerm != null
                 ? $"  \U0001f50d\"{_searchTerm}\" {(_searchMatches.Count > 0 ? $"{_searchMatchIndex + 1}/{_searchMatches.Count}" : "no matches")}"
                 : "";
-            status = $" {cellRef}{valueDisplay}{sumDisplay}{productDisplay}{searchDisplay}  |  F2: Edit  Ctrl+S: Save  Ctrl+Q: Quit";
+            string f1Label = _showResolved ? "F1: Raw" : "F1: Resolve";
+            status = $" {cellRef}{valueDisplay}{resolvedDisplay}{sumDisplay}{productDisplay}{searchDisplay}  |  {f1Label}  F2: Edit  Ctrl+S: Save  Ctrl+Q: Quit";
         }
         status = status.PadRight(maxChars);
         g.FillRectangle(Brushes.White, 0, statusY, formWidth, ch);
@@ -953,6 +978,9 @@ internal class DesktopForm : Form
                     if (TryRerunInlineCommand(_selectedRow, _selectedCol))
                         break;
                     OpenAllSelected();
+                    break;
+                case Keys.F1:
+                    _showResolved = !_showResolved;
                     break;
                 case Keys.F2:
                     EnterEditMode();
