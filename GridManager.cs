@@ -361,9 +361,6 @@ public class GridManager
 
                 var (sr, sc, er, ec, content) = parsed.Value;
 
-                // Anchor must be at top-left of the defined range
-                if (r != sr || c != sc) continue;
-
                 // Clamp to grid bounds
                 er = Math.Min(er, RowCount - 1);
                 ec = Math.Min(ec, ColumnCount - 1);
@@ -378,11 +375,12 @@ public class GridManager
 
                 if (overlaps) continue;
 
-                // Claim cells
+                // Claim target range cells
                 for (int wr = sr; wr <= er; wr++)
                     for (int wc = sc; wc <= ec; wc++)
                         occupied.Add((wr, wc));
 
+                // Anchor is the cell containing the w: definition (r, c), not necessarily the range top-left
                 windows.Add(new WindowRegion(sr, sc, er, ec, r, c, content));
             }
         }

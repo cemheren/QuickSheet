@@ -509,13 +509,6 @@ internal class DesktopForm : Form
                     displayVal = CellPrefix.ExpandCellReferences(cellVal, _grid);
                 }
 
-                // Window anchor cells are drawn later as merged regions
-                if (isWindowDef)
-                {
-                    x += w * cw;
-                    continue;
-                }
-
                 string display = displayVal.Length >= w ? displayVal[..w] : displayVal.PadRight(w);
                 bool isCursor = r == _selectedRow && c == _selectedCol;
                 bool isMultiSel = _selection.Contains((r, c));
@@ -529,6 +522,7 @@ internal class DesktopForm : Form
                          : isMultiSel ? Color.FromArgb(50, 50, 80)
                          : isSearchMatch ? Color.FromArgb(80, 80, 0)
                          : isConflict ? Color.FromArgb(100, 0, 0)
+                         : isWindowDef ? Color.FromArgb(40, 40, 50)
                          : isInlineCmd ? Color.FromArgb(20, 50, 20)
                          : isInline   ? Color.FromArgb(0, 40, 50)
                          : isFile     ? Color.FromArgb(0, 40, 60)
@@ -536,6 +530,7 @@ internal class DesktopForm : Form
                          : isCmd      ? Color.FromArgb(40, 40, 0)
                          : Color.Black;
                 Color fg = isConflict ? Color.FromArgb(255, 180, 180)
+                         : isWindowDef ? Color.FromArgb(180, 180, 220)
                          : isInlineCmd ? Color.FromArgb(100, 255, 150)
                          : isInline   ? Color.FromArgb(100, 220, 240)
                          : isFile ? Color.FromArgb(100, 200, 255)
@@ -595,15 +590,15 @@ internal class DesktopForm : Form
                 content = CellPrefix.ExpandCellReferences(content, _grid);
             }
 
-            // Background
+            // Background — gray to indicate window region
             bool winHasCursor = _selectedRow >= win.StartRow && _selectedRow <= win.EndRow &&
                                 _selectedCol >= win.StartCol && _selectedCol <= win.EndCol;
-            Color winBg = winHasCursor ? Color.FromArgb(30, 40, 60) : Color.FromArgb(20, 30, 50);
+            Color winBg = winHasCursor ? Color.FromArgb(60, 60, 65) : Color.FromArgb(45, 45, 50);
             using (var bgBrush = new SolidBrush(winBg))
                 g.FillRectangle(bgBrush, winX, winY, winWidth, winHeight);
 
             // Border
-            Color borderColor = winHasCursor ? Color.FromArgb(80, 140, 200) : Color.FromArgb(50, 80, 120);
+            Color borderColor = winHasCursor ? Color.FromArgb(120, 120, 140) : Color.FromArgb(80, 80, 100);
             using (var borderPen = new Pen(borderColor, 1))
                 g.DrawRectangle(borderPen, winX, winY, winWidth - 1, winHeight - 1);
 
