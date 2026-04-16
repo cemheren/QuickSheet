@@ -94,13 +94,29 @@ public static class CellPrefix
     }
 
     /// <summary>
-    /// Parses an "i: A10" cell value. Returns the source cell reference.
+    /// Parses an "i: A10" or "i: A10,5,3" cell value.
+    /// Returns the source cell reference and optional span dimensions (cols, rows).
+    /// Defaults to (1,1) if no dimensions given.
     /// </summary>
-    public static (int row, int col)? ParseInlineRef(string cellValue)
+    public static (int row, int col, int spanCols, int spanRows)? ParseInlineRef(string cellValue)
     {
         if (!IsInline(cellValue)) return null;
-        string afterPrefix = cellValue[3..].Trim(); // skip "i: "
-        return ParseCellRef(afterPrefix);
+        string afterPrefix = cellValue[3..].Trim();
+
+        string[] parts = afterPrefix.Split(',');
+        var cellRef = ParseCellRef(parts[0].Trim());
+        if (cellRef == null) return null;
+
+        int spanCols = 1, spanRows = 1;
+        if (parts.Length >= 3)
+        {
+            int.TryParse(parts[1].Trim(), out spanCols);
+            int.TryParse(parts[2].Trim(), out spanRows);
+            if (spanCols < 1) spanCols = 1;
+            if (spanRows < 1) spanRows = 1;
+        }
+
+        return (cellRef.Value.row, cellRef.Value.col, spanCols, spanRows);
     }
 
     // ── Cell reference expansion {A1::C10} ───────────────────────────

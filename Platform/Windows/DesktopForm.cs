@@ -426,6 +426,53 @@ internal class DesktopForm : Form
         // Track inline cells that need process management
         var activeInlineCmds = new HashSet<(int, int)>();
 
+        // Pre-scan for inline cells with visual spans (i: A10,5,3)
+        var inlineSpans = new List<(int anchorRow, int anchorCol, int spanCols, int spanRows, string content, bool isCmd)>();
+        var occludedCells = new HashSet<(int, int)>();
+        for (int r = 0; r < _grid.RowCount; r++)
+        {
+            for (int c = 0; c < _grid.ColumnCount; c++)
+            {
+                string val = _grid.GetCellValue(r, c);
+                if (!CellPrefix.IsInline(val)) continue;
+                var parsed = CellPrefix.ParseInlineRef(val);
+                if (parsed == null || (parsed.Value.spanCols <= 1 && parsed.Value.spanRows <= 1)) continue;
+
+                int sc = parsed.Value.spanCols, sr = parsed.Value.spanRows;
+                int endCol = Math.Min(c + sc - 1, _grid.ColumnCount - 1);
+                int endRow = Math.Min(r + sr - 1, _grid.RowCount - 1);
+
+                // Resolve content
+                string? resolved = _grid.ResolveInline(r, c);
+                bool isCmd = false;
+                string content;
+                if (resolved != null && CellPrefix.IsCommand(resolved))
+                {
+                    isCmd = true;
+                    activeInlineCmds.Add((r, c));
+                    string expandedCmd = CellPrefix.ExpandCellReferences(resolved, _grid);
+                    _processManager.EnsureRunning(r, c, expandedCmd);
+                    content = _processManager.GetOutput(r, c) ?? "[running...]";
+                }
+                else if (resolved != null)
+                {
+                    content = CellPrefix.ExpandCellReferences(resolved, _grid);
+                }
+                else
+                {
+                    content = val;
+                }
+
+                inlineSpans.Add((r, c, sc, sr, content, isCmd));
+
+                // Mark all spanned cells except anchor as occluded
+                for (int wr = r; wr <= endRow; wr++)
+                    for (int wc = c; wc <= endCol; wc++)
+                        if (wr != r || wc != c)
+                            occludedCells.Add((wr, wc));
+            }
+        }
+
         // Column headers
         DrawText(g, new string(' ', RowHeaderWidth), 0, y, Color.White, Color.Black);
         int x = RowHeaderWidth * cw;
@@ -458,6 +505,13 @@ internal class DesktopForm : Form
             for (int c = 0; c < _grid.ColumnCount; c++)
             {
                 int w = colWidths[c];
+
+                // Skip cells occluded by an inline span
+                if (occludedCells.Contains((r, c)))
+                {
+                    x += w * cw;
+                    continue;
+                }
 
                 string cellVal = _grid.GetCellValue(r, c);
                 string displayVal = cellVal;
@@ -521,6 +575,54 @@ internal class DesktopForm : Form
                 x += w * cw;
             }
             y += ch;
+        }
+
+        // Draw inline span overlays
+        int headerRows = 2;
+        foreach (var span in inlineSpans)
+        {
+            int spanX = RowHeaderWidth * cw;
+            for (int c = 0; c < span.anchorCol && c < _grid.ColumnCount; c++)
+                spanX += colWidths[c] * cw;
+
+            int spanY = headerRows * ch + span.anchorRow * ch;
+            int spanWidth = 0;
+            int endCol = Math.Min(span.anchorCol + span.spanCols - 1, _grid.ColumnCount - 1);
+            for (int c = span.anchorCol; c <= endCol; c++)
+                spanWidth += colWidths[c] * cw;
+            int endRow = Math.Min(span.anchorRow + span.spanRows - 1, _grid.RowCount - 1);
+            int spanHeight = (endRow - span.anchorRow + 1) * ch;
+
+            if (spanY + spanHeight > statusY) spanHeight = statusY - spanY;
+            if (spanWidth <= 0 || spanHeight <= 0) continue;
+
+            // Background
+            bool hasCursor = _selectedRow >= span.anchorRow && _selectedRow <= endRow &&
+                             _selectedCol >= span.anchorCol && _selectedCol <= endCol;
+            Color spanBg = span.isCmd
+                ? (hasCursor ? Color.FromArgb(30, 60, 30) : Color.FromArgb(20, 50, 20))
+                : (hasCursor ? Color.FromArgb(10, 55, 65) : Color.FromArgb(0, 40, 50));
+            using (var bgBrush = new SolidBrush(spanBg))
+                g.FillRectangle(bgBrush, spanX, spanY, spanWidth, spanHeight);
+
+            // Border
+            Color borderColor = hasCursor ? Color.FromArgb(100, 180, 200) : Color.FromArgb(60, 100, 120);
+            using (var borderPen = new Pen(borderColor, 1))
+                g.DrawRectangle(borderPen, spanX, spanY, spanWidth - 1, spanHeight - 1);
+
+            // Cell ref label
+            string cellRef = _grid.GetCellReference(span.anchorRow, span.anchorCol);
+            DrawText(g, cellRef, spanX + 2, spanY + 1, Color.FromArgb(80, 140, 160), spanBg);
+
+            // Word-wrapped content
+            if (!string.IsNullOrEmpty(span.content))
+            {
+                var contentRect = new Rectangle(spanX + 4, spanY + ch + 2, spanWidth - 8, spanHeight - ch - 4);
+                Color contentFg = span.isCmd ? Color.FromArgb(100, 255, 150) : Color.FromArgb(180, 220, 255);
+                using var contentBrush = new SolidBrush(contentFg);
+                var format = new StringFormat { Trimming = StringTrimming.EllipsisCharacter };
+                g.DrawString(span.content, _monoFont, contentBrush, contentRect, format);
+            }
         }
 
         // Status bar
