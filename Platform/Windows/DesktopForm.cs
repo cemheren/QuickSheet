@@ -871,9 +871,9 @@ internal class DesktopForm : Form
                     // Ctrl+C: copy raw cell value
                     if (_selection.Count > 0)
                     {
-                        var copyCells = new List<(int row, int col)>(_selection) { (_selectedRow, _selectedCol) };
-                        copyCells.Sort((a, b) => a.row != b.row ? a.row.CompareTo(b.row) : a.col.CompareTo(b.col));
-                        _clipboard = string.Join(Environment.NewLine, copyCells.Select(c => _grid.GetCellValue(c.row, c.col)));
+                        var copyCells = new HashSet<(int row, int col)>(_selection) { (_selectedRow, _selectedCol) };
+                        var sorted = copyCells.OrderBy(c => c.row).ThenBy(c => c.col).ToList();
+                        _clipboard = string.Join(Environment.NewLine, sorted.Select(c => _grid.GetCellValue(c.row, c.col)));
                     }
                     else
                         _clipboard = _grid.GetCellValue(_selectedRow, _selectedCol);
@@ -883,10 +883,10 @@ internal class DesktopForm : Form
                 case Keys.X:
                     if (_selection.Count > 0)
                     {
-                        var cutCells = new List<(int row, int col)>(_selection) { (_selectedRow, _selectedCol) };
-                        cutCells.Sort((a, b) => a.row != b.row ? a.row.CompareTo(b.row) : a.col.CompareTo(b.col));
-                        _clipboard = string.Join(Environment.NewLine, cutCells.Select(c => _grid.GetCellValue(c.row, c.col)));
-                        foreach (var (r, c) in cutCells) _grid.SetCellValue(r, c, "");
+                        var cutCells = new HashSet<(int row, int col)>(_selection) { (_selectedRow, _selectedCol) };
+                        var sorted = cutCells.OrderBy(c => c.row).ThenBy(c => c.col).ToList();
+                        _clipboard = string.Join(Environment.NewLine, sorted.Select(c => _grid.GetCellValue(c.row, c.col)));
+                        foreach (var (r, c) in sorted) _grid.SetCellValue(r, c, "");
                         _selection.Clear();
                     }
                     else
