@@ -843,6 +843,26 @@ internal class DesktopForm : Form
                     if (_selectedRow >= _grid.RowCount) _selectedRow = _grid.RowCount - 1;
                     break;
                 case Keys.C:
+                    if (e.Shift)
+                    {
+                        // Ctrl+Shift+C: copy resolved/displayed content (inline output, command output, etc.)
+                        string display = _grid.GetDisplayValue(_selectedRow, _selectedCol);
+                        string? resolved = _grid.ResolveInline(_selectedRow, _selectedCol);
+                        if (resolved != null && CellPrefix.IsCommand(resolved))
+                        {
+                            string? output = _processManager.GetOutput(_selectedRow, _selectedCol);
+                            if (output != null) display = output;
+                        }
+                        else if (resolved != null)
+                        {
+                            display = CellPrefix.ExpandCellReferences(resolved, _grid);
+                        }
+                        _clipboard = display;
+                        if (!string.IsNullOrEmpty(_clipboard))
+                            Clipboard.SetText(_clipboard);
+                        break;
+                    }
+                    // Ctrl+C: copy raw cell value
                     if (_selection.Count > 0)
                     {
                         var copyCells = new List<(int row, int col)>(_selection) { (_selectedRow, _selectedCol) };
