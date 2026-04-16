@@ -423,14 +423,6 @@ internal class DesktopForm : Form
         g.Clear(Color.Black);
         int y = 0;
 
-        // Pre-compute window regions and occluded cells
-        var windows = _grid.GetWindows();
-        var occludedCells = new HashSet<(int, int)>();
-        foreach (var w in windows)
-            for (int wr = w.StartRow; wr <= w.EndRow; wr++)
-                for (int wc = w.StartCol; wc <= w.EndCol; wc++)
-                    occludedCells.Add((wr, wc)); // entire range is covered by window
-
         // Track inline cells that need process management
         var activeInlineCmds = new HashSet<(int, int)>();
 
@@ -456,7 +448,6 @@ internal class DesktopForm : Form
 
         // Data rows
         int statusY = formHeight - ch;
-        int headerPixelY = y; // remember where data rows start for window rendering
         for (int r = 0; r < _grid.RowCount && y + ch <= statusY; r++)
         {
             x = 0;
@@ -468,17 +459,9 @@ internal class DesktopForm : Form
             {
                 int w = colWidths[c];
 
-                // Skip occluded cells (inside a window but not the anchor)
-                if (occludedCells.Contains((r, c)))
-                {
-                    x += w * cw;
-                    continue;
-                }
-
                 string cellVal = _grid.GetCellValue(r, c);
                 string displayVal = cellVal;
                 bool isInline = CellPrefix.IsInline(cellVal);
-                bool isWindowDef = CellPrefix.IsWindow(cellVal);
                 bool isInlineCmd = false;
 
                 // Resolve inline references
@@ -502,7 +485,7 @@ internal class DesktopForm : Form
                         }
                     }
                 }
-                else if (!isWindowDef)
+                else
                 {
                     // Expand cell references in normal cells
                     displayVal = CellPrefix.ExpandCellReferences(cellVal, _grid);
@@ -521,7 +504,6 @@ internal class DesktopForm : Form
                          : isMultiSel ? Color.FromArgb(50, 50, 80)
                          : isSearchMatch ? Color.FromArgb(80, 80, 0)
                          : isConflict ? Color.FromArgb(100, 0, 0)
-                         : isWindowDef ? Color.FromArgb(40, 40, 50)
                          : isInlineCmd ? Color.FromArgb(20, 50, 20)
                          : isInline   ? Color.FromArgb(0, 40, 50)
                          : isFile     ? Color.FromArgb(0, 40, 60)
@@ -529,7 +511,6 @@ internal class DesktopForm : Form
                          : isCmd      ? Color.FromArgb(40, 40, 0)
                          : Color.Black;
                 Color fg = isConflict ? Color.FromArgb(255, 180, 180)
-                         : isWindowDef ? Color.FromArgb(180, 180, 220)
                          : isInlineCmd ? Color.FromArgb(100, 255, 150)
                          : isInline   ? Color.FromArgb(100, 220, 240)
                          : isFile ? Color.FromArgb(100, 200, 255)
@@ -541,97 +522,6 @@ internal class DesktopForm : Form
             }
             y += ch;
         }
-
-        // Draw window regions as merged rectangles with word-wrapped content
-        foreach (var win in windows)
-        {
-            // Calculate pixel rectangle for the window
-            int winX = RowHeaderWidth * cw;
-            for (int c = 0; c < win.StartCol && c < _grid.ColumnCount; c++)
-                winX += colWidths[c] * cw;
-
-            int winY = headerPixelY + win.StartRow * ch;
-            int winWidth = 0;
-            for (int c = win.StartCol; c <= win.EndCol && c < _grid.ColumnCount; c++)
-                winWidth += colWidths[c] * cw;
-            int winHeight = (win.EndRow - win.StartRow + 1) * ch;
-
-            // Clamp to visible area
-            if (winY + winHeight > statusY)
-                winHeight = statusY - winY;
-            if (winWidth <= 0 || winHeight <= 0) continue;
-
-            // Data cell is top-left of range — all window content lives here
-            int dataRow = win.StartRow, dataCol = win.StartCol;
-            string dataCellVal = _grid.GetCellValue(dataRow, dataCol);
-
-            // If the data cell IS the anchor (w: command typed into top-left),
-            // extract content after the range spec; otherwise use raw cell value
-            string content;
-            bool anchorIsDataCell = win.AnchorRow == dataRow && win.AnchorCol == dataCol;
-            if (anchorIsDataCell)
-            {
-                content = win.Content; // parsed content after "w: F40-H50 "
-            }
-            else
-            {
-                content = dataCellVal;
-            }
-
-            // Resolve inline refs in the data cell
-            if (CellPrefix.IsInline(anchorIsDataCell ? content : dataCellVal))
-            {
-                string? resolved = _grid.ResolveInline(dataRow, dataCol);
-                if (resolved != null && CellPrefix.IsCommand(resolved))
-                {
-                    activeInlineCmds.Add((dataRow, dataCol));
-                    string expandedCmd = CellPrefix.ExpandCellReferences(resolved, _grid);
-                    _processManager.EnsureRunning(dataRow, dataCol, expandedCmd);
-                    content = _processManager.GetOutput(dataRow, dataCol) ?? "[running...]";
-                }
-                else if (resolved != null)
-                {
-                    content = CellPrefix.ExpandCellReferences(resolved, _grid);
-                }
-            }
-            else
-            {
-                content = CellPrefix.ExpandCellReferences(content, _grid);
-            }
-
-            // Background — gray to indicate window region
-            bool winHasCursor = _selectedRow >= win.StartRow && _selectedRow <= win.EndRow &&
-                                _selectedCol >= win.StartCol && _selectedCol <= win.EndCol;
-            Color winBg = winHasCursor ? Color.FromArgb(60, 60, 65) : Color.FromArgb(45, 45, 50);
-            using (var bgBrush = new SolidBrush(winBg))
-                g.FillRectangle(bgBrush, winX, winY, winWidth, winHeight);
-
-            // Border
-            Color borderColor = winHasCursor ? Color.FromArgb(120, 120, 140) : Color.FromArgb(80, 80, 100);
-            using (var borderPen = new Pen(borderColor, 1))
-                g.DrawRectangle(borderPen, winX, winY, winWidth - 1, winHeight - 1);
-
-            // Cell ref label in top-left corner
-            string cellRef = _grid.GetCellReference(dataRow, dataCol);
-            DrawText(g, cellRef, winX + 2, winY + 1, Color.FromArgb(100, 100, 120), winBg);
-
-            // Word-wrapped content
-            if (!string.IsNullOrEmpty(content))
-            {
-                int labelHeight = ch;
-                var contentRect = new Rectangle(winX + 4, winY + labelHeight + 2, winWidth - 8, winHeight - labelHeight - 4);
-                using var contentBrush = new SolidBrush(Color.FromArgb(220, 230, 255));
-                var format = new StringFormat
-                {
-                    Trimming = StringTrimming.EllipsisCharacter
-                };
-                g.DrawString(content, _monoFont, contentBrush, contentRect, format);
-            }
-        }
-
-        // Stop processes for inline cells that are no longer active
-        // (deferred to avoid modifying collection during enumeration above)
-        // This is handled by the process manager's EnsureRunning logic
 
         // Status bar
         int maxChars = formWidth / cw;
@@ -681,47 +571,12 @@ internal class DesktopForm : Form
     {
         _editing = true;
         string raw = _grid.GetCellValue(_selectedRow, _selectedCol);
-
-        // If selected cell is a window data cell that's also the anchor, edit content portion
-        if (CellPrefix.IsWindow(raw))
-        {
-            var parsed = CellPrefix.ParseWindowDef(raw);
-            if (parsed != null)
-            {
-                _editText = parsed.Value.content;
-                _editCursorPos = _editText.Length;
-                return;
-            }
-        }
-
-        // If selected cell is inside a window range (as data cell, not anchor),
-        // it's a normal cell — edit its raw value
         _editText = raw;
         _editCursorPos = _editText.Length;
     }
 
     private void CommitEdit()
     {
-        string raw = _grid.GetCellValue(_selectedRow, _selectedCol);
-
-        // For window anchor cells, preserve the w: prefix and range, replace content
-        if (CellPrefix.IsWindow(raw))
-        {
-            var parsed = CellPrefix.ParseWindowDef(raw);
-            if (parsed != null)
-            {
-                string afterW = raw[3..].TrimStart();
-                int spaceIdx = afterW.IndexOf(' ');
-                string rangeOnly = spaceIdx >= 0 ? afterW[..spaceIdx] : afterW;
-                string newVal = string.IsNullOrEmpty(_editText)
-                    ? $"w: {rangeOnly}"
-                    : $"w: {rangeOnly} {_editText}";
-                _grid.SetCellValue(_selectedRow, _selectedCol, newVal);
-                _editing = false;
-                return;
-            }
-        }
-
         _grid.SetCellValue(_selectedRow, _selectedCol, _editText);
         _editing = false;
     }
@@ -933,65 +788,19 @@ internal class DesktopForm : Form
             switch (e.KeyCode)
             {
                 case Keys.Up:
-                    if (_selectedRow > 0)
-                    {
-                        _selectedRow--;
-                        var winUp = _grid.GetWindowAt(_selectedRow, _selectedCol);
-                        if (winUp != null)
-                        {
-                            // If we're coming from below the window, land on data cell
-                            if (_selectedRow == winUp.EndRow)
-                            { _selectedRow = winUp.StartRow; _selectedCol = winUp.StartCol; }
-                            else
-                                _selectedRow = winUp.StartRow - 1 >= 0 ? winUp.StartRow - 1 : winUp.StartRow;
-                        }
-                    }
+                    if (_selectedRow > 0) _selectedRow--;
                     _selection.Clear();
                     break;
                 case Keys.Down:
-                    if (_selectedRow < _grid.RowCount - 1)
-                    {
-                        _selectedRow++;
-                        var winDown = _grid.GetWindowAt(_selectedRow, _selectedCol);
-                        if (winDown != null)
-                        {
-                            // If entering from above, land on data cell
-                            if (_selectedRow == winDown.StartRow)
-                            { _selectedCol = winDown.StartCol; }
-                            else
-                                _selectedRow = winDown.EndRow + 1 < _grid.RowCount ? winDown.EndRow + 1 : winDown.StartRow;
-                        }
-                    }
+                    if (_selectedRow < _grid.RowCount - 1) _selectedRow++;
                     _selection.Clear();
                     break;
                 case Keys.Left:
-                    if (_selectedCol > 0)
-                    {
-                        _selectedCol--;
-                        var winLeft = _grid.GetWindowAt(_selectedRow, _selectedCol);
-                        if (winLeft != null)
-                        {
-                            if (_selectedCol == winLeft.EndCol)
-                            { _selectedRow = winLeft.StartRow; _selectedCol = winLeft.StartCol; }
-                            else
-                                _selectedCol = winLeft.StartCol - 1 >= 0 ? winLeft.StartCol - 1 : winLeft.StartCol;
-                        }
-                    }
+                    if (_selectedCol > 0) _selectedCol--;
                     _selection.Clear();
                     break;
                 case Keys.Right:
-                    if (_selectedCol < _grid.ColumnCount - 1)
-                    {
-                        _selectedCol++;
-                        var winRight = _grid.GetWindowAt(_selectedRow, _selectedCol);
-                        if (winRight != null)
-                        {
-                            if (_selectedCol == winRight.StartCol)
-                            { _selectedRow = winRight.StartRow; }
-                            else
-                                _selectedCol = winRight.EndCol + 1 < _grid.ColumnCount ? winRight.EndCol + 1 : winRight.StartCol;
-                        }
-                    }
+                    if (_selectedCol < _grid.ColumnCount - 1) _selectedCol++;
                     _selection.Clear();
                     break;
                 case Keys.Enter:
@@ -1020,19 +829,7 @@ internal class DesktopForm : Form
                 case Keys.Back:
                     var val = _grid.GetCellValue(_selectedRow, _selectedCol);
                     if (val.Length > 0)
-                    {
-                        // Protect w: prefix — don't delete into "w: RANGE" portion
-                        if (CellPrefix.IsWindow(val))
-                        {
-                            int minLen = CellPrefix.GetWindowPrefixLength(val);
-                            if (val.Length > minLen)
-                                _grid.SetCellValue(_selectedRow, _selectedCol, val[..^1]);
-                        }
-                        else
-                        {
-                            _grid.SetCellValue(_selectedRow, _selectedCol, val[..^1]);
-                        }
-                    }
+                        _grid.SetCellValue(_selectedRow, _selectedCol, val[..^1]);
                     break;
                 case Keys.Delete:
                     if (_selection.Count > 0)
@@ -1164,14 +961,6 @@ internal class DesktopForm : Form
         var cell = HitTestCell(e.X, e.Y);
         if (cell is null) return;
         var (row, col) = cell.Value;
-
-        // If clicking inside a window region, redirect to data cell (top-left of range)
-        var win = _grid.GetWindowAt(row, col);
-        if (win != null)
-        {
-            row = win.StartRow;
-            col = win.StartCol;
-        }
 
         if (ModifierKeys.HasFlag(Keys.Control))
         {

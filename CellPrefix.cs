@@ -3,14 +3,11 @@ using System.Text.RegularExpressions;
 namespace ExcelConsole;
 
 /// <summary>
-/// Parsing utilities for cell prefixes (w:, i:, r:) and cell reference syntax {A1::C10}.
+/// Parsing utilities for cell prefixes (i:, r:) and cell reference syntax {A1::C10}.
 /// </summary>
 public static class CellPrefix
 {
     // ── Prefix detection ─────────────────────────────────────────────
-
-    public static bool IsWindow(string value) =>
-        value.StartsWith("w: ", StringComparison.OrdinalIgnoreCase);
 
     public static bool IsInline(string value) =>
         value.StartsWith("i: ", StringComparison.OrdinalIgnoreCase);
@@ -94,42 +91,6 @@ public static class CellPrefix
         int endCol = Math.Max(start.Value.col, end.Value.col);
 
         return (startRow, startCol, endRow, endCol);
-    }
-
-    // ── Window prefix parsing ────────────────────────────────────────
-
-    /// <summary>
-    /// Parses a "w: F40-H50 optional content" cell value.
-    /// Returns the range and the content after the range (may be empty).
-    /// </summary>
-    public static (int startRow, int startCol, int endRow, int endCol, string content)? ParseWindowDef(string cellValue)
-    {
-        if (!IsWindow(cellValue)) return null;
-        string afterPrefix = cellValue[3..].Trim(); // skip "w: "
-
-        // First token is the range, rest is content
-        int spaceIdx = afterPrefix.IndexOf(' ');
-        string rangeStr = spaceIdx >= 0 ? afterPrefix[..spaceIdx] : afterPrefix;
-        string content = spaceIdx >= 0 ? afterPrefix[(spaceIdx + 1)..] : "";
-
-        var range = ParseCellRange(rangeStr);
-        if (range == null) return null;
-
-        return (range.Value.startRow, range.Value.startCol, range.Value.endRow, range.Value.endCol, content);
-    }
-
-    /// <summary>
-    /// Returns the length of the "w: RANGE " prefix (including trailing space).
-    /// Used to protect the prefix during backspace. Returns cellValue.Length if no content.
-    /// </summary>
-    public static int GetWindowPrefixLength(string cellValue)
-    {
-        if (!IsWindow(cellValue)) return 0;
-        string afterW = cellValue[3..].TrimStart();
-        int rangeStart = cellValue.Length - afterW.Length; // position where range starts
-        int spaceAfterRange = afterW.IndexOf(' ');
-        if (spaceAfterRange < 0) return cellValue.Length; // no content, entire string is prefix
-        return rangeStart + spaceAfterRange + 1; // include space after range
     }
 
     /// <summary>

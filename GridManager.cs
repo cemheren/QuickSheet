@@ -1,13 +1,5 @@
 namespace ExcelConsole;
 
-/// <summary>
-/// Represents a visual window region defined by a "w:" prefix cell.
-/// The anchor cell (anchorRow, anchorCol) contains the "w:" definition and content.
-/// </summary>
-public record WindowRegion(
-    int StartRow, int StartCol, int EndRow, int EndCol,
-    int AnchorRow, int AnchorCol, string Content);
-
 public class GridManager
 {
     private readonly string[,] _data;
@@ -16,10 +8,6 @@ public class GridManager
     public int ColumnCount { get; }
     public int RowCount { get; }
     public bool IsDirty { get; private set; }
-
-    // Cached window regions, rebuilt on demand
-    private List<WindowRegion>? _cachedWindows;
-    private bool _windowsCacheDirty = true;
 
     public GridManager(int availableWidth, int availableHeight, int columnWidth = 20)
     {
@@ -70,7 +58,6 @@ public class GridManager
         {
             _data[row, col] = value;
             IsDirty = true;
-            _windowsCacheDirty = true;
         }
     }
 
@@ -187,9 +174,10 @@ public class GridManager
         {
             try
             {
-                var lines = File.ReadAllLines(path);
-                existingRows = new List<List<string>>(lines.Length);
-                foreach (var line in lines)
+                var text = File.ReadAllText(path);
+                var csvLines = SplitCsvRows(text);
+                existingRows = new List<List<string>>(csvLines.Count);
+                foreach (var line in csvLines)
                 {
                     var parsed = ParseCsvLine(line);
                     existingRows.Add(parsed);
@@ -233,8 +221,9 @@ public class GridManager
     public void LoadFromCsv(string path)
     {
         if (!File.Exists(path)) return;
-        var lines = File.ReadAllLines(path);
-        for (int r = 0; r < Math.Min(lines.Length, RowCount); r++)
+        var text = File.ReadAllText(path);
+        var lines = SplitCsvRows(text);
+        for (int r = 0; r < Math.Min(lines.Count, RowCount); r++)
         {
             var fields = ParseCsvLine(lines[r]);
             for (int c = 0; c < Math.Min(fields.Count, ColumnCount); c++)
@@ -250,12 +239,16 @@ public class GridManager
     public bool MergeFromCsv(string path)
     {
         if (!File.Exists(path)) return false;
-        string[] lines;
-        try { lines = File.ReadAllLines(path); }
+        List<string> lines;
+        try
+        {
+            var text = File.ReadAllText(path);
+            lines = SplitCsvRows(text);
+        }
         catch { return false; }
 
         bool changed = false;
-        for (int r = 0; r < Math.Min(lines.Length, RowCount); r++)
+        for (int r = 0; r < Math.Min(lines.Count, RowCount); r++)
         {
             var fields = ParseCsvLine(lines[r]);
             for (int c = 0; c < Math.Min(fields.Count, ColumnCount); c++)
@@ -338,78 +331,69 @@ public class GridManager
         return fields;
     }
 
-    // ── Window regions ──────────────────────────────────────────────
-
     /// <summary>
-    /// Scans all cells for "w:" definitions and returns validated window regions.
-    /// Results are cached and only recomputed when cell data changes.
+    /// Splits raw CSV text into logical row strings, correctly handling
+    /// quoted fields that contain embedded newlines.
     /// </summary>
-    public List<WindowRegion> GetWindows()
+    private static List<string> SplitCsvRows(string text)
     {
-        if (!_windowsCacheDirty && _cachedWindows != null)
-            return _cachedWindows;
+        var rows = new List<string>();
+        var current = new System.Text.StringBuilder();
+        bool inQuote = false;
 
-        var windows = new List<WindowRegion>();
-        var occupied = new HashSet<(int, int)>();
-
-        for (int r = 0; r < RowCount; r++)
+        for (int i = 0; i < text.Length; i++)
         {
-            for (int c = 0; c < ColumnCount; c++)
+            char c = text[i];
+            if (inQuote)
             {
-                var parsed = CellPrefix.ParseWindowDef(_data[r, c]);
-                if (parsed == null) continue;
-
-                var (sr, sc, er, ec, content) = parsed.Value;
-
-                // Clamp to grid bounds
-                er = Math.Min(er, RowCount - 1);
-                ec = Math.Min(ec, ColumnCount - 1);
-                if (sr > er || sc > ec) continue;
-
-                // Check for overlaps with already-claimed cells
-                bool overlaps = false;
-                for (int wr = sr; wr <= er && !overlaps; wr++)
-                    for (int wc = sc; wc <= ec && !overlaps; wc++)
-                        if (occupied.Contains((wr, wc)))
-                            overlaps = true;
-
-                if (overlaps) continue;
-
-                // Claim target range cells
-                for (int wr = sr; wr <= er; wr++)
-                    for (int wc = sc; wc <= ec; wc++)
-                        occupied.Add((wr, wc));
-
-                // Anchor is the cell containing the w: definition (r, c), not necessarily the range top-left
-                windows.Add(new WindowRegion(sr, sc, er, ec, r, c, content));
+                if (c == '"')
+                {
+                    if (i + 1 < text.Length && text[i + 1] == '"')
+                    {
+                        current.Append('"');
+                        current.Append('"');
+                        i++;
+                    }
+                    else
+                    {
+                        current.Append(c);
+                        inQuote = false;
+                    }
+                }
+                else
+                {
+                    current.Append(c);
+                }
+            }
+            else
+            {
+                if (c == '"')
+                {
+                    current.Append(c);
+                    inQuote = true;
+                }
+                else if (c == '\r')
+                {
+                    rows.Add(current.ToString());
+                    current.Clear();
+                    if (i + 1 < text.Length && text[i + 1] == '\n') i++;
+                }
+                else if (c == '\n')
+                {
+                    rows.Add(current.ToString());
+                    current.Clear();
+                }
+                else
+                {
+                    current.Append(c);
+                }
             }
         }
 
-        _cachedWindows = windows;
-        _windowsCacheDirty = false;
-        return windows;
-    }
+        if (current.Length > 0)
+            rows.Add(current.ToString());
 
-    /// <summary>
-    /// Returns the window region containing (row, col), or null.
-    /// </summary>
-    public WindowRegion? GetWindowAt(int row, int col)
-    {
-        foreach (var w in GetWindows())
-            if (row >= w.StartRow && row <= w.EndRow &&
-                col >= w.StartCol && col <= w.EndCol)
-                return w;
-        return null;
-    }
-
-    /// <summary>
-    /// Returns true if the cell at (row, col) is inside a window but is NOT the anchor.
-    /// These cells are visually occluded.
-    /// </summary>
-    public bool IsOccludedByWindow(int row, int col)
-    {
-        var w = GetWindowAt(row, col);
-        return w != null && !(row == w.AnchorRow && col == w.AnchorCol);
+        return rows;
     }
 
     // ── Inline resolution ────────────────────────────────────────────
@@ -446,7 +430,6 @@ public class GridManager
 
     /// <summary>
     /// Gets the display value for a cell, resolving inline refs if applicable.
-    /// For window cells, returns the window content.
     /// </summary>
     public string GetDisplayValue(int row, int col, HashSet<(int, int)>? visited = null)
     {
@@ -456,12 +439,6 @@ public class GridManager
         {
             visited ??= new HashSet<(int, int)>();
             return ResolveInline(row, col, visited) ?? raw;
-        }
-
-        if (CellPrefix.IsWindow(raw))
-        {
-            var parsed = CellPrefix.ParseWindowDef(raw);
-            return parsed?.content ?? raw;
         }
 
         return raw;
