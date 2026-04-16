@@ -6,7 +6,8 @@ namespace ExcelConsole;
 
 /// <summary>
 /// Manages live subprocesses for inline command execution (i: cells pointing to r: cells).
-/// Captures stdout/stderr asynchronously with a configurable line buffer cap.
+/// On Windows, uses ConPTY (Pseudo Console) to capture output from interactive/TUI programs.
+/// On Linux, falls back to stdout/stderr pipe redirection.
 /// Thread-safe: output can be read from the UI thread while processes write from background threads.
 /// </summary>
 public class InlineProcessManager : IDisposable
@@ -17,11 +18,33 @@ public class InlineProcessManager : IDisposable
 
     private class ManagedProcess : IDisposable
     {
-        public Process? Process { get; set; }
         public string Command { get; set; } = "";
+
+#if PLATFORM_WINDOWS
+        private ConPtyProcess? _pty;
+
+        public bool HasNewOutput => _pty?.HasNewOutput ?? false;
+        public bool HasExited => _pty?.HasExited ?? true;
+
+        public void StartConPty(string cmdText)
+        {
+            _pty = new ConPtyProcess();
+            if (!_pty.Start(cmdText))
+            {
+                _pty.Dispose();
+                _pty = null;
+            }
+        }
+
+        public string? GetOutput() => _pty?.GetOutput();
+
+        public void Dispose() => _pty?.Dispose();
+#else
+        public Process? Process { get; set; }
+        public bool HasNewOutput { get; set; }
+        public bool HasExited => Process?.HasExited ?? true;
         private readonly object _lock = new();
         private readonly List<string> _outputLines = new();
-        public bool HasNewOutput { get; set; }
 
         public void AppendLine(string line)
         {
@@ -34,11 +57,12 @@ public class InlineProcessManager : IDisposable
             }
         }
 
-        public string GetOutput()
+        public string? GetOutput()
         {
             lock (_lock)
             {
                 HasNewOutput = false;
+                if (_outputLines.Count == 0) return null;
                 return string.Join("\n", _outputLines);
             }
         }
@@ -53,6 +77,7 @@ public class InlineProcessManager : IDisposable
             catch { }
             Process?.Dispose();
         }
+#endif
     }
 
     /// <summary>
@@ -66,30 +91,28 @@ public class InlineProcessManager : IDisposable
         if (_processes.TryGetValue(key, out var existing))
         {
             if (existing.Command == command)
-            {
-                // Same command — whether running or finished, keep it (preserve output)
-                return;
-            }
-            // Different command → stop old, start new
+                return; // same command — keep it and its output
             StopProcess(pointerRow, pointerCol);
         }
 
         var managed = new ManagedProcess { Command = command };
 
-        // Parse command (strip r: prefix if present)
         string cmdText = command;
         if (CellPrefix.IsCommand(cmdText))
             cmdText = cmdText[3..].Trim();
 
         if (string.IsNullOrWhiteSpace(cmdText)) return;
 
+#if PLATFORM_WINDOWS
+        managed.StartConPty(cmdText);
+        _processes[key] = managed;
+#else
         try
         {
-            // Use cmd.exe on Windows to support shell commands
             var psi = new ProcessStartInfo
             {
-                FileName = "cmd.exe",
-                Arguments = $"/c {cmdText}",
+                FileName = "/bin/sh",
+                Arguments = $"-c \"{cmdText.Replace("\"", "\\\"")}\"",
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
@@ -103,20 +126,16 @@ public class InlineProcessManager : IDisposable
 
             proc.OutputDataReceived += (_, e) =>
             {
-                if (e.Data != null)
-                    managed.AppendLine(e.Data);
+                if (e.Data != null) managed.AppendLine(e.Data);
             };
-
             proc.ErrorDataReceived += (_, e) =>
             {
-                if (e.Data != null)
-                    managed.AppendLine($"[err] {e.Data}");
+                if (e.Data != null) managed.AppendLine($"[err] {e.Data}");
             };
 
             proc.Start();
             proc.BeginOutputReadLine();
             proc.BeginErrorReadLine();
-
             _processes[key] = managed;
         }
         catch (Exception ex)
@@ -124,6 +143,7 @@ public class InlineProcessManager : IDisposable
             managed.AppendLine($"[failed to start: {ex.Message}]");
             _processes[key] = managed;
         }
+#endif
     }
 
     /// <summary>
@@ -135,27 +155,22 @@ public class InlineProcessManager : IDisposable
     }
 
     /// <summary>
-    /// Returns true if any managed process has new output since last GetOutput call.
+    /// Returns true if any managed process has new output or is still running.
     /// </summary>
     public bool HasAnyNewOutput()
     {
         foreach (var mp in _processes.Values)
-            if (mp.HasNewOutput) return true;
+            if (mp.HasNewOutput || !mp.HasExited)
+                return true;
         return false;
     }
 
-    /// <summary>
-    /// Stops and removes the process for the given pointer cell.
-    /// </summary>
     public void StopProcess(int pointerRow, int pointerCol)
     {
         if (_processes.TryRemove((pointerRow, pointerCol), out var mp))
             mp.Dispose();
     }
 
-    /// <summary>
-    /// Stops all managed processes.
-    /// </summary>
     public void StopAll()
     {
         foreach (var key in _processes.Keys.ToList())
