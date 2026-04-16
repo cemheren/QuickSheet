@@ -470,10 +470,11 @@ internal class DesktopForm : Form
                     isCmd = true;
                     activeInlineCmds.Add((r, c));
                     string expandedCmd = CellPrefix.ExpandCellReferences(resolved, _grid);
-                    // Calculate pty size from span dimensions
-                    int ptyCols = 0;
+                    // Calculate pty size from span dimensions (subtract padding)
+                    int ptyCols = -1; // account for 8px padding → ~1 char
                     for (int tc = c; tc <= endCol; tc++)
                         ptyCols += colWidths[tc];
+                    if (ptyCols < 20) ptyCols = 20;
                     int ptyRows = Math.Max(1, (endRow - r + 1) - 1); // minus header row
                     _processManager.EnsureRunning(r, c, expandedCmd, ptyCols, ptyRows);
                     content = _processManager.GetOutput(r, c) ?? "[running...]";
@@ -649,22 +650,33 @@ internal class DesktopForm : Form
                     string cleaned = StripMarkdown(span.content);
                     string[] allLines = cleaned.Split('\n');
 
-                    // How many lines fit
-                    int linesPerWindow = Math.Max(1, contentHeight / ch);
-
-                    // Take last N lines
-                    int startIdx = Math.Max(0, allLines.Length - linesPerWindow);
-                    int count = Math.Min(linesPerWindow, allLines.Length);
-
                     Color contentFg = span.isCmd ? Color.FromArgb(100, 255, 150) : Color.FromArgb(180, 220, 255);
 
-                    // Render line by line for precise control
+                    // Wrap long lines to fit width, then take last N
                     int charsPerLine = Math.Max(1, contentWidth / cw);
+                    var wrappedLines = new List<string>();
+                    foreach (string rawLine in allLines)
+                    {
+                        if (rawLine.Length <= charsPerLine)
+                        {
+                            wrappedLines.Add(rawLine);
+                        }
+                        else
+                        {
+                            // Word-wrap at charsPerLine
+                            for (int pos = 0; pos < rawLine.Length; pos += charsPerLine)
+                                wrappedLines.Add(rawLine.Substring(pos, Math.Min(charsPerLine, rawLine.Length - pos)));
+                        }
+                    }
+
+                    int linesPerWindow = Math.Max(1, contentHeight / ch);
+                    int startIdx = Math.Max(0, wrappedLines.Count - linesPerWindow);
+                    int count = Math.Min(linesPerWindow, wrappedLines.Count);
+
                     int lineY = contentTop;
                     for (int li = startIdx; li < startIdx + count && lineY + ch <= contentTop + contentHeight; li++)
                     {
-                        string line = allLines[li];
-                        // Truncate to fit width
+                        string line = wrappedLines[li];
                         if (line.Length > charsPerLine)
                             line = line[..charsPerLine];
                         DrawText(g, line.PadRight(charsPerLine), spanX + 4, lineY, contentFg, spanBg);
