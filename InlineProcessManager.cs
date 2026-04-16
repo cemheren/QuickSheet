@@ -26,10 +26,10 @@ public class InlineProcessManager : IDisposable
         public bool HasNewOutput => _pty?.HasNewOutput ?? false;
         public bool HasExited => _pty?.HasExited ?? true;
 
-        public void StartConPty(string cmdText)
+        public void StartConPty(string cmdText, int ptyCols = 120, int ptyRows = 30)
         {
             _pty = new ConPtyProcess();
-            if (!_pty.Start(cmdText))
+            if (!_pty.Start(cmdText, ptyCols, ptyRows))
             {
                 _pty.Dispose();
                 _pty = null;
@@ -82,9 +82,9 @@ public class InlineProcessManager : IDisposable
 
     /// <summary>
     /// Starts or restarts a process for the given pointer cell.
-    /// If a process is already running for this cell with the same command, does nothing.
+    /// ptyCols/ptyRows set the pseudo console size to match the visual span.
     /// </summary>
-    public void EnsureRunning(int pointerRow, int pointerCol, string command)
+    public void EnsureRunning(int pointerRow, int pointerCol, string command, int ptyCols = 120, int ptyRows = 30)
     {
         var key = (pointerRow, pointerCol);
 
@@ -104,7 +104,7 @@ public class InlineProcessManager : IDisposable
         if (string.IsNullOrWhiteSpace(cmdText)) return;
 
 #if PLATFORM_WINDOWS
-        managed.StartConPty(cmdText);
+        managed.StartConPty(cmdText, ptyCols, ptyRows);
         _processes[key] = managed;
 #else
         try

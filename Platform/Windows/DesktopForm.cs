@@ -470,7 +470,12 @@ internal class DesktopForm : Form
                     isCmd = true;
                     activeInlineCmds.Add((r, c));
                     string expandedCmd = CellPrefix.ExpandCellReferences(resolved, _grid);
-                    _processManager.EnsureRunning(r, c, expandedCmd);
+                    // Calculate pty size from span dimensions
+                    int ptyCols = 0;
+                    for (int tc = c; tc <= endCol; tc++)
+                        ptyCols += colWidths[tc];
+                    int ptyRows = Math.Max(1, (endRow - r + 1) - 1); // minus header row
+                    _processManager.EnsureRunning(r, c, expandedCmd, ptyCols, ptyRows);
                     content = _processManager.GetOutput(r, c) ?? "[running...]";
                 }
                 else if (resolved != null)
