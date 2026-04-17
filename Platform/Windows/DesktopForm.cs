@@ -264,17 +264,6 @@ internal class DesktopForm : DesktopFormBase
         catch { }
     }
 
-    private void OpenHyperlink()
-    {
-        string url = _grid.GetCellValue(_selectedRow, _selectedCol);
-        if (!IsHyperlink(url)) return;
-        try
-        {
-            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
-        }
-        catch { }
-    }
-
     /// <summary>
     /// If the cell is an inline ref pointing to a command, kill the cached process
     /// so it re-runs on the next render. Returns true if it handled the action.
