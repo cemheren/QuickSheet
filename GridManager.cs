@@ -339,7 +339,7 @@ public class GridManager
 
         visited ??= new HashSet<(int, int)>();
         if (!visited.Add((row, col))) return "[circular]";
-        if (visited.Count > 20) return "[too deep]";
+        if (visited.Count > 7) return "[too deep]";
 
         // Expand {A1::C10} refs in the i: value before parsing the target cell
         string expanded = CellPrefix.ExpandCellReferences(value, this);
