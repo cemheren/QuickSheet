@@ -27,9 +27,7 @@ internal class DesktopForm : Form
     private List<(int row, int col)> _searchMatches = new();
     private int _searchMatchIndex = -1;
 
-    private bool _editing;
-    private string _editText = "";
-    private int _editCursorPos;
+    private readonly EditingMode _editMode;
 
     private bool _dragging;
     private int _dragAnchorRow;
@@ -82,6 +80,7 @@ internal class DesktopForm : Form
         int availableWidth = Bounds.Width / _charWidth;
         int availableHeight = Bounds.Height / _charHeight - 3;
         _grid = new GridManager(availableWidth, availableHeight, _columnWidth);
+        _editMode = new EditingMode(_grid);
 
         // Distribute available width evenly so columns fill the screen
         int usableChars = availableWidth - RowHeaderWidth;
@@ -214,6 +213,7 @@ internal class DesktopForm : Form
                     newGrid.SetCellValue(r, c, _grid.GetCellValue(r, c));
 
         _grid = newGrid;
+        _editMode.Grid = _grid;
 
         if (_loadedFile is not null)
             _grid.LoadFromCsv(_loadedFile);
@@ -226,18 +226,6 @@ internal class DesktopForm : Form
         _selectedCol = Math.Min(_selectedCol, _grid.ColumnCount - 1);
         _selection.Clear();
         Invalidate();
-    }
-
-    private void OpenSelectedFile()
-    {
-        if (!_grid.IsFileEntry(_selectedRow, _selectedCol)) return;
-        string path = _grid.GetFilePath(_selectedRow, _selectedCol);
-        if (string.IsNullOrEmpty(path)) return;
-        try
-        {
-            Process.Start(new ProcessStartInfo(path) { UseShellExecute = true });
-        }
-        catch { }
     }
 
     private static bool IsHyperlink(string value) =>
@@ -328,7 +316,10 @@ internal class DesktopForm : Form
             {
                 string val = _grid.GetCellValue(r, c);
                 if (IsCommand(val))
-                    { RunCommand(val); opened = true; }
+                { 
+                    RunCommand(val); 
+                    opened = true; 
+                }
                 else if (IsHyperlink(val))
                     try { Process.Start(new ProcessStartInfo(val) { UseShellExecute = true }); opened = true; } catch { }
             }
@@ -693,11 +684,9 @@ internal class DesktopForm : Form
         {
             status = $" Find: {_searchInput}\u2502  (Enter=Search  Esc=Cancel)";
         }
-        else if (_editing)
+        else if (_editMode.IsActive())
         {
-            string prefix = " Edit: ";
-            string cursor = _editText.Insert(_editCursorPos, "\u2502");
-            status = $"{prefix}{cursor}  (Enter=OK  Esc=Cancel)";
+            status = _editMode.GetStatusText();
         }
         else
         {
@@ -788,28 +777,7 @@ internal class DesktopForm : Form
         }
         return sb.ToString().TrimEnd();
     }
-
-    // ── Input ────────────────────────────────────────────────────────
-
-    private void EnterEditMode()
-    {
-        _editing = true;
-        string raw = _grid.GetCellValue(_selectedRow, _selectedCol);
-        _editText = raw;
-        _editCursorPos = _editText.Length;
-    }
-
-    private void CommitEdit()
-    {
-        _grid.SetCellValue(_selectedRow, _selectedCol, _editText);
-        _editing = false;
-    }
-
-    private void CancelEdit()
-    {
-        _editing = false;
-    }
-
+    
     private void OnFormKeyDown(object? sender, KeyEventArgs e)
     {
         if (_searching)
@@ -840,54 +808,9 @@ internal class DesktopForm : Form
             return;
         }
 
-        if (_editing)
+        if (_editMode.IsActive())
         {
-            bool handled = true;
-            switch (e.KeyCode)
-            {
-                case Keys.Left:
-                    if (_editCursorPos > 0) _editCursorPos--;
-                    break;
-                case Keys.Right:
-                    if (_editCursorPos < _editText.Length) _editCursorPos++;
-                    break;
-                case Keys.Home:
-                    _editCursorPos = 0;
-                    break;
-                case Keys.End:
-                    _editCursorPos = _editText.Length;
-                    break;
-                case Keys.Back:
-                    if (_editCursorPos > 0)
-                    {
-                        _editText = _editText.Remove(_editCursorPos - 1, 1);
-                        _editCursorPos--;
-                    }
-                    break;
-                case Keys.Delete:
-                    if (_editCursorPos < _editText.Length)
-                        _editText = _editText.Remove(_editCursorPos, 1);
-                    break;
-                case Keys.V:
-                    if (e.Control && Clipboard.ContainsText())
-                    {
-                        string clipText = Clipboard.GetText().Replace("\r\n", " ").Replace("\n", " ").Replace("\r", " ");
-                        _editText = _editText.Insert(_editCursorPos, clipText);
-                        _editCursorPos += clipText.Length;
-                    }
-                    else
-                        handled = false;
-                    break;
-                case Keys.Enter:
-                    CommitEdit();
-                    break;
-                case Keys.Escape:
-                    CancelEdit();
-                    break;
-                default:
-                    handled = false;
-                    break;
-            }
+            bool handled = _editMode.HandleKeyEvent(e);
             if (handled)
             {
                 e.Handled = true;
@@ -1062,7 +985,7 @@ internal class DesktopForm : Form
                     _showResolved = !_showResolved;
                     break;
                 case Keys.F2:
-                    EnterEditMode();
+                    _editMode.Enter(_selectedRow, _selectedCol);  //EnterEditMode;
                     break;
                 case Keys.F3:
                     RebuildGrid();
@@ -1167,10 +1090,9 @@ internal class DesktopForm : Form
             {
                 _searchInput += e.KeyChar;
             }
-            else if (_editing)
+            else if (_editMode.IsActive())
             {
-                _editText = _editText.Insert(_editCursorPos, e.KeyChar.ToString());
-                _editCursorPos++;
+                _editMode.HandleCharInput(e.KeyChar);
             }
             else
             {
