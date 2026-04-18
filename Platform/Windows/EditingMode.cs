@@ -26,13 +26,12 @@ internal class EditingMode : IMode
     public string EditText => _editText;
     public int CursorPosition => _cursorPos;
 
-    /// <summary>Start editing the cell at (row, col).</summary>
-    public void Enter(int row, int col)
+    /// <summary>Start editing the currently selected cell.</summary>
+    public void Enter()
     {
         _active = true;
-        _editRow = row;
-        _editCol = col;
-        _editText = Grid.GetCellValue(row, col);
+        (_editRow, _editCol) = Grid.GetCurrentCell();
+        _editText = Grid.GetCellValue(_editRow, _editCol);
         _cursorPos = _editText.Length;
     }
 

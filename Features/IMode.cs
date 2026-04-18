@@ -8,7 +8,7 @@ namespace ExcelConsole.Features
 {
     public interface IMode
     {
-        void Enter(int row, int col);
+        void Enter();
 
         void Exit();
 

@@ -15,11 +15,11 @@ namespace ExcelConsole.Platform.Windows;
 internal class DesktopForm : DesktopFormBase
 {
     private GridManager _grid;
-    private int _selectedRow;
-    private int _selectedCol;
     private readonly HashSet<(int row, int col)> _selection = new();
-    private string _clipboard = "";
     private string? _loadedFile;
+
+
+    private string _clipboard = "";
 
     private bool _searching;
     private string _searchInput = "";
@@ -209,8 +209,10 @@ internal class DesktopForm : DesktopFormBase
                 if (!_grid.IsFileEntry(r, c))
                     newGrid.SetCellValue(r, c, _grid.GetCellValue(r, c));
 
+        var (prevRow, prevCol) = _grid.GetCurrentCell();
         _grid = newGrid;
         _editMode.Grid = _grid;
+        _grid.SelectCell(prevRow, prevCol);
 
         if (_loadedFile is not null)
             _grid.LoadFromCsv(_loadedFile);
@@ -219,8 +221,6 @@ internal class DesktopForm : DesktopFormBase
 
         PopulateDesktopFiles();
 
-        _selectedRow = Math.Min(_selectedRow, _grid.RowCount - 1);
-        _selectedCol = Math.Min(_selectedCol, _grid.ColumnCount - 1);
         _selection.Clear();
         Invalidate();
     }
@@ -284,9 +284,10 @@ internal class DesktopForm : DesktopFormBase
     private void OpenAllSelected()
     {
         // Collect all cells: current cursor + multi-selection
+        var (curRow, curCol) = _grid.GetCurrentCell();
         var cells = new HashSet<(int row, int col)>(_selection)
         {
-            (_selectedRow, _selectedCol)
+            (curRow, curCol)
         };
 
         bool opened = false;
@@ -312,8 +313,8 @@ internal class DesktopForm : DesktopFormBase
         }
 
         // If nothing was opened, move down as default Enter behavior
-        if (!opened && _selectedRow < _grid.RowCount - 1)
-            _selectedRow++;
+        if (!opened)
+            _grid.MoveDown();
     }
 
     // ── Rendering ────────────────────────────────────────────────────
@@ -335,6 +336,7 @@ internal class DesktopForm : DesktopFormBase
 
     private void RenderGrid(Graphics g, int formWidth, int formHeight)
     {
+        var (selRow, selCol) = _grid.GetCurrentCell();
         int cw = _charWidth;
         int ch = _charHeight;
         int[] colWidths = GetColumnWidths();
@@ -405,7 +407,7 @@ internal class DesktopForm : DesktopFormBase
         {
             int w = colWidths[c];
             string header = GridManager.GetColumnName(c).PadRight(w);
-            Color bg = c == _selectedCol ? Color.FromArgb(64, 64, 64) : Color.Black;
+            Color bg = c == selCol ? Color.FromArgb(64, 64, 64) : Color.Black;
             DrawText(g, header, x, y, Color.White, bg);
             x += w * cw;
         }
@@ -424,7 +426,7 @@ internal class DesktopForm : DesktopFormBase
         {
             x = 0;
             string rowNum = (r + 1).ToString().PadLeft(RowHeaderWidth - 1) + " ";
-            Color rowBg = r == _selectedRow ? Color.FromArgb(64, 64, 64) : Color.Black;
+            Color rowBg = r == selRow ? Color.FromArgb(64, 64, 64) : Color.Black;
             DrawText(g, rowNum, x, y, Color.White, rowBg);
             x = RowHeaderWidth * cw;
             for (int c = 0; c < _grid.ColumnCount; c++)
@@ -471,7 +473,7 @@ internal class DesktopForm : DesktopFormBase
                 }
 
                 string display = displayVal.Length >= w ? displayVal[..w] : displayVal.PadRight(w);
-                bool isCursor = r == _selectedRow && c == _selectedCol;
+                bool isCursor = r == selRow && c == selCol;
                 bool isMultiSel = _selection.Contains((r, c));
                 bool isSearchMatch = _searchTerm != null && _searchMatches.Contains((r, c));
                 bool isFile = _grid.IsFileEntry(r, c);
@@ -522,8 +524,8 @@ internal class DesktopForm : DesktopFormBase
             if (spanWidth <= 0 || spanHeight <= 0) continue;
 
             // Background
-            bool hasCursor = _selectedRow >= span.anchorRow && _selectedRow <= endRow &&
-                             _selectedCol >= span.anchorCol && _selectedCol <= endCol;
+            bool hasCursor = selRow >= span.anchorRow && selRow <= endRow &&
+                             selCol >= span.anchorCol && selCol <= endCol;
             Color spanBg = span.isCmd
                 ? (hasCursor ? Color.FromArgb(30, 60, 30) : Color.FromArgb(20, 50, 20))
                 : (hasCursor ? Color.FromArgb(10, 55, 65) : Color.FromArgb(0, 40, 50));
@@ -599,8 +601,8 @@ internal class DesktopForm : DesktopFormBase
         }
         else
         {
-            string cellRef = _grid.GetCellReference(_selectedRow, _selectedCol);
-            string value = _grid.GetCellValue(_selectedRow, _selectedCol);
+            string cellRef = _grid.GetCellReference(selRow, selCol);
+            string value = _grid.GetCellValue(selRow, selCol);
             string valueDisplay = string.IsNullOrEmpty(value) ? "" : $" = {value}";
 
             // F1 toggle: show resolved/expanded value
@@ -608,10 +610,10 @@ internal class DesktopForm : DesktopFormBase
             if (_showResolved && !string.IsNullOrEmpty(value))
             {
                 string resolved;
-                string? inlineResult = _grid.ResolveInline(_selectedRow, _selectedCol);
+                string? inlineResult = _grid.ResolveInline(selRow, selCol);
                 if (inlineResult != null && CellPrefix.IsCommand(inlineResult))
                 {
-                    resolved = _processManager.GetOutput(_selectedRow, _selectedCol) ?? "[running...]";
+                    resolved = _processManager.GetOutput(selRow, selCol) ?? "[running...]";
                 }
                 else if (inlineResult != null)
                 {
@@ -625,11 +627,11 @@ internal class DesktopForm : DesktopFormBase
                     resolvedDisplay = $" \u2192 {resolved}";
             }
 
-            double? sum = _grid.GetColumnSum(_selectedCol);
-            string colName = GridManager.GetColumnName(_selectedCol);
+            double? sum = _grid.GetColumnSum(selCol);
+            string colName = GridManager.GetColumnName(selCol);
             string sumDisplay = sum.HasValue ? $"  \u03a3{colName} = {sum.Value}" : "";
-            double? product = _grid.GetRowProduct(_selectedRow);
-            string productDisplay = product.HasValue ? $"  \u03a0{(_selectedRow + 1)} = {product.Value}" : "";
+            double? product = _grid.GetRowProduct(selRow);
+            string productDisplay = product.HasValue ? $"  \u03a0{(selRow + 1)} = {product.Value}" : "";
             string searchDisplay = _searchTerm != null
                 ? $"  \U0001f50d\"{_searchTerm}\" {(_searchMatches.Count > 0 ? $"{_searchMatchIndex + 1}/{_searchMatches.Count}" : "no matches")}"
                 : "";
@@ -736,14 +738,12 @@ internal class DesktopForm : DesktopFormBase
             if (e.KeyCode == Keys.Enter && e.Shift && _searchMatches.Count > 0)
             {
                 _searchMatchIndex = (_searchMatchIndex - 1 + _searchMatches.Count) % _searchMatches.Count;
-                _selectedRow = _searchMatches[_searchMatchIndex].row;
-                _selectedCol = _searchMatches[_searchMatchIndex].col;
+                _grid.SelectCell(_searchMatches[_searchMatchIndex].row, _searchMatches[_searchMatchIndex].col);
             }
             else if (e.KeyCode == Keys.Enter && _searchMatches.Count > 0)
             {
                 _searchMatchIndex = (_searchMatchIndex + 1) % _searchMatches.Count;
-                _selectedRow = _searchMatches[_searchMatchIndex].row;
-                _selectedCol = _searchMatches[_searchMatchIndex].col;
+                _grid.SelectCell(_searchMatches[_searchMatchIndex].row, _searchMatches[_searchMatchIndex].col);
             }
             else if (e.KeyCode == Keys.Escape)
             {
@@ -776,19 +776,19 @@ internal class DesktopForm : DesktopFormBase
             {
                 case Keys.Q: Close(); return;
                 case Keys.D:
-                    _grid.DeleteRow(_selectedRow);
-                    if (_selectedRow >= _grid.RowCount) _selectedRow = _grid.RowCount - 1;
+                    _grid.DeleteSelectedRow();
                     break;
                 case Keys.C:
                     if (e.Shift)
                     {
                         // Ctrl+Shift+C: copy resolved/displayed content
-                        string raw = _grid.GetCellValue(_selectedRow, _selectedCol);
+                        var (curRow, curCol) = _grid.GetCurrentCell();
+                        string raw = _grid.GetSelectedCellValue();
                         string display;
-                        string? resolved = _grid.ResolveInline(_selectedRow, _selectedCol);
+                        string? resolved = _grid.ResolveSelectedInline();
                         if (resolved != null && CellPrefix.IsCommand(resolved))
                         {
-                            display = _processManager.GetOutput(_selectedRow, _selectedCol) ?? "[running...]";
+                            display = _processManager.GetOutput(curRow, curCol) ?? "[running...]";
                         }
                         else if (resolved != null)
                         {
@@ -807,19 +807,19 @@ internal class DesktopForm : DesktopFormBase
                     // Ctrl+C: copy raw cell value
                     if (_selection.Count > 0)
                     {
-                        var copyCells = new HashSet<(int row, int col)>(_selection) { (_selectedRow, _selectedCol) };
+                        var copyCells = new HashSet<(int row, int col)>(_selection) { _grid.GetCurrentCell() };
                         var sorted = copyCells.OrderBy(c => c.row).ThenBy(c => c.col).ToList();
                         _clipboard = string.Join(Environment.NewLine, sorted.Select(c => _grid.GetCellValue(c.row, c.col)));
                     }
                     else
-                        _clipboard = _grid.GetCellValue(_selectedRow, _selectedCol);
+                        _clipboard = _grid.GetSelectedCellValue();
                     if (!string.IsNullOrEmpty(_clipboard))
                         Clipboard.SetText(_clipboard);
                     break;
                 case Keys.X:
                     if (_selection.Count > 0)
                     {
-                        var cutCells = new HashSet<(int row, int col)>(_selection) { (_selectedRow, _selectedCol) };
+                        var cutCells = new HashSet<(int row, int col)>(_selection) { _grid.GetCurrentCell() };
                         var sorted = cutCells.OrderBy(c => c.row).ThenBy(c => c.col).ToList();
                         _clipboard = string.Join(Environment.NewLine, sorted.Select(c => _grid.GetCellValue(c.row, c.col)));
                         foreach (var (r, c) in sorted) _grid.SetCellValue(r, c, "");
@@ -827,8 +827,8 @@ internal class DesktopForm : DesktopFormBase
                     }
                     else
                     {
-                        _clipboard = _grid.GetCellValue(_selectedRow, _selectedCol);
-                        _grid.SetCellValue(_selectedRow, _selectedCol, "");
+                        _clipboard = _grid.GetSelectedCellValue();
+                        _grid.SetSelectedCellValue("");
                     }
                     if (!string.IsNullOrEmpty(_clipboard))
                         Clipboard.SetText(_clipboard);
@@ -836,15 +836,18 @@ internal class DesktopForm : DesktopFormBase
                 case Keys.V:
                     string paste = Clipboard.ContainsText() ? Clipboard.GetText() : _clipboard;
                     string[] lines = paste.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-                    for (int i = 0; i < lines.Length; i++)
                     {
-                        int targetRow = _selectedRow + i;
-                        if (targetRow >= _grid.RowCount) break;
-                        _grid.SetCellValue(targetRow, _selectedCol, lines[i]);
+                        var (curRow, curCol) = _grid.GetCurrentCell();
+                        for (int i = 0; i < lines.Length; i++)
+                        {
+                            int targetRow = curRow + i;
+                            if (targetRow >= _grid.RowCount) break;
+                            _grid.SetCellValue(targetRow, curCol, lines[i]);
+                        }
                     }
                     break;
-                case Keys.O: _grid.ShiftRowsDown(_selectedRow); break;
-                case Keys.P: _grid.ShiftRowsUp(_selectedRow); break;
+                case Keys.O: _grid.ShiftSelectedRowDown(); break;
+                case Keys.P: _grid.ShiftSelectedRowUp(); break;
                 case Keys.S: SaveFile(); break;
                 case Keys.F: EnterSearchMode(); break;
                 default: handled2 = false; break;
@@ -853,48 +856,51 @@ internal class DesktopForm : DesktopFormBase
         else if (e.Shift)
         {
             // Shift+Arrow: extend multi-selection
-            _selection.Add((_selectedRow, _selectedCol));
+            _selection.Add(_grid.GetCurrentCell());
             switch (e.KeyCode)
             {
-                case Keys.Up: if (_selectedRow > 0) _selectedRow--; break;
-                case Keys.Down: if (_selectedRow < _grid.RowCount - 1) _selectedRow++; break;
-                case Keys.Left: if (_selectedCol > 0) _selectedCol--; break;
-                case Keys.Right: if (_selectedCol < _grid.ColumnCount - 1) _selectedCol++; break;
+                case Keys.Up: _grid.MoveUp(); break;
+                case Keys.Down: _grid.MoveDown(); break;
+                case Keys.Left: _grid.MoveLeft(); break;
+                case Keys.Right: _grid.MoveRight(); break;
                 default: handled2 = false; break;
             }
-            if (handled2) _selection.Add((_selectedRow, _selectedCol));
+            if (handled2) _selection.Add(_grid.GetCurrentCell());
         }
         else
         {
             switch (e.KeyCode)
             {
                 case Keys.Up:
-                    if (_selectedRow > 0) _selectedRow--;
+                    _grid.MoveUp();
                     _selection.Clear();
                     break;
                 case Keys.Down:
-                    if (_selectedRow < _grid.RowCount - 1) _selectedRow++;
+                    _grid.MoveDown();
                     _selection.Clear();
                     break;
                 case Keys.Left:
-                    if (_selectedCol > 0) _selectedCol--;
+                    _grid.MoveLeft();
                     _selection.Clear();
                     break;
                 case Keys.Right:
-                    if (_selectedCol < _grid.ColumnCount - 1) _selectedCol++;
+                    _grid.MoveRight();
                     _selection.Clear();
                     break;
                 case Keys.Enter:
-                    // If current cell is an inline ref to a command, re-run it
-                    if (TryRerunInlineCommand(_selectedRow, _selectedCol))
-                        break;
-                    OpenAllSelected();
+                    {
+                        var (curRow, curCol) = _grid.GetCurrentCell();
+                        // If current cell is an inline ref to a command, re-run it
+                        if (TryRerunInlineCommand(curRow, curCol))
+                            break;
+                        OpenAllSelected();
+                    }
                     break;
                 case Keys.F1:
                     _showResolved = !_showResolved;
                     break;
                 case Keys.F2:
-                    _editMode.Enter(_selectedRow, _selectedCol);  //EnterEditMode;
+                    _editMode.Enter();
                     break;
                 case Keys.F3:
                     RebuildGrid();
@@ -914,25 +920,30 @@ internal class DesktopForm : DesktopFormBase
                     }
                     break;
                 case Keys.Back:
-                    var val = _grid.GetCellValue(_selectedRow, _selectedCol);
-                    if (val.Length > 0)
-                        _grid.SetCellValue(_selectedRow, _selectedCol, val[..^1]);
+                    {
+                        var val = _grid.GetSelectedCellValue();
+                        if (val.Length > 0)
+                            _grid.SetSelectedCellValue(val[..^1]);
+                    }
                     break;
                 case Keys.Delete:
                     if (_selection.Count > 0)
                     {
                         foreach (var (r, c) in _selection) _grid.SetCellValue(r, c, "");
-                        _grid.SetCellValue(_selectedRow, _selectedCol, "");
+                        _grid.SetSelectedCellValue("");
                         _selection.Clear();
                     }
                     else
                     {
-                        _grid.SetCellValue(_selectedRow, _selectedCol, "");
+                        _grid.SetSelectedCellValue("");
                     }
                     break;
                 case Keys.Tab:
-                    if (_selectedCol < _grid.ColumnCount - 1) _selectedCol++;
-                    else if (_selectedRow < _grid.RowCount - 1) { _selectedCol = 0; _selectedRow++; }
+                    {
+                        var (curRow, curCol) = _grid.GetCurrentCell();
+                        if (curCol < _grid.ColumnCount - 1) _grid.SelectCell(curRow, curCol + 1);
+                        else if (curRow < _grid.RowCount - 1) _grid.SelectCell(curRow + 1, 0);
+                    }
                     _selection.Clear();
                     break;
                 case Keys.Escape:
@@ -976,8 +987,7 @@ internal class DesktopForm : DesktopFormBase
         if (_searchMatches.Count > 0)
         {
             _searchMatchIndex = 0;
-            _selectedRow = _searchMatches[0].row;
-            _selectedCol = _searchMatches[0].col;
+            _grid.SelectCell(_searchMatches[0].row, _searchMatches[0].col);
         }
         else
         {
@@ -1005,8 +1015,7 @@ internal class DesktopForm : DesktopFormBase
             }
             else
             {
-                var cur = _grid.GetCellValue(_selectedRow, _selectedCol);
-                _grid.SetCellValue(_selectedRow, _selectedCol, cur + e.KeyChar);
+                _grid.AppendToSelectedCell(e.KeyChar);
             }
             e.Handled = true;
             Invalidate();
@@ -1061,8 +1070,7 @@ internal class DesktopForm : DesktopFormBase
             _dragAnchorCol = col;
         }
 
-        _selectedRow = row;
-        _selectedCol = col;
+        _grid.SelectCell(row, col);
         Invalidate();
     }
 
@@ -1073,8 +1081,7 @@ internal class DesktopForm : DesktopFormBase
         if (cell is null) return;
         var (row, col) = cell.Value;
 
-        _selectedRow = row;
-        _selectedCol = col;
+        _grid.SelectCell(row, col);
         SelectRectangle(_dragAnchorRow, _dragAnchorCol, row, col);
         Invalidate();
     }

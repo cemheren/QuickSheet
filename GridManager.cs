@@ -9,6 +9,30 @@ public class GridManager
     public int RowCount { get; }
     public bool IsDirty { get; private set; }
 
+    // ── Cursor state ─────────────────────────────────────────────────
+
+    private int _selectedRow;
+    private int _selectedCol;
+
+    public (int row, int col) GetCurrentCell() => (_selectedRow, _selectedCol);
+
+    public void SelectCell(int row, int col)
+    {
+        _selectedRow = Math.Clamp(row, 0, RowCount - 1);
+        _selectedCol = Math.Clamp(col, 0, ColumnCount - 1);
+    }
+
+    public void MoveUp() { if (_selectedRow > 0) _selectedRow--; }
+    public void MoveDown() { if (_selectedRow < RowCount - 1) _selectedRow++; }
+    public void MoveLeft() { if (_selectedCol > 0) _selectedCol--; }
+    public void MoveRight() { if (_selectedCol < ColumnCount - 1) _selectedCol++; }
+
+    public void ClampSelection()
+    {
+        _selectedRow = Math.Min(_selectedRow, RowCount - 1);
+        _selectedCol = Math.Min(_selectedCol, ColumnCount - 1);
+    }
+
     public GridManager(int availableWidth, int availableHeight, int columnWidth = 20)
     {
         const int rowHeaderWidth = 4;
@@ -51,6 +75,10 @@ public class GridManager
             return _data[row, col];
         return "";
     }
+
+    public string GetSelectedCellValue() => GetCellValue(_selectedRow, _selectedCol);
+    public void SetSelectedCellValue(string value) => SetCellValue(_selectedRow, _selectedCol, value);
+    public void AppendToSelectedCell(char ch) { var cur = GetSelectedCellValue(); SetSelectedCellValue(cur + ch); }
 
     public void SetCellValue(int row, int col, string value)
     {
@@ -100,6 +128,12 @@ public class GridManager
         IsDirty = true;
     }
 
+    public void DeleteSelectedRow()
+    {
+        DeleteRow(_selectedRow);
+        ClampSelection();
+    }
+
     public void ShiftRowsDown(int fromRow)
     {
         if (fromRow < 0 || fromRow >= RowCount) return;
@@ -121,6 +155,9 @@ public class GridManager
             _data[RowCount - 1, c] = "";
         IsDirty = true;
     }
+
+    public void ShiftSelectedRowDown() => ShiftRowsDown(_selectedRow);
+    public void ShiftSelectedRowUp() => ShiftRowsUp(_selectedRow);
 
     public double? GetColumnSum(int col)
     {
@@ -358,6 +395,9 @@ public class GridManager
 
         return targetValue;
     }
+
+    public string? ResolveSelectedInline(HashSet<(int, int)>? visited = null)
+        => ResolveInline(_selectedRow, _selectedCol, visited);
 
     /// <summary>
     /// Gets the display value for a cell, resolving inline refs if applicable.
