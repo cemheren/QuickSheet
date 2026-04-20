@@ -15,12 +15,15 @@ namespace ExcelConsole.Platform.Windows;
 internal class DesktopForm : DesktopFormBase
 {
     private GridManager _grid;
+
+    //todo: refactor these two into the GridManager
     private readonly HashSet<(int row, int col)> _selection = new();
     private string? _loadedFile;
 
-
+    //todo: why is this even here. 
     private string _clipboard = "";
 
+    //todo: refactor into a SearchingMode : IMode. 
     private bool _searching;
     private string _searchInput = "";
     private string? _searchTerm;
@@ -29,6 +32,7 @@ internal class DesktopForm : DesktopFormBase
 
     private readonly EditingMode _editMode;
 
+    //todo: DraggingMode? Not sure if this should be a state yet. 
     private bool _dragging;
     private int _dragAnchorRow;
     private int _dragAnchorCol;
