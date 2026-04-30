@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QuickSheet — vim for spreadsheets, lives on your wallpaper</title>
+<meta name="description" content="A keyboard-driven spreadsheet that runs on your desktop wallpaper. Runs commands, streams output, remembers things. For developers who hate opening apps.">
+<meta property="og:title" content="QuickSheet">
+<meta property="og:description" content="Your wallpaper, but it runs commands and remembers things.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="nav">
+  <a href="/" class="logo">▦ quicksheet</a>
+  <nav>
+    <a href="#features">features</a>
+    <a href="#install">install</a>
+    <a href="https://github.com/cemheren/QuickSheet">github</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="hero">
+  <h1>Your wallpaper,<br>but it <em>runs commands</em>.</h1>
+  <p class="lede">
+    A keyboard-driven spreadsheet that lives behind your icons.
+    Type <code>r:&nbsp;git&nbsp;status</code> in a cell. Hit enter.
+    The grid remembers, refreshes, autosaves. For developers who hate opening apps.
+  </p>
+  <div class="cta">
+    <a class="btn primary" href="#install">Get it</a>
+    <a class="btn ghost" href="https://github.com/cemheren/QuickSheet">View source</a>
+  </div>
+  <p class="meta">MIT-licensed · Zero NuGet deps · Windows &amp; Linux (X11)</p>
+
+  <div class="grid-demo" aria-hidden="true">
+    <div class="row"><span class="cellref">A1</span><span class="cell">i: uptime</span><span class="cell out">up 3 days, 14:22, load 0.41</span></div>
+    <div class="row"><span class="cellref">A2</span><span class="cell">r: git status -s</span><span class="cell out">M  GridManager.cs</span></div>
+    <div class="row"><span class="cellref">A3</span><span class="cell">https://news.ycombinator.com</span><span class="cell out">↗ open</span></div>
+    <div class="row"><span class="cellref">A4</span><span class="cell">=SUM({B1::B40})</span><span class="cell out">Σ 1284</span></div>
+    <div class="row"><span class="cellref">A5</span><span class="cell">notes.csv</span><span class="cell out">autosaved 4s ago</span></div>
+  </div>
+</section>
+
+<section id="features" class="features">
+  <h2>Three ideas, one surface.</h2>
+
+  <article>
+    <h3>① Cells run commands</h3>
+    <p>
+      <code>r:&nbsp;cmd</code> runs once. <code>i:&nbsp;cmd</code> streams forever — live subprocess output, capped at 200 lines.
+      The output <em>is</em> the cell value. Diff it, copy it, export it to CSV.
+      No panel, no terminal pane, no context switch.
+    </p>
+  </article>
+
+  <article>
+    <h3>② Always visible, never in the way</h3>
+    <p>
+      Lives at the bottom of the Z-order — behind every other window, on top of the wallpaper.
+      Win+D doesn't dismiss it. Alt+Tab skips it. On Linux it sets <code>_NET_WM_WINDOW_TYPE_DESKTOP</code>.
+      It's just <em>there</em>, like a sticky note that does math.
+    </p>
+  </article>
+
+  <article>
+    <h3>③ Plain CSV, all the way down</h3>
+    <p>
+      No database, no JSON state, no cloud. Your sheet is one CSV file you can
+      <code>git&nbsp;diff</code>. Autosaves every 5s in desktop mode. Survives reboots.
+      Sync with rsync, Dropbox, or nothing at all.
+    </p>
+  </article>
+</section>
+
+<section class="prefixes">
+  <h2>The prefix language.</h2>
+  <table>
+    <tr><th><code>r:</code></th><td>Run a command once. Output replaces the cell.</td></tr>
+    <tr><th><code>i:</code></th><td>Inline live process. Stdout streams into the cell, capped at 200 lines. ConPTY on Windows, pipe redirect on Linux.</td></tr>
+    <tr><th><code>http(s)://</code></th><td>Auto-detected hyperlink. Open it from the cell.</td></tr>
+    <tr><th><code>{A1::C10}</code></th><td>Cell-range reference. Splice grid contents into any command.</td></tr>
+    <tr><th>Σ / Π</th><td>Column sums and row products, computed live.</td></tr>
+  </table>
+</section>
+
+<section id="install" class="install">
+  <h2>Install.</h2>
+  <p class="lede" style="margin-bottom:24px">
+    Build from source today. .NET 9 SDK required. Pre-built binaries are coming once code-signing is in place.
+  </p>
+  <div class="install-grid">
+    <div>
+      <h3>Windows</h3>
+      <pre><code>git clone https://github.com/cemheren/QuickSheet
+cd QuickSheet
+dotnet run -c Release --project ExcelConsole.csproj -- --desktop</code></pre>
+      <p class="muted">Embeds into the WorkerW behind the wallpaper.</p>
+    </div>
+    <div>
+      <h3>Linux</h3>
+      <pre><code>git clone https://github.com/cemheren/QuickSheet
+cd QuickSheet
+dotnet run -c Release --project ExcelConsole.csproj -- --desktop</code></pre>
+      <p class="muted">X11 only. Wayland support is on the roadmap.</p>
+    </div>
+    <div>
+      <h3>Console TUI</h3>
+      <pre><code>dotnet run --project ExcelConsole.csproj
+# or with a CSV
+dotnet run --project ExcelConsole.csproj -- data.csv</code></pre>
+      <p class="muted">Same grid, plain terminal. Works anywhere .NET 9 runs.</p>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <h2>Why you can trust the binary.</h2>
+  <ul>
+    <li><strong>Zero NuGet dependencies.</strong> Every line is in the repo. Native interop is hand-written P/Invoke (<code>libX11</code>, Win32).</li>
+    <li><strong>Local-first.</strong> No telemetry. No accounts. No sync server. No network calls at all in the core.</li>
+    <li><strong>CSV is the only state.</strong> No hidden database, no opaque format. Open it in any editor.</li>
+    <li><strong>MIT-licensed.</strong> Read it, fork it, ship it. The repo is the whole product.</li>
+  </ul>
+</section>
+
+<!--
+  ============================================================
+  DEFERRED SECTIONS — re-enable as features ship.
+  ============================================================
+
+  AI cells (a:): roadmap Phase 1
+  Pro tier ($29) + Stripe checkout: roadmap Phase 1
+  Extension marketplace (we:, gh:, k8s:, ...): roadmap Phase 2
+  Signed Windows installer + winget: roadmap Phase 0
+  Auto-updater + beta channel: roadmap Phase 0
+  macOS port: roadmap Phase 2
+  /docs, /extensions, /changelog, /buy pages: roadmap §7
+  ============================================================
+
+  <section class="pro">
+    <h2>QuickSheet Pro — <span class="price">$29 one-time</span></h2>
+    <p class="lede">
+      The core is free and MIT-licensed and always will be.
+      Pro unlocks the features that take real work to build right.
+    </p>
+    <ul class="pro-list">
+      <li>AI cells (<code>a:</code>) — Claude, OpenAI, or local Ollama. BYOK, stored in the OS keyring.</li>
+      <li>Multi-sheet tabs and saved loadouts (work / personal / oncall — one keypress).</li>
+      <li><code>=</code> formulas: arithmetic, ranges, common funcs.</li>
+      <li>Encrypted cells for tokens and notes.</li>
+      <li>Signed binaries, auto-updates, beta channel access.</li>
+      <li>Extension marketplace access.</li>
+    </ul>
+    <a class="btn primary" href="/buy">Buy Pro · $29</a>
+    <p class="meta">One-time payment. Optional $19 yearly for major-version upgrades. No subscription trap.</p>
+  </section>
+
+  Install snippets to restore once shipped:
+    winget install quicksheet
+    brew install --cask quicksheet
+
+  Prefix table rows to restore:
+    <tr><th><code>a:</code></th><td>Ask Claude. Response streams to the cell below. <span class="pro">Pro</span></td></tr>
+    <tr><th><code>we:</code> <code>gh:</code> <code>k8s:</code></th><td>Extensions. Any binary on disk can register a prefix. <span class="pro">Marketplace</span></td></tr>
+
+  Trust bullets to restore once true:
+    <li><strong>Auditable updater.</strong> ~300 lines of bespoke code. No Squirrel, no AutoUpdater.NET.</li>
+    <li><strong>Signed releases.</strong> Windows EV cert, Apple notarization (when macOS lands).</li>
+    <li><strong>Extensions are subprocesses, not plugins.</strong> No DLL loading, no in-process plugin host.</li>
+-->
+
+</main>
+
+<footer>
+  <div>
+    <span>© 2026 QuickSheet</span>
+    <a href="https://github.com/cemheren/QuickSheet">github</a>
+    <a href="https://github.com/cemheren/QuickSheet/blob/main/roadmap.md">roadmap</a>
+  </div>
+  <div class="muted">Built by hand. No frameworks were harmed in the making of this site.</div>
+</footer>
+
+</body>
+</html>
