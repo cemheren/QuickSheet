@@ -25,9 +25,9 @@
 <section class="hero">
   <h1>Your wallpaper,<br>but it <em>runs commands</em>.</h1>
   <p class="lede">
-    A keyboard-driven spreadsheet that lives behind your icons.
-    Type <code>r:&nbsp;git&nbsp;status</code> in a cell. Hit enter.
-    The grid remembers, refreshes, autosaves. For developers who hate opening apps.
+    This is a desktop experience tailored for developers who want to automate more.  
+    Type <code>r:&nbsp;git&nbsp;status</code> in a cell. Hit enter to run.
+    Keep your urls, notes, task in a different cell.
   </p>
   <div class="cta">
     <a class="btn primary" href="#install">Get it</a>
@@ -37,7 +37,7 @@
 
   <div class="grid-demo" aria-hidden="true">
     <div class="row"><span class="cellref">A1</span><span class="cell">i: uptime</span><span class="cell out">up 3 days, 14:22, load 0.41</span></div>
-    <div class="row"><span class="cellref">A2</span><span class="cell">r: git status -s</span><span class="cell out">M  GridManager.cs</span></div>
+    <div class="row"><span class="cellref">A2</span><span class="cell">r: git status -s</span><span class="cell out">M  README.md</span></div>
     <div class="row"><span class="cellref">A3</span><span class="cell">https://news.ycombinator.com</span><span class="cell out">↗ open</span></div>
     <div class="row"><span class="cellref">A4</span><span class="cell">=SUM({B1::B40})</span><span class="cell out">Σ 1284</span></div>
     <div class="row"><span class="cellref">A5</span><span class="cell">notes.csv</span><span class="cell out">autosaved 4s ago</span></div>
@@ -50,27 +50,34 @@
   <article>
     <h3>① Cells run commands</h3>
     <p>
-      <code>r:&nbsp;cmd</code> runs once. <code>i:&nbsp;cmd</code> streams forever — live subprocess output, capped at 200 lines.
-      The output <em>is</em> the cell value. Diff it, copy it, export it to CSV.
-      No panel, no terminal pane, no context switch.
+      <code>r:&nbsp;cmd</code> runs the captured command once. You can use this to run your favorite tools all at the same time. 
+      Just multi-select the cells and hit enter to get into a zen-start. 
     </p>
   </article>
 
   <article>
-    <h3>② Always visible, never in the way</h3>
+    <h3>② Cells can chain commands</h3>
     <p>
-      Lives at the bottom of the Z-order — behind every other window, on top of the wallpaper.
-      Win+D doesn't dismiss it. Alt+Tab skips it. On Linux it sets <code>_NET_WM_WINDOW_TYPE_DESKTOP</code>.
-      It's just <em>there</em>, like a sticky note that does math.
+      <code>i:&nbsp; {A11:A11}</code> inlines the contents of A11. 
+      But if the cell <code>A11</code> has a <code>r:&nbsp;cmd</code> it chains the command and starts a live subprocess output that is captured on the desktop. 
+      These sticky cells create live dashboards on your desktop. 
+    </p>
+  </article>
+
+  <article>
+    <h3>③ Always visible, never in the way</h3>
+    <p>
+      Lives right at the desktop layer below all your applications. Intended to be a true replacement to your desktop. 
+      It will feel like taking a note on your highschool desk. 
     </p>
   </article>
 
   <article>
     <h3>③ Plain CSV, all the way down</h3>
     <p>
-      No database, no JSON state, no cloud. Your sheet is one CSV file you can
-      <code>git&nbsp;diff</code>. Autosaves every 5s in desktop mode. Survives reboots.
-      Sync with rsync, Dropbox, or nothing at all.
+      No database, no JSON state, no cloud. Your sheet is one CSV file you can <code>git&nbsp;diff</code>. 
+      Autosaves and auto reloads are supported. Survives reboots.
+      Sync with Onedrive, rsync, Dropbox, or nothing at all.
     </p>
   </article>
 </section>
@@ -104,15 +111,15 @@ dotnet run -c Release --project ExcelConsole.csproj -- --desktop</code></pre>
       <pre><code>git clone https://github.com/cemheren/QuickSheet
 cd QuickSheet
 dotnet run -c Release --project ExcelConsole.csproj -- --desktop</code></pre>
-      <p class="muted">X11 only. Wayland support is on the roadmap.</p>
+      <p class="muted">A little behind Windows, X11 only. Wayland support is on the roadmap.</p>
     </div>
-    <div>
+    <!-- <div>
       <h3>Console TUI</h3>
       <pre><code>dotnet run --project ExcelConsole.csproj
 # or with a CSV
 dotnet run --project ExcelConsole.csproj -- data.csv</code></pre>
       <p class="muted">Same grid, plain terminal. Works anywhere .NET 9 runs.</p>
-    </div>
+    </div> -->
   </div>
 </section>
 
