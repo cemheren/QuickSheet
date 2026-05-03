@@ -9,7 +9,7 @@ namespace ExcelConsole.Extensions;
 public class ExtensionManager : IDisposable
 {
     private readonly IExtensionEnvironment _env;
-    private readonly GridManager _grid;
+    private GridManager _grid;
 
     // Extension source (from ext: cell) -> installation state
     private readonly Dictionary<string, LoadedExtension> _extensions = new();
@@ -90,6 +90,18 @@ public class ExtensionManager : IDisposable
     {
         _activeCalls.Remove((row, col));
     }
+
+    /// <summary>
+    /// Updates the grid reference after a rebuild. Clears activation tracking
+    /// so extensions are re-scanned against the new grid.
+    /// </summary>
+    public void UpdateGrid(GridManager newGrid)
+    {
+        _grid = newGrid;
+        _activeCalls.Clear();
+        _processedExtCells.Clear();
+    }
+
     public void ScanGrid()
     {
         if (_disposed) return;

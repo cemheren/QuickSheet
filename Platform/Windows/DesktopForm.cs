@@ -219,6 +219,7 @@ internal class DesktopForm : DesktopFormBase
         var (prevRow, prevCol) = _grid.GetCurrentCell();
         _grid = newGrid;
         _editMode.Grid = _grid;
+        _extensionManager.UpdateGrid(_grid);
         _grid.SelectCell(prevRow, prevCol);
 
         if (_loadedFile is not null)

@@ -917,6 +917,7 @@ internal class DesktopWindow : IDisposable
 
         _grid = newGrid;
         _editMode.Grid = _grid;
+        _extensionManager.UpdateGrid(_grid);
 
         if (_loadedFile is not null)
             _grid.LoadFromCsv(_loadedFile);
