@@ -49,6 +49,40 @@ public class ExtensionManager : IDisposable
     public HashSet<string> KnownPrefixes => new(_prefixMap.Keys);
 
     /// <summary>
+    /// Returns the status of a cell for color coding purposes.
+    /// </summary>
+    public ExtensionCellStatus GetCellStatus(int row, int col)
+    {
+        string val = _grid.GetCellValue(row, col);
+
+        // Check if it's an ext: cell
+        if (CellPrefix.IsExtension(val))
+        {
+            string? source = CellPrefix.ParseExtensionSource(val);
+            if (source == null) return ExtensionCellStatus.None;
+
+            if (val.Contains("[install failed]") || val.Contains("[bad manifest]") || val.Contains("[start failed]"))
+                return ExtensionCellStatus.Error;
+
+            if (_extensions.TryGetValue(source, out var ext) && ext.Process.IsRunning)
+                return ExtensionCellStatus.Running;
+
+            return ExtensionCellStatus.Loading;
+        }
+
+        // Check if it's a prefix call cell
+        if (_activeCalls.ContainsKey((row, col)))
+        {
+            var call = _activeCalls[(row, col)];
+            if (call.HasError)
+                return ExtensionCellStatus.Error;
+            return ExtensionCellStatus.Running;
+        }
+
+        return ExtensionCellStatus.None;
+    }
+
+    /// <summary>
     /// Scans the entire grid for ext: and registered-prefix cells.
     /// Call this on load and periodically (e.g., every render cycle).
     /// </summary>
@@ -266,6 +300,7 @@ public class ExtensionManager : IDisposable
         {
             if (ac.ActivationId == msg.Id)
             {
+                ac.HasError = true;
                 if (ac.AnchorRow >= 0 && ac.AnchorRow < _grid.RowCount &&
                     ac.AnchorCol >= 0 && ac.AnchorCol < _grid.ColumnCount)
                 {
@@ -307,5 +342,17 @@ public class ExtensionManager : IDisposable
         public int AnchorCol { get; set; }
         public int GridCols { get; set; }
         public int GridRows { get; set; }
+        public bool HasError { get; set; }
     }
+}
+
+/// <summary>
+/// Status of a cell for extension color coding.
+/// </summary>
+public enum ExtensionCellStatus
+{
+    None,
+    Loading,
+    Running,
+    Error
 }
