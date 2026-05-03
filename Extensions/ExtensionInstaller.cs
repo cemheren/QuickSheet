@@ -28,9 +28,11 @@ public static class ExtensionInstaller
 
         if (Directory.Exists(targetDir))
         {
-            // Already installed — check manifest exists
+            // Already installed — pull latest changes
             string manifestPath = Path.Combine(targetDir, "quicksheet-extension.json");
-            return File.Exists(manifestPath) ? targetDir : null;
+            if (!File.Exists(manifestPath)) return null;
+            TryPull(targetDir);
+            return targetDir;
         }
 
         // Ensure parent directory exists
@@ -63,6 +65,30 @@ public static class ExtensionInstaller
         {
             return null;
         }
+    }
+
+    /// <summary>
+    /// Pulls latest changes from the remote. Non-blocking, best-effort.
+    /// </summary>
+    private static void TryPull(string extensionDir)
+    {
+        try
+        {
+            var psi = new ProcessStartInfo
+            {
+                FileName = "git",
+                Arguments = "pull --ff-only",
+                WorkingDirectory = extensionDir,
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = true
+            };
+
+            using var proc = Process.Start(psi);
+            proc?.WaitForExit(15_000); // 15s timeout
+        }
+        catch { }
     }
 
     /// <summary>
