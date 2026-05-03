@@ -12,7 +12,7 @@ namespace ExcelConsole.Platform.Linux;
 /// </summary>
 internal class DesktopWindow : IDisposable
 {
-    private readonly GridManager _grid;
+    private GridManager _grid;
     private int _selectedRow;
     private int _selectedCol;
     private readonly HashSet<(int row, int col)> _selection = new();
@@ -24,6 +24,10 @@ internal class DesktopWindow : IDisposable
     private string? _searchTerm;
     private List<(int row, int col)> _searchMatches = new();
     private int _searchMatchIndex = -1;
+
+    private readonly LinuxEditingMode _editMode = new();
+    private bool _showResolved;
+    private readonly InlineProcessManager _inlineProcesses = new();
 
     private IntPtr _display;
     private IntPtr _window;
@@ -40,7 +44,10 @@ internal class DesktopWindow : IDisposable
     private int _screenWidth;
     private int _screenHeight;
 
-    private readonly int _colWidth;
+    private int _columnWidth = 20;
+    private const int MinColumnWidth = 8;
+    private const int MaxColumnWidth = 40;
+    private const int ColumnWidthStep = 4;
     private const int RowHeaderWidth = 4;
     private const string FontName = "monospace:size=14";
 
@@ -48,6 +55,7 @@ internal class DesktopWindow : IDisposable
     private bool _isNativeX11;
     private System.Threading.Timer? _autoSaveTimer;
     private readonly object _saveLock = new();
+    private volatile bool _externalChangePending;
 
     // Double-click tracking
     private ulong _lastClickTime;
@@ -93,10 +101,7 @@ internal class DesktopWindow : IDisposable
 
         int availableWidth = _screenWidth / _charWidth;
         int availableHeight = _screenHeight / _charHeight - 3;
-        _grid = new GridManager(availableWidth, availableHeight);
-
-        int usableChars = availableWidth - RowHeaderWidth;
-        _colWidth = _grid.ColumnCount > 0 ? usableChars / _grid.ColumnCount : 20;
+        _grid = new GridManager(availableWidth, availableHeight, _columnWidth);
 
         // Create the window (try 32-bit ARGB visual for transparency)
         IntPtr root = XDefaultRootWindow(display);
@@ -159,8 +164,10 @@ internal class DesktopWindow : IDisposable
 
         PopulateDesktopFiles();
 
-        // Autosave every 5 seconds
+        // Autosave every 5 seconds; every 12th tick (60s) also re-merge the source CSV
+        // to pick up external edits (e.g. OneDrive/Syncthing) the same way Windows does.
         Directory.CreateDirectory(StateDir);
+        int reloadTick = 0;
         _autoSaveTimer = new System.Threading.Timer(_ =>
         {
             lock (_saveLock)
@@ -172,6 +179,18 @@ internal class DesktopWindow : IDisposable
                     File.Move(tmp, AutoSavePath, overwrite: true);
                 }
                 catch { }
+
+                if (++reloadTick >= 12)
+                {
+                    reloadTick = 0;
+                    try
+                    {
+                        string? path = _loadedFile;
+                        if (path is not null && _grid.MergeFromCsv(path))
+                            _externalChangePending = true;
+                    }
+                    catch { }
+                }
             }
         }, null, TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(5));
     }
@@ -467,6 +486,19 @@ internal class DesktopWindow : IDisposable
         {
             while (_running)
             {
+                // If no events are pending, poll inline-process output and idle briefly.
+                // This gives sub-second update cadence for `i:` cells without a full event-driven wakeup.
+                if (XPending(_display) == 0)
+                {
+                    if (_inlineProcesses.HasAnyNewOutput() || _externalChangePending)
+                    {
+                        _externalChangePending = false;
+                        Render();
+                    }
+                    System.Threading.Thread.Sleep(100);
+                    continue;
+                }
+
                 XNextEvent(_display, eventPtr);
                 int eventType = Marshal.ReadInt32(eventPtr);
 
@@ -539,6 +571,58 @@ internal class DesktopWindow : IDisposable
         SetGCColor(0, 0, 0, _hasArgbVisual ? _bgAlpha : 255);
         XFillRectangle(_display, _window, _gc, 0, 0, (uint)_screenWidth, (uint)_screenHeight);
 
+        // Pre-scan for inline cells with multi-cell visual spans (e.g. {A1::C5}-style refs).
+        // Each spanning inline anchor produces an overlay drawn after the row loop;
+        // cells covered by the span (other than the anchor) are skipped during row rendering.
+        var inlineSpans = new List<(int anchorRow, int anchorCol, int spanCols, int spanRows, string content, bool isCmd)>();
+        var occludedCells = new HashSet<(int, int)>();
+        for (int r = 0; r < _grid.RowCount; r++)
+        {
+            for (int c = 0; c < _grid.ColumnCount; c++)
+            {
+                string val = _grid.GetCellValue(r, c);
+                if (!CellPrefix.IsInline(val)) continue;
+                string expandedVal = CellPrefix.ExpandCellReferences(val, _grid);
+                var parsed = CellPrefix.ParseInlineRef(expandedVal);
+                if (parsed == null || (parsed.Value.spanCols <= 1 && parsed.Value.spanRows <= 1)) continue;
+
+                int sc = parsed.Value.spanCols, sr = parsed.Value.spanRows;
+                int endColIdx = Math.Min(c + sc - 1, _grid.ColumnCount - 1);
+                int endRowIdx = Math.Min(r + sr - 1, _grid.RowCount - 1);
+
+                string? resolved = _grid.ResolveInline(r, c);
+                bool isCmdSpan = false;
+                string content;
+                if (resolved != null && CellPrefix.IsCommand(resolved))
+                {
+                    isCmdSpan = true;
+                    string expandedCmd = CellPrefix.ExpandCellReferences(resolved, _grid);
+                    int ptyCols = -1; // padding budget
+                    for (int tc = c; tc <= endColIdx; tc++) ptyCols += colWidths[tc];
+                    if (ptyCols < 20) ptyCols = 20;
+                    int ptyRows = Math.Max(1, (endRowIdx - r + 1) - 1);
+                    _inlineProcesses.EnsureRunning(r, c, expandedCmd, ptyCols, ptyRows);
+                    content = _inlineProcesses.GetOutput(r, c) ?? "[running...]";
+                }
+                else if (resolved != null)
+                {
+                    content = CellPrefix.ExpandCellReferences(resolved, _grid);
+                }
+                else
+                {
+                    content = val;
+                }
+
+                inlineSpans.Add((r, c, sc, sr, content, isCmdSpan));
+
+                // Anchor stays renderable; only cover the rest of the span.
+                for (int wr = r; wr <= endRowIdx; wr++)
+                    for (int wc = c; wc <= endColIdx; wc++)
+                        if (wr != r || wc != c)
+                            occludedCells.Add((wr, wc));
+            }
+        }
+
         int y = 0;
 
         // Column headers
@@ -577,8 +661,42 @@ internal class DesktopWindow : IDisposable
             for (int c = 0; c < _grid.ColumnCount; c++)
             {
                 int w = colWidths[c];
+
+                // Skip cells covered by an inline-span overlay (drawn later).
+                if (occludedCells.Contains((r, c)))
+                {
+                    x += w * cw;
+                    continue;
+                }
+
+                bool isEditingThisCell = _editMode.IsActive() && _editMode.EditRow == r && _editMode.EditCol == c;
                 string cellVal = _grid.GetCellValue(r, c);
-                string display = cellVal.Length >= w ? cellVal[..w] : cellVal.PadRight(w);
+
+                // Resolve single-cell inline references for in-cell display.
+                string displayVal = cellVal;
+                if (!isEditingThisCell && CellPrefix.IsInline(cellVal))
+                {
+                    string? resolvedCell = _grid.ResolveInline(r, c);
+                    if (resolvedCell != null)
+                    {
+                        if (CellPrefix.IsCommand(resolvedCell))
+                        {
+                            string expandedCmd = CellPrefix.ExpandCellReferences(resolvedCell, _grid);
+                            _inlineProcesses.EnsureRunning(r, c, expandedCmd);
+                            displayVal = _inlineProcesses.GetOutput(r, c) ?? "[running...]";
+                            int nl = displayVal.IndexOf('\n');
+                            if (nl >= 0) displayVal = displayVal[..nl];
+                        }
+                        else
+                        {
+                            displayVal = CellPrefix.ExpandCellReferences(resolvedCell, _grid);
+                        }
+                    }
+                }
+
+                string display = isEditingThisCell
+                    ? _editMode.GetCellDisplay(w)
+                    : (displayVal.Length >= w ? displayVal[..w] : displayVal.PadRight(w));
                 bool isCursor = r == _selectedRow && c == _selectedCol;
                 bool isMultiSel = _selection.Contains((r, c));
                 bool isSearchMatch = _searchTerm != null && _searchMatches.Contains((r, c));
@@ -611,9 +729,93 @@ internal class DesktopWindow : IDisposable
             y += ch;
         }
 
+        // Inline span overlays (drawn over the cell layer for spanning i: cells)
+        const int headerRows = 2; // column header + underline
+        foreach (var span in inlineSpans)
+        {
+            int spanX = RowHeaderWidth * cw;
+            for (int sc = 0; sc < span.anchorCol && sc < _grid.ColumnCount; sc++)
+                spanX += colWidths[sc] * cw;
+
+            int spanY = headerRows * ch + span.anchorRow * ch;
+            int endColIdx = Math.Min(span.anchorCol + span.spanCols - 1, _grid.ColumnCount - 1);
+            int endRowIdx = Math.Min(span.anchorRow + span.spanRows - 1, _grid.RowCount - 1);
+
+            int spanWidth = 0;
+            for (int sc = span.anchorCol; sc <= endColIdx; sc++)
+                spanWidth += colWidths[sc] * cw;
+            int spanHeight = (endRowIdx - span.anchorRow + 1) * ch;
+
+            if (spanY + spanHeight > statusY) spanHeight = statusY - spanY;
+            if (spanWidth <= 0 || spanHeight <= 0) continue;
+
+            bool hasCursor = _selectedRow >= span.anchorRow && _selectedRow <= endRowIdx
+                          && _selectedCol >= span.anchorCol && _selectedCol <= endColIdx;
+
+            int sBgR, sBgG, sBgB;
+            if (span.isCmd) { sBgR = hasCursor ? 30 : 20; sBgG = hasCursor ? 60 : 50; sBgB = hasCursor ? 30 : 20; }
+            else            { sBgR = hasCursor ? 10 : 0;  sBgG = hasCursor ? 55 : 40; sBgB = hasCursor ? 65 : 50; }
+
+            // Background
+            SetGCColor(sBgR, sBgG, sBgB, _hasArgbVisual ? _bgAlpha : 255);
+            XFillRectangle(_display, _window, _gc, spanX, spanY, (uint)spanWidth, (uint)spanHeight);
+
+            // Border
+            int borR = hasCursor ? 100 : 60, borG = hasCursor ? 180 : 100, borB = hasCursor ? 200 : 120;
+            SetGCColor(borR, borG, borB, 255);
+            XDrawRectangle(_display, _window, _gc, spanX, spanY, (uint)(spanWidth - 1), (uint)(spanHeight - 1));
+
+            // Cell-ref label
+            string cellRef = _grid.GetCellReference(span.anchorRow, span.anchorCol);
+            DrawTextWithBg(cellRef, spanX + 2, spanY + 1, 80, 140, 160, sBgR, sBgG, sBgB);
+
+            // Wrapped output content (last N lines that fit)
+            if (!string.IsNullOrEmpty(span.content))
+            {
+                int contentTop = spanY + ch + 2;
+                int contentHeight = spanHeight - ch - 4;
+                int contentWidth = spanWidth - 8;
+                if (contentHeight > 0 && contentWidth > 0)
+                {
+                    string[] allLines = span.content.Split('\n');
+                    int charsPerLine = Math.Max(1, contentWidth / cw);
+                    var wrappedLines = new List<string>();
+                    foreach (string rawLine in allLines)
+                    {
+                        if (rawLine.Length <= charsPerLine) wrappedLines.Add(rawLine);
+                        else
+                            for (int pos = 0; pos < rawLine.Length; pos += charsPerLine)
+                                wrappedLines.Add(rawLine.Substring(pos, Math.Min(charsPerLine, rawLine.Length - pos)));
+                    }
+
+                    int linesPerWindow = Math.Max(1, contentHeight / ch);
+                    int startIdx = Math.Max(0, wrappedLines.Count - linesPerWindow);
+                    int count = Math.Min(linesPerWindow, wrappedLines.Count);
+
+                    int contentFgR = span.isCmd ? 100 : 180;
+                    int contentFgG = span.isCmd ? 255 : 220;
+                    int contentFgB = span.isCmd ? 150 : 255;
+
+                    int lineY = contentTop;
+                    for (int li = startIdx; li < startIdx + count && lineY + ch <= contentTop + contentHeight; li++)
+                    {
+                        string line = wrappedLines[li];
+                        if (line.Length > charsPerLine) line = line[..charsPerLine];
+                        DrawTextWithBg(line.PadRight(charsPerLine), spanX + 4, lineY,
+                            contentFgR, contentFgG, contentFgB, sBgR, sBgG, sBgB);
+                        lineY += ch;
+                    }
+                }
+            }
+        }
+
         // Status bar
         string status;
-        if (_searching)
+        if (_editMode.IsActive())
+        {
+            status = _editMode.GetStatusText();
+        }
+        else if (_searching)
         {
             status = $" Find: {_searchInput}\u2502  (Enter=Search  Esc=Cancel)";
         }
@@ -622,6 +824,22 @@ internal class DesktopWindow : IDisposable
             string cellRef = _grid.GetCellReference(_selectedRow, _selectedCol);
             string value = _grid.GetCellValue(_selectedRow, _selectedCol);
             string valueDisplay = string.IsNullOrEmpty(value) ? "" : $" = {value}";
+
+            string resolvedDisplay = "";
+            if (_showResolved && !string.IsNullOrEmpty(value))
+            {
+                string resolved;
+                string? inlineResult = _grid.ResolveInline(_selectedRow, _selectedCol);
+                if (inlineResult != null && CellPrefix.IsCommand(inlineResult))
+                    resolved = "[running...]";
+                else if (inlineResult != null)
+                    resolved = CellPrefix.ExpandCellReferences(inlineResult, _grid);
+                else
+                    resolved = CellPrefix.ExpandCellReferences(value, _grid);
+                if (resolved != value)
+                    resolvedDisplay = $" \u2192 {resolved}";
+            }
+
             double? sum = _grid.GetColumnSum(_selectedCol);
             string colName = GridManager.GetColumnName(_selectedCol);
             string sumDisplay = sum.HasValue ? $"  \u03a3{colName} = {sum.Value}" : "";
@@ -630,7 +848,8 @@ internal class DesktopWindow : IDisposable
             string searchDisplay = _searchTerm != null
                 ? $"  \U0001f50d\"{_searchTerm}\" {(_searchMatches.Count > 0 ? $"{_searchMatchIndex + 1}/{_searchMatches.Count}" : "no matches")}"
                 : "";
-            status = $" {cellRef}{valueDisplay}{sumDisplay}{productDisplay}{searchDisplay}  |  Ctrl+S: Save  Ctrl+Q: Quit";
+            string f1Label = _showResolved ? "F1: Raw" : "F1: Resolve";
+            status = $" {cellRef}{valueDisplay}{resolvedDisplay}{sumDisplay}{productDisplay}{searchDisplay}  |  {f1Label}  F2: Edit  Ctrl+S: Save  Ctrl+Q: Quit";
         }
         int maxChars = _screenWidth / cw;
         status = status.PadRight(maxChars);
@@ -645,8 +864,45 @@ internal class DesktopWindow : IDisposable
     {
         var widths = new int[_grid.ColumnCount];
         for (int c = 0; c < _grid.ColumnCount; c++)
-            widths[c] = _colWidth;
+            widths[c] = _columnWidth;
         return widths;
+    }
+
+    /// <summary>
+    /// Rebuild the grid for current screen size + column-width setting.
+    /// Preserves cell data (skipping desktop-file entries which are re-populated).
+    /// </summary>
+    private void RebuildGrid()
+    {
+        // Save unsaved edits before rebuilding so we don't lose them.
+        try
+        {
+            if (_grid.IsDirty)
+                _grid.SaveToCsv(_loadedFile ?? AutoSavePath);
+        }
+        catch { }
+
+        int availableWidth = _screenWidth / _charWidth;
+        int availableHeight = _screenHeight / _charHeight - 3;
+        var newGrid = new GridManager(availableWidth, availableHeight, _columnWidth);
+
+        for (int r = 0; r < Math.Min(_grid.RowCount, newGrid.RowCount); r++)
+            for (int c = 0; c < Math.Min(_grid.ColumnCount, newGrid.ColumnCount); c++)
+                if (!_grid.IsFileEntry(r, c))
+                    newGrid.SetCellValue(r, c, _grid.GetCellValue(r, c));
+
+        _grid = newGrid;
+
+        if (_loadedFile is not null)
+            _grid.LoadFromCsv(_loadedFile);
+        else if (File.Exists(AutoSavePath))
+            _grid.LoadFromCsv(AutoSavePath);
+
+        PopulateDesktopFiles();
+
+        if (_selectedRow >= _grid.RowCount) _selectedRow = _grid.RowCount - 1;
+        if (_selectedCol >= _grid.ColumnCount) _selectedCol = _grid.ColumnCount - 1;
+        _selection.Clear();
     }
 
     private void SetGCColor(int r, int g, int b, int a = 255)
@@ -745,6 +1001,57 @@ internal class DesktopWindow : IDisposable
                             }
                         }
                         finally { Marshal.FreeHGlobal(buf); }
+                    }
+                    return;
+            }
+        }
+
+        // Edit mode: route all keys through the editing state machine.
+        if (_editMode.IsActive())
+        {
+            switch (keysym)
+            {
+                case XK_Return:
+                    _editMode.Commit(_grid);
+                    return;
+                case XK_Escape:
+                    _editMode.Exit();
+                    return;
+                case XK_Left:
+                    _editMode.MoveLeft();
+                    return;
+                case XK_Right:
+                    _editMode.MoveRight();
+                    return;
+                case XK_Home:
+                    _editMode.MoveHome();
+                    return;
+                case XK_End:
+                    _editMode.MoveEnd();
+                    return;
+                case XK_BackSpace:
+                    _editMode.Backspace();
+                    return;
+                case XK_Delete:
+                    _editMode.DeleteForward();
+                    return;
+                default:
+                    if (!ctrl)
+                    {
+                        IntPtr eBuf = Marshal.AllocHGlobal(32);
+                        try
+                        {
+                            int eLen = XLookupString(ref keyEvent, eBuf, 32, out _, IntPtr.Zero);
+                            if (eLen > 0)
+                            {
+                                byte[] eBytes = new byte[eLen];
+                                Marshal.Copy(eBuf, eBytes, 0, eLen);
+                                string eCh = Encoding.UTF8.GetString(eBytes);
+                                if (eCh.Length > 0 && eCh[0] >= 32 && eCh[0] <= 126)
+                                    _editMode.Insert(eCh);
+                            }
+                        }
+                        finally { Marshal.FreeHGlobal(eBuf); }
                     }
                     return;
             }
@@ -880,7 +1187,32 @@ internal class DesktopWindow : IDisposable
                 _selection.Clear();
                 break;
             case XK_Return:
+                if (TryRerunInlineCommand(_selectedRow, _selectedCol))
+                    break;
                 OpenAllSelected();
+                break;
+            case XK_F1:
+                _showResolved = !_showResolved;
+                break;
+            case XK_F2:
+                _editMode.Enter(_grid, _selectedRow, _selectedCol);
+                break;
+            case XK_F3:
+                RebuildGrid();
+                break;
+            case XK_F4:
+                if (_columnWidth > MinColumnWidth)
+                {
+                    _columnWidth -= ColumnWidthStep;
+                    RebuildGrid();
+                }
+                break;
+            case XK_F5:
+                if (_columnWidth < MaxColumnWidth)
+                {
+                    _columnWidth += ColumnWidthStep;
+                    RebuildGrid();
+                }
                 break;
             case XK_BackSpace:
                 var val = _grid.GetCellValue(_selectedRow, _selectedCol);
@@ -898,7 +1230,7 @@ internal class DesktopWindow : IDisposable
                 _selection.Clear();
                 break;
             default:
-                // Printable character input
+                // Printable character: auto-enter edit mode and insert (Excel-style).
                 if (!ctrl)
                 {
                     IntPtr buf = Marshal.AllocHGlobal(32);
@@ -912,8 +1244,8 @@ internal class DesktopWindow : IDisposable
                             string ch = Encoding.UTF8.GetString(bytes);
                             if (ch.Length > 0 && ch[0] >= 32 && ch[0] <= 126)
                             {
-                                var cur = _grid.GetCellValue(_selectedRow, _selectedCol);
-                                _grid.SetCellValue(_selectedRow, _selectedCol, cur + ch);
+                                _editMode.Enter(_grid, _selectedRow, _selectedCol);
+                                _editMode.Insert(ch);
                             }
                         }
                     }
@@ -1116,6 +1448,8 @@ internal class DesktopWindow : IDisposable
         }
         catch { }
 
+        _inlineProcesses.Dispose();
+
         if (_xftDraw != IntPtr.Zero)
             XftDrawDestroy(_xftDraw);
         if (_xftFont != IntPtr.Zero)
@@ -1124,5 +1458,19 @@ internal class DesktopWindow : IDisposable
             XFreeGC(_display, _gc);
         if (_window != IntPtr.Zero)
             XDestroyWindow(_display, _window);
+    }
+
+    /// <summary>
+    /// If the cell is an inline ref pointing to a command, kill the cached process
+    /// so the next render restarts it. Returns true if it handled the action.
+    /// </summary>
+    private bool TryRerunInlineCommand(int row, int col)
+    {
+        string val = _grid.GetCellValue(row, col);
+        if (!CellPrefix.IsInline(val)) return false;
+        string? resolved = _grid.ResolveInline(row, col);
+        if (resolved == null || !CellPrefix.IsCommand(resolved)) return false;
+        _inlineProcesses.StopProcess(row, col);
+        return true;
     }
 }

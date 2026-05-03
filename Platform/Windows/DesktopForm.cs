@@ -725,7 +725,7 @@ internal class DesktopForm : DesktopFormBase
 
         if (_editMode.IsActive())
         {
-            bool handled = _editMode.HandleKeyEvent(e);
+            bool handled = _editMode.HandleKeyEventWindows(e);
             if (handled)
             {
                 e.Handled = true;

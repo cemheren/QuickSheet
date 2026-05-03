@@ -262,6 +262,7 @@ internal static class X11Methods
     public const ulong XK_a = 0x0061;
     public const ulong XK_c = 0x0063;
     public const ulong XK_d = 0x0064;
+    public const ulong XK_f = 0x0066;
     public const ulong XK_h = 0x0068;
     public const ulong XK_o = 0x006f;
     public const ulong XK_p = 0x0070;
@@ -269,6 +270,13 @@ internal static class X11Methods
     public const ulong XK_s = 0x0073;
     public const ulong XK_v = 0x0076;
     public const ulong XK_x = 0x0078;
+
+    // Function keys
+    public const ulong XK_F1 = 0xffbe;
+    public const ulong XK_F2 = 0xffbf;
+    public const ulong XK_F3 = 0xffc0;
+    public const ulong XK_F4 = 0xffc1;
+    public const ulong XK_F5 = 0xffc2;
 
     // State masks
     public const uint ShiftMask = 1 << 0;

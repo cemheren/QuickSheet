@@ -48,7 +48,7 @@ internal class EditingMode : IMode
 
     public bool IsActive() => _active;
 
-    public bool HandleKeyEvent(KeyEventArgs e)
+    public bool HandleKeyEventWindows(KeyEventArgs e)
     {
         if (!_active) return false;
 

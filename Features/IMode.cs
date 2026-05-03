@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+#if PLATFORM_WINDOWS
+using System.Windows.Forms;
+#endif
 
 namespace ExcelConsole.Features
 {
@@ -16,8 +14,10 @@ namespace ExcelConsole.Features
 
         bool IsActive();
 
+#if PLATFORM_WINDOWS
         /// <returns>True if handled</returns>
-        bool HandleKeyEvent(KeyEventArgs e);
+        bool HandleKeyEventWindows(KeyEventArgs e);
+#endif
 
         string GetStatusText();
     }
