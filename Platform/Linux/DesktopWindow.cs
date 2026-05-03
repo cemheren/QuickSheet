@@ -1194,11 +1194,27 @@ internal class DesktopWindow : IDisposable
                 }
                 break;
             case XK_BackSpace:
-                var val = _grid.GetCellValue(_selectedRow, _selectedCol);
-                if (val.Length > 0) _grid.SetCellValue(_selectedRow, _selectedCol, val[..^1]);
+                if (_selection.Count > 0)
+                {
+                    foreach (var (r, c) in _selection) _grid.SetCellValue(r, c, "");
+                    _selection.Clear();
+                }
+                else
+                {
+                    var val = _grid.GetCellValue(_selectedRow, _selectedCol);
+                    if (val.Length > 0) _grid.SetCellValue(_selectedRow, _selectedCol, val[..^1]);
+                }
                 break;
             case XK_Delete:
-                _grid.SetCellValue(_selectedRow, _selectedCol, "");
+                if (_selection.Count > 0)
+                {
+                    foreach (var (r, c) in _selection) _grid.SetCellValue(r, c, "");
+                    _selection.Clear();
+                }
+                else
+                {
+                    _grid.SetCellValue(_selectedRow, _selectedCol, "");
+                }
                 break;
             case XK_Tab:
                 if (_selectedCol < _grid.ColumnCount - 1) _selectedCol++;
