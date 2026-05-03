@@ -25,7 +25,7 @@ internal class DesktopWindow : IDisposable
     private List<(int row, int col)> _searchMatches = new();
     private int _searchMatchIndex = -1;
 
-    private readonly LinuxEditingMode _editMode = new();
+    private readonly LinuxEditingMode _editMode;
     private bool _showResolved;
     private readonly InlineProcessManager _inlineProcesses = new();
 
@@ -102,6 +102,7 @@ internal class DesktopWindow : IDisposable
         int availableWidth = _screenWidth / _charWidth;
         int availableHeight = _screenHeight / _charHeight - 3;
         _grid = new GridManager(availableWidth, availableHeight, _columnWidth);
+        _editMode = new LinuxEditingMode(_grid);
 
         // Create the window (try 32-bit ARGB visual for transparency)
         IntPtr root = XDefaultRootWindow(display);
@@ -892,6 +893,7 @@ internal class DesktopWindow : IDisposable
                     newGrid.SetCellValue(r, c, _grid.GetCellValue(r, c));
 
         _grid = newGrid;
+        _editMode.Grid = _grid;
 
         if (_loadedFile is not null)
             _grid.LoadFromCsv(_loadedFile);
@@ -1006,56 +1008,9 @@ internal class DesktopWindow : IDisposable
             }
         }
 
-        // Edit mode: route all keys through the editing state machine.
-        if (_editMode.IsActive())
-        {
-            switch (keysym)
-            {
-                case XK_Return:
-                    _editMode.Commit(_grid);
-                    return;
-                case XK_Escape:
-                    _editMode.Exit();
-                    return;
-                case XK_Left:
-                    _editMode.MoveLeft();
-                    return;
-                case XK_Right:
-                    _editMode.MoveRight();
-                    return;
-                case XK_Home:
-                    _editMode.MoveHome();
-                    return;
-                case XK_End:
-                    _editMode.MoveEnd();
-                    return;
-                case XK_BackSpace:
-                    _editMode.Backspace();
-                    return;
-                case XK_Delete:
-                    _editMode.DeleteForward();
-                    return;
-                default:
-                    if (!ctrl)
-                    {
-                        IntPtr eBuf = Marshal.AllocHGlobal(32);
-                        try
-                        {
-                            int eLen = XLookupString(ref keyEvent, eBuf, 32, out _, IntPtr.Zero);
-                            if (eLen > 0)
-                            {
-                                byte[] eBytes = new byte[eLen];
-                                Marshal.Copy(eBuf, eBytes, 0, eLen);
-                                string eCh = Encoding.UTF8.GetString(eBytes);
-                                if (eCh.Length > 0 && eCh[0] >= 32 && eCh[0] <= 126)
-                                    _editMode.Insert(eCh);
-                            }
-                        }
-                        finally { Marshal.FreeHGlobal(eBuf); }
-                    }
-                    return;
-            }
-        }
+        // Edit mode owns its own keys via the IMode dispatch.
+        if (_editMode.HandleKeyEventLinux(keysym, ref keyEvent, ctrl))
+            return;
 
         // While search results active, only allow navigation/clear
         if (_searchTerm != null)
@@ -1195,7 +1150,8 @@ internal class DesktopWindow : IDisposable
                 _showResolved = !_showResolved;
                 break;
             case XK_F2:
-                _editMode.Enter(_grid, _selectedRow, _selectedCol);
+                _grid.SelectCell(_selectedRow, _selectedCol);
+                _editMode.Enter();
                 break;
             case XK_F3:
                 RebuildGrid();
@@ -1244,7 +1200,8 @@ internal class DesktopWindow : IDisposable
                             string ch = Encoding.UTF8.GetString(bytes);
                             if (ch.Length > 0 && ch[0] >= 32 && ch[0] <= 126)
                             {
-                                _editMode.Enter(_grid, _selectedRow, _selectedCol);
+                                _grid.SelectCell(_selectedRow, _selectedCol);
+                                _editMode.Enter();
                                 _editMode.Insert(ch);
                             }
                         }

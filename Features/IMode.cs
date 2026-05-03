@@ -1,10 +1,12 @@
 #if PLATFORM_WINDOWS
 using System.Windows.Forms;
+#elif PLATFORM_LINUX
+using static ExcelConsole.Platform.Linux.X11Methods;
 #endif
 
 namespace ExcelConsole.Features
 {
-    public interface IMode
+    internal interface IMode
     {
         void Enter();
 
@@ -17,6 +19,9 @@ namespace ExcelConsole.Features
 #if PLATFORM_WINDOWS
         /// <returns>True if handled</returns>
         bool HandleKeyEventWindows(KeyEventArgs e);
+#elif PLATFORM_LINUX
+        /// <returns>True if handled</returns>
+        bool HandleKeyEventLinux(ulong keysym, ref XKeyEvent keyEvent, bool ctrl);
 #endif
 
         string GetStatusText();
