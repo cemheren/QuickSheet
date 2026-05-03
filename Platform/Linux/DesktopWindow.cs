@@ -28,6 +28,7 @@ internal class DesktopWindow : IDisposable
     private readonly LinuxEditingMode _editMode;
     private bool _showResolved;
     private readonly InlineProcessManager _inlineProcesses = new();
+    private readonly Extensions.ExtensionManager _extensionManager;
 
     private IntPtr _display;
     private IntPtr _window;
@@ -103,6 +104,7 @@ internal class DesktopWindow : IDisposable
         int availableHeight = _screenHeight / _charHeight - 3;
         _grid = new GridManager(availableWidth, availableHeight, _columnWidth);
         _editMode = new LinuxEditingMode(_grid);
+        _extensionManager = new Extensions.ExtensionManager(new LinuxExtensionEnvironment(), _grid);
 
         // Create the window (try 32-bit ARGB visual for transparency)
         IntPtr root = XDefaultRootWindow(display);
@@ -491,7 +493,8 @@ internal class DesktopWindow : IDisposable
                 // This gives sub-second update cadence for `i:` cells without a full event-driven wakeup.
                 if (XPending(_display) == 0)
                 {
-                    if (_inlineProcesses.HasAnyNewOutput() || _externalChangePending)
+                    _extensionManager.ScanGrid();
+                    if (_inlineProcesses.HasAnyNewOutput() || _externalChangePending || _extensionManager.ConsumeHasChanges())
                     {
                         _externalChangePending = false;
                         Render();
@@ -704,6 +707,7 @@ internal class DesktopWindow : IDisposable
                 bool isFile = _grid.IsFileEntry(r, c);
                 bool isLink = IsHyperlink(cellVal);
                 bool isCmd = IsCommand(cellVal);
+                var extStatus = _extensionManager.GetCellStatus(r, c);
 
                 int bgR, bgG, bgB, fgR, fgG, fgB;
 
@@ -714,11 +718,15 @@ internal class DesktopWindow : IDisposable
                 else if (isFile) { bgR = 0; bgG = 40; bgB = 60; }
                 else if (isLink) { bgR = 40; bgG = 0; bgB = 60; }
                 else if (isCmd) { bgR = 40; bgG = 40; bgB = 0; }
+                else if (extStatus == Extensions.ExtensionCellStatus.Error) { bgR = 50; bgG = 10; bgB = 10; }
+                else if (extStatus == Extensions.ExtensionCellStatus.Running) { bgR = 10; bgG = 40; bgB = 10; }
                 else { bgR = 15; bgG = 15; bgB = 15; }
 
                 if (isFile) { fgR = 100; fgG = 200; fgB = 255; }
                 else if (isLink) { fgR = 180; fgG = 140; fgB = 255; }
                 else if (isCmd) { fgR = 255; fgG = 220; fgB = 100; }
+                else if (extStatus == Extensions.ExtensionCellStatus.Error) { fgR = 255; fgG = 80; fgB = 80; }
+                else if (extStatus == Extensions.ExtensionCellStatus.Running) { fgR = 80; fgG = 255; fgB = 80; }
                 else { fgR = 255; fgG = 255; fgB = 255; }
 
                 DrawTextWithBg(display, x, y, fgR, fgG, fgB, bgR, bgG, bgB);
@@ -1406,6 +1414,7 @@ internal class DesktopWindow : IDisposable
         catch { }
 
         _inlineProcesses.Dispose();
+        _extensionManager.Dispose();
 
         if (_xftDraw != IntPtr.Zero)
             XftDrawDestroy(_xftDraw);
