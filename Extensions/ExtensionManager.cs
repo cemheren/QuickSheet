@@ -83,9 +83,13 @@ public class ExtensionManager : IDisposable
     }
 
     /// <summary>
-    /// Scans the entire grid for ext: and registered-prefix cells.
-    /// Call this on load and periodically (e.g., every render cycle).
+    /// Forces re-activation of an extension call at the given cell.
+    /// Removes any existing activation so the next ScanGrid() will re-send activate.
     /// </summary>
+    public void ReactivateCell(int row, int col)
+    {
+        _activeCalls.Remove((row, col));
+    }
     public void ScanGrid()
     {
         if (_disposed) return;

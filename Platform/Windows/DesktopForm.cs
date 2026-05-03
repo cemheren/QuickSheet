@@ -902,6 +902,7 @@ internal class DesktopForm : DesktopFormBase
                 case Keys.Enter:
                     {
                         var (curRow, curCol) = _grid.GetCurrentCell();
+                        _extensionManager.ReactivateCell(curRow, curCol);
                         // If current cell is an inline ref to a command, re-run it
                         if (TryRerunInlineCommand(curRow, curCol))
                             break;

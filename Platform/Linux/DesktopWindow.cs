@@ -1165,6 +1165,7 @@ internal class DesktopWindow : IDisposable
                 _selection.Clear();
                 break;
             case XK_Return:
+                _extensionManager.ReactivateCell(_selectedRow, _selectedCol);
                 if (TryRerunInlineCommand(_selectedRow, _selectedCol))
                     break;
                 OpenAllSelected();
