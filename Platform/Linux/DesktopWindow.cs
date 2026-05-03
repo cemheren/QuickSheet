@@ -37,6 +37,10 @@ internal class DesktopWindow : IDisposable
     private IntPtr _xftFont;
     private IntPtr _visual;
     private IntPtr _colormap;
+    private IntPtr _backBuffer;
+    private IntPtr _backBufferXftDraw;
+    private IntPtr _renderDrawable;  // current draw target (backbuffer or window)
+    private IntPtr _renderXftDraw;   // current xft draw target
     private int _screen;
 
     private int _charWidth;
@@ -487,6 +491,9 @@ internal class DesktopWindow : IDisposable
         // Create XftDraw now that window is mapped
         _xftDraw = XftDrawCreate(_display, _window, _visual, _colormap);
 
+        // Create double buffer to eliminate flicker
+        CreateBackBuffer();
+
         _running = true;
 
         IntPtr eventPtr = Marshal.AllocHGlobal(XEventSize);
@@ -548,6 +555,7 @@ internal class DesktopWindow : IDisposable
                             if (_xftDraw != IntPtr.Zero)
                                 XftDrawDestroy(_xftDraw);
                             _xftDraw = XftDrawCreate(_display, _window, _visual, _colormap);
+                            CreateBackBuffer();
                             Render();
                         }
                         break;
@@ -582,13 +590,16 @@ internal class DesktopWindow : IDisposable
 
     private void Render()
     {
+        _renderDrawable = _backBuffer != IntPtr.Zero ? _backBuffer : _window;
+        _renderXftDraw = _backBufferXftDraw != IntPtr.Zero ? _backBufferXftDraw : _xftDraw;
+
         int cw = _charWidth;
         int ch = _charHeight;
         int[] colWidths = GetColumnWidths();
 
         // Clear background (semi-transparent if ARGB visual available)
         SetGCColor(0, 0, 0, _hasArgbVisual ? _bgAlpha : 255);
-        XFillRectangle(_display, _window, _gc, 0, 0, (uint)_screenWidth, (uint)_screenHeight);
+        XFillRectangle(_display, _renderDrawable, _gc, 0, 0, (uint)_screenWidth, (uint)_screenHeight);
 
         // Pre-scan for inline cells with multi-cell visual spans (e.g. {A1::C5}-style refs).
         // Each spanning inline anchor produces an overlay drawn after the row loop;
@@ -749,7 +760,7 @@ internal class DesktopWindow : IDisposable
             }
             // Subtle horizontal grid line at the bottom of each row
             SetGCColor(40, 40, 40, _hasArgbVisual ? _bgAlpha : 255);
-            XDrawLine(_display, _window, _gc, 0, y + ch - 1, _screenWidth, y + ch - 1);
+            XDrawLine(_display, _renderDrawable, _gc, 0, y + ch - 1, _screenWidth, y + ch - 1);
             y += ch;
         }
 
@@ -782,12 +793,12 @@ internal class DesktopWindow : IDisposable
 
             // Background
             SetGCColor(sBgR, sBgG, sBgB, _hasArgbVisual ? _bgAlpha : 255);
-            XFillRectangle(_display, _window, _gc, spanX, spanY, (uint)spanWidth, (uint)spanHeight);
+            XFillRectangle(_display, _renderDrawable, _gc, spanX, spanY, (uint)spanWidth, (uint)spanHeight);
 
             // Border
             int borR = hasCursor ? 100 : 60, borG = hasCursor ? 180 : 100, borB = hasCursor ? 200 : 120;
             SetGCColor(borR, borG, borB, 255);
-            XDrawRectangle(_display, _window, _gc, spanX, spanY, (uint)(spanWidth - 1), (uint)(spanHeight - 1));
+            XDrawRectangle(_display, _renderDrawable, _gc, spanX, spanY, (uint)(spanWidth - 1), (uint)(spanHeight - 1));
 
             // Cell-ref label
             string cellRef = _grid.GetCellReference(span.anchorRow, span.anchorCol);
@@ -881,6 +892,10 @@ internal class DesktopWindow : IDisposable
         // White background status bar (fully opaque)
         DrawTextWithBg(status, 0, statusY, 0, 0, 0, 255, 255, 255, 255);
 
+        // Blit back buffer to window
+        if (_backBuffer != IntPtr.Zero)
+            XCopyArea(_display, _backBuffer, _window, _gc, 0, 0, (uint)_screenWidth, (uint)_screenHeight, 0, 0);
+
         XFlush(_display);
     }
 
@@ -931,6 +946,28 @@ internal class DesktopWindow : IDisposable
         _selection.Clear();
     }
 
+    private void CreateBackBuffer()
+    {
+        FreeBackBuffer();
+        uint depth = _hasArgbVisual ? 32u : (uint)XDefaultDepth(_display, _screen);
+        _backBuffer = XCreatePixmap(_display, _window, (uint)_screenWidth, (uint)_screenHeight, depth);
+        _backBufferXftDraw = XftDrawCreate(_display, _backBuffer, _visual, _colormap);
+    }
+
+    private void FreeBackBuffer()
+    {
+        if (_backBufferXftDraw != IntPtr.Zero)
+        {
+            XftDrawDestroy(_backBufferXftDraw);
+            _backBufferXftDraw = IntPtr.Zero;
+        }
+        if (_backBuffer != IntPtr.Zero)
+        {
+            XFreePixmap(_display, _backBuffer);
+            _backBuffer = IntPtr.Zero;
+        }
+    }
+
     private void SetGCColor(int r, int g, int b, int a = 255)
     {
         ulong pixel = _hasArgbVisual
@@ -946,7 +983,7 @@ internal class DesktopWindow : IDisposable
         // Draw background rectangle (use per-cell alpha, or default _bgAlpha for normal cells)
         int alpha = bgA >= 0 ? bgA : (_hasArgbVisual ? _bgAlpha : 255);
         SetGCColor(bgR, bgG, bgB, alpha);
-        XFillRectangle(_display, _window, _gc, x, y, (uint)w, (uint)_charHeight);
+        XFillRectangle(_display, _renderDrawable, _gc, x, y, (uint)w, (uint)_charHeight);
 
         // Draw text with Xft
         var renderColor = new XRenderColor
@@ -959,7 +996,7 @@ internal class DesktopWindow : IDisposable
         XftColorAllocValue(_display, _visual, _colormap, ref renderColor, out XftColor xftColor);
 
         byte[] utf8 = Encoding.UTF8.GetBytes(text);
-        XftDrawStringUtf8(_xftDraw, ref xftColor, _xftFont, x, y + _fontAscent, utf8, utf8.Length);
+        XftDrawStringUtf8(_renderXftDraw, ref xftColor, _xftFont, x, y + _fontAscent, utf8, utf8.Length);
 
         XftColorFree(_display, _visual, _colormap, ref xftColor);
     }
@@ -1492,6 +1529,8 @@ internal class DesktopWindow : IDisposable
 
         _inlineProcesses.Dispose();
         _extensionManager.Dispose();
+
+        FreeBackBuffer();
 
         if (_xftDraw != IntPtr.Zero)
             XftDrawDestroy(_xftDraw);

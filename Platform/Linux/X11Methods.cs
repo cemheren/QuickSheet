@@ -120,6 +120,17 @@ internal static class X11Methods
     public static extern int XClearWindow(IntPtr display, IntPtr window);
 
     [DllImport(LibX11)]
+    public static extern IntPtr XCreatePixmap(IntPtr display, IntPtr drawable,
+        uint width, uint height, uint depth);
+
+    [DllImport(LibX11)]
+    public static extern int XFreePixmap(IntPtr display, IntPtr pixmap);
+
+    [DllImport(LibX11)]
+    public static extern int XCopyArea(IntPtr display, IntPtr src, IntPtr dest, IntPtr gc,
+        int srcX, int srcY, uint width, uint height, int destX, int destY);
+
+    [DllImport(LibX11)]
     public static extern int XFlush(IntPtr display);
 
     [DllImport(LibX11)]
