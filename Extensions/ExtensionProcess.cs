@@ -12,6 +12,7 @@ public class ExtensionProcess : IDisposable
 {
     private Process? _process;
     private Thread? _readerThread;
+    private Thread? _errorReaderThread;
     private volatile bool _disposed;
 
     private readonly object _lock = new();
@@ -52,6 +53,9 @@ public class ExtensionProcess : IDisposable
 
             _readerThread = new Thread(ReadLoop) { IsBackground = true, Name = $"ExtReader-{ExtensionName}" };
             _readerThread.Start();
+
+            _errorReaderThread = new Thread(ErrorReadLoop) { IsBackground = true, Name = $"ExtError-{ExtensionName}" };
+            _errorReaderThread.Start();
 
             // Send init message
             SendMessage(new InitMessage());
@@ -112,10 +116,29 @@ public class ExtensionProcess : IDisposable
                 if (line == null) break;
                 if (string.IsNullOrWhiteSpace(line)) continue;
 
+                Console.Error.WriteLine($"[ext:{ExtensionName}:stdout] {line}");
+
                 lock (_lock)
                 {
                     _incomingMessages.Enqueue(line);
                 }
+            }
+        }
+        catch when (_disposed) { }
+        catch { }
+    }
+
+    private void ErrorReadLoop()
+    {
+        try
+        {
+            while (!_disposed && _process?.HasExited == false)
+            {
+                string? line = _process.StandardError.ReadLine();
+                if (line == null) break;
+                if (string.IsNullOrWhiteSpace(line)) continue;
+
+                Console.Error.WriteLine($"[ext:{ExtensionName}:stderr] {line}");
             }
         }
         catch when (_disposed) { }
