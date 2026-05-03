@@ -1,13 +1,17 @@
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Text;
+#if PLATFORM_LINUX
+using ExcelConsole.Platform.Linux;
+#endif
 
 namespace ExcelConsole;
 
 /// <summary>
 /// Manages live subprocesses for inline command execution (i: cells pointing to r: cells).
 /// On Windows, uses ConPTY (Pseudo Console) to capture output from interactive/TUI programs.
-/// On Linux, falls back to stdout/stderr pipe redirection.
+/// On Linux, uses openpty + fork + exec (PtyProcess) for the same effect — gives the
+/// child a real tty so streaming/TUI commands behave normally.
 /// Thread-safe: output can be read from the UI thread while processes write from background threads.
 /// </summary>
 public class InlineProcessManager : IDisposable
@@ -40,43 +44,30 @@ public class InlineProcessManager : IDisposable
 
         public void Dispose() => _pty?.Dispose();
 #else
-        public Process? Process { get; set; }
-        public bool HasNewOutput { get; set; }
-        public bool HasExited => Process?.HasExited ?? true;
-        private readonly object _lock = new();
-        private readonly List<string> _outputLines = new();
+        private PtyProcess? _pty;
 
-        public void AppendLine(string line)
+        public bool HasNewOutput => _pty?.HasNewOutput ?? false;
+        public bool HasExited => _pty?.HasExited ?? true;
+
+        public void StartPty(string cmdText, int cols = 120, int rows = 30)
         {
-            lock (_lock)
+            _pty = new PtyProcess();
+            if (!_pty.Start(cmdText, cols, rows))
             {
-                _outputLines.Add(line);
-                while (_outputLines.Count > MaxOutputLines)
-                    _outputLines.RemoveAt(0);
-                HasNewOutput = true;
+                _pty.Dispose();
+                _pty = null;
             }
         }
 
-        public string? GetOutput()
+        public void AppendError(string msg)
         {
-            lock (_lock)
-            {
-                HasNewOutput = false;
-                if (_outputLines.Count == 0) return null;
-                return string.Join("\n", _outputLines);
-            }
+            _pty?.Dispose();
+            _pty = PtyProcess.CreateError(msg);
         }
 
-        public void Dispose()
-        {
-            try
-            {
-                if (Process != null && !Process.HasExited)
-                    Process.Kill(entireProcessTree: true);
-            }
-            catch { }
-            Process?.Dispose();
-        }
+        public string? GetOutput() => _pty?.GetOutput();
+
+        public void Dispose() => _pty?.Dispose();
 #endif
     }
 
@@ -109,38 +100,12 @@ public class InlineProcessManager : IDisposable
 #else
         try
         {
-            var psi = new ProcessStartInfo
-            {
-                FileName = "/bin/sh",
-                Arguments = $"-c \"{cmdText.Replace("\"", "\\\"")}\"",
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                CreateNoWindow = true,
-                StandardOutputEncoding = Encoding.UTF8,
-                StandardErrorEncoding = Encoding.UTF8,
-            };
-
-            var proc = new Process { StartInfo = psi, EnableRaisingEvents = true };
-            managed.Process = proc;
-
-            proc.OutputDataReceived += (_, e) =>
-            {
-                if (e.Data != null) managed.AppendLine(e.Data);
-            };
-            proc.ErrorDataReceived += (_, e) =>
-            {
-                if (e.Data != null) managed.AppendLine($"[err] {e.Data}");
-            };
-
-            proc.Start();
-            proc.BeginOutputReadLine();
-            proc.BeginErrorReadLine();
+            managed.StartPty(cmdText, ptyCols, ptyRows);
             _processes[key] = managed;
         }
         catch (Exception ex)
         {
-            managed.AppendLine($"[failed to start: {ex.Message}]");
+            managed.AppendError($"[failed to start: {ex.Message}]");
             _processes[key] = managed;
         }
 #endif
