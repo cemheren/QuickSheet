@@ -223,6 +223,8 @@ internal static class X11Methods
     public const long KeyReleaseMask = 1L << 1;
     public const long ButtonPressMask = 1L << 2;
     public const long ButtonReleaseMask = 1L << 3;
+    public const long PointerMotionMask = 1L << 6;
+    public const long Button1MotionMask = 1L << 8;
     public const long ExposureMask = 1L << 15;
     public const long StructureNotifyMask = 1L << 17;
     public const long FocusChangeMask = 1L << 21;
@@ -233,6 +235,7 @@ internal static class X11Methods
     public const int KeyRelease = 3;
     public const int ButtonPress = 4;
     public const int ButtonRelease = 5;
+    public const int MotionNotify = 6;
     public const int Expose = 12;
     public const int ConfigureNotify = 22;
     public const int SelectionClear = 29;
@@ -365,6 +368,24 @@ internal static class X11Methods
         public int x_root, y_root;
         public uint state;
         public uint button;
+        public int same_screen; // Bool
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct XMotionEvent
+    {
+        public int type;
+        public ulong serial;
+        public int send_event; // Bool
+        public IntPtr display;
+        public IntPtr window;
+        public IntPtr root;
+        public IntPtr subwindow;
+        public ulong time;
+        public int x, y;
+        public int x_root, y_root;
+        public uint state;
+        public byte is_hint; // char
         public int same_screen; // Bool
     }
 

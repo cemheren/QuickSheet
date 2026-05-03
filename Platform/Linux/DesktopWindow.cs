@@ -64,6 +64,11 @@ internal class DesktopWindow : IDisposable
     private int _lastClickCol = -1;
     private const ulong DoubleClickMs = 400;
 
+    // Drag selection
+    private bool _dragging;
+    private int _dragAnchorRow;
+    private int _dragAnchorCol;
+
     // Transparency
     private bool _hasArgbVisual;
     private int _bgAlpha = 204; // ~80% opacity (0-255)
@@ -140,8 +145,8 @@ internal class DesktopWindow : IDisposable
 
         // Subscribe to events
         XSelectInput(display, _window,
-            KeyPressMask | ButtonPressMask | ExposureMask |
-            StructureNotifyMask | FocusChangeMask);
+            KeyPressMask | ButtonPressMask | ButtonReleaseMask | Button1MotionMask |
+            ExposureMask | StructureNotifyMask | FocusChangeMask);
 
         // Intern atoms
         _atomWmDeleteWindow = XInternAtom(display, "WM_DELETE_WINDOW", false);
@@ -521,6 +526,16 @@ internal class DesktopWindow : IDisposable
                     case ButtonPress:
                         var buttonEvent = Marshal.PtrToStructure<XButtonEvent>(eventPtr);
                         HandleButtonPress(ref buttonEvent);
+                        Render();
+                        break;
+
+                    case ButtonRelease:
+                        HandleButtonRelease();
+                        break;
+
+                    case MotionNotify:
+                        var motionEvent = Marshal.PtrToStructure<XMotionEvent>(eventPtr);
+                        HandleMotionNotify(ref motionEvent);
                         Render();
                         break;
 
@@ -1265,6 +1280,9 @@ internal class DesktopWindow : IDisposable
             else
             {
                 _selection.Clear();
+                _dragging = true;
+                _dragAnchorRow = row;
+                _dragAnchorCol = col;
             }
 
             _selectedRow = row;
@@ -1274,6 +1292,47 @@ internal class DesktopWindow : IDisposable
         {
             OpenAllSelected();
         }
+    }
+
+    private void HandleButtonRelease()
+    {
+        _dragging = false;
+    }
+
+    private void HandleMotionNotify(ref XMotionEvent motionEvent)
+    {
+        if (!_dragging) return;
+
+        int headerRows = 2;
+        int row = (motionEvent.y / _charHeight) - headerRows;
+        row = Math.Clamp(row, 0, _grid.RowCount - 1);
+
+        int[] colWidths = GetColumnWidths();
+        int x = RowHeaderWidth * _charWidth;
+        int col = _grid.ColumnCount - 1; // default to last col if past end
+        for (int c = 0; c < _grid.ColumnCount; c++)
+        {
+            int colPx = colWidths[c] * _charWidth;
+            if (motionEvent.x < x + colPx) { col = c; break; }
+            x += colPx;
+        }
+        col = Math.Clamp(col, 0, _grid.ColumnCount - 1);
+
+        _selectedRow = row;
+        _selectedCol = col;
+        SelectRectangle(_dragAnchorRow, _dragAnchorCol, row, col);
+    }
+
+    private void SelectRectangle(int anchorRow, int anchorCol, int endRow, int endCol)
+    {
+        _selection.Clear();
+        int r1 = Math.Min(anchorRow, endRow);
+        int r2 = Math.Max(anchorRow, endRow);
+        int c1 = Math.Min(anchorCol, endCol);
+        int c2 = Math.Max(anchorCol, endCol);
+        for (int r = r1; r <= r2; r++)
+            for (int c = c1; c <= c2; c++)
+                _selection.Add((r, c));
     }
 
     // ── Clipboard ────────────────────────────────────────────────────
