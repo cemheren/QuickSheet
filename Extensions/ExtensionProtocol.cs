@@ -86,6 +86,13 @@ public static class ExtensionProtocol
         public string Message { get; set; } = "";
     }
 
+    public class StatusMessage
+    {
+        public string Type { get; set; } = "status";
+        public string Id { get; set; } = "";
+        public string Message { get; set; } = "";
+    }
+
     public class LogMessage
     {
         public string Type { get; set; } = "log";

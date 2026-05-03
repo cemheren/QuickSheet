@@ -223,6 +223,12 @@ public class ExtensionManager : IDisposable
                             HandleWriteCells(write);
                         break;
 
+                    case "status":
+                        var status = Deserialize<StatusMessage>(json);
+                        if (status != null)
+                            HandleStatus(status);
+                        break;
+
                     case "error":
                         var error = Deserialize<ErrorMessage>(json);
                         if (error != null)
@@ -251,11 +257,16 @@ public class ExtensionManager : IDisposable
         // Output starts one row below the command cell
         var anchor = new CellPosition { Row = row + 1, Col = col };
 
+        // Expand cell references (e.g., {A1::C10}) in params before sending
+        var expandedParams = new string[call.extParams.Length];
+        for (int i = 0; i < call.extParams.Length; i++)
+            expandedParams[i] = CellPrefix.ExpandCellReferences(call.extParams[i], _grid);
+
         var msg = new ActivateMessage
         {
             Id = activationId,
             Anchor = anchor,
-            Params = call.extParams,
+            Params = expandedParams,
             GridCols = call.gridCols,
             GridRows = call.gridRows
         };
@@ -304,6 +315,26 @@ public class ExtensionManager : IDisposable
         }
 
         HasChanges = true;
+    }
+
+    /// <summary>
+    /// Handles a status message from an extension, writing temporary status text to the anchor cell.
+    /// </summary>
+    private void HandleStatus(StatusMessage msg)
+    {
+        foreach (var ac in _activeCalls.Values)
+        {
+            if (ac.ActivationId == msg.Id)
+            {
+                if (ac.AnchorRow >= 0 && ac.AnchorRow < _grid.RowCount &&
+                    ac.AnchorCol >= 0 && ac.AnchorCol < _grid.ColumnCount)
+                {
+                    _grid.SetCellValue(ac.AnchorRow, ac.AnchorCol, msg.Message);
+                    HasChanges = true;
+                }
+                break;
+            }
+        }
     }
 
     /// <summary>

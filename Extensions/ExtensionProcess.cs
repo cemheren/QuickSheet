@@ -45,6 +45,8 @@ public class ExtensionProcess : IDisposable
             CreateNoWindow = true,
             WorkingDirectory = workingDirectory
         };
+        psi.Environment["QUICKSHEET_EXTENSIONS_DIR"] = env.ExtensionsDirectory;
+        psi.Environment["QUICKSHEET_PROTOCOL_VERSION"] = ExtensionProtocol.ProtocolVersion.ToString();
 
         try
         {
