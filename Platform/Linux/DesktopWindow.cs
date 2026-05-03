@@ -28,6 +28,7 @@ internal class DesktopWindow : IDisposable
     private readonly LinuxEditingMode _editMode;
     private bool _showResolved;
     private readonly InlineProcessManager _inlineProcesses = new();
+    private readonly Extensions.ExtensionManager _extensionManager;
 
     private IntPtr _display;
     private IntPtr _window;
@@ -103,6 +104,7 @@ internal class DesktopWindow : IDisposable
         int availableHeight = _screenHeight / _charHeight - 3;
         _grid = new GridManager(availableWidth, availableHeight, _columnWidth);
         _editMode = new LinuxEditingMode(_grid);
+        _extensionManager = new Extensions.ExtensionManager(new LinuxExtensionEnvironment(), _grid);
 
         // Create the window (try 32-bit ARGB visual for transparency)
         IntPtr root = XDefaultRootWindow(display);
@@ -491,7 +493,8 @@ internal class DesktopWindow : IDisposable
                 // This gives sub-second update cadence for `i:` cells without a full event-driven wakeup.
                 if (XPending(_display) == 0)
                 {
-                    if (_inlineProcesses.HasAnyNewOutput() || _externalChangePending)
+                    _extensionManager.ScanGrid();
+                    if (_inlineProcesses.HasAnyNewOutput() || _externalChangePending || _extensionManager.ConsumeHasChanges())
                     {
                         _externalChangePending = false;
                         Render();
@@ -1406,6 +1409,7 @@ internal class DesktopWindow : IDisposable
         catch { }
 
         _inlineProcesses.Dispose();
+        _extensionManager.Dispose();
 
         if (_xftDraw != IntPtr.Zero)
             XftDrawDestroy(_xftDraw);

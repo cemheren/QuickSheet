@@ -19,6 +19,49 @@ public static class CellPrefix
         value.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
         value.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
 
+    public static bool IsExtension(string value) =>
+        value.StartsWith("ext: ", StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// Parses an "ext: github:user/repo" cell value into the GitHub reference.
+    /// Returns null if not a valid extension cell.
+    /// </summary>
+    public static string? ParseExtensionSource(string value)
+    {
+        if (!IsExtension(value)) return null;
+        string source = value[5..].Trim();
+        return string.IsNullOrEmpty(source) ? null : source;
+    }
+
+    /// <summary>
+    /// Parses a prefixed cell like "wthr: 98112,2,7" into (prefix, params[], gridCols, gridRows).
+    /// Last two comma-separated values are always gridCols and gridRows.
+    /// Returns null if parsing fails.
+    /// </summary>
+    public static (string prefix, string[] extParams, int gridCols, int gridRows)? ParseExtensionCall(
+        string value, HashSet<string> knownPrefixes)
+    {
+        int colonIdx = value.IndexOf(':');
+        if (colonIdx <= 0) return null;
+
+        string prefix = value[..colonIdx].Trim().ToLowerInvariant();
+        if (!knownPrefixes.Contains(prefix)) return null;
+
+        string rest = value[(colonIdx + 1)..].Trim();
+        if (string.IsNullOrEmpty(rest)) return null;
+
+        string[] parts = rest.Split(',', StringSplitOptions.TrimEntries);
+        if (parts.Length < 2) return null;
+
+        // Last two are always gridCols, gridRows
+        if (!int.TryParse(parts[^2], out int gridCols) || !int.TryParse(parts[^1], out int gridRows))
+            return null;
+        if (gridCols < 1 || gridRows < 1) return null;
+
+        string[] extParams = parts.Length > 2 ? parts[..^2] : [];
+        return (prefix, extParams, gridCols, gridRows);
+    }
+
     // ── Cell reference parsing ───────────────────────────────────────
 
     /// <summary>
