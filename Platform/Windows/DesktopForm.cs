@@ -54,6 +54,7 @@ internal class DesktopForm : DesktopFormBase
     private const int RowHeaderWidth = 4;
 
     private readonly InlineProcessManager _processManager = new();
+    private readonly Extensions.ExtensionManager _extensionManager;
     private System.Threading.Timer? _inlineRefreshTimer;
 
     private static readonly string AutoSavePath = Path.Combine(
@@ -82,6 +83,7 @@ internal class DesktopForm : DesktopFormBase
         int availableHeight = Bounds.Height / _charHeight - 3;
         _grid = new GridManager(availableWidth, availableHeight, _columnWidth);
         _editMode = new EditingMode(_grid);
+        _extensionManager = new Extensions.ExtensionManager(new WindowsExtensionEnvironment(), _grid);
 
         // Distribute available width evenly so columns fill the screen
         int usableChars = availableWidth - RowHeaderWidth;
@@ -142,7 +144,8 @@ internal class DesktopForm : DesktopFormBase
         {
             try
             {
-                if (_processManager.HasAnyNewOutput())
+                _extensionManager.ScanGrid();
+                if (_processManager.HasAnyNewOutput() || _extensionManager.ConsumeHasChanges())
                     BeginInvoke(() => Invalidate());
             }
             catch { }
@@ -484,6 +487,7 @@ internal class DesktopForm : DesktopFormBase
                 bool isLink = IsHyperlink(cellVal);
                 bool isCmd = IsCommand(cellVal);
                 bool isConflict = cellVal.StartsWith("c: ", StringComparison.Ordinal);
+                var extStatus = _extensionManager.GetCellStatus(r, c);
                 Color bg = isCursor && isSearchMatch ? Color.FromArgb(0, 180, 0)
                          : isCursor   ? Color.FromArgb(64, 64, 64)
                          : isMultiSel ? Color.FromArgb(50, 50, 80)
@@ -494,6 +498,8 @@ internal class DesktopForm : DesktopFormBase
                          : isFile     ? Color.FromArgb(0, 40, 60)
                          : isLink     ? Color.FromArgb(40, 0, 60)
                          : isCmd      ? Color.FromArgb(40, 40, 0)
+                         : extStatus == Extensions.ExtensionCellStatus.Error ? Color.FromArgb(50, 10, 10)
+                         : extStatus == Extensions.ExtensionCellStatus.Running ? Color.FromArgb(10, 40, 10)
                          : Color.Black;
                 Color fg = isConflict ? Color.FromArgb(255, 180, 180)
                          : isInlineCmd ? Color.FromArgb(100, 255, 150)
@@ -501,6 +507,8 @@ internal class DesktopForm : DesktopFormBase
                          : isFile ? Color.FromArgb(100, 200, 255)
                          : isLink ? Color.FromArgb(180, 140, 255)
                          : isCmd  ? Color.FromArgb(255, 220, 100)
+                         : extStatus == Extensions.ExtensionCellStatus.Error ? Color.FromArgb(255, 80, 80)
+                         : extStatus == Extensions.ExtensionCellStatus.Running ? Color.FromArgb(80, 255, 80)
                          : Color.White;
                 DrawText(g, display, x, y, fg, bg);
                 x += w * cw;
@@ -1127,6 +1135,7 @@ internal class DesktopForm : DesktopFormBase
             _autoSaveTimer?.Dispose();
             _csvReloadTimer?.Dispose();
             _processManager.Dispose();
+            _extensionManager.Dispose();
             _monoFont.Dispose();
             _trayIcon.Dispose();
         }
