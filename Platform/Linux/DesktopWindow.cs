@@ -677,6 +677,7 @@ internal class DesktopWindow : IDisposable
                 bool isFile = _grid.IsFileEntry(r, c);
                 bool isLink = IsHyperlink(cellVal);
                 bool isCmd = IsCommand(cellVal);
+                bool isLoop = CellPrefix.IsLoop(cellVal);
                 var extStatus = _extensionManager.GetCellStatus(r, c);
 
                 int bgR, bgG, bgB, fgR, fgG, fgB;
@@ -688,6 +689,7 @@ internal class DesktopWindow : IDisposable
                 else if (isFile) { bgR = 0; bgG = 40; bgB = 60; }
                 else if (isLink) { bgR = 40; bgG = 0; bgB = 60; }
                 else if (isCmd) { bgR = 40; bgG = 40; bgB = 0; }
+                else if (isLoop) { bgR = 0; bgG = 40; bgB = 40; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Error) { bgR = 50; bgG = 10; bgB = 10; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Running) { bgR = 10; bgG = 40; bgB = 10; }
                 else { bgR = 15; bgG = 15; bgB = 15; }
@@ -695,6 +697,7 @@ internal class DesktopWindow : IDisposable
                 if (isFile) { fgR = 100; fgG = 200; fgB = 255; }
                 else if (isLink) { fgR = 180; fgG = 140; fgB = 255; }
                 else if (isCmd) { fgR = 255; fgG = 220; fgB = 100; }
+                else if (isLoop) { fgR = 100; fgG = 220; fgB = 200; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Error) { fgR = 255; fgG = 80; fgB = 80; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Running) { fgR = 80; fgG = 255; fgB = 80; }
                 else { fgR = 255; fgG = 255; fgB = 255; }
