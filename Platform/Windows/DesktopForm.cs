@@ -56,6 +56,7 @@ internal class DesktopForm : DesktopFormBase
     private readonly InlineProcessManager _processManager = new();
     private readonly Extensions.ExtensionManager _extensionManager;
     private System.Threading.Timer? _inlineRefreshTimer;
+    private readonly LoopManager _loopManager;
 
     private static readonly string AutoSavePath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "autosave.csv");
@@ -84,6 +85,7 @@ internal class DesktopForm : DesktopFormBase
         _grid = new GridManager(availableWidth, availableHeight, _columnWidth);
         _editMode = new EditingMode(_grid);
         _extensionManager = new Extensions.ExtensionManager(new WindowsExtensionEnvironment(), _grid);
+        _loopManager = new LoopManager(_grid, ActivateCellAt);
 
         // Distribute available width evenly so columns fill the screen
         int usableChars = availableWidth - RowHeaderWidth;
@@ -220,6 +222,7 @@ internal class DesktopForm : DesktopFormBase
         _grid = newGrid;
         _editMode.Grid = _grid;
         _extensionManager.UpdateGrid(_grid);
+        _loopManager.UpdateGrid(_grid);
         _grid.SelectCell(prevRow, prevCol);
 
         if (_loadedFile is not null)
@@ -323,6 +326,45 @@ internal class DesktopForm : DesktopFormBase
         // If nothing was opened, move down as default Enter behavior
         if (!opened)
             _grid.MoveDown();
+    }
+
+    /// <summary>
+    /// Activates a single cell as if the user pressed Enter on it.
+    /// Used by LoopManager for periodic activation of target cells.
+    /// </summary>
+    private void ActivateCellAt(int row, int col)
+    {
+        if (row < 0 || row >= _grid.RowCount || col < 0 || col >= _grid.ColumnCount)
+            return;
+
+        _extensionManager.ReactivateCell(row, col);
+
+        string val = _grid.GetCellValue(row, col);
+        if (CellPrefix.IsInline(val))
+        {
+            string? resolved = _grid.ResolveInline(row, col);
+            if (resolved != null && CellPrefix.IsCommand(resolved))
+            {
+                _processManager.StopProcess(row, col);
+                try { BeginInvoke(() => Invalidate()); } catch { }
+                return;
+            }
+        }
+
+        if (_grid.IsFileEntry(row, col))
+        {
+            string path = _grid.GetFilePath(row, col);
+            if (!string.IsNullOrEmpty(path))
+                try { Process.Start(new ProcessStartInfo(path) { UseShellExecute = true }); } catch { }
+        }
+        else if (IsCommand(val))
+        {
+            RunCommand(val);
+        }
+        else if (IsHyperlink(val))
+        {
+            try { Process.Start(new ProcessStartInfo(val) { UseShellExecute = true }); } catch { }
+        }
     }
 
     // ── Rendering ────────────────────────────────────────────────────
@@ -1133,6 +1175,7 @@ internal class DesktopForm : DesktopFormBase
     {
         if (disposing)
         {
+            _loopManager.Dispose();
             _inlineRefreshTimer?.Dispose();
             _autoSaveTimer?.Dispose();
             _csvReloadTimer?.Dispose();

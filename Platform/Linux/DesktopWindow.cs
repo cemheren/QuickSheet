@@ -29,6 +29,7 @@ internal class DesktopWindow : IDisposable
     private bool _showResolved;
     private readonly InlineProcessManager _inlineProcesses = new();
     private readonly Extensions.ExtensionManager _extensionManager;
+    private readonly LoopManager _loopManager;
 
     private IntPtr _display;
     private IntPtr _window;
@@ -114,6 +115,7 @@ internal class DesktopWindow : IDisposable
         _grid = new GridManager(availableWidth, availableHeight, _columnWidth);
         _editMode = new LinuxEditingMode(_grid);
         _extensionManager = new Extensions.ExtensionManager(new LinuxExtensionEnvironment(), _grid);
+        _loopManager = new LoopManager(_grid, ActivateCellAt);
 
         // Create the window (try 32-bit ARGB visual for transparency)
         IntPtr root = XDefaultRootWindow(display);
@@ -933,6 +935,7 @@ internal class DesktopWindow : IDisposable
         _grid = newGrid;
         _editMode.Grid = _grid;
         _extensionManager.UpdateGrid(_grid);
+        _loopManager.UpdateGrid(_grid);
 
         if (_loadedFile is not null)
             _grid.LoadFromCsv(_loadedFile);
@@ -1517,6 +1520,7 @@ internal class DesktopWindow : IDisposable
 
     public void Dispose()
     {
+        _loopManager.Dispose();
         _autoSaveTimer?.Dispose();
 
         // Autosave on exit
@@ -1540,6 +1544,54 @@ internal class DesktopWindow : IDisposable
             XFreeGC(_display, _gc);
         if (_window != IntPtr.Zero)
             XDestroyWindow(_display, _window);
+    }
+
+    /// <summary>
+    /// Activates a single cell as if the user pressed Enter on it.
+    /// Used by LoopManager for periodic activation of target cells.
+    /// </summary>
+    private void ActivateCellAt(int row, int col)
+    {
+        if (row < 0 || row >= _grid.RowCount || col < 0 || col >= _grid.ColumnCount)
+            return;
+
+        _extensionManager.ReactivateCell(row, col);
+
+        string val = _grid.GetCellValue(row, col);
+        if (CellPrefix.IsInline(val))
+        {
+            string? resolved = _grid.ResolveInline(row, col);
+            if (resolved != null && CellPrefix.IsCommand(resolved))
+            {
+                _inlineProcesses.StopProcess(row, col);
+                return;
+            }
+        }
+
+        if (_grid.IsFileEntry(row, col))
+        {
+            string path = _grid.GetFilePath(row, col);
+            if (!string.IsNullOrEmpty(path))
+                try
+                {
+                    var psi = new ProcessStartInfo("xdg-open") { UseShellExecute = false };
+                    psi.ArgumentList.Add(path);
+                    Process.Start(psi);
+                } catch { }
+        }
+        else if (IsCommand(val))
+        {
+            RunCommand(val);
+        }
+        else if (IsHyperlink(val))
+        {
+            try
+            {
+                var psi = new ProcessStartInfo("xdg-open") { UseShellExecute = false };
+                psi.ArgumentList.Add(val);
+                Process.Start(psi);
+            } catch { }
+        }
     }
 
     /// <summary>

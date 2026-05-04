@@ -19,6 +19,37 @@ public static class CellPrefix
         value.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
         value.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
 
+    public static bool IsLoop(string value) =>
+        value.StartsWith("L: ", StringComparison.Ordinal) ||
+        value.StartsWith("l: ", StringComparison.Ordinal);
+
+    /// <summary>
+    /// Parses "L: A10,15m" into the target cell (row, col) and interval in minutes.
+    /// Returns null if parsing fails.
+    /// </summary>
+    public static (int row, int col, int minutes)? ParseLoop(string value)
+    {
+        if (!IsLoop(value)) return null;
+        string rest = value[3..].Trim();
+        // Expected format: <cellRef>,<N>m
+        int commaIdx = rest.IndexOf(',');
+        if (commaIdx <= 0) return null;
+
+        string cellPart = rest[..commaIdx].Trim();
+        string intervalPart = rest[(commaIdx + 1)..].Trim();
+
+        var cellRef = ParseCellRef(cellPart);
+        if (cellRef == null) return null;
+
+        // Strip trailing 'm' and parse number
+        if (intervalPart.EndsWith('m') || intervalPart.EndsWith('M'))
+            intervalPart = intervalPart[..^1].Trim();
+        if (!int.TryParse(intervalPart, out int minutes) || minutes < 1)
+            return null;
+
+        return (cellRef.Value.row, cellRef.Value.col, minutes);
+    }
+
     public static bool IsExtension(string value) =>
         value.StartsWith("ext: ", StringComparison.OrdinalIgnoreCase);
 
