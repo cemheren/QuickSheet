@@ -85,7 +85,7 @@ internal class DesktopForm : DesktopFormBase
         _grid = new GridManager(availableWidth, availableHeight, _columnWidth);
         _editMode = new EditingMode(_grid);
         _extensionManager = new Extensions.ExtensionManager(new WindowsExtensionEnvironment(), _grid);
-        _loopManager = new LoopManager(_grid, ActivateCellAt);
+        _loopManager = new LoopManager(_grid, (r, c) => ActivateCellAt(r, c));
 
         // Distribute available width evenly so columns fill the screen
         int usableChars = availableWidth - RowHeaderWidth;
@@ -294,7 +294,6 @@ internal class DesktopForm : DesktopFormBase
 
     private void OpenAllSelected()
     {
-        // Collect all cells: current cursor + multi-selection
         var (curRow, curCol) = _grid.GetCurrentCell();
         var cells = new HashSet<(int row, int col)>(_selection)
         {
@@ -303,25 +302,7 @@ internal class DesktopForm : DesktopFormBase
 
         bool opened = false;
         foreach (var (r, c) in cells)
-        {
-            if (_grid.IsFileEntry(r, c))
-            {
-                string path = _grid.GetFilePath(r, c);
-                if (!string.IsNullOrEmpty(path))
-                    try { Process.Start(new ProcessStartInfo(path) { UseShellExecute = true }); opened = true; } catch { }
-            }
-            else
-            {
-                string val = _grid.GetCellValue(r, c);
-                if (IsCommand(val))
-                { 
-                    RunCommand(val); 
-                    opened = true; 
-                }
-                else if (IsHyperlink(val))
-                    try { Process.Start(new ProcessStartInfo(val) { UseShellExecute = true }); opened = true; } catch { }
-            }
-        }
+            opened |= ActivateCellAt(r, c);
 
         // If nothing was opened, move down as default Enter behavior
         if (!opened)
@@ -330,41 +311,38 @@ internal class DesktopForm : DesktopFormBase
 
     /// <summary>
     /// Activates a single cell as if the user pressed Enter on it.
-    /// Used by LoopManager for periodic activation of target cells.
+    /// Handles extension reactivation, inline command reruns, file/command/hyperlink opening.
+    /// Returns true if the cell was meaningfully activated.
     /// </summary>
-    private void ActivateCellAt(int row, int col)
+    private bool ActivateCellAt(int row, int col)
     {
         if (row < 0 || row >= _grid.RowCount || col < 0 || col >= _grid.ColumnCount)
-            return;
+            return false;
 
         _extensionManager.ReactivateCell(row, col);
 
-        string val = _grid.GetCellValue(row, col);
-        if (CellPrefix.IsInline(val))
-        {
-            string? resolved = _grid.ResolveInline(row, col);
-            if (resolved != null && CellPrefix.IsCommand(resolved))
-            {
-                _processManager.StopProcess(row, col);
-                try { BeginInvoke(() => Invalidate()); } catch { }
-                return;
-            }
-        }
+        if (TryRerunInlineCommand(row, col))
+            return true;
 
         if (_grid.IsFileEntry(row, col))
         {
             string path = _grid.GetFilePath(row, col);
             if (!string.IsNullOrEmpty(path))
-                try { Process.Start(new ProcessStartInfo(path) { UseShellExecute = true }); } catch { }
+                try { Process.Start(new ProcessStartInfo(path) { UseShellExecute = true }); return true; } catch { }
         }
-        else if (IsCommand(val))
+        else
         {
-            RunCommand(val);
+            string val = _grid.GetCellValue(row, col);
+            if (IsCommand(val))
+            {
+                RunCommand(val);
+                return true;
+            }
+            else if (IsHyperlink(val))
+                try { Process.Start(new ProcessStartInfo(val) { UseShellExecute = true }); return true; } catch { }
         }
-        else if (IsHyperlink(val))
-        {
-            try { Process.Start(new ProcessStartInfo(val) { UseShellExecute = true }); } catch { }
-        }
+
+        return false;
     }
 
     // ── Rendering ────────────────────────────────────────────────────
@@ -943,14 +921,7 @@ internal class DesktopForm : DesktopFormBase
                     _selection.Clear();
                     break;
                 case Keys.Enter:
-                    {
-                        var (curRow, curCol) = _grid.GetCurrentCell();
-                        _extensionManager.ReactivateCell(curRow, curCol);
-                        // If current cell is an inline ref to a command, re-run it
-                        if (TryRerunInlineCommand(curRow, curCol))
-                            break;
-                        OpenAllSelected();
-                    }
+                    OpenAllSelected();
                     break;
                 case Keys.F1:
                     _showResolved = !_showResolved;

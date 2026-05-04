@@ -115,7 +115,7 @@ internal class DesktopWindow : IDisposable
         _grid = new GridManager(availableWidth, availableHeight, _columnWidth);
         _editMode = new LinuxEditingMode(_grid);
         _extensionManager = new Extensions.ExtensionManager(new LinuxExtensionEnvironment(), _grid);
-        _loopManager = new LoopManager(_grid, ActivateCellAt);
+        _loopManager = new LoopManager(_grid, (r, c) => ActivateCellAt(r, c));
 
         // Create the window (try 32-bit ARGB visual for transparency)
         IntPtr root = XDefaultRootWindow(display);
@@ -422,64 +422,6 @@ internal class DesktopWindow : IDisposable
             catch { }
         }
         return ("", "");
-    }
-
-    private void OpenHyperlink()
-    {
-        string url = _grid.GetCellValue(_selectedRow, _selectedCol);
-        if (!IsHyperlink(url)) return;
-        try
-        {
-            var psi = new ProcessStartInfo("xdg-open") { UseShellExecute = false };
-            psi.ArgumentList.Add(url);
-            Process.Start(psi);
-        }
-        catch { }
-    }
-
-    private void OpenAllSelected()
-    {
-        var cells = new HashSet<(int row, int col)>(_selection)
-        {
-            (_selectedRow, _selectedCol)
-        };
-
-        bool opened = false;
-        foreach (var (r, c) in cells)
-        {
-            if (_grid.IsFileEntry(r, c))
-            {
-                string path = _grid.GetFilePath(r, c);
-                if (!string.IsNullOrEmpty(path))
-                    try
-                    {
-                        var psi = new ProcessStartInfo("xdg-open") { UseShellExecute = false };
-                        psi.ArgumentList.Add(path);
-                        Process.Start(psi);
-                        opened = true;
-                    } catch { }
-            }
-            else
-            {
-                string val = _grid.GetCellValue(r, c);
-                if (IsCommand(val))
-                {
-                    RunCommand(val);
-                    opened = true;
-                }
-                else if (IsHyperlink(val))
-                    try
-                    {
-                        var psi = new ProcessStartInfo("xdg-open") { UseShellExecute = false };
-                        psi.ArgumentList.Add(val);
-                        Process.Start(psi);
-                        opened = true;
-                    } catch { }
-            }
-        }
-
-        if (!opened && _selectedRow < _grid.RowCount - 1)
-            _selectedRow++;
     }
 
     // ── Event Loop ───────────────────────────────────────────────────
@@ -1206,9 +1148,6 @@ internal class DesktopWindow : IDisposable
                 _selection.Clear();
                 break;
             case XK_Return:
-                _extensionManager.ReactivateCell(_selectedRow, _selectedCol);
-                if (TryRerunInlineCommand(_selectedRow, _selectedCol))
-                    break;
                 OpenAllSelected();
                 break;
             case XK_F1:
@@ -1546,27 +1485,35 @@ internal class DesktopWindow : IDisposable
             XDestroyWindow(_display, _window);
     }
 
+    private void OpenAllSelected()
+    {
+        var cells = new HashSet<(int row, int col)>(_selection)
+        {
+            (_selectedRow, _selectedCol)
+        };
+
+        bool opened = false;
+        foreach (var (r, c) in cells)
+            opened |= ActivateCellAt(r, c);
+
+        if (!opened && _selectedRow < _grid.RowCount - 1)
+            _selectedRow++;
+    }
+
     /// <summary>
     /// Activates a single cell as if the user pressed Enter on it.
-    /// Used by LoopManager for periodic activation of target cells.
+    /// Handles extension reactivation, inline command reruns, file/command/hyperlink opening.
+    /// Returns true if the cell was meaningfully activated.
     /// </summary>
-    private void ActivateCellAt(int row, int col)
+    private bool ActivateCellAt(int row, int col)
     {
         if (row < 0 || row >= _grid.RowCount || col < 0 || col >= _grid.ColumnCount)
-            return;
+            return false;
 
         _extensionManager.ReactivateCell(row, col);
 
-        string val = _grid.GetCellValue(row, col);
-        if (CellPrefix.IsInline(val))
-        {
-            string? resolved = _grid.ResolveInline(row, col);
-            if (resolved != null && CellPrefix.IsCommand(resolved))
-            {
-                _inlineProcesses.StopProcess(row, col);
-                return;
-            }
-        }
+        if (TryRerunInlineCommand(row, col))
+            return true;
 
         if (_grid.IsFileEntry(row, col))
         {
@@ -1577,21 +1524,28 @@ internal class DesktopWindow : IDisposable
                     var psi = new ProcessStartInfo("xdg-open") { UseShellExecute = false };
                     psi.ArgumentList.Add(path);
                     Process.Start(psi);
+                    return true;
                 } catch { }
         }
-        else if (IsCommand(val))
+        else
         {
-            RunCommand(val);
-        }
-        else if (IsHyperlink(val))
-        {
-            try
+            string val = _grid.GetCellValue(row, col);
+            if (IsCommand(val))
             {
-                var psi = new ProcessStartInfo("xdg-open") { UseShellExecute = false };
-                psi.ArgumentList.Add(val);
-                Process.Start(psi);
-            } catch { }
+                RunCommand(val);
+                return true;
+            }
+            else if (IsHyperlink(val))
+                try
+                {
+                    var psi = new ProcessStartInfo("xdg-open") { UseShellExecute = false };
+                    psi.ArgumentList.Add(val);
+                    Process.Start(psi);
+                    return true;
+                } catch { }
         }
+
+        return false;
     }
 
     /// <summary>
