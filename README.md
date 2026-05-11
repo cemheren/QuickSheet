@@ -66,6 +66,50 @@ Desktop files are added to cells (padded to right), which can be used in a multi
 
 ![alt text](image.png)
 
+## Extensions — Make Your Desktop Do More
+
+QuickSheet has a lightweight extension system that lets you bring new capabilities right into your grid. Extensions are standalone programs that communicate with QuickSheet over a simple JSON-lines protocol — install one in seconds and it just works.
+
+### Install an extension in one cell
+
+Type `ext: github:user/repo` into any cell and press Enter. QuickSheet clones the repo, reads its manifest, and starts the extension automatically. That's it — no package managers, no config files.
+
+### Example: GitHub Copilot on your desktop
+
+The [quicksheet-copilot-ext](https://github.com/cemheren/quicksheet-copilot-ext) extension brings AI directly into your spreadsheet grid. Ask questions, generate structured data, or summarize cell ranges — all without leaving your desktop.
+
+```
+ext: github:cemheren/quicksheet-copilot-ext
+copilot: test, 1, 1
+```
+
+![Copilot extension running on the desktop](copilot-ext-example.png)
+
+You can reference cell ranges with `{A1::C10}` syntax and Copilot receives the actual cell contents as context:
+
+```
+copilot: summarize this data {B1::E50}, 3, 1
+copilot: generate random test data with name and age, 2, 10
+```
+
+### Example: Weather forecast widget
+
+The [quicksheet-weather](https://github.com/cemheren/quicksheet-weather) extension turns a cell into a live 7-day weather forecast:
+
+```
+ext: github:cemheren/quicksheet-weather
+wthr: Seattle, 2, 7
+```
+
+### Build your own
+
+Extensions are regular .NET (or any language) programs that read/write JSON lines on stdin/stdout. The protocol is intentionally minimal:
+
+1. QuickSheet sends `{"type":"init"}` → extension replies with `{"type":"register", "prefix":"xyz", ...}`
+2. When a user activates a cell matching the prefix, QuickSheet sends `{"type":"activate", ...}` → extension replies with `{"type":"write", "cells":[...]}` to fill the grid.
+
+Ship a `quicksheet-extension.json` manifest in your repo and you're done. See the [weather extension](https://github.com/cemheren/quicksheet-weather) for a minimal working example, or the [Copilot extension](https://github.com/cemheren/quicksheet-copilot-ext) for something more advanced.
+
 ## Keyboard Shortcuts
 
 | Shortcut | Action |
