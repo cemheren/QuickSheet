@@ -112,16 +112,52 @@ Ship a `quicksheet-extension.json` manifest in your repo and you're done. See th
 
 ## Keyboard Shortcuts
 
+### Navigation
+
 | Shortcut | Action |
 |----------|--------|
 | Arrow Keys | Navigate cells |
-| F2 | Edit cell in status bar |
-| Enter | Open file / URL / command |
+| Shift+Arrow | Extend selection / multi-select |
+| Tab | Move right, wrap to next row |
+| Enter | Activate cell (open URL / run command) |
+
+### Editing
+
+| Shortcut | Action |
+|----------|--------|
+| F2 | Edit cell in-place |
+| Backspace | Delete last character / clear selection |
+| Delete | Clear cell or selection |
+| Escape | Cancel edit |
+| Type any character | Start editing the selected cell |
+
+### View & Layout
+
+| Shortcut | Action |
+|----------|--------|
+| F1 | Toggle raw vs resolved cell display |
+| F3 | Rebuild grid / recalculate layout |
+| F4 | Decrease column width |
+| F5 | Increase column width |
+
+### Clipboard & Search
+
+| Shortcut | Action |
+|----------|--------|
+| Ctrl+C | Copy cell(s) |
+| Ctrl+Shift+C | Copy resolved / displayed content |
+| Ctrl+X | Cut cell(s) |
+| Ctrl+V | Paste (supports multi-line) |
+| Ctrl+F | Search |
+
+### File & Row Operations
+
+| Shortcut | Action |
+|----------|--------|
 | Ctrl+S | Save to CSV |
-| Ctrl+C / X / V | Copy / Cut / Paste |
-| Shift+Arrow | Extend selection/Multi select |
 | Ctrl+D | Delete row |
-| Ctrl+O and Ctrl+P | Insert row |
+| Ctrl+O | Insert row below |
+| Ctrl+P | Insert row above |
 | Ctrl+Q | Quit |
 
 ## License
