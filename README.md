@@ -101,6 +101,8 @@ ext: github:cemheren/quicksheet-weather
 wthr: Seattle, 2, 7
 ```
 
+![Weather extension showing a 7-day forecast on the desktop](weather-ext-example.png)
+
 ### Build your own
 
 Extensions are regular .NET (or any language) programs that read/write JSON lines on stdin/stdout. The protocol is intentionally minimal:
