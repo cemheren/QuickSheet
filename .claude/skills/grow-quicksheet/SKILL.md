@@ -75,7 +75,7 @@ on their own time. Log as "draft saved at <path>".
   Save to `drafts/awesome-<listname>.md`. User submits.
 - Identify terminal-tool directories (terminaltrove, console.dev). Draft submission.
 
-## Bucket F — Vertical extensions (DRAFT to separate repo dir, never push)
+## Bucket F — Vertical extensions (scaffold locally, create repo, push)
 
 Extensions live in **separate GitHub repos** referenced via `ext: github:user/repo`.
 QuickSheet itself stays small; the network of `quicksheet-*-ext` repos is the
@@ -85,9 +85,17 @@ For inspiration, see existing extensions linked in the README (e.g.
 `quicksheet-copilot-ext`). Manifest + JSON-lines protocol details are in README
 under "Extensions — Make Your Desktop Do More".
 
-Pick a vertical, scaffold a full extension repo locally, save it to
-`.claude/skills/grow-quicksheet/drafts/extensions/<name>/`. User reviews,
-creates the GitHub repo, and pushes.
+Workflow:
+1. Pick a vertical. Scaffold the extension at
+   `.claude/skills/grow-quicksheet/drafts/extensions/<name>/`.
+2. Build it locally with `dotnet build` — must be green, zero NuGet deps.
+3. Create the GitHub repo: `gh repo create cemheren/<name> --public --description "..." --source=<draft-path>`.
+4. Push the contents.
+5. After push, queue a follow-up Bucket A action to add a link in QuickSheet
+   main README's Extensions section.
+
+Never push extension code to the QuickSheet repo itself — it goes to its own
+new repo on the user's account.
 
 Vertical ideas (research-driven — pick one per run):
 - **Tax / accounting**: `ext: tax: <amount>,<state>` → returns federal+state tax

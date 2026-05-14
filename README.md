@@ -104,6 +104,15 @@ wthr: Seattle, 2, 7
 
 ![Weather extension showing a 7-day forecast on the desktop](weather-ext-example.png)
 
+### Example: TLS certificate checker
+
+The [quicksheet-tls-ext](https://github.com/cemheren/quicksheet-tls-ext) extension turns a cell into a live TLS cert expiry/issuer readout — useful as an ambient SRE dashboard on the wallpaper:
+
+```
+ext: github:cemheren/quicksheet-tls-ext
+tls: github.com, 1, 4
+```
+
 ### Build your own
 
 Extensions are regular .NET (or any language) programs that read/write JSON lines on stdin/stdout. The protocol is intentionally minimal:
