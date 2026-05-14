@@ -1,0 +1,8 @@
+{
+  "name": "mxck",
+  "version": "1.0.0",
+  "prefix": "mxck",
+  "description": "MX record lookup over DNS-over-HTTPS for QuickSheet",
+  "entry": "dotnet run --project MxckExtension.csproj",
+  "minProtocolVersion": 1
+}

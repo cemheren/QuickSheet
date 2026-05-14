@@ -54,6 +54,7 @@ Currently public:
 - [`quicksheet-price-ext`](https://github.com/cemheren/quicksheet-price-ext) — crypto price quotes (CoinGecko).
 - [`quicksheet-define-ext`](https://github.com/cemheren/quicksheet-define-ext) — inline dictionary lookups.
 - [`quicksheet-mortgage-ext`](https://github.com/cemheren/quicksheet-mortgage-ext) — mortgage payment calculator.
+- [`quicksheet-mxck-ext`](https://github.com/cemheren/quicksheet-mxck-ext) — MX record check (DNS-over-HTTPS).
 
 [Write your own](../README.md#build-your-own) in whatever language you want — the protocol is two message types.
 
