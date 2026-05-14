@@ -131,6 +131,12 @@ public class SpreadsheetApp
                         Theme.CycleNext();
                         Console.Clear();
                         break;
+                    case ConsoleKey.Z:
+                        _grid.Undo();
+                        break;
+                    case ConsoleKey.Y:
+                        _grid.Redo();
+                        break;
                 }
                 Render();
                 continue;
@@ -349,6 +355,8 @@ public class SpreadsheetApp
             "  ║  Ctrl+P         Remove row (shift up)    ║",
             "  ║  Ctrl+S         Save to CSV              ║",
             "  ║  Ctrl+F         Find (contains search)   ║",
+            "  ║  Ctrl+Z         Undo                     ║",
+            "  ║  Ctrl+Y         Redo                     ║",
             "  ║  Enter          Next search match         ║",
             "  ║  Shift+Enter    Previous search match     ║",
             "  ║  Escape         Clear search              ║",

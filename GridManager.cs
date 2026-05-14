@@ -9,6 +9,11 @@ public class GridManager
     public int RowCount { get; }
     public bool IsDirty { get; private set; }
 
+    // ── Undo / Redo ────────────────────────────────────────────────
+    private readonly UndoManager _undo = new();
+    public void BeginUndoGroup() => _undo.BeginGroup();
+    public void EndUndoGroup() => _undo.EndGroup();
+
     // ── Cursor state ─────────────────────────────────────────────────
 
     private int _selectedRow;
@@ -84,9 +89,38 @@ public class GridManager
     {
         if (row >= 0 && row < RowCount && col >= 0 && col < ColumnCount)
         {
+            _undo.RecordChange(row, col, _data[row, col], value);
             _data[row, col] = value;
             IsDirty = true;
         }
+    }
+
+    /// <summary>Apply cell values directly without recording undo (used by Undo/Redo restore).</summary>
+    private void SetCellValueRaw(int row, int col, string value)
+    {
+        if (row >= 0 && row < RowCount && col >= 0 && col < ColumnCount)
+        {
+            _data[row, col] = value;
+            IsDirty = true;
+        }
+    }
+
+    public bool Undo()
+    {
+        var changes = _undo.Undo();
+        if (changes == null) return false;
+        foreach (var (row, col, value) in changes)
+            SetCellValueRaw(row, col, value);
+        return true;
+    }
+
+    public bool Redo()
+    {
+        var changes = _undo.Redo();
+        if (changes == null) return false;
+        foreach (var (row, col, value) in changes)
+            SetCellValueRaw(row, col, value);
+        return true;
     }
 
     public void SetFileEntry(int row, int col, string displayName, string fullPath)
@@ -112,19 +146,32 @@ public class GridManager
     public void ClearRow(int row)
     {
         if (row < 0 || row >= RowCount) return;
+        _undo.BeginGroup();
         for (int c = 0; c < ColumnCount; c++)
+        {
+            _undo.RecordChange(row, c, _data[row, c], "");
             _data[row, c] = "";
+        }
+        _undo.EndGroup();
         IsDirty = true;
     }
 
     public void DeleteRow(int row)
     {
         if (row < 0 || row >= RowCount) return;
+        _undo.BeginGroup();
         for (int r = row; r < RowCount - 1; r++)
             for (int c = 0; c < ColumnCount; c++)
+            {
+                _undo.RecordChange(r, c, _data[r, c], _data[r + 1, c]);
                 _data[r, c] = _data[r + 1, c];
+            }
         for (int c = 0; c < ColumnCount; c++)
+        {
+            _undo.RecordChange(RowCount - 1, c, _data[RowCount - 1, c], "");
             _data[RowCount - 1, c] = "";
+        }
+        _undo.EndGroup();
         IsDirty = true;
     }
 
@@ -137,22 +184,38 @@ public class GridManager
     public void ShiftRowsDown(int fromRow)
     {
         if (fromRow < 0 || fromRow >= RowCount) return;
+        _undo.BeginGroup();
         for (int r = RowCount - 1; r > fromRow; r--)
             for (int c = 0; c < ColumnCount; c++)
+            {
+                _undo.RecordChange(r, c, _data[r, c], _data[r - 1, c]);
                 _data[r, c] = _data[r - 1, c];
+            }
         for (int c = 0; c < ColumnCount; c++)
+        {
+            _undo.RecordChange(fromRow, c, _data[fromRow, c], "");
             _data[fromRow, c] = "";
+        }
+        _undo.EndGroup();
         IsDirty = true;
     }
 
     public void ShiftRowsUp(int fromRow)
     {
         if (fromRow < 0 || fromRow >= RowCount) return;
+        _undo.BeginGroup();
         for (int r = fromRow; r < RowCount - 1; r++)
             for (int c = 0; c < ColumnCount; c++)
+            {
+                _undo.RecordChange(r, c, _data[r, c], _data[r + 1, c]);
                 _data[r, c] = _data[r + 1, c];
+            }
         for (int c = 0; c < ColumnCount; c++)
+        {
+            _undo.RecordChange(RowCount - 1, c, _data[RowCount - 1, c], "");
             _data[RowCount - 1, c] = "";
+        }
+        _undo.EndGroup();
         IsDirty = true;
     }
 
