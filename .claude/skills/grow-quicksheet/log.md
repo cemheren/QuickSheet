@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #38)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket B — cut v0.2.0. Bumped Program.cs version constant, rolled the Unreleased CHANGELOG section into 0.2.0, tagged + pushed, created GitHub release with full notes (theme presets, --version, sparkline range, #1/#2 closed, 11 new ext repos including grav).
+- Bucket: B
+- Outcome: release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.2.0. GitHub "Latest release" badge updated.
+- Follow-up: Prebuilt cross-platform binaries still queued for v0.3.0. Next: legal/case lookup vertical or HN-reading recipe.
+
 ## 2026-05-14 (local run #37)
 
 - Stars: 0 (Δ 0)
