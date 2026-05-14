@@ -119,6 +119,29 @@ Code changes in QuickSheet repo. Autonomous-safe — commit and push.
 - Cell formatting (bold, color via ANSI)
 - Undo/redo stack
 
+## Bucket F — Extensions (separate repos, high discoverability value)
+Create new QuickSheet extensions as **separate GitHub repos** under the user's
+account (cemheren). Extensions showcase the platform, add backlinks, and appear
+in GitHub search. Use `gh repo create` to make the repo.
+
+Pattern: see `cemheren/quicksheet-weather` and `cemheren/quicksheet-copilot-ext`.
+- Repo name: `quicksheet-<name>`
+- Must include `quicksheet-extension.json` manifest
+- Use JSON-lines stdin/stdout protocol (see README Extensions section)
+- Can be any language (.NET preferred for consistency)
+- README should link back to main QuickSheet repo
+
+Extension ideas:
+- `quicksheet-pomodoro` — timer cells, focus/break cycle, notification sound
+- `quicksheet-stocks` — live stock/crypto ticker in cells (free API)
+- `quicksheet-todo` — task management with due dates, priorities, completion %
+- `quicksheet-sysmon` — CPU/RAM/disk usage in cells, refreshing live
+- `quicksheet-cal` — upcoming calendar events (reads .ics file)
+- `quicksheet-news` — RSS feed headlines in cells
+- `quicksheet-dict` — dictionary/thesaurus lookup prefix
+
+After creating extension repo, update main QuickSheet README to mention it.
+
 Pick small. One feature per run. Keep CLAUDE.md conventions:
 zero NuGet deps, CSV persistence, cross-platform pattern.
 

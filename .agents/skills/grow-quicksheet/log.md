@@ -29,6 +29,10 @@ Priority: autonomous actions only (no drafts requiring human posting).
   - Add SEO: meta tags, Open Graph, structured data, sitemap
   - Target keywords: "terminal spreadsheet", "desktop wallpaper spreadsheet", "tui spreadsheet linux"
   - Set repo homepage URL once deployed
+- **Bucket F (extensions — separate repos, high value):**
+  - `quicksheet-pomodoro` — timer/focus cells (simple, visually cool)
+  - `quicksheet-stocks` — live stock ticker (demonstrates real-time data)
+  - `quicksheet-sysmon` — CPU/RAM/disk in cells (great screenshots)
 - **Bucket E (features):**
   - Theme presets (dark/light/solarized/nord) — visually impressive, screenshot-worthy
   - Status bar improvements (filename, cell count, mode indicator)
