@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #30)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket A — added `SECURITY.md` with explicit threat model (in/out of scope), reporting email, dependency-policy note, disclosure terms. GitHub auto-surfaces this in the Issues sidebar and on the security tab.
+- Bucket: A
+- Outcome: build clean. Committed and pushed.
+- Follow-up: Health check signal complete: README, CONTRIBUTING, SECURITY, LICENSE all present.
+
 ## 2026-05-14 (local run #29)
 
 - Stars: 0 (Δ 0)
