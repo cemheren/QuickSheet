@@ -24,13 +24,18 @@ Since you run 4× less often, you must extract more value per run:
 - **Prefer compound actions**: pick things that unlock multiple follow-ups.
 - **Prefer code over docs early**: shipped features create screenshot/demo material
   AND improve the product. One good feature = multiple future content pieces.
-- **Batch prep work**: when writing a draft, prep 2-3 drafts in one pass if fast.
 - **Focus on virality signals**: things that make people share (cool screenshots,
   demo GIFs, compelling README, unique features).
 - **Track competitor log**: read `.claude/skills/grow-quicksheet/log.md` to avoid
   duplicating their work and to build on what they've done.
-- **SKIP Bucket C/D unless explicitly asked.** The human cannot act on drafts
-  regularly. Autonomous actions (A, B, E) compound without human intervention.
+- **SKIP Bucket SKIP unless explicitly asked.** The human cannot act on drafts
+  regularly. Autonomous actions (A, B, C, D, E) compound without human intervention.
+- **Use Chrome DevTools** for data-driven decisions:
+  - Check Google Analytics (traffic, referrers, top pages)
+  - Run Lighthouse audits on the GitHub Pages site (performance, SEO score)
+  - Verify Open Graph / meta tags render correctly
+  - Check Google Search Console for indexing and keyword rankings
+  - Monitor what's working and double down on it
 
 # How a run works
 
@@ -40,22 +45,25 @@ Pick, execute, log, report.
 1. **Read both logs**:
    - Own log: `.agents/skills/grow-quicksheet/log.md` (your persistent memory).
    - Competitor log: `.claude/skills/grow-quicksheet/log.md` (see what they did).
-2. **Check current state**: `gh repo view --json stargazerCount,forks,issues` and
+2. **Check current state**: `gh repo view --json stargazerCount,forkCount,issues` and
    note star count + delta since last run.
-3. **Pick ONE action** from the menu below. Selection rules:
+3. **Check analytics** (if site is deployed): Use Chrome DevTools to visit Google
+   Analytics / Search Console. Note traffic, top referrers, keyword rankings.
+   Log any notable changes. Use data to inform action selection.
+4. **Pick ONE action** from the menu below. Selection rules:
    - Prefer items under `## Queued` in your log.
    - Don't repeat what the competitor just did — build on it or pick a different angle.
    - Bias toward variety: do not repeat the same bucket two runs in a row.
    - Prefer high expected value × low risk.
    - If unsure, default to Bucket E (features) or Bucket A (polish).
-4. **Execute** the action end-to-end. No mid-run questions.
-5. **Update your log** with date, action, outcome, star count, follow-ups.
-6. **Commit and push** any code/doc changes to the repo (single focused commit,
+5. **Execute** the action end-to-end. No mid-run questions.
+6. **Update your log** with date, action, outcome, star count, follow-ups.
+7. **Commit and push** any code/doc changes to the repo (single focused commit,
    Conventional Commits style). For destructive or publishable-elsewhere actions
    (see "Boundaries" below), save artifacts to
    `.agents/skills/grow-quicksheet/drafts/` and log them as "draft saved" — do not
    publish.
-7. **Report** a 3-6 line summary at end of run: action, outcome, star delta, next.
+8. **Report** a 3-6 line summary at end of run: action, outcome, star delta, next.
 
 # Action menu
 
