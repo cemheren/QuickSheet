@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #39)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket A — added HN-reading recipe (6b) to `docs/recipes.md`. URLs auto-detect as hyperlinks (open on Enter), `ping:` column gives at-a-glance status, `i: curl ...` cell pulls a live HN top-stories byte count as a "is there anything new" proxy.
+- Bucket: A
+- Outcome: Committed and pushed.
+- Follow-up: Recipe page now 10 sections. Could refactor numbering at some point but cost > benefit.
+
 ## 2026-05-14 (local run #38)
 
 - Stars: 0 (Δ 0)

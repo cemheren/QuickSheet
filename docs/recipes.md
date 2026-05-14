@@ -151,6 +151,24 @@ Extensions used: [cite](https://github.com/cemheren/quicksheet-cite-ext), [defin
 
 ---
 
+## 6b. HN reading list
+
+Hacker News tabs, but on the wallpaper. Pin the URLs you actually come back to, watch latency to make sure they're up, and use `i:` for a live count of stories you might want to read.
+
+```
+What,Link,Status,Comments
+news.ycombinator.com,https://news.ycombinator.com,"ping: https://news.ycombinator.com, 1, 3",
+Show HN,https://news.ycombinator.com/show,"ping: https://news.ycombinator.com/show, 1, 3",
+Ask HN,https://news.ycombinator.com/ask,"ping: https://news.ycombinator.com/ask, 1, 3",
+top story,,"i: curl -s 'https://hacker-news.firebaseio.com/v0/topstories.json' | head -c 200 | wc -c",first 200 chars
+```
+
+Multi-select column B, hit Enter to open all four in your browser. Add `L: <cell>, 30m` on the status column for a passive uptime indicator.
+
+Extensions used: [ping](https://github.com/cemheren/quicksheet-ping-ext). The `i:` cell is built-in.
+
+---
+
 ## 7. AI scratchpad
 
 Drop in a cell that asks Copilot to summarize whatever else is in the sheet:
