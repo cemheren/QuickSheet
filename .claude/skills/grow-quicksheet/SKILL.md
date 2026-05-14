@@ -75,6 +75,57 @@ on their own time. Log as "draft saved at <path>".
   Save to `drafts/awesome-<listname>.md`. User submits.
 - Identify terminal-tool directories (terminaltrove, console.dev). Draft submission.
 
+## Bucket F — Vertical extensions (DRAFT to separate repo dir, never push)
+
+Extensions live in **separate GitHub repos** referenced via `ext: github:user/repo`.
+QuickSheet itself stays small; the network of `quicksheet-*-ext` repos is the
+discoverability flywheel.
+
+For inspiration, see existing extensions linked in the README (e.g.
+`quicksheet-copilot-ext`). Manifest + JSON-lines protocol details are in README
+under "Extensions — Make Your Desktop Do More".
+
+Pick a vertical, scaffold a full extension repo locally, save it to
+`.claude/skills/grow-quicksheet/drafts/extensions/<name>/`. User reviews,
+creates the GitHub repo, and pushes.
+
+Vertical ideas (research-driven — pick one per run):
+- **Tax / accounting**: `ext: tax: <amount>,<state>` → returns federal+state tax
+  estimate; `ext: 1099: <gross>` → quarterly estimated payment.
+- **Legal**: `ext: case: <citation>` → case lookup (free Caselaw API); `ext: stat:
+  <us-code>` → statute snippet.
+- **Real estate**: `ext: zillow: <address>` → Zestimate; `ext: mortgage:
+  <principal>,<rate>,<years>` → monthly payment.
+- **Crypto / finance**: `ext: price: <symbol>` → last trade; `ext: yield: <ticker>`
+  → dividend yield. Use free APIs (CoinGecko, Yahoo via yfinance JSON).
+- **Devops / SRE**: `ext: ping: <host>` → status code + latency; `ext: tls:
+  <host>` → cert expiry days.
+- **Writing / research**: `ext: define: <word>`, `ext: thes: <word>`, `ext:
+  cite: <doi>` → formatted citation.
+- **Email / contacts**: `ext: gravatar: <email>`, `ext: mxck: <domain>` → MX
+  records.
+
+What each draft must include:
+- `README.md` — install one-liner (`ext: github:user/repo`), examples, demo
+  screenshot placeholder.
+- `manifest.json` (or whatever QuickSheet's protocol spec calls it — read the
+  protocol section in the main README before drafting).
+- A minimal working implementation in **any zero-dep language** (Python stdlib,
+  Go, Rust, .NET) — pick whatever's smallest.
+- License (MIT).
+- A 2-sentence pitch paragraph for the eventual repo description.
+
+Submission strategy:
+- Tag extension with the vertical's terms (e.g. `tax,1099,accounting`).
+- Cross-link from QuickSheet README (separate Bucket A action — wait for user
+  to push the extension repo first).
+
+**Hard rules**:
+- Never push extension code to the QuickSheet repo. Drafts only.
+- Same boundaries apply: no social posting, no NuGet deps in dotnet projects,
+  truthful claims.
+- One extension draft per run, not a sprawl of half-done verticals.
+
 ## Bucket E — Quality-of-life features that get screenshotted
 Code change in QuickSheet repo. Autonomous-safe — commit and push.
 - Theme presets
