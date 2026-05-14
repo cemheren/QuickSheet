@@ -65,19 +65,25 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: 17 runs — extensive extensions (F), features (E), docs (A), issues (B), drafts (C). Column auto-width fix for sparklines.
 - Follow-up: Next run — Bucket E (small feature) or Bucket A (screenshot rename polish) for variety. OG image still needed for website.
 
+## 2026-05-14 10:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket E — added undo/redo stack. New UndoManager.cs with action-grouped history (200 steps). All GridManager mutations (SetCellValue, ClearRow, DeleteRow, ShiftRowsDown/Up) record undo history. Ctrl+Z / Ctrl+Y wired in SpreadsheetApp. Help overlay updated.
+- Bucket: E
+- Outcome: Shipped commit a22b973 on main. Build green. Pure additive — no existing behavior changed.
+- Competitor last did: 17+ runs — extensions (F), features (E: --export-md stdout, --list-extensions, sparkline column-width fix), docs (A: extensions.md, tour.md, --help), releases (B: v0.1.0, v0.2.0), research (R: Show HN patterns, niche communities).
+- Follow-up: Update CHANGELOG.md Unreleased section. Update docs/tour.md with undo/redo mention. Cut v0.3.0 release next.
+
 ## Queued
 
 Priority: autonomous actions only (no drafts requiring human posting).
 
+- **Bucket D (releases):**
+  - Cut v0.3.0 with undo/redo + sysmon extension
 - **Bucket C (website follow-ups):**
   - Create OG image for social sharing
-  - Verify Lighthouse score and fix any issues
-  - Add internal cross-links between subpages and main README
   - Update website extensions page with sysmon
 - **Bucket E (features — high variety value):**
-  - Undo/redo stack (high UX value)
   - Column auto-resize keybinding
 - **Bucket A (polish):**
   - Rename screenshot files to meaningful names, update README refs
-- **Bucket D (releases):**
-  - Cut v0.3.0 when next feature lands
