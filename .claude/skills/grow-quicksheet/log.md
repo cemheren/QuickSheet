@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #48)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket D — drafted `drafts/email-pitches.md` for terminaltrove + console.dev. Both single-email send-and-forget. terminaltrove: short tool-suggestion to `hello@terminaltrove.com` with differentiator one-liner. console.dev: explicit criteria-by-criteria mapping (they publish criteria; mirroring shows you read them). Sending guidance: terminaltrove first, console.dev +7d after.
+- Bucket: D
+- Outcome: draft saved at `.claude/skills/grow-quicksheet/drafts/email-pitches.md`. User sends manually.
+- Follow-up: All major outreach drafts now exist (HN, Reddit-cl, Reddit-dotnet, Reddit-programming, Reddit-linux, Lobsters, Twitter, Mastodon/Bluesky, dev.to, unixporn rice, awesome-tuis/dotnet/cli-apps/csharp/windows, terminaltrove, console.dev). Bottleneck is user publishing them. Next runs should pick research / minor polish if anything, not more drafts.
+
 ## 2026-05-14 (local run #47)
 
 - Stars: 0 (Δ 0)
