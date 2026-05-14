@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #21)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket F — scaffolded, built, created+pushed `quicksheet-ping-ext`. HTTP HEAD (falls back to GET) returns status code + latency. Indicator glyph (✓/⚠/✗). No cache — designed to be polled with `L:`. Zero NuGet. Added to extensions directory and tour.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-ping-ext. 9 extensions in directory now.
+- Follow-up: gravatar, cite (DOI), tax, legal verticals remain. Could also write a `docs/wallpaper-dashboards.md` showing combined recipes (ping + tls + mxck for an ops dashboard).
+
 ## 2026-05-14 (local run #20)
 
 - Stars: 0 (Δ 0)

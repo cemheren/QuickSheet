@@ -55,6 +55,7 @@ Currently public:
 - [`quicksheet-define-ext`](https://github.com/cemheren/quicksheet-define-ext) — inline dictionary lookups.
 - [`quicksheet-mortgage-ext`](https://github.com/cemheren/quicksheet-mortgage-ext) — mortgage payment calculator.
 - [`quicksheet-mxck-ext`](https://github.com/cemheren/quicksheet-mxck-ext) — MX record check (DNS-over-HTTPS).
+- [`quicksheet-ping-ext`](https://github.com/cemheren/quicksheet-ping-ext) — HTTP status code + latency probe.
 
 [Write your own](../README.md#build-your-own) in whatever language you want — the protocol is two message types.
 
