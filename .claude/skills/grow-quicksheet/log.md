@@ -42,14 +42,22 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean (dotnet 9.0.115). Committed and pushed.
 - Follow-up: Capture screenshot showing sparkline cells next to data column — high-shareability for HN/social. Could also auto-detect numeric range references later (`s: A1::A10`).
 
+## 2026-05-14 (local run #4)
+
+- Stars: 0 (Δ 0)
+- Action: Drafted awesome-list + directory submissions (awesome-tuis, awesome-dotnet, awesome-cli-apps, terminaltrove, console.dev). Each with one-line entry, PR title, PR body, and recommended section. Suggested submission order to avoid burst pattern.
+- Bucket: D
+- Outcome: draft saved at `.claude/skills/grow-quicksheet/drafts/awesome-lists.md`. User forks and PRs manually.
+- Follow-up: After Show HN posts, drafts open for r/commandline + r/dotnet (Bucket C). After list PRs land, link them in README "as seen in" footer.
+
 ## Queued
 
 - Capture sparkline screenshot for README/social (needs human or `--desktop` smoke test).
 - Add "Why this exists" short section or 60-second feature tour under `docs/`.
-- More Bucket E small wins: theme presets, `w: url` live web-fetch prefix, markdown export.
+- More Bucket E small wins: theme presets, `w: url` live web-fetch prefix, markdown export (each <50 LOC, additive).
 - Demo GIF of desktop wallpaper mode (needs human capture — deferred).
 - Audit screenshot filenames (`image.png`, `image-1.png`, etc.) — give meaningful names and update README refs.
 - Set social preview image (openGraphImage) — needs custom upload via web UI or API.
-- Identify awesome-tui / awesome-dotnet lists for future PR drafts.
 - Draft r/commandline + r/dotnet posts (Bucket C) once Show HN result is known.
 - Sparkline could accept range refs (`s: A1::A10`) — open enhancement.
+- Write small CONTRIBUTING.md (Bucket B, alive signal).
