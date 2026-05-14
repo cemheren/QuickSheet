@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #40)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket E — added `--list-extensions` flag. Walks `~/.quicksheet/extensions/`, parses each `quicksheet-extension.json`, prints prefix/dir/version. Smoke-tested against actually-installed copilot + weather. Pure additive — no existing path touched. Updated --help and CHANGELOG Unreleased.
+- Bucket: E
+- Outcome: build clean. Smoke-test passes.
+- Follow-up: When v0.3.0 cuts, this is the headline addition.
+
 ## 2026-05-14 (local run #39)
 
 - Stars: 0 (Δ 0)

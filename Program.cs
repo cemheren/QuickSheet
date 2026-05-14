@@ -18,6 +18,12 @@ public class Program
             return;
         }
 
+        if (args.Contains("--list-extensions"))
+        {
+            PrintInstalledExtensions();
+            return;
+        }
+
         string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
         bool desktopMode = args.Contains("--desktop");
 
@@ -93,6 +99,52 @@ public class Program
 
     private const string Version = "0.2.0";
 
+    private static void PrintInstalledExtensions()
+    {
+        string root = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+            ".quicksheet", "extensions");
+        if (!Directory.Exists(root))
+        {
+            Console.WriteLine("(no extensions installed)");
+            Console.WriteLine($"Install one with `ext: github:user/repo` from inside QuickSheet.");
+            Console.WriteLine($"Extensions live under {root}");
+            return;
+        }
+
+        var dirs = Directory.GetDirectories(root).OrderBy(d => d).ToList();
+        if (dirs.Count == 0)
+        {
+            Console.WriteLine("(no extensions installed)");
+            return;
+        }
+
+        Console.WriteLine($"Installed extensions ({root}):");
+        foreach (var dir in dirs)
+        {
+            string manifestPath = Path.Combine(dir, "quicksheet-extension.json");
+            string name = Path.GetFileName(dir);
+            if (File.Exists(manifestPath))
+            {
+                try
+                {
+                    using var doc = System.Text.Json.JsonDocument.Parse(File.ReadAllText(manifestPath));
+                    string prefix = doc.RootElement.TryGetProperty("prefix", out var p) ? p.GetString() ?? "?" : "?";
+                    string version = doc.RootElement.TryGetProperty("version", out var v) ? v.GetString() ?? "?" : "?";
+                    Console.WriteLine($"  {prefix,-8} {name}  v{version}");
+                }
+                catch
+                {
+                    Console.WriteLine($"  ?        {name}  (bad manifest)");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"  ?        {name}  (no manifest)");
+            }
+        }
+    }
+
     private static void PrintVersion()
     {
         string platform =
@@ -116,6 +168,7 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>  Headless: CSV → Markdown table");
         Console.WriteLine("  ExcelConsole --help                        Show this help");
         Console.WriteLine("  ExcelConsole --version                     Show version");
+        Console.WriteLine("  ExcelConsole --list-extensions             List installed extensions");
         Console.WriteLine();
         Console.WriteLine("Cell prefixes (TUI / desktop modes):");
         Console.WriteLine("  r: <cmd>          Runnable command. Press Enter to launch.");

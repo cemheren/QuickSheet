@@ -4,7 +4,8 @@ All notable changes to QuickSheet. Format roughly follows [Keep a Changelog](htt
 
 ## Unreleased
 
-(empty — bump here before the next tag)
+### Added
+- `--list-extensions` flag prints installed extensions from `~/.quicksheet/extensions/` with prefix, repo dir, and version from each manifest.
 
 ## 0.2.0 — 2026-05-14
 
