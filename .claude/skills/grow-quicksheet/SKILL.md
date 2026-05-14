@@ -159,6 +159,26 @@ environment (e.g., remote sandbox without .NET 9 SDK), skip Bucket E this run
 and pick from A–D instead. Log "skipped: no dotnet" rather than shipping
 unverified code.
 
+# Selection rule: only ship if it will plausibly cause new stars
+
+Adding code/features for variety is a trap. Lots of features, lots of extensions, no stars = wasted runs. **Before picking an action, ask: "would a human seeing this delta on the repo plausibly star it, or would a human reading a draft I just wrote share/post it?"** If neither, skip.
+
+What still counts as "plausibly causes stars":
+- README first-impression improvements that change the hero screenshot, the tagline, or a top-of-page demo.
+- Drafts that the user will *actually publish* (HN, Reddit, Lobsters, Twitter, dev.to). The publish step is the bottleneck, not the draft count.
+- A v0.X release that bundles a real user-visible change, since GitHub surfaces the release badge.
+- An awesome-list PR the user submits and gets merged — high signal once landed.
+- A new extension only if it serves a real vertical that the user can lean into for a targeted post (e.g. crypto-focused subreddit + crypto ext together).
+
+What does NOT plausibly cause stars (avoid):
+- Yet another extension repo when 15 already exist.
+- Yet another flag whose value is internal to the user.
+- Yet another doc page that nobody links to.
+- Yet another draft for a channel the user already has 3 drafts for.
+- Bucket-variety for its own sake.
+
+If no action passes the "plausibly causes stars" filter, **log a no-op run instead of forcing something**. End the run with the date, "no qualifying action this run; skipped," and a 1-line note on what's blocked.
+
 # Boundaries (hard rules — no exceptions)
 
 - **DO NOT BREAK THE PROJECT.** A broken repo loses stars, doesn't earn them.
