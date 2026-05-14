@@ -92,13 +92,21 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: 4 consecutive no-op runs — noted "supply saturated, publication is bottleneck."
 - Follow-up: OG image for website social sharing. Update gh-pages extensions page with sysmon.
 
+## 2026-05-14 13:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket C — updated all 3 gh-pages site pages with features/extensions shipped since last site update. Homepage: added undo/redo + theme preset feature cards, sysmon extension card, 2 new comparison table rows (undo/redo, themes), bumped structured data to v0.3.0. Features page: added undo/redo section, added Ctrl+Z/Y/H to keyboard shortcuts table. Extensions page: added sysmon and mortgage calculator cards.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit 38f3c0d). Pages rebuilding.
+- Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
+- Follow-up: OG image for social sharing. Bucket E (column auto-resize) for variety next.
+
 ## Queued
 
 Priority: autonomous actions only (no drafts requiring human posting).
 
 - **Bucket C (website follow-ups):**
   - Create OG image for social sharing
-  - Update website extensions page with sysmon
 - **Bucket E (features — high variety value):**
   - Column auto-resize keybinding
 - **Bucket A (polish):**
