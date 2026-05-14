@@ -78,22 +78,15 @@ Pick, execute, log, report.
 - Cut a GitHub release with meaningful release notes
 - Create GitHub Discussions or issue templates
 
-## Bucket C — Content drafts (DRAFT ONLY, never publish)
-Save to `.agents/skills/grow-quicksheet/drafts/<topic>.md`. User publishes manually.
-Log as "draft saved at <path>".
-- Hacker News "Show HN" post — title + first comment
-- Reddit posts: r/commandline, r/dotnet, r/programming, r/linux, r/unixporn
-- Lobsters submission text
-- Twitter/X thread (3-5 tweets)
-- Mastodon/Bluesky post
-- dev.to / Medium blog post
-- YouTube video script for a 60-second demo
+## Bucket C — Releases & GitHub presence (autonomous-safe)
+- Cut GitHub releases with meaningful release notes (shows in follower feeds)
+- Create GitHub Discussions (feature announcements, "what would you use this for?")
+- Add issue templates to lower contribution barrier
+- Improve release notes to be share-worthy (people link to releases)
 
-## Bucket D — Network effects (DRAFT ONLY, never push to other repos)
-- Identify awesome-* lists this project fits. Draft PR description + diff snippet.
-  Save to `drafts/awesome-<listname>.md`. User submits.
-- Identify terminal-tool directories (terminaltrove, console.dev). Draft submission.
-- Identify dotnet community newsletters. Draft submission email.
+## Bucket D — SKIP (requires human action)
+Social posting, awesome-list PRs, directory submissions — all require human.
+Do NOT spend runs on these. Only revisit if user explicitly asks.
 
 ## Bucket E — Quality-of-life features that get screenshotted (PRIORITY)
 Code changes in QuickSheet repo. Autonomous-safe — commit and push.
