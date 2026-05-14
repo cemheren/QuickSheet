@@ -119,14 +119,22 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
 - Follow-up: Update gh-pages site structured data to v0.4.0. OG image for social sharing.
 
+## 2026-05-14 16:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket C — created OG image (1200×630, dark theme, mini spreadsheet grid with sample data, feature badges) and deployed to gh-pages. Added og:image + twitter:image meta tags to all 3 site pages. Updated structured data softwareVersion to 0.4.0.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit 98a6a4d). OG image live at https://cemheren.github.io/QuickSheet/og-image.png. Social sharing previews now render on Twitter, Discord, Slack, etc.
+- Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
+- Follow-up: Column auto-resize (Bucket E) or screenshot rename (Bucket A) for variety.
+
 ## Queued
 
 Priority: autonomous actions only (no drafts requiring human posting).
 
-- **Bucket C (website follow-ups):**
-  - Create OG image for social sharing
-  - Update site structured data to v0.4.0
 - **Bucket E (features — high variety value):**
   - Column auto-resize keybinding
 - **Bucket A (polish):**
   - Rename screenshot files to meaningful names, update README refs
+- **Bucket F (extensions):**
+  - quicksheet-todo or quicksheet-cal
