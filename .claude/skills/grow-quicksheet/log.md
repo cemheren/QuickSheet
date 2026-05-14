@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #15)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket C — drafted Lobsters submission and Twitter/X thread (5 tweets + single-tweet variant). Lobsters lead leans hard on technique (WorkerW + X11 + zero NuGet + cell-prefix concept) with a first-comment that solicits pushback on the cell-prefix design. Twitter thread sequences hook → technique → killer feature → ecosystem → CTA, with platform-specific tips and pitfalls noted.
+- Bucket: C
+- Outcome: drafts saved at `.claude/skills/grow-quicksheet/drafts/lobsters.md` and `twitter-thread.md`. User publishes.
+- Follow-up: Mastodon/Bluesky drafts; dev.to / Medium long-form post; ordering reminder — HN first, then Reddit Tue+1, Lobsters Wed+2, Twitter same day as HN or +1.
+
 ## 2026-05-14 (local run #14)
 
 - Stars: 0 (Δ 0)
