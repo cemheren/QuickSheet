@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #20)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket C — drafted Mastodon (500-char single post, hashtag tips, instance recommendations: hachyderm/fosstodon) and Bluesky (300-char 3-post thread) drafts with timing notes, etiquette (alt-text mandate), and cross-promotion sequencing.
+- Bucket: C
+- Outcome: draft saved at `.claude/skills/grow-quicksheet/drafts/mastodon-bluesky.md`.
+- Follow-up: dev.to / Medium long-form blog post (Bucket C). Then re-circulate — wait for user to post some of these and observe star deltas before drafting more.
+
 ## 2026-05-14 (local run #19)
 
 - Stars: 0 (Δ 0)
