@@ -12,6 +12,7 @@ dotnet run --project ExcelConsole.csproj                          # Console TUI 
 dotnet run --project ExcelConsole.csproj -- --desktop             # Desktop wallpaper mode
 dotnet run --project ExcelConsole.csproj -- --desktop data.csv    # Desktop mode with CSV
 dotnet run -c Release --project ExcelConsole.csproj -- --desktop  # Release (recommended for desktop)
+dotnet run --project ExcelConsole.csproj -- data.csv --export-md data.md  # Headless: CSV → Markdown
 ```
 
 `Program.cs` dispatches: `--desktop` → platform `IDesktopHost`; otherwise → `SpreadsheetApp` (TUI).

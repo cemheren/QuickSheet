@@ -9,6 +9,46 @@ public class Program
         string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
         bool desktopMode = args.Contains("--desktop");
 
+        int exportIdx = Array.IndexOf(args, "--export-md");
+        if (exportIdx >= 0)
+        {
+            if (csvPath == null || exportIdx + 1 >= args.Length)
+            {
+                Console.Error.WriteLine("Usage: ExcelConsole <input.csv> --export-md <output.md>");
+                Environment.Exit(2);
+                return;
+            }
+            string outPath = args[exportIdx + 1];
+            if (!File.Exists(csvPath))
+            {
+                Console.Error.WriteLine($"Input CSV not found: {csvPath}");
+                Environment.Exit(1);
+                return;
+            }
+
+            // Probe CSV for dimensions so the headless GridManager is big enough.
+            var lines = File.ReadAllLines(csvPath);
+            int rows = Math.Max(1, lines.Length);
+            int cols = 1;
+            foreach (var line in lines)
+            {
+                int n = 1;
+                bool inQuotes = false;
+                foreach (char ch in line)
+                {
+                    if (ch == '"') inQuotes = !inQuotes;
+                    else if (ch == ',' && !inQuotes) n++;
+                }
+                if (n > cols) cols = n;
+            }
+            // Constructor derives ColumnCount from (availableWidth - 4) / columnWidth (default 20).
+            var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
+            grid.LoadFromCsv(csvPath);
+            grid.SaveToMarkdown(outPath);
+            Console.WriteLine($"Wrote markdown: {outPath}");
+            return;
+        }
+
         if (desktopMode)
         {
 #if PLATFORM_WINDOWS

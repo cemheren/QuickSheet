@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #12)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket E — added headless CSV→Markdown export. `GridManager.SaveToMarkdown(path)` trims trailing empty rows/cols, escapes `|`, treats row 0 as header. New CLI flag `--export-md <out.md>` in Program.cs uses a headless GridManager, no UI launch. Smoke-tested on a sample CSV (quoted fields, empty cells) — output is valid GitHub-flavored markdown. README + CLAUDE.md updated.
+- Bucket: E
+- Outcome: build clean (0/0). Smoke-test passes. Committed and pushed.
+- Follow-up: Could add `--export-md` as a cell-prefix or in-app keybinding later. Could support range scoping. Both deferred.
+
 ## 2026-05-14 (local run #11)
 
 - Stars: 0 (Δ 0)

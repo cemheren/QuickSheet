@@ -254,6 +254,50 @@ public class GridManager
         IsDirty = false;
     }
 
+    /// <summary>
+    /// Writes the grid as a GitHub-flavored Markdown table to <paramref name="path"/>.
+    /// First row of the grid is treated as the header.
+    /// Trailing rows and columns that are entirely empty are trimmed.
+    /// </summary>
+    public void SaveToMarkdown(string path)
+    {
+        // Find the bottom-most non-empty row and right-most non-empty column.
+        int lastRow = -1, lastCol = -1;
+        for (int r = 0; r < RowCount; r++)
+            for (int c = 0; c < ColumnCount; c++)
+                if (!string.IsNullOrEmpty(_data[r, c]) && !_isFile[r, c])
+                {
+                    if (r > lastRow) lastRow = r;
+                    if (c > lastCol) lastCol = c;
+                }
+        if (lastRow < 0 || lastCol < 0)
+        {
+            File.WriteAllText(path, "");
+            return;
+        }
+
+        using var writer = new StreamWriter(path);
+        for (int r = 0; r <= lastRow; r++)
+        {
+            writer.Write('|');
+            for (int c = 0; c <= lastCol; c++)
+            {
+                string v = _isFile[r, c] ? "" : (_data[r, c] ?? "");
+                v = v.Replace("|", "\\|").Replace("\r", " ").Replace("\n", " ");
+                writer.Write(' ');
+                writer.Write(v);
+                writer.Write(" |");
+            }
+            writer.WriteLine();
+            if (r == 0)
+            {
+                writer.Write('|');
+                for (int c = 0; c <= lastCol; c++) writer.Write("---|");
+                writer.WriteLine();
+            }
+        }
+    }
+
     public void LoadFromCsv(string path)
     {
         if (!File.Exists(path)) return;

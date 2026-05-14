@@ -21,6 +21,12 @@ Requires [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0). Release
 
 Tip: add it to your startup applications so your notes, links, and launchers are there every time you log in.
 
+Want to export your data? Render any CSV as a GitHub-flavored Markdown table:
+
+```bash
+dotnet run --project ExcelConsole.csproj -- mydata.csv --export-md mydata.md
+```
+
 New here? The 60-second tour is in [docs/tour.md](docs/tour.md).
 
 ## A note on the code
