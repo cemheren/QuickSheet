@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #36)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket B — added `CHANGELOG.md`. Keep-a-Changelog format. Unreleased section captures everything shipped since v0.1.0 (--version flag, sparkline range form, issue #2 fix, recipes/tour/extensions docs, CONTRIBUTING/SECURITY, 10 extension repos). v0.1.0 section mirrors the GitHub release notes.
+- Bucket: B
+- Outcome: build clean. Committed and pushed.
+- Follow-up: Update CHANGELOG.md in the same commit as each future feature/fix. Next v0.2.0 cut should reference the Unreleased entries.
+
 ## 2026-05-14 (local run #35)
 
 - Stars: 0 (Δ 0)
