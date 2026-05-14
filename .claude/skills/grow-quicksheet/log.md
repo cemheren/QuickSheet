@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #33)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket F — scaffolded, built, created+pushed `quicksheet-1099-ext`. US SE tax estimate (SS @ 12.4% capped at $176,100, Medicare @ 2.9% uncapped, 0.9235 adjustment) + quarterly. Explicit "Not tax advice" framing in output and README. Federal income tax intentionally left out. Pure math, no network, zero NuGet. Added to docs.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-1099-ext. 13 extensions in directory now.
+- Follow-up: Bumpable Social Security wage base constant noted. Could add a freelancer recipe (`1099:` + `mort:` + sparkline-of-net-monthly).
+
 ## 2026-05-14 (local run #32)
 
 - Stars: 0 (Δ 0)

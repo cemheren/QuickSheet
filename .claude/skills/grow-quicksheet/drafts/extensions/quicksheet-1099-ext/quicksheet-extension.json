@@ -1,0 +1,8 @@
+{
+  "name": "1099",
+  "version": "1.0.0",
+  "prefix": "1099",
+  "description": "US self-employment tax estimator for QuickSheet",
+  "entry": "dotnet run --project Ten99Extension.csproj",
+  "minProtocolVersion": 1
+}

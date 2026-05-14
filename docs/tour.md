@@ -59,6 +59,7 @@ Currently public:
 - [`quicksheet-cite-ext`](https://github.com/cemheren/quicksheet-cite-ext) — DOI → citation (Crossref).
 - [`quicksheet-thes-ext`](https://github.com/cemheren/quicksheet-thes-ext) — thesaurus (Datamuse).
 - [`quicksheet-stock-ext`](https://github.com/cemheren/quicksheet-stock-ext) — stock ticker quotes (Stooq).
+- [`quicksheet-1099-ext`](https://github.com/cemheren/quicksheet-1099-ext) — US self-employment tax estimate.
 
 [Write your own](../README.md#build-your-own) in whatever language you want — the protocol is two message types.
 
