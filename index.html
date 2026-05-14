@@ -32,7 +32,7 @@
     "description": "A zero-dependency .NET 9 spreadsheet that replaces your desktop wallpaper with a transparent interactive grid.",
     "url": "https://github.com/cemheren/QuickSheet",
     "downloadUrl": "https://github.com/cemheren/QuickSheet",
-    "softwareVersion": "0.1.0",
+    "softwareVersion": "0.3.0",
     "license": "https://opensource.org/licenses/MIT",
     "programmingLanguage": "C#",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -341,6 +341,16 @@
         <h3>CSV Everywhere</h3>
         <p>CSV is the only persistence format. Export to Markdown with <code>--export-md</code>. No databases, no lock-in.</p>
       </div>
+      <div class="feature-card">
+        <span class="icon">↩️</span>
+        <h3>Undo / Redo</h3>
+        <p>200-step undo/redo stack with <code>Ctrl+Z</code> and <code>Ctrl+Y</code>. Grouped by action — edits, clears, row ops.</p>
+      </div>
+      <div class="feature-card">
+        <span class="icon">🎨</span>
+        <h3>Theme Presets</h3>
+        <p>Cycle through Dark, Light, Nord, Solarized, and Matrix themes with <code>Ctrl+T</code>.</p>
+      </div>
     </div>
   </section>
 
@@ -397,6 +407,10 @@
         <code>1099:</code>
         <p>US self-employment tax estimator</p>
       </div>
+      <div class="ext-card">
+        <code>sysmon:</code>
+        <p>Live CPU/RAM/disk monitor</p>
+      </div>
     </div>
     <p style="margin-top:1.5rem;color:var(--muted);font-size:0.9rem;">
       See the <a href="https://github.com/cemheren/QuickSheet/blob/main/docs/extensions.md">full extension directory</a> for install commands and protocol docs.
@@ -419,6 +433,8 @@
         <tr><td>App launcher</td><td class="yes">✓ (r: prefix)</td><td class="no">—</td><td class="no">—</td></tr>
         <tr><td>Sparklines</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td></tr>
         <tr><td>Markdown export</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td></tr>
+        <tr><td>Undo/redo</td><td class="yes">✓ (200-step)</td><td class="yes">✓</td><td class="no">—</td></tr>
+        <tr><td>Theme presets</td><td class="yes">✓ (5 themes)</td><td class="no">—</td><td class="no">—</td></tr>
         <tr><td>Zero dependencies</td><td class="yes">✓ (0 NuGet)</td><td class="no">ncurses</td><td class="no">Python + deps</td></tr>
         <tr><td>Windows + Linux</td><td class="yes">✓</td><td class="no">Linux/macOS</td><td class="yes">✓</td></tr>
       </tbody>
