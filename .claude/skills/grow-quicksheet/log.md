@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #10)
+
+- Stars: 0 (Δ 0)
+- Action: Opened 3 GitHub issues with real specs (no manufactured activity — these are queued TODOs from prior runs). #1 sparkline range refs (good first issue, enhancement). #2 column auto-width over-counts raw chars on `s:`/`i:` cells (good first issue, enhancement). #3 Wayland support investigation (help wanted).
+- Bucket: B
+- Outcome: Issues live at https://github.com/cemheren/QuickSheet/issues/1, /2, /3. CONTRIBUTING.md now has concrete entry points; alive-signal complete.
+- Follow-up: None per-issue. Next bucket: Bucket E (markdown export, theme presets), or Bucket F next vertical (writing/email/legal).
+
 ## 2026-05-14 (local run #9)
 
 - Stars: 0 (Δ 0)
