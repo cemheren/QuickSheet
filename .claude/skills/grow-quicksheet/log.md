@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #9)
+
+- Stars: 0 (Δ 0)
+- Action: Drafted Reddit posts for r/commandline and r/dotnet. r/commandline lead with UX hook (wallpaper that does something), screenshot strategy, posting timing. r/dotnet lead with technical hook (zero NuGet, WorkerW, X11 P/Invoke, ConPTY) — leans into BCL purity. Each draft includes title alternatives, body, posting tips, and pitfalls to avoid.
+- Bucket: C
+- Outcome: drafts saved at `.claude/skills/grow-quicksheet/drafts/reddit-commandline.md` and `reddit-dotnet.md`. User posts manually.
+- Follow-up: Stagger posts (Show HN first, then r/commandline 1–2 days after, then r/dotnet 3–5 days after). Lobsters draft + Twitter thread next Bucket C run.
+
 ## 2026-05-14 (local run #8)
 
 - Stars: 0 (Δ 0)
