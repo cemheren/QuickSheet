@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #11)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket F — scaffolded, built, created+pushed `quicksheet-define-ext`. Inline dictionary lookups via free dictionaryapi.dev (no key). Returns one definition per part-of-speech. 24h cache. Zero NuGet. Linked from README + tour.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-define-ext.
+- Follow-up: Next vertical candidates — email/gravatar/MX, legal/case lookup, mortgage calc. Or smoke-test the running extensions inside QuickSheet on user's next interactive session.
+
 ## 2026-05-14 (local run #10)
 
 - Stars: 0 (Δ 0)

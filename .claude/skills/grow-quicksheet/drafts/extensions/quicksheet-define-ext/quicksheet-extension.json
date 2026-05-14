@@ -1,0 +1,8 @@
+{
+  "name": "define",
+  "version": "1.0.0",
+  "prefix": "def",
+  "description": "Inline dictionary lookups (Free Dictionary API) for QuickSheet",
+  "entry": "dotnet run --project DefineExtension.csproj",
+  "minProtocolVersion": 1
+}

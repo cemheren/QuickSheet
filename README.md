@@ -124,6 +124,15 @@ ext: github:cemheren/quicksheet-price-ext
 price: btc, 1, 2
 ```
 
+### Example: Dictionary lookups
+
+The [quicksheet-define-ext](https://github.com/cemheren/quicksheet-define-ext) extension puts an inline dictionary in any cell — handy for writers and people learning a language:
+
+```
+ext: github:cemheren/quicksheet-define-ext
+def: laconic, 1, 4
+```
+
 ### Example: Pomodoro timer
 
 The [quicksheet-pomodoro](https://github.com/cemheren/quicksheet-pomodoro) extension adds a live countdown timer to your desktop — perfect for focus sessions:

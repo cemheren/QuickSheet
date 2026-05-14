@@ -52,6 +52,7 @@ Currently public:
 - [`quicksheet-tls-ext`](https://github.com/cemheren/quicksheet-tls-ext) — TLS certificate checker.
 - [`quicksheet-pomodoro`](https://github.com/cemheren/quicksheet-pomodoro) — focus timer.
 - [`quicksheet-price-ext`](https://github.com/cemheren/quicksheet-price-ext) — crypto price quotes (CoinGecko).
+- [`quicksheet-define-ext`](https://github.com/cemheren/quicksheet-define-ext) — inline dictionary lookups.
 
 [Write your own](../README.md#build-your-own) in whatever language you want — the protocol is two message types.
 
