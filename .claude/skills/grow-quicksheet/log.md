@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #34)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket C — drafted Reddit r/programming + r/linux posts in one file. r/programming lead with WorkerW + X11 technique deep-dive (code snippets, no marketing language). r/linux lead with `_NET_WM_WINDOW_TYPE_DESKTOP` and the Wayland gap. Posting-order coordination note (HN → r/cl → r/dotnet → r/programming → r/linux, staggered by days).
+- Bucket: C
+- Outcome: draft saved at `.claude/skills/grow-quicksheet/drafts/reddit-programming.md`.
+- Follow-up: All major social channels now drafted. After user posts, observe star deltas per channel and prioritize follow-up content.
+
 ## 2026-05-14 (local run #33)
 
 - Stars: 0 (Δ 0)
