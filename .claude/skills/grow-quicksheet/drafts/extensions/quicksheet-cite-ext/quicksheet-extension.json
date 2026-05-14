@@ -1,0 +1,8 @@
+{
+  "name": "cite",
+  "version": "1.0.0",
+  "prefix": "cite",
+  "description": "DOI → formatted citation (Crossref) for QuickSheet",
+  "entry": "dotnet run --project CiteExtension.csproj",
+  "minProtocolVersion": 1
+}

@@ -13,6 +13,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `pomo`    | Pomodoro timer    | Live countdown with progress bar                   | [`quicksheet-pomodoro`](https://github.com/cemheren/quicksheet-pomodoro) |
 | `mxck`    | MX record check   | MX records for a domain (DNS-over-HTTPS)           | [`quicksheet-mxck-ext`](https://github.com/cemheren/quicksheet-mxck-ext) |
 | `ping`    | HTTP ping         | Status code + latency for a URL                    | [`quicksheet-ping-ext`](https://github.com/cemheren/quicksheet-ping-ext) |
+| `cite`    | DOI citation      | Authors / year / title / venue from Crossref       | [`quicksheet-cite-ext`](https://github.com/cemheren/quicksheet-cite-ext) |
 
 ## Install
 

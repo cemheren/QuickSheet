@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #25)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket F — scaffolded, built, created+pushed `quicksheet-cite-ext`. DOI → citation lookup via Crossref's free API. Normalizes `https://doi.org/`, `doi:`, raw forms. Author list truncated to 3 + "et al.". Cached in-memory. Polite User-Agent header per Crossref etiquette. Zero NuGet. Added to extensions directory and tour.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-cite-ext. 10 extensions in directory now.
+- Follow-up: Remaining verticals: gravatar, tax/1099, legal (Caselaw), thesaurus. Or pause Bucket F and broaden — recipes for academic-writing dashboard combining cite + define.
+
 ## 2026-05-14 (local run #24)
 
 - Stars: 0 (Δ 0)
