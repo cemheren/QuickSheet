@@ -141,6 +141,26 @@ Submission strategy:
   truthful claims.
 - One extension draft per run, not a sprawl of half-done verticals.
 
+## Bucket R — Deep research (use WebSearch + WebFetch)
+
+Spend a run *researching* instead of *producing*. Goal: gather concrete intel that makes the next 5–10 publish/PR actions hit harder. Save findings as a markdown brief in `.claude/skills/grow-quicksheet/research/<topic>.md`.
+
+Good research targets (pick one per run):
+- **Comparable TUI launch case studies** — repos that crossed 500 / 1k / 5k stars from a single HN or Reddit moment. Title pattern, posting time, who they replied to, what the top comment was. Distill into a "what worked" cheat sheet.
+- **Specific niche communities** — beyond the big subs, find smaller forums where this project specifically fits (e.g. r/Rainmeter, r/unixporn, r/i3wm, vim/emacs lists, terminal-tool newsletters like Console Weekly, TerminalTrove podcasts). For each: rules, posting cadence, what they reward.
+- **Top contributors / influencers** for terminal-tool genre — accounts that signal-boost when they discover something they like. Curate a small list (≤10) with what each is known for. No mass-tagging; this is *who to be visible to*, not who to spam.
+- **Adjacent-project teardown** — pick 2–3 projects QuickSheet is adjacent to (e.g. `visidata`, `lazygit`, `nyxt`, `harlequin`) and read their README / `docs/` / launch posts. What hooks do they lead with? What does the first screenshot show? What's their one-line pitch? Steal the *structure* of what works, not the words.
+- **What works on HN for "Show HN: a TUI..."** — search HN for the last year of TUI submissions, capture title + score + comments. Identify three patterns that correlate with high scores.
+
+Output of each research run is a `research/<topic>.md` with:
+- Bullet summary at top (≤5 lines).
+- Concrete data points with URLs.
+- "Implications for QuickSheet" section — 2–3 specific actions to queue in the log.
+
+Then queue those actions in the log's `## Queued` section so the next run picks one.
+
+Hard rule: research without distilled implications is wasted work. The deliverable is the implications, not the survey.
+
 ## Bucket E — Quality-of-life features that get screenshotted
 Code change in QuickSheet repo. Autonomous-safe — commit and push.
 - Theme presets
