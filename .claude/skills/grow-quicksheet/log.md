@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #17)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket A — wrote `docs/extensions.md`. Live directory page with prefix/name/what-it-does/repo table for all 7 current extensions (copilot, weather, tls, price, define, mortgage, pomodoro). Install command, protocol spec, manifest template, conventions for new ext authors, submission instructions. README's Extensions section now points readers there.
+- Bucket: A
+- Outcome: build clean. Committed and pushed.
+- Follow-up: As new extensions ship, append a row to the table in the same commit. Could later add screenshot thumbnails column.
+
 ## 2026-05-14 (local run #16)
 
 - Stars: 0 (Δ 0)
