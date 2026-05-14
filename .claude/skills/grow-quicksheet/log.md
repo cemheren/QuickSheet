@@ -58,14 +58,23 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: Repo live at https://github.com/cemheren/quicksheet-tls-ext. SKILL.md updated to allow autonomous repo create/push (no user interrupt). Main README updated with link.
 - Follow-up: Pick next vertical (finance — yfinance JSON, real estate — Zillow API, writing — dictionary). Smoke-test the TLS ext end-to-end inside QuickSheet on next interactive opportunity.
 
+## 2026-05-14 (local run #6)
+
+- Stars: 0 (Δ 0)
+- Action: Added top-level CONTRIBUTING.md — quick-start, ground rules (zero NuGet, CSV persistence, cross-platform conditionals, don't break keybindings/CSV/flags), "what's helpful" priority list, PR style. Alive-signal doc.
+- Bucket: B
+- Outcome: build clean. Committed and pushed.
+- Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
+
 ## Queued
 
 - Capture sparkline screenshot for README/social (needs human or `--desktop` smoke test).
 - Add "Why this exists" short section or 60-second feature tour under `docs/`.
 - More Bucket E small wins: theme presets, `w: url` live web-fetch prefix, markdown export (each <50 LOC, additive).
+- More Bucket F verticals: finance (yfinance JSON), real estate (Zillow), writing (dictionary), email (gravatar/MX).
 - Demo GIF of desktop wallpaper mode (needs human capture — deferred).
 - Audit screenshot filenames (`image.png`, `image-1.png`, etc.) — give meaningful names and update README refs.
 - Set social preview image (openGraphImage) — needs custom upload via web UI or API.
 - Draft r/commandline + r/dotnet posts (Bucket C) once Show HN result is known.
 - Sparkline could accept range refs (`s: A1::A10`) — open enhancement.
-- Write small CONTRIBUTING.md (Bucket B, alive signal).
+- Open 1–2 "good first issue" stubs (alive signal, after CONTRIBUTING is live).
