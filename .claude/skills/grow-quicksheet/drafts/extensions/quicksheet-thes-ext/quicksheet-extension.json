@@ -1,0 +1,8 @@
+{
+  "name": "thes",
+  "version": "1.0.0",
+  "prefix": "thes",
+  "description": "Inline thesaurus lookups (Datamuse) for QuickSheet",
+  "entry": "dotnet run --project ThesExtension.csproj",
+  "minProtocolVersion": 1
+}

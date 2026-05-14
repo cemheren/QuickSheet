@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #27)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket F — scaffolded, built, created+pushed `quicksheet-thes-ext`. Thesaurus via free Datamuse API (`rel_syn`). Pairs naturally with `quicksheet-define-ext`. Cached in-memory; zero NuGet. Added to extensions directory and tour.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-thes-ext. 11 extensions in directory now.
+- Follow-up: Could pair-extend the writer recipe with `thes:` column. Remaining verticals: gravatar, tax/1099, legal (Caselaw). Prebuilt binaries for v0.2.0 still open.
+
 ## 2026-05-14 (local run #26)
 
 - Stars: 0 (Δ 0)
