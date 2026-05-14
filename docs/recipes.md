@@ -54,6 +54,24 @@ Extensions used: [price](https://github.com/cemheren/quicksheet-price-ext).
 
 ---
 
+## 2b. Stock watchlist
+
+Same idea, but for equities and ETFs.
+
+```
+Ticker,Quote,Notes
+AAPL,"stock: AAPL, 1, 3",
+MSFT,"stock: MSFT, 1, 3",
+SPY,"stock: SPY, 1, 3",
+VOO,"stock: VOO, 1, 3",
+```
+
+`L: B2, 30m` is plenty — Stooq's data is end-of-day for most exchanges, and intraday updates lag 15+ minutes anyway.
+
+Extensions used: [stock](https://github.com/cemheren/quicksheet-stock-ext).
+
+---
+
 ## 3. Personal command center
 
 Launchers + bookmarks + small numeric tracker in one sheet.
