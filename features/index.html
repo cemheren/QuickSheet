@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuickSheet Features — Desktop Wallpaper Spreadsheet, TUI, Extensions & More</title>
+  <meta name="description" content="QuickSheet features: desktop wallpaper spreadsheet mode, terminal TUI, inline subprocesses, sparkline charts, cell-range references, theme presets, CSV persistence, extension system, and more.">
+  <meta name="keywords" content="terminal spreadsheet features, desktop wallpaper spreadsheet, tui spreadsheet linux, inline subprocess spreadsheet, sparkline cells, csv editor terminal, dotnet spreadsheet cli, console spreadsheet features">
+  <link rel="canonical" href="https://cemheren.github.io/QuickSheet/features/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="QuickSheet Features — Everything Your Desktop Can Do">
+  <meta property="og:description" content="Desktop wallpaper mode, terminal TUI, inline subprocesses, sparklines, themes, extensions — all with zero dependencies.">
+  <meta property="og:url" content="https://cemheren.github.io/QuickSheet/features/">
+  <meta property="og:site_name" content="QuickSheet">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QuickSheet Features">
+  <meta name="twitter:description" content="Desktop wallpaper mode, terminal TUI, inline subprocesses, sparklines, themes, extensions.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "QuickSheet Features",
+    "description": "Complete feature list for QuickSheet — the zero-dependency .NET 9 spreadsheet that runs as your desktop wallpaper.",
+    "url": "https://cemheren.github.io/QuickSheet/features/",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "QuickSheet",
+      "url": "https://cemheren.github.io/QuickSheet/"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --purple: #bc8cff;
+      --orange: #d29922;
+      --max-w: 960px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    nav .logo { font-weight: 700; font-size: 1.1rem; }
+    nav a { color: var(--muted); font-size: 0.9rem; }
+    nav a:hover { color: var(--text); text-decoration: none; }
+    nav a.active { color: var(--accent); }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      background: linear-gradient(180deg, #161b22 0%, var(--bg) 100%);
+    }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    .hero h1 span { color: var(--accent); }
+    .hero .tagline { font-size: 1.15rem; color: var(--muted); max-width: 600px; margin: 0 auto; }
+
+    section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+    section + section { border-top: 1px solid var(--border); }
+    h2 { font-size: 1.75rem; margin-bottom: 1rem; }
+    h2 span { color: var(--accent); }
+    h3 { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--accent2); }
+
+    .feature-block { margin-bottom: 2.5rem; }
+    .feature-block p { color: var(--muted); max-width: 700px; }
+    .feature-block .prefix {
+      display: inline-block;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.15rem 0.5rem;
+      font-family: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 0.85rem;
+      color: var(--orange);
+      margin-right: 0.25rem;
+    }
+    .feature-block ul { margin-top: 0.5rem; padding-left: 1.25rem; color: var(--muted); }
+    .feature-block li { margin-bottom: 0.25rem; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+    .badge-win { background: #1f6feb33; color: var(--accent); }
+    .badge-linux { background: #3fb95033; color: var(--accent2); }
+    .badge-both { background: #bc8cff22; color: var(--purple); }
+
+    .shortcut-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .shortcut-table th, .shortcut-table td { padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+    .shortcut-table th { color: var(--muted); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .shortcut-table td:first-child { font-family: 'SF Mono', Consolas, monospace; font-size: 0.9rem; color: var(--orange); white-space: nowrap; }
+
+    .cta-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; }
+    .btn { display: inline-block; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; font-size: 1rem; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="logo">⚡ QuickSheet</span>
+    <a href="../">Home</a>
+    <a href="./" class="active">Features</a>
+    <a href="../extensions/">Extensions</a>
+    <a href="https://github.com/cemheren/QuickSheet">GitHub</a>
+  </nav>
+
+  <div class="hero">
+    <h1>Every <span>feature</span>, explained</h1>
+    <p class="tagline">QuickSheet packs a surprising amount into a zero-dependency .NET 9 binary. Here's what it can do.</p>
+  </div>
+
+  <!-- Desktop Wallpaper Mode -->
+  <section>
+    <h2>🖥️ Desktop <span>wallpaper</span> mode</h2>
+    <div class="feature-block">
+      <p>QuickSheet's signature feature. Launch with <span class="prefix">--desktop</span> and your wallpaper becomes a fully interactive, transparent spreadsheet grid. Type anywhere, launch apps, run inline commands — all without opening a window.</p>
+      <ul>
+        <li><strong>Windows:</strong> Embeds behind desktop icons using the WorkerW window technique (Win32 P/Invoke)</li>
+        <li><strong>Linux:</strong> Uses raw X11 P/Invoke with <code>_NET_WM_WINDOW_TYPE_DESKTOP</code> (requires X11 session)</li>
+        <li>Transparent background — your wallpaper shows through</li>
+        <li>Autosaves every 5 seconds to your CSV file</li>
+        <li>Survives Alt+Tab, Win+D, and workspace switches</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Terminal TUI Mode -->
+  <section>
+    <h2>⌨️ Terminal <span>TUI</span> mode</h2>
+    <div class="feature-block">
+      <p>Run QuickSheet in any terminal for a classic spreadsheet experience. Navigate with arrow keys, edit cells inline, search with Ctrl+F. Works over SSH, in tmux, on headless servers.</p>
+      <ul>
+        <li>Full keyboard navigation with vim-friendly concepts</li>
+        <li>Cell editing with immediate visual feedback</li>
+        <li>Column sums (Σ) and row products (Π) computed live</li>
+        <li>Autosave to <code>~/.config/ExcelConsole/autosave.csv</code></li>
+        <li>Search across all cells with Ctrl+F</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Cell Prefixes -->
+  <section>
+    <h2>🔤 Smart <span>cell prefixes</span></h2>
+    <div class="feature-block">
+      <p>Cell content drives behavior. Type a prefix and QuickSheet does the rest — no menus, no dialogs, no right-click context menus. Just type.</p>
+    </div>
+    <div class="two-col">
+      <div class="feature-block">
+        <h3><span class="prefix">r: command</span> Run a command</h3>
+        <p>Press Enter on a cell starting with <code>r:</code> to launch any shell command. Open apps, run scripts, trigger builds — your spreadsheet becomes a launcher.</p>
+      </div>
+      <div class="feature-block">
+        <h3><span class="prefix">i: command</span> Inline subprocess</h3>
+        <p>Live output from a subprocess rendered directly in the cell. Uses ConPTY on Windows, pipe redirect on Linux. Output capped at 200 lines, thread-safe.</p>
+      </div>
+      <div class="feature-block">
+        <h3><span class="prefix">s: 1,4,2,8,5</span> Sparkline chart</h3>
+        <p>Comma-separated numbers rendered as Unicode block bars (▁▂▃▄▅▆▇█). Instant in-cell data visualization — no charting library needed.</p>
+      </div>
+      <div class="feature-block">
+        <h3><span class="prefix">https://...</span> Hyperlink</h3>
+        <p>URLs are auto-detected and rendered as clickable hyperlinks. Press Enter to open in your default browser.</p>
+      </div>
+      <div class="feature-block">
+        <h3><span class="prefix">{A1::C10}</span> Cell range reference</h3>
+        <p>Reference a rectangular range of cells. Used by formulas and the extension protocol to read/write cell blocks.</p>
+      </div>
+      <div class="feature-block">
+        <h3><span class="prefix">ext: name args</span> Extension call</h3>
+        <p>Invoke any installed extension. The extension reads/writes cells via the JSON-lines stdin/stdout protocol.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Themes -->
+  <section>
+    <h2>🎨 Theme <span>presets</span></h2>
+    <div class="feature-block">
+      <p>Cycle through 5 built-in themes with <span class="prefix">Ctrl+T</span> in TUI mode. Each theme sets grid lines, headers, cell text, and selection highlight colors.</p>
+      <ul>
+        <li><strong>Dark</strong> — default dark theme with blue accents</li>
+        <li><strong>Light</strong> — high-contrast light background</li>
+        <li><strong>Nord</strong> — arctic blue-grey palette</li>
+        <li><strong>Solarized</strong> — Ethan Schoonover's classic warm tones</li>
+        <li><strong>Matrix</strong> — green-on-black hacker aesthetic</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Math -->
+  <section>
+    <h2>🔢 Built-in <span>math</span></h2>
+    <div class="feature-block">
+      <p>No formula bar needed for the basics. QuickSheet computes column sums (Σ) and row products (Π) automatically for any column or row containing numeric values. Results appear in dedicated summary cells.</p>
+    </div>
+  </section>
+
+  <!-- Data -->
+  <section>
+    <h2>💾 CSV <span>persistence</span></h2>
+    <div class="feature-block">
+      <p>Everything is a CSV file. No proprietary formats, no database, no JSON state files. Open your spreadsheet data in any tool — Excel, LibreOffice, pandas, awk, or a text editor.</p>
+      <ul>
+        <li>Load any CSV: <code>dotnet run -- mydata.csv</code></li>
+        <li>Autosave preserves rows and columns beyond the visible grid</li>
+        <li>Export to Markdown: <code>dotnet run -- data.csv --export-md out.md</code></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Extensions -->
+  <section>
+    <h2>🧩 Extension <span>system</span></h2>
+    <div class="feature-block">
+      <p>QuickSheet extensions are standalone executables that communicate via a JSON-lines stdin/stdout protocol. Write extensions in any language. Install by cloning a git repo — no package manager, no registry, no trust chain beyond the code you can read.</p>
+      <ul>
+        <li>Protocol: JSON-lines over stdin/stdout</li>
+        <li>Manifest: <code>quicksheet-extension.json</code> in repo root</li>
+        <li>Install: <code>git clone</code> into extensions directory</li>
+        <li>Any language works — .NET, Python, Rust, Go, shell scripts</li>
+      </ul>
+      <p style="margin-top:0.75rem;"><a href="../extensions/">Browse the extension directory →</a></p>
+    </div>
+  </section>
+
+  <!-- Keyboard Shortcuts -->
+  <section>
+    <h2>⌨️ Keyboard <span>shortcuts</span></h2>
+    <table class="shortcut-table">
+      <thead>
+        <tr><th>Key</th><th>Action</th><th>Mode</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Arrow keys</td><td>Navigate cells</td><td>TUI + Desktop</td></tr>
+        <tr><td>Enter</td><td>Edit cell / execute command</td><td>TUI + Desktop</td></tr>
+        <tr><td>Escape</td><td>Cancel edit</td><td>TUI + Desktop</td></tr>
+        <tr><td>Delete</td><td>Clear cell</td><td>TUI + Desktop</td></tr>
+        <tr><td>Ctrl+F</td><td>Search cells</td><td>TUI</td></tr>
+        <tr><td>Ctrl+T</td><td>Cycle theme</td><td>TUI</td></tr>
+        <tr><td>Ctrl+S</td><td>Save</td><td>TUI + Desktop</td></tr>
+        <tr><td>Tab</td><td>Next cell</td><td>TUI + Desktop</td></tr>
+        <tr><td>Ctrl+C</td><td>Quit</td><td>TUI</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Cross-platform -->
+  <section>
+    <h2>🌐 Cross-<span>platform</span></h2>
+    <div class="two-col">
+      <div class="feature-block">
+        <h3>Windows <span class="badge badge-win">Win</span></h3>
+        <p>WinForms host with Win32 interop. WorkerW embedding places the grid behind desktop icons. Full ConPTY support for inline subprocesses.</p>
+      </div>
+      <div class="feature-block">
+        <h3>Linux <span class="badge badge-linux">Linux</span></h3>
+        <p>Raw X11 P/Invoke (<code>libX11.so.6</code>, <code>libXft.so.2</code>). Window type set to <code>_NET_WM_WINDOW_TYPE_DESKTOP</code>. Requires X11 session.</p>
+      </div>
+    </div>
+    <div class="feature-block">
+      <h3>Zero NuGet dependencies <span class="badge badge-both">Both</span></h3>
+      <p>Not a single NuGet package. All platform interop is hand-written P/Invoke. The entire project compiles from source with just the .NET 9 SDK — nothing else to install, audit, or trust.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="text-align:center">
+    <h2>Try it <span>now</span></h2>
+    <div class="cta-row">
+      <a href="https://github.com/cemheren/QuickSheet" class="btn btn-primary">⭐ Star on GitHub</a>
+      <a href="../extensions/" class="btn btn-secondary">🧩 Browse Extensions</a>
+      <a href="https://github.com/cemheren/QuickSheet/blob/main/docs/tour.md" class="btn btn-secondary">📖 60-Second Tour</a>
+    </div>
+  </section>
+
+  <footer>
+    <p><a href="../">QuickSheet</a> is open source under the <a href="https://github.com/cemheren/QuickSheet/blob/main/LICENSE">MIT License</a>.</p>
+    <p style="margin-top:0.5rem;">Built with .NET 9 — zero NuGet dependencies.</p>
+  </footer>
+
+</body>
+</html>

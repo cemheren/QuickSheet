@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuickSheet Extensions — Weather, Stocks, Pomodoro, AI Copilot & More</title>
+  <meta name="description" content="Browse QuickSheet extensions: weather forecasts, stock tickers, Pomodoro timer, AI copilot, TLS inspector, dictionary lookup, tax estimator, system monitor — all via JSON-lines protocol.">
+  <meta name="keywords" content="quicksheet extensions, terminal spreadsheet plugins, tui spreadsheet extensions, spreadsheet weather extension, spreadsheet stock ticker, spreadsheet pomodoro timer, dotnet spreadsheet extensions">
+  <link rel="canonical" href="https://cemheren.github.io/QuickSheet/extensions/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="QuickSheet Extensions — Extend Your Desktop Spreadsheet">
+  <meta property="og:description" content="Weather, stocks, Pomodoro, AI copilot, TLS inspector, dictionary — install with git clone, write in any language.">
+  <meta property="og:url" content="https://cemheren.github.io/QuickSheet/extensions/">
+  <meta property="og:site_name" content="QuickSheet">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QuickSheet Extensions">
+  <meta name="twitter:description" content="Browse and install QuickSheet extensions — weather, stocks, Pomodoro, AI copilot, and more.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "QuickSheet Extensions",
+    "description": "Directory of QuickSheet extensions — standalone executables that extend your spreadsheet via JSON-lines protocol.",
+    "url": "https://cemheren.github.io/QuickSheet/extensions/",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "QuickSheet",
+      "url": "https://cemheren.github.io/QuickSheet/"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --purple: #bc8cff;
+      --orange: #d29922;
+      --max-w: 960px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    nav .logo { font-weight: 700; font-size: 1.1rem; }
+    nav a { color: var(--muted); font-size: 0.9rem; }
+    nav a:hover { color: var(--text); text-decoration: none; }
+    nav a.active { color: var(--accent); }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      background: linear-gradient(180deg, #161b22 0%, var(--bg) 100%);
+    }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    .hero h1 span { color: var(--accent); }
+    .hero .tagline { font-size: 1.15rem; color: var(--muted); max-width: 650px; margin: 0 auto; }
+
+    section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+    section + section { border-top: 1px solid var(--border); }
+    h2 { font-size: 1.75rem; margin-bottom: 1rem; }
+    h2 span { color: var(--accent); }
+
+    .ext-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    @media (max-width: 640px) { .ext-grid { grid-template-columns: 1fr; } }
+
+    .ext-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .ext-card:hover { border-color: var(--accent); }
+    .ext-card h3 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+    .ext-card h3 .icon { margin-right: 0.4rem; }
+    .ext-card .desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .ext-card .meta { font-size: 0.8rem; color: var(--muted); display: flex; gap: 1rem; flex-wrap: wrap; }
+    .ext-card .meta span { display: inline-flex; align-items: center; gap: 0.25rem; }
+    .ext-card .install {
+      display: block;
+      margin-top: 0.75rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.4rem 0.75rem;
+      font-family: 'SF Mono', Consolas, monospace;
+      font-size: 0.8rem;
+      color: var(--orange);
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .protocol {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-top: 1.5rem;
+    }
+    .protocol h3 { margin-bottom: 0.75rem; color: var(--accent2); }
+    .protocol p { color: var(--muted); }
+    .protocol ol { padding-left: 1.25rem; color: var(--muted); margin-top: 0.5rem; }
+    .protocol li { margin-bottom: 0.4rem; }
+    .protocol code {
+      background: var(--bg);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    .cta-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; }
+    .btn { display: inline-block; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; font-size: 1rem; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="logo">⚡ QuickSheet</span>
+    <a href="../">Home</a>
+    <a href="../features/">Features</a>
+    <a href="./" class="active">Extensions</a>
+    <a href="https://github.com/cemheren/QuickSheet">GitHub</a>
+  </nav>
+
+  <div class="hero">
+    <h1>Extension <span>directory</span></h1>
+    <p class="tagline">Standalone executables that extend QuickSheet via JSON-lines protocol. Install with <code>git clone</code>, write in any language.</p>
+  </div>
+
+  <!-- Official Extensions -->
+  <section>
+    <h2>Official <span>extensions</span></h2>
+    <div class="ext-grid">
+
+      <div class="ext-card">
+        <h3><span class="icon">🤖</span> Copilot</h3>
+        <p class="desc">AI-powered cell completion and formula suggestions using GitHub Copilot.</p>
+        <div class="meta">
+          <span>🔧 .NET</span>
+          <span>📦 cemheren/quicksheet-copilot-ext</span>
+        </div>
+        <code class="install">git clone https://github.com/cemheren/quicksheet-copilot-ext</code>
+      </div>
+
+      <div class="ext-card">
+        <h3><span class="icon">🌤️</span> Weather</h3>
+        <p class="desc">Current weather and forecasts for any city. Uses wttr.in — no API key needed.</p>
+        <div class="meta">
+          <span>🔧 .NET</span>
+          <span>📦 cemheren/quicksheet-weather</span>
+        </div>
+        <code class="install">git clone https://github.com/cemheren/quicksheet-weather</code>
+      </div>
+
+      <div class="ext-card">
+        <h3><span class="icon">🔒</span> TLS Inspector</h3>
+        <p class="desc">Check SSL/TLS certificate details, expiry dates, and chain validity for any domain.</p>
+        <div class="meta">
+          <span>🔧 .NET</span>
+          <span>📦 cemheren/quicksheet-tls-ext</span>
+        </div>
+        <code class="install">git clone https://github.com/cemheren/quicksheet-tls-ext</code>
+      </div>
+
+      <div class="ext-card">
+        <h3><span class="icon">🍅</span> Pomodoro</h3>
+        <p class="desc">Focus timer with work/break cycles. Track sessions directly in your spreadsheet.</p>
+        <div class="meta">
+          <span>🔧 .NET</span>
+          <span>📦 cemheren/quicksheet-pomodoro</span>
+        </div>
+        <code class="install">git clone https://github.com/cemheren/quicksheet-pomodoro</code>
+      </div>
+
+      <div class="ext-card">
+        <h3><span class="icon">📈</span> Stock Quotes</h3>
+        <p class="desc">Live stock price quotes from Stooq. Track your portfolio in spreadsheet cells.</p>
+        <div class="meta">
+          <span>🔧 .NET</span>
+          <span>📦 cemheren/quicksheet-stock-ext</span>
+        </div>
+        <code class="install">git clone https://github.com/cemheren/quicksheet-stock-ext</code>
+      </div>
+
+      <div class="ext-card">
+        <h3><span class="icon">💰</span> Crypto Prices</h3>
+        <p class="desc">Live cryptocurrency prices from CoinGecko with 24h change indicators.</p>
+        <div class="meta">
+          <span>🔧 .NET</span>
+          <span>📦 cemheren/quicksheet-price-ext</span>
+        </div>
+        <code class="install">git clone https://github.com/cemheren/quicksheet-price-ext</code>
+      </div>
+
+      <div class="ext-card">
+        <h3><span class="icon">📖</span> Dictionary</h3>
+        <p class="desc">Inline dictionary definitions via dictionaryapi.dev. Look up any word, get definitions by part of speech.</p>
+        <div class="meta">
+          <span>🔧 .NET</span>
+          <span>📦 cemheren/quicksheet-define-ext</span>
+        </div>
+        <code class="install">git clone https://github.com/cemheren/quicksheet-define-ext</code>
+      </div>
+
+      <div class="ext-card">
+        <h3><span class="icon">🧾</span> 1099 Tax Estimator</h3>
+        <p class="desc">US self-employment tax calculator. Estimate quarterly payments right in your spreadsheet.</p>
+        <div class="meta">
+          <span>🔧 .NET</span>
+          <span>📦 cemheren/quicksheet-1099-ext</span>
+        </div>
+        <code class="install">git clone https://github.com/cemheren/quicksheet-1099-ext</code>
+      </div>
+
+      <div class="ext-card">
+        <h3><span class="icon">👤</span> Gravatar</h3>
+        <p class="desc">Look up Gravatar profiles and MX records for email addresses.</p>
+        <div class="meta">
+          <span>🔧 .NET</span>
+          <span>📦 cemheren/quicksheet-grav-ext</span>
+        </div>
+        <code class="install">git clone https://github.com/cemheren/quicksheet-grav-ext</code>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- How Extensions Work -->
+  <section>
+    <h2>How extensions <span>work</span></h2>
+    <div class="protocol">
+      <h3>JSON-lines protocol</h3>
+      <p>Extensions are standalone executables. QuickSheet communicates with them via stdin/stdout using newline-delimited JSON messages.</p>
+      <ol>
+        <li>User types <code>ext: name args</code> in a cell</li>
+        <li>QuickSheet spawns the extension process (or reuses a running one)</li>
+        <li>Sends a JSON request with the cell coordinates and arguments</li>
+        <li>Extension processes the request and writes JSON response(s) to stdout</li>
+        <li>QuickSheet updates the target cells with the response data</li>
+      </ol>
+    </div>
+
+    <div class="protocol" style="margin-top:1rem;">
+      <h3>Writing your own extension</h3>
+      <p>Extensions can be written in any language. The minimum requirements:</p>
+      <ol>
+        <li>Create a <code>quicksheet-extension.json</code> manifest in the repo root</li>
+        <li>Build an executable that reads JSON from stdin and writes JSON to stdout</li>
+        <li>Handle the <code>invoke</code> message type at minimum</li>
+        <li>Publish as a Git repo — users install with <code>git clone</code></li>
+      </ol>
+      <p style="margin-top:0.75rem;">See the <a href="https://github.com/cemheren/QuickSheet#extensions">Extensions section in the README</a> for the full protocol specification.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="text-align:center">
+    <h2>Build <span>something</span></h2>
+    <p style="color:var(--muted);max-width:500px;margin:0 auto 1.5rem;">The extension protocol is simple by design. If you can read stdin and write stdout, you can build a QuickSheet extension.</p>
+    <div class="cta-row">
+      <a href="https://github.com/cemheren/QuickSheet" class="btn btn-primary">⭐ Star on GitHub</a>
+      <a href="../features/" class="btn btn-secondary">📋 All Features</a>
+      <a href="https://github.com/cemheren/QuickSheet/blob/main/CONTRIBUTING.md" class="btn btn-secondary">🤝 Contribute</a>
+    </div>
+  </section>
+
+  <footer>
+    <p><a href="../">QuickSheet</a> is open source under the <a href="https://github.com/cemheren/QuickSheet/blob/main/LICENSE">MIT License</a>.</p>
+    <p style="margin-top:0.5rem;">Built with .NET 9 — zero NuGet dependencies.</p>
+  </footer>
+
+</body>
+</html>
