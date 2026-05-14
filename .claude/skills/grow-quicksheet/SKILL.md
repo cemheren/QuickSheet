@@ -95,6 +95,18 @@ unverified code.
 
 # Boundaries (hard rules — no exceptions)
 
+- **DO NOT BREAK THE PROJECT.** A broken repo loses stars, doesn't earn them.
+  Before every code/doc commit:
+  - Run `dotnet build ExcelConsole.csproj` — must be 0 errors, 0 warnings.
+  - Do not change existing public API or rename CLI flags without a deprecation path.
+  - Do not modify keybindings, default behavior, or UI layout that users rely on.
+  - Do not remove or rename screenshots referenced in README.
+  - Do not change CSV format, autosave path, or persistence layout.
+  - Touch the smallest surface area that achieves the action. Additive > refactor.
+  - If a change is non-trivial (>~50 lines, or touches >2 files outside docs),
+    skip and pick a smaller action this run.
+  - If build fails and the fix isn't obvious, revert local changes and switch to a
+    Bucket A/B/C/D action instead. Never push broken code.
 - **No social posting.** Never post to HN, Reddit, Twitter, Mastodon, Bluesky,
   Lobsters, dev.to, Medium, etc., even if credentials exist. Drafts only.
 - **No PRs to other repos.** Draft branch + PR body saved to `drafts/`. User submits.
