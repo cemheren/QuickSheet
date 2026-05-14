@@ -261,6 +261,16 @@ public class GridManager
     /// </summary>
     public void SaveToMarkdown(string path)
     {
+        using var writer = new StreamWriter(path);
+        WriteMarkdownTo(writer);
+    }
+
+    /// <summary>
+    /// Writes the grid as a GitHub-flavored Markdown table to an arbitrary <see cref="TextWriter"/>.
+    /// Used by `--export-md -` to write to stdout for piping.
+    /// </summary>
+    public void WriteMarkdownTo(TextWriter writer)
+    {
         // Find the bottom-most non-empty row and right-most non-empty column.
         int lastRow = -1, lastCol = -1;
         for (int r = 0; r < RowCount; r++)
@@ -270,13 +280,8 @@ public class GridManager
                     if (r > lastRow) lastRow = r;
                     if (c > lastCol) lastCol = c;
                 }
-        if (lastRow < 0 || lastCol < 0)
-        {
-            File.WriteAllText(path, "");
-            return;
-        }
+        if (lastRow < 0 || lastCol < 0) return;
 
-        using var writer = new StreamWriter(path);
         for (int r = 0; r <= lastRow; r++)
         {
             writer.Write('|');

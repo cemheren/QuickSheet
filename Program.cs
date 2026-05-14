@@ -62,8 +62,15 @@ public class Program
             // Constructor derives ColumnCount from (availableWidth - 4) / columnWidth (default 20).
             var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
             grid.LoadFromCsv(csvPath);
-            grid.SaveToMarkdown(outPath);
-            Console.WriteLine($"Wrote markdown: {outPath}");
+            if (outPath == "-")
+            {
+                grid.WriteMarkdownTo(Console.Out);
+            }
+            else
+            {
+                grid.SaveToMarkdown(outPath);
+                Console.WriteLine($"Wrote markdown: {outPath}");
+            }
             return;
         }
 
@@ -165,7 +172,7 @@ public class Program
         Console.WriteLine("Usage:");
         Console.WriteLine("  ExcelConsole [<file.csv>]                  TUI mode (default)");
         Console.WriteLine("  ExcelConsole [<file.csv>] --desktop        Embed as desktop wallpaper");
-        Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>  Headless: CSV → Markdown table");
+        Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>  Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole --help                        Show this help");
         Console.WriteLine("  ExcelConsole --version                     Show version");
         Console.WriteLine("  ExcelConsole --list-extensions             List installed extensions");

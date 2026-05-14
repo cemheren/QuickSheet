@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #42)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket E — `--export-md -` writes Markdown table to stdout. Refactored `SaveToMarkdown(path)` into `WriteMarkdownTo(TextWriter)` core + thin path-based wrapper. Program.cs branches on `-` to feed `Console.Out`. Updated --help, CHANGELOG Unreleased.
+- Bucket: E
+- Outcome: build clean. Smoke-tested via `dotnet run -- /tmp/test.csv --export-md -` → clean stdout pipe.
+- Follow-up: v0.3.0 stack now has --list-extensions and --export-md stdout. Continue to grow Unreleased.
+
 ## 2026-05-14 (local run #41)
 
 - Stars: 0 (Δ 0)

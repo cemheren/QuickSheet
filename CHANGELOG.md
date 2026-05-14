@@ -6,6 +6,7 @@ All notable changes to QuickSheet. Format roughly follows [Keep a Changelog](htt
 
 ### Added
 - `--list-extensions` flag prints installed extensions from `~/.quicksheet/extensions/` with prefix, repo dir, and version from each manifest.
+- `--export-md -` writes the Markdown table to stdout instead of a file, for piping into other tools.
 
 ## 0.2.0 — 2026-05-14
 
