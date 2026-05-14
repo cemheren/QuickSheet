@@ -38,15 +38,22 @@ public static class ExtensionInstaller
 
         if (Directory.Exists(targetDir))
         {
-            // Already installed — pull latest changes
             string manifestPath = Path.Combine(targetDir, "quicksheet-extension.json");
-            if (!File.Exists(manifestPath))
+            if (File.Exists(manifestPath))
             {
-                Log($"Install failed: {repoRef} cloned but no quicksheet-extension.json at root of {targetDir}");
+                // Already installed — pull latest changes
+                TryPull(targetDir);
+                return targetDir;
+            }
+
+            // Stale cache (cloned before manifest existed or from broken version) — re-clone
+            Log($"Stale cache: {repoRef} has no manifest at root, deleting and re-cloning");
+            try { Directory.Delete(targetDir, recursive: true); }
+            catch (Exception ex)
+            {
+                Log($"Install failed: could not delete stale cache {targetDir}: {ex.Message}");
                 return null;
             }
-            TryPull(targetDir);
-            return targetDir;
         }
 
         // Ensure parent directory exists
