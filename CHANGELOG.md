@@ -4,29 +4,34 @@ All notable changes to QuickSheet. Format roughly follows [Keep a Changelog](htt
 
 ## Unreleased
 
+(empty — bump here before the next tag)
+
+## 0.2.0 — 2026-05-14
+
 ### Added
+- Theme presets — cycle TUI color palette with Ctrl+T.
 - `--version` / `-v` flag.
-- `s: A1::A10` range form for sparkline cells (issue #1).
+- `s: A1::A10` range form for sparkline cells (closes #1).
 - `docs/recipes.md` — eight ready-to-paste wallpaper dashboards (ops, portfolio, stock watchlist, command center, writer, pomodoro+tasks, freelancer, academic, AI scratchpad).
 - `docs/extensions.md` — live directory of installable extensions.
 - `docs/tour.md` — 60-second feature tour.
-- `CONTRIBUTING.md`, `SECURITY.md` — repo-health docs.
+- `CONTRIBUTING.md`, `SECURITY.md`, `CHANGELOG.md` — repo-health docs.
 
 ### Fixed
-- Column auto-width over-counted raw cell length for `s:` sparkline cells (issue #2).
+- Column auto-width over-counted raw cell length for `s:` sparkline cells (closes #2).
 
-### Extensions
-New extensions published as separate repos, installable via `ext: github:cemheren/<repo>`:
-- `quicksheet-tls-ext` — TLS cert expiry + issuer.
-- `quicksheet-price-ext` — crypto price quotes (CoinGecko).
-- `quicksheet-define-ext` — inline dictionary (dictionaryapi.dev).
-- `quicksheet-mortgage-ext` — fixed-rate amortization calculator.
-- `quicksheet-mxck-ext` — MX record lookup (DNS-over-HTTPS).
-- `quicksheet-ping-ext` — HTTP probe (status + latency).
-- `quicksheet-cite-ext` — DOI → citation (Crossref).
-- `quicksheet-thes-ext` — thesaurus (Datamuse).
-- `quicksheet-stock-ext` — stock quotes (Stooq).
-- `quicksheet-1099-ext` — US self-employment tax estimator.
+### Extensions (separate repos, installable via `ext: github:cemheren/<repo>`)
+- `quicksheet-tls-ext`
+- `quicksheet-price-ext`
+- `quicksheet-define-ext`
+- `quicksheet-mortgage-ext`
+- `quicksheet-mxck-ext`
+- `quicksheet-ping-ext`
+- `quicksheet-cite-ext`
+- `quicksheet-thes-ext`
+- `quicksheet-stock-ext`
+- `quicksheet-1099-ext`
+- `quicksheet-grav-ext`
 
 ## 0.1.0 — 2026-05-14
 
