@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #37)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket F — scaffolded, built, created+pushed `quicksheet-grav-ext`. MD5-hash email → Gravatar profile JSON (en.gravatar.com/<md5>.json) for name + location + avatar URL. Falls back to identicon URL if no profile. 24h cache. Zero NuGet (BCL MD5 only). Added to docs.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-grav-ext. 14 extensions in directory now (counting theme presets feature; F count 11 of 14).
+- Follow-up: Remaining vertical from skill list: legal/case lookup. Yield ext blocked on unstable APIs.
+
 ## 2026-05-14 (local run #36)
 
 - Stars: 0 (Δ 0)

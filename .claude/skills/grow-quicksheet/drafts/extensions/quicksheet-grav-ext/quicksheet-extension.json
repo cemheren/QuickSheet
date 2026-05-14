@@ -1,0 +1,8 @@
+{
+  "name": "grav",
+  "version": "1.0.0",
+  "prefix": "grav",
+  "description": "Gravatar profile + avatar URL lookup for QuickSheet",
+  "entry": "dotnet run --project GravExtension.csproj",
+  "minProtocolVersion": 1
+}
