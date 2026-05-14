@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #45)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket R — researched niche communities. r/unixporn AutoMod rules pulled from upstream source (mandatory DE-tag title, mandatory details-comment in 30min, approved hosts, min-karma). terminaltrove submission = email `hello@terminaltrove.com`. console.dev = editorial Thursdays, criteria checked — QuickSheet fits 8/9 of their checklist. r/unixporn is identified as the underexploited highest-demographic-fit channel: wallpaper-mode IS the rice post.
+- Bucket: R
+- Outcome: brief saved at `.claude/skills/grow-quicksheet/research/niche-communities.md`. Two concrete queued actions: unixporn rice-style submission template + short pitch emails for terminaltrove + console.dev.
+- Follow-up: Next run pick Bucket D unixporn draft (best ROI of the queued options).
+
 ## 2026-05-14 (local run #44)
 
 - Stars: 0 (Δ 0)
