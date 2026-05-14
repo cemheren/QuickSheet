@@ -51,6 +51,9 @@ Auto-sum (Σ) per column and auto-product (Π) per row in the status bar. Import
 
 ![alt text](image-2.png)
 
+### Sparklines in a cell
+Prefix a cell with `s: 1,2,3,4,5,6` to render the values as a unicode bar sparkline (`▁▂▃▄▅▆`). Handy for tracking a small series next to other notes — paste a row of numbers, get a tiny chart, no extra column.
+
 <!-- 
 ## Add your own sections here!
 Some ideas:

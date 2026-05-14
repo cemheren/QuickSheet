@@ -34,12 +34,22 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: draft saved at `.claude/skills/grow-quicksheet/drafts/showhn.md`. User posts manually.
 - Follow-up: Capture a 10s GIF of wallpaper mode to attach in HN replies. Watch HN clock — best window is Tue–Thu, 7–10am Pacific.
 
+## 2026-05-14 (local run #3)
+
+- Stars: 0 (Δ 0)
+- Action: Shipped `s: 1,2,3,...` sparkline cell prefix. Parses comma-separated numbers and renders as 8-level unicode block bars (▁▂▃▄▅▆▇█). Added `IsSparkline` + `RenderSparkline` to CellPrefix; SpreadsheetApp render path checks before painting. README and CLAUDE.md updated.
+- Bucket: E
+- Outcome: build clean (dotnet 9.0.115). Committed and pushed.
+- Follow-up: Capture screenshot showing sparkline cells next to data column — high-shareability for HN/social. Could also auto-detect numeric range references later (`s: A1::A10`).
+
 ## Queued
 
+- Capture sparkline screenshot for README/social (needs human or `--desktop` smoke test).
 - Add "Why this exists" short section or 60-second feature tour under `docs/`.
-- Bucket E small wins: theme presets, sparkline-in-cell, or `w: url` live web-fetch prefix.
+- More Bucket E small wins: theme presets, `w: url` live web-fetch prefix, markdown export.
 - Demo GIF of desktop wallpaper mode (needs human capture — deferred).
 - Audit screenshot filenames (`image.png`, `image-1.png`, etc.) — give meaningful names and update README refs.
 - Set social preview image (openGraphImage) — needs custom upload via web UI or API.
 - Identify awesome-tui / awesome-dotnet lists for future PR drafts.
 - Draft r/commandline + r/dotnet posts (Bucket C) once Show HN result is known.
+- Sparkline could accept range refs (`s: A1::A10`) — open enhancement.

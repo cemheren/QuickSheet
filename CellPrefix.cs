@@ -50,6 +50,49 @@ public static class CellPrefix
         return (cellRef.Value.row, cellRef.Value.col, minutes);
     }
 
+    public static bool IsSparkline(string value) =>
+        value.StartsWith("s: ", StringComparison.OrdinalIgnoreCase);
+
+    private static readonly char[] SparklineChars = ['▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'];
+
+    /// <summary>
+    /// Renders an "s: 1,2,3,4,5" cell as unicode block-bar sparkline characters.
+    /// Returns the rendered glyph string, or null if the value is not a sparkline cell or fails to parse.
+    /// </summary>
+    public static string? RenderSparkline(string value)
+    {
+        if (!IsSparkline(value)) return null;
+        string rest = value[3..].Trim();
+        if (rest.Length == 0) return null;
+
+        string[] parts = rest.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length == 0) return null;
+
+        var nums = new List<double>(parts.Length);
+        foreach (string p in parts)
+        {
+            if (!double.TryParse(p, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out double n))
+                return null;
+            nums.Add(n);
+        }
+
+        double min = nums[0], max = nums[0];
+        foreach (double n in nums) { if (n < min) min = n; if (n > max) max = n; }
+        double range = max - min;
+
+        var sb = new System.Text.StringBuilder(nums.Count);
+        foreach (double n in nums)
+        {
+            int idx = range > 0
+                ? (int)Math.Round((n - min) / range * (SparklineChars.Length - 1))
+                : SparklineChars.Length / 2;
+            if (idx < 0) idx = 0;
+            if (idx >= SparklineChars.Length) idx = SparklineChars.Length - 1;
+            sb.Append(SparklineChars[idx]);
+        }
+        return sb.ToString();
+    }
+
     public static bool IsExtension(string value) =>
         value.StartsWith("ext: ", StringComparison.OrdinalIgnoreCase);
 

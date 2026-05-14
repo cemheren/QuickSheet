@@ -27,7 +27,7 @@ Two run modes share one data layer:
 - **`Platform/Linux/`** — raw X11 P/Invoke (`libX11.so.6`, `libXft.so.2`). Sets `_NET_WM_WINDOW_TYPE_DESKTOP`. Requires X11 (Wayland warning emitted).
 - **`Features/IMode.cs`** — modal input interface (Enter/Exit/Commit/HandleKeyEvent).
 - **`InlineProcessManager`** — live subprocesses for `i:` cells. ConPTY on Windows, pipe redirect on Linux. Thread-safe (UI reads, bg threads write). Output capped at 200 lines.
-- **`CellPrefix`** — parses `i: ` (inline output), `r: ` (runnable), `http(s)://` (hyperlink), and `{A1::C10}` cell-range refs.
+- **`CellPrefix`** — parses `i: ` (inline output), `r: ` (runnable), `s: ` (sparkline render), `http(s)://` (hyperlink), and `{A1::C10}` cell-range refs.
 
 ## Cross-platform build
 

@@ -241,7 +241,10 @@ public class SpreadsheetApp
             {
                 int w = colWidths[c];
                 string cellVal = _grid.GetCellValue(r, c);
-                string display = cellVal.PadRight(w)[..w];
+                string rendered = CellPrefix.IsSparkline(cellVal)
+                    ? (CellPrefix.RenderSparkline(cellVal) ?? cellVal)
+                    : cellVal;
+                string display = rendered.PadRight(w)[..w];
 
                 bool isSelected = r == _selectedRow && c == _selectedCol;
                 bool isMatch = _searchTerm != null && _searchMatches.Contains((r, c));
