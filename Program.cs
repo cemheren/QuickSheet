@@ -6,6 +6,12 @@ public class Program
     [STAThread]
     public static void Main(string[] args)
     {
+        if (args.Contains("--help") || args.Contains("-h"))
+        {
+            PrintHelp();
+            return;
+        }
+
         string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
         bool desktopMode = args.Contains("--desktop");
 
@@ -77,6 +83,28 @@ public class Program
             var app = new SpreadsheetApp(csvPath);
             app.Run();
         }
+    }
+
+    private static void PrintHelp()
+    {
+        Console.WriteLine("QuickSheet — interactive terminal spreadsheet + desktop wallpaper");
+        Console.WriteLine();
+        Console.WriteLine("Usage:");
+        Console.WriteLine("  ExcelConsole [<file.csv>]                  TUI mode (default)");
+        Console.WriteLine("  ExcelConsole [<file.csv>] --desktop        Embed as desktop wallpaper");
+        Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>  Headless: CSV → Markdown table");
+        Console.WriteLine("  ExcelConsole --help                        Show this help");
+        Console.WriteLine();
+        Console.WriteLine("Cell prefixes (TUI / desktop modes):");
+        Console.WriteLine("  r: <cmd>          Runnable command. Press Enter to launch.");
+        Console.WriteLine("  i: <cmd>          Inline subprocess. Output streams back into the cell.");
+        Console.WriteLine("  s: 1,2,3,...      Sparkline (unicode block bars).");
+        Console.WriteLine("  L: <cellRef>,<N>m Loop the target cell every N minutes.");
+        Console.WriteLine("  ext: github:u/r   Install an extension repo (registers a new prefix).");
+        Console.WriteLine("  http(s)://...     Hyperlink. Highlighted, opens in browser on Enter.");
+        Console.WriteLine();
+        Console.WriteLine("Range references work inside text: {A1::C10}");
+        Console.WriteLine("Tour: docs/tour.md · Issues: github.com/cemheren/QuickSheet/issues");
     }
 
 #if PLATFORM_WINDOWS

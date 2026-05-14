@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #13)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket A — added `--help` / `-h` flag. Prints usage (TUI / --desktop / --export-md / --help), cell prefix cheatsheet (r:/i:/s:/L:/ext:/URL), `{A1::C10}` range hint, links to tour and issues. Pure additive — no changes to default behavior.
+- Bucket: A
+- Outcome: build clean, smoke-test passes. Committed and pushed.
+- Follow-up: When new prefixes ship (e.g. issue #1 sparkline ranges), update the help block in same commit.
+
 ## 2026-05-14 (local run #12)
 
 - Stars: 0 (Δ 0)
