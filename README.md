@@ -139,6 +139,15 @@ ext: github:cemheren/quicksheet-define-ext
 def: laconic, 1, 4
 ```
 
+### Example: Mortgage calculator
+
+The [quicksheet-mortgage-ext](https://github.com/cemheren/quicksheet-mortgage-ext) extension turns a cell into a live amortization calculator — useful for side-by-side loan comparisons:
+
+```
+ext: github:cemheren/quicksheet-mortgage-ext
+mort: 500000, 6.5, 30, 1, 4
+```
+
 ### Example: Pomodoro timer
 
 The [quicksheet-pomodoro](https://github.com/cemheren/quicksheet-pomodoro) extension adds a live countdown timer to your desktop — perfect for focus sessions:

@@ -1,0 +1,8 @@
+{
+  "name": "mortgage",
+  "version": "1.0.0",
+  "prefix": "mort",
+  "description": "Mortgage payment calculator for QuickSheet",
+  "entry": "dotnet run --project MortgageExtension.csproj",
+  "minProtocolVersion": 1
+}

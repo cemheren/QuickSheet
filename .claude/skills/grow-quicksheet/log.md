@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #14)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket F — scaffolded, built, created+pushed `quicksheet-mortgage-ext`. Fixed-rate amortization calculator (monthly payment, total interest, total cost). Pure math, no network, no cache, no state. Zero NuGet. Linked from README + tour.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-mortgage-ext.
+- Follow-up: Next vertical — email/MX, legal (Caselaw API), tax calc. Smoke-test running extensions inside QuickSheet on user's next interactive session.
+
 ## 2026-05-14 (local run #13)
 
 - Stars: 0 (Δ 0)
