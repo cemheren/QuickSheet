@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #29)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket B — refined repo description and set homepage URL. New description leads with the differentiator (wallpaper) + .NET 9 + zero NuGet + the extension hook. Homepage points to `docs/tour.md` so first-touch visitors get the 60-second tour.
+- Bucket: B
+- Outcome: Live via `gh repo edit`. GitHub shows the new description on the repo card and on search results.
+- Follow-up: When more verticals ship, swap homepage to a real GitHub Pages site if/when one exists.
+
 ## 2026-05-14 (local run #28)
 
 - Stars: 0 (Δ 0)
