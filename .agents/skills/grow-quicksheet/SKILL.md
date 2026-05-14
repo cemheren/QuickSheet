@@ -122,13 +122,21 @@ Code changes in QuickSheet repo. Autonomous-safe — commit and push.
 Pick small. One feature per run. Keep CLAUDE.md conventions:
 zero NuGet deps, CSV persistence, cross-platform pattern.
 
-**Build before commit.** Run `dotnet build ExcelConsole.csproj`. If build fails,
-fix until green. Do NOT commit broken code. If `dotnet` is unavailable in the
-environment, skip Bucket E this run and pick from A–D instead. Log "skipped: no
-dotnet" rather than shipping unverified code.
+**Build before AND after.** Run `dotnet build ExcelConsole.csproj` before making
+changes (confirm baseline is green) and after. If build fails, fix until green or
+REVERT. Do NOT commit broken code. If `dotnet` is unavailable in the environment,
+skip Bucket E entirely — log "skipped: no dotnet" rather than shipping unverified
+code. A broken app is worse than no change at all — it actively loses stars.
 
 # Boundaries (hard rules — no exceptions)
 
+- **DO NOT BREAK THE BUILD.** Run `dotnet build ExcelConsole.csproj` before AND after
+  changes. If it fails, fix it or revert. A broken project loses stars.
+- **DO NOT break existing features or UI.** If you touch existing code, verify the
+  change doesn't regress behavior. When in doubt, don't touch working code.
+- **Additive changes only for Bucket E.** New files, new classes, new prefixes — never
+  modify core logic (GridManager, SpreadsheetApp, DesktopForm) unless fixing a bug
+  that's clearly broken. Extending is safe; rewriting is not.
 - **No social posting.** Never post to HN, Reddit, Twitter, Mastodon, Bluesky,
   Lobsters, dev.to, Medium, etc., even if credentials exist. Drafts only.
 - **No PRs to other repos.** Draft branch + PR body saved to `drafts/`. User submits.
@@ -139,6 +147,8 @@ dotnet" rather than shipping unverified code.
 - **One action per run.** Pick, execute, log, stop.
 - **No NuGet dependencies added.** Hard repo policy.
 - **Don't undo competitor's work.** Build on it, complement it, never revert it.
+- **If unsure whether a change is safe, skip Bucket E.** Pick A/B/C/D instead.
+  A cosmetic README fix can never break the app. A code change can.
 
 # Log format
 
