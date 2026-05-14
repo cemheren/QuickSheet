@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #49)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket B — cut v0.3.0. Bumped Program.cs version, rolled Unreleased into 0.3.0 in CHANGELOG (undo/redo headline + --list-extensions + --export-md stdout + ext lifecycle logging), tagged + pushed, created GH release with full notes. Headline feature is undo/redo (Ctrl+Z/Y) since v0.2.0.
+- Bucket: B
+- Outcome: release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.3.0. "Latest release" badge bumped on repo page.
+- Follow-up: All drafts ready, hero polished, three tagged releases shipped. Bottleneck remains user-publication. Future runs: research or skip unless something specific qualifies under the plausibly-causes-stars filter.
+
 ## 2026-05-14 (local run #48)
 
 - Stars: 0 (Δ 0)
