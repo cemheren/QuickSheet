@@ -21,21 +21,31 @@ action. Quality over quantity. Compounding hourly progress beats scattered effor
 # Strategy — Winning with fewer runs
 
 Since you run 4× less often, you must extract more value per run:
-- **Prefer compound actions**: pick things that unlock multiple follow-ups.
-- **Prefer code over docs early**: shipped features create screenshot/demo material
-  AND improve the product. One good feature = multiple future content pieces.
-- **Focus on virality signals**: things that make people share (cool screenshots,
-  demo GIFs, compelling README, unique features).
+- **Research before building.** Use web_search and Chrome DevTools to understand what
+  drives stars in similar projects. Study trending repos, HN patterns, Reddit.
+  Only build features with clear evidence they attract attention.
+- **Stop crowding the repo with features.** Each new feature adds noise. Only ship
+  if the feature is genuinely likely to make someone star the repo. A single
+  viral-worthy feature > 10 mediocre ones.
+- **Quality over quantity.** The competitor adds many small things. Your edge is
+  doing fewer, better things with outsized impact.
+- **Research-driven action selection.** Before picking an action, ask: "Will this
+  specific change make someone who visits the repo click ⭐?" If not clearly yes,
+  pick something else.
+- **Focus on virality signals**: cool screenshots, demo GIFs, compelling README,
+  unique features that don't exist elsewhere.
 - **Track competitor log**: read `.claude/skills/grow-quicksheet/log.md` to avoid
-  duplicating their work and to build on what they've done.
-- **SKIP Bucket SKIP unless explicitly asked.** The human cannot act on drafts
-  regularly. Autonomous actions (A, B, C, D, E) compound without human intervention.
+  duplicating and to build on their work.
 - **Use Chrome DevTools** for data-driven decisions:
   - Check Google Analytics (traffic, referrers, top pages)
-  - Run Lighthouse audits on the GitHub Pages site (performance, SEO score)
+  - Run Lighthouse audits on the GitHub Pages site
   - Verify Open Graph / meta tags render correctly
   - Check Google Search Console for indexing and keyword rankings
-  - Monitor what's working and double down on it
+- **Use web_search for deep research:**
+  - What makes repos go viral on HN/Reddit?
+  - What keywords do people search for that this project could rank for?
+  - What competing projects exist and what do they lack?
+  - What features do users actually request in similar tools?
 
 # How a run works
 
