@@ -1,0 +1,134 @@
+---
+name: grow-quicksheet
+description: >
+  Autonomously pick and execute one high-leverage action to grow GitHub stars on
+  QuickSheet. Designed for scheduled, unattended runs (no human present). Picks
+  one action, does it, logs it, reports summary. Never asks the user mid-run.
+  Trigger: /grow-quicksheet, "grow quicksheet", or scheduled invocation.
+---
+
+# Mission
+
+Grow GitHub stars on github.com/cemheren/QuickSheet. The project is a zero-dependency
+.NET terminal spreadsheet that also runs as a Linux/Windows desktop wallpaper. It is
+genuinely useful — job is to make more people aware of it and make the first-touch
+experience better.
+
+You have **limited time per run** and **limited total runs**. Treat each run as one
+focused action, not a sprawl. Compounding daily progress beats one giant push.
+
+# How a run works
+
+Assume no human is watching. Do not ask questions. Do not block on approval.
+Pick, execute, log, report.
+
+1. **Read the log** at `.claude/skills/grow-quicksheet/log.md`. This is durable
+   memory across runs — what was tried, what worked, what didn't, what's queued.
+2. **Check current state**: `gh repo view --json stargazerCount,forks,issues` and
+   note star count + delta since last run.
+3. **Pick ONE action** from the menu below. Selection rules:
+   - Prefer items under `## Queued` in the log.
+   - Bias toward variety: do not repeat the same bucket two runs in a row.
+   - Prefer high expected value × low risk.
+   - If unsure, default to Bucket A (product polish, local-only).
+4. **Execute** the action end-to-end. No mid-run questions.
+5. **Update the log** with date, action, outcome, star count, follow-ups.
+6. **Commit and push** any code/doc changes to the repo (single focused commit,
+   Conventional Commits style, no Claude attribution lines unless repo convention
+   says so). For destructive or publishable-elsewhere actions (see "Boundaries"
+   below), save artifacts to `.claude/skills/grow-quicksheet/drafts/` and log them
+   as "draft saved" — do not publish.
+7. **Report** a 3-6 line summary at end of run: action, outcome, star delta, next.
+
+# Action menu
+
+## Bucket A — Product polish (local, low-risk, autonomous-safe)
+- README improvements: clearer hero, sharper first-paragraph pitch, animated demo
+  GIF near top, badges, install one-liner, "Why this exists" section
+- Add new screenshot showing compelling use (live process output, weather extension,
+  hyperlinks, formula cells, loop coloring)
+- Write `docs/` page: "tour of features in 60 seconds"
+- Fix an open issue or TODO in `roadmap.md`
+- Add small example extension under `Extensions/`
+- Improve `--help` output and first-run UX
+- Polish error messages, copy, typos
+
+## Bucket B — Discoverability (metadata, SEO, autonomous-safe via gh)
+- Set/refine repo description: `gh repo edit --description "..."`
+- Set topics: `gh repo edit --add-topic terminal,tui,spreadsheet,csv,dotnet,...`
+- Set homepage if a site exists
+- Write `CONTRIBUTING.md` (small, alive signal)
+- Cut a GitHub release with built binaries when feature-meaningful change exists
+
+## Bucket C — Content drafts (DRAFT ONLY, never publish)
+Save to `.claude/skills/grow-quicksheet/drafts/<topic>.md`. User publishes manually
+on their own time. Log as "draft saved at <path>".
+- Hacker News "Show HN" post — title + first comment
+- Reddit posts: r/commandline, r/dotnet, r/programming, r/linux
+- Lobsters submission text
+- Twitter/X thread (3-5 tweets)
+- Mastodon/Bluesky post
+- dev.to / Medium blog post
+
+## Bucket D — Network effects (DRAFT ONLY, never push to other repos)
+- Identify awesome-* lists this project fits. Draft PR description + diff snippet.
+  Save to `drafts/awesome-<listname>.md`. User submits.
+- Identify terminal-tool directories (terminaltrove, console.dev). Draft submission.
+
+## Bucket E — Quality-of-life features that get screenshotted
+Code change in QuickSheet repo. Autonomous-safe — commit and push.
+- Theme presets
+- Sparkline-in-cell rendering
+- Live web fetch cell prefix (`w: url`)
+- Markdown export
+- Vim-style keybinding mode
+- Better autocomplete on cell prefixes
+
+Pick small. One feature per run. Keep CLAUDE.md conventions:
+zero NuGet deps, CSV persistence, cross-platform pattern.
+
+# Boundaries (hard rules — no exceptions)
+
+- **No social posting.** Never post to HN, Reddit, Twitter, Mastodon, Bluesky,
+  Lobsters, dev.to, Medium, etc., even if credentials exist. Drafts only.
+- **No PRs to other repos.** Draft branch + PR body saved to `drafts/`. User submits.
+- **No paid promotion, no bots, no astroturfing, no fake accounts.**
+- **Truthful claims only.** No "production-grade" / "thousands of users" lies.
+- **No destructive git ops on QuickSheet.** No force-push, no history rewrite, no
+  branch deletion. Plain commits to `main` are fine.
+- **One action per run.** Pick, execute, log, stop.
+- **No NuGet dependencies added.** Hard repo policy.
+
+# Log format
+
+`.claude/skills/grow-quicksheet/log.md` is persistent memory. Append entries:
+
+```
+## YYYY-MM-DD
+
+- Stars: N (Δ +M since last)
+- Action: <one-line summary>
+- Bucket: A/B/C/D/E
+- Outcome: <shipped commit abc1234 | draft saved at path | blocked on X>
+- Follow-up: <next step queued, or "none">
+```
+
+Keep entries short. Maintain a `## Queued` section at bottom for next-run hints.
+
+# End-of-run report
+
+Print to user (always, even if no human will read it — the log of runs matters):
+
+```
+QuickSheet grow run YYYY-MM-DD
+Stars: N (Δ +M)
+Did: <action>
+Outcome: <commit hash | draft path>
+Next: <queued follow-up>
+```
+
+# First run
+
+If `log.md` does not exist, create it with header and a `## Queued` seed:
+"Audit README first-impression; pick top fix." Then execute that audit as the
+first action.

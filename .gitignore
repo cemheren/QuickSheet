@@ -5,6 +5,7 @@ obj/
 .vs/
 
 # local tool/agent state
-.claude/
+.claude/*
+!.claude/skills/
 .mcp.json
 logs/
