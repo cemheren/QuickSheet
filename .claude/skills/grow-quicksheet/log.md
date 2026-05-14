@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #23)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket B — cut v0.1.0 release. Tagged + pushed v0.1.0, created GitHub release with structured notes (core features, constraints, docs, full extension list, install command, known limits). No prebuilt binaries this release (cross-platform publish is a separate step). GitHub will now surface "Latest release" badge on the repo page.
+- Bucket: B
+- Outcome: release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.1.0.
+- Follow-up: For v0.2.0 — prebuilt self-contained binaries via `dotnet publish -r {linux,win}-x64 --self-contained` attached as release artifacts.
+
 ## 2026-05-14 (local run #22)
 
 - Stars: 0 (Δ 0)
