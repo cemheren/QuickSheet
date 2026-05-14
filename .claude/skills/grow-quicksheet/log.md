@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #24)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket C — drafted dev.to / Medium long-form blog post (~1500 words). Structure: itch → wallpaper trick (Windows WorkerW + Linux X11) → zero NuGet rationale → extensions as git URLs → what it's good for → feedback asks. Includes code snippets (P/Invoke samples). Publishing notes for dev.to / Medium / personal blog + cross-post timing rules.
+- Bucket: C
+- Outcome: draft saved at `.claude/skills/grow-quicksheet/drafts/devto-blog.md`.
+- Follow-up: All major content drafts are now in place (HN, Reddit-cl, Reddit-dotnet, Lobsters, Twitter, Mastodon/Bluesky, dev.to). After user posts a few, observe deltas to inform which channel deserves a second wave.
+
 ## 2026-05-14 (local run #23)
 
 - Stars: 0 (Δ 0)
