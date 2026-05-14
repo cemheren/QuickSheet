@@ -113,6 +113,17 @@ ext: github:cemheren/quicksheet-tls-ext
 tls: github.com, 1, 4
 ```
 
+### Example: Pomodoro timer
+
+The [quicksheet-pomodoro](https://github.com/cemheren/quicksheet-pomodoro) extension adds a live countdown timer to your desktop — perfect for focus sessions:
+
+```
+ext: github:cemheren/quicksheet-pomodoro
+pomo: 25, 3, 2
+```
+
+Shows a live-updating countdown with progress bar: `🍅 FOCUS  23:41  [████░░░░░░]`. Supports `pomo: break` (5 min) and `pomo: long` (15 min) for the full Pomodoro technique.
+
 ### Build your own
 
 Extensions are regular .NET (or any language) programs that read/write JSON lines on stdin/stdout. The protocol is intentionally minimal:
