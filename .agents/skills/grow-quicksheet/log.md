@@ -29,28 +29,27 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Bucket B (topics), Bucket A (README).
 - Follow-up: Next run — create quicksheet-sysmon (CPU/RAM monitor) or build the GitHub Pages site.
 
+## 2026-05-14 07:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket C — created GitHub Pages landing page. Plain HTML/CSS, dark theme, SEO-optimized. Features: hero with install command, feature grid (6 cards), extension directory (12 extensions), comparison table (vs sc-im, VisiData), 4-step getting started, CTAs. SEO: Open Graph + Twitter Card meta, Schema.org SoftwareApplication structured data, sitemap.xml, robots.txt, 404 page. Keywords targeted: terminal spreadsheet, desktop wallpaper spreadsheet, tui spreadsheet linux, dotnet spreadsheet cli. Set repo homepage URL.
+- Bucket: C
+- Outcome: Pushed to `gh-pages` branch (commit 45ca5a6). Pages building at https://cemheren.github.io/QuickSheet/. Repo homepage set.
+- Competitor last did: 34+ runs — extensive extensions (F), features (E), docs (A), releases (B), social drafts (C). No website yet.
+- Follow-up: Verify site is live after build. Add subpages for long-tail keywords (features, extensions). Add OG image. Consider Bucket E next for variety.
+
 ## Queued
 
 Priority: autonomous actions only (no drafts requiring human posting).
 
-- **Bucket C (website — high priority, do next):**
-  - Create GitHub Pages site with landing page, feature highlights, install one-liner
-  - Add SEO: meta tags, Open Graph, structured data, sitemap
-  - Target keywords: "terminal spreadsheet", "desktop wallpaper spreadsheet", "tui spreadsheet linux"
-  - Set repo homepage URL once deployed
-- **Bucket F (extensions — separate repos, high value):**
-  - `quicksheet-pomodoro` — timer/focus cells (simple, visually cool)
-  - `quicksheet-stocks` — live stock ticker (demonstrates real-time data)
-  - `quicksheet-sysmon` — CPU/RAM/disk in cells (great screenshots)
-- **Bucket E (features):**
+- **Bucket C (website follow-ups):**
+  - Add subpages: /features, /extensions (long-tail keyword targets)
+  - Create OG image for social sharing
+  - Verify Lighthouse score and fix any issues
+- **Bucket E (features — high variety value after website run):**
   - Theme presets (dark/light/solarized/nord) — visually impressive, screenshot-worthy
   - Status bar improvements (filename, cell count, mode indicator)
-  - Markdown/HTML table export (`Ctrl+E` → copies as markdown table)
-  - Column auto-resize
+- **Bucket F (extensions — separate repos):**
+  - `quicksheet-sysmon` — CPU/RAM/disk in cells (great screenshots)
 - **Bucket A (polish):**
-  - Create a feature comparison table in README (vs sc-im, visidata)
-  - Add `docs/FEATURES.md` — 60-second tour of features
   - Rename screenshot files to meaningful names, update README refs
-- **Bucket D (releases/metadata):**
-  - Write CONTRIBUTING.md (signals active project)
-  - Cut a GitHub release with proper release notes
