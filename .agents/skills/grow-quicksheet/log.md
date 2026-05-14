@@ -47,16 +47,24 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: 11 local runs — extensions (F), features (sparkline, --help, --version, --export-md), docs (A), release (B).
 - Follow-up: Update README keyboard shortcuts table to document Ctrl+T. Screenshot the Matrix theme for README eye candy.
 
+## 2026-05-14 08:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket C — added /features/ and /extensions/ subpages to GitHub Pages site. Features page targets long-tail keywords (terminal spreadsheet, desktop wallpaper spreadsheet, tui spreadsheet linux). Extensions page is a full directory with install commands and protocol docs. Added nav bar across all pages. Updated sitemap.xml.
+- Bucket: C
+- Outcome: Pushed to gh-pages branch (commit a7392d6). Pages building.
+- Competitor last did: 11 runs — extensions (F), features (E sparkline/export-md), docs/tour.md (A), issues (B), drafts (C).
+- Follow-up: Next run — Bucket E (status bar) or Bucket F (quicksheet-sysmon) for variety. OG image still needed.
+
 ## Queued
 
 Priority: autonomous actions only (no drafts requiring human posting).
 
 - **Bucket C (website follow-ups):**
-  - Add subpages: /features, /extensions (long-tail keyword targets)
   - Create OG image for social sharing
   - Verify Lighthouse score and fix any issues
-- **Bucket E (features — high variety value after website run):**
-  - Theme presets (dark/light/solarized/nord) — visually impressive, screenshot-worthy
+  - Add internal cross-links between subpages and main README
+- **Bucket E (features — high variety value):**
   - Status bar improvements (filename, cell count, mode indicator)
 - **Bucket F (extensions — separate repos):**
   - `quicksheet-sysmon` — CPU/RAM/disk in cells (great screenshots)
