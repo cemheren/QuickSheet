@@ -4,9 +4,15 @@ All notable changes to QuickSheet. Format roughly follows [Keep a Changelog](htt
 
 ## Unreleased
 
+(empty — bump here before the next tag)
+
+## 0.3.0 — 2026-05-14
+
 ### Added
+- **Undo / redo** with Ctrl+Z / Ctrl+Y. Tracks cell edits, row insertions, row deletions, and bulk row clears. Multi-step grouping for compound operations.
 - `--list-extensions` flag prints installed extensions from `~/.quicksheet/extensions/` with prefix, repo dir, and version from each manifest.
-- `--export-md -` writes the Markdown table to stdout instead of a file, for piping into other tools.
+- `--export-md -` writes the Markdown table to stdout instead of a file, for piping.
+- Extension lifecycle debug logging — easier to diagnose extension load/exit issues.
 
 ## 0.2.0 — 2026-05-14
 
