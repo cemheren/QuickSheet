@@ -1,0 +1,163 @@
+---
+name: grow-quicksheet
+description: >
+  Autonomously pick and execute one high-leverage action to grow GitHub stars on
+  QuickSheet. Designed for scheduled, unattended runs (no human present). Picks
+  one action, does it, logs it, reports summary. Never asks the user mid-run.
+  Trigger: /grow-quicksheet, "grow quicksheet", or scheduled invocation.
+---
+
+# Mission
+
+Grow GitHub stars on github.com/cemheren/QuickSheet. The project is a zero-dependency
+.NET terminal spreadsheet that also runs as a Linux/Windows desktop wallpaper. It is
+genuinely useful — job is to make more people aware of it and make the first-touch
+experience better.
+
+You have **limited time per run** and **limited total runs** (once per hour, vs a
+competitor running every 15 minutes). Treat each run as one focused, high-impact
+action. Quality over quantity. Compounding hourly progress beats scattered effort.
+
+# Strategy — Winning with fewer runs
+
+Since you run 4× less often, you must extract more value per run:
+- **Prefer compound actions**: pick things that unlock multiple follow-ups.
+- **Prefer code over docs early**: shipped features create screenshot/demo material
+  AND improve the product. One good feature = multiple future content pieces.
+- **Batch prep work**: when writing a draft, prep 2-3 drafts in one pass if fast.
+- **Focus on virality signals**: things that make people share (cool screenshots,
+  demo GIFs, compelling README, unique features).
+- **Track competitor log**: read `.claude/skills/grow-quicksheet/log.md` to avoid
+  duplicating their work and to build on what they've done.
+
+# How a run works
+
+Assume no human is watching. Do not ask questions. Do not block on approval.
+Pick, execute, log, report.
+
+1. **Read both logs**:
+   - Own log: `.agents/skills/grow-quicksheet/log.md` (your persistent memory).
+   - Competitor log: `.claude/skills/grow-quicksheet/log.md` (see what they did).
+2. **Check current state**: `gh repo view --json stargazerCount,forks,issues` and
+   note star count + delta since last run.
+3. **Pick ONE action** from the menu below. Selection rules:
+   - Prefer items under `## Queued` in your log.
+   - Don't repeat what the competitor just did — build on it or pick a different angle.
+   - Bias toward variety: do not repeat the same bucket two runs in a row.
+   - Prefer high expected value × low risk.
+   - If unsure, default to Bucket E (features) or Bucket A (polish).
+4. **Execute** the action end-to-end. No mid-run questions.
+5. **Update your log** with date, action, outcome, star count, follow-ups.
+6. **Commit and push** any code/doc changes to the repo (single focused commit,
+   Conventional Commits style). For destructive or publishable-elsewhere actions
+   (see "Boundaries" below), save artifacts to
+   `.agents/skills/grow-quicksheet/drafts/` and log them as "draft saved" — do not
+   publish.
+7. **Report** a 3-6 line summary at end of run: action, outcome, star delta, next.
+
+# Action menu
+
+## Bucket A — Product polish (local, low-risk, autonomous-safe)
+- README improvements: clearer hero, animated demo GIF, badges, install one-liner,
+  "Why this exists" section, feature comparison table
+- Add/improve screenshots showing compelling use cases
+- Write `docs/` pages: feature tours, keyboard shortcuts reference
+- Fix open issues or TODOs in `roadmap.md`
+- Add small example extension under `Extensions/`
+- Improve `--help` output and first-run UX
+- Polish error messages, copy, typos
+- Add CHANGELOG.md or improve release notes
+
+## Bucket B — Discoverability (metadata, SEO, autonomous-safe via gh)
+- Refine repo description: `gh repo edit --description "..."`
+- Adjust topics: `gh repo edit --add-topic ...`
+- Set homepage if a site exists
+- Write/improve `CONTRIBUTING.md` (alive signal)
+- Cut a GitHub release with meaningful release notes
+- Create GitHub Discussions or issue templates
+
+## Bucket C — Content drafts (DRAFT ONLY, never publish)
+Save to `.agents/skills/grow-quicksheet/drafts/<topic>.md`. User publishes manually.
+Log as "draft saved at <path>".
+- Hacker News "Show HN" post — title + first comment
+- Reddit posts: r/commandline, r/dotnet, r/programming, r/linux, r/unixporn
+- Lobsters submission text
+- Twitter/X thread (3-5 tweets)
+- Mastodon/Bluesky post
+- dev.to / Medium blog post
+- YouTube video script for a 60-second demo
+
+## Bucket D — Network effects (DRAFT ONLY, never push to other repos)
+- Identify awesome-* lists this project fits. Draft PR description + diff snippet.
+  Save to `drafts/awesome-<listname>.md`. User submits.
+- Identify terminal-tool directories (terminaltrove, console.dev). Draft submission.
+- Identify dotnet community newsletters. Draft submission email.
+
+## Bucket E — Quality-of-life features that get screenshotted (PRIORITY)
+Code changes in QuickSheet repo. Autonomous-safe — commit and push.
+- Theme presets (dark/light/solarized/nord)
+- Sparkline-in-cell rendering
+- Live web fetch cell prefix (`w: url`)
+- Markdown/HTML table export
+- Vim-style keybinding mode
+- Better autocomplete on cell prefixes
+- Status bar improvements (file name, cell count, mode indicator)
+- Column auto-resize
+- Cell formatting (bold, color via ANSI)
+- Undo/redo stack
+
+Pick small. One feature per run. Keep CLAUDE.md conventions:
+zero NuGet deps, CSV persistence, cross-platform pattern.
+
+**Build before commit.** Run `dotnet build ExcelConsole.csproj`. If build fails,
+fix until green. Do NOT commit broken code. If `dotnet` is unavailable in the
+environment, skip Bucket E this run and pick from A–D instead. Log "skipped: no
+dotnet" rather than shipping unverified code.
+
+# Boundaries (hard rules — no exceptions)
+
+- **No social posting.** Never post to HN, Reddit, Twitter, Mastodon, Bluesky,
+  Lobsters, dev.to, Medium, etc., even if credentials exist. Drafts only.
+- **No PRs to other repos.** Draft branch + PR body saved to `drafts/`. User submits.
+- **No paid promotion, no bots, no astroturfing, no fake accounts.**
+- **Truthful claims only.** No "production-grade" / "thousands of users" lies.
+- **No destructive git ops on QuickSheet.** No force-push, no history rewrite, no
+  branch deletion. Plain commits to `main` are fine.
+- **One action per run.** Pick, execute, log, stop.
+- **No NuGet dependencies added.** Hard repo policy.
+- **Don't undo competitor's work.** Build on it, complement it, never revert it.
+
+# Log format
+
+`.agents/skills/grow-quicksheet/log.md` is persistent memory. Append entries:
+
+```
+## YYYY-MM-DD HH:MM
+
+- Stars: N (Δ +M since last)
+- Action: <one-line summary>
+- Bucket: A/B/C/D/E
+- Outcome: <shipped commit abc1234 | draft saved at path | blocked on X>
+- Competitor last did: <brief note of their most recent action>
+- Follow-up: <next step queued, or "none">
+```
+
+Keep entries short. Maintain a `## Queued` section at bottom for next-run hints.
+
+# End-of-run report
+
+Print to user (always, even if no human will read it — the log of runs matters):
+
+```
+QuickSheet grow run YYYY-MM-DD HH:MM
+Stars: N (Δ +M)
+Did: <action>
+Outcome: <commit hash | draft path>
+Next: <queued follow-up>
+```
+
+# First run
+
+If `log.md` does not exist, create it with header and a `## Queued` seed based on
+reading the competitor's log and identifying the highest-impact ungapped action.
+Then execute that action immediately.
