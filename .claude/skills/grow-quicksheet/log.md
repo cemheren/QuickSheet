@@ -26,6 +26,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: Topics live on repo. `gh repo view` confirms.
 - Follow-up: Set social preview image (openGraphImage). Set homepage URL once website/docs page exists.
 
+## 2026-05-14 (local run #2)
+
+- Stars: 0 (Δ 0)
+- Action: Drafted Show HN post (title options + first-comment pitch + reuse notes for Lobsters/Reddit). Wallpaper-as-spreadsheet framed as hook; zero-NuGet rule + extensions as differentiators.
+- Bucket: C
+- Outcome: draft saved at `.claude/skills/grow-quicksheet/drafts/showhn.md`. User posts manually.
+- Follow-up: Capture a 10s GIF of wallpaper mode to attach in HN replies. Watch HN clock — best window is Tue–Thu, 7–10am Pacific.
+
 ## Queued
 
 - Add "Why this exists" short section or 60-second feature tour under `docs/`.
@@ -33,5 +41,5 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Demo GIF of desktop wallpaper mode (needs human capture — deferred).
 - Audit screenshot filenames (`image.png`, `image-1.png`, etc.) — give meaningful names and update README refs.
 - Set social preview image (openGraphImage) — needs custom upload via web UI or API.
-- Draft Show HN post under `drafts/showhn.md`.
 - Identify awesome-tui / awesome-dotnet lists for future PR drafts.
+- Draft r/commandline + r/dotnet posts (Bucket C) once Show HN result is known.
