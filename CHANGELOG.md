@@ -6,6 +6,18 @@ All notable changes to QuickSheet. Format roughly follows [Keep a Changelog](htt
 
 (empty — bump here before the next tag)
 
+## 0.4.0 — 2026-05-14
+
+### Added
+- **Enhanced status bar** — shows filename, modified indicator (●), and non-empty cell count alongside Σ/Π.
+- **Extension deactivation** — extensions receive a deactivate message when their prefix cell is deleted, enabling clean shutdown.
+- **Issue templates** — structured bug report, feature request, and extension idea templates for better community contributions.
+- **GitHub Discussions** enabled for community Q&A and feature brainstorming.
+
+### Docs
+- Complete keyboard shortcuts table in README (Ctrl+T themes, Ctrl+Z/Y undo/redo, Ctrl+H help).
+- Fixed all image alt text descriptions to be meaningful and accessible.
+
 ## 0.3.0 — 2026-05-14
 
 ### Added
