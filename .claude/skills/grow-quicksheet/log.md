@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #26)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket A — added "Academic writing reference" recipe to `docs/recipes.md` combining `cite:` + `def:` extensions (DOI column auto-fills citation, term column auto-fills definition). Renumbered AI scratchpad to recipe #7.
+- Bucket: A
+- Outcome: Committed and pushed.
+- Follow-up: Recipe page now spans ops, finance, productivity, writing, focus, academic, AI. Could add a "creative" or "media" recipe next.
+
 ## 2026-05-14 (local run #25)
 
 - Stars: 0 (Δ 0)

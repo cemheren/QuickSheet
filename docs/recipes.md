@@ -99,7 +99,23 @@ Extensions used: [pomodoro](https://github.com/cemheren/quicksheet-pomodoro).
 
 ---
 
-## 6. AI scratchpad
+## 6. Academic writing reference
+
+Definitions and live citation lookups in one sheet — drop a DOI in column B and the formatted citation fills column C, type a word in column D for an inline definition.
+
+```
+DOI,Citation,Term,Definition
+10.1145/3623476.3623525,"cite: 10.1145/3623476.3623525, 1, 4",laconic,"def: laconic, 1, 2"
+10.1109/MS.2021.3070752,"cite: 10.1109/MS.2021.3070752, 1, 4",heuristic,"def: heuristic, 1, 2"
+```
+
+Citations are cached forever in the extension subprocess (DOIs don't change), so loading is fast on repeat views.
+
+Extensions used: [cite](https://github.com/cemheren/quicksheet-cite-ext), [define](https://github.com/cemheren/quicksheet-define-ext).
+
+---
+
+## 7. AI scratchpad
 
 Drop in a cell that asks Copilot to summarize whatever else is in the sheet:
 
