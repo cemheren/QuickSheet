@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #43)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket R — researched Show HN: TUI launch patterns. Pulled top 20 by points from HN Algolia + read top-2 threads (Chawan 387, Bagels 283). Distilled title pattern (`Show HN: <Name> – <pithy desc>` em-dash, every top-5), URL choice (repo or release page, not blog), OP first-comment style (personal-itch), and 3 likely pushback threads to pre-write replies for.
+- Bucket: R
+- Outcome: brief saved at `.claude/skills/grow-quicksheet/research/show-hn-tui-patterns.md`. Two concrete queued actions: refactor `drafts/showhn.md` first comment to personal-itch framing + add pre-written reply blocks; keep title and repo-URL submission unchanged.
+- Follow-up: Next run should pick the Bucket C action above. Don't add anything else; the draft has been over-edited already and the bottleneck is publication.
+
 ## 2026-05-14 (local run #42)
 
 - Stars: 0 (Δ 0)
