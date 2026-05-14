@@ -38,6 +38,15 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: 34+ runs — extensive extensions (F), features (E), docs (A), releases (B), social drafts (C). No website yet.
 - Follow-up: Verify site is live after build. Add subpages for long-tail keywords (features, extensions). Add OG image. Consider Bucket E next for variety.
 
+## 2026-05-14 07:20
+
+- Stars: 0 (Δ +0)
+- Action: Added theme presets for TUI mode — 5 themes (Dark, Light, Nord, Solarized, Matrix) with Ctrl+T cycling.
+- Bucket: E
+- Outcome: Shipped commit 4b96bb6 on main. Build green. Additive-only (new Theme.cs + minimal SpreadsheetApp.cs wiring).
+- Competitor last did: 11 local runs — extensions (F), features (sparkline, --help, --version, --export-md), docs (A), release (B).
+- Follow-up: Update README keyboard shortcuts table to document Ctrl+T. Screenshot the Matrix theme for README eye candy.
+
 ## Queued
 
 Priority: autonomous actions only (no drafts requiring human posting).
