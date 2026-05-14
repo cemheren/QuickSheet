@@ -89,10 +89,17 @@ Workflow:
 1. Pick a vertical. Scaffold the extension at
    `.claude/skills/grow-quicksheet/drafts/extensions/<name>/`.
 2. Build it locally with `dotnet build` — must be green, zero NuGet deps.
-3. Create the GitHub repo: `gh repo create cemheren/<name> --public --description "..." --source=<draft-path>`.
-4. Push the contents.
-5. After push, queue a follow-up Bucket A action to add a link in QuickSheet
-   main README's Extensions section.
+3. Clean build artifacts: `rm -rf bin obj`.
+4. Init local repo + commit: `cd <draft-path> && git init -b main && git add . && git -c user.email=cemheren@gmail.com -c user.name=cemheren commit -m "Initial: <pitch>"`.
+5. Create the GitHub repo + push:
+   `gh repo create cemheren/<name> --public --description "..." --source=. --push`.
+6. **Critical:** Back in the QuickSheet repo root, the inner `.git` makes the draft
+   look like a submodule (gitlink, mode 160000) when added to the outer index.
+   Remove it: `git rm --cached <draft-path> && rm -rf <draft-path>/.git && git add <draft-path>`.
+   Then commit the draft files normally in the outer repo so the scaffold travels
+   with the QuickSheet repo as plain files.
+7. Add a link to the new extension in QuickSheet's main README **and**
+   `docs/tour.md` (same commit).
 
 Never push extension code to the QuickSheet repo itself — it goes to its own
 new repo on the user's account.
