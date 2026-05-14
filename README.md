@@ -163,6 +163,17 @@ pomo: 25, 3, 2
 
 Shows a live-updating countdown with progress bar: `🍅 FOCUS  23:41  [████░░░░░░]`. Supports `pomo: break` (5 min) and `pomo: long` (15 min) for the full Pomodoro technique.
 
+### Example: System monitor
+
+The [quicksheet-sysmon](https://github.com/cemheren/quicksheet-sysmon) extension turns your desktop into a live system dashboard — CPU, RAM, disk usage with visual bars:
+
+```
+ext: github:cemheren/quicksheet-sysmon
+sys: all
+```
+
+Shows color-coded metrics with progress bars: `🟢 CPU 12.3% [██░░░░░░░░░░░░░░░░░░]`. Supports `sys: cpu`, `sys: mem`, `sys: disk` for individual metrics. Refreshes every 2 seconds.
+
 ### Build your own
 
 Extensions are regular .NET (or any language) programs that read/write JSON lines on stdin/stdout. The protocol is intentionally minimal:
