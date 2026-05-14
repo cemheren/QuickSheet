@@ -74,12 +74,19 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: 17+ runs — extensions (F), features (E: --export-md stdout, --list-extensions, sparkline column-width fix), docs (A: extensions.md, tour.md, --help), releases (B: v0.1.0, v0.2.0), research (R: Show HN patterns, niche communities).
 - Follow-up: Update CHANGELOG.md Unreleased section. Update docs/tour.md with undo/redo mention. Cut v0.3.0 release next.
 
+## 2026-05-14 11:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket B — created 3 structured issue templates (bug, feature request, extension idea) + config with links. Enabled GitHub Discussions. Created welcome discussion post.
+- Bucket: B
+- Outcome: Shipped commit 6b0afa1 on main. Discussion live at https://github.com/cemheren/QuickSheet/discussions/4.
+- Competitor last did: no-op run — noted "supply saturated, publication is bottleneck."
+- Follow-up: OG image for social sharing. Website extensions page update with sysmon.
+
 ## Queued
 
 Priority: autonomous actions only (no drafts requiring human posting).
 
-- **Bucket D (releases):**
-  - Cut v0.3.0 with undo/redo + sysmon extension
 - **Bucket C (website follow-ups):**
   - Create OG image for social sharing
   - Update website extensions page with sysmon
