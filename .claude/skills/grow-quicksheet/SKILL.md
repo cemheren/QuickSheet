@@ -87,6 +87,12 @@ Code change in QuickSheet repo. Autonomous-safe — commit and push.
 Pick small. One feature per run. Keep CLAUDE.md conventions:
 zero NuGet deps, CSV persistence, cross-platform pattern.
 
+**Build before commit.** Run `dotnet build ExcelConsole.csproj`. If build fails,
+fix until green. Do NOT commit broken code. If `dotnet` is unavailable in the
+environment (e.g., remote sandbox without .NET 9 SDK), skip Bucket E this run
+and pick from A–D instead. Log "skipped: no dotnet" rather than shipping
+unverified code.
+
 # Boundaries (hard rules — no exceptions)
 
 - **No social posting.** Never post to HN, Reddit, Twitter, Mastodon, Bluesky,
