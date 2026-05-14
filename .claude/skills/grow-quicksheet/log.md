@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #16)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket E — closed issue #2. Column auto-width in `SpreadsheetApp.GetColumnWidths` now uses rendered length for `s:` sparkline cells instead of raw `s: 1,2,3,...` string. Pure additive — falls back to raw length for everything else and for unparseable sparklines.
+- Bucket: E
+- Outcome: build clean. Committed, pushed, and closed issue #2 via commit keyword.
+- Follow-up: Issue #1 (sparkline range refs) is the next good-first-issue fix; #3 Wayland is the open hard problem.
+
 ## 2026-05-14 (local run #15)
 
 - Stars: 0 (Δ 0)

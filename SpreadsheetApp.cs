@@ -41,7 +41,11 @@ public class SpreadsheetApp
             int max = GridManager.GetColumnName(c).Length;
             for (int r = 0; r < _grid.RowCount; r++)
             {
-                int len = _grid.GetCellValue(r, c).Length;
+                string val = _grid.GetCellValue(r, c);
+                // Use rendered length for prefixes whose display is shorter than the raw value.
+                int len = CellPrefix.IsSparkline(val)
+                    ? (CellPrefix.RenderSparkline(val)?.Length ?? val.Length)
+                    : val.Length;
                 if (len > max) max = len;
             }
             widths[c] = Math.Max(MinColWidth, max + 2); // +2 for padding
