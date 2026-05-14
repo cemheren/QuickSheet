@@ -50,6 +50,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: draft saved at `.claude/skills/grow-quicksheet/drafts/awesome-lists.md`. User forks and PRs manually.
 - Follow-up: After Show HN posts, drafts open for r/commandline + r/dotnet (Bucket C). After list PRs land, link them in README "as seen in" footer.
 
+## 2026-05-14 (local run #5)
+
+- Stars: 0 (Δ 0)
+- Action: Added Bucket F (vertical extensions, drafts to separate repos). Drafted first extension: `quicksheet-tls-ext` — TLS cert expiry + issuer checker. Targets SRE/sysadmin vertical, uses BCL `System.Net.Security` only (zero NuGet deps). Manifest + Program.cs + README + LICENSE + .gitignore. Builds clean on .NET 9.
+- Bucket: F
+- Outcome: SKILL.md updated (commit 28faa91). Draft saved at `.claude/skills/grow-quicksheet/drafts/extensions/quicksheet-tls-ext/`. User creates GitHub repo `quicksheet-tls-ext`, pushes contents.
+- Follow-up: After repo is live, add reference to it in main README's Extensions section (Bucket A). Continue Bucket F: pick another vertical (finance, real estate, writing).
+
 ## Queued
 
 - Capture sparkline screenshot for README/social (needs human or `--desktop` smoke test).
