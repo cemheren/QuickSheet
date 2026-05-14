@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #47)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket A — hoisted hero screenshot (image-4.png, launcher view) to immediately under the README tagline + description. Per Show-HN-TUI research, top-2 posts (Chawan/Bagels) both had the first screenshot visible above the fold. Image already in repo; pure additive change with descriptive alt-text.
+- Bucket: A
+- Outcome: build clean. Committed and pushed.
+- Follow-up: Email pitches draft still queued (Bucket D). 60-second tour and recipe-page links remain.
+
 ## 2026-05-14 (local run #46)
 
 - Stars: 0 (Δ 0)

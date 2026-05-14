@@ -4,6 +4,8 @@
 
 QuickSheet replaces your wallpaper with a transparent, interactive grid. Pin notes, launch apps, paste links, track numbers — all without opening a window. The idea: keep something lightweight always present in the background, instead of a static wallpaper you never interact with.
 
+![QuickSheet running as the desktop wallpaper — cells holding runnable commands behind every open window](image-4.png)
+
 ![.NET 9](https://img.shields.io/badge/.NET-9.0-purple)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Windows](https://img.shields.io/badge/platform-Windows-0078D6?logo=windows)
