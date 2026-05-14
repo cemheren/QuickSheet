@@ -51,6 +51,7 @@ Currently public:
 - [`quicksheet-weather`](https://github.com/cemheren/quicksheet-weather) — 7-day forecast.
 - [`quicksheet-tls-ext`](https://github.com/cemheren/quicksheet-tls-ext) — TLS certificate checker.
 - [`quicksheet-pomodoro`](https://github.com/cemheren/quicksheet-pomodoro) — focus timer.
+- [`quicksheet-price-ext`](https://github.com/cemheren/quicksheet-price-ext) — crypto price quotes (CoinGecko).
 
 [Write your own](../README.md#build-your-own) in whatever language you want — the protocol is two message types.
 

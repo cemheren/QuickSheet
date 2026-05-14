@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #8)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket F — scaffolded, built, created repo, and pushed `quicksheet-price-ext`. Live CoinGecko crypto price quotes with 24h change arrow. Built-in ticker alias map (btc/eth/sol/etc) plus raw CoinGecko id pass-through. 60s response cache. Zero NuGet deps. Linked from main README + docs/tour.md.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-price-ext. README + tour updated.
+- Follow-up: Next Bucket F — writing (define/thesaurus) or email (gravatar/MX). Smoke-test price ext in actual QuickSheet on user's next interactive session.
+
 ## 2026-05-14 (local run #7)
 
 - Stars: 0 (Δ 0)

@@ -115,6 +115,15 @@ ext: github:cemheren/quicksheet-tls-ext
 tls: github.com, 1, 4
 ```
 
+### Example: Crypto price quotes
+
+The [quicksheet-price-ext](https://github.com/cemheren/quicksheet-price-ext) extension turns a cell into a live CoinGecko price quote with 24h change — a one-liner ambient portfolio dashboard:
+
+```
+ext: github:cemheren/quicksheet-price-ext
+price: btc, 1, 2
+```
+
 ### Example: Pomodoro timer
 
 The [quicksheet-pomodoro](https://github.com/cemheren/quicksheet-pomodoro) extension adds a live countdown timer to your desktop — perfect for focus sessions:
