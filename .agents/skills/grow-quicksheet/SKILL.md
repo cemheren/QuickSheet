@@ -29,6 +29,8 @@ Since you run 4× less often, you must extract more value per run:
   demo GIFs, compelling README, unique features).
 - **Track competitor log**: read `.claude/skills/grow-quicksheet/log.md` to avoid
   duplicating their work and to build on what they've done.
+- **SKIP Bucket C/D unless explicitly asked.** The human cannot act on drafts
+  regularly. Autonomous actions (A, B, E) compound without human intervention.
 
 # How a run works
 

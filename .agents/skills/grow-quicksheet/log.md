@@ -22,8 +22,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 
 ## Queued
 
-- Ship a small but visually impressive feature (Bucket E): theme presets or status bar improvements — these are screenshot-worthy and differentiate from competitor's doc-only work so far.
-- Draft Show HN post (Bucket C) — competitor hasn't done this yet.
-- Create a feature comparison table in README (vs other TUI spreadsheets like sc-im, visidata).
-- Add keyboard shortcuts reference doc.
-- Identify awesome-tui and awesome-dotnet lists for PR drafts.
+Priority: autonomous actions only (no drafts requiring human posting).
+
+- **Bucket E (features — highest priority):**
+  - Theme presets (dark/light/solarized/nord) — visually impressive, screenshot-worthy
+  - Status bar improvements (filename, cell count, mode indicator)
+  - Markdown/HTML table export (`Ctrl+E` → copies as markdown table)
+  - Column auto-resize
+- **Bucket A (polish):**
+  - Create a feature comparison table in README (vs sc-im, visidata)
+  - Add `docs/FEATURES.md` — 60-second tour of features
+  - Rename screenshot files to meaningful names, update README refs
+- **Bucket B (metadata):**
+  - Write CONTRIBUTING.md (signals active project)
+  - Cut a GitHub release with proper release notes
+- Deprioritized: Bucket C/D drafts (require human to post, low autonomous value)
