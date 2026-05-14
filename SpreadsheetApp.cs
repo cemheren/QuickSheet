@@ -127,6 +127,10 @@ public class SpreadsheetApp
                     case ConsoleKey.F:
                         PromptSearch();
                         break;
+                    case ConsoleKey.T:
+                        Theme.CycleNext();
+                        Console.Clear();
+                        break;
                 }
                 Render();
                 continue;
@@ -186,9 +190,10 @@ public class SpreadsheetApp
 
     private void Render()
     {
+        var theme = Theme.Current;
         Console.SetCursorPosition(0, 0);
-        Console.BackgroundColor = ConsoleColor.Black;
-        Console.ForegroundColor = ConsoleColor.White;
+        Console.BackgroundColor = theme.Background;
+        Console.ForegroundColor = theme.Foreground;
 
         int totalWidth = Console.WindowWidth;
         int[] colWidths = GetColumnWidths();
@@ -203,9 +208,9 @@ public class SpreadsheetApp
             string header = GridManager.GetColumnName(c).PadRight(w);
             if (c == _selectedCol)
             {
-                Console.BackgroundColor = ConsoleColor.DarkGray;
+                Console.BackgroundColor = theme.HeaderHighlight;
                 Console.Write(header);
-                Console.BackgroundColor = ConsoleColor.Black;
+                Console.BackgroundColor = theme.Background;
             }
             else
             {
@@ -231,9 +236,9 @@ public class SpreadsheetApp
             string rowNum = (r + 1).ToString().PadLeft(RowHeaderWidth - 1) + " ";
             if (r == _selectedRow)
             {
-                Console.BackgroundColor = ConsoleColor.DarkGray;
+                Console.BackgroundColor = theme.HeaderHighlight;
                 Console.Write(rowNum);
-                Console.BackgroundColor = ConsoleColor.Black;
+                Console.BackgroundColor = theme.Background;
             }
             else
             {
@@ -254,26 +259,26 @@ public class SpreadsheetApp
                 bool isMatch = _searchTerm != null && _searchMatches.Contains((r, c));
                 if (isSelected && isMatch)
                 {
-                    Console.BackgroundColor = ConsoleColor.Green;
-                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.BackgroundColor = theme.SearchSelectedBg;
+                    Console.ForegroundColor = theme.SearchSelectedFg;
                 }
                 else if (isSelected)
                 {
-                    Console.BackgroundColor = ConsoleColor.DarkGray;
-                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.BackgroundColor = theme.SelectionBg;
+                    Console.ForegroundColor = theme.SelectionFg;
                 }
                 else if (isMatch)
                 {
-                    Console.BackgroundColor = ConsoleColor.DarkYellow;
-                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.BackgroundColor = theme.SearchMatchBg;
+                    Console.ForegroundColor = theme.SearchMatchFg;
                 }
 
                 Console.Write(display);
 
                 if (isSelected || isMatch)
                 {
-                    Console.BackgroundColor = ConsoleColor.Black;
-                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.BackgroundColor = theme.Background;
+                    Console.ForegroundColor = theme.Foreground;
                 }
             }
 
@@ -284,8 +289,8 @@ public class SpreadsheetApp
         // Status bar at the bottom
         int statusY = Console.WindowHeight - 1;
         Console.SetCursorPosition(0, statusY);
-        Console.BackgroundColor = ConsoleColor.White;
-        Console.ForegroundColor = ConsoleColor.Black;
+        Console.BackgroundColor = theme.StatusBarBg;
+        Console.ForegroundColor = theme.StatusBarFg;
 
         string cellRef = _grid.GetCellReference(_selectedRow, _selectedCol);
         string value = _grid.GetCellValue(_selectedRow, _selectedCol);
@@ -302,11 +307,11 @@ public class SpreadsheetApp
             ? $"  🔍\"{_searchTerm}\" {(_searchMatches.Count > 0 ? $"{_searchMatchIndex + 1}/{_searchMatches.Count}" : "no matches")}"
             : "";
 
-        string status = $" {cellRef}{valueDisplay}{sumDisplay}{productDisplay}{searchDisplay}  │  Ctrl+Q: Quit ";
+        string status = $" {cellRef}{valueDisplay}{sumDisplay}{productDisplay}{searchDisplay}  │  [{theme.Name}] Ctrl+T: Theme  Ctrl+Q: Quit ";
         Console.Write(status.PadRight(totalWidth));
 
-        Console.BackgroundColor = ConsoleColor.Black;
-        Console.ForegroundColor = ConsoleColor.White;
+        Console.BackgroundColor = theme.Background;
+        Console.ForegroundColor = theme.Foreground;
     }
 
     private static void ClearToEndOfLine(int currentPos, int totalWidth)
