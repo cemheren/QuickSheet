@@ -19,7 +19,7 @@ Every cell is plain text by default. Add a prefix and the cell *does something*.
 | (none)              | Plain text. Autosaves every 5 seconds.                            | `groceries`                        |
 | `r: `               | Runnable command. Press Enter to launch.                          | `r: code .`                        |
 | `i: `               | Inline subprocess. Output streams back into the cell, live.       | `i: ping -c 1 example.com`         |
-| `s: `               | Sparkline. Numbers render as unicode bars (▁▂▃▄▅▆▇█).             | `s: 4,7,9,3,8,12`                  |
+| `s: `               | Sparkline. Numbers render as unicode bars (▁▂▃▄▅▆▇█). Range form: `s: A1::A10`. | `s: 4,7,9,3,8,12`                  |
 | `L: `               | Loop a target cell on an interval.                                | `L: A10, 5m`                       |
 | `ext: `             | Install an extension repo. One line.                              | `ext: github:cemheren/quicksheet-weather` |
 | `http://` `https://`| Hyperlink. Highlighted, opens on Enter.                           | `https://news.ycombinator.com`     |

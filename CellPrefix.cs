@@ -56,24 +56,49 @@ public static class CellPrefix
     private static readonly char[] SparklineChars = ['▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'];
 
     /// <summary>
-    /// Renders an "s: 1,2,3,4,5" cell as unicode block-bar sparkline characters.
+    /// Renders an "s: 1,2,3,4,5" or "s: A1::A10" cell as unicode block-bar sparkline characters.
+    /// The range form pulls numeric values from <paramref name="grid"/> when supplied.
     /// Returns the rendered glyph string, or null if the value is not a sparkline cell or fails to parse.
     /// </summary>
-    public static string? RenderSparkline(string value)
+    public static string? RenderSparkline(string value, GridManager? grid = null)
     {
         if (!IsSparkline(value)) return null;
         string rest = value[3..].Trim();
         if (rest.Length == 0) return null;
 
-        string[] parts = rest.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-        if (parts.Length == 0) return null;
+        List<double> nums;
 
-        var nums = new List<double>(parts.Length);
-        foreach (string p in parts)
+        // Range form: `s: A1::A10` or `s: A1-A10`. Only honored when a grid is supplied.
+        var sparkRange = ParseCellRange(rest);
+        if (sparkRange != null && grid != null)
         {
-            if (!double.TryParse(p, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out double n))
-                return null;
-            nums.Add(n);
+            var (r1, c1, r2, c2) = sparkRange.Value;
+            r2 = Math.Min(r2, grid.RowCount - 1);
+            c2 = Math.Min(c2, grid.ColumnCount - 1);
+            if (r1 >= grid.RowCount || c1 >= grid.ColumnCount) return null;
+
+            nums = new List<double>();
+            for (int r = r1; r <= r2; r++)
+                for (int c = c1; c <= c2; c++)
+                {
+                    string v = grid.GetCellValue(r, c);
+                    if (double.TryParse(v, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out double n))
+                        nums.Add(n);
+                }
+            if (nums.Count == 0) return null;
+        }
+        else
+        {
+            string[] parts = rest.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length == 0) return null;
+
+            nums = new List<double>(parts.Length);
+            foreach (string p in parts)
+            {
+                if (!double.TryParse(p, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out double n))
+                    return null;
+                nums.Add(n);
+            }
         }
 
         double min = nums[0], max = nums[0];

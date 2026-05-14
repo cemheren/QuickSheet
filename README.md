@@ -62,6 +62,8 @@ Auto-sum (Σ) per column and auto-product (Π) per row in the status bar. Import
 ### Sparklines in a cell
 Prefix a cell with `s: 1,2,3,4,5,6` to render the values as a unicode bar sparkline (`▁▂▃▄▅▆`). Handy for tracking a small series next to other notes — paste a row of numbers, get a tiny chart, no extra column.
 
+You can also point at a range of cells: `s: A1::A10` pulls numeric values from the referenced grid range and renders them. Non-numeric cells in the range are skipped.
+
 <!-- 
 ## Add your own sections here!
 Some ideas:

@@ -44,7 +44,7 @@ public class SpreadsheetApp
                 string val = _grid.GetCellValue(r, c);
                 // Use rendered length for prefixes whose display is shorter than the raw value.
                 int len = CellPrefix.IsSparkline(val)
-                    ? (CellPrefix.RenderSparkline(val)?.Length ?? val.Length)
+                    ? (CellPrefix.RenderSparkline(val, _grid)?.Length ?? val.Length)
                     : val.Length;
                 if (len > max) max = len;
             }
@@ -246,7 +246,7 @@ public class SpreadsheetApp
                 int w = colWidths[c];
                 string cellVal = _grid.GetCellValue(r, c);
                 string rendered = CellPrefix.IsSparkline(cellVal)
-                    ? (CellPrefix.RenderSparkline(cellVal) ?? cellVal)
+                    ? (CellPrefix.RenderSparkline(cellVal, _grid) ?? cellVal)
                     : cellVal;
                 string display = rendered.PadRight(w)[..w];
 

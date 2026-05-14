@@ -98,7 +98,7 @@ public class Program
         Console.WriteLine("Cell prefixes (TUI / desktop modes):");
         Console.WriteLine("  r: <cmd>          Runnable command. Press Enter to launch.");
         Console.WriteLine("  i: <cmd>          Inline subprocess. Output streams back into the cell.");
-        Console.WriteLine("  s: 1,2,3,...      Sparkline (unicode block bars).");
+        Console.WriteLine("  s: 1,2,3,...      Sparkline (unicode block bars). Also accepts range: s: A1::A10");
         Console.WriteLine("  L: <cellRef>,<N>m Loop the target cell every N minutes.");
         Console.WriteLine("  ext: github:u/r   Install an extension repo (registers a new prefix).");
         Console.WriteLine("  http(s)://...     Hyperlink. Highlighted, opens in browser on Enter.");

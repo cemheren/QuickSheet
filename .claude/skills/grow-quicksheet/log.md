@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #19)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket E — closed issue #1. Sparkline cell now accepts a cell range: `s: A1::A10` pulls numeric values from the referenced range via GridManager. Non-numeric cells skipped. Literal `s: 1,2,3,...` path unchanged. Renamed local `range` to `sparkRange` to avoid scope collision. SpreadsheetApp callers pass `_grid` through. README, docs/tour.md, --help all updated.
+- Bucket: E
+- Outcome: build clean. Commit closes #1 via keyword.
+- Follow-up: Issue #3 (Wayland) is the remaining open enhancement — needs human with Wayland desktop.
+
 ## 2026-05-14 (local run #18)
 
 - Stars: 0 (Δ 0)
