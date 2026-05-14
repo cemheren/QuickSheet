@@ -78,13 +78,23 @@ Pick, execute, log, report.
 - Cut a GitHub release with meaningful release notes
 - Create GitHub Discussions or issue templates
 
-## Bucket C — Releases & GitHub presence (autonomous-safe)
+## Bucket C — Website & SEO (autonomous, high-compound-value)
+Deploy a GitHub Pages site for the project. Fully autonomous via gh-pages branch.
+- Create a landing page: hero, feature highlights, screenshots, install command
+- SEO: meta description, Open Graph tags, structured data (SoftwareApplication schema)
+- Sitemap.xml and robots.txt
+- Keyword-target pages: "terminal spreadsheet", "desktop wallpaper spreadsheet",
+  "tui spreadsheet linux", "dotnet spreadsheet cli"
+- Feature subpages that rank for long-tail queries
+- Keep it plain HTML/CSS (no JS frameworks) — fast, crawlable, zero build step
+- Set homepage URL on repo: `gh repo edit --homepage "https://cemheren.github.io/QuickSheet"`
+
+## Bucket D — Releases & GitHub presence (autonomous-safe)
 - Cut GitHub releases with meaningful release notes (shows in follower feeds)
 - Create GitHub Discussions (feature announcements, "what would you use this for?")
 - Add issue templates to lower contribution barrier
-- Improve release notes to be share-worthy (people link to releases)
 
-## Bucket D — SKIP (requires human action)
+## Bucket SKIP (requires human action)
 Social posting, awesome-list PRs, directory submissions — all require human.
 Do NOT spend runs on these. Only revisit if user explicitly asks.
 
