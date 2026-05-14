@@ -1,0 +1,55 @@
+name: Bug Report
+description: Something isn't working as expected
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! Please fill in what you can — even partial reports help.
+  - type: input
+    id: version
+    attributes:
+      label: QuickSheet version
+      description: Output of `dotnet run --project ExcelConsole.csproj -- --version`, or the release tag
+      placeholder: "e.g. v0.3.0 or latest main"
+    validations:
+      required: false
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Run mode
+      options:
+        - Desktop wallpaper (--desktop)
+        - Terminal TUI
+        - Headless (--export-md)
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - Linux (X11)
+        - Linux (Wayland)
+        - Windows
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the bug and what you expected to happen instead.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Minimal steps to trigger the bug.
+      placeholder: |
+        1. Open QuickSheet in desktop mode
+        2. Type `r: echo hello` in cell A1
+        3. Press Enter
+        4. ...
+    validations:
+      required: false

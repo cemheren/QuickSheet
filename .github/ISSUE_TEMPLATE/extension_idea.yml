@@ -1,0 +1,34 @@
+name: Extension Idea
+description: Suggest a new QuickSheet extension
+labels: ["extension"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Extensions are separate repos that feed data into QuickSheet cells via the JSON-lines protocol.
+        See [docs/extensions.md](https://github.com/cemheren/QuickSheet/blob/main/docs/extensions.md) for details.
+  - type: input
+    id: name
+    attributes:
+      label: Extension name
+      placeholder: "e.g. quicksheet-stocks"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What would it do?
+      description: What data would it show in cells? What prefix or trigger would invoke it?
+    validations:
+      required: true
+  - type: dropdown
+    id: build_it
+    attributes:
+      label: Would you build it?
+      description: If you'd like to contribute this extension, we can help you get started.
+      options:
+        - "Yes — I'd like to build it"
+        - "Maybe — I'd need some guidance"
+        - "No — just an idea"
+    validations:
+      required: false

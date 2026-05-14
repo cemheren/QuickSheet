@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Discussions
+    url: https://github.com/cemheren/QuickSheet/discussions
+    about: Ask questions, share your setup, or chat with other users
+  - name: 60-second tour
+    url: https://github.com/cemheren/QuickSheet/blob/main/docs/tour.md
+    about: New here? Start with the quick tour
