@@ -19,27 +19,56 @@ Recommended: **#1**. Short, concrete, slightly weird — the wallpaper angle is 
 
 ## First comment (post as soon as the submission goes live — this is the pitch)
 
+> This rewrite leads with personal-itch framing per the research in `research/show-hn-tui-patterns.md` — the Bagels (Show HN: TUI expense tracker, 283 pts) opening pattern. Two sentences of "I built this for myself because X" before any feature list.
+
 ```
-Author here. QuickSheet started as an itch: I never interact with my wallpaper, and I always have a few things I want at hand — notes, todos, app launchers, frequently-visited URLs, small running totals. So I made the wallpaper itself a transparent, interactive grid.
+I'm Akif. My wallpaper has been a static image I never interact with for years, and at the same time I always had a small handful of things I wanted at hand — notes, app launchers, a couple of URLs I open every morning, small running totals. I wanted those things to *be* the wallpaper, so I built QuickSheet for myself and it's been the surface I use most.
 
-What it does:
-- Cells are plain text by default. `r: cmd` makes a cell a launcher (`r: code .`, `r: firefox github.com`). Pasting a URL auto-detects and opens it on Enter. `i: cmd` runs a subprocess and pipes output back into the cell (live-tail a log, ping a host, watch a counter).
-- Persistence is CSV. No database, no JSON state file. Open it in Excel or vim, same file.
-- Auto-sum per column, auto-product per row in the status bar — for the times you don't want to open a calculator.
-- Extensions are git repos. `ext: github:user/repo` in a cell clones, reads the manifest, and starts a subprocess that talks JSON-lines. One I use is a Copilot extension that answers questions in-cell.
-- Two run modes: `--desktop` embeds it as the wallpaper (Win32 WorkerW on Windows, `_NET_WM_WINDOW_TYPE_DESKTOP` on X11), no flag = plain terminal TUI.
+Two run modes share one CSV file: a normal terminal TUI in any shell, and a `--desktop` mode that embeds the same grid as the wallpaper (Win32 WorkerW on Windows, `_NET_WM_WINDOW_TYPE_DESKTOP` on X11).
 
-Design constraints I'm holding to:
-- **Zero NuGet dependencies.** All native interop is hand-written P/Invoke (X11, WinForms, ConPTY). Clone → build → run. Supply-chain surface is tiny.
-- Side-project quality, written largely with AI assistance, but the zero-deps rule kept the design honest.
+Cell prefixes are the whole feature set:
+- `r: code .` — runnable command. Press Enter to launch.
+- `i: ping example.com` — subprocess output streams into the cell live.
+- `s: 4,7,9,3,8,12` — renders as ▂▃▆▁▅█ sparkline. Also `s: A1::A10` for a range.
+- `L: <cell>, 5m` — loops a target cell on an interval.
+- `ext: github:user/repo` — clones the repo and registers a new prefix at runtime.
+- Any URL — highlighted, opens on Enter.
 
-Cross-platform via OS-conditional TFMs in the csproj; the Windows path uses WinForms + WorkerW for wallpaper embedding, Linux uses raw X11 (Wayland gets a warning — patches welcome).
+A few constraints I held to and am glad I did:
+- Zero NuGet dependencies. All native interop (X11, WinForms, ConPTY) is hand-written P/Invoke. Clone, build, run.
+- CSV is the only persistence format. Open it in Excel or vim, same data.
+- Cross-platform via OS-conditional `#if`s in shared files and per-OS folders excluded by the csproj, not an abstraction layer.
 
-Things I want feedback on:
-- The "i:" inline-process cell is the part I use most but it's the rough edge — output is capped at 200 lines and the threading model could be cleaner.
-- Whether anyone has a use for sparkline-in-cell or `w: url` live-fetch — both are on the roadmap but I'd rather hear if people actually want them.
+Honest disclosures: side project, written largely with AI assist (the zero-deps rule kept the design honest because you can't paper over a bad idea with a package). Wayland is the open problem — XWayland passes the X11 hint through but compositors don't honor it; layer-shell is the path forward and I haven't shipped that yet (issue #3 on the repo).
 
 Repo: https://github.com/cemheren/QuickSheet
+60-second tour: https://github.com/cemheren/QuickSheet/blob/main/docs/tour.md
+```
+
+## Pre-written reply blocks (post when the obvious questions come up)
+
+### "Why not VisiData / sc-im / NeoVim with a spreadsheet plugin?"
+
+```
+Honest answer: none of those embed as the desktop wallpaper, which is the actual differentiator. If all I wanted was a TUI spreadsheet I'd use sc-im — it's mature and the keybindings are great. QuickSheet's design pressure came from wanting the grid to be *visible while doing other things*, not visible *only while focused on it*. The cell-prefix extension system (any cell prefix can be backed by a separate git repo of any language that talks JSON-lines on stdin/stdout) is the second differentiator and falls out of the wallpaper use case — you want compact, glanceable widgets, not full apps.
+```
+
+### "Why .NET? Why not Rust / Go?"
+
+```
+Two specific reasons. (1) The Win32 WorkerW wallpaper trick needs a window with a real HWND that can be `SetParent`ed into another HWND. .NET's WinForms gives me that with a one-line `new Form()` and lets me write the Win32 P/Invoke directly in the same project. Rust/Go can do this but the path is rougher. (2) The Linux side wants raw X11 P/Invoke too — `libX11.so.6` for the window, `libXft.so.2` for fonts — and .NET's `DllImport` is the same shape on both OSes, so the cross-platform conditional compilation pattern stays clean. Once that was in place I never had a reason to leave .NET.
+```
+
+### "Zero NuGet deps is dogma, not a design principle."
+
+```
+It's a forcing function more than a principle. The point isn't "packages are bad," it's that *not having packages* keeps the surface area small enough to read in a sitting and supply-chain-trivial to clone-and-run. When I needed ConPTY I wrote ~100 lines of P/Invoke instead of a 700-package dependency tree. The lift was less than I expected. The cost of the rule is real (the X11 font rendering took longer than `Avalonia.Controls.TextBlock` would have), but it bought a project I'd be comfortable shipping a binary of to a stranger.
+```
+
+### "Wayland?"
+
+```
+That's the open issue (#3 on the repo). `_NET_WM_WINDOW_TYPE_DESKTOP` doesn't survive XWayland — most compositors don't honor it. The right path is `wlr-layer-shell` with the background layer on wlroots-based compositors (Sway, Hyprland). I haven't shipped that yet; if anyone here has driven layer-shell from a non-Wayland-native language, I want to hear what was painful.
 ```
 
 ## Tips for the actual submission

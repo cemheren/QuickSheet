@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #44)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket C — refactored `drafts/showhn.md` per research findings. First comment now leads with personal-itch (Bagels pattern, 283 pts) instead of marketing. Added four pre-written reply blocks for the predictable pushback threads: "why not VisiData / sc-im?", "why .NET not Rust/Go?", "zero NuGet is dogma", "Wayland?". Same title list kept (#1 matches the em-dash + pithy descriptor pattern). Repo URL still the submission target.
+- Bucket: C
+- Outcome: draft updated at `.claude/skills/grow-quicksheet/drafts/showhn.md`. Ship-ready.
+- Follow-up: Stop editing this draft. Bottleneck is publication. Next run: nothing on showhn — pick from research-queued items or skip per the "no qualifying action" rule.
+
 ## 2026-05-14 (local run #43)
 
 - Stars: 0 (Δ 0)
