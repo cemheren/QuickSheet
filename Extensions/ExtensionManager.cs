@@ -130,6 +130,9 @@ public class ExtensionManager : IDisposable
         var knownPrefixes = KnownPrefixes;
         if (knownPrefixes.Count == 0) return;
 
+        // Collect currently active prefix cells to detect removals
+        var stillActive = new HashSet<(int, int)>();
+
         for (int r = 0; r < _grid.RowCount; r++)
         {
             for (int c = 0; c < _grid.ColumnCount; c++)
@@ -141,10 +144,23 @@ public class ExtensionManager : IDisposable
                 if (parsed == null) continue;
 
                 var anchor = (r, c);
+                stillActive.Add(anchor);
                 if (_activeCalls.ContainsKey(anchor)) continue; // already activated
 
                 ActivateExtensionCall(r, c, parsed.Value);
             }
+        }
+
+        // Phase 4: Deactivate calls whose cells were deleted or changed
+        var stale = new List<(int row, int col)>();
+        foreach (var key in _activeCalls.Keys)
+        {
+            if (!stillActive.Contains(key))
+                stale.Add(key);
+        }
+        foreach (var key in stale)
+        {
+            DeactivateCall(key.row, key.col);
         }
     }
 
@@ -241,6 +257,27 @@ public class ExtensionManager : IDisposable
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Sends a deactivate message and removes tracking for a cell that no longer has a prefix call.
+    /// </summary>
+    private void DeactivateCall(int row, int col)
+    {
+        if (!_activeCalls.TryGetValue((row, col), out var call)) return;
+
+        // Send deactivate to the extension
+        if (_extensions.TryGetValue(call.ExtensionSource, out var ext) && ext.Process.IsRunning)
+        {
+            var msg = new DeactivateMessage
+            {
+                Id = call.ActivationId,
+                Anchor = new CellPosition { Row = call.AnchorRow, Col = call.AnchorCol }
+            };
+            ext.Process.SendMessage(msg);
+        }
+
+        _activeCalls.Remove((row, col));
     }
 
     /// <summary>
