@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #28)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket E — added `--version` / `-v` flag. Prints `QuickSheet 0.1.0 (linux|windows, .NET <runtime>)` and exits. Version constant in Program.cs so it bumps in one place. Updated --help to mention it.
+- Bucket: E
+- Outcome: build clean. Smoke-test passes.
+- Follow-up: Bump constant + tag for next release. Could later wire build-time GitVersion if needed.
+
 ## 2026-05-14 (local run #27)
 
 - Stars: 0 (Δ 0)

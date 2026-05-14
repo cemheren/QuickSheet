@@ -12,6 +12,12 @@ public class Program
             return;
         }
 
+        if (args.Contains("--version") || args.Contains("-v"))
+        {
+            PrintVersion();
+            return;
+        }
+
         string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
         bool desktopMode = args.Contains("--desktop");
 
@@ -85,6 +91,21 @@ public class Program
         }
     }
 
+    private const string Version = "0.1.0";
+
+    private static void PrintVersion()
+    {
+        string platform =
+#if PLATFORM_WINDOWS
+            "windows";
+#elif PLATFORM_LINUX
+            "linux";
+#else
+            "unknown";
+#endif
+        Console.WriteLine($"QuickSheet {Version} ({platform}, .NET {Environment.Version})");
+    }
+
     private static void PrintHelp()
     {
         Console.WriteLine("QuickSheet — interactive terminal spreadsheet + desktop wallpaper");
@@ -94,6 +115,7 @@ public class Program
         Console.WriteLine("  ExcelConsole [<file.csv>] --desktop        Embed as desktop wallpaper");
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>  Headless: CSV → Markdown table");
         Console.WriteLine("  ExcelConsole --help                        Show this help");
+        Console.WriteLine("  ExcelConsole --version                     Show version");
         Console.WriteLine();
         Console.WriteLine("Cell prefixes (TUI / desktop modes):");
         Console.WriteLine("  r: <cmd>          Runnable command. Press Enter to launch.");
