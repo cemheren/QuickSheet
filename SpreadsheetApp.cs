@@ -360,6 +360,7 @@ public class SpreadsheetApp
             "  ║  Enter          Next search match         ║",
             "  ║  Shift+Enter    Previous search match     ║",
             "  ║  Escape         Clear search              ║",
+            "  ║  Ctrl+T         Cycle theme               ║",
             "  ║  Ctrl+H         Show this help            ║",
             "  ║  Ctrl+Q         Quit                     ║",
             "  ║                                          ║",
