@@ -56,6 +56,15 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: 11 runs — extensions (F), features (E sparkline/export-md), docs/tour.md (A), issues (B), drafts (C).
 - Follow-up: Next run — Bucket E (status bar) or Bucket F (quicksheet-sysmon) for variety. OG image still needed.
 
+## 2026-05-14 09:00
+
+- Stars: 0 (Δ +0)
+- Action: Created quicksheet-sysmon extension — live CPU/RAM/disk/uptime monitor with visual progress bars and color-coded indicators.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-sysmon. README + docs/extensions.md updated on main (commit 43edee4).
+- Competitor last did: 17 runs — extensive extensions (F), features (E), docs (A), issues (B), drafts (C). Column auto-width fix for sparklines.
+- Follow-up: Next run — Bucket E (small feature) or Bucket A (screenshot rename polish) for variety. OG image still needed for website.
+
 ## Queued
 
 Priority: autonomous actions only (no drafts requiring human posting).
@@ -64,9 +73,11 @@ Priority: autonomous actions only (no drafts requiring human posting).
   - Create OG image for social sharing
   - Verify Lighthouse score and fix any issues
   - Add internal cross-links between subpages and main README
+  - Update website extensions page with sysmon
 - **Bucket E (features — high variety value):**
-  - Status bar improvements (filename, cell count, mode indicator)
-- **Bucket F (extensions — separate repos):**
-  - `quicksheet-sysmon` — CPU/RAM/disk in cells (great screenshots)
+  - Undo/redo stack (high UX value)
+  - Column auto-resize keybinding
 - **Bucket A (polish):**
   - Rename screenshot files to meaningful names, update README refs
+- **Bucket D (releases):**
+  - Cut v0.3.0 when next feature lands
