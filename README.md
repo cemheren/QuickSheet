@@ -2,30 +2,28 @@
 
 **Your desktop is a spreadsheet.**
 
-QuickSheet replaces your wallpaper with a transparent, interactive grid. Pin notes, launch apps, track tasks — all without opening a window. I wanted to give a always present feeling, there is always something lightweight in the background to achieve things. I normally find the default desktop experience pretty useless. 
+QuickSheet replaces your wallpaper with a transparent, interactive grid. Pin notes, launch apps, paste links, track numbers — all without opening a window. The idea: keep something lightweight always present in the background, instead of a static wallpaper you never interact with.
 
 ![.NET 9](https://img.shields.io/badge/.NET-9.0-purple)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Windows](https://img.shields.io/badge/platform-Windows-0078D6?logo=windows)
 ![Linux](https://img.shields.io/badge/platform-Linux-FCC624?logo=linux&logoColor=black)
 
-## Disclaimers
-
-This repo contains lots of AI coding, so I can't attest for the code quality. It's meant to be a side project. I'm however taking the time to ensure it has no downstream dependencies, I wanted to be cognizant of supply chain attacks. So download locally and build locally (shouldn't need any packages for the moment.) 
-
-I also highly recommend setting it as a startup application, this way every time there is a restart you have your notes etc. 
-
 ## Quick Start
-
-I recommend running in release mode so things feel snappier. 
 
 ```bash
 git clone https://github.com/cemheren/QuickSheet.git
 cd QuickSheet
-dotnet run -c Release --desktop
+dotnet run -c Release --project ExcelConsole.csproj -- --desktop
 ```
 
-Requires [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0).
+Requires [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0). Release mode is recommended — it feels noticeably snappier. Drop `--desktop` to launch in plain TUI mode inside any terminal.
+
+Tip: add it to your startup applications so your notes, links, and launchers are there every time you log in.
+
+## A note on the code
+
+This is a side project, and a lot of it was written with AI assistance. The hard rule the project keeps is **zero NuGet dependencies** — all native interop (X11, WinForms, ConPTY) is hand-written P/Invoke. That keeps the supply-chain surface area minimal: clone, build, run.
 
 ## Desktop environment for developers 
 ### Type directly into cells 
