@@ -1,0 +1,121 @@
+# Wallpaper dashboard recipes
+
+Concrete layouts you can drop into QuickSheet (`--desktop` mode) to make the wallpaper genuinely useful. Each recipe is a small CSV you can paste into a fresh sheet and adapt.
+
+> All recipes assume the relevant extensions are installed. Install once with `ext: github:cemheren/<name>` and the prefix is registered for every future cell.
+
+---
+
+## 1. Ops on-call dashboard
+
+Hosts you care about, their TLS expiry, their HTTP status, their MX records. One glance at the wallpaper tells you whether anything is on fire.
+
+```
+Service,Endpoint,HTTP,TLS,MX
+api,api.example.com,"ping: https://api.example.com, 1, 3","tls: api.example.com, 1, 4","mxck: example.com, 1, 5"
+auth,auth.example.com,"ping: https://auth.example.com, 1, 3","tls: auth.example.com, 1, 4",
+docs,docs.example.com,"ping: https://docs.example.com, 1, 3","tls: docs.example.com, 1, 4",
+```
+
+Then wrap the `ping:` cells in a loop:
+
+```
+L: C2, 1m
+L: C3, 1m
+L: C4, 1m
+```
+
+Now the status column refreshes every minute. TLS only changes daily — point a slower loop at the TLS column:
+
+```
+L: D2, 720m
+```
+
+Extensions used: [ping](https://github.com/cemheren/quicksheet-ping-ext), [tls](https://github.com/cemheren/quicksheet-tls-ext), [mxck](https://github.com/cemheren/quicksheet-mxck-ext).
+
+---
+
+## 2. Quiet portfolio glance
+
+Crypto holdings, no app to open, no browser tab.
+
+```
+Holding,Position,Quote,Change
+BTC,0.5,"price: btc, 1, 2",
+ETH,4.2,"price: eth, 1, 2",
+SOL,80,"price: sol, 1, 2",
+```
+
+`L: C2, 5m` to refresh once every five minutes.
+
+The price extension auto-caches for 60 seconds, so the loop never hammers the API even at faster cadence.
+
+Extensions used: [price](https://github.com/cemheren/quicksheet-price-ext).
+
+---
+
+## 3. Personal command center
+
+Launchers + bookmarks + small numeric tracker in one sheet.
+
+```
+Open today,,,Weight,Steps,Sparkline
+r: code .,r: firefox github.com,,72.1,5421,"s: D2::D8"
+r: slack,r: zoom,,72.4,8210,
+r: notes,r: terminal,,71.8,6100,
+```
+
+The sparkline cell uses the range form (`s: A1::A10`) — it pulls live values from a column of your weights, so just typing today's number in `D2..` updates the chart automatically.
+
+---
+
+## 4. Writer's reference panel
+
+```
+Word,Definition,Notes
+laconic,"def: laconic, 1, 2",
+prolix,"def: prolix, 1, 2",
+eponymous,"def: eponymous, 1, 2",
+```
+
+Wrap the column in a `L:` if you want them to refresh, though definitions don't change.
+
+Extensions used: [define](https://github.com/cemheren/quicksheet-define-ext).
+
+---
+
+## 5. Pomodoro + tasks side-by-side
+
+```
+Timer,Tasks
+"pomo: 25, 3, 2",1. ship the refactor
+,2. review PR #142
+,3. lunch
+```
+
+When the timer runs, the rest of the row stays where it is — the timer cell expands within its allotted span.
+
+Extensions used: [pomodoro](https://github.com/cemheren/quicksheet-pomodoro).
+
+---
+
+## 6. AI scratchpad
+
+Drop in a cell that asks Copilot to summarize whatever else is in the sheet:
+
+```
+copilot: summarize the data in {A1::E20}, 5, 1
+```
+
+This makes the wallpaper a live "what am I looking at?" surface.
+
+Extensions used: [copilot](https://github.com/cemheren/quicksheet-copilot-ext).
+
+---
+
+## Tips
+
+- **Multi-select + Enter** triggers many cells at once. Useful for "rebuild the whole dashboard" on demand.
+- **`L:` loops are per-cell**, so set faster cadences only where you need them. Most cells don't need refresh.
+- **Σ and Π** in the status bar show the column sum and row product live — useful even on cells that look textual, since extension outputs that happen to be numeric also count.
+- **CSV is the file**. You can keep multiple recipes as separate `.csv` files and point QuickSheet at whichever one you want.

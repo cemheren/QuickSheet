@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #22)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket A — wrote `docs/recipes.md`. Six concrete wallpaper-dashboard recipes with copy-paste CSV blocks: ops on-call (ping + tls + mxck + L: loops), portfolio glance (price), command center (launchers + sparkline range), writer's reference (define), pomodoro+tasks, AI scratchpad (copilot). Tips section on multi-select / L: cadence / Σ Π / CSV portability. Linked from README hero. Concrete content asset for HN/Reddit replies showing the network of extensions in use.
+- Bucket: A
+- Outcome: build clean. Committed and pushed.
+- Follow-up: Add a "did you ship a recipe?" PR-friendly footer to invite community recipes. After dev.to long-form, this page becomes the natural deep-link.
+
 ## 2026-05-14 (local run #21)
 
 - Stars: 0 (Δ 0)
