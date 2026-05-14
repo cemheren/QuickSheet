@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #35)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket A — added freelancer dashboard recipe (5b) to `docs/recipes.md`. Combines `1099:` (SE tax on annualized rate) + `mort:` (fixed mortgage cost) + Σ for YTD gross + sparkline range for income curve.
+- Bucket: A
+- Outcome: Committed and pushed.
+- Follow-up: Recipe page now spans 8 use cases. Could add an HN-reading dashboard (URLs + ping on `news.ycombinator.com`) next.
+
 ## 2026-05-14 (local run #34)
 
 - Stars: 0 (Δ 0)

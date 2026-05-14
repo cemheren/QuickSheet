@@ -117,6 +117,24 @@ Extensions used: [pomodoro](https://github.com/cemheren/quicksheet-pomodoro).
 
 ---
 
+## 5b. Freelancer dashboard
+
+Track invoices, set-aside tax, mortgage payment, and a running total of monthly net — the whole "am I going to make rent and pay quarterlies" calculation in one row.
+
+```
+Invoice,Gross,SE tax,Mortgage,Notes
+Acme Co,5200,"1099: 62400, 1, 5","mort: 380000, 6.5, 30, 1, 4",last month
+Globex,3800,"1099: 45600, 1, 5","mort: 380000, 6.5, 30, 1, 4",this month
+```
+
+Σ of column B in the status bar gives your YTD gross. The `1099:` cell projects what SE tax you owe at that annualized rate. The `mort:` cell stays constant — that's your fixed cost.
+
+Pair with a sparkline of monthly gross in column F (`s: B2::B13`) for an at-a-glance income curve.
+
+Extensions used: [1099](https://github.com/cemheren/quicksheet-1099-ext), [mortgage](https://github.com/cemheren/quicksheet-mortgage-ext).
+
+---
+
 ## 6. Academic writing reference
 
 Definitions and live citation lookups in one sheet — drop a DOI in column B and the formatted citation fills column C, type a word in column D for an inline definition.
