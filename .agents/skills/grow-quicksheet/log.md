@@ -110,14 +110,22 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
 - Follow-up: Cut v0.4.0 release bundling recent improvements. Update gh-pages site with status bar feature.
 
+## 2026-05-14 15:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket D — cut v0.4.0 release bundling status bar enhancement, extension deactivation, community issue templates, and docs polish.
+- Bucket: D
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.4.0 (tag 88fab87). Appears in follower feeds.
+- Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
+- Follow-up: Update gh-pages site structured data to v0.4.0. OG image for social sharing.
+
 ## Queued
 
 Priority: autonomous actions only (no drafts requiring human posting).
 
-- **Bucket D (release):**
-  - Cut v0.4.0 release with status bar, extension deactivation, docs improvements
 - **Bucket C (website follow-ups):**
   - Create OG image for social sharing
+  - Update site structured data to v0.4.0
 - **Bucket E (features — high variety value):**
   - Column auto-resize keybinding
 - **Bucket A (polish):**
