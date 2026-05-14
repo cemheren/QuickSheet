@@ -7,6 +7,7 @@ public class SpreadsheetApp
     private int _selectedCol;
     private string _clipboard = "";
     private string? _loadedFile;
+    private bool _dirty;
     private string? _searchTerm;
     private List<(int row, int col)> _searchMatches = new();
     private int _searchMatchIndex = -1;
@@ -99,6 +100,7 @@ public class SpreadsheetApp
                 {
                     case ConsoleKey.D:
                         _grid.DeleteRow(_selectedRow);
+                        _dirty = true;
                         if (_selectedRow >= _grid.RowCount) _selectedRow = _grid.RowCount - 1;
                         break;
                     case ConsoleKey.C:
@@ -107,15 +109,19 @@ public class SpreadsheetApp
                     case ConsoleKey.X:
                         _clipboard = _grid.GetCellValue(_selectedRow, _selectedCol);
                         _grid.SetCellValue(_selectedRow, _selectedCol, "");
+                        _dirty = true;
                         break;
                     case ConsoleKey.V:
                         _grid.SetCellValue(_selectedRow, _selectedCol, _clipboard);
+                        _dirty = true;
                         break;
                     case ConsoleKey.O:
                         _grid.ShiftRowsDown(_selectedRow);
+                        _dirty = true;
                         break;
                     case ConsoleKey.P:
                         _grid.ShiftRowsUp(_selectedRow);
+                        _dirty = true;
                         break;
                     case ConsoleKey.H:
                     case ConsoleKey.Backspace:
@@ -133,9 +139,11 @@ public class SpreadsheetApp
                         break;
                     case ConsoleKey.Z:
                         _grid.Undo();
+                        _dirty = true;
                         break;
                     case ConsoleKey.Y:
                         _grid.Redo();
+                        _dirty = true;
                         break;
                 }
                 Render();
@@ -162,10 +170,14 @@ public class SpreadsheetApp
                 case ConsoleKey.Backspace:
                     var val = _grid.GetCellValue(_selectedRow, _selectedCol);
                     if (val.Length > 0)
+                    {
                         _grid.SetCellValue(_selectedRow, _selectedCol, val[..^1]);
+                        _dirty = true;
+                    }
                     break;
                 case ConsoleKey.Delete:
                     _grid.SetCellValue(_selectedRow, _selectedCol, "");
+                    _dirty = true;
                     break;
                 case ConsoleKey.Escape:
                     break;
@@ -178,6 +190,7 @@ public class SpreadsheetApp
                     {
                         var cur = _grid.GetCellValue(_selectedRow, _selectedCol);
                         _grid.SetCellValue(_selectedRow, _selectedCol, cur + key.KeyChar);
+                        _dirty = true;
                     }
                     break;
             }
@@ -298,6 +311,17 @@ public class SpreadsheetApp
         Console.BackgroundColor = theme.StatusBarBg;
         Console.ForegroundColor = theme.StatusBarFg;
 
+        // File info: name + modified indicator
+        string fileLabel = _loadedFile != null ? Path.GetFileName(_loadedFile) : "autosave";
+        string dirtyMark = _dirty ? " ●" : "";
+
+        // Count non-empty cells
+        int filledCells = 0;
+        for (int r = 0; r < _grid.RowCount; r++)
+            for (int c = 0; c < _grid.ColumnCount; c++)
+                if (!string.IsNullOrEmpty(_grid.GetCellValue(r, c)))
+                    filledCells++;
+
         string cellRef = _grid.GetCellReference(_selectedRow, _selectedCol);
         string value = _grid.GetCellValue(_selectedRow, _selectedCol);
         string valueDisplay = string.IsNullOrEmpty(value) ? "" : $" = {value}";
@@ -313,7 +337,7 @@ public class SpreadsheetApp
             ? $"  🔍\"{_searchTerm}\" {(_searchMatches.Count > 0 ? $"{_searchMatchIndex + 1}/{_searchMatches.Count}" : "no matches")}"
             : "";
 
-        string status = $" {cellRef}{valueDisplay}{sumDisplay}{productDisplay}{searchDisplay}  │  [{theme.Name}] Ctrl+T: Theme  Ctrl+Q: Quit ";
+        string status = $" {fileLabel}{dirtyMark}  {cellRef}{valueDisplay}{sumDisplay}{productDisplay}{searchDisplay}  │  {filledCells} cells  [{theme.Name}]  Ctrl+H: Help ";
         Console.Write(status.PadRight(totalWidth));
 
         Console.BackgroundColor = theme.Background;
@@ -491,6 +515,7 @@ public class SpreadsheetApp
 
         _grid.SaveToCsv(filename);
         _loadedFile = filename;
+        _dirty = false;
 
         // Flash confirmation
         Console.SetCursorPosition(0, statusY);
