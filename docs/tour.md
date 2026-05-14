@@ -58,6 +58,7 @@ Currently public:
 - [`quicksheet-ping-ext`](https://github.com/cemheren/quicksheet-ping-ext) — HTTP status code + latency probe.
 - [`quicksheet-cite-ext`](https://github.com/cemheren/quicksheet-cite-ext) — DOI → citation (Crossref).
 - [`quicksheet-thes-ext`](https://github.com/cemheren/quicksheet-thes-ext) — thesaurus (Datamuse).
+- [`quicksheet-stock-ext`](https://github.com/cemheren/quicksheet-stock-ext) — stock ticker quotes (Stooq).
 
 [Write your own](../README.md#build-your-own) in whatever language you want — the protocol is two message types.
 

@@ -1,0 +1,8 @@
+{
+  "name": "stock",
+  "version": "1.0.0",
+  "prefix": "stock",
+  "description": "Stock ticker quotes (Stooq) for QuickSheet",
+  "entry": "dotnet run --project StockExtension.csproj",
+  "minProtocolVersion": 1
+}

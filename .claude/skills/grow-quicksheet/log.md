@@ -66,6 +66,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #31)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket F — scaffolded, built, created+pushed `quicksheet-stock-ext`. Stock quotes via Stooq's free CSV endpoint. Default `.us` suffix; supports any Stooq exchange suffix. 5min cache. Zero NuGet. Linked from docs.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-stock-ext. 12 extensions in directory now.
+- Follow-up: Could ship a "watchlist" recipe combining stock + sparkline range (manual close-history) in docs/recipes.md.
+
 ## 2026-05-14 (local run #30)
 
 - Stars: 0 (Δ 0)
