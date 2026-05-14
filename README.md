@@ -21,6 +21,8 @@ Requires [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0). Release
 
 Tip: add it to your startup applications so your notes, links, and launchers are there every time you log in.
 
+New here? The 60-second tour is in [docs/tour.md](docs/tour.md).
+
 ## A note on the code
 
 This is a side project, and a lot of it was written with AI assistance. The hard rule the project keeps is **zero NuGet dependencies** — all native interop (X11, WinForms, ConPTY) is hand-written P/Invoke. That keeps the supply-chain surface area minimal: clone, build, run.

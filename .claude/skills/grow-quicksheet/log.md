@@ -66,10 +66,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: build clean. Committed and pushed.
 - Follow-up: GitHub auto-detects CONTRIBUTING.md and surfaces it in the Issues/PR sidebar. Consider opening a starter issue or two labeled "good first issue" next run.
 
+## 2026-05-14 (local run #7)
+
+- Stars: 0 (Δ 0)
+- Action: Wrote `docs/tour.md` — 60-second guided tour. Prefix cheatsheet table (`r:`, `i:`, `s:`, `L:`, `ext:`, URLs), Σ/Π math, `{A1::C10}` references, full extension lineup (copilot, weather, tls, pomodoro), hard rules, "good for / isn't" framing. Linked from README hero section. Doubles as a content asset for HN/Reddit replies and Twitter threads.
+- Bucket: A
+- Outcome: build clean. Committed and pushed.
+- Follow-up: Add docs/tour.md link to the awesome-list submission drafts (one-line entries already done; could mention tour in PR body).
+
 ## Queued
 
 - Capture sparkline screenshot for README/social (needs human or `--desktop` smoke test).
-- Add "Why this exists" short section or 60-second feature tour under `docs/`.
 - More Bucket E small wins: theme presets, `w: url` live web-fetch prefix, markdown export (each <50 LOC, additive).
 - More Bucket F verticals: finance (yfinance JSON), real estate (Zillow), writing (dictionary), email (gravatar/MX).
 - Demo GIF of desktop wallpaper mode (needs human capture — deferred).
