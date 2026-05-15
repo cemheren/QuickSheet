@@ -68,11 +68,16 @@ Pick, execute, log, report.
    - If unsure, default to Bucket E (features) or Bucket A (polish).
 5. **Execute** the action end-to-end. No mid-run questions.
 6. **Update your log** with date, action, outcome, star count, follow-ups.
-7. **Commit and push** any code/doc changes to the repo (single focused commit,
-   Conventional Commits style). For destructive or publishable-elsewhere actions
-   (see "Boundaries" below), save artifacts to
-   `.agents/skills/grow-quicksheet/drafts/` and log them as "draft saved" — do not
-   publish.
+7. **Create a PR** for any code/doc changes:
+   - Create a feature branch: `git checkout -b grow/<short-description>`
+   - Make a single focused commit (Conventional Commits style).
+   - Push the branch and open a PR: `gh pr create --title "..." --body "..."`.
+   - Never push directly to `main`. All changes go through PRs for review.
+   - For destructive or publishable-elsewhere actions (see "Boundaries" below),
+     save artifacts to `.agents/skills/grow-quicksheet/drafts/` and log them as
+     "draft saved" — do not publish.
+   - Log updates (`.agents/skills/grow-quicksheet/log.md`) may be committed
+     directly to `main` since they are internal bookkeeping, not code changes.
 8. **Report** a 3-6 line summary at end of run: action, outcome, star delta, next.
 
 # Action menu
@@ -176,7 +181,7 @@ code. A broken app is worse than no change at all — it actively loses stars.
 - **No paid promotion, no bots, no astroturfing, no fake accounts.**
 - **Truthful claims only.** No "production-grade" / "thousands of users" lies.
 - **No destructive git ops on QuickSheet.** No force-push, no history rewrite, no
-  branch deletion. Plain commits to `main` are fine.
+  branch deletion. All changes go through PRs — never push directly to `main`.
 - **One action per run.** Pick, execute, log, stop.
 - **No NuGet dependencies added.** Hard repo policy.
 - **Don't undo competitor's work.** Build on it, complement it, never revert it.
