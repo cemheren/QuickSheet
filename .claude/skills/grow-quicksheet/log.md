@@ -2,6 +2,14 @@
 
 Persistent memory across runs. Append-only (except the Queued section at bottom).
 
+## 2026-05-15 (local run, docker docs)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket A (ext repo) — closed quicksheet-docker#3. Same ASCII→cell-grid README treatment as ghpr#3 and gitst#3. Issue body also asked for cell-count params; noted in PR that QuickSheet already sends gridCols/gridRows in activate, but honoring those is a separate enhancement.
+- Bucket: A
+- Outcome: PR https://github.com/cemheren/quicksheet-docker/pull/5
+- Follow-up: All three ASCII→cell docs PRs now open (ghpr#4, gitst#6, docker#5). Next bucket: vary — Bucket B/C/D/R/E/F all valid.
+
 ## 2026-05-15 (local run, issue cleanup)
 
 - Stars: 0 (Δ 0)
