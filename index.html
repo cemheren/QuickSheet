@@ -33,7 +33,7 @@
     "description": "A zero-dependency .NET 9 spreadsheet that replaces your desktop wallpaper with a transparent interactive grid.",
     "url": "https://github.com/cemheren/QuickSheet",
     "downloadUrl": "https://github.com/cemheren/QuickSheet",
-    "softwareVersion": "0.4.0",
+    "softwareVersion": "0.5.0",
     "license": "https://opensource.org/licenses/MIT",
     "programmingLanguage": "C#",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -352,6 +352,16 @@
         <h3>Theme Presets</h3>
         <p>Cycle through Dark, Light, Nord, Solarized, and Matrix themes with <code>Ctrl+T</code>.</p>
       </div>
+      <div class="feature-card">
+        <span class="icon">🧭</span>
+        <h3>Go-to-Cell</h3>
+        <p>Press <code>Ctrl+G</code> and type a cell reference like <code>C5</code> to jump instantly. No scrolling through large grids.</p>
+      </div>
+      <div class="feature-card">
+        <span class="icon">📊</span>
+        <h3>Smart Status Bar</h3>
+        <p>Filename, modified indicator (●), and non-empty cell count always visible. Know your context at a glance.</p>
+      </div>
     </div>
   </section>
 
@@ -412,6 +422,10 @@
         <code>sysmon:</code>
         <p>Live CPU/RAM/disk monitor</p>
       </div>
+      <div class="ext-card">
+        <code>todo:</code>
+        <p>Task management with priorities &amp; due dates</p>
+      </div>
     </div>
     <p style="margin-top:1.5rem;color:var(--muted);font-size:0.9rem;">
       See the <a href="https://github.com/cemheren/QuickSheet/blob/main/docs/extensions.md">full extension directory</a> for install commands and protocol docs.
@@ -437,6 +451,8 @@
         <tr><td>Undo/redo</td><td class="yes">✓ (200-step)</td><td class="yes">✓</td><td class="no">—</td></tr>
         <tr><td>Theme presets</td><td class="yes">✓ (5 themes)</td><td class="no">—</td><td class="no">—</td></tr>
         <tr><td>Zero dependencies</td><td class="yes">✓ (0 NuGet)</td><td class="no">ncurses</td><td class="no">Python + deps</td></tr>
+        <tr><td>Go-to-cell navigation</td><td class="yes">✓ (Ctrl+G)</td><td class="yes">✓</td><td class="no">—</td></tr>
+        <tr><td>Status bar info</td><td class="yes">✓ (file, cells, Σ/Π)</td><td class="yes">✓</td><td class="yes">✓</td></tr>
         <tr><td>Windows + Linux</td><td class="yes">✓</td><td class="no">Linux/macOS</td><td class="yes">✓</td></tr>
       </tbody>
     </table>

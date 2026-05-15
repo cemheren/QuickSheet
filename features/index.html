@@ -242,6 +242,33 @@
     </div>
   </section>
 
+  <!-- Go-to-Cell -->
+  <section>
+    <h2>🧭 Go-to-<span>cell</span> navigation</h2>
+    <div class="feature-block">
+      <p>Press <span class="prefix">Ctrl+G</span> and type a cell reference like <code>A1</code>, <code>C5</code>, or <code>Z99</code> to jump your cursor instantly. No scrolling through large grids — just type the address and you're there.</p>
+      <ul>
+        <li>Accepts standard spreadsheet notation (column letter + row number)</li>
+        <li>Validates input and shows error feedback for invalid references</li>
+        <li>Reuses the same cell-reference parser as <code>{A1::C10}</code> range refs</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Status Bar -->
+  <section>
+    <h2>📊 Smart <span>status bar</span></h2>
+    <div class="feature-block">
+      <p>The TUI status bar shows contextual information at a glance — no need to check the terminal title or file manager.</p>
+      <ul>
+        <li><strong>Filename</strong> — see which CSV file is loaded</li>
+        <li><strong>Modified indicator (●)</strong> — know when you have unsaved changes</li>
+        <li><strong>Cell count</strong> — non-empty cells across the grid</li>
+        <li><strong>Column sums (Σ) and row products (Π)</strong> — live math in the status area</li>
+      </ul>
+    </div>
+  </section>
+
   <!-- Themes -->
   <section>
     <h2>🎨 Theme <span>presets</span></h2>
@@ -309,6 +336,7 @@
         <tr><td>Ctrl+T</td><td>Cycle theme</td><td>TUI</td></tr>
         <tr><td>Ctrl+Z</td><td>Undo</td><td>TUI</td></tr>
         <tr><td>Ctrl+Y</td><td>Redo</td><td>TUI</td></tr>
+        <tr><td>Ctrl+G</td><td>Go to cell</td><td>TUI</td></tr>
         <tr><td>Ctrl+H</td><td>Help overlay</td><td>TUI</td></tr>
         <tr><td>Ctrl+S</td><td>Save</td><td>TUI + Desktop</td></tr>
         <tr><td>Tab</td><td>Next cell</td><td>TUI + Desktop</td></tr>
