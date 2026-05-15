@@ -118,6 +118,45 @@ public static class CellPrefix
         return sb.ToString();
     }
 
+    // ── Color prefix ───────────────────────────────────────────────
+
+    private static readonly Dictionary<string, ConsoleColor> ColorMap = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ["red"] = ConsoleColor.DarkRed,
+        ["green"] = ConsoleColor.DarkGreen,
+        ["blue"] = ConsoleColor.DarkBlue,
+        ["yellow"] = ConsoleColor.DarkYellow,
+        ["cyan"] = ConsoleColor.DarkCyan,
+        ["magenta"] = ConsoleColor.DarkMagenta,
+        ["white"] = ConsoleColor.White,
+        ["gray"] = ConsoleColor.DarkGray,
+        ["grey"] = ConsoleColor.DarkGray,
+    };
+
+    /// <summary>
+    /// Checks if a cell value uses the color prefix: "c:color: text"
+    /// </summary>
+    public static bool IsColored(string value) =>
+        value.StartsWith("c:", StringComparison.OrdinalIgnoreCase) && ParseColor(value) != null;
+
+    /// <summary>
+    /// Parses "c:red: some text" into (ConsoleColor, displayText).
+    /// Returns null if the prefix or color name is invalid.
+    /// </summary>
+    public static (ConsoleColor bg, string text)? ParseColor(string value)
+    {
+        if (!value.StartsWith("c:", StringComparison.OrdinalIgnoreCase)) return null;
+        // Format: c:COLOR: text
+        int secondColon = value.IndexOf(':', 2);
+        if (secondColon < 0) return null;
+
+        string colorName = value[2..secondColon].Trim();
+        if (!ColorMap.TryGetValue(colorName, out var color)) return null;
+
+        string text = value[(secondColon + 1)..].TrimStart();
+        return (color, text);
+    }
+
     public static bool IsExtension(string value) =>
         value.StartsWith("ext: ", StringComparison.OrdinalIgnoreCase);
 
