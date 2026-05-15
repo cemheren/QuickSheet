@@ -29,7 +29,7 @@ Want to export your data? Render any CSV as a GitHub-flavored Markdown table:
 dotnet run --project ExcelConsole.csproj -- mydata.csv --export-md mydata.md
 ```
 
-New here? The 60-second tour is in [docs/tour.md](docs/tour.md). Or jump straight to [docs/recipes.md](docs/recipes.md) for ready-to-paste dashboard layouts.
+New here? The 60-second tour is in [docs/tour.md](docs/tour.md). Or jump straight to [docs/recipes.md](docs/recipes.md) for ready-to-paste dashboard layouts. All keyboard shortcuts are in [docs/keyboard-shortcuts.md](docs/keyboard-shortcuts.md).
 
 ## A note on the code
 
