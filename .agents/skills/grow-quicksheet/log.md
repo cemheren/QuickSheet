@@ -308,19 +308,26 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Still stalled since May 14.
 - Follow-up: Build quicksheet-hntop next — highest viral potential (5/5 feasibility, free API, devs check HN 10x/day).
 
+## 2026-05-15 03:49
+
+- Stars: 0 (Δ +0)
+- Action: Created quicksheet-hntop extension — Top Hacker News stories with scores and comment counts on your wallpaper. Uses free HN Firebase API, 5-min cache, correct {r,c,v} format. Tested with live data (real stories returned).
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-hntop (commit 892d696). PR #30 adds to README/docs.
+- Competitor last did: Deep research for devops extensions (drafts/designs/devops-sre-extensions.md).
+- Follow-up: Build quicksheet-apistatus (service health) next. Merge PRs #27/#28 when ready.
+
 ## Queued
 
 Priority: Build from devops research — "replace a browser tab" extensions.
 
 - **Bucket F — Tier 1 devops extensions (highest impact):**
-  - `quicksheet-hntop` — HN top stories on wallpaper (5/5, free Firebase API)
   - `quicksheet-apistatus` — service health (GitHub/Cloudflare/npm status, 5/5)
   - `quicksheet-ghpr` — PR review dashboard via `gh` CLI (4/5)
   - `quicksheet-docker` — container health via Docker socket (5/5)
-- **Bucket F — Tier 1 continued:**
-  - `quicksheet-gitst` — git repo status (branch, modified, stashes) (5/5)
-  - `quicksheet-ghrun` — GitHub Actions run status (4/5)
-- **Bucket C:**
-  - Update gh-pages with sort feature + devops extension cards
+  - `quicksheet-portck` — TCP port/service health checker (5/5)
 - **Bucket D:**
-  - Cut v0.6.0 release when PRs #27/#28 merge
+  - Merge PRs #27 (bug fix), #28 (sort), #30 (hntop docs)
+  - Cut v0.6.0 release
+- **Bucket C:**
+  - Update gh-pages with hntop + sort feature cards
