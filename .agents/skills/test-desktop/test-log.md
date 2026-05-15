@@ -664,3 +664,30 @@ A62-A66  Issue #66 filed (single issue for all 5 missing shortcuts)
 - **Failed: 9** (C28 worldtm, C29 mileage, C32 depr, A61 c:color, A62-A66 shortcuts)
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 7** (A2, A3, A5, A6, A20, A21, A52)
+
+## Run: 2026-05-15 16:45
+Commit: 277b572 (main), v0.11.0
+Build: Release
+
+### Discovery
+- **2 NEW extensions**: quicksheet-jwtdec (JWT decoder), quicksheet-rate (freelance rate calculator)
+- quicksheet-rate has correct manifest (entry, prefix, params)
+- quicksheet-jwtdec has manifest with trailing colon in prefix: "jwtdec:" (bug)
+- **PRs #70, #71 OPEN**: fixes for Issue #65 (c:color) and Issue #66 (shortcuts)  not merged yet
+- Extension fix PRs still OPEN: worldtm, mileage-ext, depr-ext
+- **35 quicksheet-* repos** total (was 34)
+
+### Tests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| A28 |  PASS | Multi-line paste: "line1\nline2\nline3" pasted correctly into consecutive rows |
+| C33 |  FAIL | jwtdec: 2 protocol bugs  (1) responds to init with status:ready instead of register, (2) manifest prefix has trailing colon "jwtdec:"  jwtdec#1 filed |
+| C34 |  FAIL | rate: responds to activate with type:"cells" instead of type:"write"  cells silently dropped  rate#1 filed |
+
+### Cumulative (after Run 21)
+- **Total: 96 tests** (54 core + 8 ext system + 34 extensions)
+- **Passed: 76** (+1: A28)
+- **Failed: 11** (C28 worldtm, C29 mileage, C32 depr, C33 jwtdec, C34 rate, A61 c:color, A62-A66 shortcuts)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 6** (A2, A3, A5, A6, A20, A21)

@@ -302,6 +302,8 @@ First install each extension via its `ext:` cell. Then test the prefix.
 | C30 | quicksheet-margin-ext | `ext: github:cemheren/quicksheet-margin-ext` | `margin: 100000,60000,25000,1,5` | Break-even analysis: CM per unit, break-even units, revenue |
 | C31 | quicksheet-k8s | `ext: github:cemheren/quicksheet-k8s` | `k8s: default,1,5` | Kubernetes pod status from kubeconfig (requires kubectl) |
 | C32 | quicksheet-depr-ext | `ext: github:cemheren/quicksheet-depr-ext` | `depr: 50000 5 straight 5000` | Straight-line/MACRS depreciation schedule |
+| C33 | quicksheet-jwtdec | `ext: github:cemheren/quicksheet-jwtdec` | `jwtdec: <jwt-token>,1,8` | Decoded JWT header + claims in grid cells |
+| C34 | quicksheet-rate | `ext: github:cemheren/quicksheet-rate` | `rate: 120000,1,6` | Freelance rate calculator: min rate, take-home, billable hours |
 
 ---
 
