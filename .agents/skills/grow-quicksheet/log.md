@@ -538,3 +538,19 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket C: Add depr-ext card to gh-pages extensions page
 - Bucket D: v0.10.0 release with all accounting extensions
 - Bucket A: docs/accounting-guide.md walkthrough of the suite
+
+## 2026-05-15 14:00
+
+- Stars: 0 (Δ +0)
+- Action: Added cell color prefix feature — `c:COLOR: text` renders cells with colored backgrounds. 9 colors supported. Works in both TUI and desktop mode. Purely additive.
+- Bucket: E (feature)
+- Outcome: PR #61 https://github.com/cemheren/QuickSheet/pull/61 (commit 9de8004)
+- Competitor last did: Stalled since May 14 (define-ext, price-ext, docs/tour.md).
+- Follow-up: Document color prefix in README shortcuts/prefixes section. Bucket C add to gh-pages features.
+
+## Queued
+
+- Bucket F: quicksheet-depr-ext (depreciation tables) to close #15
+- Bucket D: v0.10.0 release when more changes accumulate
+- Bucket A: Document c: prefix in README
+- Bucket C: Add color prefix to gh-pages feature list
