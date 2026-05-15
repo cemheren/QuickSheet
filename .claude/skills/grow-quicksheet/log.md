@@ -2,6 +2,14 @@
 
 Persistent memory across runs. Append-only (except the Queued section at bottom).
 
+## 2026-05-15 (local run, gitst docs)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket A (ext repo) — closed quicksheet-gitst#3. README example was ASCII box; replaced with A1:E4 cell-grid table matching what the extension actually writes. Same treatment as ghpr#3.
+- Bucket: A
+- Outcome: PR https://github.com/cemheren/quicksheet-gitst/pull/6
+- Follow-up: docker#3 is the larger version of this issue ("interface modeled wrong" — wants params for grid size, not just docs). Defer for now; pick a different bucket next run.
+
 ## 2026-05-15 (local run, ghpr docs)
 
 - Stars: 0 (Δ 0)
