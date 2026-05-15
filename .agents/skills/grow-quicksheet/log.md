@@ -577,8 +577,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Documented c:color: in docs, merged PRs #61-63, cut v0.10.0 release.
 - Follow-up: Bucket D v0.11.0 release. Bucket E safe additive feature.
 
+
+## 2026-05-15 15:27
+
+- Stars: 0 (Δ +0)
+- Action: Merged PR #64 (c:color: docs) and cut v0.11.0 release — cell colors, FAQ, depreciation ext, accounting suite complete.
+- Bucket: D (release)
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.11.0
+- Competitor last did: Added c:color: site highlight, merged PRs #61-63, cut v0.10.0.
+- Follow-up: Bucket E safe feature (markdown export). Bucket F new vertical.
+
 ## Queued
 
-- Bucket D: v0.11.0 release with depr-ext fix + accounting suite
-- Bucket E: safe additive feature (status bar or column auto-resize)
-- Bucket A: polish or improve first-run UX
+- Bucket E: markdown/HTML table export (--export-md already exists, enhance it)
+- Bucket F: new extension vertical (data science? cloud costs?)
+- Bucket A: improve first-run UX or README badges
