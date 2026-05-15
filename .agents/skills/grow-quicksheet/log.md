@@ -452,7 +452,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Accounting extension research for #15.
 - Follow-up: Bucket F Tier 2 extension next.
 
+## 2026-05-15 12:00
+
+- Stars: 0 (Δ +0)
+- Action: Created quicksheet-worldtm extension — multi-timezone world clock with 40+ aliases (NY, London, PST, etc.), business-hours indicators (🟢🟡🔴), time-of-day icons, fuzzy matching. Pure local, zero network calls.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-worldtm. PR #54 adds to README/docs.
+- Competitor last did: Accounting extension research for #15, closed 18 filler issues.
+- Follow-up: Bucket C — add worldtm + cntdn cards to gh-pages. Or quicksheet-k8s next.
+
 ## Queued
 
-- Bucket F (Tier 2): quicksheet-k8s or quicksheet-worldtm from research doc
-- Bucket C: Add cntdn card to gh-pages
+- Bucket C: Add worldtm + cntdn cards to gh-pages site
+- Bucket F (Tier 2): quicksheet-k8s from devops research doc
+- Bucket F (accounting): quicksheet-mileage-ext, quicksheet-margin-ext for issue #15
