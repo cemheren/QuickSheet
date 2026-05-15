@@ -267,6 +267,17 @@ hntop: 10
 
 Shows top 10 stories with scores and comment counts. Cached for 5 minutes. Uses the free HN Firebase API — no key required.
 
+### Example: Service status monitor
+
+The [quicksheet-apistatus](https://github.com/cemheren/quicksheet-apistatus) extension monitors 18 services (GitHub, Cloudflare, npm, Discord, etc.) using public Statuspage.io APIs — no key required:
+
+```
+ext: github:cemheren/quicksheet-apistatus
+apistatus: github, cloudflare, npm, vercel
+```
+
+Shows color-coded service status (🟢🟡🟠🔴) on your wallpaper. Great for "is it me or them?" during deploy failures.
+
 ### Example: Gravatar lookup
 
 The [quicksheet-grav-ext](https://github.com/cemheren/quicksheet-grav-ext) extension looks up Gravatar profiles by email — display name, location, and avatar URL:
