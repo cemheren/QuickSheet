@@ -364,9 +364,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 
 ## Queued
 
-- **Bucket E:** Theme presets, markdown export, or `w: url` web fetch prefix
-- **Bucket A:** Demo GIF capture (needs desktop mode running)
-- **Bucket F:** Consider writing/email verticals (define improved, mail checker)
+- **Bucket E:** Theme presets, `w: url` web fetch prefix, or markdown export
+- **Bucket C:** Update gh-pages with cntdn card
+- **Bucket D:** Merge PR #45 (cntdn docs), cut v0.7.1 release
+
+## 2026-05-15 08:49
+
+- Stars: 0 (Δ +0)
+- Action: Created quicksheet-cntdn — countdown timer extension. Shows days/hours to custom dates or holidays with progress bars and color-coded urgency. Also merged PRs #42 (changelog) + #44 (version fix).
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-cntdn (commit 177a180). PR #45 for docs.
+- Competitor last did: Built quicksheet-gitst + quicksheet-rate, fixed RegisterMessage version parsing (PR #44).
+- Follow-up: Bucket E next for variety. Or gh-pages update with cntdn card.
 
 ## 2026-05-15 07:49
 
