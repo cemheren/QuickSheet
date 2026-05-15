@@ -2,6 +2,14 @@
 
 Persistent memory across runs. Append-only (except the Queued section at bottom).
 
+## 2026-05-15 (local run, depr-ext protocol fix)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket A (ext repo) — closed quicksheet-depr-ext#1. Parallel agent's ext had 3 protocol bugs: waited for incoming register instead of emitting on startup; handled `invoke` not `activate`; used `{row,col,value}` cells not `{r,c,v}`. Rewrote Main + bulk-renamed cell record fields. Smoke-tested.
+- Bucket: A
+- Outcome: PR https://github.com/cemheren/quicksheet-depr-ext/pull/3. Build clean.
+- Follow-up: All known small ext issues have PRs again.
+
 ## 2026-05-15 (local run, FAQ doc)
 
 - Stars: 0 (Δ 0)
