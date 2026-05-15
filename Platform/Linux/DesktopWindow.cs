@@ -25,6 +25,9 @@ internal class DesktopWindow : IDisposable
     private List<(int row, int col)> _searchMatches = new();
     private int _searchMatchIndex = -1;
 
+    private bool _gotoMode;
+    private string _gotoInput = "";
+
     // Find & Replace state machine
     private enum ReplacePhase { None, FindInput, ReplaceInput, Confirm }
     private ReplacePhase _replacePhase = ReplacePhase.None;
@@ -847,6 +850,10 @@ internal class DesktopWindow : IDisposable
         {
             status = _editMode.GetStatusText();
         }
+        else if (_gotoMode)
+        {
+            status = $" Go to cell (e.g. A1, C5): {_gotoInput}\u2502  (Enter=Go  Esc=Cancel)";
+        }
         else if (_searching)
         {
             status = $" Find: {_searchInput}\u2502  (Enter=Search  Esc=Cancel)";
@@ -1047,6 +1054,50 @@ internal class DesktopWindow : IDisposable
             return;
         }
 
+        if (_gotoMode)
+        {
+            switch (keysym)
+            {
+                case XK_Return:
+                    _gotoMode = false;
+                    var parsed = CellPrefix.ParseCellRef(_gotoInput);
+                    if (parsed is var (row, col))
+                    {
+                        _selectedRow = Math.Clamp(row, 0, _grid.RowCount - 1);
+                        _selectedCol = Math.Clamp(col, 0, _grid.ColumnCount - 1);
+                    }
+                    _gotoInput = "";
+                    return;
+                case XK_Escape:
+                    _gotoMode = false;
+                    _gotoInput = "";
+                    return;
+                case XK_BackSpace:
+                    if (_gotoInput.Length > 0)
+                        _gotoInput = _gotoInput[..^1];
+                    return;
+                default:
+                    if (!ctrl)
+                    {
+                        IntPtr buf = Marshal.AllocHGlobal(32);
+                        try
+                        {
+                            int len = XLookupString(ref keyEvent, buf, 32, out _, IntPtr.Zero);
+                            if (len > 0)
+                            {
+                                byte[] bytes = new byte[len];
+                                Marshal.Copy(buf, bytes, 0, len);
+                                string ch = Encoding.UTF8.GetString(bytes);
+                                if (ch.Length > 0 && ch[0] >= 32 && ch[0] <= 126)
+                                    _gotoInput += ch;
+                            }
+                        }
+                        finally { Marshal.FreeHGlobal(buf); }
+                    }
+                    return;
+            }
+        }
+
         if (_searching)
         {
             switch (keysym)
@@ -1207,6 +1258,19 @@ internal class DesktopWindow : IDisposable
                     return;
                 case XK_b:
                     _grid.SortByColumn(_selectedCol);
+                    return;
+                case XK_z:
+                    _grid.Undo();
+                    return;
+                case XK_y:
+                    _grid.Redo();
+                    return;
+                case XK_t:
+                    Theme.CycleNext();
+                    return;
+                case XK_g:
+                    _gotoMode = true;
+                    _gotoInput = "";
                     return;
             }
         }
