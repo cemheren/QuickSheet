@@ -685,6 +685,11 @@ internal class DesktopWindow : IDisposable
                     if (spark != null) displayVal = spark;
                 }
 
+                // Render color-prefixed cells: strip prefix from display
+                var colorParsed = (!isEditingThisCell && !isSparkline) ? CellPrefix.ParseColor(cellVal) : null;
+                if (colorParsed != null)
+                    displayVal = colorParsed.Value.text;
+
                 string display = isEditingThisCell
                     ? _editMode.GetCellDisplay(w)
                     : (displayVal.Length >= w ? displayVal[..w] : displayVal.PadRight(w));
@@ -708,6 +713,22 @@ internal class DesktopWindow : IDisposable
                 else if (isCmd) { bgR = 40; bgG = 40; bgB = 0; }
                 else if (isLoop) { bgR = 0; bgG = 40; bgB = 40; }
                 else if (isSparkline) { bgR = 20; bgG = 30; bgB = 50; }
+                else if (colorParsed != null)
+                {
+                    // Map ConsoleColor to RGB for desktop
+                    (bgR, bgG, bgB) = colorParsed.Value.bg switch
+                    {
+                        ConsoleColor.DarkRed => (140, 20, 20),
+                        ConsoleColor.DarkGreen => (20, 100, 20),
+                        ConsoleColor.DarkBlue => (20, 40, 140),
+                        ConsoleColor.DarkYellow => (140, 120, 0),
+                        ConsoleColor.DarkCyan => (0, 100, 100),
+                        ConsoleColor.DarkMagenta => (100, 20, 100),
+                        ConsoleColor.White => (180, 180, 180),
+                        ConsoleColor.DarkGray => (60, 60, 60),
+                        _ => (15, 15, 15)
+                    };
+                }
                 else if (extStatus == Extensions.ExtensionCellStatus.Error) { bgR = 50; bgG = 10; bgB = 10; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Running) { bgR = 10; bgG = 40; bgB = 10; }
                 else { bgR = 15; bgG = 15; bgB = 15; }

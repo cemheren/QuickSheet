@@ -44,9 +44,14 @@ public class SpreadsheetApp
             {
                 string val = _grid.GetCellValue(r, c);
                 // Use rendered length for prefixes whose display is shorter than the raw value.
-                int len = CellPrefix.IsSparkline(val)
-                    ? (CellPrefix.RenderSparkline(val, _grid)?.Length ?? val.Length)
-                    : val.Length;
+                int len;
+                if (CellPrefix.IsSparkline(val))
+                    len = CellPrefix.RenderSparkline(val, _grid)?.Length ?? val.Length;
+                else
+                {
+                    var cp = CellPrefix.ParseColor(val);
+                    len = cp != null ? cp.Value.text.Length : val.Length;
+                }
                 if (len > max) max = len;
             }
             widths[c] = Math.Max(MinColWidth, max + 2); // +2 for padding
@@ -279,9 +284,27 @@ public class SpreadsheetApp
             {
                 int w = colWidths[c];
                 string cellVal = _grid.GetCellValue(r, c);
-                string rendered = CellPrefix.IsSparkline(cellVal)
-                    ? (CellPrefix.RenderSparkline(cellVal, _grid) ?? cellVal)
-                    : cellVal;
+
+                // Resolve display text: sparkline > color prefix > raw
+                string rendered;
+                ConsoleColor? colorBg = null;
+                if (CellPrefix.IsSparkline(cellVal))
+                {
+                    rendered = CellPrefix.RenderSparkline(cellVal, _grid) ?? cellVal;
+                }
+                else
+                {
+                    var colorParsed = CellPrefix.ParseColor(cellVal);
+                    if (colorParsed != null)
+                    {
+                        colorBg = colorParsed.Value.bg;
+                        rendered = colorParsed.Value.text;
+                    }
+                    else
+                    {
+                        rendered = cellVal;
+                    }
+                }
                 string display = rendered.PadRight(w)[..w];
 
                 bool isSelected = r == _selectedRow && c == _selectedCol;
@@ -301,10 +324,15 @@ public class SpreadsheetApp
                     Console.BackgroundColor = theme.SearchMatchBg;
                     Console.ForegroundColor = theme.SearchMatchFg;
                 }
+                else if (colorBg != null)
+                {
+                    Console.BackgroundColor = colorBg.Value;
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
 
                 Console.Write(display);
 
-                if (isSelected || isMatch)
+                if (isSelected || isMatch || colorBg != null)
                 {
                     Console.BackgroundColor = theme.Background;
                     Console.ForegroundColor = theme.Foreground;
