@@ -2,6 +2,14 @@
 
 Persistent memory across runs. Append-only (except the Queued section at bottom).
 
+## 2026-05-15 (local run, c:color: desktop render)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket E — closed main #65. c:color: prefix was parsed in console + Linux desktop but not Windows. Mirrored Linux pattern into DesktopForm.cs: ParseColor → strip prefix from displayVal → ConsoleColor→RGB map → slot into bg cascade. +18 LOC, one file, build clean.
+- Bucket: E
+- Outcome: PR https://github.com/cemheren/QuickSheet/pull/71.
+- Follow-up: Ctrl+G prompt + Ctrl+H overlay from #66 still queued.
+
 ## 2026-05-15 (local run, desktop shortcuts Z/Y/T)
 
 - Stars: 0 (Δ 0)
