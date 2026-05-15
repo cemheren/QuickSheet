@@ -151,6 +151,7 @@ tls: github.com, 1, 4
 | `worldtm:` | World clock / timezones | `ext: github:cemheren/quicksheet-worldtm` |
 | `margin:` | Break-even & margin calc | `ext: github:cemheren/quicksheet-margin-ext` |
 | `depr:` | Depreciation schedules | `ext: github:cemheren/quicksheet-depr-ext` |
+| `jwtdec:` | JWT token decoder | `ext: github:cemheren/quicksheet-jwtdec` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
