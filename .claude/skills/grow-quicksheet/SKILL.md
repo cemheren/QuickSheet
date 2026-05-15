@@ -33,12 +33,30 @@ Pick, execute, log, report.
    - If unsure, default to Bucket A (product polish, local-only).
 4. **Execute** the action end-to-end. No mid-run questions.
 5. **Update the log** with date, action, outcome, star count, follow-ups.
-6. **Commit and push** any code/doc changes to the repo (single focused commit,
-   Conventional Commits style, no Claude attribution lines unless repo convention
-   says so). For destructive or publishable-elsewhere actions (see "Boundaries"
-   below), save artifacts to `.claude/skills/grow-quicksheet/drafts/` and log them
-   as "draft saved" — do not publish.
-7. **Report** a 3-6 line summary at end of run: action, outcome, star delta, next.
+6. **Open a PR for every code/doc change.** Never push directly to `main`.
+   Per run:
+   - `git checkout -b grow/<short-slug>`.
+   - Commit (Conventional Commits, no Claude attribution lines).
+   - Push the branch.
+   - `gh pr create --base main --head <branch> --title "..." --body "..."`.
+   - User merges. The skill never merges its own PRs.
+   - For destructive / publishable-elsewhere actions, drafts still go to
+     `.claude/skills/grow-quicksheet/drafts/` — also on a branch + PR.
+7. **Report** a 3-6 line summary at end of run: action, PR URL, star delta, next.
+
+## Action priority
+
+1. **Outstanding issues first.** `gh issue list --state open --json number,title,labels`.
+   Pick smallest open issue + fix on a branch. PR with `Closes #N` in body.
+2. **No open issues → feature PRs are fair game.** Either:
+   - A new feature on the main QuickSheet repo (Bucket E menu), OR
+   - A new extension repo (Bucket F workflow — still create the ext via `gh repo
+     create`, then file the README/tour cross-link change against QuickSheet as a PR).
+3. **Other buckets (A/B/C/D/R)** still allowed, each via PR.
+
+The "plausibly causes stars" filter is *relaxed* under this regime — feature
+work is welcome even if star-ROI is not certain, because PRs let the human gate
+what merges.
 
 # Action menu
 
@@ -179,25 +197,24 @@ environment (e.g., remote sandbox without .NET 9 SDK), skip Bucket E this run
 and pick from A–D instead. Log "skipped: no dotnet" rather than shipping
 unverified code.
 
-# Selection rule: only ship if it will plausibly cause new stars
+# Selection rule (relaxed under the PR regime)
 
-Adding code/features for variety is a trap. Lots of features, lots of extensions, no stars = wasted runs. **Before picking an action, ask: "would a human seeing this delta on the repo plausibly star it, or would a human reading a draft I just wrote share/post it?"** If neither, skip.
+PRs make the human the gatekeeper, so produce liberally — the filter is mostly
+"is this a real change, truthful, and not breaking?" rather than "am I sure
+this causes stars?" Specifically:
 
-What still counts as "plausibly causes stars":
-- README first-impression improvements that change the hero screenshot, the tagline, or a top-of-page demo.
-- Drafts that the user will *actually publish* (HN, Reddit, Lobsters, Twitter, dev.to). The publish step is the bottleneck, not the draft count.
-- A v0.X release that bundles a real user-visible change, since GitHub surfaces the release badge.
-- An awesome-list PR the user submits and gets merged — high signal once landed.
-- A new extension only if it serves a real vertical that the user can lean into for a targeted post (e.g. crypto-focused subreddit + crypto ext together).
+- Feature PRs are welcome on the main repo. Even if star-ROI is uncertain, the
+  user can decline to merge.
+- New extension repos are welcome. Same gating: cross-link PR against QuickSheet
+  can be declined if the ext doesn't earn its place.
+- Bucket-variety is fine. Pick the highest-quality concrete action available.
 
-What does NOT plausibly cause stars (avoid):
-- Yet another extension repo when 15 already exist.
-- Yet another flag whose value is internal to the user.
-- Yet another doc page that nobody links to.
-- Yet another draft for a channel the user already has 3 drafts for.
-- Bucket-variety for its own sake.
+Still **avoid:**
+- Breaking the build or existing features (see Boundaries).
+- Re-doing work already in `drafts/` or already merged.
+- Manufactured filler (duplicate drafts, near-identical extensions, flag bikesheds).
 
-If no action passes the "plausibly causes stars" filter, **log a no-op run instead of forcing something**. End the run with the date, "no qualifying action this run; skipped," and a 1-line note on what's blocked.
+If genuinely nothing concrete to do, log a no-op and exit.
 
 # Boundaries (hard rules — no exceptions)
 
@@ -218,8 +235,8 @@ If no action passes the "plausibly causes stars" filter, **log a no-op run inste
 - **No PRs to other repos.** Draft branch + PR body saved to `drafts/`. User submits.
 - **No paid promotion, no bots, no astroturfing, no fake accounts.**
 - **Truthful claims only.** No "production-grade" / "thousands of users" lies.
-- **No destructive git ops on QuickSheet.** No force-push, no history rewrite, no
-  branch deletion. Plain commits to `main` are fine.
+- **Never push to `main` directly.** All changes go via feature branch + PR.
+  User merges. No force-push, no history rewrite, no branch deletion either.
 - **One action per run.** Pick, execute, log, stop.
 - **No NuGet dependencies added.** Hard repo policy.
 
