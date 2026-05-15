@@ -364,3 +364,49 @@ Priority: Continue devops extension suite.
   - Update gh-pages with portck + ghpr cards
 - **Bucket D:**
   - Merge PR #36 (portck docs)
+  - Cut v0.6.0 release once PRs merge
+
+## 2026-05-15 04:30
+
+- Stars: 0 (Δ +0)
+- Action: Updated gh-pages site — added hntop + apistatus extension cards, column sorting feature row in comparison table, Ctrl+B in keyboard shortcuts, updated SEO meta tags.
+- Bucket: C (Website & SEO)
+- Outcome: Pushed commit 021ddd6 directly to gh-pages branch.
+- Competitor last did: Fixed quicksheet-price-ext CoinGecko 403 (PR #5 on that repo).
+- Follow-up: Build quicksheet-ghpr (PR review dashboard) next run.
+
+## 2026-05-15 04:57
+
+- Stars: 0 (Δ +0)
+- Action: Fixed issue #17 — define-ext crashes process. Extension sends cells as array-of-arrays but CellWrite expected {r,c,v} objects. Added CellWriteArrayConverter handling 3 formats (object, grid, flat). Also wrapped ProcessIncomingMessages in try-catch for JsonException safety.
+- Bucket: E (bug fix)
+- Outcome: PR #33 opened (commit b8ccb51 on grow/fix-define-ext-crash). Closes #17.
+- Competitor last did: Drafted Reddit posts for r/commandline and r/dotnet.
+- Follow-up: Build quicksheet-ghpr (PR dashboard) or quicksheet-docker next.
+
+## 2026-05-15 05:00
+
+- Stars: 0 (Δ +0)
+- Action: Fixed quicksheet-hntop issue #1 — manifest used `"entrypoint"` instead of `"entry"`, causing `[bad manifest]` install failure. One-line key rename fix.
+- Bucket: F (bug fix in extension repo)
+- Outcome: PR cemheren/quicksheet-hntop#2 opened (commit b7c73d0 on fix/manifest-entry-key). Closes #1.
+- Competitor last did: Drafted Reddit posts for r/commandline and r/dotnet (Bucket C). Most recent real action: PR #33 fix define-ext crash.
+- Follow-up: Build quicksheet-ghpr (PR dashboard) or quicksheet-portck next. Merge #33 when ready.
+
+## 2026-05-15 05:27
+
+- Stars: 0 (Δ +0)
+- Action: Built and shipped quicksheet-ghpr — GitHub PR review dashboard. Shows PRs needing attention (review-requested, authored, specific repo) with status icons and age. Uses gh CLI, 2-min cache. Tested live.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-ghpr. PR #34 adds to README/docs.
+- Competitor last did: Drafted Reddit posts (r/commandline, r/dotnet). No new code.
+- Follow-up: Build quicksheet-docker (container health) or quicksheet-portck (port checker) next.
+
+## 2026-05-15 05:57
+
+- Stars: 0 (Δ +0)
+- Action: Fixed issue #35 — Ctrl+B sort missing in desktop mode. Added handler to both Windows (DesktopForm.cs) and Linux (DesktopWindow.cs + XK_b keysym).
+- Bucket: E (bug fix)
+- Outcome: PR #37 opened (commit 5f3ff8f on grow/fix-sort-desktop-mode). Closes #35.
+- Competitor last did: Built quicksheet-portck extension (PR #36).
+- Follow-up: Build quicksheet-docker next, or cut v0.6.0 release once PRs merge.
