@@ -479,8 +479,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Created quicksheet-mileage-ext (PR #55, merged). Accounting research for #15.
 - Follow-up: Bucket C — add k8s card to gh-pages. Or quicksheet-margin-ext next.
 
+
+## 2026-05-15 12:57
+
+- Stars: 0 (Δ +0)
+- Action: Fixed 2 extension manifest bugs — worldtm#1 (entrypoint→entry), mileage-ext#1 (missing prefix field + enriched manifest).
+- Bucket: E (issue fixes)
+- Outcome: PR #2 on cemheren/quicksheet-worldtm (84bda51). PR #2 on cemheren/quicksheet-mileage-ext (ac89b6c).
+- Competitor last did: Created quicksheet-k8s, merged PRs #52-55.
+- Follow-up: Bucket C add k8s card to gh-pages, or accounting extensions.
+
 ## Queued
 
-- Bucket C: Add k8s extension card to gh-pages
-- Bucket F (accounting): quicksheet-margin-ext, quicksheet-depr-ext for issue #15
-- Bucket E: safe additive feature (theme presets, status bar)
+- Bucket C: Add k8s card to gh-pages
+- Bucket F (accounting): quicksheet-margin-ext, quicksheet-depr-ext for #15
+- Bucket E: safe additive feature (theme presets, markdown export)
