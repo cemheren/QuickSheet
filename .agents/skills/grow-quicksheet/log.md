@@ -473,3 +473,21 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: Repo live at https://github.com/cemheren/quicksheet-gitst. PR #41 adds to README/docs.
 - Competitor last did: Built quicksheet-rate extension (PR #40).
 - Follow-up: All Tier 1 devops extensions complete (ghpr, portck, docker, gitst). Next: Bucket A docs polish or Bucket C gh-pages update with gitst card.
+
+## 2026-05-15 08:15
+
+- Stars: 0 (Δ +0)
+- Action: Fixed quicksheet-docker issue #1 — Windows named pipe support, params field mismatch, visible errors. All 3 bugs from the issue addressed in one PR.
+- Bucket: E (issue fix on extension repo)
+- Outcome: PR #2 on cemheren/quicksheet-docker (commit 154b03e). Build green.
+- Competitor last did: Built quicksheet-price-ext (crypto prices), wrote docs/tour.md.
+- Follow-up: Bucket A docs polish, or Bucket C gh-pages update with gitst+rate cards, or Bucket F Tier 2 extension.
+
+## Queued
+
+- Bucket A: Write `docs/keyboard-shortcuts.md` comprehensive reference
+- Bucket C: Update gh-pages with gitst + rate extension cards (check if competitor already did)
+- Bucket D: v0.8.0 release when more PRs merge
+- Bucket F (Tier 2): Consider quicksheet-k8s, quicksheet-worldtm, or other extensions from research doc
+- Bucket B: Refresh topics with new extension keywords
+- Fix remaining extension repo bugs: quicksheet-ghpr #1, quicksheet-portck #1, quicksheet-hntop #1 (all have pending PRs — skip)
