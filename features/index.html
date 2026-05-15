@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>QuickSheet Features — Desktop Wallpaper Spreadsheet, TUI, Extensions & More</title>
   <meta name="description" content="QuickSheet features: desktop wallpaper spreadsheet mode, terminal TUI, inline subprocesses, sparkline charts, cell-range references, theme presets, CSV persistence, extension system, and more.">
-  <meta name="keywords" content="terminal spreadsheet features, desktop wallpaper spreadsheet, tui spreadsheet linux, inline subprocess spreadsheet, sparkline cells, csv editor terminal, dotnet spreadsheet cli, console spreadsheet features">
+  <meta name="keywords" content="terminal spreadsheet features, desktop wallpaper spreadsheet, tui spreadsheet linux, inline subprocess spreadsheet, sparkline cells, csv editor terminal, dotnet spreadsheet cli, console spreadsheet features, cell coloring terminal spreadsheet">
   <link rel="canonical" href="https://cemheren.github.io/QuickSheet/features/">
 
   <meta property="og:type" content="website">
@@ -222,6 +222,10 @@
       <div class="feature-block">
         <h3><span class="prefix">{A1::C10}</span> Cell range reference</h3>
         <p>Reference a rectangular range of cells. Used by formulas and the extension protocol to read/write cell blocks.</p>
+      </div>
+      <div class="feature-block">
+        <h3><span class="prefix">c:COLOR:</span> Cell coloring</h3>
+        <p>Prefix any cell with <code>c:red:</code>, <code>c:blue:</code>, <code>c:green:</code>, etc. to set its background color. 16 console colors supported. The prefix is hidden during display — only the color and content are shown.</p>
       </div>
       <div class="feature-block">
         <h3><span class="prefix">ext: name args</span> Extension call</h3>

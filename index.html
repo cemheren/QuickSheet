@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>QuickSheet — Your Desktop Is a Spreadsheet</title>
   <meta name="description" content="QuickSheet replaces your wallpaper with a transparent, interactive spreadsheet grid. Pin notes, launch apps, track numbers — all without opening a window. Zero dependencies, .NET 9, Windows &amp; Linux.">
-  <meta name="keywords" content="terminal spreadsheet, desktop wallpaper spreadsheet, tui spreadsheet linux, dotnet spreadsheet cli, console spreadsheet, csv editor terminal, desktop productivity tool">
+  <meta name="keywords" content="terminal spreadsheet, desktop wallpaper spreadsheet, tui spreadsheet linux, dotnet spreadsheet cli, console spreadsheet, csv editor terminal, desktop productivity tool, cell coloring terminal, spreadsheet cell colors">
   <link rel="canonical" href="https://cemheren.github.io/QuickSheet/">
 
   <!-- Open Graph -->
@@ -33,7 +33,7 @@
     "description": "A zero-dependency .NET 9 spreadsheet that replaces your desktop wallpaper with a transparent interactive grid.",
     "url": "https://github.com/cemheren/QuickSheet",
     "downloadUrl": "https://github.com/cemheren/QuickSheet",
-    "softwareVersion": "0.7.0",
+    "softwareVersion": "0.10.0",
     "license": "https://opensource.org/licenses/MIT",
     "programmingLanguage": "C#",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -354,6 +354,11 @@
         <p>Cycle through Dark, Light, Nord, Solarized, and Matrix themes with <code>Ctrl+T</code>.</p>
       </div>
       <div class="feature-card">
+        <span class="icon">🎨</span>
+        <h3>Cell Coloring</h3>
+        <p>Prefix with <code>c:red:</code>, <code>c:blue:</code>, etc. to color any cell. 16 colors — no menus, just type the prefix.</p>
+      </div>
+      <div class="feature-card">
         <span class="icon">🧭</span>
         <h3>Go-to-Cell</h3>
         <p>Press <code>Ctrl+G</code> and type a cell reference like <code>C5</code> to jump instantly. No scrolling through large grids.</p>
@@ -497,6 +502,7 @@
         <tr><td>Theme presets</td><td class="yes">✓ (5 themes)</td><td class="no">—</td><td class="no">—</td></tr>
         <tr><td>Zero dependencies</td><td class="yes">✓ (0 NuGet)</td><td class="no">ncurses</td><td class="no">Python + deps</td></tr>
         <tr><td>Go-to-cell navigation</td><td class="yes">✓ (Ctrl+G)</td><td class="yes">✓</td><td class="no">—</td></tr>
+        <tr><td>Cell coloring (c:color:)</td><td class="yes">✓ (16 colors)</td><td class="no">—</td><td class="no">—</td></tr>
         <tr><td>Column sorting</td><td class="yes">✓ (Ctrl+B)</td><td class="yes">✓</td><td class="yes">✓</td></tr>
         <tr><td>Status bar info</td><td class="yes">✓ (file, cells, Σ/Π)</td><td class="yes">✓</td><td class="yes">✓</td></tr>
         <tr><td>Windows + Linux</td><td class="yes">✓</td><td class="no">Linux/macOS</td><td class="yes">✓</td></tr>
