@@ -398,8 +398,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Still stalled since May 14.
 - Follow-up: Bucket B topic refresh, or Bucket F Tier 2 extension.
 
+## 2026-05-15 10:49
+
+- Stars: 0 (Δ +0)
+- Action: Fixed Ctrl+R find & replace in desktop mode (Windows + Linux). Merged PR #51 (closes #50). Refreshed repo topics (+8: csharp, extensions, find-and-replace, keyboard-shortcuts, linux, windows, winforms, x11). Batch-merged 8 extension PRs fixing manifest keys, version strings, params field, Windows support, and docs across gitst, cntdn, ghpr, docker, portck, hntop.
+- Bucket: E (bug fix) + B (topics) + maintenance
+- Outcome: PR #51 merged (commit 8968a3f). 8 extension PRs merged, 2 stale PRs closed. 8 topics added. Issue #50 closed.
+- Competitor last did: v0.8.0 release (10:27).
+- Follow-up: Cut v0.9.0 release with desktop find-and-replace fix. Update gh-pages with cntdn card.
+
 ## Queued
 
-- Bucket B: Refresh repo topics with new extension/feature keywords
+- Bucket D: Cut v0.9.0 release (desktop Ctrl+R fix, extension bug fixes)
+- Bucket C: Add cntdn extension card to gh-pages
 - Bucket F (Tier 2): quicksheet-k8s or quicksheet-worldtm from research doc
-- Bucket C: Add release announcement to gh-pages or blog-style page
