@@ -10,6 +10,7 @@ QuickSheet replaces your wallpaper with a transparent, interactive grid. Pin not
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Windows](https://img.shields.io/badge/platform-Windows-0078D6?logo=windows)
 ![Linux](https://img.shields.io/badge/platform-Linux-FCC624?logo=linux&logoColor=black)
+[![build](https://github.com/cemheren/QuickSheet/actions/workflows/build.yml/badge.svg)](https://github.com/cemheren/QuickSheet/actions/workflows/build.yml)
 
 ## Quick Start
 

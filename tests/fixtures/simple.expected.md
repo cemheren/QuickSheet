@@ -1,0 +1,5 @@
+| name | age | city |
+|---|---|---|
+| alice | 30 | seattle |
+| bob | 40 | new york |
+| charlie | 25 |  |

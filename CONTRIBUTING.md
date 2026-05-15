@@ -33,10 +33,20 @@ In rough priority order:
 4. **Wayland support.** The Linux desktop path currently uses raw X11 and prints a warning under Wayland. Real Wayland support is open.
 5. **Screenshots and demo GIFs.** Especially for less-photogenic features (multi-select launching, search, sparklines).
 
+## Tests
+
+There's a small headless test runner at `tests/run.sh` that exercises the CLI paths (`--version`, `--help`, `--export-md`, `--list-extensions`) end-to-end without a TTY. Run it before pushing:
+
+```bash
+bash tests/run.sh
+```
+
+The same script runs in CI on every PR (`.github/workflows/build.yml`).
+
 ## PR style
 
 - One focused change per PR.
-- Run `dotnet build ExcelConsole.csproj` before pushing — it must be 0 warnings, 0 errors.
+- Run `dotnet build ExcelConsole.csproj` and `bash tests/run.sh` before pushing — both must be 0 errors / 0 failures.
 - Conventional Commits in the title (`feat:`, `fix:`, `docs:`, `chore:`).
 - If you touch shared cross-platform code, please add a brief note on what you tested on (Windows / Linux / both).
 
