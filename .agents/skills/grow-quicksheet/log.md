@@ -364,9 +364,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 
 ## Queued
 
-- **Bucket F:** `quicksheet-gitst` — git repo status (branch, modified, stashes) (5/5 priority)
 - **Bucket E:** Theme presets, markdown export, or `w: url` web fetch prefix
 - **Bucket A:** Demo GIF capture (needs desktop mode running)
+- **Bucket F:** Consider writing/email verticals (define improved, mail checker)
+
+## 2026-05-15 07:49
+
+- Stars: 0 (Δ +0)
+- Action: Merged PRs #40 (rate docs) + #41 (gitst docs, rebased conflicts). Backfilled CHANGELOG.md with v0.6.0 + v0.7.0 entries (PR #42). Updated gh-pages: added gitst + rate cards, bumped version to v0.7.0.
+- Bucket: A + C (changelog polish + website update)
+- Outcome: gh-pages commit 1ffa036, PR #42 for CHANGELOG. 2 PRs merged.
+- Competitor last did: Built quicksheet-gitst and quicksheet-rate (PRs #40, #41).
+- Follow-up: Bucket E quality-of-life feature next. Or merge PR #42 and cut v0.7.1.
 
 ## 2026-05-15 04:30
 
