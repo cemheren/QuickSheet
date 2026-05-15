@@ -328,6 +328,17 @@ budget: Software, 200, 89
 
 Shows color-coded status (🟢≤50%, 🟡≤75%, 🟠≤90%, 🔴>90%), visual fill bar, and remaining balance. Pairs with cell references for live updates as you log expenses.
 
+### Example: GitHub PR dashboard
+
+The [quicksheet-ghpr](https://github.com/cemheren/quicksheet-ghpr) extension shows pull requests needing your attention — review requests, your authored PRs, approval status — right on your wallpaper:
+
+```
+ext: github:cemheren/quicksheet-ghpr
+ghpr: all
+```
+
+Uses `gh` CLI under the hood — no tokens to configure. Filters: `review-requested` (default), `mine`, `all`, or a specific `owner/repo`.
+
 ### Build your own
 
 Extensions are regular .NET (or any language) programs that read/write JSON lines on stdin/stdout. The protocol is intentionally minimal:
