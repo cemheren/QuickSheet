@@ -364,3 +364,12 @@ Priority: Build from devops research — "replace a browser tab" extensions.
 - Outcome: Pushed commit 021ddd6 directly to gh-pages branch.
 - Competitor last did: Fixed quicksheet-price-ext CoinGecko 403 (PR #5 on that repo).
 - Follow-up: Build quicksheet-ghpr (PR review dashboard) next run.
+
+## 2026-05-15 04:57
+
+- Stars: 0 (Δ +0)
+- Action: Fixed issue #17 — define-ext crashes process. Extension sends cells as array-of-arrays but CellWrite expected {r,c,v} objects. Added CellWriteArrayConverter handling 3 formats (object, grid, flat). Also wrapped ProcessIncomingMessages in try-catch for JsonException safety.
+- Bucket: E (bug fix)
+- Outcome: PR #33 opened (commit b8ccb51 on grow/fix-define-ext-crash). Closes #17.
+- Competitor last did: Drafted Reddit posts for r/commandline and r/dotnet.
+- Follow-up: Build quicksheet-ghpr (PR dashboard) or quicksheet-docker next.
