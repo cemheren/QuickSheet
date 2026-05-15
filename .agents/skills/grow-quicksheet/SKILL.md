@@ -35,8 +35,9 @@ a real need.
   `.agents/skills/grow-quicksheet/drafts/designs/` before writing any code.
 - **Track competitor log**: read `.claude/skills/grow-quicksheet/log.md` to avoid
   duplicating and to build on their work.
-- **No screenshots.** This environment cannot take screenshots. Skip any issues or
-  tasks that require screenshots, screen captures, or GIF recordings.
+- **Screenshots are conditional.** If an MCP server with screenshot capability is
+  available, take screenshots for issues/tasks that need them. If not, skip those
+  issues and move on to something else.
 - **Use web_search for deep research:**
   - What makes repos go viral on HN/Reddit?
   - What keywords do people search for that this project could rank for?
@@ -187,8 +188,8 @@ code. A broken app is worse than no change at all — it actively loses stars.
 - **Additive changes only for Bucket E.** New files, new classes, new prefixes — never
   modify core logic (GridManager, SpreadsheetApp, DesktopForm) unless fixing a bug
   that's clearly broken. Extending is safe; rewriting is not.
-- **No screenshots or screen captures.** This environment cannot take screenshots.
-  Skip any issues or tasks that require screenshots, GIFs, or screen recordings.
+- **Screenshots require MCP.** Only attempt screenshot/GIF tasks if an MCP server
+  with screenshot capability is available. If not, skip those issues.
 - **No social posting.** Never post to HN, Reddit, Twitter, Mastodon, Bluesky,
   Lobsters, dev.to, Medium, etc., even if credentials exist. Drafts only.
 - **No PRs to other repos.** Draft branch + PR body saved to `drafts/`. User submits.
