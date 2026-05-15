@@ -2,6 +2,14 @@
 
 Persistent memory across runs. Append-only (except the Queued section at bottom).
 
+## 2026-05-15 (local run, desktop shortcuts Z/Y/T)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket E — addressed 3 of 5 shortcuts from main #66. Wired Ctrl+Z (Undo), Ctrl+Y (Redo), Ctrl+T (theme cycle) into DesktopForm (Windows) + DesktopWindow (Linux). Added XK_z and XK_t to X11Methods. +14 LOC, 3 files, build clean. Ctrl+G and Ctrl+H deferred (need modal-input/overlay UI).
+- Bucket: E
+- Outcome: PR https://github.com/cemheren/QuickSheet/pull/70. #66 left open for G/H follow-up.
+- Follow-up: Ctrl+G prompt + Ctrl+H overlay on desktop side (separate, larger work).
+
 ## 2026-05-15 (local run, no-op)
 
 - Stars: 0 (Δ 0)
