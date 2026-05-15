@@ -6,6 +6,30 @@ All notable changes to QuickSheet. Format roughly follows [Keep a Changelog](htt
 
 (empty — bump here before the next tag)
 
+## 0.12.0 — 2026-05-15
+
+### Fixed
+- **c:color: prefix in Windows desktop mode** (#65) — `CellPrefix.ParseColor()` now rendered in DesktopForm with ConsoleColor→RGB mapping matching the Linux implementation.
+
+### Added
+- **Ctrl+Z/Y/T/G shortcuts in Linux desktop mode** (#66, partial) — Undo, redo, new tab, and goto-cell shortcuts now work in X11 desktop host.
+- `quicksheet-jwtdec` extension — decode JWTs entirely offline. Privacy-first: tokens never leave your machine.
+
+### Fixed (extensions)
+- Fixed `quicksheet-depr-ext` protocol types (`register`/`invoke` → `init`/`activate`, cell format `r`/`c`/`v`).
+- Fixed `quicksheet-mileage-ext` manifest (missing prefix field).
+- Fixed `quicksheet-worldtm` manifest key (`entrypoint` → `entry`).
+
+## 0.11.0 — 2026-05-15
+
+### Added
+- **Cell color prefix `c:COLOR:`** (#61) — 9 named colors (red, green, blue, yellow, cyan, magenta, white, gray/grey) as cell backgrounds. Works in console + Linux desktop.
+- **FAQ page** on website — common questions about desktop mode, extensions, CSV format.
+- **Color prefix documentation** — keyboard-shortcuts.md color table + tour.md cheatsheet entry.
+
+### Extensions (new repos)
+- `quicksheet-depr-ext` — Straight-line & MACRS depreciation schedules.
+
 ## 0.10.0 — 2026-05-15
 
 ### Added
