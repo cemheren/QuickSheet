@@ -1,5 +1,33 @@
 # QuickSheet Test Log
 
+## Run: 2026-05-15 04:45
+Commit: d98da91
+Build: Release
+
+### Discovery
+- 2 new extensions found: quicksheet-hntop (HN stories), quicksheet-apistatus (service status monitor)
+- All 10 cell-format fixes merged, PR #21 merged (typing race)
+- Issue #26 fix PRs #27/#29 still OPEN
+- PR #28 OPEN: Ctrl+B column sorting
+- price-ext 403 still unfixed
+
+### Tests Run
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C21 | ❌ FAIL | quicksheet-hntop: `[bad manifest]` — uses "entrypoint" instead of "entry" → filed hntop#1 |
+| C22 | ✅ PASS | quicksheet-apistatus: 🟢 github operational, 🟢 npm operational, 🟡 cloudflare minor, Updated 04:47 |
+| C6 | ❌ FAIL | quicksheet-price-ext: still 403 Forbidden (CoinGecko API) — existing issue #4 |
+| A40 | ✅ PASS | r: echo test-output-123 — cmd process launched, yellow bg on cell |
+
+### Cumulative Summary
+- **Total tests:** 73 (46 core + 8 ext system + 22 extensions)
+- **Passed:** 70
+- **Failed:** C6 (price 403), C21 (hntop manifest), sparkline (Issue #9) = 3
+- **Skipped:** A2, A3, A5, A6, A20, A21, A39, A43, A52, A53, C16 = 11
+
+---
+
 ## Run: 2026-05-15 03:45
 Commit: 5c71062
 Build: Release
