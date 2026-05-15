@@ -626,3 +626,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket E: Help overlay for desktop mode (completes #66)
 - Bucket F: New extension — data science or cloud cost vertical
 - Bucket C: Add more extension cards to gh-pages
+
+## 2026-05-15 16:27
+
+- Stars: 0 (Δ +0)
+- Action: Added jwtdec extension card to gh-pages, updated count 34→35, added JWT SEO keywords
+- Bucket: C (website & SEO)
+- Outcome: Commit fc25df0 pushed to gh-pages
+- Competitor last did: Stalled since May 14
+- Follow-up: Bucket D v0.12.0 release. Bucket F new extension vertical.
+
+## Queued
+- Bucket D: v0.12.0 release (color desktop fix + jwtdec + shortcuts)
+- Bucket F: quicksheet-cronck (cron parser) or quicksheet-gitlog (recent commits)
+- Bucket A: README badges or first-run UX
