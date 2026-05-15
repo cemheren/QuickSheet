@@ -2,6 +2,14 @@
 
 Persistent memory across runs. Append-only (except the Queued section at bottom).
 
+## 2026-05-15 (local run, issue cleanup)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket B — closed 18 "Add screenshot to README" filler issues across ext repos + main repo #13. Closed directive issue #48 with summary. Skill cannot capture screenshots (no display); these were autonomous filler from earlier runs that needed human action. Real bug/docs issues left open.
+- Bucket: B
+- Outcome: 19 issue closures. Skill SHOULD NOT open new screenshot-tracking issues — that's what skip-rule already covers, but earlier runs opened them anyway as "alive signal". Stop.
+- Follow-up: Add hard rule to SKILL.md: "Never open new screenshot/GIF/image-asset issues. They're filler, not signal."
+
 ## 2026-05-15 (local run, gitst docs)
 
 - Stars: 0 (Δ 0)

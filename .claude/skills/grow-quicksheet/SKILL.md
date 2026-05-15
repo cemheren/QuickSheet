@@ -77,6 +77,11 @@ Pick, execute, log, report.
      unless the fix path is obvious from reading code (e.g. a clear concurrency
      or parse bug whose code path doesn't actually need a TTY to verify).
 
+   **Do not open new screenshot/GIF/image-asset issues either.** They look like
+   "alive-signal" filler but the skill cannot resolve them, so they accumulate as
+   noise across the repo network. If a real human can capture the asset, they
+   don't need a tracking issue to know it's missing.
+
 2. **No open issues anywhere → feature PRs are fair game.** Either:
    - A new feature on the main QuickSheet repo (Bucket E menu), OR
    - A targeted feature/fix on an existing extension repo, OR
