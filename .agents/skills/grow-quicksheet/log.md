@@ -443,8 +443,16 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Accounting extension research, closed 18 filler issues.
 - Follow-up: Bucket C gh-pages cntdn card, or Bucket F Tier 2 extension.
 
+## 2026-05-15 11:57
+
+- Stars: 0 (Δ +0)
+- Action: Updated CHANGELOG.md with v0.8.0 entries — Find & Replace, FlexVersionConverter, shortcuts docs, cntdn, extension fixes.
+- Bucket: A (product polish)
+- Outcome: PR #53 on cemheren/QuickSheet (commit 75d80d9).
+- Competitor last did: Accounting extension research for #15.
+- Follow-up: Bucket F Tier 2 extension next.
+
 ## Queued
 
-- Bucket C: Add cntdn extension card to gh-pages
 - Bucket F (Tier 2): quicksheet-k8s or quicksheet-worldtm from research doc
-- Bucket A: Update CHANGELOG.md with v0.9.0 entries
+- Bucket C: Add cntdn card to gh-pages
