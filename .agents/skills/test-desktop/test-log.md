@@ -1,5 +1,35 @@
 # QuickSheet Test Log
 
+## Run: 2026-05-15 05:45
+Commit: c3d8541 (v0.6.0)
+Build: Release
+
+### Discovery
+- **v0.6.0 released** with merged PRs: #27 (Issue #26 fix), #28 (Ctrl+B sorting), #30 (hntop), #32 (apistatus docs)
+- New extension: `quicksheet-ghpr` (GitHub PR dashboard)
+- price-ext PR #5 merged: CoinCap fallback for 403 fix
+- define-ext crash fix branch force-updated
+- hntop manifest still uses "entrypoint" (NOT fixed despite grow log claiming so)
+- Ctrl+B sorting wired in console mode only — NOT in DesktopForm (feature parity gap)
+
+### Tests Run
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C6 | ✅ PASS | quicksheet-price-ext: bitcoin $80,382, ▲ 0.87% 24h — CoinCap fallback works! |
+| C21 | ❌ FAIL | quicksheet-hntop: installed but "Manifest missing 'entry' field" — existing hntop#1 |
+| C23 | ⚠️ BLOCKED | quicksheet-ghpr: installed, 3 processes running, but no output. Requires `gh` CLI auth. Needs investigation. |
+
+### Cumulative Summary
+- **Total tests:** 74 (46 core + 8 ext system + 23 extensions)
+- **Passed:** 71 (C6 flipped from FAIL to PASS)
+- **Failed:** C21 (hntop manifest), sparkline (Issue #9) = 2
+- **Blocked:** C23 (ghpr no output), C16 (copilot auth) = 2
+- **Skipped:** A2, A3, A5, A6, A20, A21, A39, A43, A52, A53 = 10
+- **Known gaps:** Ctrl+B sorting not in desktop mode (console only)
+
+---
+
 ## Run: 2026-05-15 04:45
 Commit: d98da91
 Build: Release

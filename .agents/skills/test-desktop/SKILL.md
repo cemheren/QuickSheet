@@ -268,6 +268,7 @@ First install each extension via its `ext:` cell. Then test the prefix.
 | C20 | quicksheet-budget | `ext: github:cemheren/quicksheet-budget` | `budget: Groceries,500,350,1,3` | Category + progress bar + spent/budget + remaining |
 | C21 | quicksheet-hntop | `ext: github:cemheren/quicksheet-hntop` | `hntop: 5,1,6` | Top 5 HN stories with scores and comment counts |
 | C22 | quicksheet-apistatus | `ext: github:cemheren/quicksheet-apistatus` | `apistatus: github,npm,cloudflare,1,6` | Service status: emoji + name + operational/minor + description |
+| C23 | quicksheet-ghpr | `ext: github:cemheren/quicksheet-ghpr` | `ghpr: cemheren/QuickSheet,1,5` | GitHub PRs needing attention (requires `gh` CLI auth) |
 
 ---
 
