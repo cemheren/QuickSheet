@@ -68,6 +68,15 @@ Pick, execute, log, report.
    `Closes #N` in body, opened against that repo. The user merges. The skill
    never merges its own PRs.
 
+   **Skip rules** — these issues do NOT qualify, even if they're the smallest:
+   - **Screenshot / GIF / image-asset issues.** The skill has no display and
+     cannot run the TUI or `--desktop` mode to capture a real screenshot.
+     Anything titled "Add screenshot to README", "Need demo GIF", etc., needs
+     a human. Skip and move to the next issue.
+   - **Issues whose repro requires interactive TUI input or `--desktop` mode**
+     unless the fix path is obvious from reading code (e.g. a clear concurrency
+     or parse bug whose code path doesn't actually need a TTY to verify).
+
 2. **No open issues anywhere → feature PRs are fair game.** Either:
    - A new feature on the main QuickSheet repo (Bucket E menu), OR
    - A targeted feature/fix on an existing extension repo, OR
