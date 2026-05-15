@@ -24,6 +24,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `todo`    | Todo manager      | Tasks with priorities, due dates, completion stats  | [`quicksheet-todo`](https://github.com/cemheren/quicksheet-todo) |
 | `cal`     | Calendar          | Upcoming events from .ics files, grouped by date    | [`quicksheet-cal`](https://github.com/cemheren/quicksheet-cal) |
 | `budget`  | Budget envelopes  | Track spending with visual progress bars            | [`quicksheet-budget`](https://github.com/cemheren/quicksheet-budget) |
+| `hntop`   | HN Top Stories    | Top Hacker News stories with scores & comments      | [`quicksheet-hntop`](https://github.com/cemheren/quicksheet-hntop) |
 
 ## Install
 
