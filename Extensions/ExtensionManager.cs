@@ -102,7 +102,7 @@ public class ExtensionManager : IDisposable
         _processedExtCells.Clear();
     }
 
-    public void ScanGrid()
+    public void ScanGrid(int? editingRow = null, int? editingCol = null)
     {
         if (_disposed) return;
 
@@ -111,6 +111,9 @@ public class ExtensionManager : IDisposable
         {
             for (int c = 0; c < _grid.ColumnCount; c++)
             {
+                // Skip the cell currently being edited to avoid processing partial input
+                if (editingRow == r && editingCol == c) continue;
+
                 string val = _grid.GetCellValue(r, c);
                 if (CellPrefix.IsExtension(val))
                 {
@@ -137,6 +140,9 @@ public class ExtensionManager : IDisposable
         {
             for (int c = 0; c < _grid.ColumnCount; c++)
             {
+                // Skip the cell currently being edited
+                if (editingRow == r && editingCol == c) continue;
+
                 string val = _grid.GetCellValue(r, c);
                 if (string.IsNullOrEmpty(val)) continue;
 
