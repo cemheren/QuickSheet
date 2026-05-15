@@ -425,12 +425,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Closed 18 filler issues, cleaned up screenshot tasks.
 - Follow-up: Windows side of #9 still needs same fix in DesktopForm.cs. Issue #1 (sparkline range refs) is next good-first-issue.
 
+## 2026-05-15 11:27
+
+- Stars: 0 (Δ +0)
+- Action: Refreshed repo topics — added csv-editor, terminal-spreadsheet, devops. Removed misleading "excel". Now at 20/20 topics (GitHub max).
+- Bucket: B (discoverability)
+- Outcome: Topics live via `gh repo edit`. Also fixed leftover merge conflict markers in log.md.
+- Competitor last did: Still stalled since May 14.
+- Follow-up: Bucket F Tier 2 extension, or Bucket A CHANGELOG update for v0.8.0.
+
 ## Queued
 
-- Bucket D: Cut v0.9.0 release (desktop Ctrl+R fix, extension bug fixes)
-- Bucket C: Add cntdn extension card to gh-pages
 - Bucket F (Tier 2): quicksheet-k8s or quicksheet-worldtm from research doc
-<<<<<<< HEAD
-=======
-- Bucket C: Add release announcement or blog post to gh-pages
->>>>>>> 6b92d42 (log: gitst params fix run)
+- Bucket A: Update CHANGELOG.md with v0.8.0 entries
+- Bucket C: Add cntdn extension card to gh-pages
