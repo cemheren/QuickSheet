@@ -218,6 +218,15 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
 - Follow-up: Build quicksheet-qtr (quarterly tax countdown) next. Then quicksheet-fx (currency).
 
+## 2026-05-15 00:57
+
+- Stars: 0 (Δ +0)
+- Action: Fixed issue #19 — ext: cells processed during typing, causing premature install failures. Added editingRow/editingCol params to ScanGrid() so extension system skips the cell being typed into. Fixed on both Windows and Linux.
+- Bucket: E (bug fix)
+- Outcome: PR #21 opened (commit e12ccab on grow/fix-ext-typing-race). Closes #19.
+- Competitor last did: Created quicksheet-budget extension (PR #20).
+- Follow-up: Build quicksheet-qtr (quarterly tax countdown) next run.
+
 ## Queued
 
 Priority: Continue accounting extension suite per design doc.
