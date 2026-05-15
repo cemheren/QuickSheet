@@ -256,6 +256,17 @@ fx: 1000, USD, EUR, GBP
 
 Shows converted amounts, exchange rates, and the ECB rate date. Part of the freelancer finance suite with `1099:`, `budget:`, and `qtr:`.
 
+### Example: Hacker News on your wallpaper
+
+The [quicksheet-hntop](https://github.com/cemheren/quicksheet-hntop) extension puts the top Hacker News stories right on your desktop — scores, comment counts, no browser needed:
+
+```
+ext: github:cemheren/quicksheet-hntop
+hntop: 10
+```
+
+Shows top 10 stories with scores and comment counts. Cached for 5 minutes. Uses the free HN Firebase API — no key required.
+
 ### Example: Gravatar lookup
 
 The [quicksheet-grav-ext](https://github.com/cemheren/quicksheet-grav-ext) extension looks up Gravatar profiles by email — display name, location, and avatar URL:
