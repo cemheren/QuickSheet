@@ -677,6 +677,14 @@ internal class DesktopWindow : IDisposable
                     }
                 }
 
+                // Render sparkline cells as unicode block-bar glyphs
+                bool isSparkline = !isEditingThisCell && CellPrefix.IsSparkline(cellVal);
+                if (isSparkline)
+                {
+                    string? spark = CellPrefix.RenderSparkline(cellVal, _grid);
+                    if (spark != null) displayVal = spark;
+                }
+
                 string display = isEditingThisCell
                     ? _editMode.GetCellDisplay(w)
                     : (displayVal.Length >= w ? displayVal[..w] : displayVal.PadRight(w));
@@ -699,6 +707,7 @@ internal class DesktopWindow : IDisposable
                 else if (isLink) { bgR = 40; bgG = 0; bgB = 60; }
                 else if (isCmd) { bgR = 40; bgG = 40; bgB = 0; }
                 else if (isLoop) { bgR = 0; bgG = 40; bgB = 40; }
+                else if (isSparkline) { bgR = 20; bgG = 30; bgB = 50; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Error) { bgR = 50; bgG = 10; bgB = 10; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Running) { bgR = 10; bgG = 40; bgB = 10; }
                 else { bgR = 15; bgG = 15; bgB = 15; }
@@ -707,6 +716,7 @@ internal class DesktopWindow : IDisposable
                 else if (isLink) { fgR = 180; fgG = 140; fgB = 255; }
                 else if (isCmd) { fgR = 255; fgG = 220; fgB = 100; }
                 else if (isLoop) { fgR = 100; fgG = 220; fgB = 200; }
+                else if (isSparkline) { fgR = 100; fgG = 180; fgB = 255; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Error) { fgR = 255; fgG = 80; fgB = 80; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Running) { fgR = 80; fgG = 255; fgB = 80; }
                 else { fgR = 255; fgG = 255; fgB = 255; }
