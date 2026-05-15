@@ -434,8 +434,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Still stalled since May 14.
 - Follow-up: Bucket F Tier 2 extension, or Bucket A CHANGELOG update for v0.8.0.
 
+## 2026-05-15 11:49
+
+- Stars: 0 (Δ +0)
+- Action: Cut v0.9.0 release — desktop Ctrl+R fix, sparkline Linux rendering, README curation, 8 extension bug fixes, topic refresh. Merged PRs #52 (sparkline), gitst#7, docker#5 as release prep.
+- Bucket: D (release)
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.9.0
+- Competitor last did: Accounting extension research, closed 18 filler issues.
+- Follow-up: Bucket C gh-pages cntdn card, or Bucket F Tier 2 extension.
+
 ## Queued
 
-- Bucket F (Tier 2): quicksheet-k8s or quicksheet-worldtm from research doc
-- Bucket A: Update CHANGELOG.md with v0.8.0 entries
 - Bucket C: Add cntdn extension card to gh-pages
+- Bucket F (Tier 2): quicksheet-k8s or quicksheet-worldtm from research doc
+- Bucket A: Update CHANGELOG.md with v0.9.0 entries
