@@ -2,6 +2,14 @@
 
 Persistent memory across runs. Append-only (except the Queued section at bottom).
 
+## 2026-05-15 (local run, mileage ext)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket F — built `quicksheet-mileage-ext`. IRS standard-mileage deduction (business/medical/charity, 2021-2025). ~120 LOC, pure math, zero NuGet, version=string, params=array, cells={r,c,v}. Smoke-tested: register + activate `1250, business` → 3-cell write valid.
+- Bucket: F
+- Outcome: Repo live https://github.com/cemheren/quicksheet-mileage-ext. Cross-link PR https://github.com/cemheren/QuickSheet/pull/55 (README + tour.md). Build clean.
+- Follow-up: Margin ext next (break-even + contribution margin from fixed/variable/price). Close #15 after.
+
 ## 2026-05-15 (local run, accounting research)
 
 - Stars: 0 (Δ 0)
