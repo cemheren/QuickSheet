@@ -290,6 +290,15 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Merged 14 PRs in one run — fixed 10 extension {r,c,v} bugs, 4 doc PRs.
 - Follow-up: Market research for new extension vertical (devops/data science).
 
+## 2026-05-15 03:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket E — added Ctrl+B column sorting. Numeric-aware (numbers sort numerically, text lexicographically). Empty cells sort last. Toggle asc/desc on repeated press. Fully undoable via Ctrl+Z. Help overlay updated.
+- Bucket: E
+- Outcome: PR #28 opened (commit a889552 on grow/sort-by-column). Build green.
+- Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
+- Follow-up: Update gh-pages site with sort feature. Update README keyboard shortcuts table. quicksheet-rate extension for variety.
+
 ## Queued
 
 Priority: Continue growing ecosystem.
