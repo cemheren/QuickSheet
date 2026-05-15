@@ -1,5 +1,36 @@
 # QuickSheet Test Log
 
+## Run: 2026-05-15 14:50
+Commit: 5c2909f (main), v0.10.0
+Build: Release
+
+### Discovery
+- **1 new extension**: **quicksheet-depr-ext** (depreciation calculator) — manifest correct (`"entry"`, `"prefix": "depr"`)
+- **PR #61 OPEN**: New feature — cell color prefix `c:color: text` for highlighting cells
+- PRs #60, #62, #63 open (docs)
+- worldtm/mileage fix PRs still NOT merged
+- 34 quicksheet-* repos total (was 33)
+
+### Tests Run
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C32 | ❌ FAIL | depr-ext: 3 protocol bugs — wrong message types (register/invoke instead of init/activate) + wrong cell format (row/col/value instead of r/c/v). No output produced. → filed depr-ext#1 |
+| C28 | ❌ FAIL | worldtm: fix PRs #2/#3 still OPEN |
+| C29 | ❌ FAIL | mileage-ext: fix PRs #2/#3 still OPEN |
+
+### Issues Filed
+- **cemheren/quicksheet-depr-ext#1** — Extension uses wrong protocol message types + cell format
+
+### Cumulative Summary
+- **Total tests:** 88 (48 core + 8 ext system + 32 extensions)
+- **Passed:** 75
+- **Failed:** C28 (worldtm), C29 (mileage), C32 (depr protocol) = 3
+- **Blocked:** C16 (copilot auth), C25 (docker), C31 (k8s) = 3
+- **Skipped:** A2, A3, A5, A6, A20, A21, A52 = 7
+
+---
+
 ## Run: 2026-05-15 13:48
 Commit: ff7f371 (main)
 Build: Release

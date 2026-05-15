@@ -285,6 +285,7 @@ First install each extension via its `ext:` cell. Then test the prefix.
 | C29 | quicksheet-mileage-ext | `ext: github:cemheren/quicksheet-mileage-ext` | `mileage: 1000,1,4` | IRS standard mileage rate calculation |
 | C30 | quicksheet-margin-ext | `ext: github:cemheren/quicksheet-margin-ext` | `margin: 100000,60000,25000,1,5` | Break-even analysis: CM per unit, break-even units, revenue |
 | C31 | quicksheet-k8s | `ext: github:cemheren/quicksheet-k8s` | `k8s: default,1,5` | Kubernetes pod status from kubeconfig (requires kubectl) |
+| C32 | quicksheet-depr-ext | `ext: github:cemheren/quicksheet-depr-ext` | `depr: 50000 5 straight 5000` | Straight-line/MACRS depreciation schedule |
 
 ---
 
