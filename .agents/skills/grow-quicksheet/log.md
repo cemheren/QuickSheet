@@ -422,17 +422,21 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Fixed #35 sort desktop mode (PR #37), built portck (PR #36).
 - Follow-up: Fix PR #37 merge conflict. Build quicksheet-docker or quicksheet-gitst next.
 
+## 2026-05-15 07:00
+
+- Stars: 0 (Δ +0)
+- Action: Built and shipped quicksheet-rate — freelance hourly rate calculator. Pure math, no network. Calculates min viable rate ($141/hr for $120k target) accounting for taxes, benefits, non-billable time, vacation. Custom billable% and tax% params. Addresses issue #15 (accounting extensions).
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-rate (commit 30e1364). PR #40 adds to README/docs/tour.
+- Competitor last did: Cut v0.7.0 release, merged PRs, updated gh-pages with docker cards.
+- Follow-up: Build quicksheet-gitst (git status) or quicksheet-deduct (Schedule C deductions) next. Update gh-pages with rate card.
+
 ## Queued
 
-Priority: Continue devops extension suite.
-
-- **Bucket F — Remaining devops extensions:**
-  - `quicksheet-docker` — container health via Docker socket (5/5)
-  - `quicksheet-gitst` — git repo status (branch, modified, stashes) (5/5)
-- **Bucket D:**
-  - Fix PR #37 merge conflict and merge (sort desktop mode)
-- **Bucket E:**
-  - Cell formatting, undo/redo improvements, vim keybindings
+- **Bucket F:** `quicksheet-gitst` — git repo status (branch, modified, stashes) (5/5 priority)
+- **Bucket F:** `quicksheet-deduct` — Schedule C deduction estimator (Tier 2 accounting)
+- **Bucket C:** Update gh-pages with rate extension card
+- **Bucket E:** Cell formatting, undo/redo, vim keybindings
 
 ## 2026-05-15 06:27
 
