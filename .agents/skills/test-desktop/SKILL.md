@@ -231,6 +231,22 @@ Also use PowerShell for:
 | A59 | Ctrl+R find/replace | Press Ctrl+R, enter find term, enter replace term | Matching cells found and replaced (like console mode) |
 | A60 | Ctrl+B sort column | Select column, press Ctrl+B | Column sorted alphabetically |
 
+### Cell Color Prefix
+
+| ID | Test | Steps | Expected |
+|----|------|-------|----------|
+| A61 | c:color: prefix | Type `c:red: URGENT` in a cell | Cell background turns red, text shows "URGENT" only |
+
+### Missing Desktop Shortcuts
+
+| ID | Test | Steps | Expected |
+|----|------|-------|----------|
+| A62 | Ctrl+G go to cell | Press Ctrl+G | Status bar shows "Go to:" prompt (like console mode) |
+| A63 | Ctrl+T cycle theme | Press Ctrl+T | Theme cycles (Dark → Light → Solarized → Nord → …) |
+| A64 | Ctrl+H help overlay | Press Ctrl+H | Help overlay shows/hides |
+| A65 | Ctrl+Z undo | Press Ctrl+Z | Last action undone |
+| A66 | Ctrl+Y redo | Press Ctrl+Y | Last undone action redone |
+
 ---
 
 ## Test Group B: Extension System (8 tests)

@@ -632,3 +632,35 @@ The manifest check (`File.Exists(manifestPath)`) runs immediately after `proc.Wa
 Additionally, the `_processedExtCells` cache means that once a cell is processed (even with incomplete text during typing), it can never be re-processed without restarting the app.
 
 **Status:** Issue to be filed on cemheren/QuickSheet.
+
+## Run: 2026-05-15 17:50
+Commit: 54d62ec (main), v0.11.0
+Build: Release
+
+### Discovery
+- **PR #61 MERGED**: c:color: cell prefix feature (highlights cell backgrounds with named colors)
+- **PR #64 MERGED**: docs for c:color: in keyboard-shortcuts.md
+- **New file**: `docs/keyboard-shortcuts.md` documents ALL shortcuts
+- **5 console-mode shortcuts NOT in desktop mode**: Ctrl+G (Go to), Ctrl+T (Theme), Ctrl+H (Help), Ctrl+Z (Undo), Ctrl+Y (Redo)
+- **34 quicksheet-* repos** (no new ones)
+- depr-ext/worldtm/mileage-ext fix PRs still OPEN
+
+### Tests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| A61 |  FAIL | c:color: prefix shows as plain text  no colored background. DesktopForm.cs has zero references to CellPrefix.IsColored()/ParseColor().  Issue #65 filed |
+| A62 |  FAIL | Ctrl+G (Go to cell) does nothing in desktop mode  types "g" in cell instead. Not in DesktopForm.cs Ctrl handler |
+| A63 |  FAIL | Ctrl+T (Cycle theme) not implemented in desktop mode |
+| A64 |  FAIL | Ctrl+H (Help overlay) not implemented in desktop mode |
+| A65 |  FAIL | Ctrl+Z (Undo) not implemented in desktop mode |
+| A66 |  FAIL | Ctrl+Y (Redo) not implemented in desktop mode |
+
+A62-A66  Issue #66 filed (single issue for all 5 missing shortcuts)
+
+### Cumulative (after Run 20)
+- **Total: 94 tests** (54 core + 8 ext system + 32 extensions)
+- **Passed: 75**
+- **Failed: 9** (C28 worldtm, C29 mileage, C32 depr, A61 c:color, A62-A66 shortcuts)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 7** (A2, A3, A5, A6, A20, A21, A52)
