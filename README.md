@@ -120,279 +120,34 @@ wthr: Seattle, 2, 7
 
 ### Example: TLS certificate checker
 
-The [quicksheet-tls-ext](https://github.com/cemheren/quicksheet-tls-ext) extension turns a cell into a live TLS cert expiry/issuer readout — useful as an ambient SRE dashboard on the wallpaper:
+The [quicksheet-tls-ext](https://github.com/cemheren/quicksheet-tls-ext) extension shows TLS cert expiry and issuer — useful as an ambient SRE dashboard:
 
 ```
 ext: github:cemheren/quicksheet-tls-ext
 tls: github.com, 1, 4
 ```
 
-### Example: Crypto price quotes
-
-The [quicksheet-price-ext](https://github.com/cemheren/quicksheet-price-ext) extension turns a cell into a live CoinGecko price quote with 24h change — a one-liner ambient portfolio dashboard:
-
-```
-ext: github:cemheren/quicksheet-price-ext
-price: btc, 1, 2
-```
-
-### Example: Dictionary lookups
-
-The [quicksheet-define-ext](https://github.com/cemheren/quicksheet-define-ext) extension puts an inline dictionary in any cell — handy for writers and people learning a language:
-
-```
-ext: github:cemheren/quicksheet-define-ext
-def: laconic, 1, 4
-```
-
-### Example: Mortgage calculator
-
-The [quicksheet-mortgage-ext](https://github.com/cemheren/quicksheet-mortgage-ext) extension turns a cell into a live amortization calculator — useful for side-by-side loan comparisons:
-
-```
-ext: github:cemheren/quicksheet-mortgage-ext
-mort: 500000, 6.5, 30, 1, 4
-```
-
-### Example: Pomodoro timer
-
-The [quicksheet-pomodoro](https://github.com/cemheren/quicksheet-pomodoro) extension adds a live countdown timer to your desktop — perfect for focus sessions:
-
-```
-ext: github:cemheren/quicksheet-pomodoro
-pomo: 25, 3, 2
-```
-
-Shows a live-updating countdown with progress bar: `🍅 FOCUS  23:41  [████░░░░░░]`. Supports `pomo: break` (5 min) and `pomo: long` (15 min) for the full Pomodoro technique.
-
-### Example: System monitor
-
-The [quicksheet-sysmon](https://github.com/cemheren/quicksheet-sysmon) extension turns your desktop into a live system dashboard — CPU, RAM, disk usage with visual bars:
-
-```
-ext: github:cemheren/quicksheet-sysmon
-sys: all
-```
-
-Shows color-coded metrics with progress bars: `🟢 CPU 12.3% [██░░░░░░░░░░░░░░░░░░]`. Supports `sys: cpu`, `sys: mem`, `sys: disk` for individual metrics. Refreshes every 2 seconds.
-
-### 📋 Todo Manager
-
-The [quicksheet-todo](https://github.com/cemheren/quicksheet-todo) extension brings task management into your cells — add tasks with priorities and due dates, track completion:
-
-```
-ext: github:cemheren/quicksheet-todo
-todo: add !high @2026-05-20 Fix login bug
-todo: list
-```
-
-Supports 4 priority levels (`!low`, `!normal`, `!high`, `!critical`), due date tracking with overdue warnings, and persistent storage across sessions.
-
-### Example: Calendar events
-
-The [quicksheet-cal](https://github.com/cemheren/quicksheet-cal) extension reads `.ics` calendar files and shows upcoming events grouped by date — a glanceable schedule on your desktop:
-
-```
-ext: github:cemheren/quicksheet-cal
-cal: ~/calendar.ics
-cal: today
-cal: week
-```
-
-Parses standard iCalendar (RFC 5545) files. Auto-scans common calendar directories (Evolution, Thunderbird, KDE, Calcurse) when no path is given.
-
-### Example: Stock ticker
-
-The [quicksheet-stock-ext](https://github.com/cemheren/quicksheet-stock-ext) extension pulls live stock quotes from Stooq — no API key needed. A column of `stock:` cells is a watchlist that lives on the wallpaper:
-
-```
-ext: github:cemheren/quicksheet-stock-ext
-stock: AAPL, 1, 3
-```
-
-US tickers default to `.us`. For other markets: `stock: bp.uk`, `stock: 7203.jp`, `stock: spy.us`.
-
-### Example: HTTP ping monitor
-
-The [quicksheet-ping-ext](https://github.com/cemheren/quicksheet-ping-ext) extension turns cells into a no-config status page — HTTP status code and latency at a glance:
-
-```
-ext: github:cemheren/quicksheet-ping-ext
-ping: https://example.com, 1, 3
-```
-
-Shows `✓` for 2xx/3xx, `⚠` for 4xx, `✗` for 5xx. Pair with `L: <cell>, 1m` for a one-minute uptime poll on the wallpaper.
-
-### Example: Self-employment tax estimator
-
-The [quicksheet-1099-ext](https://github.com/cemheren/quicksheet-1099-ext) extension estimates US self-employment tax — pure math, no network:
-
-```
-ext: github:cemheren/quicksheet-1099-ext
-1099: 80000, 1, 5
-```
-
-Shows SE tax estimate, quarterly payment amount, and a reminder that it's not tax advice.
-
-### Example: Quarterly tax deadline countdown
-
-The [quicksheet-qtr](https://github.com/cemheren/quicksheet-qtr) extension shows the next IRS estimated tax deadline with a countdown and urgency indicator:
-
-```
-ext: github:cemheren/quicksheet-qtr
-qtr:
-```
-
-Shows next deadline date, days remaining, and a progress bar. Use `qtr: 2026` for all deadlines in a tax year. Pairs with 1099-ext for a complete freelancer tax dashboard.
-
-### Example: Currency conversion
-
-The [quicksheet-fx](https://github.com/cemheren/quicksheet-fx) extension converts currencies using ECB rates via Frankfurter API — no API key required, 200+ currencies:
-
-```
-ext: github:cemheren/quicksheet-fx
-fx: 1000, USD, EUR, GBP
-```
-
-Shows converted amounts, exchange rates, and the ECB rate date. Part of the freelancer finance suite with `1099:`, `budget:`, `qtr:`, and `rate:`.
-
-### Example: Know your freelance rate
-
-The [quicksheet-rate](https://github.com/cemheren/quicksheet-rate) extension calculates your minimum viable hourly rate — accounting for taxes, benefits, non-billable time, and vacation:
-
-```
-ext: github:cemheren/quicksheet-rate
-rate: 120000
-```
-
-Shows minimum hourly rate ($141/hr for $120k target), effective take-home per hour, and monthly gross/net. Accepts optional billable% and tax% params: `rate: 120000, 80, 25`. Pure math, no network — part of the freelancer finance suite.
-
-### Example: Hacker News on your wallpaper
-
-The [quicksheet-hntop](https://github.com/cemheren/quicksheet-hntop) extension puts the top Hacker News stories right on your desktop — scores, comment counts, no browser needed:
-
-```
-ext: github:cemheren/quicksheet-hntop
-hntop: 10
-```
-
-Shows top 10 stories with scores and comment counts. Cached for 5 minutes. Uses the free HN Firebase API — no key required.
-
-### Example: Service status monitor
-
-The [quicksheet-apistatus](https://github.com/cemheren/quicksheet-apistatus) extension monitors 18 services (GitHub, Cloudflare, npm, Discord, etc.) using public Statuspage.io APIs — no key required:
-
-```
-ext: github:cemheren/quicksheet-apistatus
-apistatus: github, cloudflare, npm, vercel
-```
-
-Shows color-coded service status (🟢🟡🟠🔴) on your wallpaper. Great for "is it me or them?" during deploy failures.
-
-### Example: Local service health check
-
-The [quicksheet-portck](https://github.com/cemheren/quicksheet-portck) extension probes TCP ports to show which local services are running — no terminal needed:
-
-```
-ext: github:cemheren/quicksheet-portck
-portck: postgres, redis, api:3000, nginx
-```
-
-Shows 🟢 UP / 🔴 DOWN with latency for each service. Knows 20 well-known port names (postgres=5432, redis=6379, etc.). Pure local TCP — no APIs, no credentials.
-
-### Example: Countdown to important dates
-
-The [quicksheet-cntdn](https://github.com/cemheren/quicksheet-cntdn) extension shows countdown timers to deadlines, launches, holidays — with color-coded urgency and progress bars:
-
-```
-ext: github:cemheren/quicksheet-cntdn
-cntdn: 2026-12-25 Christmas, 2026-07-04 Independence Day, 2026-06-15 Project Launch
-```
-
-Shows ⏳ remaining time (🔴 <1h, 🟡 <7d, 🟢 <30d, 🔵 >30d, ✅ past) with visual progress bars. No arguments shows upcoming US holidays.
-
-### Example: Gravatar lookup
-
-The [quicksheet-grav-ext](https://github.com/cemheren/quicksheet-grav-ext) extension looks up Gravatar profiles by email — display name, location, and avatar URL:
-
-```
-ext: github:cemheren/quicksheet-grav-ext
-grav: jane@example.com, 1, 4
-```
-
-### Example: Thesaurus
-
-The [quicksheet-thes-ext](https://github.com/cemheren/quicksheet-thes-ext) extension provides inline synonyms via the free Datamuse API — pairs nicely with the dictionary extension:
-
-```
-ext: github:cemheren/quicksheet-thes-ext
-thes: laconic, 1, 6
-```
-
-### Example: DOI citation lookup
-
-The [quicksheet-cite-ext](https://github.com/cemheren/quicksheet-cite-ext) extension resolves DOIs to author/title/venue citations via Crossref — no browser round-trip needed:
-
-```
-ext: github:cemheren/quicksheet-cite-ext
-cite: 10.1145/3623476.3623525, 1, 4
-```
-
-Accepts plain DOIs, `doi:...` form, or full `https://doi.org/...` URLs.
-
-### Example: MX record checker
-
-The [quicksheet-mxck-ext](https://github.com/cemheren/quicksheet-mxck-ext) extension looks up MX records via Google DNS-over-HTTPS — handy for email debugging:
-
-```
-ext: github:cemheren/quicksheet-mxck-ext
-mxck: example.com, 1, 5
-```
-
-### Example: Budget envelope tracker
-
-The [quicksheet-budget](https://github.com/cemheren/quicksheet-budget) extension visualizes spending per category with progress bars — a glanceable budget dashboard on your desktop:
-
-```
-ext: github:cemheren/quicksheet-budget
-budget: Groceries, 800, 623
-budget: Software, 200, 89
-```
-
-Shows color-coded status (🟢≤50%, 🟡≤75%, 🟠≤90%, 🔴>90%), visual fill bar, and remaining balance. Pairs with cell references for live updates as you log expenses.
-
-### Example: GitHub PR dashboard
-
-The [quicksheet-ghpr](https://github.com/cemheren/quicksheet-ghpr) extension shows pull requests needing your attention — review requests, your authored PRs, approval status — right on your wallpaper:
-
-```
-ext: github:cemheren/quicksheet-ghpr
-ghpr: all
-```
-
-Uses `gh` CLI under the hood — no tokens to configure. Filters: `review-requested` (default), `mine`, `all`, or a specific `owner/repo`.
-
-### Example: Docker container health
-
-The [quicksheet-docker](https://github.com/cemheren/quicksheet-docker) extension shows Docker container status directly from the Engine API — no `docker` CLI needed:
-
-```
-ext: github:cemheren/quicksheet-docker
-docker: all
-```
-
-Connects via Unix socket (`/var/run/docker.sock`) or TCP (`DOCKER_HOST`). Shows 🟢running, 🔴exited, ⏸️paused with ports and images.
-
-### Example: Git repo status
-
-The [quicksheet-gitst](https://github.com/cemheren/quicksheet-gitst) extension shows branch, modified/staged/untracked counts, stashes, and last commit for your repos:
-
-```
-ext: github:cemheren/quicksheet-gitst
-gitst: ~/Projects/myapp, ~/Projects/infra
-```
-
-Scans one or more repos (comma-separated paths, or auto-scans current directory). Like a persistent `git status` on your wallpaper.
+### More extensions
+
+| Prefix | What it does | Install |
+|--------|-------------|---------|
+| `price:` | Crypto prices (CoinGecko) | `ext: github:cemheren/quicksheet-price-ext` |
+| `def:` | Dictionary lookups | `ext: github:cemheren/quicksheet-define-ext` |
+| `mort:` | Mortgage calculator | `ext: github:cemheren/quicksheet-mortgage-ext` |
+| `stock:` | Stock quotes (Stooq) | `ext: github:cemheren/quicksheet-stock-ext` |
+| `cal:` | Calendar events (.ics) | `ext: github:cemheren/quicksheet-cal` |
+| `todo:` | Task management | `ext: github:cemheren/quicksheet-todo` |
+| `ping:` | HTTP status & latency | `ext: github:cemheren/quicksheet-ping-ext` |
+| `fx:` | Currency conversion | `ext: github:cemheren/quicksheet-fx` |
+| `ghpr:` | GitHub PR dashboard | `ext: github:cemheren/quicksheet-ghpr` |
+| `docker:` | Container health | `ext: github:cemheren/quicksheet-docker` |
+| `gitst:` | Git repo status | `ext: github:cemheren/quicksheet-gitst` |
+| `portck:` | TCP port checker | `ext: github:cemheren/quicksheet-portck` |
+| `cntdn:` | Countdown timers | `ext: github:cemheren/quicksheet-cntdn` |
+| `1099:` | US self-employment tax | `ext: github:cemheren/quicksheet-1099-ext` |
+| `budget:` | Budget envelopes | `ext: github:cemheren/quicksheet-budget` |
+
+See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
 ### Build your own
 
