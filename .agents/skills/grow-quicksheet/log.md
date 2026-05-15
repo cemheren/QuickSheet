@@ -389,41 +389,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Still stalled since May 14.
 - Follow-up: Bucket D v0.8.0 release, or Bucket B topic refresh, or Bucket F Tier 2 extension.
 
-## Queued
-
-- **Bucket D:** Cut v0.8.0 release (find & replace, shortcuts, cntdn, README curation)
-- **Bucket C:** Update gh-pages with cntdn card
-- **Bucket B:** Refresh repo topics
-
-## 2026-05-15 09:49
+## 2026-05-15 10:27
 
 - Stars: 0 (Δ +0)
-- Action: Addressed owner feedback (issue #48 "extensions are useless"). Curated README from 26 verbose examples to 3 hero showcases + compact table (-267/+22 lines). Merged PRs #45, #46, #47.
-- Bucket: A (product polish — README curation)
-- Outcome: PR #49 (Closes #48). 3 PRs merged.
-- Competitor last did: Keyboard shortcuts doc (A), find & replace (E), gh-pages shortcuts page (C).
-- Follow-up: Merge #49, cut v0.8.0 release.
-
-## 2026-05-15 09:57
-
-- Stars: 0 (Δ +0)
-- Action: Fixed quicksheet-cntdn #1 — manifest uses 'entryPoint' instead of 'entry', causing launch failure.
-- Bucket: E (issue fix on extension repo)
-- Outcome: PR #2 on cemheren/quicksheet-cntdn (commit b32e29f).
-- Competitor last did: Merged PRs #44-47, added cntdn extension, curated README (#48).
-- Follow-up: Bucket D v0.8.0 release, or Bucket B topic refresh.
-
-## 2026-05-15 10:00
-
-- Stars: 0 (Δ +0)
-- Action: Resolved merge conflict in log.md. Fixed quicksheet-gitst #4 — extension reads 'arguments' (string) but QuickSheet sends 'params' (JSON array). Changed to parse params array and join with comma. Also fixed register version int→string.
-- Bucket: F (bug fix in extension repo)
-- Outcome: PR cemheren/quicksheet-gitst#5 opened (commit 370c7d9 on fix/params-field). Closes #4.
+- Action: Cut v0.8.0 release — Find & Replace, FlexVersionConverter fix, cntdn extension, keyboard shortcuts docs, website shortcuts page.
+- Bucket: D (release)
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.8.0
 - Competitor last did: Still stalled since May 14.
-- Follow-up: Cut v0.8.0 release next, or fix more extension bugs.
+- Follow-up: Bucket B topic refresh, or Bucket F Tier 2 extension.
 
 ## Queued
 
-- **Bucket D:** Cut v0.8.0 release
-- **Bucket C:** Update gh-pages with new extension cards
-- **Bucket B:** Refresh repo topics
+- Bucket B: Refresh repo topics with new extension/feature keywords
+- Bucket F (Tier 2): quicksheet-k8s or quicksheet-worldtm from research doc
+- Bucket C: Add release announcement to gh-pages or blog-style page
