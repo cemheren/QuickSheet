@@ -73,6 +73,7 @@ Currently public:
 - [`quicksheet-thes-ext`](https://github.com/cemheren/quicksheet-thes-ext) — thesaurus (Datamuse).
 - [`quicksheet-stock-ext`](https://github.com/cemheren/quicksheet-stock-ext) — stock ticker quotes (Stooq).
 - [`quicksheet-1099-ext`](https://github.com/cemheren/quicksheet-1099-ext) — US self-employment tax estimate.
+- [`quicksheet-mileage-ext`](https://github.com/cemheren/quicksheet-mileage-ext) — IRS standard-mileage deduction calculator.
 - [`quicksheet-grav-ext`](https://github.com/cemheren/quicksheet-grav-ext) — Gravatar profile + avatar URL.
 - [`quicksheet-sysmon`](https://github.com/cemheren/quicksheet-sysmon) — live CPU/RAM/disk/uptime monitor.
 - [`quicksheet-todo`](https://github.com/cemheren/quicksheet-todo) — task management with priorities + due dates.

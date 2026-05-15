@@ -145,6 +145,7 @@ tls: github.com, 1, 4
 | `portck:` | TCP port checker | `ext: github:cemheren/quicksheet-portck` |
 | `cntdn:` | Countdown timers | `ext: github:cemheren/quicksheet-cntdn` |
 | `1099:` | US self-employment tax | `ext: github:cemheren/quicksheet-1099-ext` |
+| `mileage:` | IRS mileage deduction | `ext: github:cemheren/quicksheet-mileage-ext` |
 | `budget:` | Budget envelopes | `ext: github:cemheren/quicksheet-budget` |
 | `worldtm:` | World clock / timezones | `ext: github:cemheren/quicksheet-worldtm` |
 
