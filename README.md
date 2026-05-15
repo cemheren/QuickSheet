@@ -148,6 +148,8 @@ tls: github.com, 1, 4
 | `mileage:` | IRS mileage deduction | `ext: github:cemheren/quicksheet-mileage-ext` |
 | `budget:` | Budget envelopes | `ext: github:cemheren/quicksheet-budget` |
 | `worldtm:` | World clock / timezones | `ext: github:cemheren/quicksheet-worldtm` |
+| `margin:` | Break-even & margin | `ext: github:cemheren/quicksheet-margin-ext` |
+| `depr:` | Depreciation (SL & MACRS) | `ext: github:cemheren/quicksheet-depr-ext` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
