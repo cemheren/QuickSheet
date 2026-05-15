@@ -4,7 +4,7 @@
 
 QuickSheet replaces your wallpaper with a transparent, interactive grid. Pin notes, launch apps, paste links, track numbers — all without opening a window. The idea: keep something lightweight always present in the background, instead of a static wallpaper you never interact with.
 
-![QuickSheet running as the desktop wallpaper — cells holding runnable commands behind every open window](image-4.png)
+![QuickSheet running as the desktop wallpaper — cells holding runnable commands behind every open window](desktop-wallpaper-commands.png)
 
 ![.NET 9](https://img.shields.io/badge/.NET-9.0-purple)
 ![License](https://img.shields.io/badge/license-MIT-blue)
@@ -46,20 +46,20 @@ You can open or launch multiple repos with a single operation. Multi select cell
 
 I've used it to start the repos I want to work on for the day, and launch copilot with some saved prompts like summarize emails. Not sure how others solve this problem, but this to me is simpler than running startup scripts. 
 
-![QuickSheet cells with runnable commands and links on the desktop](image-4.png)
+![QuickSheet cells with runnable commands and links on the desktop](desktop-wallpaper-commands.png)
 
 ### Hyper-Link Dashboard
 <!-- ![Links example](docs/screenshots/use-case-links.png) -->
 Paste URLs into cells. They're highlighted and open in your browser on Enter/double-click.
 Similar to the launcher funcitonality you can open and run multiple by selecting multiple cells. I was going for a emacs buffer type of feel to save and run multiple cells. 
 
-![Hyperlink dashboard — clickable URLs organized in a grid](image-1.png)
+![Hyperlink dashboard — clickable URLs organized in a grid](hyperlink-dashboard.png)
 
 ### Lightweight Data Tracking
 <!-- ![Data example](docs/screenshots/use-case-data.png) -->
 Auto-sum (Σ) per column and auto-product (Π) per row in the status bar. Import/export CSV. I hate opening the calculator for simple operations. This helps with that. 
 
-![Lightweight data tracking with auto-sum per column](image-2.png)
+![Lightweight data tracking with auto-sum per column](data-tracking-autosum.png)
 
 ### Sparklines in a cell
 Prefix a cell with `s: 1,2,3,4,5,6` to render the values as a unicode bar sparkline (`▁▂▃▄▅▆`). Handy for tracking a small series next to other notes — paste a row of numbers, get a tiny chart, no extra column.
@@ -77,7 +77,7 @@ Some ideas:
 ### Desktop files
 Desktop files are added to cells (padded to right), which can be used in a multi-select way. Helpful for finding/launching multiple files. Not sure about usability of these yet, likely I'm going to tweak this. 
 
-![Desktop files rendered as clickable cells for quick access](image.png)
+![Desktop files rendered as clickable cells for quick access](desktop-files-grid.png)
 
 ## Extensions — Make Your Desktop Do More
 
