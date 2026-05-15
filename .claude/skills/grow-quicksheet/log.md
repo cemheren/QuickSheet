@@ -2,6 +2,14 @@
 
 Persistent memory across runs. Append-only (except the Queued section at bottom).
 
+## 2026-05-15 (local run, accounting research)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket R — research brief for issue #15 (more accounting extensions). Gap analysis of existing finance exts (1099, mortgage, qtr, budget, fx). Identified 7 real gaps; picked 3 to build next (mileage, margin, depreciation — all pure math, no network, ~60-120 LOC). Declined: sales-tax-by-zip, payroll, ledger.
+- Bucket: R
+- Outcome: research/accounting-extensions.md committed. Comment posted on #15 listing the three queued builds.
+- Follow-up: Next Bucket F run picks `quicksheet-mileage-ext`. Close #15 after first ships.
+
 ## 2026-05-15 (local run, docker docs)
 
 - Stars: 0 (Δ 0)
@@ -477,6 +485,12 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 
 ## Queued
 
+- **From #15 accounting research (2026-05-15)** — next 3 Bucket F picks in order:
+  1. `quicksheet-mileage-ext` — IRS std-mileage (business/medical/charity).
+  2. `quicksheet-margin-ext` — break-even + contribution margin.
+  3. `quicksheet-depr-ext` — straight-line + MACRS depreciation tables.
+  Brief: `.claude/skills/grow-quicksheet/research/accounting-extensions.md`.
+  Close #15 after first one ships.
 - Capture sparkline screenshot for README/social (needs human or `--desktop` smoke test).
 - More Bucket E small wins: theme presets, `w: url` live web-fetch prefix, markdown export (each <50 LOC, additive).
 - More Bucket F verticals: finance (yfinance JSON), real estate (Zillow), writing (dictionary), email (gravatar/MX).
