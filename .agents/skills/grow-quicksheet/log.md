@@ -568,8 +568,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Stalled since May 14.
 - Follow-up: Bucket D v0.11.0 release. Bucket A document c: prefix.
 
+## 2026-05-15 15:00
+
+- Stars: 0 (Δ +0)
+- Action: Added c:color: feature highlight to gh-pages site — feature card on homepage, prefix entry on features & shortcuts pages, comparison table row, version bump to 0.10.0, SEO keywords for cell coloring.
+- Bucket: C (website & SEO)
+- Outcome: Commit 6274562 pushed to gh-pages.
+- Competitor last did: Documented c:color: in docs, merged PRs #61-63, cut v0.10.0 release.
+- Follow-up: Bucket D v0.11.0 release. Bucket E safe additive feature.
+
 ## Queued
 
 - Bucket D: v0.11.0 release with depr-ext fix + accounting suite
-- Bucket A: Document c: prefix in docs/keyboard-shortcuts.md
-- Bucket E: markdown export or status bar improvement
+- Bucket E: safe additive feature (status bar or column auto-resize)
+- Bucket A: polish or improve first-run UX
