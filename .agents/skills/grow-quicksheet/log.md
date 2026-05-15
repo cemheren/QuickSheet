@@ -373,3 +373,12 @@ Priority: Build from devops research — "replace a browser tab" extensions.
 - Outcome: PR #33 opened (commit b8ccb51 on grow/fix-define-ext-crash). Closes #17.
 - Competitor last did: Drafted Reddit posts for r/commandline and r/dotnet.
 - Follow-up: Build quicksheet-ghpr (PR dashboard) or quicksheet-docker next.
+
+## 2026-05-15 05:00
+
+- Stars: 0 (Δ +0)
+- Action: Fixed quicksheet-hntop issue #1 — manifest used `"entrypoint"` instead of `"entry"`, causing `[bad manifest]` install failure. One-line key rename fix.
+- Bucket: F (bug fix in extension repo)
+- Outcome: PR cemheren/quicksheet-hntop#2 opened (commit b7c73d0 on fix/manifest-entry-key). Closes #1.
+- Competitor last did: Drafted Reddit posts for r/commandline and r/dotnet (Bucket C). Most recent real action: PR #33 fix define-ext crash.
+- Follow-up: Build quicksheet-ghpr (PR dashboard) or quicksheet-portck next. Merge #33 when ready.
