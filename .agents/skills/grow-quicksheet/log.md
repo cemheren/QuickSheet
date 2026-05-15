@@ -533,24 +533,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Created quicksheet-k8s, margin-ext. Stalled on Claude side since May 14.
 - Follow-up: Bucket C add depr-ext card to gh-pages. Bucket D v0.10.0 release.
 
-## Queued
 
-- Bucket C: Add depr-ext card to gh-pages extensions page
-- Bucket D: v0.10.0 release with all accounting extensions
-- Bucket A: docs/accounting-guide.md walkthrough of the suite
-
-## 2026-05-15 14:00
+## 2026-05-15 14:27
 
 - Stars: 0 (Δ +0)
-- Action: Added cell color prefix feature — `c:COLOR: text` renders cells with colored backgrounds. 9 colors supported. Works in both TUI and desktop mode. Purely additive.
-- Bucket: E (feature)
-- Outcome: PR #61 https://github.com/cemheren/QuickSheet/pull/61 (commit 9de8004)
-- Competitor last did: Stalled since May 14 (define-ext, price-ext, docs/tour.md).
-- Follow-up: Document color prefix in README shortcuts/prefixes section. Bucket C add to gh-pages features.
+- Action: Added depr-ext card to gh-pages extensions page. Count 33→34. Added MACRS keyword to SEO.
+- Bucket: C (website & SEO)
+- Outcome: Commit 7cf4ad0 pushed to gh-pages.
+- Competitor last did: Added cell color prefix (c:COLOR:) feature, PR #61.
+- Follow-up: Bucket A document c: prefix in keyboard-shortcuts. Bucket D v0.10.0 release.
 
 ## Queued
 
-- Bucket F: quicksheet-depr-ext (depreciation tables) to close #15
-- Bucket D: v0.10.0 release when more changes accumulate
-- Bucket A: Document c: prefix in README
-- Bucket C: Add color prefix to gh-pages feature list
+- Bucket A: Document c: prefix in docs/keyboard-shortcuts.md
+- Bucket D: v0.10.0 release with accounting suite + color prefix
+- Bucket E: markdown export or status bar improvement
