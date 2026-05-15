@@ -20,11 +20,13 @@ Build: Release
 | C25 | ❌ FAIL | quicksheet-docker: (a) Windows not supported (Unix socket only), (b) "arguments" vs "params" mismatch, (c) errors not shown. Filed docker#1 |
 | C23 | ❌ FAIL | quicksheet-ghpr: extension responds but `reviewDecision` is invalid gh search field → all searches fail → always shows "No PRs". Also "arguments" vs "params" mismatch. Filed ghpr#1 |
 | C21 | ❌ FAIL | quicksheet-hntop: manifest still uses "entrypoint". Existing hntop#1 |
+| A-sort | ✅ PASS | Ctrl+B sort in desktop mode WORKS — Issue #35 closed via PR #38 (v0.7.0). Data sorted A-Z correctly. |
 
 ### Issues Filed
 - `quicksheet-portck#1`: Manifest uses "entrypoint" instead of "entry"
 - `quicksheet-docker#1`: Doesn't work on Windows (Unix socket, params mismatch, silent errors)
 - `quicksheet-ghpr#1`: All searches fail (invalid reviewDecision field) + params mismatch
+- Issue #35: CONFIRMED FIXED (PR #38 merged, v0.7.0)
 
 ### Cross-cutting bug found: "arguments" vs "params" field name mismatch
 Multiple extensions (ghpr, docker) read `root.TryGetProperty("arguments", ...)` but QuickSheet's `ActivateMessage` sends the field as `"params"` (string[]). This means extensions never receive user arguments.
