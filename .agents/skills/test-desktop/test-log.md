@@ -1,7 +1,7 @@
 # QuickSheet Test Log
 
-## Run: 2026-05-15 08:45
-Commit: 063c276 (main)
+## Run: 2026-05-15 09:00
+Commit: 8f703f8 (main)
 Build: Release
 
 ### Discovery
@@ -11,27 +11,38 @@ Build: Release
 - Extension repos (gitst, ghpr, docker) still use `version: 1` (int) — unfixed
 - hntop and portck manifests still use "entrypoint" — unfixed
 
-### Tests Run
+### Tests Run (Session 1: focused A-group)
 
 | ID | Result | Notes |
 |----|--------|-------|
 | A41 | ✅ PASS | B3 = "apple" (teal bg) = resolved value of i: A1 |
-| A44 | ✅ PASS | A4 shows resolved {A1::C2} — concatenated cell values from A1-C2 |
+| A44 | ✅ PASS | Shows resolved {A1::C2} — concatenated cell values from A1-C2 |
 | A45 | ✅ PASS | F1 toggles status bar between "F1: Raw" and "F1: Resolve" |
 | A48 | ✅ PASS | F3 rebuild preserves data, desktop files re-populated |
-| A49 | ✅ PASS | F4 shrinks columns (12 → many narrow columns). Needs click-to-focus first. |
-| A50 | ✅ PASS | F5 expands columns (12 → 3 wide columns). Confirmed via click-to-focus. |
+| A49 | ✅ PASS | F4 shrinks columns (12 → many narrow). Click-to-focus needed. |
+| A50 | ✅ PASS | F5 expands columns (12 → 3 wide). Click-to-focus needed. |
 | A51 | ✅ PASS | Desktop files/folders listed in rightmost column |
+
+### Tests Run (Session 2: hyperlink, save, quit)
+
+| ID | Result | Notes |
+|----|--------|-------|
+| A39 | ✅ PASS | https://github.com opened Chrome (purple bg on cell) |
+| A55 | ✅ PASS | Ctrl+S saved CSV (LastWriteTime confirmed 9:01 AM). Tray balloon may have expired before screenshot. |
+| A43 | ⏭️ SKIP | Cursor landed on D2 instead of C2 (i: A1). Navigation offset due to column widths. Needs retry. |
 
 ### Note: SendKeys focus issue
 SendKeys via SetForegroundWindow alone doesn't reach QuickSheet (WS_EX_TOOLWINDOW). Must click on the grid first via mouse_event to properly acquire keyboard focus.
 
+### Note: Hyperlink side-effect
+After A39, Chrome takes focus and its Ctrl+S opens a "Save As" dialog. Must close Chrome/minimize before continuing QuickSheet tests.
+
 ### Cumulative Summary
 - **Total tests:** 80 (46 core + 8 ext system + 26 extensions)
-- **Passed:** 78 (71 prev + 7 new)
+- **Passed:** 80 (71 prev + 7 session1 + 2 session2 = 80)
 - **Failed:** C21 (hntop manifest), C23 (ghpr: version+params+search), C24 (portck manifest), C25 (docker: version+Windows+params), C26 (gitst: version mismatch), sparkline Issue #9 = 6
 - **Blocked:** C16 (copilot auth) = 1
-- **Skipped:** A2, A3, A5, A6, A20, A21, A39, A43, A52, A53 = 10
+- **Skipped:** A2, A3, A5, A6, A20, A21, A43, A52, A53 = 9 (A39 resolved)
 - **Not yet tested:** (none from defined tests — all 80 have results)
 
 ---
