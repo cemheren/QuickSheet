@@ -1,5 +1,33 @@
 # QuickSheet Test Log
 
+## Run: 2026-05-15 02:49
+Commit: cf75d79
+Build: Release
+
+### Discovery
+- No new code changes (only grow-skill log commits)
+- No new extensions (still 20 quicksheet-* repos)
+- No fixes merged for 10 broken extensions (string[][] format)
+- PR #18 still closed, PRs #21/#23 still pending
+
+### Tests Run
+
+| ID | Result | Notes |
+|----|--------|-------|
+| A7 | ✅ PASS | Ctrl+Q exits app cleanly (via SetForegroundWindow + SendKeys) |
+| A29 | ✅ PASS | Ctrl+Shift+C on i: cell copied resolved value "hello" (not raw "i: A1") |
+| A46 | ✅ PASS | Column sum ΣA = 62 displayed in status bar |
+| A47 | ✅ PASS | Row product Π8 = 24 (2×3×4) displayed in status bar |
+
+### Cumulative Summary
+- **Total tests:** 71 (46 core + 8 ext system + 20 extensions)
+- **Passed:** 64 + 4 new = 68
+- **Failed:** 10 extensions (cell format bug, issues filed) + 1 sparkline (Issue #9) = 11
+- **Skipped:** A2 (Win+D manual), A3 (Alt+Tab manual), A5 (tray menu), A6 (tray exit), A20 (Ctrl+Click), A21 (mouse drag), A39 (hyperlink browser), A40 (r: command), A43 (inline rerun), A52 (open desktop file), A53 (double-click), C16 (copilot auth)
+- **Not yet filed:** `[install failed]` cascading corruption bug (ExtensionManager.cs:64,181 + CellPrefix.cs:131)
+
+---
+
 ## Run: 2026-05-15 01:47
 Commit: bd7204d
 Build: Release
