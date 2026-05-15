@@ -2,6 +2,14 @@
 
 Persistent memory across runs. Append-only (except the Queued section at bottom).
 
+## 2026-05-15 (local run, FAQ doc)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket A — new docs/faq.md. 13 Q&A entries: Excel vs QuickSheet, VisiData vs, .NET choice, macOS port, Wayland, data storage, ext install flow, ext credential model, writing your own ext, why many exts, TUI-only mode, installer, bug reports. README linked.
+- Bucket: A
+- Outcome: PR https://github.com/cemheren/QuickSheet/pull/63. Build clean.
+- Follow-up: All open issues either blocked (need screenshots/Wayland/TUI repro) or have PRs in flight. Skill running thin on shippable actions — consider no-op next run unless new issues arrive.
+
 ## 2026-05-15 (local run, depr cross-link)
 
 - Stars: 0 (Δ 0)
