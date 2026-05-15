@@ -6,6 +6,38 @@ All notable changes to QuickSheet. Format roughly follows [Keep a Changelog](htt
 
 (empty — bump here before the next tag)
 
+## 0.7.0 — 2026-05-15
+
+### Fixed
+- **Define-ext crash** (#17) — extensions sending array-of-arrays cell format no longer crash the host. Added `CellWriteArrayConverter` handling object, grid, and flat formats with try-catch safety.
+- **Ctrl+B sort in desktop mode** (#35) — column sorting was only wired in console mode. Now works in Windows (WinForms) and Linux (X11) desktop wallpaper mode.
+
+### Extensions (separate repos)
+- `quicksheet-ghpr` — GitHub PR review dashboard with status icons.
+- `quicksheet-portck` — TCP port/service health checker with color-coded UP/DOWN.
+- `quicksheet-docker` — Docker container status dashboard via Engine API.
+- `quicksheet-gitst` — Git repo status (branch, changes, stashes, last commit).
+- `quicksheet-rate` — Freelance hourly rate calculator with tax/benefit modeling.
+
+## 0.6.0 — 2026-05-15
+
+### Fixed
+- **Extension install corruption** (#26) — install failures no longer append status suffixes to cell text. Tracked in memory only.
+
+### Added
+- **Ctrl+B column sorting** — sort any column ascending/descending with numeric awareness. Empty cells sort last. Fully undoable.
+
+### Extensions (separate repos)
+- `quicksheet-hntop` — Hacker News top stories on your wallpaper (Firebase API, 5-min cache).
+- `quicksheet-apistatus` — Service health monitor for GitHub, Cloudflare, npm, Discord + 14 more.
+- `quicksheet-budget` — Budget envelope visualizer with progress bars.
+- `quicksheet-qtr` — IRS quarterly tax deadline countdown.
+- `quicksheet-fx` — Live currency conversion (170+ currencies, ECB rates).
+
+### Fixed (extensions)
+- Fixed cell format bug in 10 extensions (stock, price, ping, mortgage, tls, mxck, grav, 1099, thes, cite) — all now emit correct `{r,c,v}` format.
+- Fixed `quicksheet-price-ext` CoinGecko 403 — added CoinCap API fallback.
+
 ## 0.5.0 — 2026-05-14
 
 ### Added
