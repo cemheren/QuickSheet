@@ -1112,6 +1112,9 @@ internal class DesktopWindow : IDisposable
                     _searching = true;
                     _searchInput = "";
                     return;
+                case XK_b:
+                    _grid.SortByColumn(_selectedCol);
+                    return;
             }
         }
 
