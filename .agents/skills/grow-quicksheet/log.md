@@ -263,6 +263,15 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Also updated gh-pages with budget/qtr/fx/cal cards (concurrent work).
 - Follow-up: Market research for next extension vertical. Or Tier 2 accounting extensions.
 
+## 2026-05-15 02:27
+
+- Stars: 0 (Δ +0)
+- Action: Bucket A — updated docs/tour.md with 3 missing extensions (budget, qtr, fx), new section 5½ for headless --export-md mode, and freelancer finance dashboard use case.
+- Bucket: A
+- Outcome: PR #25 opened (commit 43012e7 on grow/update-tour-docs). Docs-only, zero risk.
+- Competitor last did: Still stalled — last real action was ~May 14 local run #12 (markdown export).
+- Follow-up: Market research for devops/data-science extension vertical next run.
+
 ## Queued
 
 Priority: Continue growing ecosystem.
