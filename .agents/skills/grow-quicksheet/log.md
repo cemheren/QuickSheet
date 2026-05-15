@@ -281,6 +281,15 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Updated docs/tour.md (PR #25).
 - Follow-up: Tier 2 extensions (rate, deduct, pl) or Bucket E features.
 
+## 2026-05-15 02:57
+
+- Stars: 0 (Δ +0)
+- Action: Fixed issue #26 — ext: install failures were corrupting cell values by appending status suffixes. Moved failure tracking to in-memory _failedSources dict. Added backward-compat suffix stripping in ParseExtensionSource. Re-edit and F3 rebuild now allow retry.
+- Bucket: E (bug fix)
+- Outcome: PR #27 opened (commit a2320b1 on grow/fix-ext-install-corruption). Closes #26. Build green.
+- Competitor last did: Merged 14 PRs in one run — fixed 10 extension {r,c,v} bugs, 4 doc PRs.
+- Follow-up: Market research for new extension vertical (devops/data science).
+
 ## Queued
 
 Priority: Continue growing ecosystem.
