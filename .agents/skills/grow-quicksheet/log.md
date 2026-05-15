@@ -299,14 +299,28 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
 - Follow-up: Update gh-pages site with sort feature. Update README keyboard shortcuts table. quicksheet-rate extension for variety.
 
+## 2026-05-15 03:27
+
+- Stars: 0 (Δ +0)
+- Action: Deep market research for devops/SRE/developer-productivity extensions. Studied trending TUI tools (k9s 33k★, lazygit 54k★, gh-dash 8k★, wtfutil 16k★), identified 6 viral patterns, designed 15+ extension concepts across 3 tiers. Key insight: "replace a browser tab" is the strongest viral pattern; QuickSheet's wallpaper angle is genuinely novel vs all competitors.
+- Bucket: R (research)
+- Outcome: Design doc saved at `drafts/designs/devops-sre-extensions.md` (451 lines). Top picks: hntop (HN feed), apistatus (service health), ghpr (PR dashboard), docker (container health), k8s (pod status).
+- Competitor last did: Still stalled since May 14.
+- Follow-up: Build quicksheet-hntop next — highest viral potential (5/5 feasibility, free API, devs check HN 10x/day).
+
 ## Queued
 
-Priority: Continue growing ecosystem.
+Priority: Build from devops research — "replace a browser tab" extensions.
 
-- **Bucket F — Tier 2 extensions:**
-  - `quicksheet-rate` — hourly rate tracker
-  - `quicksheet-deduct` — tax deduction categorizer
-  - `quicksheet-pl` — P&L statement generator
-- **Bucket E (features):**
-  - Vim keybindings mode
-  - Theme presets (dark/light/nord)
+- **Bucket F — Tier 1 devops extensions (highest impact):**
+  - `quicksheet-hntop` — HN top stories on wallpaper (5/5, free Firebase API)
+  - `quicksheet-apistatus` — service health (GitHub/Cloudflare/npm status, 5/5)
+  - `quicksheet-ghpr` — PR review dashboard via `gh` CLI (4/5)
+  - `quicksheet-docker` — container health via Docker socket (5/5)
+- **Bucket F — Tier 1 continued:**
+  - `quicksheet-gitst` — git repo status (branch, modified, stashes) (5/5)
+  - `quicksheet-ghrun` — GitHub Actions run status (4/5)
+- **Bucket C:**
+  - Update gh-pages with sort feature + devops extension cards
+- **Bucket D:**
+  - Cut v0.6.0 release when PRs #27/#28 merge
