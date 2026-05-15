@@ -116,8 +116,14 @@ public class ExtensionManager : IDisposable
                 {
                     if (!_processedExtCells.Contains((r, c)))
                     {
-                        ProcessExtCell(r, c, val);
-                        _processedExtCells.Add((r, c));
+                        if (ProcessExtCell(r, c, val))
+                        {
+                            // Only mark cells as processed once we actually took
+                            // action; skipping over partial-typed `ext: github`
+                            // (no slash yet) must not stick — the user is still
+                            // typing and a later scan should see the full value.
+                            _processedExtCells.Add((r, c));
+                        }
                     }
                 }
             }
@@ -166,27 +172,35 @@ public class ExtensionManager : IDisposable
 
     /// <summary>
     /// Processes an ext: cell. Installs the extension from GitHub if needed, then launches it.
+    /// Returns true when the cell was acted on (installed, started, or marked
+    /// with a terminal failure). Returns false when the source is still
+    /// half-typed and the scan should retry on a later pass.
     /// </summary>
-    private void ProcessExtCell(int row, int col, string cellValue)
+    private bool ProcessExtCell(int row, int col, string cellValue)
     {
         string? source = CellPrefix.ParseExtensionSource(cellValue);
-        if (source == null) return;
+        if (source == null) return false;
 
-        if (_extensions.ContainsKey(source)) return; // already loaded
+        // Don't react to partial cell text while the user is typing
+        // (e.g. `ext: github` before the `:user/repo` part arrives).
+        // See issue #19.
+        if (!LooksLikeWellFormedExtensionSource(source)) return false;
+
+        if (_extensions.ContainsKey(source)) return true; // already loaded
 
         // Install from GitHub
         string? extDir = ExtensionInstaller.Install(source, _env);
         if (extDir == null)
         {
             _grid.SetCellValue(row, col, $"ext: {source} [install failed]");
-            return;
+            return true;
         }
 
         var manifest = ExtensionInstaller.ReadManifest(extDir);
         if (manifest == null)
         {
             _grid.SetCellValue(row, col, $"ext: {source} [bad manifest]");
-            return;
+            return true;
         }
 
         // Launch process
@@ -196,7 +210,7 @@ public class ExtensionManager : IDisposable
         {
             _grid.SetCellValue(row, col, $"ext: {source} [start failed]");
             process.Dispose();
-            return;
+            return true;
         }
 
         _extensions[source] = new LoadedExtension
@@ -206,6 +220,29 @@ public class ExtensionManager : IDisposable
             Process = process,
             Directory = extDir
         };
+        return true;
+    }
+
+    /// <summary>
+    /// Returns true when <paramref name="source"/> looks like a complete
+    /// extension reference (currently `github:&lt;user&gt;/&lt;repo&gt;`).
+    /// Used to gate install attempts so partial cell text mid-typing doesn't
+    /// trigger network calls and `[install failed]` cell mutations.
+    /// </summary>
+    private static bool LooksLikeWellFormedExtensionSource(string source)
+    {
+        if (!source.StartsWith("github:", StringComparison.OrdinalIgnoreCase)) return false;
+        string rest = source.Substring(7);
+        int slash = rest.IndexOf('/');
+        if (slash <= 0) return false; // need <user>
+        if (slash >= rest.Length - 1) return false; // need <repo>
+        string repo = rest.Substring(slash + 1).TrimEnd();
+        if (repo.Length < 2) return false;
+        foreach (char ch in repo)
+        {
+            if (char.IsWhiteSpace(ch)) return false;
+        }
+        return true;
     }
 
     /// <summary>
