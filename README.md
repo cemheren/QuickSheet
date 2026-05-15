@@ -188,6 +188,19 @@ todo: list
 
 Supports 4 priority levels (`!low`, `!normal`, `!high`, `!critical`), due date tracking with overdue warnings, and persistent storage across sessions.
 
+### Example: Calendar events
+
+The [quicksheet-cal](https://github.com/cemheren/quicksheet-cal) extension reads `.ics` calendar files and shows upcoming events grouped by date — a glanceable schedule on your desktop:
+
+```
+ext: github:cemheren/quicksheet-cal
+cal: ~/calendar.ics
+cal: today
+cal: week
+```
+
+Parses standard iCalendar (RFC 5545) files. Auto-scans common calendar directories (Evolution, Thunderbird, KDE, Calcurse) when no path is given.
+
 ### Build your own
 
 Extensions are regular .NET (or any language) programs that read/write JSON lines on stdin/stdout. The protocol is intentionally minimal:
