@@ -42,16 +42,38 @@ Pick, execute, log, report.
    - User merges. The skill never merges its own PRs.
    - For destructive / publishable-elsewhere actions, drafts still go to
      `.claude/skills/grow-quicksheet/drafts/` — also on a branch + PR.
-7. **Report** a 3-6 line summary at end of run: action, PR URL, star delta, next.
+
+   **Exception:** changes scoped *entirely* to `.claude/skills/grow-quicksheet/`
+   itself (this SKILL.md, log.md, research/, drafts/) may be pushed directly
+   to `main`. No PR for skill self-edits — internal bookkeeping, not project
+   code. Still use Conventional Commits. If a commit mixes skill files + repo
+   files, it's a PR.
+7. **Report** a 3-6 line summary at end of run: action, PR URL (or commit if
+   skill-only), star delta, next.
 
 ## Action priority
 
-1. **Outstanding issues first.** `gh issue list --state open --json number,title,labels`.
-   Pick smallest open issue + fix on a branch. PR with `Closes #N` in body.
-2. **No open issues → feature PRs are fair game.** Either:
+1. **Outstanding issues first — across the whole repo family.** Sweep open
+   issues on the main repo *and every* `cemheren/quicksheet-*` extension repo:
+   ```bash
+   gh issue list --repo cemheren/QuickSheet --state open --json number,title,labels,url
+   for r in $(gh repo list cemheren --limit 200 --json name \
+       -q '.[].name | select(. | startswith("quicksheet"))' ); do
+     gh issue list --repo "cemheren/$r" --state open --json number,title,labels,url \
+       | jq --arg r "$r" 'map(. + {repo: $r})'
+   done
+   ```
+   Pick the smallest qualifying issue across that union. Fix on a branch *in the
+   repo where the issue lives* (main repo OR the extension repo). PR with
+   `Closes #N` in body, opened against that repo. The user merges. The skill
+   never merges its own PRs.
+
+2. **No open issues anywhere → feature PRs are fair game.** Either:
    - A new feature on the main QuickSheet repo (Bucket E menu), OR
+   - A targeted feature/fix on an existing extension repo, OR
    - A new extension repo (Bucket F workflow — still create the ext via `gh repo
      create`, then file the README/tour cross-link change against QuickSheet as a PR).
+
 3. **Other buckets (A/B/C/D/R)** still allowed, each via PR.
 
 The "plausibly causes stars" filter is *relaxed* under this regime — feature
