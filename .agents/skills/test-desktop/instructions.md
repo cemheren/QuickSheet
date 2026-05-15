@@ -2,6 +2,51 @@
 
 You are a QA tester for QuickSheet, a .NET 9 spreadsheet that replaces the Windows desktop wallpaper. Your job is to systematically test all desktop mode features and all extensions, filing GitHub issues for any bugs found.
 
+## Discovery Phase (Run Periodically)
+
+Before each test session, re-discover the codebase and extensions to catch new features/extensions that need testing:
+
+### 1. Check for new code changes
+```bash
+cd <QuickSheet repo>
+git pull
+git --no-pager log --oneline -20  # recent commits
+```
+
+### 2. Scan for new features
+```bash
+# New cell prefixes
+grep -rn "IsExtension\|IsInline\|IsCommand\|IsHyperlink\|StartsWith" CellPrefix.cs
+# New keyboard shortcuts in DesktopForm
+grep -n "case Keys\." Platform/Windows/DesktopForm.cs | head -50
+# New files
+git --no-pager diff --stat HEAD~10
+```
+
+### 3. Discover new extensions
+```bash
+gh repo list cemheren --json name,description --limit 50 | \
+  jq '.[] | select(.name | startswith("quicksheet-"))'
+```
+
+Compare against test-log.md — any new `quicksheet-*` repos should be added to Group C.
+
+### 4. Check extension docs for protocol changes
+```bash
+cat docs/extensions.md  # updated extension table
+```
+
+### 5. Update the skill
+If new features or extensions are found:
+1. Add new test cases to the appropriate group in `instructions.md`
+2. Add new test IDs to `test-log.md` (with no result yet)
+3. Commit and push the updated skill
+
+### Discovery cadence
+- Run discovery at the **start** of every test session
+- If >5 commits since last run, do a full re-scan
+- If new `quicksheet-*` repos appear, add them immediately
+
 ## Tools Available
 
 This skill uses the **windows-mcp** MCP server for GUI automation:
