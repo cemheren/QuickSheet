@@ -26,6 +26,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `budget`  | Budget envelopes  | Track spending with visual progress bars            | [`quicksheet-budget`](https://github.com/cemheren/quicksheet-budget) |
 | `hntop`   | HN Top Stories    | Top Hacker News stories with scores & comments      | [`quicksheet-hntop`](https://github.com/cemheren/quicksheet-hntop) |
 | `apistatus` | Service Status  | Monitor GitHub/Cloudflare/npm/Discord status pages  | [`quicksheet-apistatus`](https://github.com/cemheren/quicksheet-apistatus) |
+| `portck`  | Port Checker      | TCP port/service health — which local services are up | [`quicksheet-portck`](https://github.com/cemheren/quicksheet-portck) |
 | `ghpr`    | GitHub PRs        | PR review dashboard — see review requests on wallpaper | [`quicksheet-ghpr`](https://github.com/cemheren/quicksheet-ghpr) |
 
 ## Install

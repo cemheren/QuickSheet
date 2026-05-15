@@ -278,6 +278,17 @@ apistatus: github, cloudflare, npm, vercel
 
 Shows color-coded service status (🟢🟡🟠🔴) on your wallpaper. Great for "is it me or them?" during deploy failures.
 
+### Example: Local service health check
+
+The [quicksheet-portck](https://github.com/cemheren/quicksheet-portck) extension probes TCP ports to show which local services are running — no terminal needed:
+
+```
+ext: github:cemheren/quicksheet-portck
+portck: postgres, redis, api:3000, nginx
+```
+
+Shows 🟢 UP / 🔴 DOWN with latency for each service. Knows 20 well-known port names (postgres=5432, redis=6379, etc.). Pure local TCP — no APIs, no credentials.
+
 ### Example: Gravatar lookup
 
 The [quicksheet-grav-ext](https://github.com/cemheren/quicksheet-grav-ext) extension looks up Gravatar profiles by email — display name, location, and avatar URL:
