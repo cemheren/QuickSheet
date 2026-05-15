@@ -201,6 +201,77 @@ cal: week
 
 Parses standard iCalendar (RFC 5545) files. Auto-scans common calendar directories (Evolution, Thunderbird, KDE, Calcurse) when no path is given.
 
+### Example: Stock ticker
+
+The [quicksheet-stock-ext](https://github.com/cemheren/quicksheet-stock-ext) extension pulls live stock quotes from Stooq — no API key needed. A column of `stock:` cells is a watchlist that lives on the wallpaper:
+
+```
+ext: github:cemheren/quicksheet-stock-ext
+stock: AAPL, 1, 3
+```
+
+US tickers default to `.us`. For other markets: `stock: bp.uk`, `stock: 7203.jp`, `stock: spy.us`.
+
+### Example: HTTP ping monitor
+
+The [quicksheet-ping-ext](https://github.com/cemheren/quicksheet-ping-ext) extension turns cells into a no-config status page — HTTP status code and latency at a glance:
+
+```
+ext: github:cemheren/quicksheet-ping-ext
+ping: https://example.com, 1, 3
+```
+
+Shows `✓` for 2xx/3xx, `⚠` for 4xx, `✗` for 5xx. Pair with `L: <cell>, 1m` for a one-minute uptime poll on the wallpaper.
+
+### Example: Self-employment tax estimator
+
+The [quicksheet-1099-ext](https://github.com/cemheren/quicksheet-1099-ext) extension estimates US self-employment tax — pure math, no network:
+
+```
+ext: github:cemheren/quicksheet-1099-ext
+1099: 80000, 1, 5
+```
+
+Shows SE tax estimate, quarterly payment amount, and a reminder that it's not tax advice.
+
+### Example: Gravatar lookup
+
+The [quicksheet-grav-ext](https://github.com/cemheren/quicksheet-grav-ext) extension looks up Gravatar profiles by email — display name, location, and avatar URL:
+
+```
+ext: github:cemheren/quicksheet-grav-ext
+grav: jane@example.com, 1, 4
+```
+
+### Example: Thesaurus
+
+The [quicksheet-thes-ext](https://github.com/cemheren/quicksheet-thes-ext) extension provides inline synonyms via the free Datamuse API — pairs nicely with the dictionary extension:
+
+```
+ext: github:cemheren/quicksheet-thes-ext
+thes: laconic, 1, 6
+```
+
+### Example: DOI citation lookup
+
+The [quicksheet-cite-ext](https://github.com/cemheren/quicksheet-cite-ext) extension resolves DOIs to author/title/venue citations via Crossref — no browser round-trip needed:
+
+```
+ext: github:cemheren/quicksheet-cite-ext
+cite: 10.1145/3623476.3623525, 1, 4
+```
+
+Accepts plain DOIs, `doi:...` form, or full `https://doi.org/...` URLs.
+
+### Example: MX record checker
+
+The [quicksheet-mxck-ext](https://github.com/cemheren/quicksheet-mxck-ext) extension looks up MX records via Google DNS-over-HTTPS — handy for email debugging:
+
+```
+ext: github:cemheren/quicksheet-mxck-ext
+mxck: example.com, 1, 5
+```
+
 ### Build your own
 
 Extensions are regular .NET (or any language) programs that read/write JSON lines on stdin/stdout. The protocol is intentionally minimal:
