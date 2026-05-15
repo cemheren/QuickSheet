@@ -49,12 +49,14 @@ Tested all 17 extensions by installing via `ext:` cells and activating via prefi
 - quicksheet-mortgage-ext #2: Cells sent in wrong format - no output rendered
 - quicksheet-grav-ext #2: Cells sent in wrong format - no output rendered
 - quicksheet-cite-ext #3: Cells sent in wrong format - no output rendered
+- QuickSheet #19: ext: cells processed during typing (partial text triggers premature install failure)
 
 ### Cumulative Summary
 - **Total tests:** 68 (46 core + 8 ext system + 17 extensions)
 - **Passed:** 44 core + 7 working extensions = 51
 - **Failed:** 10 extensions (cell format bug) + 1 sparkline (Issue #9) = 11
 - **Skipped:** 6 (copilot auth, manual-only tests)
+- **Issues filed this session:** 11 on extension repos + 1 on main repo (Issue #19)
 
 ---
 
