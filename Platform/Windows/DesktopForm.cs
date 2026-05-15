@@ -887,6 +887,10 @@ internal class DesktopForm : DesktopFormBase
                 case Keys.O: _grid.ShiftSelectedRowDown(); break;
                 case Keys.P: _grid.ShiftSelectedRowUp(); break;
                 case Keys.S: SaveFile(); break;
+                case Keys.B:
+                    var (_, sortCol) = _grid.GetCurrentCell();
+                    _grid.SortByColumn(sortCol);
+                    break;
                 case Keys.F: EnterSearchMode(); break;
                 default: handled2 = false; break;
             }

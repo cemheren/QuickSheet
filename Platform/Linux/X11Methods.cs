@@ -274,6 +274,7 @@ internal static class X11Methods
 
     // Letter keys for Ctrl+<key> handling
     public const ulong XK_a = 0x0061;
+    public const ulong XK_b = 0x0062;
     public const ulong XK_c = 0x0063;
     public const ulong XK_d = 0x0064;
     public const ulong XK_f = 0x0066;

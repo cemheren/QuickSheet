@@ -1108,6 +1108,9 @@ internal class DesktopWindow : IDisposable
                 case XK_s:
                     SaveFile();
                     return;
+                case XK_b:
+                    _grid.SortByColumn(_selectedCol);
+                    return;
                 case XK_f:
                     _searching = true;
                     _searchInput = "";
