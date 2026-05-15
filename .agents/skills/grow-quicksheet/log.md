@@ -164,13 +164,22 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
 - Follow-up: Update gh-pages site with go-to-cell feature + v0.5.0 structured data. quicksheet-cal extension for variety.
 
+## 2026-05-14 21:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket C — updated all 3 gh-pages site pages with v0.5.0 features. Homepage: added go-to-cell and status bar feature cards, quicksheet-todo extension card, 2 new comparison table rows. Features page: added go-to-cell section, status bar section, Ctrl+G to keyboard shortcuts. Extensions page: added quicksheet-todo card. Bumped structured data to v0.5.0.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit f9295cb). Pages rebuilding.
+- Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
+- Follow-up: Column auto-resize (Bucket E) or quicksheet-cal (Bucket F) for variety next.
+
 ## Queued
 
 Priority: autonomous actions only (no drafts requiring human posting).
 
-- **Bucket C (website):**
-  - Update gh-pages with go-to-cell feature, renamed screenshots, bump structured data to v0.5.0
-- **Bucket F (extensions):**
-  - quicksheet-cal or quicksheet-news
 - **Bucket E (feature):**
   - Column auto-resize keybinding
+- **Bucket F (extensions):**
+  - quicksheet-cal or quicksheet-news
+- **Bucket A (polish):**
+  - CHANGELOG.md with all shipped features
