@@ -498,8 +498,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Created quicksheet-k8s, worldtm manifest fixes.
 - Follow-up: quicksheet-depr-ext next for #15. Or Bucket C to add margin card to gh-pages.
 
+
+## 2026-05-15 13:27
+
+- Stars: 0 (Δ +0)
+- Action: Added k8s + margin-ext cards to gh-pages extensions page. Count 31→33, new SEO keywords.
+- Bucket: C (website & SEO)
+- Outcome: Commit b2e1306 pushed to gh-pages.
+- Competitor last did: Created quicksheet-margin-ext (PR #58). Stalled on Claude side since May 14.
+- Follow-up: Bucket F quicksheet-depr-ext for #15, or Bucket D release.
+
 ## Queued
 
-- Bucket F (accounting): quicksheet-depr-ext (depreciation tables) for #15
-- Bucket C: Add margin-ext + k8s cards to gh-pages extensions page
-- Bucket E: safe additive feature (status bar, undo stack)
+- Bucket F: quicksheet-depr-ext (depreciation tables) to close #15
+- Bucket D: v0.10.0 release when more changes accumulate
+- Bucket E: safe additive feature (status bar, markdown export)
