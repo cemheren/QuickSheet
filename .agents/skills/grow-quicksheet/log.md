@@ -410,3 +410,24 @@ Priority: Continue devops extension suite.
 - Outcome: PR #37 opened (commit 5f3ff8f on grow/fix-sort-desktop-mode). Closes #35.
 - Competitor last did: Built quicksheet-portck extension (PR #36).
 - Follow-up: Build quicksheet-docker next, or cut v0.6.0 release once PRs merge.
+
+## 2026-05-15 06:00
+
+- Stars: 0 (Δ +0)
+- Action: Updated gh-pages site — added ghpr (GitHub PR dashboard) + portck (port checker) extension cards to homepage grid and extensions subpage. Updated SEO meta tags and sitemap. Also merged PR #36 (portck docs) and resolved log.md merge conflict on main.
+- Bucket: C (Website & SEO) + D (maintenance)
+- Outcome: Pushed commit ac5ab5e to gh-pages. PR #36 merged. PR #37 has merge conflicts (deferred).
+- Competitor last did: Fixed #35 sort desktop mode (PR #37), built portck (PR #36).
+- Follow-up: Fix PR #37 merge conflict. Build quicksheet-docker or quicksheet-gitst next.
+
+## Queued
+
+Priority: Continue devops extension suite.
+
+- **Bucket F — Remaining devops extensions:**
+  - `quicksheet-docker` — container health via Docker socket (5/5)
+  - `quicksheet-gitst` — git repo status (branch, modified, stashes) (5/5)
+- **Bucket D:**
+  - Fix PR #37 merge conflict and merge (sort desktop mode)
+- **Bucket E:**
+  - Cell formatting, undo/redo improvements, vim keybindings
