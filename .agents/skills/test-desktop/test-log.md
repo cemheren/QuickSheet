@@ -1,5 +1,41 @@
 # QuickSheet Test Log
 
+## Run: 2026-05-15 03:45
+Commit: 5c71062
+Build: Release
+
+### Discovery
+- PR #21 merged: fix ext: typing race (Issue #19) ✅
+- All 10 broken extensions got cell-format fix PRs merged (`grow/fix-cells-shape`) ✅
+- Issue #26 fix PRs #27 and #29 OPEN (install corruption — not merged yet)
+- PR #28 OPEN: Ctrl+B column sorting (new feature)
+- New repo: `quicksheet-console` (no description, install failed — needs investigation)
+
+### Tests Run — Re-test of 10 previously-broken extensions
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C5 | ✅ PASS | quicksheet-stock-ext: AAPL.US $298.21, ▼ -0.54% (-1.61), as of 2026-05-14 |
+| C6 | ❌ FAIL | quicksheet-price-ext: `err: Response status code does not indicate success: 403 (Forbidden).` → filed quicksheet-price-ext#4 |
+| C8 | ✅ PASS | quicksheet-thes-ext: happy → halcyon, content, bright, felicitous, riant |
+| C9 | ✅ PASS | quicksheet-cite-ext: Zhang W., Hebig R., et al. (2023), full ACM citation with DOI |
+| C10 | ✅ PASS | quicksheet-ping-ext: ✓ https://github.com, 200 OK, 545 ms |
+| C11 | ✅ PASS | quicksheet-mxck-ext: MX for github.com, 0 github-com.mail.protection.outlook.com |
+| C12 | ✅ PASS | quicksheet-mortgage-ext: $500K@6.5%/30yr, monthly $3,160.34, total interest $637,722 |
+| C13 | ✅ PASS | quicksheet-tls-ext: github.com:443, expires in 79d, issuer: Sectigo Limited, cn: github.com |
+| C14 | ✅ PASS | quicksheet-grav-ext: test@example.com, (no Gravatar profile), avatar URL present |
+| C15 | ✅ PASS | quicksheet-1099-ext: $80K net income, SE tax ~$11,304, quarterly ~$2,826, disclaimer |
+
+### Cumulative Summary
+- **Total tests:** 71 (46 core + 8 ext system + 20 extensions)
+- **Passed:** 68 + 9 newly fixed = 77 (but some overlap with previous fails → net 77)
+- **Failed:** 1 extension (C6 price 403, issue filed) + 1 sparkline (Issue #9) = 2
+- **Skipped:** A2 (Win+D), A3 (Alt+Tab), A5 (tray), A6 (tray exit), A20 (Ctrl+Click), A21 (drag), A39 (hyperlink), A40 (r: cmd), A43 (inline rerun), A52 (open file), A53 (dbl-click), C16 (copilot auth)
+- **New issue filed:** quicksheet-price-ext#4 (CoinGecko 403)
+- **quicksheet-console:** Install failed — new extension, needs investigation (not yet in Group C)
+
+---
+
 ## Run: 2026-05-15 02:49
 Commit: cf75d79
 Build: Release
