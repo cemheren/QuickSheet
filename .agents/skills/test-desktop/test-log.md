@@ -1,5 +1,39 @@
 # QuickSheet Test Log
 
+## Run: 2026-05-14 22:43
+Commit: 1ab9ca7
+Build: Release
+
+### Discovery
+- New extension found: `quicksheet-cal` (calendar, `cal:` prefix) — added as C17
+- New feature found: `s:` sparkline prefix — works in console mode but NOT in desktop mode (potential bug)
+- New feature found: `L:` loop prefix — works in desktop mode (LoopManager.cs)
+
+| ID | Result | Notes |
+|----|--------|-------|
+| A10 | ✅ PASS | Mouse click moves cursor (clicked at grid, status bar changed from A1 to B2) |
+| A18 | ✅ PASS | F2 edit mode + Ctrl+V paste → "line1_APPENDED" (appended to "line1") |
+| A28 | ✅ PASS | Multi-line paste: "line1\nline2\nline3" fills F1, F2, F3 |
+| A38 | ✅ PASS | Search "zzzznonexistent12345" → status bar shows "no matches" |
+| A47 | ✅ PASS | Row product Π1 = 60 (10×2×3) shown in status bar |
+| B1 | ✅ PASS | Extension install works (self-corrects race condition) → Issue #8 filed |
+| B4 | ✅ PASS | Weather prefix `wthr: Seattle,2,7` → 7-day forecast displayed |
+| C1 | ✅ PASS | quicksheet-weather: Thu-Wed with emoji + temps (59°/49°F - 69°/47°F) |
+| C2 | ✅ PASS | quicksheet-todo: "No tasks yet" + usage instructions shown |
+| C3 | ✅ PASS | quicksheet-sysmon: CPU/RAM/disk/uptime with color bars, live updating |
+| C7 | ❌ FAIL | quicksheet-define: prefix entered but no output — ext cell got `[install failed]` due to race condition (Issue #8) |
+| C10 | ❌ FAIL | quicksheet-ping: ext cell shows `[install failed]` in CSV, extension never started (Issue #8) |
+| C15 | ⏭️ SKIP | quicksheet-1099: test error (navigation caused overwrite of ext: cell) |
+
+### Bugs Found (not previously filed)
+- **Sparkline (s:) not rendered in desktop mode** — `CellPrefix.RenderSparkline()` called in SpreadsheetApp but never in DesktopForm → Issue #9 filed
+
+### Issues Filed
+- [#8](https://github.com/cemheren/QuickSheet/issues/8) Extension install race condition: concurrent Install() calls race with git clone
+- [#9](https://github.com/cemheren/QuickSheet/issues/9) Sparkline (s:) prefix not rendered in desktop mode
+
+---
+
 ## Run: 2026-05-14 22:11
 Commit: 6c48d87
 Build: Release
