@@ -128,13 +128,40 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
 - Follow-up: Column auto-resize (Bucket E) or screenshot rename (Bucket A) for variety.
 
+## 2026-05-14 17:00
+
+- Stars: 0 (Δ +0)
+- Action: Created quicksheet-todo extension — task management with priorities (!low/normal/high/critical), due dates (@YYYY-MM-DD), completion tracking, persistent CSV storage, progress stats with visual bar.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-todo. README + docs/extensions.md updated on main (commit 703c0dd).
+- Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
+- Follow-up: Column auto-resize (Bucket E) or quicksheet-cal (Bucket F) for variety next.
+
+## 2026-05-14 18:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket A — renamed 4 generic screenshot files (image.png, image-1.png, image-2.png, image-4.png) to SEO-friendly descriptive names (desktop-wallpaper-commands, hyperlink-dashboard, data-tracking-autosum, desktop-files-grid). Updated all 5 README image references.
+- Bucket: A
+- Outcome: Shipped commit c8a9ca0 on main. No code changes — safe rename + README update.
+- Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
+- Follow-up: Column auto-resize keybinding (Bucket E) or quicksheet-cal (Bucket F) for variety.
+
+## 2026-05-14 19:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket E — added Ctrl+G go-to-cell navigation. Prompts for cell reference (e.g. A1, C5), jumps cursor. Reuses existing CellPrefix.ParseCellRef. Error feedback for invalid refs. Help overlay updated.
+- Bucket: E
+- Outcome: Shipped commit e5ac8ca on main. Build green. Pure additive — one file changed (SpreadsheetApp.cs), 65 insertions.
+- Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
+- Follow-up: Update gh-pages site with go-to-cell feature. Cut v0.5.0 release next.
+
 ## Queued
 
 Priority: autonomous actions only (no drafts requiring human posting).
 
-- **Bucket E (features — high variety value):**
-  - Column auto-resize keybinding
-- **Bucket A (polish):**
-  - Rename screenshot files to meaningful names, update README refs
+- **Bucket D (release):**
+  - Cut v0.5.0 bundling go-to-cell, status bar, undo/redo
 - **Bucket F (extensions):**
-  - quicksheet-todo or quicksheet-cal
+  - quicksheet-cal or quicksheet-news
+- **Bucket C (website):**
+  - Update gh-pages with go-to-cell + renamed screenshots

@@ -6,6 +6,17 @@ All notable changes to QuickSheet. Format roughly follows [Keep a Changelog](htt
 
 (empty — bump here before the next tag)
 
+## 0.5.0 — 2026-05-14
+
+### Added
+- **Go-to-cell navigation** — press Ctrl+G, type a cell reference (e.g. `C5`), and jump directly to it. Invalid refs show inline error feedback.
+
+### Extensions (separate repos)
+- `quicksheet-todo` — task management with priorities, due dates, completion tracking, and progress bar.
+
+### Docs
+- Renamed generic screenshot filenames (`image.png`, `image-1.png`, etc.) to meaningful SEO-friendly names for better discoverability.
+
 ## 0.4.0 — 2026-05-14
 
 ### Added
