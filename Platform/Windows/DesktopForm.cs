@@ -509,6 +509,11 @@ internal class DesktopForm : DesktopFormBase
                     displayVal = CellPrefix.ExpandCellReferences(cellVal, _grid);
                 }
 
+                // Render color-prefixed cells (c:red: text, c:green: text, ...): strip prefix from display
+                var colorParsed = CellPrefix.ParseColor(cellVal);
+                if (colorParsed != null)
+                    displayVal = colorParsed.Value.text;
+
                 string display = displayVal.Length >= w ? displayVal[..w] : displayVal.PadRight(w);
                 bool isCursor = r == selRow && c == selCol;
                 bool isMultiSel = _selection.Contains((r, c));
@@ -523,6 +528,18 @@ internal class DesktopForm : DesktopFormBase
 
                 bool isConflict = cellVal.StartsWith("c: ", StringComparison.Ordinal);
                 var extStatus = _extensionManager.GetCellStatus(r, c);
+                Color colorBg = colorParsed?.bg switch
+                {
+                    ConsoleColor.DarkRed => Color.FromArgb(140, 20, 20),
+                    ConsoleColor.DarkGreen => Color.FromArgb(20, 100, 20),
+                    ConsoleColor.DarkBlue => Color.FromArgb(20, 40, 140),
+                    ConsoleColor.DarkYellow => Color.FromArgb(140, 120, 0),
+                    ConsoleColor.DarkCyan => Color.FromArgb(0, 100, 100),
+                    ConsoleColor.DarkMagenta => Color.FromArgb(100, 20, 100),
+                    ConsoleColor.White => Color.FromArgb(180, 180, 180),
+                    ConsoleColor.DarkGray => Color.FromArgb(60, 60, 60),
+                    _ => Color.Empty
+                };
                 Color bg = isCursor && isSearchMatch ? Color.FromArgb(0, 180, 0)
                          : isCursor   ? Color.FromArgb(64, 64, 64)
                          : isMultiSel ? Color.FromArgb(50, 50, 80)
@@ -535,6 +552,7 @@ internal class DesktopForm : DesktopFormBase
                          : isLink     ? Color.FromArgb(40, 0, 60)
                          : isCmd      ? Color.FromArgb(40, 40, 0)
                          : isLoop     ? Color.FromArgb(0, 40, 40)
+                         : colorParsed != null ? colorBg
                          : extStatus == Extensions.ExtensionCellStatus.Error ? Color.FromArgb(50, 10, 10)
                          : extStatus == Extensions.ExtensionCellStatus.Running ? Color.FromArgb(10, 40, 10)
                          : Color.Black;
