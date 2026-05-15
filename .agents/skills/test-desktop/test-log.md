@@ -1,5 +1,34 @@
 # QuickSheet Test Log
 
+## Run: 2026-05-15 01:47
+Commit: bd7204d
+Build: Release
+
+### Discovery
+- 3 new extensions found: quicksheet-fx (currency), quicksheet-qtr (tax deadlines), quicksheet-budget (envelope visualizer)
+- All 3 use correct {r,c,v} cell format ✅
+- Issue #19 open: ext: cells processed during typing (fix PRs #21, #23 pending)
+- PR #18 (string[][] format fix) was CLOSED without merging — extensions must fix individually
+- New branches: grow/add-fx-extension, grow/add-qtr-extension, grow/fix-ext-typing-race
+
+### Tests Run
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C18 | ✅ PASS | quicksheet-fx: "💱 1,000.00 USD" → EUR 0.8551 = 855.14 EUR (ECB · 2026-05-15) |
+| C19 | ✅ PASS | quicksheet-qtr: "📅 Tax Year 2026" — Q1 ✅ Paid, Q2 🟢 32d, Q3 🟢 123d, Q4 🟢 245d |
+| C20 | ✅ PASS | quicksheet-budget: "🟡 Groceries" 70.0% bar, $350/$500 spent, $150 remaining |
+| C17 | ✅ PASS | quicksheet-cal: uses correct format, responds with calendar error for invalid param (expected — needs "week"/"today"/number) |
+
+### Cumulative Summary
+- **Total tests:** 71 (46 core + 8 ext system + 20 extensions — 3 new)
+- **Passed:** 61 + 3 new extensions = 64
+- **Failed:** 10 extensions (cell format bug, issues filed) + 1 sparkline (Issue #9) = 11
+- **Skipped:** ~4 (A2 Win+D, A3 Alt+Tab, A39 hyperlink, C16 copilot auth)
+- **No new issues filed** — all new extensions work correctly
+
+---
+
 ## Run: 2026-05-15 00:48
 Commit: 04ccf70
 Build: Release

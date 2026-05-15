@@ -240,7 +240,7 @@ Also use PowerShell for:
 
 ---
 
-## Test Group C: Individual Extensions (16 extensions)
+## Test Group C: Individual Extensions (19 extensions)
 
 First install each extension via its `ext:` cell. Then test the prefix.
 
@@ -262,6 +262,10 @@ First install each extension via its `ext:` cell. Then test the prefix.
 | C14 | quicksheet-grav-ext | `ext: github:cemheren/quicksheet-grav-ext` | `grav: test@example.com,1,4` | Email + name + location + avatar URL |
 | C15 | quicksheet-1099-ext | `ext: github:cemheren/quicksheet-1099-ext` | `1099: 80000,1,5` | Income + SE tax + quarterly + federal note + disclaimer |
 | C16 | quicksheet-copilot-ext | `ext: github:cemheren/quicksheet-copilot-ext` | `copilot: list 3 colors,2,3` | AI response in grid cells (requires auth) |
+| C17 | quicksheet-cal | `ext: github:cemheren/quicksheet-cal` | `cal: week,1,8` | Upcoming calendar events for next 7 days |
+| C18 | quicksheet-fx | `ext: github:cemheren/quicksheet-fx` | `fx: 1000,USD,EUR,1,3` | Currency conversion: amount + rate + converted value (ECB rates) |
+| C19 | quicksheet-qtr | `ext: github:cemheren/quicksheet-qtr` | `qtr: 2026,1,5` | Tax year + 4 quarterly deadlines with countdown |
+| C20 | quicksheet-budget | `ext: github:cemheren/quicksheet-budget` | `budget: Groceries,500,350,1,3` | Category + progress bar + spent/budget + remaining |
 
 ---
 
