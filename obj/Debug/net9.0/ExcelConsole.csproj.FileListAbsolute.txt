@@ -1,0 +1,17 @@
+/home/akif/Projects/QuickSheet/bin/Debug/net9.0/ExcelConsole
+/home/akif/Projects/QuickSheet/bin/Debug/net9.0/ExcelConsole.deps.json
+/home/akif/Projects/QuickSheet/bin/Debug/net9.0/ExcelConsole.runtimeconfig.json
+/home/akif/Projects/QuickSheet/bin/Debug/net9.0/ExcelConsole.dll
+/home/akif/Projects/QuickSheet/bin/Debug/net9.0/ExcelConsole.pdb
+/home/akif/Projects/QuickSheet/obj/Debug/net9.0/ExcelConsole.Platform.Windows.DesktopFormBase.resources
+/home/akif/Projects/QuickSheet/obj/Debug/net9.0/ExcelConsole.csproj.GenerateResource.cache
+/home/akif/Projects/QuickSheet/obj/Debug/net9.0/ExcelConsole.GeneratedMSBuildEditorConfig.editorconfig
+/home/akif/Projects/QuickSheet/obj/Debug/net9.0/ExcelConsole.AssemblyInfoInputs.cache
+/home/akif/Projects/QuickSheet/obj/Debug/net9.0/ExcelConsole.AssemblyInfo.cs
+/home/akif/Projects/QuickSheet/obj/Debug/net9.0/ExcelConsole.csproj.CoreCompileInputs.cache
+/home/akif/Projects/QuickSheet/obj/Debug/net9.0/ExcelConsole.sourcelink.json
+/home/akif/Projects/QuickSheet/obj/Debug/net9.0/ExcelConsole.dll
+/home/akif/Projects/QuickSheet/obj/Debug/net9.0/refint/ExcelConsole.dll
+/home/akif/Projects/QuickSheet/obj/Debug/net9.0/ExcelConsole.pdb
+/home/akif/Projects/QuickSheet/obj/Debug/net9.0/ExcelConsole.genruntimeconfig.cache
+/home/akif/Projects/QuickSheet/obj/Debug/net9.0/ref/ExcelConsole.dll
