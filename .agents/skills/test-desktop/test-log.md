@@ -1,13 +1,40 @@
 # QuickSheet Test Log
 
-## Run: 2026-05-15 05:45
-Commit: c3d8541 (v0.6.0)
+## Run: 2026-05-15 06:50
+Commit: c5ec47f (main)
 Build: Release
 
 ### Discovery
-- **v0.6.0 released** with merged PRs: #27 (Issue #26 fix), #28 (Ctrl+B sorting), #30 (hntop), #32 (apistatus docs)
-- New extension: `quicksheet-ghpr` (GitHub PR dashboard)
-- price-ext PR #5 merged: CoinCap fallback for 403 fix
+- PR #36 merged: `quicksheet-portck` (TCP port checker extension)
+- Branches: `grow/fix-issue-35-ctrl-b-desktop`, `grow/fix-sort-desktop-mode` (PRs #37, #38 OPEN — Ctrl+B desktop fix)
+- Branch: `grow/add-docker-extension` — new docker extension
+- 2 new extensions: `quicksheet-portck`, `quicksheet-docker` (now 25 total)
+- `quicksheet-portck` manifest uses `"entrypoint"` (same bug as hntop)
+- `quicksheet-docker` manifest uses correct `"entry"` ✅
+
+### Tests Run
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C24 | ❌ FAIL | quicksheet-portck: manifest uses "entrypoint" → install fails. Filed portck#1 |
+| C25 | ❌ FAIL | quicksheet-docker: (a) Windows not supported (Unix socket only), (b) "arguments" vs "params" mismatch, (c) errors not shown. Filed docker#1 |
+| C23 | ❌ FAIL | quicksheet-ghpr: extension responds but `reviewDecision` is invalid gh search field → all searches fail → always shows "No PRs". Also "arguments" vs "params" mismatch. Filed ghpr#1 |
+| C21 | ❌ FAIL | quicksheet-hntop: manifest still uses "entrypoint". Existing hntop#1 |
+
+### Issues Filed
+- `quicksheet-portck#1`: Manifest uses "entrypoint" instead of "entry"
+- `quicksheet-docker#1`: Doesn't work on Windows (Unix socket, params mismatch, silent errors)
+- `quicksheet-ghpr#1`: All searches fail (invalid reviewDecision field) + params mismatch
+
+### Cross-cutting bug found: "arguments" vs "params" field name mismatch
+Multiple extensions (ghpr, docker) read `root.TryGetProperty("arguments", ...)` but QuickSheet's `ActivateMessage` sends the field as `"params"` (string[]). This means extensions never receive user arguments.
+
+### Cumulative Summary
+- **Total tests:** 79 (46 core + 8 ext system + 25 extensions)
+- **Passed:** 71
+- **Failed:** C21 (hntop manifest), C23 (ghpr searchfield+params), C24 (portck manifest), C25 (docker Windows+params), sparkline Issue #9 = 5
+- **Blocked:** C16 (copilot auth) = 1
+- **Skipped:** A2, A3, A5, A6, A20, A21, A39, A43, A52, A53 = 10
 - define-ext crash fix branch force-updated
 - hntop manifest still uses "entrypoint" (NOT fixed despite grow log claiming so)
 - Ctrl+B sorting wired in console mode only — NOT in DesktopForm (feature parity gap)
