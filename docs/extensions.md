@@ -34,6 +34,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `gitst`   | Git Status        | Branch, changes, stashes, last commit for your repos   | [`quicksheet-gitst`](https://github.com/cemheren/quicksheet-gitst) |
 | `cntdn`   | Countdown Timer   | Days/hours to deadlines, launches, holidays with progress bars | [`quicksheet-cntdn`](https://github.com/cemheren/quicksheet-cntdn) |
 | `worldtm` | World Time        | Multi-timezone clock with business-hours indicators, 40+ aliases | [`quicksheet-worldtm`](https://github.com/cemheren/quicksheet-worldtm) |
+| `margin`  | Margin Calculator | Break-even point & contribution margin from price/cost/fixed     | [`quicksheet-margin-ext`](https://github.com/cemheren/quicksheet-margin-ext) |
 
 ## Install
 
