@@ -407,8 +407,21 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: v0.8.0 release (10:27).
 - Follow-up: Cut v0.9.0 release with desktop find-and-replace fix. Update gh-pages with cntdn card.
 
+## 2026-05-15 10:57
+
+- Stars: 0 (Δ +0)
+- Action: Fixed quicksheet-gitst #4 — reads 'arguments' but QuickSheet sends 'params'. Added params array parsing with fallback.
+- Bucket: E (issue fix on extension repo)
+- Outcome: PR #7 on cemheren/quicksheet-gitst (commit 3f34013). Build green.
+- Competitor last did: Still stalled since May 14.
+- Follow-up: Bucket B topic refresh, or Bucket F Tier 2 extension.
+
 ## Queued
 
 - Bucket D: Cut v0.9.0 release (desktop Ctrl+R fix, extension bug fixes)
 - Bucket C: Add cntdn extension card to gh-pages
 - Bucket F (Tier 2): quicksheet-k8s or quicksheet-worldtm from research doc
+<<<<<<< HEAD
+=======
+- Bucket C: Add release announcement or blog post to gh-pages
+>>>>>>> 6b92d42 (log: gitst params fix run)
