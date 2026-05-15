@@ -155,13 +155,22 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
 - Follow-up: Update gh-pages site with go-to-cell feature. Cut v0.5.0 release next.
 
+## 2026-05-14 20:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket D — cut v0.5.0 release bundling go-to-cell navigation, quicksheet-todo extension, and SEO screenshot renames.
+- Bucket: D
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.5.0 (tag 9687dd6). Appears in follower feeds.
+- Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
+- Follow-up: Update gh-pages site with go-to-cell feature + v0.5.0 structured data. quicksheet-cal extension for variety.
+
 ## Queued
 
 Priority: autonomous actions only (no drafts requiring human posting).
 
-- **Bucket D (release):**
-  - Cut v0.5.0 bundling go-to-cell, status bar, undo/redo
+- **Bucket C (website):**
+  - Update gh-pages with go-to-cell feature, renamed screenshots, bump structured data to v0.5.0
 - **Bucket F (extensions):**
   - quicksheet-cal or quicksheet-news
-- **Bucket C (website):**
-  - Update gh-pages with go-to-cell + renamed screenshots
+- **Bucket E (feature):**
+  - Column auto-resize keybinding
