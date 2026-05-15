@@ -382,3 +382,12 @@ Priority: Build from devops research — "replace a browser tab" extensions.
 - Outcome: PR cemheren/quicksheet-hntop#2 opened (commit b7c73d0 on fix/manifest-entry-key). Closes #1.
 - Competitor last did: Drafted Reddit posts for r/commandline and r/dotnet (Bucket C). Most recent real action: PR #33 fix define-ext crash.
 - Follow-up: Build quicksheet-ghpr (PR dashboard) or quicksheet-portck next. Merge #33 when ready.
+
+## 2026-05-15 05:27
+
+- Stars: 0 (Δ +0)
+- Action: Built and shipped quicksheet-ghpr — GitHub PR review dashboard. Shows PRs needing attention (review-requested, authored, specific repo) with status icons and age. Uses gh CLI, 2-min cache. Tested live.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-ghpr. PR #34 adds to README/docs.
+- Competitor last did: Drafted Reddit posts (r/commandline, r/dotnet). No new code.
+- Follow-up: Build quicksheet-docker (container health) or quicksheet-portck (port checker) next.
