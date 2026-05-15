@@ -32,6 +32,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `rate`    | Freelance Rate    | Min viable hourly rate for target income (taxes+benefits) | [`quicksheet-rate`](https://github.com/cemheren/quicksheet-rate) |
 | `gitst`   | Git Status        | Branch, changes, stashes, last commit for your repos   | [`quicksheet-gitst`](https://github.com/cemheren/quicksheet-gitst) |
 | `cntdn`   | Countdown Timer   | Days/hours to deadlines, launches, holidays with progress bars | [`quicksheet-cntdn`](https://github.com/cemheren/quicksheet-cntdn) |
+| `mileage` | IRS mileage       | Standard-mileage deduction (business/medical/charity, 2021-2025) | [`quicksheet-mileage-ext`](https://github.com/cemheren/quicksheet-mileage-ext) |
 
 ## Install
 
@@ -47,21 +48,28 @@ QuickSheet clones the repo, reads its `quicksheet-extension.json` manifest, and 
 
 The protocol is intentionally tiny:
 
-1. QuickSheet sends `{"type":"init"}` → extension replies with `{"type":"register","prefix":"xyz",...}`.
-2. When a cell matching the prefix is activated, QuickSheet sends `{"type":"activate","id":"...","params":[...],"gridRows":N,"gridCols":M}` → extension replies with `{"type":"write","id":"...","cells":[[...]]}`.
+1. On startup, the extension prints a register message: `{"type":"register","prefix":"xyz","name":"...","version":"1.0.0"}`. **`version` must be a string** — `1` (int) silently fails deserialization on some hosts.
+2. When a cell matching the prefix is activated, QuickSheet sends `{"type":"activate","id":"...","params":["arg1","arg2"],"gridCols":N,"gridRows":M}`. **`params` is a JSON array of strings**, not a single `arguments` string — extensions reading `arguments` will see empty input.
+3. Extension replies with `{"type":"write","id":"...","cells":[...]}`. Two `cells` shapes are accepted:
+   - **Object records** (preferred): `[{"r":0,"c":0,"v":"hello"}, {"r":0,"c":1,"v":"world"}]`. Explicit positions, easy to render sparse grids.
+   - **Row-major grid**: `[["a","b"], ["c","d"]]`. Each inner array is a row; positions are inferred relative to the activation cell.
 
-Manifest format:
+Status / errors are optional: `{"type":"status","id":"...","message":"..."}` or `{"type":"error","id":"...","message":"..."}`.
+
+Manifest format (`quicksheet-extension.json` at the repo root):
 
 ```json
 {
   "name": "myext",
   "version": "1.0.0",
-  "prefix": "mx",
-  "description": "what it does",
-  "entry": "dotnet run --project MyExt.csproj",
-  "minProtocolVersion": 1
+  "entry": "dotnet run --project MyExt.csproj"
 }
 ```
+
+**Key gotchas:**
+- The file is `quicksheet-extension.json`. The launch command is `entry`, not `entrypoint`.
+- The cell `prefix` (e.g. `mx`) is declared in the **register message** at runtime, not in the manifest.
+- `entry` is shelled with `bash -c` (or `cmd /c` on Windows), so pipes and redirects work but the program must read stdin and write stdout in line-delimited JSON.
 
 Pick any language with stdin/stdout. The reference extensions are .NET 9 with zero NuGet dependencies, but Python stdlib or Go would work just as well.
 
