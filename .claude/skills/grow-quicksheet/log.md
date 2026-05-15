@@ -2,6 +2,14 @@
 
 Persistent memory across runs. Append-only (except the Queued section at bottom).
 
+## 2026-05-15 (local run, depr cross-link)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket F→A pivot. Started building quicksheet-depr-ext; discovered parallel agent already shipped it (https://github.com/cemheren/quicksheet-depr-ext). Discarded my draft. Cross-linked depr-ext + back-filled missing mileage in extensions.md + back-filled missing margin/depr in tour.md.
+- Bucket: A
+- Outcome: PR https://github.com/cemheren/QuickSheet/pull/62. Build clean. Issue #15 effectively closeable (mileage/margin/depr all shipped) — next run should close it.
+- Follow-up: Close #15. Then bucket variety (E feature or C/D).
+
 ## 2026-05-15 (local run, mileage manifest fix)
 
 - Stars: 0 (Δ 0)
