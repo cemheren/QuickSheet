@@ -77,8 +77,22 @@ Currently public:
 - [`quicksheet-sysmon`](https://github.com/cemheren/quicksheet-sysmon) — live CPU/RAM/disk/uptime monitor.
 - [`quicksheet-todo`](https://github.com/cemheren/quicksheet-todo) — task management with priorities + due dates.
 - [`quicksheet-cal`](https://github.com/cemheren/quicksheet-cal) — upcoming calendar events from .ics files.
+- [`quicksheet-budget`](https://github.com/cemheren/quicksheet-budget) — budget envelope visualizer with progress bars.
+- [`quicksheet-qtr`](https://github.com/cemheren/quicksheet-qtr) — IRS quarterly tax deadline countdown.
+- [`quicksheet-fx`](https://github.com/cemheren/quicksheet-fx) — live currency conversion (200+ currencies, ECB rates).
 
 [Write your own](../README.md#build-your-own) in whatever language you want — the protocol is two message types.
+
+## 5½. Headless mode & export
+
+QuickSheet isn't just interactive — you can pipe data through it:
+
+```bash
+# Convert CSV to Markdown table (no UI launched)
+dotnet run --project ExcelConsole.csproj -- data.csv --export-md output.md
+```
+
+This makes QuickSheet useful in scripts and CI pipelines, not just at the desktop.
 
 ## 6. The hard rules
 
@@ -92,6 +106,7 @@ Currently public:
 - A wallpaper-pinned launcher for the apps you open every day.
 - An ambient SRE display: TLS expiries, ping latencies, alert counts.
 - A scratchpad with computed columns that survives reboots as plain CSV.
+- A freelancer finance dashboard: budget envelopes, quarterly tax deadlines, currency conversion, and SE tax estimates — all in cells on your desktop.
 
 ## What this isn't
 
