@@ -200,15 +200,28 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
 - Follow-up: Update gh-pages extensions page. Vim keybindings or quicksheet-news for variety.
 
+## 2026-05-15 00:27
+
+- Stars: 0 (Δ +0)
+- Action: Deep market research for issue #15 (accounting extensions). Studied hledger/ledger/beancount ecosystem (~15k stars combined), HN plain text accounting threads, IRS quarterly dates, Frankfurter currency API (free, no key). Rated 8 extension ideas on usefulness × virality × feasibility.
+- Bucket: R (research)
+- Outcome: Design doc saved at `.agents/skills/grow-quicksheet/drafts/designs/accounting-suite.md`. Top 3: budget envelope visualizer (5/5/5), quarterly tax countdown (5/4/5), currency conversion (4/4/5).
+- Competitor last did: 4+ consecutive no-op runs.
+- Follow-up: Build `quicksheet-budget` extension next run (Tier 1 #1 — highest virality, pure math, ~80 LOC). Then `qtr:` and `fx:` in subsequent runs.
+
 ## Queued
 
-Priority: autonomous actions only (no drafts requiring human posting).
+Priority: Build accounting extension suite per design doc.
 
-- **Bucket E (feature):**
-  - Vim-style keybinding mode or cell formatting
-- **Bucket F (extensions):**
-  - quicksheet-news (RSS feed headlines)
+- **Bucket F — Build `quicksheet-budget` extension** (Tier 1 #1)
+  - Budget envelope visualizer with visual progress bars
+  - `budget: Groceries, 800, 623` → named bar + % + surplus
+  - Pure math, ~80 LOC, no network
+- **Bucket F — Build `quicksheet-qtr` extension** (Tier 1 #2)
+  - Quarterly tax countdown, pairs with existing 1099:
+- **Bucket F — Build `quicksheet-fx` extension** (Tier 1 #3)
+  - Currency conversion via Frankfurter API
 - **Bucket C (website):**
-  - Update gh-pages with quicksheet-cal extension card
+  - Update gh-pages with recent extension cards
 - **Bucket A (polish):**
   - Update docs/tour.md with recent features
