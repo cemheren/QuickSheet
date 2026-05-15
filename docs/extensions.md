@@ -32,6 +32,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `rate`    | Freelance Rate    | Min viable hourly rate for target income (taxes+benefits) | [`quicksheet-rate`](https://github.com/cemheren/quicksheet-rate) |
 | `gitst`   | Git Status        | Branch, changes, stashes, last commit for your repos   | [`quicksheet-gitst`](https://github.com/cemheren/quicksheet-gitst) |
 | `cntdn`   | Countdown Timer   | Days/hours to deadlines, launches, holidays with progress bars | [`quicksheet-cntdn`](https://github.com/cemheren/quicksheet-cntdn) |
+| `worldtm` | World Time        | Multi-timezone clock with business-hours indicators, 40+ aliases | [`quicksheet-worldtm`](https://github.com/cemheren/quicksheet-worldtm) |
 
 ## Install
 

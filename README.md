@@ -146,6 +146,7 @@ tls: github.com, 1, 4
 | `cntdn:` | Countdown timers | `ext: github:cemheren/quicksheet-cntdn` |
 | `1099:` | US self-employment tax | `ext: github:cemheren/quicksheet-1099-ext` |
 | `budget:` | Budget envelopes | `ext: github:cemheren/quicksheet-budget` |
+| `worldtm:` | World clock / timezones | `ext: github:cemheren/quicksheet-worldtm` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
