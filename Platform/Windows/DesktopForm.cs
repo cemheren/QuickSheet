@@ -971,6 +971,9 @@ internal class DesktopForm : DesktopFormBase
                         _grid.SortByColumn(sortCol);
                         break;
                     }
+                case Keys.Z: _grid.Undo(); break;
+                case Keys.Y: _grid.Redo(); break;
+                case Keys.T: Theme.CycleNext(); Invalidate(); break;
                 default: handled2 = false; break;
             }
         }

@@ -1208,6 +1208,15 @@ internal class DesktopWindow : IDisposable
                 case XK_b:
                     _grid.SortByColumn(_selectedCol);
                     return;
+                case XK_z:
+                    _grid.Undo();
+                    return;
+                case XK_y:
+                    _grid.Redo();
+                    return;
+                case XK_t:
+                    Theme.CycleNext();
+                    return;
             }
         }
 
