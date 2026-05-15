@@ -1,5 +1,60 @@
 # QuickSheet Test Log
 
+## Run: 2026-05-15 08:30
+Commit: c5ec47f (main)
+Build: Release
+
+### Discovery
+- v0.7.0 tagged. 2 NEW extensions: `quicksheet-gitst` (git status), `quicksheet-rate` (404/no manifest yet)
+- hntop and portck manifests still NOT fixed (still use `"entrypoint"`)
+
+### Major Bug Found: RegisterMessage.Version type mismatch (Issue #43)
+
+**Root cause of gitst, ghpr, and docker producing no output:**
+- `RegisterMessage.Version` in `ExtensionProtocol.cs:72` is typed as `string`
+- `InitMessage.Version` in `ExtensionProtocol.cs:45` is typed as `int`
+- Newer extensions (gitst, ghpr, docker) send `"version":1` (integer) mirroring the init format
+- `System.Text.Json` strict typing rejects int→string coercion → `JsonException` thrown
+- Catch block at `ExtensionManager.cs:281` silently swallows the error
+- Register message effectively IGNORED → prefix never in `_prefixMap` → activate never sent
+- All 22 working extensions send `"version":"1.0.0"` (string) → work fine
+
+**Debug methodology:**
+1. Launched QuickSheet with stderr captured, only register message appeared on stdout
+2. Added temporary debug logging to ExtensionManager
+3. Confirmed: register message received but `Deserialize<RegisterMessage>()` returned null
+4. `KnownPrefixes` remained empty across all ScanGrid calls
+5. Verified weather sends `version:"1.0.0"` (string) and works
+
+### Tests Run
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C26 | ❌ FAIL | quicksheet-gitst: register sends `version:1` (int) → deserialization fails → prefix never registered → no output. Filed QuickSheet#43 + gitst#1 |
+| C23 | ❌ FAIL | Updated: root cause is version int/string mismatch (same as C26). Commented on ghpr#1 |
+| C25 | ❌ FAIL | Updated: root cause is version int/string mismatch (same as C26). Commented on docker#1 |
+
+### Issues Filed
+- QuickSheet#43: RegisterMessage.Version typed as string rejects int version from extensions (gitst, ghpr, docker)
+- quicksheet-gitst#1: Register message sends version as int, should be string
+
+### Cross-cutting: version int vs string mismatch
+| Extension | version field | Status |
+|-----------|--------------|--------|
+| quicksheet-gitst | `version = 1` (int) | ❌ Broken |
+| quicksheet-ghpr | `version = 1` (int) | ❌ Broken |
+| quicksheet-docker | `version = 1` (int) | ❌ Broken |
+| All 22 others | `version = "1.0.0"` (string) | ✅ Working |
+
+### Cumulative Summary
+- **Total tests:** 80 (46 core + 8 ext system + 26 extensions)
+- **Passed:** 71
+- **Failed:** C21 (hntop manifest), C23 (ghpr: version+params+search), C24 (portck manifest), C25 (docker: version+Windows+params), C26 (gitst: version mismatch), sparkline Issue #9 = 6
+- **Blocked:** C16 (copilot auth) = 1
+- **Skipped:** A2, A3, A5, A6, A20, A21, A39, A43, A52, A53 = 10
+
+---
+
 ## Run: 2026-05-15 06:50
 Commit: c5ec47f (main)
 Build: Release

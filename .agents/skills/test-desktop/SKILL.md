@@ -6,7 +6,7 @@ description: >
   Files GitHub issues with screenshots and debug logs for any bugs found.
   Maintains a persistent test-log.md for incremental testing across sessions.
   Use when user says "test desktop", "run tests", "QA", or invokes /test-desktop.
-  Currently tracking 25 extensions (C1-C25) plus 46 core tests and 8 extension system tests.
+  Currently tracking 26 extensions (C1-C26) plus 46 core tests and 8 extension system tests.
 ---
 
 # QuickSheet Desktop Mode Testing Skill
@@ -272,6 +272,7 @@ First install each extension via its `ext:` cell. Then test the prefix.
 | C23 | quicksheet-ghpr | `ext: github:cemheren/quicksheet-ghpr` | `ghpr: cemheren/QuickSheet,1,5` | GitHub PRs needing attention (requires `gh` CLI auth) |
 | C24 | quicksheet-portck | `ext: github:cemheren/quicksheet-portck` | `portck: 80,443,8080,1,5` | TCP port status: open/closed for each port |
 | C25 | quicksheet-docker | `ext: github:cemheren/quicksheet-docker` | `docker: all,1,5` | Docker container status dashboard (requires Docker Desktop) |
+| C26 | quicksheet-gitst | `ext: github:cemheren/quicksheet-gitst` | `gitst: .,1,5` | Git repo status: branch, clean/dirty, stash count, last commit |
 
 ---
 
