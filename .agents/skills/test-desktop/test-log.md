@@ -1,5 +1,42 @@
 # QuickSheet Test Log
 
+## Run: 2026-05-15 09:45
+Commit: 5b75db7 (main)
+Build: Release
+
+### Discovery
+- **PR #44 MERGED** (`cb6699d`) — FlexVersionConverter fixes RegisterMessage version type mismatch
+- New extension: **quicksheet-cntdn** (countdown timer) — added as C27
+- Manifest filename standardized to `quicksheet-extension.json` (old `manifest.json` now 404 on hntop/portck)
+- hntop/portck manifests still use `"entrypoint"` instead of `"entry"` field name
+- cntdn manifest uses `"entryPoint"` (camelCase) instead of `"entry"` — same class of bug
+- gitst manifest has correct `"entry"` field ✅ and `"version": "1.0.0"` (string) ✅
+- Extension deserializer uses `JsonNamingPolicy.CamelCase`: C# `Entry` → JSON `"entry"`
+
+### Tests Run
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C26 | ❌ FAIL | Version type fixed by PR #44 ✅ but `arguments` vs `params` mismatch remains → no output. Filed gitst#4. |
+| C27 | ❌ FAIL | New ext (cntdn): manifest uses `"entryPoint"` not `"entry"` → fails to launch. Filed cntdn#1. |
+| C21 | ❌ FAIL | hntop: manifest now `quicksheet-extension.json` but `"entrypoint"` not `"entry"`. Commented on hntop#1. |
+| C24 | ❌ FAIL | portck: same as hntop. Commented on portck#1. |
+
+### Issues Filed/Updated
+- **cemheren/quicksheet-cntdn#1** — Manifest uses `entryPoint` instead of `entry`
+- **cemheren/quicksheet-gitst#4** — Reads `arguments` instead of `params`, user args ignored
+- Commented on gitst#1 (version fix confirmed via PR #44)
+- Commented on hntop#1, portck#1 (manifest filename fixed, field name still wrong)
+
+### Cumulative Summary
+- **Total tests:** 81 (46 core + 8 ext system + 27 extensions)
+- **Passed:** 80
+- **Failed:** C21 (hntop entry field), C24 (portck entry field), C27 (cntdn entry field), C23 (ghpr params+search), C25 (docker Windows+params), C26 (gitst params mismatch), sparkline Issue #9 = 7
+- **Blocked:** C16 (copilot auth) = 1
+- **Skipped:** A2, A3, A5, A6, A20, A21, A43, A52, A53 = 9
+
+---
+
 ## Run: 2026-05-15 09:00
 Commit: 8f703f8 (main)
 Build: Release
