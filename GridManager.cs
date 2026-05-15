@@ -222,6 +222,100 @@ public class GridManager
     public void ShiftSelectedRowDown() => ShiftRowsDown(_selectedRow);
     public void ShiftSelectedRowUp() => ShiftRowsUp(_selectedRow);
 
+    // ── Sort ──────────────────────────────────────────────────────────
+
+    private int _lastSortCol = -1;
+    private bool _lastSortAscending = true;
+
+    /// <summary>
+    /// Sort all rows by the given column. Toggles ascending/descending on
+    /// repeated calls for the same column. Numeric values sort numerically;
+    /// non-numeric values sort lexicographically. Empty cells sort last.
+    /// </summary>
+    public void SortByColumn(int col)
+    {
+        if (col < 0 || col >= ColumnCount) return;
+
+        // Toggle direction when sorting same column again
+        bool ascending;
+        if (col == _lastSortCol)
+        {
+            ascending = !_lastSortAscending;
+        }
+        else
+        {
+            ascending = true;
+        }
+        _lastSortCol = col;
+        _lastSortAscending = ascending;
+
+        // Find last non-empty row to avoid sorting trailing blank rows
+        int lastDataRow = -1;
+        for (int r = RowCount - 1; r >= 0; r--)
+        {
+            for (int c = 0; c < ColumnCount; c++)
+            {
+                if (!string.IsNullOrEmpty(_data[r, c]))
+                {
+                    lastDataRow = r;
+                    break;
+                }
+            }
+            if (lastDataRow >= 0) break;
+        }
+        if (lastDataRow <= 0) return; // Nothing to sort (0 or 1 data rows)
+
+        int sortCount = lastDataRow + 1;
+
+        // Build row indices for sorting
+        var indices = Enumerable.Range(0, sortCount).ToArray();
+
+        Array.Sort(indices, (a, b) =>
+        {
+            string va = _data[a, col];
+            string vb = _data[b, col];
+            bool emptyA = string.IsNullOrEmpty(va);
+            bool emptyB = string.IsNullOrEmpty(vb);
+            if (emptyA && emptyB) return 0;
+            if (emptyA) return 1;  // empties last regardless of direction
+            if (emptyB) return -1;
+
+            bool numA = double.TryParse(va, out double da);
+            bool numB = double.TryParse(vb, out double db);
+
+            int cmp;
+            if (numA && numB)
+                cmp = da.CompareTo(db);
+            else
+                cmp = string.Compare(va, vb, StringComparison.OrdinalIgnoreCase);
+
+            return ascending ? cmp : -cmp;
+        });
+
+        // Record undo for all cells that change
+        _undo.BeginGroup();
+
+        // Build sorted copy of data rows
+        var sortedData = new string[sortCount, ColumnCount];
+        for (int r = 0; r < sortCount; r++)
+            for (int c = 0; c < ColumnCount; c++)
+                sortedData[r, c] = _data[indices[r], c];
+
+        // Apply and record changes
+        for (int r = 0; r < sortCount; r++)
+            for (int c = 0; c < ColumnCount; c++)
+            {
+                if (_data[r, c] != sortedData[r, c])
+                {
+                    _undo.RecordChange(r, c, _data[r, c], sortedData[r, c]);
+                    _data[r, c] = sortedData[r, c];
+                }
+            }
+
+        _undo.EndGroup();
+        IsDirty = true;
+    }
+
     public double? GetColumnSum(int col)
     {
         if (col < 0 || col >= ColumnCount)
