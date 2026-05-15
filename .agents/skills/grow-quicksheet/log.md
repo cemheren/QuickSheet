@@ -380,10 +380,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Still stalled since May 14 (last real action was markdown export + issues).
 - Follow-up: Update README shortcuts table with Ctrl+R. Cut v0.8.0 release after PR merges.
 
+## 2026-05-15 09:27
+
+- Stars: 0 (Δ +0)
+- Action: Added /shortcuts/ page to gh-pages site — SEO-targeted keyboard shortcuts reference. Updated sitemap.xml and nav on all 4 pages (home, features, extensions, shortcuts).
+- Bucket: C (website & SEO)
+- Outcome: Commit 423bcf4 pushed to gh-pages. Live at https://cemheren.github.io/QuickSheet/shortcuts/
+- Competitor last did: Still stalled since May 14.
+- Follow-up: Bucket D v0.8.0 release, or Bucket B topic refresh, or Bucket F Tier 2 extension.
+
 ## Queued
 
-- Bucket A: Update README keyboard shortcuts with Ctrl+R
-- Bucket C: Update gh-pages with gitst + rate + price extension cards
-- Bucket D: v0.8.0 release when more PRs merge
-- Bucket F (Tier 2): Consider quicksheet-k8s, quicksheet-worldtm from research doc
+- Bucket D: v0.8.0 release when PRs merge (find-replace, register version fix, shortcuts doc)
 - Bucket B: Refresh topics with new extension keywords
+- Bucket F (Tier 2): Consider quicksheet-k8s, quicksheet-worldtm from research doc
