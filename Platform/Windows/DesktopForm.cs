@@ -517,12 +517,17 @@ internal class DesktopForm : DesktopFormBase
                 bool isLink = IsHyperlink(cellVal);
                 bool isCmd = IsCommand(cellVal);
                 bool isLoop = CellPrefix.IsLoop(cellVal);
+                var colorParsed = CellPrefix.ParseColor(cellVal);
+                if (colorParsed != null)
+                    displayVal = colorParsed.Value.text;
+
                 bool isConflict = cellVal.StartsWith("c: ", StringComparison.Ordinal);
                 var extStatus = _extensionManager.GetCellStatus(r, c);
                 Color bg = isCursor && isSearchMatch ? Color.FromArgb(0, 180, 0)
                          : isCursor   ? Color.FromArgb(64, 64, 64)
                          : isMultiSel ? Color.FromArgb(50, 50, 80)
                          : isSearchMatch ? Color.FromArgb(80, 80, 0)
+                         : colorParsed != null ? ConsoleColorToBg(colorParsed.Value.bg)
                          : isConflict ? Color.FromArgb(100, 0, 0)
                          : isInlineCmd ? Color.FromArgb(20, 50, 20)
                          : isInline   ? Color.FromArgb(0, 40, 50)
@@ -533,7 +538,8 @@ internal class DesktopForm : DesktopFormBase
                          : extStatus == Extensions.ExtensionCellStatus.Error ? Color.FromArgb(50, 10, 10)
                          : extStatus == Extensions.ExtensionCellStatus.Running ? Color.FromArgb(10, 40, 10)
                          : Color.Black;
-                Color fg = isConflict ? Color.FromArgb(255, 180, 180)
+                Color fg = colorParsed != null ? Color.White
+                         : isConflict ? Color.FromArgb(255, 180, 180)
                          : isInlineCmd ? Color.FromArgb(100, 255, 150)
                          : isInline   ? Color.FromArgb(100, 220, 240)
                          : isFile ? Color.FromArgb(100, 200, 255)
@@ -697,6 +703,19 @@ internal class DesktopForm : DesktopFormBase
         g.FillRectangle(Brushes.White, 0, statusY, formWidth, ch);
         DrawText(g, status, 0, statusY, Color.Black, Color.White);
     }
+
+    private static Color ConsoleColorToBg(ConsoleColor cc) => cc switch
+    {
+        ConsoleColor.DarkRed => Color.FromArgb(140, 20, 20),
+        ConsoleColor.DarkGreen => Color.FromArgb(20, 100, 20),
+        ConsoleColor.DarkBlue => Color.FromArgb(20, 40, 140),
+        ConsoleColor.DarkYellow => Color.FromArgb(140, 120, 0),
+        ConsoleColor.DarkCyan => Color.FromArgb(0, 100, 100),
+        ConsoleColor.DarkMagenta => Color.FromArgb(100, 20, 100),
+        ConsoleColor.White => Color.FromArgb(180, 180, 180),
+        ConsoleColor.DarkGray => Color.FromArgb(60, 60, 60),
+        _ => Color.FromArgb(15, 15, 15)
+    };
 
     private void DrawText(Graphics g, string text, int x, int y, Color fg, Color bg)
     {
