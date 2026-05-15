@@ -1,5 +1,41 @@
 # QuickSheet Test Log
 
+## Run: 2026-05-15 08:45
+Commit: 063c276 (main)
+Build: Release
+
+### Discovery
+- PR #44 OPEN: fix for RegisterMessage version type mismatch (FlexVersionConverter)
+- Issue #43 CLOSED
+- No new extensions (28 repos unchanged)
+- Extension repos (gitst, ghpr, docker) still use `version: 1` (int) — unfixed
+- hntop and portck manifests still use "entrypoint" — unfixed
+
+### Tests Run
+
+| ID | Result | Notes |
+|----|--------|-------|
+| A41 | ✅ PASS | B3 = "apple" (teal bg) = resolved value of i: A1 |
+| A44 | ✅ PASS | A4 shows resolved {A1::C2} — concatenated cell values from A1-C2 |
+| A45 | ✅ PASS | F1 toggles status bar between "F1: Raw" and "F1: Resolve" |
+| A48 | ✅ PASS | F3 rebuild preserves data, desktop files re-populated |
+| A49 | ✅ PASS | F4 shrinks columns (12 → many narrow columns). Needs click-to-focus first. |
+| A50 | ✅ PASS | F5 expands columns (12 → 3 wide columns). Confirmed via click-to-focus. |
+| A51 | ✅ PASS | Desktop files/folders listed in rightmost column |
+
+### Note: SendKeys focus issue
+SendKeys via SetForegroundWindow alone doesn't reach QuickSheet (WS_EX_TOOLWINDOW). Must click on the grid first via mouse_event to properly acquire keyboard focus.
+
+### Cumulative Summary
+- **Total tests:** 80 (46 core + 8 ext system + 26 extensions)
+- **Passed:** 78 (71 prev + 7 new)
+- **Failed:** C21 (hntop manifest), C23 (ghpr: version+params+search), C24 (portck manifest), C25 (docker: version+Windows+params), C26 (gitst: version mismatch), sparkline Issue #9 = 6
+- **Blocked:** C16 (copilot auth) = 1
+- **Skipped:** A2, A3, A5, A6, A20, A21, A39, A43, A52, A53 = 10
+- **Not yet tested:** (none from defined tests — all 80 have results)
+
+---
+
 ## Run: 2026-05-15 08:30
 Commit: c5ec47f (main)
 Build: Release
