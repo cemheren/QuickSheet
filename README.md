@@ -256,6 +256,17 @@ fx: 1000, USD, EUR, GBP
 
 Shows converted amounts, exchange rates, and the ECB rate date. Part of the freelancer finance suite with `1099:`, `budget:`, and `qtr:`.
 
+### Example: Service status monitor
+
+The [quicksheet-apistatus](https://github.com/cemheren/quicksheet-apistatus) extension monitors 18 services (GitHub, Cloudflare, npm, Discord, etc.) using public Statuspage.io APIs — no key required:
+
+```
+ext: github:cemheren/quicksheet-apistatus
+apistatus: github, cloudflare, npm, vercel
+```
+
+Shows color-coded service status (🟢🟡🟠🔴) on your wallpaper. Great for "is it me or them?" during deploy failures.
+
 ### Example: Gravatar lookup
 
 The [quicksheet-grav-ext](https://github.com/cemheren/quicksheet-grav-ext) extension looks up Gravatar profiles by email — display name, location, and avatar URL:
