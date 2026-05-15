@@ -80,6 +80,7 @@ Currently public:
 - [`quicksheet-budget`](https://github.com/cemheren/quicksheet-budget) — budget envelope visualizer with progress bars.
 - [`quicksheet-qtr`](https://github.com/cemheren/quicksheet-qtr) — IRS quarterly tax deadline countdown.
 - [`quicksheet-fx`](https://github.com/cemheren/quicksheet-fx) — live currency conversion (200+ currencies, ECB rates).
+- [`quicksheet-rate`](https://github.com/cemheren/quicksheet-rate) — freelance hourly rate calculator (taxes, benefits, billable time).
 
 [Write your own](../README.md#build-your-own) in whatever language you want — the protocol is two message types.
 
@@ -106,7 +107,7 @@ This makes QuickSheet useful in scripts and CI pipelines, not just at the deskto
 - A wallpaper-pinned launcher for the apps you open every day.
 - An ambient SRE display: TLS expiries, ping latencies, alert counts.
 - A scratchpad with computed columns that survives reboots as plain CSV.
-- A freelancer finance dashboard: budget envelopes, quarterly tax deadlines, currency conversion, and SE tax estimates — all in cells on your desktop.
+- A freelancer finance dashboard: budget envelopes, quarterly tax deadlines, currency conversion, hourly rate calculator, and SE tax estimates — all in cells on your desktop.
 
 ## What this isn't
 

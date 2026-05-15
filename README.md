@@ -254,7 +254,18 @@ ext: github:cemheren/quicksheet-fx
 fx: 1000, USD, EUR, GBP
 ```
 
-Shows converted amounts, exchange rates, and the ECB rate date. Part of the freelancer finance suite with `1099:`, `budget:`, and `qtr:`.
+Shows converted amounts, exchange rates, and the ECB rate date. Part of the freelancer finance suite with `1099:`, `budget:`, `qtr:`, and `rate:`.
+
+### Example: Know your freelance rate
+
+The [quicksheet-rate](https://github.com/cemheren/quicksheet-rate) extension calculates your minimum viable hourly rate — accounting for taxes, benefits, non-billable time, and vacation:
+
+```
+ext: github:cemheren/quicksheet-rate
+rate: 120000
+```
+
+Shows minimum hourly rate ($141/hr for $120k target), effective take-home per hour, and monthly gross/net. Accepts optional billable% and tax% params: `rate: 120000, 80, 25`. Pure math, no network — part of the freelancer finance suite.
 
 ### Example: Hacker News on your wallpaper
 

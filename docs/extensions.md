@@ -29,6 +29,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `portck`  | Port Checker      | TCP port/service health — which local services are up | [`quicksheet-portck`](https://github.com/cemheren/quicksheet-portck) |
 | `ghpr`    | GitHub PRs        | PR review dashboard — see review requests on wallpaper | [`quicksheet-ghpr`](https://github.com/cemheren/quicksheet-ghpr) |
 | `docker`  | Docker Health     | Container status dashboard via Docker Engine API       | [`quicksheet-docker`](https://github.com/cemheren/quicksheet-docker) |
+| `rate`    | Freelance Rate    | Min viable hourly rate for target income (taxes+benefits) | [`quicksheet-rate`](https://github.com/cemheren/quicksheet-rate) |
 
 ## Install
 
