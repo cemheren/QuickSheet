@@ -25,6 +25,13 @@ internal class DesktopWindow : IDisposable
     private List<(int row, int col)> _searchMatches = new();
     private int _searchMatchIndex = -1;
 
+    // Find & Replace state machine
+    private enum ReplacePhase { None, FindInput, ReplaceInput, Confirm }
+    private ReplacePhase _replacePhase = ReplacePhase.None;
+    private string _replaceFindInput = "";
+    private string _replaceWithInput = "";
+    private int _replaceMatchCount;
+
     private readonly LinuxEditingMode _editMode;
     private bool _showResolved;
     private readonly InlineProcessManager _inlineProcesses = new();
@@ -795,7 +802,17 @@ internal class DesktopWindow : IDisposable
 
         // Status bar
         string status;
-        if (_editMode.IsActive())
+        if (_replacePhase != ReplacePhase.None)
+        {
+            status = _replacePhase switch
+            {
+                ReplacePhase.FindInput => $" Find: {_replaceFindInput}\u2502  (Enter=Next  Esc=Cancel)",
+                ReplacePhase.ReplaceInput => $" Replace ({_replaceMatchCount} matches) with: {_replaceWithInput}\u2502  (Enter=Next  Esc=Cancel)",
+                ReplacePhase.Confirm => $" Replace {_replaceMatchCount} occurrence(s)? [y/n]",
+                _ => ""
+            };
+        }
+        else if (_editMode.IsActive())
         {
             status = _editMode.GetStatusText();
         }
@@ -959,6 +976,46 @@ internal class DesktopWindow : IDisposable
         bool ctrl = (keyEvent.state & ControlMask) != 0;
         bool shift = (keyEvent.state & ShiftMask) != 0;
 
+        // Find & Replace state machine
+        if (_replacePhase != ReplacePhase.None)
+        {
+            switch (_replacePhase)
+            {
+                case ReplacePhase.FindInput:
+                    if (keysym == XK_Return)
+                    {
+                        if (_replaceFindInput.Length == 0) { _replacePhase = ReplacePhase.None; return; }
+                        _replaceMatchCount = CountMatches(_replaceFindInput);
+                        if (_replaceMatchCount == 0) { _replacePhase = ReplacePhase.None; }
+                        else { _replacePhase = ReplacePhase.ReplaceInput; _replaceWithInput = ""; }
+                    }
+                    else if (keysym == XK_Escape) { _replacePhase = ReplacePhase.None; }
+                    else if (keysym == XK_BackSpace && _replaceFindInput.Length > 0)
+                        _replaceFindInput = _replaceFindInput[..^1];
+                    else if (!ctrl) { AppendTypedChar(ref keyEvent, ref _replaceFindInput); }
+                    return;
+
+                case ReplacePhase.ReplaceInput:
+                    if (keysym == XK_Return) { _replacePhase = ReplacePhase.Confirm; }
+                    else if (keysym == XK_Escape) { _replacePhase = ReplacePhase.None; }
+                    else if (keysym == XK_BackSpace && _replaceWithInput.Length > 0)
+                        _replaceWithInput = _replaceWithInput[..^1];
+                    else if (!ctrl) { AppendTypedChar(ref keyEvent, ref _replaceWithInput); }
+                    return;
+
+                case ReplacePhase.Confirm:
+                    if (keysym == XK_y || keysym == XK_Y)
+                    {
+                        PerformReplace(_replaceFindInput, _replaceWithInput);
+                        _replacePhase = ReplacePhase.None;
+                    }
+                    else if (keysym == XK_n || keysym == XK_Escape)
+                        _replacePhase = ReplacePhase.None;
+                    return;
+            }
+            return;
+        }
+
         if (_searching)
         {
             switch (keysym)
@@ -1111,6 +1168,11 @@ internal class DesktopWindow : IDisposable
                 case XK_f:
                     _searching = true;
                     _searchInput = "";
+                    return;
+                case XK_r:
+                    _replacePhase = ReplacePhase.FindInput;
+                    _replaceFindInput = "";
+                    _replaceWithInput = "";
                     return;
                 case XK_b:
                     _grid.SortByColumn(_selectedCol);
@@ -1461,6 +1523,47 @@ internal class DesktopWindow : IDisposable
             Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "spreadsheet.csv");
         _grid.SaveToCsv(filename);
         _loadedFile = filename;
+    }
+
+    // ── Find & Replace helpers ──────────────────────────────────────
+
+    private int CountMatches(string find)
+    {
+        int count = 0;
+        for (int r = 0; r < _grid.RowCount; r++)
+            for (int c = 0; c < _grid.ColumnCount; c++)
+                if (_grid.GetCellValue(r, c).Contains(find, StringComparison.OrdinalIgnoreCase))
+                    count++;
+        return count;
+    }
+
+    private void PerformReplace(string find, string replace)
+    {
+        for (int r = 0; r < _grid.RowCount; r++)
+            for (int c = 0; c < _grid.ColumnCount; c++)
+            {
+                string val = _grid.GetCellValue(r, c);
+                if (val.Contains(find, StringComparison.OrdinalIgnoreCase))
+                    _grid.SetCellValue(r, c, val.Replace(find, replace, StringComparison.OrdinalIgnoreCase));
+            }
+    }
+
+    private void AppendTypedChar(ref XKeyEvent keyEvent, ref string target)
+    {
+        IntPtr buf = Marshal.AllocHGlobal(32);
+        try
+        {
+            int len = XLookupString(ref keyEvent, buf, 32, out _, IntPtr.Zero);
+            if (len > 0)
+            {
+                byte[] bytes = new byte[len];
+                Marshal.Copy(buf, bytes, 0, len);
+                string ch = Encoding.UTF8.GetString(bytes);
+                if (ch.Length > 0 && ch[0] >= 32 && ch[0] <= 126)
+                    target += ch;
+            }
+        }
+        finally { Marshal.FreeHGlobal(buf); }
     }
 
     // ── Dispose ──────────────────────────────────────────────────────
