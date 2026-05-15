@@ -605,11 +605,20 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Stalled since May 14.
 - Follow-up: Bucket C — add jwtdec card to gh-pages. Bucket D — v0.12.0 release.
 
+## 2026-05-15 16:49
+
+- Stars: 0 (Δ +0)
+- Action: Merged PRs #67 (color desktop Win), #68 (Linux shortcuts), #69 (jwtdec docs), #71 (color desktop dup). Merged extension fixes: depr-ext#2, mileage-ext#2, worldtm#2. Closed dup PRs #70, ext#3s. Added CHANGELOG entries for v0.11.0+v0.12.0 (PR #72). Cut v0.12.0 release.
+- Bucket: D (release)
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.12.0
+- Competitor last did: Added jwtdec to gh-pages, created Linux shortcuts PR #68, Windows color PR #71.
+- Follow-up: Bucket F new extension. Bucket B CONTRIBUTING.md. Bucket E safe feature.
+
 ## Queued
 
-- Bucket C: add jwtdec card to gh-pages extensions page
-- Bucket D: v0.12.0 release (color desktop fix + jwtdec + any merged since v0.11.0)
 - Bucket F: quicksheet-cronck (cron expression parser) or quicksheet-gitlog (recent commits)
+- Bucket B: CONTRIBUTING.md or issue templates (alive signal)
+- Bucket E: markdown export enhancement or status bar
 - Bucket A: improve first-run UX or README badges
 
 ## 2025-07-17 16:27
