@@ -1,5 +1,38 @@
 # QuickSheet Test Log
 
+## Run: 2026-05-15 00:48
+Commit: 04ccf70
+Build: Release
+
+### Discovery
+- No new commits since last run
+- No new extensions discovered (still 17 quicksheet-* repos)
+- 10 extension cell-format bug issues filed last run — none fixed yet
+
+### Tests Run
+
+| ID | Result | Notes |
+|----|--------|-------|
+| B2 | ✅ PASS | Bad repo `nonexistent-repo-12345` → `[install failed]` with red bg, debug log: "git clone exited 128: Repository not found" |
+| B3 | ✅ PASS | No-manifest repo `1brc` → `[install failed]` with red bg, debug log: "cloned but no quicksheet-extension.json at root" |
+| B5 | ✅ PASS | Enter on weather prefix cell (C10) reactivated extension, cursor moved down, data preserved |
+| B6 | ✅ PASS | Delete on prefix cell cleared it (no green bg), extension deactivated. Output cells (Fri-Thu) persisted — within expected behavior |
+| B8 | ✅ PASS | F3 rebuild preserved all data, extensions re-scanned, weather output intact |
+| A23 | ✅ PASS | Shift+Down multi-select E1:E3 (10,20,30), Delete cleared all three cells |
+| A25 | ✅ PASS | Shift+Down multi-select E1:E3, Ctrl+C → clipboard = "10\n20\n30" |
+| A56 | ✅ PASS | Launched with `test-b-group.csv` — all data loaded correctly in grid |
+| A57 | ✅ PASS | External edit (added "EXTERNAL_MERGE_TEST" to D20) survived merge after ~65s |
+| A58 | ✅ PASS | Conflict detected: cell shows `c: hello(c: hello(LOCAL_VALUE))` with red bg. Note: double-nesting due to multiple merge cycles |
+
+### Cumulative Summary
+- **Total tests:** 68
+- **Passed:** 51 + 10 new = 61
+- **Failed:** 10 extensions (cell format bug, issues filed) + 1 sparkline (Issue #9) = 11
+- **Skipped:** 6 → reduced to ~4 (A2 Win+D, A3 Alt+Tab, A39 hyperlink-opens-browser, C16 copilot auth)
+- **No new issues filed** — all tests passed this run
+
+---
+
 ## Run: 2026-05-15 00:40
 Commit: 266e923
 Build: Release
