@@ -31,8 +31,21 @@ Multi-select cells and hit Enter to fire all of them at once. That's how launchi
 The status bar shows:
 - **Σ (sum)** of the column the cursor's in.
 - **Π (product)** of the row.
+- **File name**, **modified indicator** (●), and **non-empty cell count**.
 
 No formulas to write. Type some numbers, glance at the bottom.
+
+## 3½. Undo, redo, themes, go-to
+
+A few keyboard shortcuts that round out the editing experience:
+
+| Shortcut | What it does |
+|----------|-------------|
+| `Ctrl+Z` | Undo (up to 200 steps, action-grouped) |
+| `Ctrl+Y` | Redo |
+| `Ctrl+T` | Cycle theme: Dark → Light → Nord → Solarized → Matrix |
+| `Ctrl+G` | Go-to cell — type a reference like `C5` and jump there |
+| `Ctrl+H` | Help overlay with all shortcuts |
 
 ## 4. References
 
@@ -61,6 +74,9 @@ Currently public:
 - [`quicksheet-stock-ext`](https://github.com/cemheren/quicksheet-stock-ext) — stock ticker quotes (Stooq).
 - [`quicksheet-1099-ext`](https://github.com/cemheren/quicksheet-1099-ext) — US self-employment tax estimate.
 - [`quicksheet-grav-ext`](https://github.com/cemheren/quicksheet-grav-ext) — Gravatar profile + avatar URL.
+- [`quicksheet-sysmon`](https://github.com/cemheren/quicksheet-sysmon) — live CPU/RAM/disk/uptime monitor.
+- [`quicksheet-todo`](https://github.com/cemheren/quicksheet-todo) — task management with priorities + due dates.
+- [`quicksheet-cal`](https://github.com/cemheren/quicksheet-cal) — upcoming calendar events from .ics files.
 
 [Write your own](../README.md#build-your-own) in whatever language you want — the protocol is two message types.
 
