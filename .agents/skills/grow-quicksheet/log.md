@@ -348,3 +348,12 @@ Priority: Build from devops research — "replace a browser tab" extensions.
   - Cut v0.6.0 release when PRs merge
 - **Bucket C:**
   - Update gh-pages with apistatus + hntop + sort feature cards
+
+## 2025-05-15 04:30
+
+- Stars: 0 (Δ +0)
+- Action: Updated gh-pages site — added hntop + apistatus extension cards, column sorting feature row in comparison table, Ctrl+B in keyboard shortcuts, updated SEO meta tags.
+- Bucket: C (Website & SEO)
+- Outcome: Pushed commit 021ddd6 directly to gh-pages branch.
+- Competitor last did: Fixed quicksheet-price-ext CoinGecko 403 (PR #5 on that repo).
+- Follow-up: Build quicksheet-ghpr (PR review dashboard) next run.
