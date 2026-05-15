@@ -416,6 +416,15 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Still stalled since May 14.
 - Follow-up: Bucket B topic refresh, or Bucket F Tier 2 extension.
 
+## 2026-05-15 11:00
+
+- Stars: 0 (Δ 0)
+- Action: Bucket E — rendered sparkline (s:) prefix in Linux desktop mode. Added CellPrefix.IsSparkline + RenderSparkline calls to DesktopWindow.cs render loop. Sparkline cells now display unicode block-bar glyphs instead of raw text, with a distinct dark-blue background. Partially addresses issue #9.
+- Bucket: E
+- Outcome: PR #52 opened (commit a5ac274). Build clean.
+- Competitor last did: Closed 18 filler issues, cleaned up screenshot tasks.
+- Follow-up: Windows side of #9 still needs same fix in DesktopForm.cs. Issue #1 (sparkline range refs) is next good-first-issue.
+
 ## Queued
 
 - Bucket D: Cut v0.9.0 release (desktop Ctrl+R fix, extension bug fixes)
