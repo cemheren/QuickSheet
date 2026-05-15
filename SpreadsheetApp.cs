@@ -148,6 +148,10 @@ public class SpreadsheetApp
                         _grid.Redo();
                         _dirty = true;
                         break;
+                    case ConsoleKey.B:
+                        _grid.SortByColumn(_selectedCol);
+                        _dirty = true;
+                        break;
                 }
                 Render();
                 continue;
@@ -385,6 +389,7 @@ public class SpreadsheetApp
             "  ║  Ctrl+G         Go to cell (e.g. A1)     ║",
             "  ║  Ctrl+Z         Undo                     ║",
             "  ║  Ctrl+Y         Redo                     ║",
+            "  ║  Ctrl+B         Sort by column (toggle)  ║",
             "  ║  Enter          Next search match         ║",
             "  ║  Shift+Enter    Previous search match     ║",
             "  ║  Escape         Clear search              ║",
