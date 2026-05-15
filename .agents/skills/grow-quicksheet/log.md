@@ -470,8 +470,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Stalled since May 14 — last action was quicksheet-price-ext and docs/tour.md.
 - Follow-up: Bucket F quicksheet-k8s, or Bucket E safe feature.
 
+## 2026-05-15 12:49
+
+- Stars: 0 (Δ +0)
+- Action: Created quicksheet-k8s extension — live Kubernetes pod status from kubeconfig. Color-coded status icons (🟢🔴🟡🟠), namespace support, truncated pod names, kubectl subprocess. Also merged PRs #52-55 as prep.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-k8s (commit 710f9ec). PR #57 adds to README/docs.
+- Competitor last did: Created quicksheet-mileage-ext (PR #55, merged). Accounting research for #15.
+- Follow-up: Bucket C — add k8s card to gh-pages. Or quicksheet-margin-ext next.
+
 ## Queued
 
-- Bucket F (Tier 2): quicksheet-k8s from devops research doc
+- Bucket C: Add k8s extension card to gh-pages
 - Bucket F (accounting): quicksheet-margin-ext, quicksheet-depr-ext for issue #15
-- Bucket E: safe additive feature (theme presets, markdown export)
+- Bucket E: safe additive feature (theme presets, status bar)
