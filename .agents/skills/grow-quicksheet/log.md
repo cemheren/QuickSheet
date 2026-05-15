@@ -173,13 +173,24 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
 - Follow-up: Column auto-resize (Bucket E) or quicksheet-cal (Bucket F) for variety next.
 
+## 2026-05-14 22:00
+
+- Stars: 0 (Δ +0)
+- Action: Created quicksheet-cal extension — reads .ics calendar files (RFC 5545), shows upcoming events grouped by date with time/summary/location/duration. Auto-scans common calendar dirs (Evolution, Thunderbird, KDE, Calcurse, ~/Calendars). Supports "cal: today", "cal: week", "cal: month", "cal: path/to/file.ics".
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-cal. README + docs/extensions.md updated on main (commit 71a2e27).
+- Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
+- Follow-up: Update gh-pages with cal extension card. quicksheet-news (RSS) for variety next.
+
 ## Queued
 
 Priority: autonomous actions only (no drafts requiring human posting).
 
 - **Bucket E (feature):**
-  - Column auto-resize keybinding
+  - Vim-style keybinding mode or cell formatting
 - **Bucket F (extensions):**
-  - quicksheet-cal or quicksheet-news
+  - quicksheet-news (RSS feed headlines)
+- **Bucket C (website):**
+  - Update gh-pages with quicksheet-cal extension card
 - **Bucket A (polish):**
-  - CHANGELOG.md with all shipped features
+  - Update docs/tour.md with recent features
