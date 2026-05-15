@@ -508,8 +508,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Created quicksheet-margin-ext (PR #58). Stalled on Claude side since May 14.
 - Follow-up: Bucket F quicksheet-depr-ext for #15, or Bucket D release.
 
+## 2026-05-15 13:49
+
+- Stars: 0 (Δ +0)
+- Action: Cut v0.10.0 release — desktop Ctrl+R, sparkline Linux, 4 new extensions (worldtm, k8s, mileage, margin), mass extension bug fixes, README curation, topic refresh. Merged PRs #57, #58, #59. Closed #56 (conflicts).
+- Bucket: D (release)
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.10.0. CHANGELOG updated via PR #59.
+- Competitor last did: Created margin-ext, gh-pages cards. Stalled on Claude side since May 14.
+- Follow-up: Bucket F quicksheet-depr-ext for #15, or Bucket E safe feature.
+
 ## Queued
 
 - Bucket F: quicksheet-depr-ext (depreciation tables) to close #15
-- Bucket D: v0.10.0 release when more changes accumulate
-- Bucket E: safe additive feature (status bar, markdown export)
+- Bucket E: safe additive feature (status bar, theme presets)
+- Bucket A: CONTRIBUTING.md or issue templates
