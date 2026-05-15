@@ -543,8 +543,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Added cell color prefix (c:COLOR:) feature, PR #61.
 - Follow-up: Bucket A document c: prefix in keyboard-shortcuts. Bucket D v0.10.0 release.
 
+## 2026-05-15 14:49
+
+- Stars: 0 (Δ +0)
+- Action: Documented c:color: cell prefix in keyboard-shortcuts.md (full color table) and tour.md. Merged PRs #61 (color prefix feature), #62 (depr-ext links), #63 (FAQ page). Closed #60 (conflicts).
+- Bucket: A (product polish)
+- Outcome: PR #64 on cemheren/QuickSheet (commit fe860cc).
+- Competitor last did: Added c:color: prefix feature (PR #61), wrote FAQ, linked accounting extensions.
+- Follow-up: Bucket C gh-pages color feature highlight, or Bucket E safe feature.
+
 ## Queued
 
-- Bucket A: Document c: prefix in docs/keyboard-shortcuts.md
-- Bucket D: v0.10.0 release with accounting suite + color prefix
-- Bucket E: markdown export or status bar improvement
+- Bucket C: Add color-prefix feature highlight to gh-pages
+- Bucket E: safe additive feature (status bar, markdown export)
+- Bucket B: CONTRIBUTING.md or issue templates
