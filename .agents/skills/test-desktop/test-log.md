@@ -1,5 +1,63 @@
 # QuickSheet Test Log
 
+## Run: 2026-05-15 00:40
+Commit: 266e923
+Build: Release
+
+### Discovery
+- PR #12 merged: fixed extension install race condition (Issue #8 closed)
+- PR #17 merged: fixed define-ext crash
+- All 17 extensions now install successfully (verified via debug log)
+
+### Extension Protocol Testing
+
+Tested all 17 extensions by installing via `ext:` cells and activating via prefix cells.
+
+**Root cause of 10 extension failures:** Extensions send `cells` as `string[][]` instead of `{r,c,v}` objects. QuickSheet's `ExtensionProtocol.cs` expects `CellWrite[]` with `[JsonPropertyName("r")]`, `[JsonPropertyName("c")]`, `[JsonPropertyName("v")]` properties. The `string[][]` format silently fails deserialization.
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C1 | ✅ PASS | quicksheet-weather: 7-day forecast (Fri-Thu) rendered correctly |
+| C2 | ✅ PASS | quicksheet-todo: "📋 No tasks yet" + usage instructions shown |
+| C3 | ✅ PASS | quicksheet-sysmon: CPU 100%/RAM 41.5%/Disk 89.3%/Uptime with live progress bars |
+| C4 | ✅ PASS | quicksheet-pomodoro: 🍅 FOCUS timer running, countdown visible |
+| C5 | ❌ FAIL | quicksheet-stock-ext: no output — string[][] cell format bug → filed #2 |
+| C6 | ❌ FAIL | quicksheet-price-ext: no output — string[][] cell format bug → filed #2 |
+| C7 | ✅ PASS | quicksheet-define-ext: "laconic" + "(adjective) Using as few words as possible..." — FIXED by PR #17 |
+| C8 | ❌ FAIL | quicksheet-thes-ext: no output — string[][] cell format bug → filed #2 |
+| C9 | ❌ FAIL | quicksheet-cite-ext: no output — string[][] cell format bug → filed #3 |
+| C10 | ❌ FAIL | quicksheet-ping-ext: no output — string[][] cell format bug → filed #2 |
+| C11 | ❌ FAIL | quicksheet-mxck-ext: no output — string[][] cell format bug → filed #2 |
+| C12 | ❌ FAIL | quicksheet-mortgage-ext: no output — string[][] cell format bug → filed #2 |
+| C13 | ❌ FAIL | quicksheet-tls-ext: no output — string[][] cell format bug → filed #2 |
+| C14 | ❌ FAIL | quicksheet-grav-ext: no output — string[][] cell format bug → filed #2 |
+| C15 | ❌ FAIL | quicksheet-1099-ext: no output — string[][] cell format bug → filed #2 |
+| C16 | ⏭️ SKIP | quicksheet-copilot-ext: requires Copilot CLI auth (format is correct ✅) |
+| C17 | ✅ PASS | quicksheet-cal: responds with error for date param (expected — needs "week"/"today"/number/path). Uses correct {r,c,v} format. |
+| B1 | ✅ PASS | All 17 extensions install successfully (race condition fix from PR #12 confirmed working) |
+| B4 | ✅ PASS | Weather prefix activation works correctly |
+| B7 | ✅ PASS | ext: cells show green background, prefix cells show teal background |
+
+### Issues Filed This Run
+- quicksheet-ping-ext #2: Cells sent in wrong format - no output rendered
+- quicksheet-stock-ext #2: Cells sent in wrong format - no output rendered
+- quicksheet-price-ext #2: Cells sent in wrong format - no output rendered
+- quicksheet-1099-ext #2: Cells sent in wrong format - no output rendered
+- quicksheet-tls-ext #2: Cells sent in wrong format - no output rendered
+- quicksheet-mxck-ext #2: Cells sent in wrong format - no output rendered
+- quicksheet-thes-ext #2: Cells sent in wrong format - no output rendered
+- quicksheet-mortgage-ext #2: Cells sent in wrong format - no output rendered
+- quicksheet-grav-ext #2: Cells sent in wrong format - no output rendered
+- quicksheet-cite-ext #3: Cells sent in wrong format - no output rendered
+
+### Cumulative Summary
+- **Total tests:** 68 (46 core + 8 ext system + 17 extensions)
+- **Passed:** 44 core + 7 working extensions = 51
+- **Failed:** 10 extensions (cell format bug) + 1 sparkline (Issue #9) = 11
+- **Skipped:** 6 (copilot auth, manual-only tests)
+
+---
+
 ## Run: 2026-05-14 22:43
 Commit: 1ab9ca7
 Build: Release
