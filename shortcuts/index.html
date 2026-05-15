@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuickSheet Keyboard Shortcuts — Complete Reference</title>
+  <meta name="description" content="Complete keyboard shortcuts reference for QuickSheet terminal spreadsheet. Navigation, editing, clipboard, search, sort, undo/redo, cell prefixes, and desktop mode keys.">
+  <meta name="keywords" content="quicksheet keyboard shortcuts, terminal spreadsheet shortcuts, tui spreadsheet keybindings, csv editor keyboard, console spreadsheet keys, desktop wallpaper spreadsheet controls">
+  <link rel="canonical" href="https://cemheren.github.io/QuickSheet/shortcuts/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="QuickSheet Keyboard Shortcuts — Complete Reference">
+  <meta property="og:description" content="Every keyboard shortcut in QuickSheet — navigation, editing, clipboard, search, sort, cell prefixes, and more.">
+  <meta property="og:url" content="https://cemheren.github.io/QuickSheet/shortcuts/">
+  <meta property="og:site_name" content="QuickSheet">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="QuickSheet Keyboard Shortcuts">
+  <meta name="twitter:description" content="Complete keyboard reference for the terminal spreadsheet that runs as your wallpaper.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "QuickSheet Keyboard Shortcuts",
+    "description": "Complete keyboard shortcuts reference for QuickSheet terminal spreadsheet.",
+    "url": "https://cemheren.github.io/QuickSheet/shortcuts/",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "QuickSheet",
+      "url": "https://cemheren.github.io/QuickSheet/"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --purple: #bc8cff;
+      --orange: #d29922;
+      --max-w: 960px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.6; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .nav { background: var(--surface); border-bottom: 1px solid var(--border); padding: .75rem 1.5rem; display: flex; align-items: center; gap: 1.5rem; font-size: .9rem; }
+    .nav a { color: var(--muted); }
+    .nav a:hover, .nav a.active { color: var(--text); }
+    .nav .brand { font-weight: 700; color: var(--text); font-size: 1.1rem; }
+
+    .hero { text-align: center; padding: 3rem 1.5rem 2rem; }
+    .hero h1 { font-size: 2rem; margin-bottom: .5rem; }
+    .hero p { color: var(--muted); max-width: 600px; margin: 0 auto; }
+
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 1.5rem 4rem; }
+
+    .section { margin-bottom: 2.5rem; }
+    .section h2 { font-size: 1.3rem; margin-bottom: 1rem; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: .5rem; }
+
+    table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+    th, td { padding: .6rem .8rem; text-align: left; border-bottom: 1px solid var(--border); }
+    th { color: var(--muted); font-size: .85rem; text-transform: uppercase; letter-spacing: .05em; }
+    td:first-child { white-space: nowrap; }
+    kbd { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: .15rem .45rem; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; font-size: .85em; color: var(--accent2); }
+
+    .prefix-table code { background: var(--surface); padding: .2rem .5rem; border-radius: 4px; color: var(--purple); font-size: .9em; }
+    .prefix-table td:nth-child(3) { color: var(--muted); font-size: .9em; }
+
+    .note { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.2rem; margin-top: 1rem; font-size: .9rem; color: var(--muted); }
+    .note strong { color: var(--text); }
+
+    footer { text-align: center; padding: 2rem; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--border); }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.5rem; }
+      table { font-size: .9rem; }
+      kbd { font-size: .8em; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/QuickSheet/" class="brand">⊞ QuickSheet</a>
+  <a href="/QuickSheet/features/">Features</a>
+  <a href="/QuickSheet/extensions/">Extensions</a>
+  <a href="/QuickSheet/shortcuts/" class="active">Shortcuts</a>
+  <a href="https://github.com/cemheren/QuickSheet">GitHub</a>
+</nav>
+
+<div class="hero">
+  <h1>⌨️ Keyboard Shortcuts</h1>
+  <p>Complete reference for every key in QuickSheet. Works in both console TUI and desktop wallpaper mode.</p>
+</div>
+
+<div class="container">
+
+  <div class="section">
+    <h2>Navigation</h2>
+    <table>
+      <tr><th>Key</th><th>Action</th></tr>
+      <tr><td><kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd></td><td>Move one cell in that direction</td></tr>
+      <tr><td><kbd>Tab</kbd></td><td>Move to next column</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>G</kbd></td><td>Go to cell — type a reference like <code>A1</code>, <code>C10</code></td></tr>
+      <tr><td><kbd>Enter</kbd></td><td>Enter edit mode on current cell</td></tr>
+      <tr><td><kbd>Escape</kbd></td><td>Cancel edit / close help overlay</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Editing</h2>
+    <table>
+      <tr><th>Key</th><th>Action</th></tr>
+      <tr><td><kbd>Enter</kbd></td><td>Start editing current cell</td></tr>
+      <tr><td><kbd>Escape</kbd></td><td>Cancel edit, discard changes</td></tr>
+      <tr><td><kbd>Backspace</kbd></td><td>Delete last character (edit mode) / clear cell (nav mode)</td></tr>
+      <tr><td><kbd>Delete</kbd></td><td>Clear cell content</td></tr>
+      <tr><td>Any character</td><td>Start typing into the current cell</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Clipboard</h2>
+    <table>
+      <tr><th>Key</th><th>Action</th></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>C</kbd></td><td>Copy cell</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>X</kbd></td><td>Cut cell</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>V</kbd></td><td>Paste cell</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Row Operations</h2>
+    <table>
+      <tr><th>Key</th><th>Action</th></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>D</kbd></td><td>Delete current row</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>O</kbd></td><td>Insert row above (shift down)</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>P</kbd></td><td>Remove row (shift up)</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Search &amp; Sort</h2>
+    <table>
+      <tr><th>Key</th><th>Action</th></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>F</kbd></td><td>Find — substring search across all cells</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>R</kbd></td><td>Find &amp; Replace — search and replace text in cells</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>B</kbd></td><td>Sort by current column (toggles ascending ↔ descending)</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Undo / Redo</h2>
+    <table>
+      <tr><th>Key</th><th>Action</th></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>Z</kbd></td><td>Undo last action</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>Y</kbd></td><td>Redo</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>File &amp; System</h2>
+    <table>
+      <tr><th>Key</th><th>Action</th></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>S</kbd></td><td>Save to CSV</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>T</kbd></td><td>Cycle theme (Dark → Light → Solarized → Nord → …)</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>H</kbd></td><td>Show / hide help overlay</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>Q</kbd></td><td>Quit</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Cell Prefixes</h2>
+    <p style="color:var(--muted);margin-bottom:1rem;">Type these at the start of a cell value to activate special behavior.</p>
+    <table class="prefix-table">
+      <tr><th>Prefix</th><th>Behavior</th><th>Example</th></tr>
+      <tr><td><code>r: cmd</code></td><td>Run command — press Enter to execute</td><td><code>r: echo hello</code></td></tr>
+      <tr><td><code>i: cmd</code></td><td>Inline process — live output streams into cells below</td><td><code>i: top -b -n1</code></td></tr>
+      <tr><td><code>s: values</code></td><td>Sparkline — mini bar chart from numbers</td><td><code>s: 3,1,4,1,5,9</code></td></tr>
+      <tr><td><code>L: path</code></td><td>Load file contents</td><td><code>L: data.csv</code></td></tr>
+      <tr><td><code>ext: source</code></td><td>Install &amp; activate extension</td><td><code>ext: github:cemheren/quicksheet-weather</code></td></tr>
+      <tr><td><code>http(s)://</code></td><td>Hyperlink — opens in browser on Enter</td><td><code>https://github.com</code></td></tr>
+      <tr><td><code>{A1::C10}</code></td><td>Cell range reference — displays inline</td><td><code>{A1::B5}</code></td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Built-in Math</h2>
+    <table>
+      <tr><th>Symbol</th><th>What it does</th></tr>
+      <tr><td><strong>Σ</strong> (Sigma)</td><td>Column sum — shown in the status bar for columns containing numbers</td></tr>
+      <tr><td><strong>Π</strong> (Pi)</td><td>Row product — shown in the status bar for rows containing numbers</td></tr>
+    </table>
+  </div>
+
+  <div class="note">
+    <strong>Desktop mode note:</strong> Desktop wallpaper mode (<code>--desktop</code>) supports all the same shortcuts. Input is handled via platform-native key events (WinForms on Windows, X11 on Linux) rather than System.Console. Desktop mode auto-saves every 5 seconds.
+  </div>
+
+</div>
+
+<footer>
+  <a href="https://github.com/cemheren/QuickSheet">QuickSheet</a> — zero-dependency .NET 9 terminal spreadsheet &amp; desktop wallpaper.
+  <br>
+  <a href="/QuickSheet/">Home</a> · <a href="/QuickSheet/features/">Features</a> · <a href="/QuickSheet/extensions/">Extensions</a>
+</footer>
+
+</body>
+</html>
