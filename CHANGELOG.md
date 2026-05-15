@@ -6,6 +6,24 @@ All notable changes to QuickSheet. Format roughly follows [Keep a Changelog](htt
 
 (empty — bump here before the next tag)
 
+## 0.8.0 — 2026-05-15
+
+### Added
+- **Find & Replace (Ctrl+R)** — search and replace text across cells with per-match confirmation dialog. Works in both console and desktop mode.
+- **Keyboard shortcuts documentation** — complete reference at `docs/keyboard-shortcuts.md` covering all keys, cell prefixes, built-in math, and desktop mode notes.
+- **Shortcuts page on website** — SEO-targeted page at [/shortcuts/](https://cemheren.github.io/QuickSheet/shortcuts/).
+
+### Fixed
+- **Extension protocol: int version accepted** (#43) — extensions sending `version: 1` (int) instead of `"1.0.0"` (string) in register messages now work via `FlexVersionConverter`. Fixes quicksheet-gitst, quicksheet-ghpr, quicksheet-docker.
+
+### Extensions (separate repos)
+- `quicksheet-cntdn` — countdown to dates (deadlines, holidays, launches).
+
+### Fixed (extensions)
+- Fixed `quicksheet-cntdn` manifest key (`entryPoint` → `entry`).
+- Fixed `quicksheet-gitst` params field (`arguments` → `params` array).
+- Fixed `quicksheet-docker` Windows named pipe support, params field, error visibility.
+
 ## 0.7.0 — 2026-05-15
 
 ### Fixed
