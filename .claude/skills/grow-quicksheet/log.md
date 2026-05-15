@@ -2,6 +2,10 @@
 
 Persistent memory across runs. Append-only (except the Queued section at bottom).
 
+## 2026-05-15 (no-op)
+
+- Stars: 0. All open issues either have an open PR awaiting merge (#14→PR#16, #19→PR#23, #17→batch ext PRs, all 10 ext "cells-format" issues→their respective `Closes #N` PRs), need screenshots (skip), need TUI/desktop runtime (#9), or are large research/infra (#3, #15). 11 main-repo PRs + 11 ext-repo PRs queued. Blocked on user merges.
+
 ## 2026-05-13
 
 - Stars: 0 (baseline)
