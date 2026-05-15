@@ -350,6 +350,17 @@ ghpr: all
 
 Uses `gh` CLI under the hood — no tokens to configure. Filters: `review-requested` (default), `mine`, `all`, or a specific `owner/repo`.
 
+### Example: Docker container health
+
+The [quicksheet-docker](https://github.com/cemheren/quicksheet-docker) extension shows Docker container status directly from the Engine API — no `docker` CLI needed:
+
+```
+ext: github:cemheren/quicksheet-docker
+docker: all
+```
+
+Connects via Unix socket (`/var/run/docker.sock`) or TCP (`DOCKER_HOST`). Shows 🟢running, 🔴exited, ⏸️paused with ports and images.
+
 ### Build your own
 
 Extensions are regular .NET (or any language) programs that read/write JSON lines on stdin/stdout. The protocol is intentionally minimal:
