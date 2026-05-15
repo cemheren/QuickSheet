@@ -517,8 +517,24 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Created margin-ext, gh-pages cards. Stalled on Claude side since May 14.
 - Follow-up: Bucket F quicksheet-depr-ext for #15, or Bucket E safe feature.
 
-## Queued
+
 
 - Bucket F: quicksheet-depr-ext (depreciation tables) to close #15
 - Bucket E: safe additive feature (status bar, theme presets)
 - Bucket A: CONTRIBUTING.md or issue templates
+
+
+## 2026-05-15 13:57
+
+- Stars: 0 (Δ +0)
+- Action: Created quicksheet-depr-ext — straight-line & MACRS depreciation calculator. IRS Pub 946 tables (3/5/7/10/15/20-yr), salvage value support, auto-maps to nearest MACRS class. Build-tested. Added to README. Completes accounting suite for #15.
+- Bucket: F (accounting)
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-depr-ext (10b54a5). PR #60 adds to README.
+- Competitor last did: Created quicksheet-k8s, margin-ext. Stalled on Claude side since May 14.
+- Follow-up: Bucket C add depr-ext card to gh-pages. Bucket D v0.10.0 release.
+
+## Queued
+
+- Bucket C: Add depr-ext card to gh-pages extensions page
+- Bucket D: v0.10.0 release with all accounting extensions
+- Bucket A: docs/accounting-guide.md walkthrough of the suite
