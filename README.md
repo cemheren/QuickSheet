@@ -143,6 +143,7 @@ tls: github.com, 1, 4
 | `docker:` | Container health | `ext: github:cemheren/quicksheet-docker` |
 | `gitst:` | Git repo status | `ext: github:cemheren/quicksheet-gitst` |
 | `portck:` | TCP port checker | `ext: github:cemheren/quicksheet-portck` |
+| `k8s:` | Kubernetes pod status | `ext: github:cemheren/quicksheet-k8s` |
 | `cntdn:` | Countdown timers | `ext: github:cemheren/quicksheet-cntdn` |
 | `1099:` | US self-employment tax | `ext: github:cemheren/quicksheet-1099-ext` |
 | `mileage:` | IRS mileage deduction | `ext: github:cemheren/quicksheet-mileage-ext` |
