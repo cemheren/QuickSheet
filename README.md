@@ -272,6 +272,18 @@ ext: github:cemheren/quicksheet-mxck-ext
 mxck: example.com, 1, 5
 ```
 
+### Example: Budget envelope tracker
+
+The [quicksheet-budget](https://github.com/cemheren/quicksheet-budget) extension visualizes spending per category with progress bars — a glanceable budget dashboard on your desktop:
+
+```
+ext: github:cemheren/quicksheet-budget
+budget: Groceries, 800, 623
+budget: Software, 200, 89
+```
+
+Shows color-coded status (🟢≤50%, 🟡≤75%, 🟠≤90%, 🔴>90%), visual fill bar, and remaining balance. Pairs with cell references for live updates as you log expenses.
+
 ### Build your own
 
 Extensions are regular .NET (or any language) programs that read/write JSON lines on stdin/stdout. The protocol is intentionally minimal:
