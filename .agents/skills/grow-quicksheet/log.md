@@ -236,13 +236,24 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Fixed issue #19 ext typing race (PR #21).
 - Follow-up: Build quicksheet-fx (currency conversion) next. Then update gh-pages site.
 
+## 2026-05-15 01:45
+
+- Stars: 0 (Δ +0)
+- Action: Built and shipped quicksheet-fx extension — live currency conversion via ECB/Frankfurter API. 200+ currencies, no API key, 1-hour rate cache, multi-target conversion. Tested with real API calls. Created repo, added to README + docs/extensions.md.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-fx. PR #24 adds to README/docs.
+- Competitor last did: Created quicksheet-qtr (PR #22).
+- Follow-up: Update gh-pages site with recent extension cards. Then Tier 2 extensions.
+
 ## Queued
 
-Priority: Continue accounting extension suite per design doc.
+Priority: Continue growing ecosystem.
 
-- **Bucket F — Build `quicksheet-fx` extension** (Tier 1 #3)
-  - Currency conversion via Frankfurter API
 - **Bucket C (website):**
-  - Update gh-pages with recent extension cards (budget, qtr, cal)
+  - Update gh-pages with recent extension cards (budget, qtr, cal, fx)
 - **Bucket A (polish):**
   - Update docs/tour.md with recent features
+- **Bucket F — Tier 2 extensions:**
+  - `quicksheet-rate` — hourly rate tracker
+  - `quicksheet-deduct` — tax deduction categorizer
+  - `quicksheet-pl` — P&L statement generator
