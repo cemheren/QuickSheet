@@ -4,7 +4,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 
 | Prefix    | Name              | What it does                                       | Repo |
 |-----------|-------------------|----------------------------------------------------|------|
-| `copilot` | Copilot           | AI in a cell. Q&A, range summarization, generation | [`quicksheet-copilot-ext`](https://github.com/cemheren/quicksheet-copilot-ext) |
+| `copilot` | Copilot           | AI in a cell. Q&A, range summarization, generation. [Use cases →](copilot-usecases.md) | [`quicksheet-copilot-ext`](https://github.com/cemheren/quicksheet-copilot-ext) |
 | `wthr`    | Weather forecast  | 7-day forecast for a location                      | [`quicksheet-weather`](https://github.com/cemheren/quicksheet-weather) |
 | `tls`     | TLS cert checker  | Cert expiry, issuer, CN for a host                 | [`quicksheet-tls-ext`](https://github.com/cemheren/quicksheet-tls-ext) |
 | `price`   | Crypto price      | Last trade + 24h change (CoinGecko)                | [`quicksheet-price-ext`](https://github.com/cemheren/quicksheet-price-ext) |

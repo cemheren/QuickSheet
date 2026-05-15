@@ -105,7 +105,12 @@ You can reference cell ranges with `{A1::C10}` syntax and Copilot receives the a
 ```
 copilot: summarize this data {B1::E50}, 3, 1
 copilot: generate random test data with name and age, 2, 10
+copilot: classify as utilities/food/transport given {A2::B2}, 1, 1
+copilot: extract action items from {A1::A1} as a checklist, 1, 5
+copilot: translate to english {A1::A1}, 1, 1
 ```
+
+More use-case patterns (classify, extract, compare ranges, dashboard headers): see **[docs/copilot-usecases.md](docs/copilot-usecases.md)**.
 
 ### Example: Weather forecast widget
 
