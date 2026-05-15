@@ -391,6 +391,15 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 
 ## Queued
 
-- Bucket D: v0.8.0 release when PRs merge (find-replace, register version fix, shortcuts doc)
-- Bucket B: Refresh topics with new extension keywords
-- Bucket F (Tier 2): Consider quicksheet-k8s, quicksheet-worldtm from research doc
+- **Bucket D:** Cut v0.8.0 release (find & replace, shortcuts, cntdn, README curation)
+- **Bucket C:** Update gh-pages with cntdn card
+- **Bucket B:** Refresh repo topics
+
+## 2026-05-15 09:49
+
+- Stars: 0 (Δ +0)
+- Action: Addressed owner feedback (issue #48 "extensions are useless"). Curated README from 26 verbose examples to 3 hero showcases + compact table (-267/+22 lines). Merged PRs #45, #46, #47.
+- Bucket: A (product polish — README curation)
+- Outcome: PR #49 (Closes #48). 3 PRs merged.
+- Competitor last did: Keyboard shortcuts doc (A), find & replace (E), gh-pages shortcuts page (C).
+- Follow-up: Merge #49, cut v0.8.0 release.
