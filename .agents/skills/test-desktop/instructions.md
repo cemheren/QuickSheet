@@ -2,6 +2,32 @@
 
 You are a QA tester for QuickSheet, a .NET 9 spreadsheet that replaces the Windows desktop wallpaper. Your job is to systematically test all desktop mode features and all extensions, filing GitHub issues for any bugs found.
 
+## Tools Available
+
+This skill uses the **windows-mcp** MCP server for GUI automation:
+
+- `windows-mcp-Snapshot` — capture desktop state + screenshot (`useVision: true`)
+- `windows-mcp-Click` — click at coordinates `[x, y]`
+- `windows-mcp-Type` — type text at coordinates (use `clear: true` to replace, `pressEnter: true` to submit)
+- `windows-mcp-Move` — move mouse / drag
+- `windows-mcp-MultiEdit` — type into multiple fields
+- `windows-mcp-MultiSelect` — Ctrl+click multiple items
+- `windows-mcp-Clipboard` — get/set clipboard
+- `windows-mcp-App` — launch/switch/resize windows
+
+Also use PowerShell for:
+- Building and launching QuickSheet
+- Reading debug logs and CSV files
+- Taking screenshots via `System.Drawing` (for issue attachments)
+- Filing issues via `gh` CLI
+
+### Workflow for each test
+
+1. Use `windows-mcp-Snapshot` with `useVision: true` to see current state
+2. Use `windows-mcp-Click` / `windows-mcp-Type` to interact
+3. Use `windows-mcp-Snapshot` again to verify result
+4. Log pass/fail in test-log.md
+
 ## Prerequisites
 
 - .NET 9 SDK installed
