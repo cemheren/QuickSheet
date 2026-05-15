@@ -19,6 +19,8 @@ public class ExtensionManager : IDisposable
     private readonly HashSet<(int row, int col)> _processedExtCells = new();
     // Tracks active prefix calls: anchor cell -> activation state
     private readonly Dictionary<(int row, int col), ActiveCall> _activeCalls = new();
+    // Tracks failed ext: sources so we don't retry every scan cycle or corrupt cell values
+    private readonly Dictionary<string, string> _failedSources = new();
 
     private bool _disposed;
 
@@ -61,7 +63,7 @@ public class ExtensionManager : IDisposable
             string? source = CellPrefix.ParseExtensionSource(val);
             if (source == null) return ExtensionCellStatus.None;
 
-            if (val.Contains("[install failed]") || val.Contains("[bad manifest]") || val.Contains("[start failed]"))
+            if (_failedSources.ContainsKey(source))
                 return ExtensionCellStatus.Error;
 
             if (_extensions.TryGetValue(source, out var ext) && ext.Process.IsRunning)
@@ -89,6 +91,8 @@ public class ExtensionManager : IDisposable
     public void ReactivateCell(int row, int col)
     {
         _activeCalls.Remove((row, col));
+        // Allow retry of failed ext: cells when user re-edits them
+        _processedExtCells.Remove((row, col));
     }
 
     /// <summary>
@@ -100,6 +104,7 @@ public class ExtensionManager : IDisposable
         _grid = newGrid;
         _activeCalls.Clear();
         _processedExtCells.Clear();
+        _failedSources.Clear();
     }
 
     public void ScanGrid(int? editingRow = null, int? editingCol = null)
@@ -179,19 +184,20 @@ public class ExtensionManager : IDisposable
         if (source == null) return;
 
         if (_extensions.ContainsKey(source)) return; // already loaded
+        if (_failedSources.ContainsKey(source)) return; // already failed — don't retry every scan
 
         // Install from GitHub
         string? extDir = ExtensionInstaller.Install(source, _env);
         if (extDir == null)
         {
-            _grid.SetCellValue(row, col, $"ext: {source} [install failed]");
+            _failedSources[source] = "install failed";
             return;
         }
 
         var manifest = ExtensionInstaller.ReadManifest(extDir);
         if (manifest == null)
         {
-            _grid.SetCellValue(row, col, $"ext: {source} [bad manifest]");
+            _failedSources[source] = "bad manifest";
             return;
         }
 
@@ -200,7 +206,7 @@ public class ExtensionManager : IDisposable
         bool started = process.Start(_env, manifest.Entry, extDir);
         if (!started)
         {
-            _grid.SetCellValue(row, col, $"ext: {source} [start failed]");
+            _failedSources[source] = "start failed";
             process.Dispose();
             return;
         }
