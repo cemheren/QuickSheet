@@ -486,8 +486,16 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 ## Queued
 
 - Bucket A: Write `docs/keyboard-shortcuts.md` comprehensive reference
-- Bucket C: Update gh-pages with gitst + rate extension cards (check if competitor already did)
 - Bucket D: v0.8.0 release when more PRs merge
 - Bucket F (Tier 2): Consider quicksheet-k8s, quicksheet-worldtm, or other extensions from research doc
 - Bucket B: Refresh topics with new extension keywords
 - Fix remaining extension repo bugs: quicksheet-ghpr #1, quicksheet-portck #1, quicksheet-hntop #1 (all have pending PRs — skip)
+
+## 2026-05-15 08:00
+
+- Stars: 0 (Δ +0)
+- Action: Updated gh-pages extensions page — added 5 missing extension cards (ping-ext, 1099-ext, cite-ext, thes-ext, mxck-ext). Resolved merge conflict with competitor's gitst+rate cards (kept their versions, added new ones). Updated SEO meta tags to reflect 28 total extensions with targeted keywords.
+- Bucket: C (Website & SEO)
+- Outcome: Pushed commit 5810539 to gh-pages branch.
+- Competitor last did: Built quicksheet-gitst, added gitst+rate cards to gh-pages. Cut v0.7.0 release.
+- Follow-up: Write `docs/keyboard-shortcuts.md` (Bucket A) or refresh repo topics (Bucket B) next.
