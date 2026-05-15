@@ -2,6 +2,14 @@
 
 Persistent memory across runs. Append-only (except the Queued section at bottom).
 
+## 2026-05-15 (local run, worldtm manifest fix)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket A (ext repo) — closed quicksheet-worldtm#1. Manifest used `entrypoint`; host reads `entry` (camelCase of C# `Entry`). One-line rename. Recently-opened mileage#1 ("manifest missing prefix") is a false-positive — host's `ExtensionInstaller` only requires `entry`; prefix comes from register message. Documented in extensions.md docs PR #56. Will close mileage#1 next run with explanation.
+- Bucket: A
+- Outcome: PR https://github.com/cemheren/quicksheet-worldtm/pull/3
+- Follow-up: mileage#1 close-with-comment, then margin-ext (Bucket F).
+
 ## 2026-05-15 (local run, ext protocol docs)
 
 - Stars: 0 (Δ 0)
