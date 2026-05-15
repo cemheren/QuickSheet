@@ -14,33 +14,29 @@ Grow GitHub stars on github.com/cemheren/QuickSheet. The project is a zero-depen
 genuinely useful — job is to make more people aware of it and make the first-touch
 experience better.
 
-You have **limited time per run** and **limited total runs** (once per hour, vs a
+You have **limited time per run** and **limited total runs** (every 30 minutes, vs a
 competitor running every 15 minutes). Treat each run as one focused, high-impact
-action. Quality over quantity. Compounding hourly progress beats scattered effort.
+action. Quality over quantity. Compounding progress beats scattered effort.
 
-# Strategy — Winning with fewer runs
+# Strategy — Market research → thoughtful extensions
 
-Since you run 4× less often, you must extract more value per run:
-- **Research before building.** Use web_search and Chrome DevTools to understand what
-  drives stars in similar projects. Study trending repos, HN patterns, Reddit.
-  Only build features with clear evidence they attract attention.
-- **Stop crowding the repo with features.** Each new feature adds noise. Only ship
-  if the feature is genuinely likely to make someone star the repo. A single
-  viral-worthy feature > 10 mediocre ones.
-- **Quality over quantity.** The competitor adds many small things. Your edge is
-  doing fewer, better things with outsized impact.
-- **Research-driven action selection.** Before picking an action, ask: "Will this
-  specific change make someone who visits the repo click ⭐?" If not clearly yes,
-  pick something else.
-- **Focus on virality signals**: cool screenshots, demo GIFs, compelling README,
-  unique features that don't exist elsewhere.
+Your primary edge is **deep thinking and market research**. Don't rush to ship code.
+Spend runs understanding what people actually want, then design extensions that nail
+a real need.
+
+- **Market research first.** Use web_search to study:
+  - What terminal/TUI tools are trending and why (stars, HN, Reddit)
+  - What workflows people do in terminals that could benefit from a spreadsheet
+  - What extensions/plugins are most popular in VS Code, Obsidian, Raycast, etc.
+  - What pain points exist in developer daily workflows
+  - What verticals (finance, devops, data science) lack good terminal tooling
+- **Design extensions based on research.** Don't just scaffold boilerplate — think
+  deeply about what would make someone say "I need this." Write a design doc in
+  `.agents/skills/grow-quicksheet/drafts/designs/` before writing any code.
 - **Track competitor log**: read `.claude/skills/grow-quicksheet/log.md` to avoid
   duplicating and to build on their work.
-- **Use Chrome DevTools** for data-driven decisions:
-  - Check Google Analytics (traffic, referrers, top pages)
-  - Run Lighthouse audits on the GitHub Pages site
-  - Verify Open Graph / meta tags render correctly
-  - Check Google Search Console for indexing and keyword rankings
+- **No screenshots.** This environment cannot take screenshots. Skip any issues or
+  tasks that require screenshots, screen captures, or GIF recordings.
 - **Use web_search for deep research:**
   - What makes repos go viral on HN/Reddit?
   - What keywords do people search for that this project could rank for?
@@ -191,6 +187,8 @@ code. A broken app is worse than no change at all — it actively loses stars.
 - **Additive changes only for Bucket E.** New files, new classes, new prefixes — never
   modify core logic (GridManager, SpreadsheetApp, DesktopForm) unless fixing a bug
   that's clearly broken. Extending is safe; rewriting is not.
+- **No screenshots or screen captures.** This environment cannot take screenshots.
+  Skip any issues or tasks that require screenshots, GIFs, or screen recordings.
 - **No social posting.** Never post to HN, Reddit, Twitter, Mastodon, Bluesky,
   Lobsters, dev.to, Medium, etc., even if credentials exist. Drafts only.
 - **No PRs to other repos.** Draft branch + PR body saved to `drafts/`. User submits.
