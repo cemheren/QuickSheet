@@ -6,7 +6,7 @@ description: >
   Files GitHub issues with screenshots and debug logs for any bugs found.
   Maintains a persistent test-log.md for incremental testing across sessions.
   Use when user says "test desktop", "run tests", "QA", or invokes /test-desktop.
-  Currently tracking 27 extensions (C1-C27) plus 46 core tests and 8 extension system tests.
+  Currently tracking 27 extensions (C1-C27) plus 48 core tests and 8 extension system tests.
 ---
 
 # QuickSheet Desktop Mode Testing Skill
@@ -223,6 +223,13 @@ Also use PowerShell for:
 | A56 | Load CSV | Launch with `-- --desktop test.csv` | Data from test.csv visible in grid |
 | A57 | CSV merge | Edit CSV externally while app running, wait ~60s | External changes merged in |
 | A58 | Conflict marker | Edit same cell locally and externally, wait for merge | Cell shows `c: external(local)` with red background |
+
+### Find & Replace
+
+| ID | Test | Steps | Expected |
+|----|------|-------|----------|
+| A59 | Ctrl+R find/replace | Press Ctrl+R, enter find term, enter replace term | Matching cells found and replaced (like console mode) |
+| A60 | Ctrl+B sort column | Select column, press Ctrl+B | Column sorted alphabetically |
 
 ---
 
