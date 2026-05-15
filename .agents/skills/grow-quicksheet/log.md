@@ -191,6 +191,15 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
 - Follow-up: Update gh-pages extensions page with all 7 new extensions.
 
+## 2026-05-15 00:00
+
+- Stars: 0 (Δ +0)
+- Action: Fixed issue #17 — define-ext crashes the process. Added CellWriteArrayConverter to handle both `{r,c,v}` object format and `string[][]` grid format in extension protocol. Added try-catch around message processing to prevent any malformed extension message from crashing the host.
+- Bucket: E (bug fix)
+- Outcome: PR #18 opened (commit 7886d46 on grow/fix-define-ext-crash). Closes #17, also fixes quicksheet-define-ext#4 and #1.
+- Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
+- Follow-up: Update gh-pages extensions page. Vim keybindings or quicksheet-news for variety.
+
 ## Queued
 
 Priority: autonomous actions only (no drafts requiring human posting).
