@@ -317,17 +317,25 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Deep research for devops extensions (drafts/designs/devops-sre-extensions.md).
 - Follow-up: Build quicksheet-apistatus (service health) next. Merge PRs #27/#28 when ready.
 
+## 2026-05-15 03:57
+
+- Stars: 0 (Δ +0)
+- Action: Built and shipped quicksheet-apistatus — service status aggregator monitoring 18 services (GitHub, Cloudflare, npm, Discord, Vercel, etc.) via public Statuspage.io APIs. Tested with real calls (caught a live Cloudflare minor outage!). Created repo, added to README + docs.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-apistatus. PR #31 adds to README/docs.
+- Competitor last did: Shipped quicksheet-hntop (PR #30), fixed #26 suffix stripping (PR #29).
+- Follow-up: Build quicksheet-ghpr (PR dashboard via gh CLI) or quicksheet-docker next.
+
 ## Queued
 
 Priority: Build from devops research — "replace a browser tab" extensions.
 
 - **Bucket F — Tier 1 devops extensions (highest impact):**
-  - `quicksheet-apistatus` — service health (GitHub/Cloudflare/npm status, 5/5)
   - `quicksheet-ghpr` — PR review dashboard via `gh` CLI (4/5)
   - `quicksheet-docker` — container health via Docker socket (5/5)
   - `quicksheet-portck` — TCP port/service health checker (5/5)
+  - `quicksheet-gitst` — git repo status (branch, modified, stashes) (5/5)
 - **Bucket D:**
-  - Merge PRs #27 (bug fix), #28 (sort), #30 (hntop docs)
-  - Cut v0.6.0 release
+  - Cut v0.6.0 release when PRs merge
 - **Bucket C:**
-  - Update gh-pages with hntop + sort feature cards
+  - Update gh-pages with apistatus + hntop + sort feature cards
