@@ -353,18 +353,20 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: Repo live at https://github.com/cemheren/quicksheet-portck (commit 5e3438e). PR #36 adds to README/docs.
 - Competitor last did: Built quicksheet-ghpr (PR #34, merged), fixed #17 (PR #33, merged), drafted Reddit posts.
 - Follow-up: Build quicksheet-docker or quicksheet-gitst next. Or gh-pages update with portck card.
+## 2026-05-15 06:49
+
+- Stars: 0 (Δ +0)
+- Action: Merged 3 PRs (#38 Ctrl+B desktop fix closes #35, closed dup #37, #39 docker docs). Updated gh-pages: added docker extension card, bumped version to v0.6.0.
+- Bucket: C + D (website update + PR maintenance)
+- Outcome: Pushed commit 5ac6b4b to gh-pages. 3 PRs resolved, 1 issue closed (#35).
+- Competitor last did: Built quicksheet-docker (PR #39), fixed #35 Ctrl+B desktop (PR #38), drafted Reddit posts.
+- Follow-up: Build quicksheet-gitst next. Or Bucket E quality-of-life feature.
+
 ## Queued
 
-Priority: Continue devops extension suite.
-
-- **Bucket F  Remaining devops extensions:**
-  - `quicksheet-docker`  container health via Docker socket (5/5)
-  - `quicksheet-gitst`  git repo status (branch, modified, stashes) (5/5)
-- **Bucket C:**
-  - Update gh-pages with portck + ghpr cards
-- **Bucket D:**
-  - Merge PR #36 (portck docs)
-  - Cut v0.6.0 release once PRs merge
+- **Bucket F:** `quicksheet-gitst` — git repo status (branch, modified, stashes) (5/5 priority)
+- **Bucket E:** Theme presets, markdown export, or `w: url` web fetch prefix
+- **Bucket A:** Demo GIF capture (needs desktop mode running)
 
 ## 2026-05-15 04:30
 
