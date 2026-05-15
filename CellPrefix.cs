@@ -121,6 +121,16 @@ public static class CellPrefix
     public static bool IsExtension(string value) =>
         value.StartsWith("ext: ", StringComparison.OrdinalIgnoreCase);
 
+    // Status suffixes that ExtensionManager appends to ext: cells on failure.
+    // ParseExtensionSource strips them so a stale corrupted cell on restart
+    // still parses to a clean repo reference (see #26).
+    private static readonly string[] ExtensionStatusSuffixes =
+    {
+        " [install failed]",
+        " [bad manifest]",
+        " [start failed]",
+    };
+
     /// <summary>
     /// Parses an "ext: github:user/repo" cell value into the GitHub reference.
     /// Returns null if not a valid extension cell.
@@ -129,6 +139,26 @@ public static class CellPrefix
     {
         if (!IsExtension(value)) return null;
         string source = value[5..].Trim();
+
+        // Strip trailing status suffixes recursively — a cell that's failed
+        // multiple times may have multiple " [install failed]" markers
+        // appended. Without this the suffix is interpreted as part of the
+        // repo path, the next install attempt fails with the corrupted URL,
+        // and another suffix gets tacked on (issue #26).
+        bool stripped;
+        do
+        {
+            stripped = false;
+            foreach (string suffix in ExtensionStatusSuffixes)
+            {
+                if (source.EndsWith(suffix, StringComparison.Ordinal))
+                {
+                    source = source[..^suffix.Length].TrimEnd();
+                    stripped = true;
+                }
+            }
+        } while (stripped);
+
         return string.IsNullOrEmpty(source) ? null : source;
     }
 
