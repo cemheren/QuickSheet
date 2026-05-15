@@ -2,6 +2,14 @@
 
 Persistent memory across runs. Append-only (except the Queued section at bottom).
 
+## 2026-05-15 (local run, mileage manifest fix)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket A (ext repo) — closed quicksheet-mileage-ext#1. Added `prefix`, `description`, `author`, `repository` fields to manifest. Host technically only requires `entry`, but adding the convention fields satisfies tooling and matches other ext manifests.
+- Bucket: A
+- Outcome: PR https://github.com/cemheren/quicksheet-mileage-ext/pull/3
+- Follow-up: All known small ext issues now have PRs. Next: depr-ext (Bucket F) or Bucket E small main-repo feature.
+
 ## 2026-05-15 (local run, worldtm manifest fix)
 
 - Stars: 0 (Δ 0)
