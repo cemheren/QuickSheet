@@ -137,6 +137,9 @@ public class SpreadsheetApp
                         Theme.CycleNext();
                         Console.Clear();
                         break;
+                    case ConsoleKey.G:
+                        PromptGoto();
+                        break;
                     case ConsoleKey.Z:
                         _grid.Undo();
                         _dirty = true;
@@ -379,6 +382,7 @@ public class SpreadsheetApp
             "  ║  Ctrl+P         Remove row (shift up)    ║",
             "  ║  Ctrl+S         Save to CSV              ║",
             "  ║  Ctrl+F         Find (contains search)   ║",
+            "  ║  Ctrl+G         Go to cell (e.g. A1)     ║",
             "  ║  Ctrl+Z         Undo                     ║",
             "  ║  Ctrl+Y         Redo                     ║",
             "  ║  Enter          Next search match         ║",
@@ -523,5 +527,66 @@ public class SpreadsheetApp
         Console.BackgroundColor = ConsoleColor.Black;
         Console.ForegroundColor = ConsoleColor.White;
         Thread.Sleep(1000);
+    }
+
+    private void PromptGoto()
+    {
+        int statusY = Console.WindowHeight - 1;
+        Console.SetCursorPosition(0, statusY);
+        Console.BackgroundColor = ConsoleColor.White;
+        Console.ForegroundColor = ConsoleColor.Black;
+        int totalWidth = Console.WindowWidth;
+
+        Console.Write(" Go to cell (e.g. A1, C5): ".PadRight(totalWidth));
+        Console.SetCursorPosition(" Go to cell (e.g. A1, C5): ".Length, statusY);
+        Console.CursorVisible = true;
+
+        string input = "";
+        while (true)
+        {
+            var k = Console.ReadKey(intercept: true);
+            if (k.Key == ConsoleKey.Enter) break;
+            if (k.Key == ConsoleKey.Escape)
+            {
+                Console.CursorVisible = false;
+                return;
+            }
+            if (k.Key == ConsoleKey.Backspace)
+            {
+                if (input.Length > 0)
+                {
+                    input = input[..^1];
+                    Console.SetCursorPosition(" Go to cell (e.g. A1, C5): ".Length, statusY);
+                    Console.Write(input.PadRight(totalWidth - " Go to cell (e.g. A1, C5): ".Length));
+                    Console.SetCursorPosition(" Go to cell (e.g. A1, C5): ".Length + input.Length, statusY);
+                }
+                continue;
+            }
+            if (k.KeyChar >= 32 && k.KeyChar <= 126)
+            {
+                input += k.KeyChar;
+                Console.Write(k.KeyChar);
+            }
+        }
+
+        Console.CursorVisible = false;
+
+        var parsed = CellPrefix.ParseCellRef(input);
+        if (parsed is var (row, col))
+        {
+            _selectedRow = Math.Clamp(row, 0, _grid.RowCount - 1);
+            _selectedCol = Math.Clamp(col, 0, _grid.ColumnCount - 1);
+        }
+        else
+        {
+            // Flash error
+            Console.SetCursorPosition(0, statusY);
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write($" Invalid cell reference: {input} ".PadRight(totalWidth));
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+            Thread.Sleep(1000);
+        }
     }
 }
