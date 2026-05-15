@@ -344,50 +344,23 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: v0.6.0 released at https://github.com/cemheren/QuickSheet/releases/tag/v0.6.0. 6 PRs resolved.
 - Competitor last did: Updated gh-pages with hntop/apistatus cards (commit 021ddd6).
 - Follow-up: Build quicksheet-ghpr or quicksheet-portck next. Update gh-pages with v0.6.0 banner.
+
+## 2026-05-15 05:49
+
+- Stars: 0 (delta +0)
+- Action: Created quicksheet-portck  TCP port/service health checker. Probes local ports (20 well-known names), color-coded UP/DOWN with latency. Also merged PRs #33 (define-ext fix) and #34 (ghpr docs).
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-portck (commit 5e3438e). PR #36 adds to README/docs.
+- Competitor last did: Built quicksheet-ghpr (PR #34, merged), fixed #17 (PR #33, merged), drafted Reddit posts.
+- Follow-up: Build quicksheet-docker or quicksheet-gitst next. Or gh-pages update with portck card.
 ## Queued
 
-Priority: Build from devops research — "replace a browser tab" extensions.
+Priority: Continue devops extension suite.
 
-- **Bucket F — Tier 1 devops extensions:**
-  - `quicksheet-ghpr` — PR review dashboard via `gh` CLI (4/5)
-  - `quicksheet-docker` — container health via Docker socket (5/5)
-  - `quicksheet-portck` — TCP port/service health checker (5/5)
-  - `quicksheet-gitst` — git repo status (branch, modified, stashes) (5/5)
+- **Bucket F  Remaining devops extensions:**
+  - `quicksheet-docker`  container health via Docker socket (5/5)
+  - `quicksheet-gitst`  git repo status (branch, modified, stashes) (5/5)
 - **Bucket C:**
-  - Update gh-pages with v0.6.0 release banner
-
-## 2026-05-15 04:30
-
-- Stars: 0 (Δ +0)
-- Action: Updated gh-pages site — added hntop + apistatus extension cards, column sorting feature row in comparison table, Ctrl+B in keyboard shortcuts, updated SEO meta tags.
-- Bucket: C (Website & SEO)
-- Outcome: Pushed commit 021ddd6 directly to gh-pages branch.
-- Competitor last did: Fixed quicksheet-price-ext CoinGecko 403 (PR #5 on that repo).
-- Follow-up: Build quicksheet-ghpr (PR review dashboard) next run.
-
-## 2026-05-15 04:57
-
-- Stars: 0 (Δ +0)
-- Action: Fixed issue #17 — define-ext crashes process. Extension sends cells as array-of-arrays but CellWrite expected {r,c,v} objects. Added CellWriteArrayConverter handling 3 formats (object, grid, flat). Also wrapped ProcessIncomingMessages in try-catch for JsonException safety.
-- Bucket: E (bug fix)
-- Outcome: PR #33 opened (commit b8ccb51 on grow/fix-define-ext-crash). Closes #17.
-- Competitor last did: Drafted Reddit posts for r/commandline and r/dotnet.
-- Follow-up: Build quicksheet-ghpr (PR dashboard) or quicksheet-docker next.
-
-## 2026-05-15 05:00
-
-- Stars: 0 (Δ +0)
-- Action: Fixed quicksheet-hntop issue #1 — manifest used `"entrypoint"` instead of `"entry"`, causing `[bad manifest]` install failure. One-line key rename fix.
-- Bucket: F (bug fix in extension repo)
-- Outcome: PR cemheren/quicksheet-hntop#2 opened (commit b7c73d0 on fix/manifest-entry-key). Closes #1.
-- Competitor last did: Drafted Reddit posts for r/commandline and r/dotnet (Bucket C). Most recent real action: PR #33 fix define-ext crash.
-- Follow-up: Build quicksheet-ghpr (PR dashboard) or quicksheet-portck next. Merge #33 when ready.
-
-## 2026-05-15 05:27
-
-- Stars: 0 (Δ +0)
-- Action: Built and shipped quicksheet-ghpr — GitHub PR review dashboard. Shows PRs needing attention (review-requested, authored, specific repo) with status icons and age. Uses gh CLI, 2-min cache. Tested live.
-- Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-ghpr. PR #34 adds to README/docs.
-- Competitor last did: Drafted Reddit posts (r/commandline, r/dotnet). No new code.
-- Follow-up: Build quicksheet-docker (container health) or quicksheet-portck (port checker) next.
+  - Update gh-pages with portck + ghpr cards
+- **Bucket D:**
+  - Merge PR #36 (portck docs)
