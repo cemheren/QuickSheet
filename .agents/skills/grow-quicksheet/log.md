@@ -431,3 +431,12 @@ Priority: Continue devops extension suite.
   - Fix PR #37 merge conflict and merge (sort desktop mode)
 - **Bucket E:**
   - Cell formatting, undo/redo improvements, vim keybindings
+
+## 2026-05-15 06:27
+
+- Stars: 0 (Δ +0)
+- Action: Built and shipped quicksheet-docker — container health dashboard. Connects to Docker Engine API via Unix socket or TCP. Shows status icons, ports, images. 30s cache. Tested (graceful error when Docker unavailable).
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-docker. PR #39 adds to README/docs.
+- Competitor last did: Filed issue #35, built portck (PR #36), fixed #35 (PR #38).
+- Follow-up: Build quicksheet-gitst (git repo status) or update gh-pages with docker+ghpr+portck cards.
