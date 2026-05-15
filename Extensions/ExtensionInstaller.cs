@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -11,6 +12,12 @@ public static class ExtensionInstaller
     private static readonly string LogPath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
         ".quicksheet", "extensions", "debug.log");
+
+    // Per-target-directory locks. The scan timer in ExtensionManager can fire
+    // a second Install() call while a clone is in flight; without this guard
+    // the second call sees git's half-created target directory and reports a
+    // spurious "cloned but no quicksheet-extension.json" failure. See #8.
+    private static readonly ConcurrentDictionary<string, object> _installLocks = new();
 
     /// <summary>
     /// Installs an extension from a GitHub reference like "github:user/repo".
@@ -36,6 +43,18 @@ public static class ExtensionInstaller
         string dirName = repoRef.Replace('/', '-').Replace('\\', '-');
         string targetDir = Path.Combine(env.ExtensionsDirectory, dirName);
 
+        // Serialize concurrent installs for the same target. Second caller
+        // blocks until the first finishes, then takes the "already installed"
+        // path (which now sees the completed manifest).
+        object lockObj = _installLocks.GetOrAdd(targetDir, _ => new object());
+        lock (lockObj)
+        {
+            return InstallLocked(repoRef, targetDir, env);
+        }
+    }
+
+    private static string? InstallLocked(string repoRef, string targetDir, IExtensionEnvironment env)
+    {
         if (Directory.Exists(targetDir))
         {
             // Already installed — pull latest changes
