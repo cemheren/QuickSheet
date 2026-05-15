@@ -449,7 +449,9 @@ internal class DesktopWindow : IDisposable
                 // This gives sub-second update cadence for `i:` cells without a full event-driven wakeup.
                 if (XPending(_display) == 0)
                 {
-                    _extensionManager.ScanGrid();
+                    _extensionManager.ScanGrid(
+                        _editMode.IsActive() ? _editMode.EditRow : null,
+                        _editMode.IsActive() ? _editMode.EditCol : null);
                     if (_inlineProcesses.HasAnyNewOutput() || _externalChangePending || _extensionManager.ConsumeHasChanges())
                     {
                         _externalChangePending = false;

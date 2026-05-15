@@ -16,6 +16,9 @@ internal class EditingMode : IMode
     private int _editRow;
     private int _editCol;
 
+    public int EditRow => _editRow;
+    public int EditCol => _editCol;
+
     public EditingMode(GridManager grid)
     {
         Grid = grid;

@@ -146,7 +146,9 @@ internal class DesktopForm : DesktopFormBase
         {
             try
             {
-                _extensionManager.ScanGrid();
+                _extensionManager.ScanGrid(
+                    _editMode.IsActive() ? _editMode.EditRow : null,
+                    _editMode.IsActive() ? _editMode.EditCol : null);
                 if (_processManager.HasAnyNewOutput() || _extensionManager.ConsumeHasChanges())
                     BeginInvoke(() => Invalidate());
             }
