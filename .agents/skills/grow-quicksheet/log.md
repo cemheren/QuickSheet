@@ -412,3 +412,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: PR #2 on cemheren/quicksheet-cntdn (commit b32e29f).
 - Competitor last did: Merged PRs #44-47, added cntdn extension, curated README (#48).
 - Follow-up: Bucket D v0.8.0 release, or Bucket B topic refresh.
+
+## 2026-05-15 10:00
+
+- Stars: 0 (Δ +0)
+- Action: Resolved merge conflict in log.md. Fixed quicksheet-gitst #4 — extension reads 'arguments' (string) but QuickSheet sends 'params' (JSON array). Changed to parse params array and join with comma. Also fixed register version int→string.
+- Bucket: F (bug fix in extension repo)
+- Outcome: PR cemheren/quicksheet-gitst#5 opened (commit 370c7d9 on fix/params-field). Closes #4.
+- Competitor last did: Still stalled since May 14.
+- Follow-up: Cut v0.8.0 release next, or fix more extension bugs.
+
+## Queued
+
+- **Bucket D:** Cut v0.8.0 release
+- **Bucket C:** Update gh-pages with new extension cards
+- **Bucket B:** Refresh repo topics
