@@ -587,8 +587,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Added c:color: site highlight, merged PRs #61-63, cut v0.10.0.
 - Follow-up: Bucket E safe feature (markdown export). Bucket F new vertical.
 
+## 2026-05-15 15:49
+
+- Stars: 0 (Δ +0)
+- Action: Fixed #65 — c:color: prefix not rendered in Windows desktop mode. Added CellPrefix.ParseColor() to DesktopForm cell rendering, ConsoleColorToBg() helper mapping ConsoleColor→RGB (matching Linux impl). Strips prefix from display, shows colored background.
+- Bucket: E (issue fix)
+- Outcome: PR #67 on cemheren/QuickSheet (commit f2f3b54). Build verified.
+- Competitor last did: Cut v0.11.0 release, color site highlight, merged PRs.
+- Follow-up: Merge PR #67. Bucket D v0.12.0 release with color desktop fix.
+
 ## Queued
 
+- Bucket D: v0.12.0 release (color desktop fix + any merged since v0.11.0)
 - Bucket E: markdown/HTML table export (--export-md already exists, enhance it)
 - Bucket F: new extension vertical (data science? cloud costs?)
 - Bucket A: improve first-run UX or README badges
