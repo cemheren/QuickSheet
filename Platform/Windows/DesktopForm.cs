@@ -30,6 +30,13 @@ internal class DesktopForm : DesktopFormBase
     private List<(int row, int col)> _searchMatches = new();
     private int _searchMatchIndex = -1;
 
+    // Find & Replace state machine
+    private enum ReplacePhase { None, FindInput, ReplaceInput, Confirm }
+    private ReplacePhase _replacePhase = ReplacePhase.None;
+    private string _replaceFindInput = "";
+    private string _replaceWithInput = "";
+    private int _replaceMatchCount;
+
     private readonly EditingMode _editMode;
 
     //todo: DraggingMode? Not sure if this should be a state yet. 
@@ -629,7 +636,17 @@ internal class DesktopForm : DesktopFormBase
         // Status bar
         int maxChars = formWidth / cw;
         string status;
-        if (_searching)
+        if (_replacePhase != ReplacePhase.None)
+        {
+            status = _replacePhase switch
+            {
+                ReplacePhase.FindInput => $" Find: {_replaceFindInput}\u2502  (Enter=Next  Esc=Cancel)",
+                ReplacePhase.ReplaceInput => $" Replace ({_replaceMatchCount} matches) with: {_replaceWithInput}\u2502  (Enter=Next  Esc=Cancel)",
+                ReplacePhase.Confirm => $" Replace {_replaceMatchCount} occurrence(s)? [y/n]",
+                _ => ""
+            };
+        }
+        else if (_searching)
         {
             status = $" Find: {_searchInput}\u2502  (Enter=Search  Esc=Cancel)";
         }
@@ -729,6 +746,61 @@ internal class DesktopForm : DesktopFormBase
     
     private void OnFormKeyDown(object? sender, KeyEventArgs e)
     {
+        // Find & Replace state machine
+        if (_replacePhase != ReplacePhase.None)
+        {
+            bool handled = true;
+            switch (_replacePhase)
+            {
+                case ReplacePhase.FindInput:
+                    if (e.KeyCode == Keys.Enter)
+                    {
+                        if (_replaceFindInput.Length == 0) { _replacePhase = ReplacePhase.None; break; }
+                        _replaceMatchCount = CountMatches(_replaceFindInput);
+                        if (_replaceMatchCount == 0)
+                        {
+                            _replacePhase = ReplacePhase.None; // no matches — exit
+                        }
+                        else
+                        {
+                            _replacePhase = ReplacePhase.ReplaceInput;
+                            _replaceWithInput = "";
+                        }
+                    }
+                    else if (e.KeyCode == Keys.Escape) { _replacePhase = ReplacePhase.None; }
+                    else if (e.KeyCode == Keys.Back && _replaceFindInput.Length > 0)
+                        _replaceFindInput = _replaceFindInput[..^1];
+                    else handled = false;
+                    break;
+
+                case ReplacePhase.ReplaceInput:
+                    if (e.KeyCode == Keys.Enter) { _replacePhase = ReplacePhase.Confirm; }
+                    else if (e.KeyCode == Keys.Escape) { _replacePhase = ReplacePhase.None; }
+                    else if (e.KeyCode == Keys.Back && _replaceWithInput.Length > 0)
+                        _replaceWithInput = _replaceWithInput[..^1];
+                    else handled = false;
+                    break;
+
+                case ReplacePhase.Confirm:
+                    if (e.KeyCode == Keys.Y)
+                    {
+                        PerformReplace(_replaceFindInput, _replaceWithInput);
+                        _replacePhase = ReplacePhase.None;
+                    }
+                    else if (e.KeyCode == Keys.N || e.KeyCode == Keys.Escape)
+                        _replacePhase = ReplacePhase.None;
+                    else handled = false;
+                    break;
+            }
+            if (handled)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                Invalidate();
+            }
+            return;
+        }
+
         if (_searching)
         {
             bool handled = true;
@@ -888,6 +960,11 @@ internal class DesktopForm : DesktopFormBase
                 case Keys.P: _grid.ShiftSelectedRowUp(); break;
                 case Keys.S: SaveFile(); break;
                 case Keys.F: EnterSearchMode(); break;
+                case Keys.R:
+                    _replacePhase = ReplacePhase.FindInput;
+                    _replaceFindInput = "";
+                    _replaceWithInput = "";
+                    break;
                 case Keys.B:
                     {
                         var (_, sortCol) = _grid.GetCurrentCell();
@@ -1039,11 +1116,40 @@ internal class DesktopForm : DesktopFormBase
         _searchInput = "";
     }
 
+    private int CountMatches(string term)
+    {
+        int count = 0;
+        for (int r = 0; r < _grid.RowCount; r++)
+            for (int c = 0; c < _grid.ColumnCount; c++)
+                if (_grid.GetCellValue(r, c).Contains(term, StringComparison.OrdinalIgnoreCase))
+                    count++;
+        return count;
+    }
+
+    private void PerformReplace(string find, string replace)
+    {
+        for (int r = 0; r < _grid.RowCount; r++)
+            for (int c = 0; c < _grid.ColumnCount; c++)
+            {
+                string val = _grid.GetCellValue(r, c);
+                if (val.Contains(find, StringComparison.OrdinalIgnoreCase))
+                    _grid.SetCellValue(r, c, val.Replace(find, replace, StringComparison.OrdinalIgnoreCase));
+            }
+    }
+
     private void OnFormKeyPress(object? sender, KeyPressEventArgs e)
     {
         if (e.KeyChar >= 32 && e.KeyChar <= 126)
         {
-            if (_searching)
+            if (_replacePhase == ReplacePhase.FindInput)
+            {
+                _replaceFindInput += e.KeyChar;
+            }
+            else if (_replacePhase == ReplacePhase.ReplaceInput)
+            {
+                _replaceWithInput += e.KeyChar;
+            }
+            else if (_searching)
             {
                 _searchInput += e.KeyChar;
             }

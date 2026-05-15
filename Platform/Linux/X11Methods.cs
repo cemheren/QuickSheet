@@ -282,9 +282,13 @@ internal static class X11Methods
     public const ulong XK_o = 0x006f;
     public const ulong XK_p = 0x0070;
     public const ulong XK_q = 0x0071;
+    public const ulong XK_r = 0x0072;
     public const ulong XK_s = 0x0073;
     public const ulong XK_v = 0x0076;
     public const ulong XK_x = 0x0078;
+    public const ulong XK_y = 0x0079;
+    public const ulong XK_n = 0x006e;
+    public const ulong XK_Y = 0x0059;
 
     // Function keys
     public const ulong XK_F1 = 0xffbe;
