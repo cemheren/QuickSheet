@@ -152,6 +152,9 @@ public class SpreadsheetApp
                         _grid.SortByColumn(_selectedCol);
                         _dirty = true;
                         break;
+                    case ConsoleKey.R:
+                        PromptFindReplace();
+                        break;
                 }
                 Render();
                 continue;
@@ -386,6 +389,7 @@ public class SpreadsheetApp
             "  ║  Ctrl+P         Remove row (shift up)    ║",
             "  ║  Ctrl+S         Save to CSV              ║",
             "  ║  Ctrl+F         Find (contains search)   ║",
+            "  ║  Ctrl+R         Find & Replace           ║",
             "  ║  Ctrl+G         Go to cell (e.g. A1)     ║",
             "  ║  Ctrl+Z         Undo                     ║",
             "  ║  Ctrl+Y         Redo                     ║",
@@ -477,6 +481,111 @@ public class SpreadsheetApp
         {
             _searchMatchIndex = -1;
         }
+    }
+
+    private void PromptFindReplace()
+    {
+        int statusY = Console.WindowHeight - 1;
+        int totalWidth = Console.WindowWidth;
+
+        // Step 1: prompt for search term
+        string? findTerm = PromptInput(" Find: ", statusY, totalWidth);
+        if (string.IsNullOrEmpty(findTerm)) return;
+
+        // Count matches
+        int matchCount = 0;
+        for (int r = 0; r < _grid.RowCount; r++)
+            for (int c = 0; c < _grid.ColumnCount; c++)
+                if (_grid.GetCellValue(r, c).Contains(findTerm, StringComparison.OrdinalIgnoreCase))
+                    matchCount++;
+
+        if (matchCount == 0)
+        {
+            Console.SetCursorPosition(0, statusY);
+            Console.BackgroundColor = ConsoleColor.DarkRed;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write($" No matches for \"{findTerm}\"".PadRight(totalWidth));
+            Console.ResetColor();
+            Console.ReadKey(intercept: true);
+            return;
+        }
+
+        // Step 2: prompt for replacement
+        string? replaceTerm = PromptInput($" Replace ({matchCount} matches) with: ", statusY, totalWidth);
+        if (replaceTerm == null) return; // Escape pressed
+
+        // Step 3: confirm
+        Console.SetCursorPosition(0, statusY);
+        Console.BackgroundColor = ConsoleColor.Yellow;
+        Console.ForegroundColor = ConsoleColor.Black;
+        Console.Write($" Replace {matchCount} occurrence(s)? [y/n] ".PadRight(totalWidth));
+        Console.ResetColor();
+
+        var confirm = Console.ReadKey(intercept: true);
+        if (confirm.KeyChar != 'y' && confirm.KeyChar != 'Y') return;
+
+        // Step 4: perform replacement
+        int replaced = 0;
+        for (int r = 0; r < _grid.RowCount; r++)
+        {
+            for (int c = 0; c < _grid.ColumnCount; c++)
+            {
+                string val = _grid.GetCellValue(r, c);
+                if (val.Contains(findTerm, StringComparison.OrdinalIgnoreCase))
+                {
+                    string newVal = val.Replace(findTerm, replaceTerm, StringComparison.OrdinalIgnoreCase);
+                    _grid.SetCellValue(r, c, newVal);
+                    replaced++;
+                }
+            }
+        }
+
+        _dirty = true;
+
+        Console.SetCursorPosition(0, statusY);
+        Console.BackgroundColor = ConsoleColor.DarkGreen;
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.Write($" Replaced {replaced} cell(s)".PadRight(totalWidth));
+        Console.ResetColor();
+        Console.ReadKey(intercept: true);
+    }
+
+    private string? PromptInput(string prompt, int statusY, int totalWidth)
+    {
+        Console.SetCursorPosition(0, statusY);
+        Console.BackgroundColor = ConsoleColor.White;
+        Console.ForegroundColor = ConsoleColor.Black;
+        Console.Write(prompt.PadRight(totalWidth));
+        Console.SetCursorPosition(prompt.Length, statusY);
+        Console.CursorVisible = true;
+
+        string input = "";
+        while (true)
+        {
+            var k = Console.ReadKey(intercept: true);
+            if (k.Key == ConsoleKey.Enter) break;
+            if (k.Key == ConsoleKey.Escape) { Console.CursorVisible = false; Console.ResetColor(); return null; }
+            if (k.Key == ConsoleKey.Backspace)
+            {
+                if (input.Length > 0)
+                {
+                    input = input[..^1];
+                    Console.SetCursorPosition(prompt.Length, statusY);
+                    Console.Write(input.PadRight(totalWidth - prompt.Length));
+                    Console.SetCursorPosition(prompt.Length + input.Length, statusY);
+                }
+                continue;
+            }
+            if (k.KeyChar >= 32 && k.KeyChar <= 126)
+            {
+                input += k.KeyChar;
+                Console.Write(k.KeyChar);
+            }
+        }
+
+        Console.CursorVisible = false;
+        Console.ResetColor();
+        return input;
     }
 
     private void PromptSave()
