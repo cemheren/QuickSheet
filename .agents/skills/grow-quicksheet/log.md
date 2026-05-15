@@ -596,11 +596,20 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Cut v0.11.0 release, color site highlight, merged PRs.
 - Follow-up: Merge PR #67. Bucket D v0.12.0 release with color desktop fix.
 
+## 2026-05-15 16:00
+
+- Stars: 0 (Δ +0)
+- Action: Created quicksheet-jwtdec extension — JWT decoder that runs 100% locally. Privacy-first alternative to jwt.io. Decodes header + claims, annotates timestamps, flags expired tokens, labels well-known claims. Zero network, zero NuGet.
+- Bucket: F (devops/security vertical)
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-jwtdec. PR #69 adds to README/docs.
+- Competitor last did: Stalled since May 14.
+- Follow-up: Bucket C — add jwtdec card to gh-pages. Bucket D — v0.12.0 release.
+
 ## Queued
 
-- Bucket D: v0.12.0 release (color desktop fix + any merged since v0.11.0)
-- Bucket E: markdown/HTML table export (--export-md already exists, enhance it)
-- Bucket F: new extension vertical (data science? cloud costs?)
+- Bucket C: add jwtdec card to gh-pages extensions page
+- Bucket D: v0.12.0 release (color desktop fix + jwtdec + any merged since v0.11.0)
+- Bucket F: quicksheet-cronck (cron expression parser) or quicksheet-gitlog (recent commits)
 - Bucket A: improve first-run UX or README badges
 
 ## 2025-07-17 16:27
