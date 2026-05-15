@@ -69,6 +69,8 @@ public static class ExtensionProtocol
         public string Type { get; set; } = "register";
         public string Prefix { get; set; } = "";
         public string Name { get; set; } = "";
+
+        [JsonConverter(typeof(FlexVersionConverter))]
         public string Version { get; set; } = "";
     }
 
@@ -139,6 +141,28 @@ public static class ExtensionProtocol
                 writer.WriteEndObject();
             }
             writer.WriteEndArray();
+        }
+    }
+
+    /// <summary>
+    /// Accepts version as either string ("1.0.0") or int (1) in JSON,
+    /// always deserializing to string. Extensions may send either format.
+    /// </summary>
+    public class FlexVersionConverter : JsonConverter<string>
+    {
+        public override string Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            return reader.TokenType switch
+            {
+                JsonTokenType.String => reader.GetString() ?? "",
+                JsonTokenType.Number => reader.GetInt64().ToString(),
+                _ => ""
+            };
+        }
+
+        public override void Write(Utf8JsonWriter writer, string value, JsonSerializerOptions options)
+        {
+            writer.WriteStringValue(value);
         }
     }
 
