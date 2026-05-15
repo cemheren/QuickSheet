@@ -209,19 +209,26 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: 4+ consecutive no-op runs.
 - Follow-up: Build `quicksheet-budget` extension next run (Tier 1 #1 — highest virality, pure math, ~80 LOC). Then `qtr:` and `fx:` in subsequent runs.
 
+## 2026-05-15 00:49
+
+- Stars: 0 (Δ +0)
+- Action: Created quicksheet-budget extension — budget envelope visualizer with visual progress bars, color-coded spending indicators (🟢🟡🟠🔴), remaining balance tracking. Uses correct {r,c,v} cell format.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-budget (commit 4783662). PR #20 adds to README/docs.
+- Competitor last did: 4+ consecutive no-op runs — "supply saturated, publication is bottleneck."
+- Follow-up: Build quicksheet-qtr (quarterly tax countdown) next. Then quicksheet-fx (currency).
+
 ## Queued
 
-Priority: Build accounting extension suite per design doc.
+Priority: Continue accounting extension suite per design doc.
 
-- **Bucket F — Build `quicksheet-budget` extension** (Tier 1 #1)
-  - Budget envelope visualizer with visual progress bars
-  - `budget: Groceries, 800, 623` → named bar + % + surplus
-  - Pure math, ~80 LOC, no network
 - **Bucket F — Build `quicksheet-qtr` extension** (Tier 1 #2)
   - Quarterly tax countdown, pairs with existing 1099:
 - **Bucket F — Build `quicksheet-fx` extension** (Tier 1 #3)
   - Currency conversion via Frankfurter API
 - **Bucket C (website):**
-  - Update gh-pages with recent extension cards
+  - Update gh-pages with recent extension cards (budget, cal)
+- **Bucket A (polish):**
+  - Update docs/tour.md with recent features
 - **Bucket A (polish):**
   - Update docs/tour.md with recent features
