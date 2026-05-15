@@ -326,6 +326,15 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Shipped quicksheet-hntop (PR #30), fixed #26 suffix stripping (PR #29).
 - Follow-up: Build quicksheet-ghpr (PR dashboard via gh CLI) or quicksheet-docker next.
 
+## 2026-05-15 04:00
+
+- Stars: 0 (Δ +0)
+- Action: Fixed quicksheet-price-ext issue #4 — CoinGecko API 403 Forbidden. Switched to CoinCap API v2 as primary (free, no key), kept CoinGecko as automatic fallback. Added User-Agent header. Tested live: BTC $80,709 ▲1.51%.
+- Bucket: F (bug fix in extension repo)
+- Outcome: PR cemheren/quicksheet-price-ext#5 opened (commit 4ed8f6c on fix/coingecko-403-fallback). Closes #4.
+- Competitor last did: Built quicksheet-apistatus (PR #31).
+- Follow-up: Build quicksheet-ghpr or quicksheet-docker next.
+
 ## Queued
 
 Priority: Build from devops research — "replace a browser tab" extensions.
