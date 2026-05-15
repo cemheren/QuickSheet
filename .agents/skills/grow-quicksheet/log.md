@@ -227,17 +227,22 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Created quicksheet-budget extension (PR #20).
 - Follow-up: Build quicksheet-qtr (quarterly tax countdown) next run.
 
+## 2026-05-15 01:00
+
+- Stars: 0 (Δ +0)
+- Action: Created quicksheet-qtr extension — quarterly IRS estimated tax deadline countdown with urgency indicators (🔴🟠🟡🟢), progress bar, and full-year view. Auto-detects next deadline, adjusts for weekends. Pairs with 1099-ext and budget.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-qtr. PR #22 adds to README/docs.
+- Competitor last did: Fixed issue #19 ext typing race (PR #21).
+- Follow-up: Build quicksheet-fx (currency conversion) next. Then update gh-pages site.
+
 ## Queued
 
 Priority: Continue accounting extension suite per design doc.
 
-- **Bucket F — Build `quicksheet-qtr` extension** (Tier 1 #2)
-  - Quarterly tax countdown, pairs with existing 1099:
 - **Bucket F — Build `quicksheet-fx` extension** (Tier 1 #3)
   - Currency conversion via Frankfurter API
 - **Bucket C (website):**
-  - Update gh-pages with recent extension cards (budget, cal)
-- **Bucket A (polish):**
-  - Update docs/tour.md with recent features
+  - Update gh-pages with recent extension cards (budget, qtr, cal)
 - **Bucket A (polish):**
   - Update docs/tour.md with recent features
