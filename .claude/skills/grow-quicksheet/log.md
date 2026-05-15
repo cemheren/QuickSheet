@@ -2,6 +2,14 @@
 
 Persistent memory across runs. Append-only (except the Queued section at bottom).
 
+## 2026-05-15 (local run, ghpr docs)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket A (ext repo) — closed quicksheet-ghpr#3. Replaced ASCII-box example in README with A1:E4 cell-grid layout matching what the extension actually writes. Kept the status-icon legend (it's a legend, not a UI mockup).
+- Bucket: A
+- Outcome: PR https://github.com/cemheren/quicksheet-ghpr/pull/4
+- Follow-up: gitst#3 + docker#3 are parallel doc-shaped issues — same treatment (cell-grid example, not ascii). Queue.
+
 ## 2026-05-15 (no-op)
 
 - Stars: 0. All open issues either have an open PR awaiting merge (#14→PR#16, #19→PR#23, #17→batch ext PRs, all 10 ext "cells-format" issues→their respective `Closes #N` PRs), need screenshots (skip), need TUI/desktop runtime (#9), or are large research/infra (#3, #15). 11 main-repo PRs + 11 ext-repo PRs queued. Blocked on user merges.
