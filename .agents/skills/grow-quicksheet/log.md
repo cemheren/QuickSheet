@@ -461,8 +461,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Accounting extension research for #15, closed 18 filler issues.
 - Follow-up: Bucket C — add worldtm + cntdn cards to gh-pages. Or quicksheet-k8s next.
 
+## 2026-05-15 12:27
+
+- Stars: 0 (Δ +0)
+- Action: Added 3 new extension cards to gh-pages extensions page — countdown (cntdn), world clock (worldtm), IRS mileage. Updated count 28→31, SEO keywords.
+- Bucket: C (website & SEO)
+- Outcome: Commit c362626 pushed to gh-pages branch.
+- Competitor last did: Stalled since May 14 — last action was quicksheet-price-ext and docs/tour.md.
+- Follow-up: Bucket F quicksheet-k8s, or Bucket E safe feature.
+
 ## Queued
 
-- Bucket C: Add worldtm + cntdn cards to gh-pages site
 - Bucket F (Tier 2): quicksheet-k8s from devops research doc
-- Bucket F (accounting): quicksheet-mileage-ext, quicksheet-margin-ext for issue #15
+- Bucket F (accounting): quicksheet-margin-ext, quicksheet-depr-ext for issue #15
+- Bucket E: safe additive feature (theme presets, markdown export)
