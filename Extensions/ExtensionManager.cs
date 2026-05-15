@@ -226,40 +226,46 @@ public class ExtensionManager : IDisposable
             var messages = ext.Process.DrainMessages();
             foreach (var json in messages)
             {
-                string? type = GetMessageType(json);
-                switch (type)
+                try
                 {
-                    case "register":
-                        var reg = Deserialize<RegisterMessage>(json);
-                        if (reg != null)
-                        {
-                            ext.Process.HandleRegister(reg);
-                            string prefix = reg.Prefix.ToLowerInvariant();
-                            _prefixMap.TryAdd(prefix, ext.Source);
-                        }
-                        break;
+                    string? type = GetMessageType(json);
+                    switch (type)
+                    {
+                        case "register":
+                            var reg = Deserialize<RegisterMessage>(json);
+                            if (reg != null)
+                            {
+                                ext.Process.HandleRegister(reg);
+                                string prefix = reg.Prefix.ToLowerInvariant();
+                                _prefixMap.TryAdd(prefix, ext.Source);
+                            }
+                            break;
 
-                    case "write":
-                        var write = Deserialize<WriteCellsMessage>(json);
-                        if (write != null)
-                            HandleWriteCells(write);
-                        break;
+                        case "write":
+                            var write = Deserialize<WriteCellsMessage>(json);
+                            if (write != null)
+                                HandleWriteCells(write);
+                            break;
 
-                    case "status":
-                        var status = Deserialize<StatusMessage>(json);
-                        if (status != null)
-                            HandleStatus(status);
-                        break;
+                        case "status":
+                            var status = Deserialize<StatusMessage>(json);
+                            if (status != null)
+                                HandleStatus(status);
+                            break;
 
-                    case "error":
-                        var error = Deserialize<ErrorMessage>(json);
-                        if (error != null)
-                            HandleError(error);
-                        break;
+                        case "error":
+                            var error = Deserialize<ErrorMessage>(json);
+                            if (error != null)
+                                HandleError(error);
+                            break;
 
-                    case "log":
-                        // Could log to debug output in the future
-                        break;
+                        case "log":
+                            break;
+                    }
+                }
+                catch (System.Text.Json.JsonException)
+                {
+                    // Malformed extension message — skip rather than crash the host
                 }
             }
         }

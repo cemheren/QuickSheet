@@ -76,7 +76,70 @@ public static class ExtensionProtocol
     {
         public string Type { get; set; } = "write";
         public string Id { get; set; } = "";
+
+        [JsonConverter(typeof(CellWriteArrayConverter))]
         public CellWrite[] Cells { get; set; } = [];
+    }
+
+    /// <summary>
+    /// Handles two cell formats from extensions:
+    /// 1. Object format: [{r:0, c:0, v:"text"}, ...] — explicit positioning
+    /// 2. Grid format:   [["a","b"], ["c","d"]]      — row-major relative to anchor
+    /// </summary>
+    public class CellWriteArrayConverter : JsonConverter<CellWrite[]>
+    {
+        public override CellWrite[] Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            if (reader.TokenType != JsonTokenType.StartArray)
+                throw new JsonException("Expected array for cells");
+
+            using var doc = JsonDocument.ParseValue(ref reader);
+            var root = doc.RootElement;
+            var result = new System.Collections.Generic.List<CellWrite>();
+
+            for (int i = 0; i < root.GetArrayLength(); i++)
+            {
+                var element = root[i];
+                if (element.ValueKind == JsonValueKind.Object)
+                {
+                    // Object format: {r, c, v}
+                    int r = element.TryGetProperty("r", out var rp) ? rp.GetInt32() : 0;
+                    int c = element.TryGetProperty("c", out var cp) ? cp.GetInt32() : 0;
+                    string v = element.TryGetProperty("v", out var vp) ? vp.GetString() ?? "" : "";
+                    result.Add(new CellWrite { Row = r, Col = c, Value = v });
+                }
+                else if (element.ValueKind == JsonValueKind.Array)
+                {
+                    // Grid format: each inner array is a row of string values
+                    for (int j = 0; j < element.GetArrayLength(); j++)
+                    {
+                        string val = element[j].GetString() ?? "";
+                        result.Add(new CellWrite { Row = i, Col = j, Value = val });
+                    }
+                }
+                else if (element.ValueKind == JsonValueKind.String)
+                {
+                    // Flat array of strings: each element is a row with one column
+                    result.Add(new CellWrite { Row = i, Col = 0, Value = element.GetString() ?? "" });
+                }
+            }
+
+            return result.ToArray();
+        }
+
+        public override void Write(Utf8JsonWriter writer, CellWrite[] value, JsonSerializerOptions options)
+        {
+            writer.WriteStartArray();
+            foreach (var cell in value)
+            {
+                writer.WriteStartObject();
+                writer.WriteNumber("r", cell.Row);
+                writer.WriteNumber("c", cell.Col);
+                writer.WriteString("v", cell.Value);
+                writer.WriteEndObject();
+            }
+            writer.WriteEndArray();
+        }
     }
 
     public class ErrorMessage
