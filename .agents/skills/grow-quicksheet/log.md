@@ -403,3 +403,12 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: PR #49 (Closes #48). 3 PRs merged.
 - Competitor last did: Keyboard shortcuts doc (A), find & replace (E), gh-pages shortcuts page (C).
 - Follow-up: Merge #49, cut v0.8.0 release.
+
+## 2026-05-15 09:57
+
+- Stars: 0 (Δ +0)
+- Action: Fixed quicksheet-cntdn #1 — manifest uses 'entryPoint' instead of 'entry', causing launch failure.
+- Bucket: E (issue fix on extension repo)
+- Outcome: PR #2 on cemheren/quicksheet-cntdn (commit b32e29f).
+- Competitor last did: Merged PRs #44-47, added cntdn extension, curated README (#48).
+- Follow-up: Bucket D v0.8.0 release, or Bucket B topic refresh.
