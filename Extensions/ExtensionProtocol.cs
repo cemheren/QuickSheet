@@ -76,7 +76,64 @@ public static class ExtensionProtocol
     {
         public string Type { get; set; } = "write";
         public string Id { get; set; } = "";
+
+        [JsonConverter(typeof(CellWriteArrayConverter))]
         public CellWrite[] Cells { get; set; } = [];
+    }
+
+    /// <summary>
+    /// Handles both extension cell formats:
+    /// 1. Object array: [{"r":0,"c":0,"v":"hello"}, ...]
+    /// 2. Grid array (string[][]): [["hello","world"], ["row2col1"]]
+    ///    — converts to CellWrite using array indices as row/col offsets.
+    /// </summary>
+    public class CellWriteArrayConverter : JsonConverter<CellWrite[]>
+    {
+        public override CellWrite[] Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            if (reader.TokenType != JsonTokenType.StartArray)
+                throw new JsonException("Expected array for cells");
+
+            var result = new List<CellWrite>();
+            int rowIndex = 0;
+
+            reader.Read(); // move past StartArray
+            while (reader.TokenType != JsonTokenType.EndArray)
+            {
+                if (reader.TokenType == JsonTokenType.StartObject)
+                {
+                    // Object format: {r, c, v}
+                    result.Add(JsonSerializer.Deserialize<CellWrite>(ref reader, options)!);
+                }
+                else if (reader.TokenType == JsonTokenType.StartArray)
+                {
+                    // Grid row format: ["val1", "val2", ...]
+                    int colIndex = 0;
+                    reader.Read(); // move past inner StartArray
+                    while (reader.TokenType != JsonTokenType.EndArray)
+                    {
+                        string value = reader.GetString() ?? "";
+                        result.Add(new CellWrite { Row = rowIndex, Col = colIndex, Value = value });
+                        colIndex++;
+                        reader.Read();
+                    }
+                    rowIndex++;
+                }
+                else
+                {
+                    throw new JsonException($"Unexpected token {reader.TokenType} in cells array");
+                }
+
+                reader.Read(); // move to next element or EndArray
+            }
+
+            return result.ToArray();
+        }
+
+        public override void Write(Utf8JsonWriter writer, CellWrite[] value, JsonSerializerOptions options)
+        {
+            JsonSerializer.Serialize(writer, value, options);
+        }
     }
 
     public class ErrorMessage
