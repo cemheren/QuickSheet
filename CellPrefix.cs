@@ -129,6 +129,15 @@ public static class CellPrefix
     {
         if (!IsExtension(value)) return null;
         string source = value[5..].Trim();
+        // Strip status suffixes that may have been written by older versions
+        foreach (var suffix in new[] { "[install failed]", "[bad manifest]", "[start failed]" })
+        {
+            if (source.EndsWith(suffix))
+            {
+                source = source[..^suffix.Length].Trim();
+                break;
+            }
+        }
         return string.IsNullOrEmpty(source) ? null : source;
     }
 
