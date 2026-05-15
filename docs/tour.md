@@ -74,6 +74,8 @@ Currently public:
 - [`quicksheet-stock-ext`](https://github.com/cemheren/quicksheet-stock-ext) — stock ticker quotes (Stooq).
 - [`quicksheet-1099-ext`](https://github.com/cemheren/quicksheet-1099-ext) — US self-employment tax estimate.
 - [`quicksheet-mileage-ext`](https://github.com/cemheren/quicksheet-mileage-ext) — IRS standard-mileage deduction calculator.
+- [`quicksheet-margin-ext`](https://github.com/cemheren/quicksheet-margin-ext) — break-even point + contribution margin.
+- [`quicksheet-depr-ext`](https://github.com/cemheren/quicksheet-depr-ext) — straight-line + MACRS depreciation schedules.
 - [`quicksheet-grav-ext`](https://github.com/cemheren/quicksheet-grav-ext) — Gravatar profile + avatar URL.
 - [`quicksheet-sysmon`](https://github.com/cemheren/quicksheet-sysmon) — live CPU/RAM/disk/uptime monitor.
 - [`quicksheet-todo`](https://github.com/cemheren/quicksheet-todo) — task management with priorities + due dates.
