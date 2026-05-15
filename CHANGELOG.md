@@ -6,6 +6,30 @@ All notable changes to QuickSheet. Format roughly follows [Keep a Changelog](htt
 
 (empty — bump here before the next tag)
 
+## 0.10.0 — 2026-05-15
+
+### Added
+- **Ctrl+R Find & Replace in desktop mode** (#50) — full find-and-replace state machine in both Windows (WinForms) and Linux (X11) desktop hosts. Phase-based: Find → Replace → Confirm.
+- **Sparkline rendering on Linux desktop** (#9, partial) — `s:` prefix cells now render unicode block-bar charts in Linux desktop mode.
+
+### Extensions (new repos)
+- `quicksheet-worldtm` — Multi-timezone world clock with 40+ aliases, business-hours indicators (🟢🟡🔴).
+- `quicksheet-k8s` — Live Kubernetes pod status from kubeconfig. Color-coded status icons.
+- `quicksheet-mileage-ext` — IRS standard-mileage deduction calculator (business/medical/charity rates).
+- `quicksheet-margin-ext` — Break-even & contribution margin calculator with health indicators.
+
+### Fixed (extensions)
+- Fixed `quicksheet-worldtm` manifest key (`entrypoint` → `entry`).
+- Fixed `quicksheet-mileage-ext` manifest (missing prefix field, enriched metadata).
+- Fixed `quicksheet-portck` manifest key (`entrypoint` → `entry`).
+- Fixed `quicksheet-hntop` manifest key (`entrypoint` → `entry`).
+- Fixed `quicksheet-ghpr` search fields + params mismatch.
+- Fixed `quicksheet-gitst` params field (`arguments` → `params` array).
+
+### Changed
+- **README curated** — trimmed from 26 verbose extension examples to 3 hero showcases + compact install table.
+- **Repo topics refreshed** — added 11 new GitHub topics for discoverability.
+
 ## 0.8.0 — 2026-05-15
 
 ### Added
