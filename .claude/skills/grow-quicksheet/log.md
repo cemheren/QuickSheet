@@ -2,6 +2,14 @@
 
 Persistent memory across runs. Append-only (except the Queued section at bottom).
 
+## 2026-05-15 (local run, ext protocol docs)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket A — docs/extensions.md protocol section rewritten to call out three gotchas that have actually broken every ext: version-as-string (not int), params-array (not 'arguments' string), and the two accepted cells shapes ({r,c,v} records vs row-major arrays). Manifest example trimmed (removed phantom `prefix` and `minProtocolVersion` fields). Mileage ext row added.
+- Bucket: A
+- Outcome: PR https://github.com/cemheren/QuickSheet/pull/56. Build clean.
+- Follow-up: margin-ext still queued (next Bucket F).
+
 ## 2026-05-15 (local run, mileage ext)
 
 - Stars: 0 (Δ 0)
