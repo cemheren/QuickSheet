@@ -1,0 +1,8 @@
+{
+  "name": "fx",
+  "prefix": "fx",
+  "version": "1.0.0",
+  "description": "Live currency conversion using ECB rates via Frankfurter API. No API key required.",
+  "entry": "dotnet build --tl:false -nologo -v q QuickSheetFx.csproj 1>&2 && dotnet run --no-build --project QuickSheetFx.csproj",
+  "minProtocolVersion": 1
+}

@@ -245,6 +245,17 @@ qtr:
 
 Shows next deadline date, days remaining, and a progress bar. Use `qtr: 2026` for all deadlines in a tax year. Pairs with 1099-ext for a complete freelancer tax dashboard.
 
+### Example: Currency conversion
+
+The [quicksheet-fx](https://github.com/cemheren/quicksheet-fx) extension converts currencies using ECB rates via Frankfurter API — no API key required, 200+ currencies:
+
+```
+ext: github:cemheren/quicksheet-fx
+fx: 1000, USD, EUR, GBP
+```
+
+Shows converted amounts, exchange rates, and the ECB rate date. Part of the freelancer finance suite with `1099:`, `budget:`, and `qtr:`.
+
 ### Example: Gravatar lookup
 
 The [quicksheet-grav-ext](https://github.com/cemheren/quicksheet-grav-ext) extension looks up Gravatar profiles by email — display name, location, and avatar URL:
