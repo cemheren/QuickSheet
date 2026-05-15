@@ -1,32 +1,36 @@
 # QuickSheet Test Log
 
-## Run: 2026-05-15 10:45
-Commit: 80dee2b (main)
+## Run: 2026-05-15 11:47
+Commit: b27a05f (main)
 Build: Release
 
 ### Discovery
-- **PR #47 MERGED**: Find & Replace (Ctrl+R) — added to console mode ONLY, not desktop mode
-- **v0.8.0 released** (includes PR #44 FlexVersionConverter, PR #47 Find & Replace, PR #46 keyboard shortcuts doc)
-- Open PRs on extension repos (not merged): cntdn#2, gitst#5, hntop#3, portck#2
-- No new `quicksheet-*` repos since last run (29 total including console)
-- **Issue #50 filed**: Ctrl+R Find & Replace not available in desktop mode
+- **PR #51 MERGED**: Ctrl+R Find & Replace added to desktop mode — **Issue #50 CLOSED**
+- **PR #49 MERGED**: README extensions curation
+- **cntdn#2 MERGED**: manifest `entryPoint` → `entry` fix
+- **hntop#3 MERGED**: manifest `entrypoint` → `entry` fix
+- **portck#2 MERGED**: manifest `entrypoint` → `entry` fix
+- **gitst#7 MERGED**: `arguments` → `params` fix
+- No new `quicksheet-*` repos (still 29 total including console)
 
 ### Tests Run
 
 | ID | Result | Notes |
 |----|--------|-------|
-| A59 | ❌ FAIL | Ctrl+R does nothing in desktop mode. Filed QuickSheet#50. Same pattern as #35 (Ctrl+B was console-only). |
-| A43 | ✅ PASS | Enter on i: A4 cell — cursor stayed on A5 (Enter intercepted for inline rerun). Output refreshed (same value from `echo testoutput`). |
-
-### Issues Filed
-- **cemheren/QuickSheet#50** — Ctrl+R Find & Replace not in desktop mode (DesktopForm.cs missing `case Keys.R`)
+| A59 | ✅ PASS | Ctrl+R now works in desktop mode (PR #51). Status bar shows "Find: │", then "Replace (1 matches) with: │". Full state machine works. |
+| A60 | ✅ PASS | Ctrl+B sorts column alphabetically. Before: cherry→banana→apple. After: apple→banana→cherry. Desktop files column also re-sorted. |
+| C21 | ✅ PASS | hntop manifest fixed (PR #3). Shows top 5 HN stories with scores + comment counts. Updated timestamp visible. |
+| C24 | ✅ PASS | portck manifest fixed (PR #2). Port scan: 80, 443, 8080 all "⚠ Unknown port", "⚠ 0/3 up". |
+| C27 | ✅ PASS | cntdn manifest fixed (PR #2). Countdown to 2026-12-25: "7mo 10d", progress bar at 39%. |
+| C26 | ✅ PASS | gitst params fix (PR #7). Shows repo: cemheren-quicks..., branch: main, status: ✅ clean, last commit: "Merge pull request #7". |
 
 ### Cumulative Summary
 - **Total tests:** 83 (48 core + 8 ext system + 27 extensions)
-- **Passed:** 81 (80 prev + A43)
-- **Failed:** A59 (Ctrl+R desktop), C21 (hntop entry), C24 (portck entry), C27 (cntdn entry), C23 (ghpr), C25 (docker), C26 (gitst params), sparkline #9 = 8
+- **Passed:** 72 (83 - 2 fail - 1 blocked - 8 skip)
+- **Failed:** C23 (ghpr params+reviewDecision), C25 (docker Windows unsupported) = 2
 - **Blocked:** C16 (copilot auth) = 1
-- **Skipped:** A2, A3, A5, A6, A20, A21, A52, A53, A60 = 9
+- **Skipped:** A2, A3, A5, A6, A20, A21, A52, A53 = 8
+- **Note:** Sparkline issue #9 tracked separately (not a numbered test)
 
 ---
 
