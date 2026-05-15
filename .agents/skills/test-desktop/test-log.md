@@ -1,5 +1,36 @@
 # QuickSheet Test Log
 
+## Run: 2026-05-15 13:48
+Commit: ff7f371 (main)
+Build: Release
+
+### Discovery
+- 2 new extensions: **quicksheet-margin-ext** (break-even analysis), **quicksheet-k8s** (Kubernetes pod status)
+- Grow skill running in parallel (gh-pages updates, PR merges)
+- `grow/add-margin-ext` branch exists — margin-ext added to QuickSheet docs
+- worldtm PR#2/#3 still OPEN — manifest fix not merged
+- mileage-ext PR#2/#3 still OPEN — manifest fix not merged
+- v0.10.0 being cut by grow skill
+- 33 quicksheet-* repos total (was 31)
+
+### Tests Run
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C30 | ✅ PASS | margin-ext: "🟡 Moderate margin", CM $40,000/unit (40%), break-even 1 unit, BE revenue $100k. Correct output! |
+| C31 | ⚠️ BLOCKED | k8s: "Error: The operation has timed out" — no Kubernetes cluster configured. Extension ran correctly. |
+| C28 | ❌ FAIL | worldtm: still "Manifest missing 'entry' field" — fix PRs #2/#3 still OPEN |
+| C29 | ❌ FAIL | mileage-ext: still missing prefix field — fix PRs #2/#3 still OPEN |
+
+### Cumulative Summary
+- **Total tests:** 87 (48 core + 8 ext system + 31 extensions)
+- **Passed:** 75 (prev 74 + C30)
+- **Failed:** C28 (worldtm entry), C29 (mileage prefix) = 2
+- **Blocked:** C16 (copilot auth), C25 (docker not running), C31 (k8s no cluster) = 3
+- **Skipped:** A2, A3, A5, A6, A20, A21, A52 = 7
+
+---
+
 ## Run: 2026-05-15 12:47
 Commit: 9ee51dd (main)
 Build: Release

@@ -283,6 +283,8 @@ First install each extension via its `ext:` cell. Then test the prefix.
 | C27 | quicksheet-cntdn | `ext: github:cemheren/quicksheet-cntdn` | `cntdn: 2026-12-25,1,3` | Countdown to date: days, hours, minutes remaining with progress |
 | C28 | quicksheet-worldtm | `ext: github:cemheren/quicksheet-worldtm` | `worldtm: London,Tokyo,NY,1,5` | Multi-timezone world clock with current times |
 | C29 | quicksheet-mileage-ext | `ext: github:cemheren/quicksheet-mileage-ext` | `mileage: 1000,1,4` | IRS standard mileage rate calculation |
+| C30 | quicksheet-margin-ext | `ext: github:cemheren/quicksheet-margin-ext` | `margin: 100000,60000,25000,1,5` | Break-even analysis: CM per unit, break-even units, revenue |
+| C31 | quicksheet-k8s | `ext: github:cemheren/quicksheet-k8s` | `k8s: default,1,5` | Kubernetes pod status from kubeconfig (requires kubectl) |
 
 ---
 
