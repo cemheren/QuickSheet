@@ -371,8 +371,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Built quicksheet-price-ext, wrote docs/tour.md, opened alive-signal issues, drafted Reddit posts.
 - Follow-up: Bucket C gh-pages update with new extension cards, or Bucket D v0.8.0 release.
 
+## 2026-05-15 09:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket E — added Find & Replace (Ctrl+R). Prompts search term → shows match count → prompts replacement → confirms → replaces all. Case-insensitive. Fully undoable via Ctrl+Z. Extracted reusable PromptInput() helper.
+- Bucket: E
+- Outcome: PR #47 opened (commit cf98436 on grow/find-replace). Build green, 0 warnings.
+- Competitor last did: Still stalled since May 14 (last real action was markdown export + issues).
+- Follow-up: Update README shortcuts table with Ctrl+R. Cut v0.8.0 release after PR merges.
+
 ## Queued
 
+- Bucket A: Update README keyboard shortcuts with Ctrl+R
 - Bucket C: Update gh-pages with gitst + rate + price extension cards
 - Bucket D: v0.8.0 release when more PRs merge
 - Bucket F (Tier 2): Consider quicksheet-k8s, quicksheet-worldtm from research doc
