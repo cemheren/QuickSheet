@@ -552,8 +552,24 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Added c:color: prefix feature (PR #61), wrote FAQ, linked accounting extensions.
 - Follow-up: Bucket C gh-pages color feature highlight, or Bucket E safe feature.
 
-## Queued
+
 
 - Bucket C: Add color-prefix feature highlight to gh-pages
 - Bucket E: safe additive feature (status bar, markdown export)
 - Bucket B: CONTRIBUTING.md or issue templates
+
+
+## 2026-05-15 14:57
+
+- Stars: 0 (Δ +0)
+- Action: Fixed quicksheet-depr-ext#1 — 3 protocol bugs (init/activate types, r/c/v cell format).
+- Bucket: E (issue fix)
+- Outcome: PR #2 on cemheren/quicksheet-depr-ext (2541d68). Build-tested.
+- Competitor last did: Stalled since May 14.
+- Follow-up: Bucket D v0.11.0 release. Bucket A document c: prefix.
+
+## Queued
+
+- Bucket D: v0.11.0 release with depr-ext fix + accounting suite
+- Bucket A: Document c: prefix in docs/keyboard-shortcuts.md
+- Bucket E: markdown export or status bar improvement
