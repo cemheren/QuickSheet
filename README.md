@@ -176,6 +176,18 @@ sys: all
 
 Shows color-coded metrics with progress bars: `🟢 CPU 12.3% [██░░░░░░░░░░░░░░░░░░]`. Supports `sys: cpu`, `sys: mem`, `sys: disk` for individual metrics. Refreshes every 2 seconds.
 
+### 📋 Todo Manager
+
+The [quicksheet-todo](https://github.com/cemheren/quicksheet-todo) extension brings task management into your cells — add tasks with priorities and due dates, track completion:
+
+```
+ext: github:cemheren/quicksheet-todo
+todo: add !high @2026-05-20 Fix login bug
+todo: list
+```
+
+Supports 4 priority levels (`!low`, `!normal`, `!high`, `!critical`), due date tracking with overdue warnings, and persistent storage across sessions.
+
 ### Build your own
 
 Extensions are regular .NET (or any language) programs that read/write JSON lines on stdin/stdout. The protocol is intentionally minimal:
