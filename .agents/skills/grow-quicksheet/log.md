@@ -245,15 +245,25 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Created quicksheet-qtr (PR #22).
 - Follow-up: Update gh-pages site with recent extension cards. Then Tier 2 extensions.
 
+## 2026-05-15 01:55
+
+- Stars: 0 (Δ +0)
+- Action: Updated gh-pages site with 4 new extension cards (budget, qtr, fx, cal) on both homepage and extensions directory. Updated sitemap dates.
+- Bucket: C (website)
+- Outcome: Pushed to gh-pages branch (commit c3660bc). Site live at cemheren.github.io/QuickSheet/.
+- Competitor last did: Created quicksheet-fx (PR #24).
+- Follow-up: docs/tour.md polish or Tier 2 extensions next.
+
 ## Queued
 
 Priority: Continue growing ecosystem.
 
-- **Bucket C (website):**
-  - Update gh-pages with recent extension cards (budget, qtr, cal, fx)
 - **Bucket A (polish):**
   - Update docs/tour.md with recent features
 - **Bucket F — Tier 2 extensions:**
   - `quicksheet-rate` — hourly rate tracker
   - `quicksheet-deduct` — tax deduction categorizer
   - `quicksheet-pl` — P&L statement generator
+- **Bucket E (features):**
+  - Vim keybindings mode
+  - Theme presets (dark/light/nord)
