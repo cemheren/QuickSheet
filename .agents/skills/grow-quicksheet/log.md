@@ -442,3 +442,12 @@ Priority: Continue devops extension suite.
 - Outcome: Repo live at https://github.com/cemheren/quicksheet-docker. PR #39 adds to README/docs.
 - Competitor last did: Filed issue #35, built portck (PR #36), fixed #35 (PR #38).
 - Follow-up: Build quicksheet-gitst (git repo status) or update gh-pages with docker+ghpr+portck cards.
+
+## 2026-05-15 06:57
+
+- Stars: 0 (Δ +0)
+- Action: Cut v0.7.0 release — desktop sort fix, define-ext crash fix, 3 new devops extensions (ghpr, portck, docker). Detailed release notes with changelogs and install command.
+- Bucket: D (Release)
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.7.0
+- Competitor last did: Added ghpr/portck/docker cards to gh-pages, filed/fixed #35, built portck.
+- Follow-up: Build quicksheet-gitst (git repo status) next. Or do Bucket A docs polish.
