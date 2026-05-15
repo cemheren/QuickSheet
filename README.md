@@ -300,6 +300,17 @@ portck: postgres, redis, api:3000, nginx
 
 Shows 🟢 UP / 🔴 DOWN with latency for each service. Knows 20 well-known port names (postgres=5432, redis=6379, etc.). Pure local TCP — no APIs, no credentials.
 
+### Example: Countdown to important dates
+
+The [quicksheet-cntdn](https://github.com/cemheren/quicksheet-cntdn) extension shows countdown timers to deadlines, launches, holidays — with color-coded urgency and progress bars:
+
+```
+ext: github:cemheren/quicksheet-cntdn
+cntdn: 2026-12-25 Christmas, 2026-07-04 Independence Day, 2026-06-15 Project Launch
+```
+
+Shows ⏳ remaining time (🔴 <1h, 🟡 <7d, 🟢 <30d, 🔵 >30d, ✅ past) with visual progress bars. No arguments shows upcoming US holidays.
+
 ### Example: Gravatar lookup
 
 The [quicksheet-grav-ext](https://github.com/cemheren/quicksheet-grav-ext) extension looks up Gravatar profiles by email — display name, location, and avatar URL:
