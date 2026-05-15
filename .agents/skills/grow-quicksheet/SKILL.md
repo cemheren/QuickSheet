@@ -60,15 +60,31 @@ Pick, execute, log, report.
 3. **Check analytics** (if site is deployed): Use Chrome DevTools to visit Google
    Analytics / Search Console. Note traffic, top referrers, keyword rankings.
    Log any notable changes. Use data to inform action selection.
-4. **Pick ONE action** from the menu below. Selection rules:
+4. **Check open issues** across the main repo and all `quicksheet-*` extension repos:
+   ```bash
+   # Main repo issues
+   gh issue list --repo cemheren/QuickSheet --state open --json number,title,url
+   # Extension repo issues
+   for r in $(gh repo list cemheren --limit 200 --json name \
+       -q '.[].name | select(startswith("quicksheet"))'); do
+     gh issue list --repo "cemheren/$r" --state open --json number,title,url \
+       | jq --arg r "$r" 'map(. + {repo: $r})'
+   done
+   ```
+   - **Open issues are top priority.** Fix the smallest qualifying issue first.
+   - **Skip issues that already have a pending PR** — check with
+     `gh pr list --repo cemheren/<repo> --state open --json title,headRefName`.
+   - Fix on a branch in the repo where the issue lives (main repo OR extension repo).
+   - PR body must include `Closes #N` to auto-close the issue on merge.
+5. **If no open issues**, pick ONE action from the menu below. Selection rules:
    - Prefer items under `## Queued` in your log.
    - Don't repeat what the competitor just did — build on it or pick a different angle.
    - Bias toward variety: do not repeat the same bucket two runs in a row.
    - Prefer high expected value × low risk.
    - If unsure, default to Bucket E (features) or Bucket A (polish).
-5. **Execute** the action end-to-end. No mid-run questions.
-6. **Update your log** with date, action, outcome, star count, follow-ups.
-7. **Create a PR** for any code/doc changes:
+6. **Execute** the action end-to-end. No mid-run questions.
+7. **Update your log** with date, action, outcome, star count, follow-ups.
+8. **Create a PR** for any code/doc changes:
    - Create a feature branch: `git checkout -b grow/<short-description>`
    - Make a single focused commit (Conventional Commits style).
    - Push the branch and open a PR: `gh pr create --title "..." --body "..."`.
@@ -78,7 +94,7 @@ Pick, execute, log, report.
      "draft saved" — do not publish.
    - Log updates (`.agents/skills/grow-quicksheet/log.md`) may be committed
      directly to `main` since they are internal bookkeeping, not code changes.
-8. **Report** a 3-6 line summary at end of run: action, outcome, star delta, next.
+9. **Report** a 3-6 line summary at end of run: action, outcome, star delta, next.
 
 # Action menu
 
