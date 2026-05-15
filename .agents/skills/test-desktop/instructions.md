@@ -276,14 +276,51 @@ gh issue create --repo cemheren/<extension-repo> \
 **Extension version:** latest main"
 ```
 
+## Test Log
+
+Maintain a persistent test log at `.agents/skills/test-desktop/test-log.md`. This enables incremental testing — you don't need to re-run tests that already passed.
+
+### Log format
+
+```markdown
+# QuickSheet Test Log
+
+## Run: YYYY-MM-DD HH:MM
+Commit: <short hash>
+Build: Release / Debug
+
+| ID | Result | Notes |
+|----|--------|-------|
+| A1 | ✅ PASS | Window launched, tray icon visible |
+| A2 | ❌ FAIL | Issue #42 filed |
+| A3 | ⏭️ SKIP | Requires manual Alt+Tab verification |
+| C16 | ⚠️ BLOCKED | Copilot CLI not authenticated |
+```
+
+### Rules for the log
+
+1. **Append, don't overwrite** — each test run adds a new `## Run:` section
+2. **Only re-test** items that previously failed, were skipped, or haven't been tested yet
+3. **Link issues** — when you file an issue, add `→ issue #N` to the Notes column
+4. **Mark regressions** — if a previously-passing test now fails, prefix with `🔄 REGRESSION`
+5. **Record the commit hash** so results can be tied to a specific codebase state
+
+### Reading the log
+
+Before running tests, read `test-log.md` to determine what still needs testing:
+- All `❌ FAIL` items: re-test to check if fixed
+- All `⏭️ SKIP` items: attempt if conditions now allow
+- Any test IDs not in the log: run them
+- All `✅ PASS` items: skip unless the relevant code changed since that run
+
 ## Execution Procedure
 
-1. **Clean state**: Delete `Desktop/autosave.csv` and `%APPDATA%/QuickSheet/extensions/` if they exist
-2. **Build**: `dotnet build -c Release ExcelConsole.csproj`
-3. **Launch**: `dotnet run -c Release --project ExcelConsole.csproj -- --desktop`
-4. **Run Group A** tests in order. Log each pass/fail. Ctrl+Q to quit if needed between batches.
-5. **Re-launch** and **run Group B** tests (extension system mechanics)
-6. **Run Group C** tests (keep the same session, install all extensions)
-7. **Ctrl+Q** to quit
-8. **File issues** for all failures
-9. **Report** summary: total tests, passed, failed, issues filed
+1. **Read test-log.md** to see what's already been tested and what needs re-testing
+2. **Clean state** (only if doing a full run): Delete `Desktop/autosave.csv` and `%APPDATA%/QuickSheet/extensions/`
+3. **Build**: `dotnet build -c Release ExcelConsole.csproj`
+4. **Launch**: `dotnet run -c Release --project ExcelConsole.csproj -- --desktop`
+5. **Run pending tests** — Group A → B → C, skipping already-passed tests
+6. **Update test-log.md** after each batch
+7. **File issues** for failures (with screenshots + debug logs)
+8. **Commit test-log.md** after each session
+9. **Report** summary: total tests, passed, failed, skipped, issues filed
