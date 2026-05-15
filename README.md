@@ -150,6 +150,7 @@ tls: github.com, 1, 4
 | `budget:` | Budget envelopes | `ext: github:cemheren/quicksheet-budget` |
 | `worldtm:` | World clock / timezones | `ext: github:cemheren/quicksheet-worldtm` |
 | `margin:` | Break-even & margin calc | `ext: github:cemheren/quicksheet-margin-ext` |
+| `depr:` | Depreciation schedules | `ext: github:cemheren/quicksheet-depr-ext` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
