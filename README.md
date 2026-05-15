@@ -234,6 +234,17 @@ ext: github:cemheren/quicksheet-1099-ext
 
 Shows SE tax estimate, quarterly payment amount, and a reminder that it's not tax advice.
 
+### Example: Quarterly tax deadline countdown
+
+The [quicksheet-qtr](https://github.com/cemheren/quicksheet-qtr) extension shows the next IRS estimated tax deadline with a countdown and urgency indicator:
+
+```
+ext: github:cemheren/quicksheet-qtr
+qtr:
+```
+
+Shows next deadline date, days remaining, and a progress bar. Use `qtr: 2026` for all deadlines in a tax year. Pairs with 1099-ext for a complete freelancer tax dashboard.
+
 ### Example: Gravatar lookup
 
 The [quicksheet-grav-ext](https://github.com/cemheren/quicksheet-grav-ext) extension looks up Gravatar profiles by email — display name, location, and avatar URL:
