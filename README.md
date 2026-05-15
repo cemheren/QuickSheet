@@ -372,6 +372,17 @@ docker: all
 
 Connects via Unix socket (`/var/run/docker.sock`) or TCP (`DOCKER_HOST`). Shows 🟢running, 🔴exited, ⏸️paused with ports and images.
 
+### Example: Git repo status
+
+The [quicksheet-gitst](https://github.com/cemheren/quicksheet-gitst) extension shows branch, modified/staged/untracked counts, stashes, and last commit for your repos:
+
+```
+ext: github:cemheren/quicksheet-gitst
+gitst: ~/Projects/myapp, ~/Projects/infra
+```
+
+Scans one or more repos (comma-separated paths, or auto-scans current directory). Like a persistent `git status` on your wallpaper.
+
 ### Build your own
 
 Extensions are regular .NET (or any language) programs that read/write JSON lines on stdin/stdout. The protocol is intentionally minimal:
