@@ -602,3 +602,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket E: markdown/HTML table export (--export-md already exists, enhance it)
 - Bucket F: new extension vertical (data science? cloud costs?)
 - Bucket A: improve first-run UX or README badges
+
+## 2025-07-17 16:27
+
+- Stars: 0 (Δ +0)
+- Action: Added 4 missing keyboard shortcuts to Linux desktop mode (Ctrl+Z/Y/T/G)
+- Bucket: E (code)
+- Outcome: PR #68 opened (commit b7dd957). Build green before and after.
+- Details: Ctrl+Z=undo, Ctrl+Y=redo, Ctrl+T=theme cycle, Ctrl+G=goto cell with input prompt. Added XK_z/t/g keysym constants. Partially addresses #66 (4 of 5; help overlay deferred).
+- Competitor last did: stalled since May 14
+- Follow-up: Ctrl+H help overlay for desktop, or new extension vertical
+
+## Queued
+- Bucket E: Help overlay for desktop mode (completes #66)
+- Bucket F: New extension — data science or cloud cost vertical
+- Bucket C: Add more extension cards to gh-pages
