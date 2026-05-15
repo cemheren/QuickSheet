@@ -335,21 +335,28 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Built quicksheet-apistatus (PR #31).
 - Follow-up: Build quicksheet-ghpr or quicksheet-docker next.
 
+
+## 2026-05-15 04:49
+
+- Stars: 0 (delta +0)
+- Action: Merged 5 PRs (#27 bug fix, #28 sort, #30 hntop docs, #32 apistatus docs, price-ext#5). Closed duplicate #29. Cut v0.6.0 release with column sort, 5 new extensions, 10 extension bug fixes.
+- Bucket: D (releases and maintenance)
+- Outcome: v0.6.0 released at https://github.com/cemheren/QuickSheet/releases/tag/v0.6.0. 6 PRs resolved.
+- Competitor last did: Updated gh-pages with hntop/apistatus cards (commit 021ddd6).
+- Follow-up: Build quicksheet-ghpr or quicksheet-portck next. Update gh-pages with v0.6.0 banner.
 ## Queued
 
 Priority: Build from devops research — "replace a browser tab" extensions.
 
-- **Bucket F — Tier 1 devops extensions (highest impact):**
+- **Bucket F — Tier 1 devops extensions:**
   - `quicksheet-ghpr` — PR review dashboard via `gh` CLI (4/5)
   - `quicksheet-docker` — container health via Docker socket (5/5)
   - `quicksheet-portck` — TCP port/service health checker (5/5)
   - `quicksheet-gitst` — git repo status (branch, modified, stashes) (5/5)
-- **Bucket D:**
-  - Cut v0.6.0 release when PRs merge
 - **Bucket C:**
-  - Update gh-pages with apistatus + hntop + sort feature cards
+  - Update gh-pages with v0.6.0 release banner
 
-## 2025-05-15 04:30
+## 2026-05-15 04:30
 
 - Stars: 0 (Δ +0)
 - Action: Updated gh-pages site — added hntop + apistatus extension cards, column sorting feature row in comparison table, Ctrl+B in keyboard shortcuts, updated SEO meta tags.
