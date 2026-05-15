@@ -1,36 +1,38 @@
 # QuickSheet Test Log
 
-## Run: 2026-05-15 11:47
-Commit: b27a05f (main)
+## Run: 2026-05-15 12:47
+Commit: 9ee51dd (main)
 Build: Release
 
 ### Discovery
-- **PR #51 MERGED**: Ctrl+R Find & Replace added to desktop mode — **Issue #50 CLOSED**
-- **PR #49 MERGED**: README extensions curation
-- **cntdn#2 MERGED**: manifest `entryPoint` → `entry` fix
-- **hntop#3 MERGED**: manifest `entrypoint` → `entry` fix
-- **portck#2 MERGED**: manifest `entrypoint` → `entry` fix
-- **gitst#7 MERGED**: `arguments` → `params` fix
-- No new `quicksheet-*` repos (still 29 total including console)
+- **PR #52 MERGED**: sparkline (s:) prefix in Linux desktop mode
+- **ghpr#2 MERGED**: fix reviewDecision + params + flatten cells
+- **docker#2 MERGED**: Windows named pipe + params fix; **docker#4 MERGED**: register version as string
+- 2 new extensions: **quicksheet-worldtm** (world clock), **quicksheet-mileage-ext** (IRS mileage)
+- PRs open: #53 (changelog), #54 (worldtm docs), #55 (mileage link), #56 (extensions doc protocol)
+- v0.9.0 tagged
+- 31 quicksheet-* repos (was 29 last run)
 
 ### Tests Run
 
 | ID | Result | Notes |
 |----|--------|-------|
-| A59 | ✅ PASS | Ctrl+R now works in desktop mode (PR #51). Status bar shows "Find: │", then "Replace (1 matches) with: │". Full state machine works. |
-| A60 | ✅ PASS | Ctrl+B sorts column alphabetically. Before: cherry→banana→apple. After: apple→banana→cherry. Desktop files column also re-sorted. |
-| C21 | ✅ PASS | hntop manifest fixed (PR #3). Shows top 5 HN stories with scores + comment counts. Updated timestamp visible. |
-| C24 | ✅ PASS | portck manifest fixed (PR #2). Port scan: 80, 443, 8080 all "⚠ Unknown port", "⚠ 0/3 up". |
-| C27 | ✅ PASS | cntdn manifest fixed (PR #2). Countdown to 2026-12-25: "7mo 10d", progress bar at 39%. |
-| C26 | ✅ PASS | gitst params fix (PR #7). Shows repo: cemheren-quicks..., branch: main, status: ✅ clean, last commit: "Merge pull request #7". |
+| C23 | ✅ PASS | ghpr fix (PR #2) works! Response: "No PRs need attention" — valid output for no matching PRs. |
+| C25 | ⚠️ BLOCKED | Docker Desktop not running on this machine. Extension code fixes verified (PRs #2, #4 merged). |
+| C28 | ❌ FAIL | worldtm: manifest uses `"entrypoint"` instead of `"entry"` → filed worldtm#1 |
+| C29 | ❌ FAIL | mileage-ext: manifest missing `"prefix"` field → filed mileage-ext#1 |
+
+### Issues Filed
+- **cemheren/quicksheet-worldtm#1** — Manifest uses 'entrypoint' instead of 'entry'
+- **cemheren/quicksheet-mileage-ext#1** — Manifest missing 'prefix' field
 
 ### Cumulative Summary
-- **Total tests:** 83 (48 core + 8 ext system + 27 extensions)
-- **Passed:** 72 (83 - 2 fail - 1 blocked - 8 skip)
-- **Failed:** C23 (ghpr params+reviewDecision), C25 (docker Windows unsupported) = 2
-- **Blocked:** C16 (copilot auth) = 1
-- **Skipped:** A2, A3, A5, A6, A20, A21, A52, A53 = 8
-- **Note:** Sparkline issue #9 tracked separately (not a numbered test)
+- **Total tests:** 85 (48 core + 8 ext system + 29 extensions)
+- **Passed:** 74 (85 - 2 fail - 2 blocked - 7 skip)
+- **Failed:** C28 (worldtm entry), C29 (mileage prefix) = 2
+- **Blocked:** C16 (copilot auth), C25 (docker not running) = 2
+- **Skipped:** A2, A3, A5, A6, A20, A21, A52 = 7
+- **Note:** Sparkline issue #9 tracked separately
 
 ---
 

@@ -281,6 +281,8 @@ First install each extension via its `ext:` cell. Then test the prefix.
 | C25 | quicksheet-docker | `ext: github:cemheren/quicksheet-docker` | `docker: all,1,5` | Docker container status dashboard (requires Docker Desktop) |
 | C26 | quicksheet-gitst | `ext: github:cemheren/quicksheet-gitst` | `gitst: .,1,5` | Git repo status: branch, clean/dirty, stash count, last commit |
 | C27 | quicksheet-cntdn | `ext: github:cemheren/quicksheet-cntdn` | `cntdn: 2026-12-25,1,3` | Countdown to date: days, hours, minutes remaining with progress |
+| C28 | quicksheet-worldtm | `ext: github:cemheren/quicksheet-worldtm` | `worldtm: London,Tokyo,NY,1,5` | Multi-timezone world clock with current times |
+| C29 | quicksheet-mileage-ext | `ext: github:cemheren/quicksheet-mileage-ext` | `mileage: 1000,1,4` | IRS standard mileage rate calculation |
 
 ---
 
