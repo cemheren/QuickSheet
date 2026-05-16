@@ -716,3 +716,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket A: README "Why this exists" section or feature comparison table
 - Bucket F: quicksheet-envck (env var viewer) or quicksheet-b64 (base64 encode/decode)
 - Bucket E: Status bar improvements (file name, cell count)
+
+## 2026-05-15 18:00
+
+- Stars: 0 (Δ +0)
+- Action: Fixed quicksheet-cronck#1 — protocol bugs (init_response→register, activate_response→write+id)
+- Bucket: A (ext repo issue fix)
+- Outcome: PR #2 on cemheren/quicksheet-cronck (commit 816aaa2). Build verified, smoke-tested.
+- Competitor last did: Cut v0.13.0 release, added cronck/gitlog cards to gh-pages
+- Follow-up: Fix quicksheet-gitlog#1 (same protocol bug). Then Bucket B CONTRIBUTING.md.
+
+## Queued
+- Fix quicksheet-gitlog#1 (same protocol pattern)
+- Bucket B: CONTRIBUTING.md (alive signal)
+- Bucket A: README badges or first-run UX
+- Bucket E: Status bar improvements
