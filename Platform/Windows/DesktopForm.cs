@@ -522,9 +522,6 @@ internal class DesktopForm : DesktopFormBase
                 bool isLink = IsHyperlink(cellVal);
                 bool isCmd = IsCommand(cellVal);
                 bool isLoop = CellPrefix.IsLoop(cellVal);
-                var colorParsed = CellPrefix.ParseColor(cellVal);
-                if (colorParsed != null)
-                    displayVal = colorParsed.Value.text;
 
                 bool isConflict = cellVal.StartsWith("c: ", StringComparison.Ordinal);
                 var extStatus = _extensionManager.GetCellStatus(r, c);
