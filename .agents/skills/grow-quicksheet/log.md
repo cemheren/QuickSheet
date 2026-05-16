@@ -702,3 +702,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket B: CONTRIBUTING.md (alive signal)
 - Bucket A: README badges (build status, .NET version, license)
 - Bucket D: v0.13.0 release once PRs #73 #74 merged
+
+## 2026-05-15 17:57
+
+- Stars: 0 (Δ +0)
+- Action: Cut v0.13.0 release — cronck + gitlog extensions, colorParsed bug fix, 37 extension cards on site
+- Bucket: D (release)
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.13.0
+- Competitor last did: Opened PR #76 (Windows desktop shortcuts), closed PR #74
+- Follow-up: Bucket A — README polish or docs. Bucket F — new extension vertical.
+
+## Queued
+- Bucket A: README "Why this exists" section or feature comparison table
+- Bucket F: quicksheet-envck (env var viewer) or quicksheet-b64 (base64 encode/decode)
+- Bucket E: Status bar improvements (file name, cell count)
