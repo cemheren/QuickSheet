@@ -641,9 +641,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Stalled (last entry was tour.md on May 14).
 - Follow-up: Merge PR #78. Bucket D v0.13.0 release. Close #66 (all shortcuts now done).
 
+## 2026-05-15 20:49
+
+- Stars: 0 (Δ +0)
+- Action: Merged PR #78 (theme desktop). Closed #66 (all shortcuts done). Fixed gitlog#1 (protocol bugs, PR #2). Merged 4 extension protocol fix PRs (cronck#2, jwtdec#2, rate#2, gitlog#2). Cut v0.14.0 release.
+- Bucket: D (release + maintenance)
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.14.0. 5 PRs merged, 2 issues closed, 4 extension bugs fixed.
+- Competitor last did: Stalled since May 14.
+- Follow-up: Bucket C gh-pages update with v0.14.0. Bucket A README badges. Bucket F new extension.
+
 ## Queued
 
-- Bucket D: v0.13.0 release (theme fix + shortcuts + merged since v0.12.0)
+- Bucket C: Update gh-pages with v0.14.0, theme cycling feature card
 - Bucket A: README badges or improve first-run UX
 - Bucket F: new extension (data science? writing tools?)
 - Bucket E: markdown export enhancement
