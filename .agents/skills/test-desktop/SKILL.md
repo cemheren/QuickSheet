@@ -237,6 +237,12 @@ Also use PowerShell for:
 |----|------|-------|----------|
 | A61 | c:color: prefix | Type `c:red: URGENT` in a cell | Cell background turns red, text shows "URGENT" only |
 
+### Sparkline Prefix
+
+| ID | Test | Steps | Expected |
+|----|------|-------|----------|
+| A67 | Sparkline (s:) | Type `s: 1,3,5,7,5,3,1` in a cell | Unicode block bars rendered with dark-blue bg, light-blue fg |
+
 ### Missing Desktop Shortcuts
 
 | ID | Test | Steps | Expected |

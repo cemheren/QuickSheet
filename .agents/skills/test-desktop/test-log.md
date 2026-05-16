@@ -866,3 +866,28 @@ Build: Release
 - **Failed: 1** (C35 cronck  cronck#3)
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 3** (A2, A3, A5/A6)
+
+
+## Run 29: 2026-05-16 00:45
+Commit: fd0d165 (main), post-v0.14.0
+Build: Release
+
+### Discovery
+- **PR #79 MERGED**: feat(desktop): render sparkline (s:) prefix  Issue #9 CLOSED!
+- cronck#3 still OPEN (no fix PR)
+- No new extension repos (37 total)
+
+### Results
+
+| ID | Result | Notes |
+|----|--------|-------|
+| A67 |  PASS | NEW TEST: Sparkline renders with unicode block bars, dark-blue bg (20,30,50), light-blue fg (100,180,255) |
+
+### Issues Resolved
+- **#9 CLOSED**: Sparkline not rendered in desktop mode  fixed by PR #79
+
+### Cumulative (99 tests  +1 new A67)
+- **Passed: 92** (+1: A67 sparkline)
+- **Failed: 1** (C35 cronck  cronck#3)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
