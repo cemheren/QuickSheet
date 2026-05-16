@@ -649,3 +649,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket D: v0.12.0 release (color desktop fix + jwtdec + shortcuts)
 - Bucket F: quicksheet-cronck (cron parser) or quicksheet-gitlog (recent commits)
 - Bucket A: README badges or first-run UX
+
+## 2026-05-15 16:57
+
+- Stars: 0 (Δ +0)
+- Action: Created quicksheet-cronck extension — cron expression parser with human-readable output
+- Bucket: F (extension)
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-cronck (commit ac728f2). PR #73 adds to README/docs.
+- Details: 5-field cron → text. Ranges, lists, steps, named days/months, common presets. Build-tested, smoke-tested.
+- Competitor last did: Stalled since May 14
+- Follow-up: Bucket C — add cronck card to gh-pages. Bucket A — README badges.
+
+## Queued
+- Bucket C: add cronck card to gh-pages extensions page
+- Bucket A: README badges or first-run UX improvements
+- Bucket F: quicksheet-gitlog (recent commits in cells) or quicksheet-envck (env var viewer)
