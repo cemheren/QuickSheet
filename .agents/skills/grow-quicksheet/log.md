@@ -789,8 +789,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Cut v0.13.0 release, added cronck/gitlog cards to gh-pages
 - Follow-up: Fix quicksheet-gitlog#1 (same protocol bug). Then Bucket B CONTRIBUTING.md.
 
+## 2026-05-16 01:49
+
+- Stars: 0 (Δ +0)
+- Action: Created quicksheet-news — RSS/Atom feed headlines extension with 15+ built-in aliases (HN, Reddit, Lobsters, dev.to, BBC, TechCrunch, etc.)
+- Bucket: F (new extension)
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-news (commit 8fd0040). PR #81 on main repo to add to extensions directory.
+- Competitor last did: Cut v0.15.0 release, added README badges (PR #80)
+- Follow-up: Merge PR #81. Bucket C — gh-pages sparkline card + v0.15.0 bump. Bucket B — CONTRIBUTING.md.
+
 ## Queued
-- Fix quicksheet-gitlog#1 (same protocol pattern)
-- Bucket B: CONTRIBUTING.md (alive signal)
-- Bucket A: README badges or first-run UX
-- Bucket E: Status bar improvements
+- Merge PR #81 (news extension docs)
+- Bucket C: gh-pages sparkline card + v0.15.0→v0.16.0 version bump
+- Bucket B: CONTRIBUTING.md refresh
+- Bucket E: Status bar improvements or markdown export
+- Bucket F: quicksheet-envck (env var viewer) or quicksheet-b64 (base64 encode/decode)
