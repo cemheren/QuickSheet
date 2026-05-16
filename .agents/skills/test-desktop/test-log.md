@@ -847,3 +847,22 @@ Build: Release
 - **Failed: 1** (C35 cronck  cronck#3)
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 3** (A2, A3, A5/A6)
+
+
+## Run 28: 2026-05-15 23:45
+Commit: 4931fe0 (main), v0.14.0
+Build: Release
+
+### Discovery
+- No new commits since Run 27
+- No new extension repos (37 total)
+- cronck#3 still OPEN (no fix PR yet)
+
+### Results
+- **No tests run**  all remaining items blocked on upstream fixes or environment
+
+### Cumulative (unchanged)
+- **Passed: 91**
+- **Failed: 1** (C35 cronck  cronck#3)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
