@@ -2,6 +2,14 @@
 
 Persistent memory across runs. Append-only (except the Queued section at bottom).
 
+## 2026-05-15 (local run, rate cells→write)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket A (ext repo) — closed quicksheet-rate#1. Activate response used `type:"cells"`; host only handles `type:"write"`. Two-line rename. Smoke-tested.
+- Bucket: A
+- Outcome: PR https://github.com/cemheren/quicksheet-rate/pull/2. NOTE: quicksheet-rate default branch is `master`, not `main` — other ext repos use `main`. Worth flagging.
+- Follow-up: jwtdec#1 next (similar protocol fix + manifest trailing-colon).
+
 ## 2026-05-15 (local run, c:color: desktop render)
 
 - Stars: 0 (Δ 0)
