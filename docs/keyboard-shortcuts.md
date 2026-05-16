@@ -58,7 +58,7 @@ and **desktop mode** (wallpaper) unless noted otherwise.
 | Key | Action |
 |-----|--------|
 | `Ctrl+S` | Save to CSV |
-| `Ctrl+T` | Cycle theme (Dark → Light → Solarized → Nord → …) |
+| `Ctrl+T` | Cycle theme (Dark, Light, Nord, Solarized, Matrix, Dracula, Synthwave, Gruvbox, Monokai, HotdogStand) |
 | `Ctrl+H` | Show / hide help overlay |
 | `Ctrl+Q` | Quit |
 

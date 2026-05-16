@@ -168,6 +168,7 @@ tls: github.com, 1, 4
 | `depr:` | Depreciation schedules | `ext: github:cemheren/quicksheet-depr-ext` |
 | `jwtdec:` | JWT token decoder | `ext: github:cemheren/quicksheet-jwtdec` |
 | `cronck:` | Cron expression parser | `ext: github:cemheren/quicksheet-cronck` |
+| `guid:` | GUID/UUID generator | `ext: github:cemheren/quicksheet-guid` |
 | `regex:` | Regex pattern explainer | `ext: github:cemheren/quicksheet-regex` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
@@ -179,7 +180,7 @@ Extensions are regular .NET (or any language) programs that read/write JSON line
 1. QuickSheet sends `{"type":"init"}` → extension replies with `{"type":"register", "prefix":"xyz", ...}`
 2. When a user activates a cell matching the prefix, QuickSheet sends `{"type":"activate", ...}` → extension replies with `{"type":"write", "cells":[...]}` to fill the grid.
 
-Ship a `quicksheet-extension.json` manifest in your repo and you're done. See the [weather extension](https://github.com/cemheren/quicksheet-weather) for a minimal working example, or the [Copilot extension](https://github.com/cemheren/quicksheet-copilot-ext) for something more advanced.
+Ship a `quicksheet-extension.json` manifest in your repo and you're done. See the **[full protocol spec](docs/extension-protocol.md)** for message formats, coordinate system, rules, and working examples in C# and Python. Or check the [weather extension](https://github.com/cemheren/quicksheet-weather) for a minimal working example.
 
 ## Keyboard Shortcuts
 
@@ -232,7 +233,7 @@ Ship a `quicksheet-extension.json` manifest in your repo and you're done. See th
 
 | Shortcut | Action |
 |----------|--------|
-| Ctrl+T | Cycle theme (Dark → Light → Nord → Solarized → Matrix) |
+| Ctrl+T | Cycle theme (Dark → Light → Nord → Solarized → Matrix → Dracula → Synthwave → Gruvbox → Monokai → HotdogStand) |
 
 ### File & Row Operations
 

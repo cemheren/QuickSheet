@@ -41,7 +41,8 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `cronck`  | Cron parser       | Convert 5-field cron expressions to human-readable descriptions. Ranges, steps, named days/months. | [`quicksheet-cronck`](https://github.com/cemheren/quicksheet-cronck) |
 | `news`    | RSS feed reader   | Headlines from HN, Reddit, dev.to, BBC, TechCrunch, or any RSS/Atom URL | [`quicksheet-news`](https://github.com/cemheren/quicksheet-news) |
 | `b64`     | Base64 codec      | Encode/decode base64 with auto-detect — paste tokens, config blobs, JWTs | [`quicksheet-b64`](https://github.com/cemheren/quicksheet-b64) |
-| `regex`   | Regex explainer   | Break down regular expressions into human-readable components — anchors, classes, quantifiers, groups, lookaheads | [`quicksheet-regex`](https://github.com/cemheren/quicksheet-regex) |
+| `guid`    | GUID generator    | Generate UUIDs on demand — standard, no-dash, braced, uppercase, batch up to 20 | [`quicksheet-guid`](https://github.com/cemheren/quicksheet-guid) |
+| `regex`   | Regex explainer   | Tokenize and explain regex patterns — anchors, classes, quantifiers, groups | [`quicksheet-regex`](https://github.com/cemheren/quicksheet-regex) |
 
 ## Install
 
@@ -55,12 +56,14 @@ QuickSheet clones the repo, reads its `quicksheet-extension.json` manifest, and 
 
 ## Build your own
 
-The protocol is intentionally tiny:
+See **[Extension Protocol Specification](extension-protocol.md)** for the complete, strict protocol reference — message formats, coordinate system, rules, common mistakes, and working examples in C# and Python.
+
+**Quick summary:** The protocol is intentionally tiny:
 
 1. QuickSheet sends `{"type":"init"}` → extension replies with `{"type":"register","prefix":"xyz",...}`.
 2. When a cell matching the prefix is activated, QuickSheet sends `{"type":"activate","id":"...","params":[...],"gridRows":N,"gridCols":M}` → extension replies with `{"type":"write","id":"...","cells":[[...]]}`.
 
-Manifest format:
+Manifest format (`quicksheet-extension.json` at repo root):
 
 ```json
 {

@@ -1056,3 +1056,33 @@ Build: Release
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 3** (A2, A3, A5/A6)
 - **Total: 102** (added C39)
+
+
+## Run 38: 2026-05-16 14:13
+Commit: 43b5933 (main), v0.16.0
+Build: Release
+
+### Discovery
+- **New extension repo: quicksheet-regex** (41st repo) — Regex pattern explainer
+- PR #96 open: 5 new themes (Dracula, Synthwave, Gruvbox, Monokai, HotdogStand)
+- PR #93 open: strict extension protocol specification docs
+- PR #97 open: add regex to extension directory
+
+### Tests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C40 | ❌ FAIL | regex extension uses {row,col,value} instead of {r,c,v} — no output visible → filed quicksheet-regex#1 |
+
+### Issue Filed
+- **quicksheet-regex#1**: Uses {row,col,value} property names instead of {r,c,v}
+  - Root cause: C# anonymous objects use wrong field names
+  - QuickSheet only reads , c,  from JSON (ExtensionProtocol.cs:108-110)
+  - Fix: rename all properties to r/c/v
+
+### Cumulative
+- **Passed: 96**
+- **Failed: 1** (C40 regex — wrong cell format)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+- **Total: 103** (added C40)
