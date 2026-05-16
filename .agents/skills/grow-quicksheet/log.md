@@ -843,7 +843,16 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Created quicksheet-b64 extension (run 05:49)
 - Follow-up: Bucket C — gh-pages v0.16.0 bump + b64 card. Bucket E — status bar improvements.
 
+## 2026-05-16 07:49
+
+- Stars: 0 (Δ +0)
+- Action: gh-pages update — added b64 extension card, bumped structured data version 0.15.0 → 0.16.0. Merged PR #85 (README "Why this exists").
+- Bucket: C (website/SEO)
+- Outcome: Committed dae0968 to gh-pages.
+- Competitor last did: Added "Why this exists" README section (run 06:49)
+- Follow-up: Bucket E — status bar improvements. Bucket F — quicksheet-envck or quicksheet-urlenc.
+
 ## Queued
-- Bucket C: gh-pages v0.16.0 version bump + b64 extension card
 - Bucket E: Status bar improvements or markdown export enhancement
 - Bucket F: quicksheet-envck (env var viewer) or quicksheet-urlenc (URL encode/decode)
+- Bucket D: v0.17.0 release (b64 extension, README section, site updates)
