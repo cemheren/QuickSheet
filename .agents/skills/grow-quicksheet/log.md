@@ -686,13 +686,6 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Stalled since May 14.
 - Follow-up: Bucket F new extension. Bucket C gh-pages update. Bucket E markdown export.
 
-## Queued
-
-- Bucket F: new extension (data science? writing tools?)
-- Bucket C: gh-pages sparkline card + v0.15.0 bump
-- Bucket E: markdown export enhancement
-- Bucket B: CONTRIBUTING.md refresh
-
 ## 2025-07-17 16:27
 
 - Stars: 0 (Δ +0)
@@ -703,11 +696,6 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: stalled since May 14
 - Follow-up: Ctrl+H help overlay for desktop, or new extension vertical
 
-## Queued
-- Bucket E: Help overlay for desktop mode (completes #66)
-- Bucket F: New extension — data science or cloud cost vertical
-- Bucket C: Add more extension cards to gh-pages
-
 ## 2026-05-15 16:27
 
 - Stars: 0 (Δ +0)
@@ -716,11 +704,6 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: Commit fc25df0 pushed to gh-pages
 - Competitor last did: Stalled since May 14
 - Follow-up: Bucket D v0.12.0 release. Bucket F new extension vertical.
-
-## Queued
-- Bucket D: v0.12.0 release (color desktop fix + jwtdec + shortcuts)
-- Bucket F: quicksheet-cronck (cron parser) or quicksheet-gitlog (recent commits)
-- Bucket A: README badges or first-run UX
 
 ## 2026-05-15 16:57
 
@@ -732,11 +715,6 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Stalled since May 14
 - Follow-up: Bucket C — add cronck card to gh-pages. Bucket A — README badges.
 
-## Queued
-- Bucket C: add cronck card to gh-pages extensions page
-- Bucket A: README badges or first-run UX improvements
-- Bucket F: quicksheet-gitlog (recent commits in cells) or quicksheet-envck (env var viewer)
-
 ## 2026-05-15 17:00
 
 - Stars: 0 (Δ +0)
@@ -745,12 +723,6 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: Repo live at https://github.com/cemheren/quicksheet-gitlog. PR #74 adds to README + docs/extensions.md.
 - Competitor last did: Stalled since May 14.
 - Follow-up: Bucket B — CONTRIBUTING.md or issue templates. Bucket E — status bar improvement.
-
-## Queued
-- Bucket B: CONTRIBUTING.md (alive signal, lowers contribution barrier)
-- Bucket E: Status bar with file name + cell count + mode indicator
-- Bucket C: Add gitlog card to gh-pages
-- Bucket A: README badges (build status, .NET version, license)
 
 ## 2026-05-15 17:27
 
@@ -761,11 +733,6 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Created quicksheet-gitlog extension (17:00)
 - Follow-up: Bucket B — CONTRIBUTING.md. Bucket A — README badges.
 
-## Queued
-- Bucket B: CONTRIBUTING.md (alive signal)
-- Bucket A: README badges (build status, .NET version, license)
-- Bucket D: v0.13.0 release once PRs #73 #74 merged
-
 ## 2026-05-15 17:57
 
 - Stars: 0 (Δ +0)
@@ -774,11 +741,6 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.13.0
 - Competitor last did: Opened PR #76 (Windows desktop shortcuts), closed PR #74
 - Follow-up: Bucket A — README polish or docs. Bucket F — new extension vertical.
-
-## Queued
-- Bucket A: README "Why this exists" section or feature comparison table
-- Bucket F: quicksheet-envck (env var viewer) or quicksheet-b64 (base64 encode/decode)
-- Bucket E: Status bar improvements (file name, cell count)
 
 ## 2026-05-15 18:00
 
@@ -852,11 +814,6 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Added "Why this exists" README section (run 06:49)
 - Follow-up: Bucket E — status bar improvements. Bucket F — quicksheet-envck or quicksheet-urlenc.
 
-## Queued
-- Bucket E: Status bar improvements or markdown export enhancement
-- Bucket F: quicksheet-envck (env var viewer) or quicksheet-urlenc (URL encode/decode)
-- Bucket D: v0.17.0 release (b64 extension, README section, site updates)
-
 ## 2026-05-16 09:00
 
 - Stars: 0 (Δ +0)
@@ -867,12 +824,6 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Stalled since May 14
 - Follow-up: Bucket B — README badges. Bucket E — status bar. Bucket C — add b64 fix to gh-pages notes.
 
-## Queued
-- Bucket A: README badges (build status, .NET version, license)
-- Bucket E: Status bar improvements (file name, cell count, mode indicator)
-- Bucket C: Update gh-pages extension cards if needed
-- Bucket F: quicksheet-envck (env var viewer) or quicksheet-mileage-ext
-
 ## 2026-05-16 10:00
 
 - Stars: 0 (Δ +0)
@@ -881,11 +832,6 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: PR #87 (commit 80e80c8). Build verified green.
 - Competitor last did: Stalled since May 14
 - Follow-up: Bucket D — v0.17.0 release (b64 fix, optional dims, news ext). Bucket C — gh-pages update.
-
-## Queued
-- Bucket D: v0.17.0 release (b64 fix, optional dims, news ext)
-- Bucket C: Update gh-pages extension cards
-- Bucket F: quicksheet-envck (env var viewer) or quicksheet-urlenc
 
 ## 2026-05-16 11:00
 
@@ -896,12 +842,6 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Stalled since May 14
 - Follow-up: Bucket D — v0.17.0 release. Bucket E — status bar. Issue #90 (regex explainer ext).
 
-## Queued
-- Bucket D: v0.17.0 release (guid ext, b64 fix, optional dims)
-- Bucket F: quicksheet-regex (issue #90)
-- Bucket E: Status bar improvements or themes (issue #88)
-- Bucket A: Extension protocol documentation (issue #89)
-
 ## 2026-05-16 12:00
 
 - Stars: 1 (Δ +0)
@@ -911,8 +851,12 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Stalled since May 14
 - Follow-up: Bucket D — v0.17.0 release. Bucket E — status bar. Bucket F — quicksheet-regex (#90).
 
-## Queued
-- Bucket D: v0.17.0 release (guid ext, b64 fix, protocol docs, optional dims)
-- Bucket F: quicksheet-regex (issue #90)
-- Bucket E: Status bar improvements or themes (issue #88)
-- Bucket C: Update gh-pages with protocol docs link
+## 2026-05-16 13:00
+
+- Stars: 1 (Δ +0)
+- Action: Fixed #94 — themes don't work on Linux. Added ConsoleColorToRgb helper and updated RenderGrid() to read Theme.Current for all color decisions (bg, fg, headers, selection, search, grid lines, status bar).
+- Bucket: E (quality-of-life bug fix)
+- Outcome: PR #95 (commit dd4aafd). Build verified green.
+- Competitor last did: Stalled since May 14
+- Follow-up: Bucket D — v0.17.0 release. Bucket F — quicksheet-regex (#90).
+
