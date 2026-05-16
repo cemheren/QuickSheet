@@ -916,3 +916,24 @@ Build: Release
 - **Failed: 0** 
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 3** (A2, A3, A5/A6)
+
+
+## Run 31: 2026-05-16 02:45
+Commit: 860018b (main), v0.15.0
+Build: Release
+
+### Discovery
+- **NEW extension**: quicksheet-news (RSS/Atom feed headlines)  38 repos total
+- No new QuickSheet commits
+
+### Results
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C37 |  PASS | NEW: news extension  correct manifest, protocol works. HN feed shows 10 headlines with titles + links |
+
+### Cumulative (100 tests  +1 new C37)
+- **Passed: 94** (+1: C37 news)
+- **Failed: 0**
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)

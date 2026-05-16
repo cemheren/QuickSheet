@@ -312,6 +312,7 @@ First install each extension via its `ext:` cell. Then test the prefix.
 | C34 | quicksheet-rate | `ext: github:cemheren/quicksheet-rate` | `rate: 120000,1,6` | Freelance rate calculator: min rate, take-home, billable hours |
 | C35 | quicksheet-cronck | `ext: github:cemheren/quicksheet-cronck` | `cronck: */5 * * * *,1,3` | Human-readable cron schedule description |
 | C36 | quicksheet-gitlog | `ext: github:cemheren/quicksheet-gitlog` | `gitlog: 5,1,6` | Recent 5 git commits from current repo |
+| C37 | quicksheet-news | `ext: github:cemheren/quicksheet-news` | `news: hn,1,6` | RSS/Atom feed headlines (HN, Reddit, etc.) with titles + links |
 
 ---
 
