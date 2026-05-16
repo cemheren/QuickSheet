@@ -1,6 +1,10 @@
-# grow-quicksheet log
+## 2026-05-16 (local run, cute themes for #88)
 
-Persistent memory across runs. Append-only (except the Queued section at bottom).
+- Stars: 1 (Δ 0 — first star earned earlier today)
+- Action: Bucket E — opened PR #96 closing issue #88 ("more cute, user friendly themes"). Added 5 new presets to Theme.Presets: Dracula, Synthwave, Gruvbox, Monokai, HotdogStand. Pure additive — no existing theme touched. Uses only 16-color ConsoleColor enum so they render in TUI mode and map through ConsoleColorToRgb in --desktop mode on both Windows and Linux (the recently-fixed Linux theme path). Updated README, docs/tour.md, docs/keyboard-shortcuts.md Ctrl+T row.
+- Bucket: E
+- Outcome: PR https://github.com/cemheren/QuickSheet/pull/96 — awaits human merge.
+- Follow-up: After merge, capture a screenshot of each new theme for a docs/themes.md gallery (deferred — needs human display). Next high-impact: open issue #90 (regex explainer extension) as Bucket F new ext.
 
 ## 2026-05-15 (local run, jwtdec protocol fix)
 
