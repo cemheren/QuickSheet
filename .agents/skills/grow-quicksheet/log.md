@@ -816,8 +816,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: gh-pages update with 9 extension cards + v0.15.0 bump (run 02:49)
 - Follow-up: Bucket D — v0.16.0 release. Bucket E — status bar or markdown export.
 
+## 2026-05-16 04:49
+
+- Stars: 0 (Δ +0)
+- Action: Cut v0.16.0 release — news extension, CONTRIBUTING refresh, CHANGELOG catch-up (v0.13–v0.16), merged PRs #82 + #83
+- Bucket: D (release)
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.16.0
+- Competitor last did: CONTRIBUTING.md refresh (run 03:49)
+- Follow-up: Bucket E — status bar or markdown export. Bucket F — new extension.
+
 ## Queued
-- Bucket D: v0.16.0 release (news extension, CONTRIBUTING refresh, site updates)
 - Bucket E: Status bar improvements or markdown export enhancement
 - Bucket F: quicksheet-envck (env var viewer) or quicksheet-b64 (base64 encode/decode)
 - Bucket A: README "Why this exists" section
+- Bucket C: gh-pages v0.16.0 version bump + news extension card highlight
