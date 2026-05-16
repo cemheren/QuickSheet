@@ -43,7 +43,7 @@ Not comparators: lazygit, k9s, visidata, harlequin. Those are TUIs that occupy a
 | 6 | Writers, researchers, academics      | done     | `writers-academics.md`              | Distraction-free desktop; word-count, citation queue, draft list visible without context switch.|
 | 7 | Day traders / quant hobbyists        | done     | `traders.md`                        | Multi-monitor culture; tickers behind every window is exactly what they pay Bloomberg for.      |
 | 8 | Homelab / sysadmin hobbyists         | done     | `homelab.md`                        | r/homelab/r/selfhosted; second monitor of Grafana → second monitor of QuickSheet.               |
-| 9 | Students (CS / STEM)                 | queued   | `students.md`                       | One laptop, one desktop; deadline + assignment list as wallpaper. Free + zero-install = sticky. |
+| 9 | Students (CS / STEM)                 | done     | `students.md`                       | One laptop, one desktop; deadline + assignment list as wallpaper. Free + zero-install = sticky. |
 |10 | Teachers / educators                 | queued   | `teachers.md`                       | Class schedule + grading queue glanceable between teaching blocks.                              |
 
 Drop or merge as overlap surfaces. Add adjacent niches (e.g. "remote workers with single monitor")

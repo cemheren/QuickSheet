@@ -1,3 +1,11 @@
+## 2026-05-16 (research phase — persona 9: students)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket R — wrote `research/personas/students.md` (paper 9/10). CS/STEM undergrads + bootcamp + self-taught. **Highest star-per-install ratio of all personas** — students star to bookmark, share aggressively in Discord, post rices voluntarily. r/unixporn-as-rice-surface is the key channel insight: wallpaper grid = a *new rice element*, not a productivity app. Top extensions: `leetcode:` streak, `gh:` user-streak, `schedule:` ICS reader, `canvas:` LMS, `wakatime:`.
+- Bucket: R
+- Outcome: paper pushed to main (skill self-edit). r/unixporn student-rice post identified as **likely single most-viral action** in entire 10-persona slate.
+- Follow-up: 1 persona remains. Next: teachers (final paper).
+
 ## 2026-05-16 (research phase — persona 8: homelab + selfhosters)
 
 - Stars: 1 (Δ 0)
@@ -637,9 +645,8 @@
   **HARD RULE:** every persona paper must frame value strictly around `--desktop` wallpaper mode.
   Terminal/TUI use cases are out of scope for this research. Comparators: Rainmeter, Conky,
   GeekTool, Übersicht, Fences. Not lazygit/k9s/visidata. Papers 1–3 revised to v2 with this lens.
-  See `research/personas/_index.md`. Remaining 2 papers, one per run, in order:
-  1. `students.md` — CS/STEM students. Viral audience, zero-budget, star-per-install ratio high.
-  2. `teachers.md` — K–12/college educators. Grading, attendance, schedule — CSV-native, untapped.
+  See `research/personas/_index.md`. Remaining 1 paper, then research phase ends:
+  1. `teachers.md` — K–12/college educators. Grading, attendance, schedule — CSV-native, untapped.
   After all 10 are `done`, rank the union of implications by build-cost × hit-probability and resume Bucket E/F shipping.
 - **Top implications already surfaced (papers 1–7)** — do NOT pick these up yet; they're the after-research backlog:
   - Build `gha:` extension (developers-sre, rank 1).
@@ -650,8 +657,9 @@
   - Build `arxiv:` extension (writers-academics, rank 5). Pairs with shipped `cite:`.
   - Build `quote:` intraday + `alert:` rule-fires extension (traders, rank 1, 6). `alert:` is genuinely new product surface — likely a feature in main repo, not an ext.
   - Build `health:` HTTP-probe + `pihole:` + `plex:` + `hass:` extensions (homelab, rank 1–4). `health:` writes-its-own-screenshot.
+  - Build `leetcode:` + `gh:` user-streak + `schedule:` ICS + `canvas:` LMS extensions (students, rank 1–4 + 9). `leetcode:` + `gh:` together = "CS-student flex bundle."
   - Bucket E features (recurring across personas — high leverage):
-    * Value-driven cell colour (`c?:>X=red,...`) — SRE + lawyers + accountants + artists + GMs + writers + traders. **7/7 personas.** Highest-leverage feature in entire backlog.
+    * Value-driven cell colour (`c?:>X=red,...`) — SRE + lawyers + accountants + artists + GMs + writers + traders + homelab + students. **9/9 personas so far.** Highest-leverage feature in entire backlog.
     * Per-cell ticking timer — lawyers + accountants + artists + GMs + writers. **5/7.**
     * **In-cell progress bar prefix (`p: 712/1500` → `▓▓▓▓░░ 712/1500`)** — writers + accountants + artists + gamedev. **4/7.** ~30 LOC.
     * **`alert:` cell rule** — fires when other cell crosses threshold; trader + SRE overlap. **NEW from paper 7.**
@@ -659,8 +667,13 @@
     * `audit:` sidecar log mode — lawyers + accountants.
     * Hex-color `c:#RRGGBB:` — artists + GMs.
     * Inline image thumbnails (`img:`) — artists + GMs. Needs feasibility brief first.
-  - Bucket A: audience landing pages — `for-accountants`, `for-lawyers`, `for-sre`, `for-artists`, `for-dms`, `for-indiedevs`, `for-writers`, `for-academics`, `for-traders`, `for-homelab`. Starter CSVs in `examples/` including `homelab-dashboard.csv` + `selfhosted-services.csv`.
-  - Bucket C drafts: r/Lawyertalk, r/Accounting, r/sre, r/desktops, r/unixporn (DM screen — top viral candidate), r/battlestations (trader multi-monitor — likely 2nd-most-viral), **r/selfhosted (Homepage.io-alternative angle — likely highest signal-to-noise per the homelab paper)**, Cara.app, itch.io devlog, r/ObsidianMD, Andy Matuschak / Maggie Appleton outreach.
+  - Bucket A: audience landing pages — `for-accountants`, `for-lawyers`, `for-sre`, `for-artists`, `for-dms`, `for-indiedevs`, `for-writers`, `for-academics`, `for-traders`, `for-homelab`, `for-students`. Starter CSVs in `examples/` (homelab-dashboard, selfhosted-services, student-dashboard).
+  - Bucket C drafts (ranked by expected virality):
+    1. **r/unixporn student-rice post** — combines rice + student status + free OSS. Likely highest-virality of any single action.
+    2. r/unixporn DM-screen rice (gamedev-ttrpg).
+    3. r/battlestations trader multi-monitor.
+    4. r/selfhosted Homepage.io-alternative angle (homelab).
+    5. r/Lawyertalk, r/Accounting, r/sre, r/desktops, Cara.app, itch.io devlog, r/ObsidianMD, Andy Matuschak / Maggie Appleton outreach.
   - Bucket D draft: `awesome-selfhosted` PR — add QuickSheet row.
 - **From #15 accounting research (2026-05-15)** — next 3 Bucket F picks in order:
   1. `quicksheet-mileage-ext` — IRS std-mileage (business/medical/charity).
