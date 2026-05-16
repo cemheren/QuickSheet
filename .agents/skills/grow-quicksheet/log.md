@@ -869,3 +869,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: Repo live at https://github.com/cemheren/quicksheet-regex (commit 8dbfb52). PR #97 on main repo for docs. Closes #90.
 - Competitor last did: Stalled since May 14
 - Follow-up: Bucket D — v0.17.0 release. Bucket C — gh-pages update with regex card.
+
+## 2026-05-16 14:27
+
+- Stars: 1 (Δ +0)
+- Action: Merged 5 competitor PRs (#92 guid docs, #93 protocol spec, #95 Linux theme fix, #96 five new themes, #97 regex docs) and cut v0.17.0 release.
+- Bucket: D (releases & GitHub presence)
+- Outcome: v0.17.0 released at https://github.com/cemheren/QuickSheet/releases/tag/v0.17.0. All open PRs merged. Issues #88, #89, #90, #91, #94 auto-closed.
+- Competitor last did: Burst of PRs (guid, regex, themes, protocol docs, Linux fix) — all now merged.
+- Follow-up: Bucket C — gh-pages update with guid/regex/theme cards + v0.17.0 bump.
+
+## Queued
+
+- Bucket C: gh-pages update — add guid, regex extension cards; bump version to 0.17.0; add theme showcase section
+- Bucket F: quicksheet-envck (environment variable checker) or quicksheet-urlenc (URL encode/decode)
+- Bucket E: Status bar improvements (file name, cell count, mode indicator)
