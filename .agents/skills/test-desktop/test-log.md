@@ -691,3 +691,38 @@ Build: Release
 - **Failed: 11** (C28 worldtm, C29 mileage, C32 depr, C33 jwtdec, C34 rate, A61 c:color, A62-A66 shortcuts)
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 6** (A2, A3, A5, A6, A20, A21)
+
+## Run: 2026-05-15 17:45
+Commit: d2ae14b (main), v0.12.0
+Build: Release
+
+### Discovery
+- **v0.12.0 released** (PR #72 merged)
+- **PR #71 MERGED**: c:color: prefix rendering in desktop mode  Issue #65 CLOSED
+- **PR #67 MERGED**: Also fixes c:color (duplicate PR  caused build error, filed #75, fixed)
+- **PR #70 CLOSED (not merged)**: Windows Ctrl+Z/Y/T shortcuts NOT added. Issue #66 still open.
+- **3 extension fix PRs MERGED**: worldtm#2, mileage-ext#2, depr-ext#2
+- **2 NEW extensions**: quicksheet-cronck (cron parser), quicksheet-gitlog (git log viewer)  37 repos total
+- **Build error found**: Duplicate `colorParsed` variable from merging PRs #67+#71  Issue #75 filed, fixed in 0b14e84
+- jwtdec#2 and rate#2 fix PRs still OPEN
+
+### Tests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| A61 |  PASS | c:color: prefix NOW WORKS in desktop mode! Red/green/blue/yellow backgrounds visible, text stripped correctly. PR #71 fix confirmed. |
+| C28 |  PASS | worldtm: Shows London/Tokyo/NY with times, UTC offsets, and business hours status. Fix PR #2 confirmed. |
+| C29 |  PASS | mileage: Shows IRS 2025 rate (.700/mi), .00 deduction for 1000 mi. Fix PR #2 confirmed. |
+| C32 |  PASS | depr: Protocol test confirms correct register/write/{r,c,v}. Shows 5yr straight-line schedule (/yr). Fix PR #2 confirmed. (Note: space-separated params, not comma) |
+| C35 |  FAIL | cronck: 2 protocol bugs  uses `init_response`/`activate_response` instead of `register`/`write`  cronck#1 filed |
+| C36 |  FAIL | gitlog: Same bugs as jwtdec  responds with `status:ready` instead of `register`, trailing colon in prefix `"gitlog:"`  gitlog#1 filed |
+
+### Build Fix
+- **Issue #75 filed + fixed**: Duplicate `colorParsed` variable from PRs #67+#71. Committed fix 0b14e84.
+
+### Cumulative (after Run 22)
+- **Total: 98 tests** (54 core + 8 ext system + 36 extensions)
+- **Passed: 80** (+4: A61, C28, C29, C32 all flipped from FAIL to PASS)
+- **Failed: 9** (C33 jwtdec, C34 rate, C35 cronck, C36 gitlog, A62-A66 shortcuts)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 6** (A2, A3, A5, A6, A20, A21)
