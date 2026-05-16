@@ -27,6 +27,7 @@ Pick, execute, log, report.
 2. **Check current state**: `gh repo view --json stargazerCount,forks,issues` and
    note star count + delta since last run.
 3. **Pick ONE action** from the menu below. Selection rules:
+   - **If `## Queued` in the log starts with `RESEARCH PHASE ACTIVE`**, you MUST pick the next persona research paper in that ordered list. No code, no extensions, no drafts until all 10 papers are `done`. After the last paper, the queue header is updated and normal selection resumes.
    - Prefer items under `## Queued` in the log.
    - Bias toward variety: do not repeat the same bucket two runs in a row.
    - Prefer high expected value × low risk.

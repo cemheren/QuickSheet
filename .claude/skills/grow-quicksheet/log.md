@@ -1,3 +1,11 @@
+## 2026-05-16 (research phase kickoff — persona papers 1–3)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket R — kicked off persona research phase. Defined 10-persona slate at `research/personas/_index.md`. Wrote 3 full papers (developers-sre, lawyers, accountants). Each follows shared template (profile / toolchain / pain points / candidate extensions / channels / discoverability hooks / implications). Build phase paused per user directive — finish all 10 papers before next code change.
+- Bucket: R
+- Outcome: 3 papers + index pushed to main (skill self-edit). PR #96 (themes) still awaits human merge.
+- Follow-up: 7 personas queued. One paper per /grow-quicksheet run until done. Then rank implications and resume Bucket E/F.
+
 ## 2026-05-16 (local run, cute themes for #88)
 
 - Stars: 1 (Δ 0 — first star earned earlier today)
@@ -585,6 +593,23 @@
 
 ## Queued
 
+- **RESEARCH PHASE ACTIVE (2026-05-16)** — finish 10-persona slate before any new code.
+  See `research/personas/_index.md`. Remaining 7 papers, one per run, in order:
+  1. `artists-visual.md` — designers/illustrators/2D artists. Commission tracking, reference grids, ambient mood. Underserved by TUI tools.
+  2. `gamedev-ttrpg.md` — indie game devs + tabletop GMs. Custom-tooling culture, screenshot-friendly, evangelize freely.
+  3. `writers-academics.md` — citation, distraction-free desktop, manuscript todo. `cite:` already exists, room to grow.
+  4. `traders.md` — day traders + quant hobbyists. Live data on wallpaper is the actual product. `stock`/`fx`/`price` already exist.
+  5. `homelab.md` — homelab/sysadmin hobbyists. Adjacent to current beachhead; `k8s`/`docker`/`ping`/`portck` already there.
+  6. `students.md` — CS/STEM students. Viral audience, zero-budget, star-per-install ratio high.
+  7. `teachers.md` — K–12/college educators. Grading, attendance, schedule — CSV-native, untapped.
+  After all 10 are `done`, rank the union of implications by build-cost × hit-probability and resume Bucket E/F shipping.
+- **Top implications already surfaced (papers 1–3)** — do NOT pick these up yet; they're the after-research backlog:
+  - Build `gha:` extension (developers-sre, rank 1).
+  - Build `bill:` 6-min increment timer extension (lawyers, rank 1) + cell-timer prefix in main repo.
+  - Build `payroll:` + `sales-tax:` extensions (accountants, rank 1–2).
+  - Bucket E features: cell-staleness dimming, `audit:` mode (lawyers + accountants + clinicians), per-cell color rules from value.
+  - Bucket A: write `docs/for-accountants.md` (and likely `for-lawyers.md`, `for-sre.md`) audience landing pages.
+  - Bucket C drafts: r/Lawyertalk, r/Accounting, r/sre launch posts.
 - **From #15 accounting research (2026-05-15)** — next 3 Bucket F picks in order:
   1. `quicksheet-mileage-ext` — IRS std-mileage (business/medical/charity).
   2. `quicksheet-margin-ext` — break-even + contribution margin.
