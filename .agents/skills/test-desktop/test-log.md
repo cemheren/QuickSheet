@@ -827,3 +827,23 @@ Build: Release
 - **Failed: 1** (C35 cronck)
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 3** (A2, A3, A5/A6)
+
+
+## Run 27: 2026-05-15 22:45
+Commit: e7d5455 (main), v0.14.0
+Build: Release
+
+### Discovery
+- No new commits since Run 26
+- No new extension repos (37 total)
+- cronck#3 still OPEN (no fix PR yet)
+- C16/C25/C31 still BLOCKED (auth/Docker/k8s)
+
+### Results
+- **No tests run**  all remaining items blocked on upstream fixes or environment
+
+### Cumulative (unchanged from Run 26)
+- **Passed: 91**
+- **Failed: 1** (C35 cronck  cronck#3)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
