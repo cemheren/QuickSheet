@@ -901,3 +901,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket F: quicksheet-regex (issue #90)
 - Bucket E: Status bar improvements or themes (issue #88)
 - Bucket A: Extension protocol documentation (issue #89)
+
+## 2026-05-16 12:00
+
+- Stars: 1 (Δ +0)
+- Action: Created strict extension protocol specification (docs/extension-protocol.md) — full lifecycle, message schemas, coordinate system, output formats, rules, common mistakes table, C# + Python examples
+- Bucket: A (product polish / documentation)
+- Outcome: PR #93 (commit d0507f8). Closes #89.
+- Competitor last did: Stalled since May 14
+- Follow-up: Bucket D — v0.17.0 release. Bucket E — status bar. Bucket F — quicksheet-regex (#90).
+
+## Queued
+- Bucket D: v0.17.0 release (guid ext, b64 fix, protocol docs, optional dims)
+- Bucket F: quicksheet-regex (issue #90)
+- Bucket E: Status bar improvements or themes (issue #88)
+- Bucket C: Update gh-pages with protocol docs link
