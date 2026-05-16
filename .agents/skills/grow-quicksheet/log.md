@@ -884,3 +884,12 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket C: gh-pages update — add guid, regex extension cards; bump version to 0.17.0; add theme showcase section
 - Bucket F: quicksheet-envck (environment variable checker) or quicksheet-urlenc (URL encode/decode)
 - Bucket E: Status bar improvements (file name, cell count, mode indicator)
+
+## 2026-05-16 15:00
+
+- Stars: 1 (Δ +0)
+- Action: Fixed quicksheet-regex#1 — extension used {row,col,value} instead of {r,c,v}, making all output invisible
+- Bucket: A (ext repo issue fix)
+- Outcome: PR #2 on cemheren/quicksheet-regex (commit 6b0576f). Build verified green.
+- Competitor last did: Research papers (persona studies) — stalled on code since May 14.
+- Follow-up: Bucket C — gh-pages update with guid/regex cards + v0.17.0. Bucket E — status bar improvements.
