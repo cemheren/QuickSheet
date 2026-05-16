@@ -39,6 +39,13 @@ internal class DesktopForm : DesktopFormBase
 
     private readonly EditingMode _editMode;
 
+    // Goto cell mode (Ctrl+G)
+    private bool _gotoMode;
+    private string _gotoInput = "";
+
+    // Help overlay (Ctrl+H)
+    private bool _showHelp;
+
     //todo: DraggingMode? Not sure if this should be a state yet. 
     private bool _dragging;
     private int _dragAnchorRow;
@@ -377,7 +384,16 @@ internal class DesktopForm : DesktopFormBase
         int cw = _charWidth;
         int ch = _charHeight;
         int[] colWidths = GetColumnWidths();
-        g.Clear(Color.Black);
+        var theme = Theme.Current;
+        Color themeBg = ConsoleColorToRgb(theme.Background);
+        Color themeFg = ConsoleColorToRgb(theme.Foreground);
+        Color themeSelBg = ConsoleColorToRgb(theme.SelectionBg);
+        Color themeSelFg = ConsoleColorToRgb(theme.SelectionFg);
+        Color themeSearchBg = ConsoleColorToRgb(theme.SearchMatchBg);
+        Color themeSearchSelBg = ConsoleColorToRgb(theme.SearchSelectedBg);
+        Color themeStatusBg = ConsoleColorToRgb(theme.StatusBarBg);
+        Color themeStatusFg = ConsoleColorToRgb(theme.StatusBarFg);
+        g.Clear(themeBg);
         int y = 0;
 
         // Track inline cells that need process management
@@ -438,14 +454,14 @@ internal class DesktopForm : DesktopFormBase
         }
 
         // Column headers
-        DrawText(g, new string(' ', RowHeaderWidth), 0, y, Color.White, Color.Black);
+        DrawText(g, new string(' ', RowHeaderWidth), 0, y, themeFg, themeBg);
         int x = RowHeaderWidth * cw;
         for (int c = 0; c < _grid.ColumnCount; c++)
         {
             int w = colWidths[c];
             string header = GridManager.GetColumnName(c).PadRight(w);
-            Color bg = c == selCol ? Color.FromArgb(64, 64, 64) : Color.Black;
-            DrawText(g, header, x, y, Color.White, bg);
+            Color bg = c == selCol ? themeSelBg : themeBg;
+            DrawText(g, header, x, y, themeFg, bg);
             x += w * cw;
         }
         y += ch;
@@ -454,7 +470,7 @@ internal class DesktopForm : DesktopFormBase
         string underline = new string('-', RowHeaderWidth);
         for (int c = 0; c < _grid.ColumnCount; c++)
             underline += new string('-', colWidths[c]);
-        DrawText(g, underline, 0, y, Color.White, Color.Black);
+        DrawText(g, underline, 0, y, themeFg, themeBg);
         y += ch;
 
         // Data rows
@@ -463,8 +479,8 @@ internal class DesktopForm : DesktopFormBase
         {
             x = 0;
             string rowNum = (r + 1).ToString().PadLeft(RowHeaderWidth - 1) + " ";
-            Color rowBg = r == selRow ? Color.FromArgb(64, 64, 64) : Color.Black;
-            DrawText(g, rowNum, x, y, Color.White, rowBg);
+            Color rowBg = r == selRow ? themeSelBg : themeBg;
+            DrawText(g, rowNum, x, y, themeFg, rowBg);
             x = RowHeaderWidth * cw;
             for (int c = 0; c < _grid.ColumnCount; c++)
             {
@@ -510,7 +526,14 @@ internal class DesktopForm : DesktopFormBase
                 }
 
                 // Render color-prefixed cells (c:red: text, c:green: text, ...): strip prefix from display
-                var colorParsed = CellPrefix.ParseColor(cellVal);
+                bool isSparkline = CellPrefix.IsSparkline(cellVal);
+                if (isSparkline)
+                {
+                    string? spark = CellPrefix.RenderSparkline(cellVal, _grid);
+                    if (spark != null) displayVal = spark;
+                }
+
+                var colorParsed = !isSparkline ? CellPrefix.ParseColor(cellVal) : null;
                 if (colorParsed != null)
                     displayVal = colorParsed.Value.text;
 
@@ -525,22 +548,10 @@ internal class DesktopForm : DesktopFormBase
 
                 bool isConflict = cellVal.StartsWith("c: ", StringComparison.Ordinal);
                 var extStatus = _extensionManager.GetCellStatus(r, c);
-                Color colorBg = colorParsed?.bg switch
-                {
-                    ConsoleColor.DarkRed => Color.FromArgb(140, 20, 20),
-                    ConsoleColor.DarkGreen => Color.FromArgb(20, 100, 20),
-                    ConsoleColor.DarkBlue => Color.FromArgb(20, 40, 140),
-                    ConsoleColor.DarkYellow => Color.FromArgb(140, 120, 0),
-                    ConsoleColor.DarkCyan => Color.FromArgb(0, 100, 100),
-                    ConsoleColor.DarkMagenta => Color.FromArgb(100, 20, 100),
-                    ConsoleColor.White => Color.FromArgb(180, 180, 180),
-                    ConsoleColor.DarkGray => Color.FromArgb(60, 60, 60),
-                    _ => Color.Empty
-                };
-                Color bg = isCursor && isSearchMatch ? Color.FromArgb(0, 180, 0)
-                         : isCursor   ? Color.FromArgb(64, 64, 64)
+                Color bg = isCursor && isSearchMatch ? themeSearchSelBg
+                         : isCursor   ? themeSelBg
                          : isMultiSel ? Color.FromArgb(50, 50, 80)
-                         : isSearchMatch ? Color.FromArgb(80, 80, 0)
+                         : isSearchMatch ? themeSearchBg
                          : colorParsed != null ? ConsoleColorToBg(colorParsed.Value.bg)
                          : isConflict ? Color.FromArgb(100, 0, 0)
                          : isInlineCmd ? Color.FromArgb(20, 50, 20)
@@ -549,10 +560,10 @@ internal class DesktopForm : DesktopFormBase
                          : isLink     ? Color.FromArgb(40, 0, 60)
                          : isCmd      ? Color.FromArgb(40, 40, 0)
                          : isLoop     ? Color.FromArgb(0, 40, 40)
-                         : colorParsed != null ? colorBg
+                         : isSparkline ? Color.FromArgb(20, 30, 50)
                          : extStatus == Extensions.ExtensionCellStatus.Error ? Color.FromArgb(50, 10, 10)
                          : extStatus == Extensions.ExtensionCellStatus.Running ? Color.FromArgb(10, 40, 10)
-                         : Color.Black;
+                         : themeBg;
                 Color fg = colorParsed != null ? Color.White
                          : isConflict ? Color.FromArgb(255, 180, 180)
                          : isInlineCmd ? Color.FromArgb(100, 255, 150)
@@ -561,9 +572,10 @@ internal class DesktopForm : DesktopFormBase
                          : isLink ? Color.FromArgb(180, 140, 255)
                          : isCmd  ? Color.FromArgb(255, 220, 100)
                          : isLoop ? Color.FromArgb(100, 220, 200)
+                         : isSparkline ? Color.FromArgb(100, 180, 255)
                          : extStatus == Extensions.ExtensionCellStatus.Error ? Color.FromArgb(255, 80, 80)
                          : extStatus == Extensions.ExtensionCellStatus.Running ? Color.FromArgb(80, 255, 80)
-                         : Color.White;
+                         : themeFg;
                 DrawText(g, display, x, y, fg, bg);
                 x += w * cw;
             }
@@ -671,6 +683,10 @@ internal class DesktopForm : DesktopFormBase
         {
             status = $" Find: {_searchInput}\u2502  (Enter=Search  Esc=Cancel)";
         }
+        else if (_gotoMode)
+        {
+            status = $" Go to cell (e.g. A1, C5): {_gotoInput}\u2502  (Enter=Go  Esc=Cancel)";
+        }
         else if (_editMode.IsActive())
         {
             status = _editMode.GetStatusText();
@@ -715,9 +731,82 @@ internal class DesktopForm : DesktopFormBase
             status = $" {cellRef}{valueDisplay}{resolvedDisplay}{sumDisplay}{productDisplay}{searchDisplay}  |  {f1Label}  F2: Edit  Ctrl+S: Save  Ctrl+Q: Quit";
         }
         status = status.PadRight(maxChars);
-        g.FillRectangle(Brushes.White, 0, statusY, formWidth, ch);
-        DrawText(g, status, 0, statusY, Color.Black, Color.White);
+        using var statusBrush = new SolidBrush(themeStatusBg);
+        g.FillRectangle(statusBrush, 0, statusY, formWidth, ch);
+        DrawText(g, status, 0, statusY, themeStatusFg, themeStatusBg);
+
+        // Help overlay (Ctrl+H)
+        if (_showHelp)
+        {
+            string[] helpLines =
+            [
+                "",
+                "  ╔══════════════════════════════════════════╗",
+                "  ║         QuickSheet — Shortcuts           ║",
+                "  ╠══════════════════════════════════════════╣",
+                "  ║                                          ║",
+                "  ║  Arrow Keys     Navigate cells           ║",
+                "  ║  Tab            Next cell                ║",
+                "  ║  Enter          Edit / move down         ║",
+                "  ║  Delete         Clear cell               ║",
+                "  ║                                          ║",
+                "  ║  Ctrl+C         Copy cell                ║",
+                "  ║  Ctrl+X         Cut cell                 ║",
+                "  ║  Ctrl+V         Paste cell               ║",
+                "  ║  Ctrl+D         Delete row               ║",
+                "  ║  Ctrl+S         Save to CSV              ║",
+                "  ║  Ctrl+F         Find (search)            ║",
+                "  ║  Ctrl+R         Find & Replace           ║",
+                "  ║  Ctrl+G         Go to cell (e.g. A1)     ║",
+                "  ║  Ctrl+Z         Undo                     ║",
+                "  ║  Ctrl+Y         Redo                     ║",
+                "  ║  Ctrl+B         Sort by column            ║",
+                "  ║  Ctrl+T         Cycle theme               ║",
+                "  ║  Ctrl+H         Show this help            ║",
+                "  ║  Ctrl+Q         Quit                     ║",
+                "  ║                                          ║",
+                "  ║  c:COLOR: text  Colored cell background  ║",
+                "  ║  r: cmd         Runnable command         ║",
+                "  ║  s: 1,2,3       Sparkline chart          ║",
+                "  ║                                          ║",
+                "  ╚══════════════════════════════════════════╝",
+                "",
+                "          Press any key to close...",
+            ];
+            int overlayW = 48 * cw;
+            int overlayH = helpLines.Length * ch;
+            int ox = (formWidth - overlayW) / 2;
+            int oy = (formHeight - overlayH) / 2;
+            using var overlayBg = new SolidBrush(Color.FromArgb(220, 0, 0, 0));
+            g.FillRectangle(overlayBg, ox - cw, oy - ch / 2, overlayW + 2 * cw, overlayH + ch);
+            for (int i = 0; i < helpLines.Length; i++)
+            {
+                string line = helpLines[i].PadRight(48);
+                DrawText(g, line, ox, oy + i * ch, Color.White, Color.Black);
+            }
+        }
     }
+
+    private static Color ConsoleColorToRgb(ConsoleColor cc) => cc switch
+    {
+        ConsoleColor.Black => Color.FromArgb(0, 0, 0),
+        ConsoleColor.DarkBlue => Color.FromArgb(0, 0, 139),
+        ConsoleColor.DarkGreen => Color.FromArgb(0, 100, 0),
+        ConsoleColor.DarkCyan => Color.FromArgb(0, 139, 139),
+        ConsoleColor.DarkRed => Color.FromArgb(139, 0, 0),
+        ConsoleColor.DarkMagenta => Color.FromArgb(139, 0, 139),
+        ConsoleColor.DarkYellow => Color.FromArgb(139, 139, 0),
+        ConsoleColor.Gray => Color.FromArgb(169, 169, 169),
+        ConsoleColor.DarkGray => Color.FromArgb(64, 64, 64),
+        ConsoleColor.Blue => Color.FromArgb(30, 80, 200),
+        ConsoleColor.Green => Color.FromArgb(0, 200, 0),
+        ConsoleColor.Cyan => Color.FromArgb(0, 200, 200),
+        ConsoleColor.Red => Color.FromArgb(200, 0, 0),
+        ConsoleColor.Magenta => Color.FromArgb(200, 0, 200),
+        ConsoleColor.Yellow => Color.FromArgb(200, 200, 0),
+        ConsoleColor.White => Color.FromArgb(240, 240, 240),
+        _ => Color.FromArgb(15, 15, 15)
+    };
 
     private static Color ConsoleColorToBg(ConsoleColor cc) => cc switch
     {
@@ -824,6 +913,50 @@ internal class DesktopForm : DesktopFormBase
                     else if (e.KeyCode == Keys.N || e.KeyCode == Keys.Escape)
                         _replacePhase = ReplacePhase.None;
                     else handled = false;
+                    break;
+            }
+            if (handled)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                Invalidate();
+            }
+            return;
+        }
+
+        // Help overlay — any key dismisses
+        if (_showHelp)
+        {
+            _showHelp = false;
+            e.Handled = true;
+            e.SuppressKeyPress = true;
+            Invalidate();
+            return;
+        }
+
+        // Goto cell mode
+        if (_gotoMode)
+        {
+            bool handled = true;
+            switch (e.KeyCode)
+            {
+                case Keys.Enter:
+                    _gotoMode = false;
+                    var parsed = CellPrefix.ParseCellRef(_gotoInput);
+                    if (parsed is var (row, col))
+                        _grid.SelectCell(row, col);
+                    _gotoInput = "";
+                    break;
+                case Keys.Escape:
+                    _gotoMode = false;
+                    _gotoInput = "";
+                    break;
+                case Keys.Back:
+                    if (_gotoInput.Length > 0)
+                        _gotoInput = _gotoInput[..^1];
+                    break;
+                default:
+                    handled = false;
                     break;
             }
             if (handled)
@@ -1005,6 +1138,22 @@ internal class DesktopForm : DesktopFormBase
                         _grid.SortByColumn(sortCol);
                         break;
                     }
+                case Keys.Z:
+                    _grid.Undo();
+                    break;
+                case Keys.Y:
+                    _grid.Redo();
+                    break;
+                case Keys.T:
+                    Theme.CycleNext();
+                    break;
+                case Keys.G:
+                    _gotoMode = true;
+                    _gotoInput = "";
+                    break;
+                case Keys.H:
+                    _showHelp = !_showHelp;
+                    break;
                 default: handled2 = false; break;
             }
         }
@@ -1182,6 +1331,10 @@ internal class DesktopForm : DesktopFormBase
             else if (_replacePhase == ReplacePhase.ReplaceInput)
             {
                 _replaceWithInput += e.KeyChar;
+            }
+            else if (_gotoMode)
+            {
+                _gotoInput += e.KeyChar;
             }
             else if (_searching)
             {

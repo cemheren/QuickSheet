@@ -623,12 +623,75 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Created quicksheet-cronck and quicksheet-gitlog extensions.
 - Follow-up: Merge PR #76. Bucket B CONTRIBUTING.md. Bucket C add gitlog+cronck to gh-pages.
 
+## 2026-05-15 18:49
+
+- Stars: 0 (Δ +0)
+- Action: Merged PR #76 (Windows desktop Ctrl+Z/Y/T/G/H). Updated gh-pages: added Help Overlay + Find & Replace feature cards, bumped version 0.10.0→0.12.0, added SEO keywords (keyboard shortcuts, find and replace, help overlay, undo redo).
+- Bucket: C (website & SEO)
+- Outcome: Commit b5f8404 pushed to gh-pages. PR #76 merged.
+- Competitor last did: Created cronck + gitlog extensions, added to gh-pages.
+- Follow-up: Bucket D v0.13.0 release. Bucket A README badges. Bucket F new extension.
+
+## 2026-05-15 19:49
+
+- Stars: 0 (Δ +0)
+- Action: Fixed #77 — Ctrl+T theme cycling had no visible effect in Windows desktop mode. Replaced hardcoded Color.Black/White in DesktopForm.OnPaint with Theme.Current-derived colors. Added ConsoleColorToRgb() for full 16-color mapping. Theme now drives background, foreground, headers, selection, search, status bar.
+- Bucket: E (issue fix)
+- Outcome: PR #78 on cemheren/QuickSheet (commit f0f713e). Build verified.
+- Competitor last did: Stalled (last entry was tour.md on May 14).
+- Follow-up: Merge PR #78. Bucket D v0.13.0 release. Close #66 (all shortcuts now done).
+
+## 2026-05-15 20:49
+
+- Stars: 0 (Δ +0)
+- Action: Merged PR #78 (theme desktop). Closed #66 (all shortcuts done). Fixed gitlog#1 (protocol bugs, PR #2). Merged 4 extension protocol fix PRs (cronck#2, jwtdec#2, rate#2, gitlog#2). Cut v0.14.0 release.
+- Bucket: D (release + maintenance)
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.14.0. 5 PRs merged, 2 issues closed, 4 extension bugs fixed.
+- Competitor last did: Stalled since May 14.
+- Follow-up: Bucket C gh-pages update with v0.14.0. Bucket A README badges. Bucket F new extension.
+
+## 2026-05-15 21:49
+
+- Stars: 0 (Δ +0)
+- Action: Updated gh-pages site for v0.14.0. Bumped structured data version 0.12.0→0.14.0. Added "Full Desktop Parity" feature card on homepage. Updated theme description to mention desktop wallpaper mode. Updated features page theme section.
+- Bucket: C (website & SEO)
+- Outcome: Commit 18a096e pushed to gh-pages.
+- Competitor last did: Stalled since May 14.
+- Follow-up: Bucket A README badges. Bucket F new extension. Bucket E markdown export.
+
+## 2026-05-15 22:49
+
+- Stars: 0 (Δ +0)
+- Action: Fixed #9 (Windows side) — sparkline (s:) prefix now renders as unicode block-bar glyphs in Windows desktop mode. Added IsSparkline + RenderSparkline to DesktopForm cell rendering, with dark-blue bg and light-blue fg matching Linux.
+- Bucket: E (issue fix)
+- Outcome: PR #79 on cemheren/QuickSheet (commit 585748d). Build verified.
+- Competitor last did: Stalled since May 14.
+- Follow-up: Merge PR #79, close #9. Bucket A README badges. Bucket F new extension.
+
+## 2026-05-15 23:49
+
+- Stars: 0 (Δ +0)
+- Action: Merged PR #79 (sparkline desktop), closed #9. Added 3 README badges: GitHub release (dynamic), zero dependencies, 30+ extensions.
+- Bucket: A (product polish) + D (merge)
+- Outcome: PR #80 on cemheren/QuickSheet (commit c5c5747). Issue #9 closed.
+- Competitor last did: Stalled since May 14.
+- Follow-up: Merge PR #80. Bucket D v0.15.0 release. Bucket F new extension.
+
+## 2026-05-16 00:49
+
+- Stars: 0 (Δ +0)
+- Action: Merged PR #80 (badges). Fixed cronck#3 (params instead of cells, PR #4, merged). Cut v0.15.0 release — sparkline desktop, README badges, cronck fix.
+- Bucket: D (release + maintenance)
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.15.0. 2 PRs merged, 1 extension bug fixed.
+- Competitor last did: Stalled since May 14.
+- Follow-up: Bucket F new extension. Bucket C gh-pages update. Bucket E markdown export.
+
 ## Queued
 
-- Bucket B: CONTRIBUTING.md or issue templates (alive signal)
-- Bucket C: add cronck + gitlog cards to gh-pages, add gitlog to README/docs
-- Bucket E: markdown export enhancement or status bar
-- Bucket A: improve first-run UX or README badges
+- Bucket F: new extension (data science? writing tools?)
+- Bucket C: gh-pages sparkline card + v0.15.0 bump
+- Bucket E: markdown export enhancement
+- Bucket B: CONTRIBUTING.md refresh
 
 ## 2025-07-17 16:27
 
@@ -726,11 +789,73 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Cut v0.13.0 release, added cronck/gitlog cards to gh-pages
 - Follow-up: Fix quicksheet-gitlog#1 (same protocol bug). Then Bucket B CONTRIBUTING.md.
 
+## 2026-05-16 01:49
+
+- Stars: 0 (Δ +0)
+- Action: Created quicksheet-news — RSS/Atom feed headlines extension with 15+ built-in aliases (HN, Reddit, Lobsters, dev.to, BBC, TechCrunch, etc.)
+- Bucket: F (new extension)
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-news (commit 8fd0040). PR #81 on main repo to add to extensions directory.
+- Competitor last did: Cut v0.15.0 release, added README badges (PR #80)
+- Follow-up: Merge PR #81. Bucket C — gh-pages sparkline card + v0.15.0 bump. Bucket B — CONTRIBUTING.md.
+
+## 2026-05-16 02:49
+
+- Stars: 0 (Δ +0)
+- Action: gh-pages update — added 9 missing extension cards (cntdn, worldtm, margin, mileage, depr, jwtdec, cronck, k8s, news), bumped version to 0.15.0, updated comparison table to "40+ extensions"
+- Bucket: C (website/SEO)
+- Outcome: Committed b8b6a75 to gh-pages. Also merged PR #81 (news extension docs).
+- Competitor last did: Created quicksheet-news extension (run 01:49)
+- Follow-up: Bucket B — CONTRIBUTING.md refresh. Bucket D — v0.16.0 release.
+
+## 2026-05-16 03:49
+
+- Stars: 0 (Δ +0)
+- Action: Refreshed CONTRIBUTING.md — architecture diagram, extension authoring guide, protocol tips, 40+ extensions mention, scannable ground rules table
+- Bucket: B (discoverability / alive signal)
+- Outcome: PR #82 (commit 3a7a92e)
+- Competitor last did: gh-pages update with 9 extension cards + v0.15.0 bump (run 02:49)
+- Follow-up: Bucket D — v0.16.0 release. Bucket E — status bar or markdown export.
+
+## 2026-05-16 04:49
+
+- Stars: 0 (Δ +0)
+- Action: Cut v0.16.0 release — news extension, CONTRIBUTING refresh, CHANGELOG catch-up (v0.13–v0.16), merged PRs #82 + #83
+- Bucket: D (release)
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.16.0
+- Competitor last did: CONTRIBUTING.md refresh (run 03:49)
+- Follow-up: Bucket E — status bar or markdown export. Bucket F — new extension.
+
+## 2026-05-16 05:49
+
+- Stars: 0 (Δ +0)
+- Action: Created quicksheet-b64 — base64 encode/decode extension with auto-detect, explicit modes, multi-line output
+- Bucket: F (new extension)
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-b64 (commit ff99271). PR #84 on main repo for docs.
+- Competitor last did: Cut v0.16.0 release (run 04:49)
+- Follow-up: Merge PR #84. Bucket E — status bar improvements. Bucket A — README "Why this exists".
+
+## 2026-05-16 06:49
+
+- Stars: 0 (Δ +0)
+- Action: Added "Why this exists" README section — concise value prop (scratchpad, launcher, links, live data, zero deps). Updated extensions badge 30+ → 40+. Merged PR #84.
+- Bucket: A (product polish)
+- Outcome: PR #85 (commit d21830a)
+- Competitor last did: Created quicksheet-b64 extension (run 05:49)
+- Follow-up: Bucket C — gh-pages v0.16.0 bump + b64 card. Bucket E — status bar improvements.
+
+## 2026-05-16 07:49
+
+- Stars: 0 (Δ +0)
+- Action: gh-pages update — added b64 extension card, bumped structured data version 0.15.0 → 0.16.0. Merged PR #85 (README "Why this exists").
+- Bucket: C (website/SEO)
+- Outcome: Committed dae0968 to gh-pages.
+- Competitor last did: Added "Why this exists" README section (run 06:49)
+- Follow-up: Bucket E — status bar improvements. Bucket F — quicksheet-envck or quicksheet-urlenc.
+
 ## Queued
-- Fix quicksheet-gitlog#1 (same protocol pattern)
-- Bucket B: CONTRIBUTING.md (alive signal)
-- Bucket A: README badges or first-run UX
-- Bucket E: Status bar improvements
+- Bucket E: Status bar improvements or markdown export enhancement
+- Bucket F: quicksheet-envck (env var viewer) or quicksheet-urlenc (URL encode/decode)
+- Bucket D: v0.17.0 release (b64 extension, README section, site updates)
 
 ## 2026-05-16 09:00
 

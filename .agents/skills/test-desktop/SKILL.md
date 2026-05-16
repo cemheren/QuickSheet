@@ -237,6 +237,12 @@ Also use PowerShell for:
 |----|------|-------|----------|
 | A61 | c:color: prefix | Type `c:red: URGENT` in a cell | Cell background turns red, text shows "URGENT" only |
 
+### Sparkline Prefix
+
+| ID | Test | Steps | Expected |
+|----|------|-------|----------|
+| A67 | Sparkline (s:) | Type `s: 1,3,5,7,5,3,1` in a cell | Unicode block bars rendered with dark-blue bg, light-blue fg |
+
 ### Missing Desktop Shortcuts
 
 | ID | Test | Steps | Expected |
@@ -301,9 +307,13 @@ First install each extension via its `ext:` cell. Then test the prefix.
 | C29 | quicksheet-mileage-ext | `ext: github:cemheren/quicksheet-mileage-ext` | `mileage: 1000,1,4` | IRS standard mileage rate calculation |
 | C30 | quicksheet-margin-ext | `ext: github:cemheren/quicksheet-margin-ext` | `margin: 100000,60000,25000,1,5` | Break-even analysis: CM per unit, break-even units, revenue |
 | C31 | quicksheet-k8s | `ext: github:cemheren/quicksheet-k8s` | `k8s: default,1,5` | Kubernetes pod status from kubeconfig (requires kubectl) |
-| C32 | quicksheet-depr-ext | `ext: github:cemheren/quicksheet-depr-ext` | `depr: 50000 5 straight 5000` | Straight-line/MACRS depreciation schedule |
+| C32 | quicksheet-depr-ext | `ext: github:cemheren/quicksheet-depr-ext` | `depr: 50000 5 straight 5000,1,10` | Straight-line depreciation schedule: cost, salvage, yearly expense |
 | C33 | quicksheet-jwtdec | `ext: github:cemheren/quicksheet-jwtdec` | `jwtdec: <jwt-token>,1,8` | Decoded JWT header + claims in grid cells |
 | C34 | quicksheet-rate | `ext: github:cemheren/quicksheet-rate` | `rate: 120000,1,6` | Freelance rate calculator: min rate, take-home, billable hours |
+| C35 | quicksheet-cronck | `ext: github:cemheren/quicksheet-cronck` | `cronck: */5 * * * *,1,3` | Human-readable cron schedule description |
+| C36 | quicksheet-gitlog | `ext: github:cemheren/quicksheet-gitlog` | `gitlog: 5,1,6` | Recent 5 git commits from current repo |
+| C37 | quicksheet-news | `ext: github:cemheren/quicksheet-news` | `news: hn,1,6` | RSS/Atom feed headlines (HN, Reddit, etc.) with titles + links |
+| C38 | quicksheet-b64 | `ext: github:cemheren/quicksheet-b64` | `b64: Hello World` | Base64 encode: "🔒 ENCODED" header + base64 string + byte count |
 
 ---
 

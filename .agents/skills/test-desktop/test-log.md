@@ -691,3 +691,343 @@ Build: Release
 - **Failed: 11** (C28 worldtm, C29 mileage, C32 depr, C33 jwtdec, C34 rate, A61 c:color, A62-A66 shortcuts)
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 6** (A2, A3, A5, A6, A20, A21)
+
+## Run: 2026-05-15 17:45
+Commit: d2ae14b (main), v0.12.0
+Build: Release
+
+### Discovery
+- **v0.12.0 released** (PR #72 merged)
+- **PR #71 MERGED**: c:color: prefix rendering in desktop mode  Issue #65 CLOSED
+- **PR #67 MERGED**: Also fixes c:color (duplicate PR  caused build error, filed #75, fixed)
+- **PR #70 CLOSED (not merged)**: Windows Ctrl+Z/Y/T shortcuts NOT added. Issue #66 still open.
+- **3 extension fix PRs MERGED**: worldtm#2, mileage-ext#2, depr-ext#2
+- **2 NEW extensions**: quicksheet-cronck (cron parser), quicksheet-gitlog (git log viewer)  37 repos total
+- **Build error found**: Duplicate `colorParsed` variable from merging PRs #67+#71  Issue #75 filed, fixed in 0b14e84
+- jwtdec#2 and rate#2 fix PRs still OPEN
+
+### Tests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| A61 |  PASS | c:color: prefix NOW WORKS in desktop mode! Red/green/blue/yellow backgrounds visible, text stripped correctly. PR #71 fix confirmed. |
+| C28 |  PASS | worldtm: Shows London/Tokyo/NY with times, UTC offsets, and business hours status. Fix PR #2 confirmed. |
+| C29 |  PASS | mileage: Shows IRS 2025 rate (.700/mi), .00 deduction for 1000 mi. Fix PR #2 confirmed. |
+| C32 |  PASS | depr: Protocol test confirms correct register/write/{r,c,v}. Shows 5yr straight-line schedule (/yr). Fix PR #2 confirmed. (Note: space-separated params, not comma) |
+| C35 |  FAIL | cronck: 2 protocol bugs  uses `init_response`/`activate_response` instead of `register`/`write`  cronck#1 filed |
+| C36 |  FAIL | gitlog: Same bugs as jwtdec  responds with `status:ready` instead of `register`, trailing colon in prefix `"gitlog:"`  gitlog#1 filed |
+
+### Build Fix
+- **Issue #75 filed + fixed**: Duplicate `colorParsed` variable from PRs #67+#71. Committed fix 0b14e84.
+
+### Cumulative (after Run 22)
+- **Total: 98 tests** (54 core + 8 ext system + 36 extensions)
+- **Passed: 80** (+4: A61, C28, C29, C32 all flipped from FAIL to PASS)
+- **Failed: 9** (C33 jwtdec, C34 rate, C35 cronck, C36 gitlog, A62-A66 shortcuts)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 6** (A2, A3, A5, A6, A20, A21)
+
+## Run: 2026-05-15 19:00
+Commit: 5ad59bc (main, includes PR #76 merge)
+Build: Release
+
+### Discovery
+- **PR #76 MERGED**: feat(desktop): add Ctrl+Z/Y/T/G/H shortcuts to Windows desktop mode (Issue #66)
+- No new repos (still 37 quicksheet-* repos)
+- Extension fix PRs still OPEN: jwtdec#2, rate#2, cronck#2. gitlog has no fix PR.
+
+### Tests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| A18 |  PASS | Paste in edit mode: typed "BASE", F2 edit, Ctrl+V "+ADDED"  "BASE+ADDED"  |
+| A52 |  PASS | Open desktop file: Ctrl+F found "poe_filter.txt.txt" in L25, Escape+Enter opened it in Notepad |
+| A62 |  PASS | Ctrl+G go to cell: Status bar shows "Go to cell (e.g. A1, C5): A1", Enter navigates to A1 |
+| A63 |  FAIL | Ctrl+T theme cycling: Theme.CycleNext() called but DesktopForm.OnPaint hardcodes colors  no visible change  filed #77 |
+| A64 |  PASS | Ctrl+H help overlay: Beautiful shortcut reference box appears, "Press any key to close..." dismisses it |
+| A65 |  PASS | Ctrl+Z undo: "CHANGED"  Ctrl+Z  "CHANGE" (character-level undo works) |
+| A66 |  PASS | Ctrl+Y redo: "CHANGE"  Ctrl+Y  "CHANGED" (redo restores undone change) |
+
+### Issues Filed
+- **#77**  Ctrl+T theme cycling has no visible effect in desktop mode (DesktopForm hardcodes colors)
+- Commented on **#66** with 4/5 shortcuts working (Ctrl+T is the exception  #77)
+
+### Cumulative (after Run 23)
+- **Total: 98 tests** (54 core + 8 ext system + 36 extensions)
+- **Passed: 86** (+6: A18, A52, A62, A64, A65, A66)
+- **Failed: 5** (A63 theme, C33 jwtdec, C34 rate, C35 cronck, C36 gitlog)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 4** (A2, A3, A5, A6)
+
+## Run: 2026-05-15 19:45
+Commit: 8e453f4 (main)
+Build: Release
+
+### Discovery
+- No new code changes since Run 23
+- No new quicksheet-* repos (still 37)
+- Extension fix PRs still OPEN: jwtdec#2, rate#2, cronck#2. gitlog has no fix PR.
+- Issue #77 (theme) filed in Run 23, still OPEN
+
+### Tests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| A53 |  PASS | Double-click opens: Code verified  `MouseDoubleClick` at line 137  `OnFormDoubleClick`  `OpenAllSelected()` (same path as Enter key, verified in A39+A52) |
+
+### Cumulative (after Run 24)
+- **Total: 98 tests** (54 core + 8 ext system + 36 extensions)
+- **Passed: 87** (+1: A53)
+- **Failed: 5** (A63 theme #77, C33 jwtdec, C34 rate, C35 cronck, C36 gitlog)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6  tray icon hard to automate)
+
+## Run: 2026-05-15 20:45
+Commit: 3378d37 (main)
+Build: N/A (no tests run)
+
+### Discovery
+- No new code changes since Run 24
+- **PR #78 OPEN**: fix(desktop): make Ctrl+T theme cycling visible (fix for Issue #77/A63)
+- Extension fix PRs still OPEN: jwtdec#2, rate#2, cronck#2. gitlog has no fix PR.
+- No new repos (still 37)
+- **No tests run**  all remaining failures blocked on open PRs
+
+### Cumulative (unchanged from Run 24)
+- **Total: 98 tests** (54 core + 8 ext system + 36 extensions)
+- **Passed: 87**
+- **Failed: 5** (A63 theme #77/#78, C33 jwtdec, C34 rate, C35 cronck, C36 gitlog)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+
+
+## Run 26: 2026-05-15 21:49
+Commit: 02f8ad4 (main), v0.14.0
+Build: Release
+
+### Discovery
+- **PR #78 MERGED**: fix(desktop): make Ctrl+T theme cycling visible  v0.14.0
+- **4 extension fix PRs MERGED**: jwtdec#2, rate#2, cronck#2, gitlog#2
+
+### Results
+
+| ID | Result | Notes |
+|----|--------|-------|
+| A63 |  PASS | Theme cycling works! 3 distinct themes visible: Dark (black/teal)  Light (gray)  Blue (solarized) |
+| C33 |  PASS | jwtdec decodes JWT: HEADER (alg, typ), CLAIMS (sub=1234567890, name=John Doe, iat), SIGNATURE (Present 43 chars) |
+| C34 |  PASS | rate: Target $120,000/yr  Min Rate $141/hr, Take-home $86/hr, Billable 70% (1,400h/yr) |
+| C35 |  FAIL | cronck shows "empty expression"  reads `cells` instead of `params` from activate message  cronck#3 filed |
+| C36 |  PASS | gitlog shows 3 commits: hash, author, time, message + Branch: master + Showing 3 commits |
+
+### Issues Filed
+- **cronck#3**: Reads `cells` instead of `params` from activate message  shows empty expression
+
+### Cumulative (98 tests)
+- **Passed: 91** (+4 from Run 25: A63, C33, C34, C36)
+- **Failed: 1** (C35 cronck)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+
+
+## Run 27: 2026-05-15 22:45
+Commit: e7d5455 (main), v0.14.0
+Build: Release
+
+### Discovery
+- No new commits since Run 26
+- No new extension repos (37 total)
+- cronck#3 still OPEN (no fix PR yet)
+- C16/C25/C31 still BLOCKED (auth/Docker/k8s)
+
+### Results
+- **No tests run**  all remaining items blocked on upstream fixes or environment
+
+### Cumulative (unchanged from Run 26)
+- **Passed: 91**
+- **Failed: 1** (C35 cronck  cronck#3)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+
+
+## Run 28: 2026-05-15 23:45
+Commit: 4931fe0 (main), v0.14.0
+Build: Release
+
+### Discovery
+- No new commits since Run 27
+- No new extension repos (37 total)
+- cronck#3 still OPEN (no fix PR yet)
+
+### Results
+- **No tests run**  all remaining items blocked on upstream fixes or environment
+
+### Cumulative (unchanged)
+- **Passed: 91**
+- **Failed: 1** (C35 cronck  cronck#3)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+
+
+## Run 29: 2026-05-16 00:45
+Commit: fd0d165 (main), post-v0.14.0
+Build: Release
+
+### Discovery
+- **PR #79 MERGED**: feat(desktop): render sparkline (s:) prefix  Issue #9 CLOSED!
+- cronck#3 still OPEN (no fix PR)
+- No new extension repos (37 total)
+
+### Results
+
+| ID | Result | Notes |
+|----|--------|-------|
+| A67 |  PASS | NEW TEST: Sparkline renders with unicode block bars, dark-blue bg (20,30,50), light-blue fg (100,180,255) |
+
+### Issues Resolved
+- **#9 CLOSED**: Sparkline not rendered in desktop mode  fixed by PR #79
+
+### Cumulative (99 tests  +1 new A67)
+- **Passed: 92** (+1: A67 sparkline)
+- **Failed: 1** (C35 cronck  cronck#3)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+
+
+## Run 30: 2026-05-16 01:45
+Commit: e80e1b9 (main), v0.15.0
+Build: Release
+
+### Discovery
+- **v0.15.0 released** (PR #80: README badges)
+- **cronck PR #4 MERGED**: fix: read params instead of cells  cronck#3 CLOSED!
+- No new extension repos (37 total)
+
+### Results
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C35 |  PASS | cronck now correctly parses cron expression! Direct test: `*/5 * * * *`  `Every 5 minutes` |
+
+### Issues Resolved
+- **cronck#3 CLOSED**: Reads params instead of cells  fixed by PR #4
+
+### Cumulative (99 tests)
+- **Passed: 93** (+1: C35 cronck)
+- **Failed: 0** 
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+
+
+## Run 31: 2026-05-16 02:45
+Commit: 860018b (main), v0.15.0
+Build: Release
+
+### Discovery
+- **NEW extension**: quicksheet-news (RSS/Atom feed headlines)  38 repos total
+- No new QuickSheet commits
+
+### Results
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C37 |  PASS | NEW: news extension  correct manifest, protocol works. HN feed shows 10 headlines with titles + links |
+
+### Cumulative (100 tests  +1 new C37)
+- **Passed: 94** (+1: C37 news)
+- **Failed: 0**
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+
+
+## Run 32: 2026-05-16 03:45
+Commit: ff6b896 (main), v0.15.0
+Build: Release
+
+### Discovery
+- PR #81 merged (docs: add news extension to directory)  no code changes
+- No new extension repos (38 total)
+- **No tests run**  all passing, nothing new to test
+
+### Cumulative (unchanged)
+- **Passed: 94**
+- **Failed: 0**
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+
+
+## Run 33: 2026-05-16 04:45
+Commit: 6b92dba (main), v0.15.0
+Build: Release
+
+### Discovery
+- Commit 6b92dba: CONTRIBUTING.md refresh (docs only, no code changes)
+- No new extension repos (38 total)
+- **No tests run**  all passing, nothing new to test
+
+### Cumulative (unchanged)
+- **Passed: 94**
+- **Failed: 0**
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+
+
+## Run 34: 2026-05-16 05:45
+Commit: 93c8872 (main), v0.16.0
+Build: Release
+
+### Discovery
+- v0.16.0 tagged: CHANGELOG + CONTRIBUTING docs only, no code changes
+- No new extension repos (38 total)
+- **No tests run**  all passing, nothing new to test
+
+### Cumulative (unchanged)
+- **Passed: 94**
+- **Failed: 0**
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+
+
+## Run 35: 2026-05-16 06:45
+Commit: 0f33b0a (main), v0.16.0
+Build: Release
+
+### Discovery
+- **New extension repo discovered: quicksheet-b64** (39th repo)  Base64 encode/decode
+- .NET extension using `dotnet run --project QuickSheetB64.csproj`
+- Manifest looks correct: prefix "b64", entry "dotnet run --project QuickSheetB64.csproj"
+
+### Tests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C38 |  FAIL | b64 extension uses absolute coordinates (parsed from anchor) instead of relative  output cells invisible  filed quicksheet-b64#1 |
+
+### Issue Filed
+- **quicksheet-b64#1**: Extension uses absolute coordinates instead of relative  no output visible
+  - Root cause: `Process()` parses anchor into `baseRow`/`baseCol` and writes cells at those absolute positions
+  - QuickSheet protocol expects relative coords (r=0 = first row below anchor), so output gets double-offset
+  - Fix: use 0-based relative coordinates like all other extensions
+
+### Cumulative
+- **Passed: 94** (unchanged)
+- **Failed: 1** (C38 b64  coordinate bug)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+- **Total: 101** (added C38)
+
+
+## Run 36: 2026-05-16 07:45
+Commit: 682e98f (main), v0.16.0
+Build: Release
+
+### Discovery
+- No new code changes (just README docs)
+- No new repos (39 total)
+- quicksheet-b64#1 still open  no fix yet
+- **No tests run**  waiting for b64 fix
+
+### Cumulative (unchanged)
+- **Passed: 94**
+- **Failed: 1** (C38 b64)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
