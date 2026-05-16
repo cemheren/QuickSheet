@@ -1116,3 +1116,19 @@ Build: Release
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 3** (A2, A3, A5/A6)
 - **Total: 103**
+
+
+## Run 40: 2026-05-16 15:43
+Commit: 7736975 (main), v0.17.0
+Build: Release
+
+### Discovery
+- quicksheet-regex PR #2 open (fix: use {r,c,v}) — not merged yet
+- No new repos (41 total), no code changes
+- **No tests run** — waiting for regex PR merge
+
+### Cumulative (unchanged)
+- **Passed: 96**
+- **Failed: 1** (C40 regex)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
