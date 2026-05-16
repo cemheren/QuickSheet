@@ -781,3 +781,21 @@ Build: Release
 - **Failed: 5** (A63 theme #77, C33 jwtdec, C34 rate, C35 cronck, C36 gitlog)
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 3** (A2, A3, A5/A6  tray icon hard to automate)
+
+## Run: 2026-05-15 20:45
+Commit: 3378d37 (main)
+Build: N/A (no tests run)
+
+### Discovery
+- No new code changes since Run 24
+- **PR #78 OPEN**: fix(desktop): make Ctrl+T theme cycling visible (fix for Issue #77/A63)
+- Extension fix PRs still OPEN: jwtdec#2, rate#2, cronck#2. gitlog has no fix PR.
+- No new repos (still 37)
+- **No tests run**  all remaining failures blocked on open PRs
+
+### Cumulative (unchanged from Run 24)
+- **Total: 98 tests** (54 core + 8 ext system + 36 extensions)
+- **Passed: 87**
+- **Failed: 5** (A63 theme #77/#78, C33 jwtdec, C34 rate, C35 cronck, C36 gitlog)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
