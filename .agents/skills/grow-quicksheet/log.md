@@ -731,3 +731,19 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket B: CONTRIBUTING.md (alive signal)
 - Bucket A: README badges or first-run UX
 - Bucket E: Status bar improvements
+
+## 2026-05-16 09:00
+
+- Stars: 0 (Δ +0)
+- Action: Fixed quicksheet-b64#1 — extension used absolute anchor coordinates instead of relative, making output invisible
+- Bucket: A (ext repo issue fix)
+- Outcome: PR #2 on cemheren/quicksheet-b64 (commit 82f198b). Build verified, smoke-tested.
+- Details: Removed anchor-to-absolute parsing logic. Now uses 0-based relative coords matching all other extensions.
+- Competitor last did: Stalled since May 14
+- Follow-up: Bucket B — README badges. Bucket E — status bar. Bucket C — add b64 fix to gh-pages notes.
+
+## Queued
+- Bucket A: README badges (build status, .NET version, license)
+- Bucket E: Status bar improvements (file name, cell count, mode indicator)
+- Bucket C: Update gh-pages extension cards if needed
+- Bucket F: quicksheet-envck (env var viewer) or quicksheet-mileage-ext
