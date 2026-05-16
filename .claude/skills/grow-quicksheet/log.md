@@ -2,6 +2,14 @@
 
 Persistent memory across runs. Append-only (except the Queued section at bottom).
 
+## 2026-05-15 (local run, jwtdec protocol fix)
+
+- Stars: 0 (Δ 0)
+- Action: Bucket A (ext repo) — closed quicksheet-jwtdec#1. Manifest had `prefix: "jwtdec:"` (trailing colon broke prefix match). Main waited for `init` instead of emitting `register` on startup. Activate response was `type:"response"` instead of `type:"write"`. Fixed all three + propagated activate id. Smoke-tested with HS256 token.
+- Bucket: A
+- Outcome: PR https://github.com/cemheren/quicksheet-jwtdec/pull/2
+- Follow-up: none queued; all known ext bug issues now have PRs.
+
 ## 2026-05-15 (local run, rate cells→write)
 
 - Stars: 0 (Δ 0)
