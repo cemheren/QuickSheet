@@ -623,12 +623,21 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Created quicksheet-cronck and quicksheet-gitlog extensions.
 - Follow-up: Merge PR #76. Bucket B CONTRIBUTING.md. Bucket C add gitlog+cronck to gh-pages.
 
+## 2026-05-15 18:49
+
+- Stars: 0 (Δ +0)
+- Action: Merged PR #76 (Windows desktop Ctrl+Z/Y/T/G/H). Updated gh-pages: added Help Overlay + Find & Replace feature cards, bumped version 0.10.0→0.12.0, added SEO keywords (keyboard shortcuts, find and replace, help overlay, undo redo).
+- Bucket: C (website & SEO)
+- Outcome: Commit b5f8404 pushed to gh-pages. PR #76 merged.
+- Competitor last did: Created cronck + gitlog extensions, added to gh-pages.
+- Follow-up: Bucket D v0.13.0 release. Bucket A README badges. Bucket F new extension.
+
 ## Queued
 
-- Bucket B: CONTRIBUTING.md or issue templates (alive signal)
-- Bucket C: add cronck + gitlog cards to gh-pages, add gitlog to README/docs
-- Bucket E: markdown export enhancement or status bar
-- Bucket A: improve first-run UX or README badges
+- Bucket D: v0.13.0 release (Windows shortcuts + any merged since v0.12.0)
+- Bucket A: README badges or improve first-run UX
+- Bucket F: new extension (data science? writing tools?)
+- Bucket E: markdown export enhancement
 
 ## 2025-07-17 16:27
 
