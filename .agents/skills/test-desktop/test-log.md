@@ -1086,3 +1086,33 @@ Build: Release
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 3** (A2, A3, A5/A6)
 - **Total: 103** (added C40)
+
+
+## Run 39: 2026-05-16 14:58
+Commit: 688923f (main), v0.17.0
+Build: Release
+
+### Discovery
+- **v0.17.0 tagged**: PR #96 merged (5 new themes: Dracula, Synthwave, Gruvbox, Monokai, HotdogStand)
+- PR #97 merged: add quicksheet-regex to directory
+- quicksheet-regex#1 still open (no fix PR yet)
+- No new extension repos (41 total)
+
+### Tests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C40 | ❌ FAIL | regex still broken — waiting for {r,c,v} fix (quicksheet-regex#1) |
+| A63 | ✅ PASS | Theme cycling still works with v0.17.0 — new themes render correctly (teal/cyan visible) |
+
+### Notes
+- PR #96 adds Dracula, Synthwave, Gruvbox, Monokai, HotdogStand themes
+- Ctrl+T cycling mechanism unchanged from PR #78 (verified Run 26)
+- Grid renders with themed colors (non-default background visible)
+
+### Cumulative
+- **Passed: 96**
+- **Failed: 1** (C40 regex — {row,col,value} bug)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+- **Total: 103**
