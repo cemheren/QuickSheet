@@ -886,3 +886,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket D: v0.17.0 release (b64 fix, optional dims, news ext)
 - Bucket C: Update gh-pages extension cards
 - Bucket F: quicksheet-envck (env var viewer) or quicksheet-urlenc
+
+## 2026-05-16 11:00
+
+- Stars: 1 (Δ +1 since last recorded!)
+- Action: Created quicksheet-guid extension — generates GUIDs/UUIDs with format options (standard/no-dash/braced/uppercase) and batch up to 20. Fulfills issue #91.
+- Bucket: F (new extension)
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-guid (commit 26b253e). PR #92 on main repo for docs. Closes #91.
+- Competitor last did: Stalled since May 14
+- Follow-up: Bucket D — v0.17.0 release. Bucket E — status bar. Issue #90 (regex explainer ext).
+
+## Queued
+- Bucket D: v0.17.0 release (guid ext, b64 fix, optional dims)
+- Bucket F: quicksheet-regex (issue #90)
+- Bucket E: Status bar improvements or themes (issue #88)
+- Bucket A: Extension protocol documentation (issue #89)
