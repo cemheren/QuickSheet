@@ -553,8 +553,21 @@ internal class DesktopWindow : IDisposable
         int ch = _charHeight;
         int[] colWidths = GetColumnWidths();
 
+        var theme = Theme.Current;
+        var (tBgR, tBgG, tBgB) = ConsoleColorToRgb(theme.Background);
+        var (tFgR, tFgG, tFgB) = ConsoleColorToRgb(theme.Foreground);
+        var (tHdrR, tHdrG, tHdrB) = ConsoleColorToRgb(theme.HeaderHighlight);
+        var (tSelBgR, tSelBgG, tSelBgB) = ConsoleColorToRgb(theme.SelectionBg);
+        var (tSelFgR, tSelFgG, tSelFgB) = ConsoleColorToRgb(theme.SelectionFg);
+        var (tSrchBgR, tSrchBgG, tSrchBgB) = ConsoleColorToRgb(theme.SearchMatchBg);
+        var (tSrchFgR, tSrchFgG, tSrchFgB) = ConsoleColorToRgb(theme.SearchMatchFg);
+        var (tSrchSelBgR, tSrchSelBgG, tSrchSelBgB) = ConsoleColorToRgb(theme.SearchSelectedBg);
+        var (tSrchSelFgR, tSrchSelFgG, tSrchSelFgB) = ConsoleColorToRgb(theme.SearchSelectedFg);
+        var (tStatBgR, tStatBgG, tStatBgB) = ConsoleColorToRgb(theme.StatusBarBg);
+        var (tStatFgR, tStatFgG, tStatFgB) = ConsoleColorToRgb(theme.StatusBarFg);
+
         // Clear background (semi-transparent if ARGB visual available)
-        SetGCColor(0, 0, 0, _hasArgbVisual ? _bgAlpha : 255);
+        SetGCColor(tBgR, tBgG, tBgB, _hasArgbVisual ? _bgAlpha : 255);
         XFillRectangle(_display, _renderDrawable, _gc, 0, 0, (uint)_screenWidth, (uint)_screenHeight);
 
         // Pre-scan for inline cells with multi-cell visual spans (e.g. {A1::C5}-style refs).
@@ -618,9 +631,9 @@ internal class DesktopWindow : IDisposable
             int w = colWidths[c];
             string header = GridManager.GetColumnName(c).PadRight(w);
             if (c == _selectedCol)
-                DrawTextWithBg(header, x, y, 255, 255, 255, 64, 64, 64);
+                DrawTextWithBg(header, x, y, tSelFgR, tSelFgG, tSelFgB, tSelBgR, tSelBgG, tSelBgB);
             else
-                DrawTextWithBg(header, x, y, 255, 255, 255, 0, 0, 0);
+                DrawTextWithBg(header, x, y, tFgR, tFgG, tFgB, tBgR, tBgG, tBgB);
             x += w * cw;
         }
         y += ch;
@@ -629,7 +642,7 @@ internal class DesktopWindow : IDisposable
         string underline = new string('-', RowHeaderWidth);
         for (int c = 0; c < _grid.ColumnCount; c++)
             underline += new string('-', colWidths[c]);
-        DrawTextWithBg(underline, 0, y, 255, 255, 255, 0, 0, 0);
+        DrawTextWithBg(underline, 0, y, tFgR, tFgG, tFgB, tBgR, tBgG, tBgB);
         y += ch;
 
         // Data rows
@@ -639,9 +652,9 @@ internal class DesktopWindow : IDisposable
             x = 0;
             string rowNum = (r + 1).ToString().PadLeft(RowHeaderWidth - 1) + " ";
             if (r == _selectedRow)
-                DrawTextWithBg(rowNum, x, y, 255, 255, 255, 64, 64, 64);
+                DrawTextWithBg(rowNum, x, y, tSelFgR, tSelFgG, tSelFgB, tSelBgR, tSelBgG, tSelBgB);
             else
-                DrawTextWithBg(rowNum, x, y, 200, 200, 200, 15, 15, 15);
+                DrawTextWithBg(rowNum, x, y, tFgR, tFgG, tFgB, tBgR, tBgG, tBgB);
 
             x = RowHeaderWidth * cw;
             for (int c = 0; c < _grid.ColumnCount; c++)
@@ -707,10 +720,10 @@ internal class DesktopWindow : IDisposable
 
                 int bgR, bgG, bgB, fgR, fgG, fgB;
 
-                if (isCursor && isSearchMatch) { bgR = 0; bgG = 180; bgB = 0; }
-                else if (isCursor) { bgR = 64; bgG = 64; bgB = 64; }
-                else if (isMultiSel) { bgR = 50; bgG = 50; bgB = 80; }
-                else if (isSearchMatch) { bgR = 80; bgG = 80; bgB = 0; }
+                if (isCursor && isSearchMatch) { bgR = tSrchSelBgR; bgG = tSrchSelBgG; bgB = tSrchSelBgB; }
+                else if (isCursor) { bgR = tSelBgR; bgG = tSelBgG; bgB = tSelBgB; }
+                else if (isMultiSel) { bgR = tSelBgR; bgG = tSelBgG; bgB = tSelBgB; }
+                else if (isSearchMatch) { bgR = tSrchBgR; bgG = tSrchBgG; bgB = tSrchBgB; }
                 else if (isFile) { bgR = 0; bgG = 40; bgB = 60; }
                 else if (isLink) { bgR = 40; bgG = 0; bgB = 60; }
                 else if (isCmd) { bgR = 40; bgG = 40; bgB = 0; }
@@ -734,7 +747,7 @@ internal class DesktopWindow : IDisposable
                 }
                 else if (extStatus == Extensions.ExtensionCellStatus.Error) { bgR = 50; bgG = 10; bgB = 10; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Running) { bgR = 10; bgG = 40; bgB = 10; }
-                else { bgR = 15; bgG = 15; bgB = 15; }
+                else { bgR = tBgR; bgG = tBgG; bgB = tBgB; }
 
                 if (isFile) { fgR = 100; fgG = 200; fgB = 255; }
                 else if (isLink) { fgR = 180; fgG = 140; fgB = 255; }
@@ -743,13 +756,13 @@ internal class DesktopWindow : IDisposable
                 else if (isSparkline) { fgR = 100; fgG = 180; fgB = 255; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Error) { fgR = 255; fgG = 80; fgB = 80; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Running) { fgR = 80; fgG = 255; fgB = 80; }
-                else { fgR = 255; fgG = 255; fgB = 255; }
+                else { fgR = tFgR; fgG = tFgG; fgB = tFgB; }
 
                 DrawTextWithBg(display, x, y, fgR, fgG, fgB, bgR, bgG, bgB);
                 x += w * cw;
             }
             // Subtle horizontal grid line at the bottom of each row
-            SetGCColor(40, 40, 40, _hasArgbVisual ? _bgAlpha : 255);
+            SetGCColor(tHdrR, tHdrG, tHdrB, _hasArgbVisual ? _bgAlpha : 255);
             XDrawLine(_display, _renderDrawable, _gc, 0, y + ch - 1, _screenWidth, y + ch - 1);
             y += ch;
         }
@@ -894,7 +907,7 @@ internal class DesktopWindow : IDisposable
         status = status.PadRight(maxChars);
 
         // White background status bar (fully opaque)
-        DrawTextWithBg(status, 0, statusY, 0, 0, 0, 255, 255, 255, 255);
+        DrawTextWithBg(status, 0, statusY, tStatFgR, tStatFgG, tStatFgB, tStatBgR, tStatBgG, tStatBgB, 255);
 
         // Blit back buffer to window
         if (_backBuffer != IntPtr.Zero)
@@ -980,6 +993,27 @@ internal class DesktopWindow : IDisposable
             : (ulong)(r << 16 | g << 8 | b);
         XSetForeground(_display, _gc, pixel);
     }
+
+    private static (int r, int g, int b) ConsoleColorToRgb(ConsoleColor cc) => cc switch
+    {
+        ConsoleColor.Black => (0, 0, 0),
+        ConsoleColor.DarkBlue => (0, 0, 139),
+        ConsoleColor.DarkGreen => (0, 100, 0),
+        ConsoleColor.DarkCyan => (0, 139, 139),
+        ConsoleColor.DarkRed => (139, 0, 0),
+        ConsoleColor.DarkMagenta => (139, 0, 139),
+        ConsoleColor.DarkYellow => (139, 139, 0),
+        ConsoleColor.Gray => (169, 169, 169),
+        ConsoleColor.DarkGray => (64, 64, 64),
+        ConsoleColor.Blue => (30, 80, 200),
+        ConsoleColor.Green => (0, 200, 0),
+        ConsoleColor.Cyan => (0, 200, 200),
+        ConsoleColor.Red => (200, 0, 0),
+        ConsoleColor.Magenta => (200, 0, 200),
+        ConsoleColor.Yellow => (200, 200, 0),
+        ConsoleColor.White => (240, 240, 240),
+        _ => (15, 15, 15)
+    };
 
     private void DrawTextWithBg(string text, int x, int y, int fgR, int fgG, int fgB, int bgR, int bgG, int bgB, int bgA = -1)
     {
