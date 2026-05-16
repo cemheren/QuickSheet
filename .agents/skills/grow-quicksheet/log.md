@@ -664,3 +664,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket C: add cronck card to gh-pages extensions page
 - Bucket A: README badges or first-run UX improvements
 - Bucket F: quicksheet-gitlog (recent commits in cells) or quicksheet-envck (env var viewer)
+
+## 2026-05-15 17:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket F — created quicksheet-gitlog extension. Shows recent git commits in cells (hash, author, relative time, message). Supports custom repo path and commit count (up to 50). Zero NuGet deps. Build verified, smoke-tested against live repo.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-gitlog. PR #74 adds to README + docs/extensions.md.
+- Competitor last did: Stalled since May 14.
+- Follow-up: Bucket B — CONTRIBUTING.md or issue templates. Bucket E — status bar improvement.
+
+## Queued
+- Bucket B: CONTRIBUTING.md (alive signal, lowers contribution barrier)
+- Bucket E: Status bar with file name + cell count + mode indicator
+- Bucket C: Add gitlog card to gh-pages
+- Bucket A: README badges (build status, .NET version, license)
