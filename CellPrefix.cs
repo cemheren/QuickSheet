@@ -198,15 +198,24 @@ public static class CellPrefix
         if (string.IsNullOrEmpty(rest)) return null;
 
         string[] parts = rest.Split(',', StringSplitOptions.TrimEntries);
-        if (parts.Length < 2) return null;
 
-        // Last two are always gridCols, gridRows
-        if (!int.TryParse(parts[^2], out int gridCols) || !int.TryParse(parts[^1], out int gridRows))
-            return null;
-        if (gridCols < 1 || gridRows < 1) return null;
+        // Default output area: 1 column, 10 rows — enough for most extensions
+        const int defaultGridCols = 1;
+        const int defaultGridRows = 10;
 
-        string[] extParams = parts.Length > 2 ? parts[..^2] : [];
-        return (prefix, extParams, gridCols, gridRows);
+        // Try to parse trailing gridCols,gridRows if at least 2 parts exist
+        if (parts.Length >= 2 &&
+            int.TryParse(parts[^2], out int gridCols) &&
+            int.TryParse(parts[^1], out int gridRows) &&
+            gridCols >= 1 && gridRows >= 1)
+        {
+            // Last two parts are valid dimensions
+            string[] extParams = parts.Length > 2 ? parts[..^2] : [];
+            return (prefix, extParams, gridCols, gridRows);
+        }
+
+        // No valid trailing dimensions — treat all parts as extension params, use defaults
+        return (prefix, parts, defaultGridCols, defaultGridRows);
     }
 
     // ── Cell reference parsing ───────────────────────────────────────
