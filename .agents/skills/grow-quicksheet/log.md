@@ -825,8 +825,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: CONTRIBUTING.md refresh (run 03:49)
 - Follow-up: Bucket E — status bar or markdown export. Bucket F — new extension.
 
+## 2026-05-16 05:49
+
+- Stars: 0 (Δ +0)
+- Action: Created quicksheet-b64 — base64 encode/decode extension with auto-detect, explicit modes, multi-line output
+- Bucket: F (new extension)
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-b64 (commit ff99271). PR #84 on main repo for docs.
+- Competitor last did: Cut v0.16.0 release (run 04:49)
+- Follow-up: Merge PR #84. Bucket E — status bar improvements. Bucket A — README "Why this exists".
+
 ## Queued
+- Merge PR #84 (b64 extension docs)
 - Bucket E: Status bar improvements or markdown export enhancement
-- Bucket F: quicksheet-envck (env var viewer) or quicksheet-b64 (base64 encode/decode)
 - Bucket A: README "Why this exists" section
-- Bucket C: gh-pages v0.16.0 version bump + news extension card highlight
+- Bucket C: gh-pages v0.16.0 version bump + b64/news extension cards
