@@ -650,12 +650,21 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Stalled since May 14.
 - Follow-up: Bucket C gh-pages update with v0.14.0. Bucket A README badges. Bucket F new extension.
 
+## 2026-05-15 21:49
+
+- Stars: 0 (Δ +0)
+- Action: Updated gh-pages site for v0.14.0. Bumped structured data version 0.12.0→0.14.0. Added "Full Desktop Parity" feature card on homepage. Updated theme description to mention desktop wallpaper mode. Updated features page theme section.
+- Bucket: C (website & SEO)
+- Outcome: Commit 18a096e pushed to gh-pages.
+- Competitor last did: Stalled since May 14.
+- Follow-up: Bucket A README badges. Bucket F new extension. Bucket E markdown export.
+
 ## Queued
 
-- Bucket C: Update gh-pages with v0.14.0, theme cycling feature card
 - Bucket A: README badges or improve first-run UX
 - Bucket F: new extension (data science? writing tools?)
 - Bucket E: markdown export enhancement
+- Bucket B: CONTRIBUTING.md refresh
 
 ## 2025-07-17 16:27
 
