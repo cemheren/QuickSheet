@@ -1031,3 +1031,28 @@ Build: Release
 - **Failed: 1** (C38 b64)
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 3** (A2, A3, A5/A6)
+
+
+## Run 37: 2026-05-16 13:30
+Commit: 7ee6db5 (main), v0.16.0
+Build: Release
+
+### Discovery
+- **New extension repo: quicksheet-guid** (40th repo) — GUID/UUID generator
+- **PR #87 merged**: Extension cell width/height params now optional (defaults 1 col × 10 rows)
+- **quicksheet-b64 PR #2 merged**: Fixed absolute→relative coordinate bug
+- Code change in CellPrefix.cs: optional trailing gridCols/gridRows dimensions
+
+### Tests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C38 | ✅ PASS | b64 extension fixed (PR #2 merged) — "Hello World" → 🔒 ENCODED + SGVsbG8gV29ybGQ= + (11 bytes → 16 chars) |
+| C39 | ✅ PASS | guid extension — 3 GUIDs generated in standard format, correct protocol |
+
+### Cumulative
+- **Passed: 96** (+2: C38 fixed, C39 new)
+- **Failed: 0**
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+- **Total: 102** (added C39)

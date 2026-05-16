@@ -314,6 +314,7 @@ First install each extension via its `ext:` cell. Then test the prefix.
 | C36 | quicksheet-gitlog | `ext: github:cemheren/quicksheet-gitlog` | `gitlog: 5,1,6` | Recent 5 git commits from current repo |
 | C37 | quicksheet-news | `ext: github:cemheren/quicksheet-news` | `news: hn,1,6` | RSS/Atom feed headlines (HN, Reddit, etc.) with titles + links |
 | C38 | quicksheet-b64 | `ext: github:cemheren/quicksheet-b64` | `b64: Hello World` | Base64 encode: "🔒 ENCODED" header + base64 string + byte count |
+| C39 | quicksheet-guid | `ext: github:cemheren/quicksheet-guid` | `guid: 3` | 3 GUIDs in standard format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) |
 
 ---
 
