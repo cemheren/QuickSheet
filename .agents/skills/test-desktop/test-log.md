@@ -799,3 +799,31 @@ Build: N/A (no tests run)
 - **Failed: 5** (A63 theme #77/#78, C33 jwtdec, C34 rate, C35 cronck, C36 gitlog)
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 3** (A2, A3, A5/A6)
+
+
+## Run 26: 2026-05-15 21:49
+Commit: 02f8ad4 (main), v0.14.0
+Build: Release
+
+### Discovery
+- **PR #78 MERGED**: fix(desktop): make Ctrl+T theme cycling visible  v0.14.0
+- **4 extension fix PRs MERGED**: jwtdec#2, rate#2, cronck#2, gitlog#2
+
+### Results
+
+| ID | Result | Notes |
+|----|--------|-------|
+| A63 |  PASS | Theme cycling works! 3 distinct themes visible: Dark (black/teal)  Light (gray)  Blue (solarized) |
+| C33 |  PASS | jwtdec decodes JWT: HEADER (alg, typ), CLAIMS (sub=1234567890, name=John Doe, iat), SIGNATURE (Present 43 chars) |
+| C34 |  PASS | rate: Target $120,000/yr  Min Rate $141/hr, Take-home $86/hr, Billable 70% (1,400h/yr) |
+| C35 |  FAIL | cronck shows "empty expression"  reads `cells` instead of `params` from activate message  cronck#3 filed |
+| C36 |  PASS | gitlog shows 3 commits: hash, author, time, message + Branch: master + Showing 3 commits |
+
+### Issues Filed
+- **cronck#3**: Reads `cells` instead of `params` from activate message  shows empty expression
+
+### Cumulative (98 tests)
+- **Passed: 91** (+4 from Run 25: A63, C33, C34, C36)
+- **Failed: 1** (C35 cronck)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
