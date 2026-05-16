@@ -39,6 +39,13 @@ internal class DesktopForm : DesktopFormBase
 
     private readonly EditingMode _editMode;
 
+    // Goto cell mode (Ctrl+G)
+    private bool _gotoMode;
+    private string _gotoInput = "";
+
+    // Help overlay (Ctrl+H)
+    private bool _showHelp;
+
     //todo: DraggingMode? Not sure if this should be a state yet. 
     private bool _dragging;
     private int _dragAnchorRow;
@@ -671,6 +678,10 @@ internal class DesktopForm : DesktopFormBase
         {
             status = $" Find: {_searchInput}\u2502  (Enter=Search  Esc=Cancel)";
         }
+        else if (_gotoMode)
+        {
+            status = $" Go to cell (e.g. A1, C5): {_gotoInput}\u2502  (Enter=Go  Esc=Cancel)";
+        }
         else if (_editMode.IsActive())
         {
             status = _editMode.GetStatusText();
@@ -717,6 +728,57 @@ internal class DesktopForm : DesktopFormBase
         status = status.PadRight(maxChars);
         g.FillRectangle(Brushes.White, 0, statusY, formWidth, ch);
         DrawText(g, status, 0, statusY, Color.Black, Color.White);
+
+        // Help overlay (Ctrl+H)
+        if (_showHelp)
+        {
+            string[] helpLines =
+            [
+                "",
+                "  ╔══════════════════════════════════════════╗",
+                "  ║         QuickSheet — Shortcuts           ║",
+                "  ╠══════════════════════════════════════════╣",
+                "  ║                                          ║",
+                "  ║  Arrow Keys     Navigate cells           ║",
+                "  ║  Tab            Next cell                ║",
+                "  ║  Enter          Edit / move down         ║",
+                "  ║  Delete         Clear cell               ║",
+                "  ║                                          ║",
+                "  ║  Ctrl+C         Copy cell                ║",
+                "  ║  Ctrl+X         Cut cell                 ║",
+                "  ║  Ctrl+V         Paste cell               ║",
+                "  ║  Ctrl+D         Delete row               ║",
+                "  ║  Ctrl+S         Save to CSV              ║",
+                "  ║  Ctrl+F         Find (search)            ║",
+                "  ║  Ctrl+R         Find & Replace           ║",
+                "  ║  Ctrl+G         Go to cell (e.g. A1)     ║",
+                "  ║  Ctrl+Z         Undo                     ║",
+                "  ║  Ctrl+Y         Redo                     ║",
+                "  ║  Ctrl+B         Sort by column            ║",
+                "  ║  Ctrl+T         Cycle theme               ║",
+                "  ║  Ctrl+H         Show this help            ║",
+                "  ║  Ctrl+Q         Quit                     ║",
+                "  ║                                          ║",
+                "  ║  c:COLOR: text  Colored cell background  ║",
+                "  ║  r: cmd         Runnable command         ║",
+                "  ║  s: 1,2,3       Sparkline chart          ║",
+                "  ║                                          ║",
+                "  ╚══════════════════════════════════════════╝",
+                "",
+                "          Press any key to close...",
+            ];
+            int overlayW = 48 * cw;
+            int overlayH = helpLines.Length * ch;
+            int ox = (formWidth - overlayW) / 2;
+            int oy = (formHeight - overlayH) / 2;
+            using var overlayBg = new SolidBrush(Color.FromArgb(220, 0, 0, 0));
+            g.FillRectangle(overlayBg, ox - cw, oy - ch / 2, overlayW + 2 * cw, overlayH + ch);
+            for (int i = 0; i < helpLines.Length; i++)
+            {
+                string line = helpLines[i].PadRight(48);
+                DrawText(g, line, ox, oy + i * ch, Color.White, Color.Black);
+            }
+        }
     }
 
     private static Color ConsoleColorToBg(ConsoleColor cc) => cc switch
@@ -824,6 +886,50 @@ internal class DesktopForm : DesktopFormBase
                     else if (e.KeyCode == Keys.N || e.KeyCode == Keys.Escape)
                         _replacePhase = ReplacePhase.None;
                     else handled = false;
+                    break;
+            }
+            if (handled)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                Invalidate();
+            }
+            return;
+        }
+
+        // Help overlay — any key dismisses
+        if (_showHelp)
+        {
+            _showHelp = false;
+            e.Handled = true;
+            e.SuppressKeyPress = true;
+            Invalidate();
+            return;
+        }
+
+        // Goto cell mode
+        if (_gotoMode)
+        {
+            bool handled = true;
+            switch (e.KeyCode)
+            {
+                case Keys.Enter:
+                    _gotoMode = false;
+                    var parsed = CellPrefix.ParseCellRef(_gotoInput);
+                    if (parsed is var (row, col))
+                        _grid.SelectCell(row, col);
+                    _gotoInput = "";
+                    break;
+                case Keys.Escape:
+                    _gotoMode = false;
+                    _gotoInput = "";
+                    break;
+                case Keys.Back:
+                    if (_gotoInput.Length > 0)
+                        _gotoInput = _gotoInput[..^1];
+                    break;
+                default:
+                    handled = false;
                     break;
             }
             if (handled)
@@ -1005,6 +1111,22 @@ internal class DesktopForm : DesktopFormBase
                         _grid.SortByColumn(sortCol);
                         break;
                     }
+                case Keys.Z:
+                    _grid.Undo();
+                    break;
+                case Keys.Y:
+                    _grid.Redo();
+                    break;
+                case Keys.T:
+                    Theme.CycleNext();
+                    break;
+                case Keys.G:
+                    _gotoMode = true;
+                    _gotoInput = "";
+                    break;
+                case Keys.H:
+                    _showHelp = !_showHelp;
+                    break;
                 default: handled2 = false; break;
             }
         }
@@ -1182,6 +1304,10 @@ internal class DesktopForm : DesktopFormBase
             else if (_replacePhase == ReplacePhase.ReplaceInput)
             {
                 _replaceWithInput += e.KeyChar;
+            }
+            else if (_gotoMode)
+            {
+                _gotoInput += e.KeyChar;
             }
             else if (_searching)
             {
