@@ -1014,3 +1014,20 @@ Build: Release
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 3** (A2, A3, A5/A6)
 - **Total: 101** (added C38)
+
+
+## Run 36: 2026-05-16 07:45
+Commit: 682e98f (main), v0.16.0
+Build: Release
+
+### Discovery
+- No new code changes (just README docs)
+- No new repos (39 total)
+- quicksheet-b64#1 still open  no fix yet
+- **No tests run**  waiting for b64 fix
+
+### Cumulative (unchanged)
+- **Passed: 94**
+- **Failed: 1** (C38 b64)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
