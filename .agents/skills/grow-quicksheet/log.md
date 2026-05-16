@@ -677,10 +677,19 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Stalled since May 14.
 - Follow-up: Merge PR #80. Bucket D v0.15.0 release. Bucket F new extension.
 
+## 2026-05-16 00:49
+
+- Stars: 0 (Δ +0)
+- Action: Merged PR #80 (badges). Fixed cronck#3 (params instead of cells, PR #4, merged). Cut v0.15.0 release — sparkline desktop, README badges, cronck fix.
+- Bucket: D (release + maintenance)
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.15.0. 2 PRs merged, 1 extension bug fixed.
+- Competitor last did: Stalled since May 14.
+- Follow-up: Bucket F new extension. Bucket C gh-pages update. Bucket E markdown export.
+
 ## Queued
 
-- Bucket D: v0.15.0 release (sparkline desktop + badges)
 - Bucket F: new extension (data science? writing tools?)
+- Bucket C: gh-pages sparkline card + v0.15.0 bump
 - Bucket E: markdown export enhancement
 - Bucket B: CONTRIBUTING.md refresh
 
