@@ -12,7 +12,19 @@ QuickSheet replaces your wallpaper with a transparent, interactive grid. Pin not
 ![Linux](https://img.shields.io/badge/platform-Linux-FCC624?logo=linux&logoColor=black)
 ![GitHub release](https://img.shields.io/github/v/release/cemheren/QuickSheet?color=green)
 ![Zero Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)
-![Extensions](https://img.shields.io/badge/extensions-30%2B-orange)
+![Extensions](https://img.shields.io/badge/extensions-40%2B-orange)
+
+## Why this exists
+
+Most developers have a second monitor — or at least a desktop — that shows a static wallpaper doing nothing. QuickSheet turns that dead space into something useful:
+
+- **Always-on scratchpad.** Click anywhere on the desktop to jot a note. No window to find, no app to open. Autosaves every 5 seconds.
+- **App launcher.** Prefix a cell with `r: code .` and hit Enter. Multi-select cells to launch your whole morning stack in one keystroke.
+- **Link dashboard.** Paste URLs into cells. They're highlighted and open on Enter — a personal start page that lives behind your windows.
+- **Live data.** Column sums, sparklines, inline subprocesses (`i: top`), and 40+ extensions for weather, stocks, RSS, system monitoring, and more.
+- **Zero dependencies.** Clone → `dotnet build` → run. No NuGet packages, no npm, no Docker. The entire supply chain is the .NET SDK.
+
+If you spend your day in a terminal or IDE and want your desktop to *do* something, QuickSheet is for you.
 
 ## Quick Start
 
