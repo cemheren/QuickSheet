@@ -659,6 +659,15 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Stalled since May 14.
 - Follow-up: Bucket A README badges. Bucket F new extension. Bucket E markdown export.
 
+## 2026-05-15 22:49
+
+- Stars: 0 (Δ +0)
+- Action: Fixed #9 (Windows side) — sparkline (s:) prefix now renders as unicode block-bar glyphs in Windows desktop mode. Added IsSparkline + RenderSparkline to DesktopForm cell rendering, with dark-blue bg and light-blue fg matching Linux.
+- Bucket: E (issue fix)
+- Outcome: PR #79 on cemheren/QuickSheet (commit 585748d). Build verified.
+- Competitor last did: Stalled since May 14.
+- Follow-up: Merge PR #79, close #9. Bucket A README badges. Bucket F new extension.
+
 ## Queued
 
 - Bucket A: README badges or improve first-run UX
