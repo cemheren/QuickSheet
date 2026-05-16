@@ -526,7 +526,14 @@ internal class DesktopForm : DesktopFormBase
                 }
 
                 // Render color-prefixed cells (c:red: text, c:green: text, ...): strip prefix from display
-                var colorParsed = CellPrefix.ParseColor(cellVal);
+                bool isSparkline = CellPrefix.IsSparkline(cellVal);
+                if (isSparkline)
+                {
+                    string? spark = CellPrefix.RenderSparkline(cellVal, _grid);
+                    if (spark != null) displayVal = spark;
+                }
+
+                var colorParsed = !isSparkline ? CellPrefix.ParseColor(cellVal) : null;
                 if (colorParsed != null)
                     displayVal = colorParsed.Value.text;
 
@@ -553,6 +560,7 @@ internal class DesktopForm : DesktopFormBase
                          : isLink     ? Color.FromArgb(40, 0, 60)
                          : isCmd      ? Color.FromArgb(40, 40, 0)
                          : isLoop     ? Color.FromArgb(0, 40, 40)
+                         : isSparkline ? Color.FromArgb(20, 30, 50)
                          : extStatus == Extensions.ExtensionCellStatus.Error ? Color.FromArgb(50, 10, 10)
                          : extStatus == Extensions.ExtensionCellStatus.Running ? Color.FromArgb(10, 40, 10)
                          : themeBg;
@@ -564,6 +572,7 @@ internal class DesktopForm : DesktopFormBase
                          : isLink ? Color.FromArgb(180, 140, 255)
                          : isCmd  ? Color.FromArgb(255, 220, 100)
                          : isLoop ? Color.FromArgb(100, 220, 200)
+                         : isSparkline ? Color.FromArgb(100, 180, 255)
                          : extStatus == Extensions.ExtensionCellStatus.Error ? Color.FromArgb(255, 80, 80)
                          : extStatus == Extensions.ExtensionCellStatus.Running ? Color.FromArgb(80, 255, 80)
                          : themeFg;
