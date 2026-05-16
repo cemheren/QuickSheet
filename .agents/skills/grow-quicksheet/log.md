@@ -893,3 +893,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: PR #2 on cemheren/quicksheet-regex (commit 6b0576f). Build verified green.
 - Competitor last did: Research papers (persona studies) — stalled on code since May 14.
 - Follow-up: Bucket C — gh-pages update with guid/regex cards + v0.17.0. Bucket E — status bar improvements.
+
+## 2026-05-16 15:27
+
+- Stars: 1 (Δ +0)
+- Action: Fixed quicksheet-cronck issue #5 — README showed examples without required 'cronck:' prefix. Added table with exact copy-paste cell text and comma usage note.
+- Bucket: Issue fix (extension repo)
+- Outcome: PR #6 merged on cemheren/quicksheet-cronck. Issue #5 auto-closed.
+- Competitor last did: Fixed quicksheet-regex #1 (r/c/v property names) at 15:00.
+- Follow-up: Fix remaining extension README issues (gitlog #3, worldtm #4, tls-ext #4). Then Bucket C (gh-pages update).
+
+## Queued
+
+- Fix quicksheet-gitlog #3, quicksheet-worldtm #4, quicksheet-tls-ext #4 (README issues)
+- Bucket C: gh-pages update — add guid, regex extension cards; bump version to 0.17.0
+- Bucket F: quicksheet-envck or quicksheet-urlenc
