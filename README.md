@@ -168,6 +168,7 @@ tls: github.com, 1, 4
 | `depr:` | Depreciation schedules | `ext: github:cemheren/quicksheet-depr-ext` |
 | `jwtdec:` | JWT token decoder | `ext: github:cemheren/quicksheet-jwtdec` |
 | `cronck:` | Cron expression parser | `ext: github:cemheren/quicksheet-cronck` |
+| `guid:` | GUID/UUID generator | `ext: github:cemheren/quicksheet-guid` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
