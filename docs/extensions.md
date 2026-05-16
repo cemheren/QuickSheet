@@ -41,6 +41,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `cronck`  | Cron parser       | Convert 5-field cron expressions to human-readable descriptions. Ranges, steps, named days/months. | [`quicksheet-cronck`](https://github.com/cemheren/quicksheet-cronck) |
 | `news`    | RSS feed reader   | Headlines from HN, Reddit, dev.to, BBC, TechCrunch, or any RSS/Atom URL | [`quicksheet-news`](https://github.com/cemheren/quicksheet-news) |
 | `b64`     | Base64 codec      | Encode/decode base64 with auto-detect — paste tokens, config blobs, JWTs | [`quicksheet-b64`](https://github.com/cemheren/quicksheet-b64) |
+| `regex`   | Regex explainer   | Break down regular expressions into human-readable components — anchors, classes, quantifiers, groups, lookaheads | [`quicksheet-regex`](https://github.com/cemheren/quicksheet-regex) |
 
 ## Install
 
