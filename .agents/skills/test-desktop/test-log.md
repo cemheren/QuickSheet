@@ -726,3 +726,35 @@ Build: Release
 - **Failed: 9** (C33 jwtdec, C34 rate, C35 cronck, C36 gitlog, A62-A66 shortcuts)
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 6** (A2, A3, A5, A6, A20, A21)
+
+## Run: 2026-05-15 19:00
+Commit: 5ad59bc (main, includes PR #76 merge)
+Build: Release
+
+### Discovery
+- **PR #76 MERGED**: feat(desktop): add Ctrl+Z/Y/T/G/H shortcuts to Windows desktop mode (Issue #66)
+- No new repos (still 37 quicksheet-* repos)
+- Extension fix PRs still OPEN: jwtdec#2, rate#2, cronck#2. gitlog has no fix PR.
+
+### Tests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| A18 |  PASS | Paste in edit mode: typed "BASE", F2 edit, Ctrl+V "+ADDED"  "BASE+ADDED"  |
+| A52 |  PASS | Open desktop file: Ctrl+F found "poe_filter.txt.txt" in L25, Escape+Enter opened it in Notepad |
+| A62 |  PASS | Ctrl+G go to cell: Status bar shows "Go to cell (e.g. A1, C5): A1", Enter navigates to A1 |
+| A63 |  FAIL | Ctrl+T theme cycling: Theme.CycleNext() called but DesktopForm.OnPaint hardcodes colors  no visible change  filed #77 |
+| A64 |  PASS | Ctrl+H help overlay: Beautiful shortcut reference box appears, "Press any key to close..." dismisses it |
+| A65 |  PASS | Ctrl+Z undo: "CHANGED"  Ctrl+Z  "CHANGE" (character-level undo works) |
+| A66 |  PASS | Ctrl+Y redo: "CHANGE"  Ctrl+Y  "CHANGED" (redo restores undone change) |
+
+### Issues Filed
+- **#77**  Ctrl+T theme cycling has no visible effect in desktop mode (DesktopForm hardcodes colors)
+- Commented on **#66** with 4/5 shortcuts working (Ctrl+T is the exception  #77)
+
+### Cumulative (after Run 23)
+- **Total: 98 tests** (54 core + 8 ext system + 36 extensions)
+- **Passed: 86** (+6: A18, A52, A62, A64, A65, A66)
+- **Failed: 5** (A63 theme, C33 jwtdec, C34 rate, C35 cronck, C36 gitlog)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 4** (A2, A3, A5, A6)
