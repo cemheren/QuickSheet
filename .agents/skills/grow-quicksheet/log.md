@@ -872,3 +872,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket E: Status bar improvements (file name, cell count, mode indicator)
 - Bucket C: Update gh-pages extension cards if needed
 - Bucket F: quicksheet-envck (env var viewer) or quicksheet-mileage-ext
+
+## 2026-05-16 10:00
+
+- Stars: 0 (Δ +0)
+- Action: Fixed #86 — make extension cell width/height params optional with sensible defaults (1 col, 10 rows)
+- Bucket: E (quality-of-life feature / bug fix)
+- Outcome: PR #87 (commit 80e80c8). Build verified green.
+- Competitor last did: Stalled since May 14
+- Follow-up: Bucket D — v0.17.0 release (b64 fix, optional dims, news ext). Bucket C — gh-pages update.
+
+## Queued
+- Bucket D: v0.17.0 release (b64 fix, optional dims, news ext)
+- Bucket C: Update gh-pages extension cards
+- Bucket F: quicksheet-envck (env var viewer) or quicksheet-urlenc
