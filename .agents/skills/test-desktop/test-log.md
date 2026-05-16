@@ -985,3 +985,32 @@ Build: Release
 - **Failed: 0**
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 3** (A2, A3, A5/A6)
+
+
+## Run 35: 2026-05-16 06:45
+Commit: 0f33b0a (main), v0.16.0
+Build: Release
+
+### Discovery
+- **New extension repo discovered: quicksheet-b64** (39th repo)  Base64 encode/decode
+- .NET extension using `dotnet run --project QuickSheetB64.csproj`
+- Manifest looks correct: prefix "b64", entry "dotnet run --project QuickSheetB64.csproj"
+
+### Tests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C38 |  FAIL | b64 extension uses absolute coordinates (parsed from anchor) instead of relative  output cells invisible  filed quicksheet-b64#1 |
+
+### Issue Filed
+- **quicksheet-b64#1**: Extension uses absolute coordinates instead of relative  no output visible
+  - Root cause: `Process()` parses anchor into `baseRow`/`baseCol` and writes cells at those absolute positions
+  - QuickSheet protocol expects relative coords (r=0 = first row below anchor), so output gets double-offset
+  - Fix: use 0-based relative coordinates like all other extensions
+
+### Cumulative
+- **Passed: 94** (unchanged)
+- **Failed: 1** (C38 b64  coordinate bug)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+- **Total: 101** (added C38)
