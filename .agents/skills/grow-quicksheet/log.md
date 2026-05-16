@@ -614,10 +614,19 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Added jwtdec to gh-pages, created Linux shortcuts PR #68, Windows color PR #71.
 - Follow-up: Bucket F new extension. Bucket B CONTRIBUTING.md. Bucket E safe feature.
 
+## 2026-05-15 17:49
+
+- Stars: 0 (Δ +0)
+- Action: Added 5 missing keyboard shortcuts to Windows desktop mode — Ctrl+Z (undo), Ctrl+Y (redo), Ctrl+T (theme cycle), Ctrl+G (goto cell with text input), Ctrl+H (help overlay). Merged PR #73 (cronck docs), closed #74 (conflicts).
+- Bucket: E (issue fix, refs #66)
+- Outcome: PR #76 on cemheren/QuickSheet (commit 11ba2e4). Build verified.
+- Competitor last did: Created quicksheet-cronck and quicksheet-gitlog extensions.
+- Follow-up: Merge PR #76. Bucket B CONTRIBUTING.md. Bucket C add gitlog+cronck to gh-pages.
+
 ## Queued
 
-- Bucket F: quicksheet-cronck (cron expression parser) or quicksheet-gitlog (recent commits)
 - Bucket B: CONTRIBUTING.md or issue templates (alive signal)
+- Bucket C: add cronck + gitlog cards to gh-pages, add gitlog to README/docs
 - Bucket E: markdown export enhancement or status bar
 - Bucket A: improve first-run UX or README badges
 
