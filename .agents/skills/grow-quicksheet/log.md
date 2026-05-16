@@ -632,9 +632,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Created cronck + gitlog extensions, added to gh-pages.
 - Follow-up: Bucket D v0.13.0 release. Bucket A README badges. Bucket F new extension.
 
+## 2026-05-15 19:49
+
+- Stars: 0 (Δ +0)
+- Action: Fixed #77 — Ctrl+T theme cycling had no visible effect in Windows desktop mode. Replaced hardcoded Color.Black/White in DesktopForm.OnPaint with Theme.Current-derived colors. Added ConsoleColorToRgb() for full 16-color mapping. Theme now drives background, foreground, headers, selection, search, status bar.
+- Bucket: E (issue fix)
+- Outcome: PR #78 on cemheren/QuickSheet (commit f0f713e). Build verified.
+- Competitor last did: Stalled (last entry was tour.md on May 14).
+- Follow-up: Merge PR #78. Bucket D v0.13.0 release. Close #66 (all shortcuts now done).
+
 ## Queued
 
-- Bucket D: v0.13.0 release (Windows shortcuts + any merged since v0.12.0)
+- Bucket D: v0.13.0 release (theme fix + shortcuts + merged since v0.12.0)
 - Bucket A: README badges or improve first-run UX
 - Bucket F: new extension (data science? writing tools?)
 - Bucket E: markdown export enhancement
