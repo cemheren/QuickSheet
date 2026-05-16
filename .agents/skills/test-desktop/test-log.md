@@ -1132,3 +1132,20 @@ Build: Release
 - **Failed: 1** (C40 regex)
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 3** (A2, A3, A5/A6)
+
+
+## Run 41: 2026-05-16 16:28
+Commit: 6fe25f7 (main), v0.17.0
+Build: Release
+
+### Discovery
+- Research/persona docs only, no code changes
+- quicksheet-regex PR #2 still open
+- No new repos (41 total)
+- **No tests run**
+
+### Cumulative (unchanged)
+- **Passed: 96**
+- **Failed: 1** (C40 regex)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
