@@ -96,6 +96,87 @@ public class Theme
             StatusBarBg = ConsoleColor.DarkGreen,
             StatusBarFg = ConsoleColor.White,
         },
+        new Theme
+        {
+            // Inspired by the popular Dracula palette (draculatheme.com).
+            Name = "Dracula",
+            Background = ConsoleColor.Black,
+            Foreground = ConsoleColor.White,
+            HeaderHighlight = ConsoleColor.DarkMagenta,
+            SelectionBg = ConsoleColor.DarkMagenta,
+            SelectionFg = ConsoleColor.White,
+            SearchMatchBg = ConsoleColor.Yellow,
+            SearchMatchFg = ConsoleColor.Black,
+            SearchSelectedBg = ConsoleColor.Magenta,
+            SearchSelectedFg = ConsoleColor.Black,
+            StatusBarBg = ConsoleColor.DarkMagenta,
+            StatusBarFg = ConsoleColor.White,
+        },
+        new Theme
+        {
+            // Outrun-era magenta + cyan. Pair with a CRT and a sunset.
+            Name = "Synthwave",
+            Background = ConsoleColor.Black,
+            Foreground = ConsoleColor.Magenta,
+            HeaderHighlight = ConsoleColor.DarkMagenta,
+            SelectionBg = ConsoleColor.DarkCyan,
+            SelectionFg = ConsoleColor.White,
+            SearchMatchBg = ConsoleColor.Yellow,
+            SearchMatchFg = ConsoleColor.DarkMagenta,
+            SearchSelectedBg = ConsoleColor.Cyan,
+            SearchSelectedFg = ConsoleColor.Black,
+            StatusBarBg = ConsoleColor.Magenta,
+            StatusBarFg = ConsoleColor.Black,
+        },
+        new Theme
+        {
+            // Warm earth tones, Gruvbox-inspired.
+            Name = "Gruvbox",
+            Background = ConsoleColor.Black,
+            Foreground = ConsoleColor.Yellow,
+            HeaderHighlight = ConsoleColor.DarkYellow,
+            SelectionBg = ConsoleColor.DarkYellow,
+            SelectionFg = ConsoleColor.Black,
+            SearchMatchBg = ConsoleColor.DarkRed,
+            SearchMatchFg = ConsoleColor.White,
+            SearchSelectedBg = ConsoleColor.Red,
+            SearchSelectedFg = ConsoleColor.White,
+            StatusBarBg = ConsoleColor.DarkYellow,
+            StatusBarFg = ConsoleColor.Black,
+        },
+        new Theme
+        {
+            // Monokai-inspired: dark backdrop with green + magenta accents.
+            Name = "Monokai",
+            Background = ConsoleColor.Black,
+            Foreground = ConsoleColor.White,
+            HeaderHighlight = ConsoleColor.DarkGreen,
+            SelectionBg = ConsoleColor.DarkMagenta,
+            SelectionFg = ConsoleColor.White,
+            SearchMatchBg = ConsoleColor.Yellow,
+            SearchMatchFg = ConsoleColor.Black,
+            SearchSelectedBg = ConsoleColor.Green,
+            SearchSelectedFg = ConsoleColor.Black,
+            StatusBarBg = ConsoleColor.DarkGreen,
+            StatusBarFg = ConsoleColor.White,
+        },
+        new Theme
+        {
+            // Hotdog Stand — the legendary Windows 3.1 cursed palette.
+            // Yes, on purpose. Cycle past it quickly. Or don't.
+            Name = "HotdogStand",
+            Background = ConsoleColor.Red,
+            Foreground = ConsoleColor.Yellow,
+            HeaderHighlight = ConsoleColor.Yellow,
+            SelectionBg = ConsoleColor.Yellow,
+            SelectionFg = ConsoleColor.Red,
+            SearchMatchBg = ConsoleColor.Black,
+            SearchMatchFg = ConsoleColor.Yellow,
+            SearchSelectedBg = ConsoleColor.White,
+            SearchSelectedFg = ConsoleColor.Red,
+            StatusBarBg = ConsoleColor.Yellow,
+            StatusBarFg = ConsoleColor.Black,
+        },
     ];
 
     private static int _currentIndex = 0;

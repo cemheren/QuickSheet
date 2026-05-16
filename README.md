@@ -232,7 +232,7 @@ Ship a `quicksheet-extension.json` manifest in your repo and you're done. See th
 
 | Shortcut | Action |
 |----------|--------|
-| Ctrl+T | Cycle theme (Dark → Light → Nord → Solarized → Matrix) |
+| Ctrl+T | Cycle theme (Dark → Light → Nord → Solarized → Matrix → Dracula → Synthwave → Gruvbox → Monokai → HotdogStand) |
 
 ### File & Row Operations
 
