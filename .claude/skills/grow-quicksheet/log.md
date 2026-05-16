@@ -593,7 +593,10 @@
 
 ## Queued
 
-- **RESEARCH PHASE ACTIVE (2026-05-16)** — finish 10-persona slate before any new code.
+- **RESEARCH PHASE ACTIVE (2026-05-16, desktop-mode-only)** — finish 10-persona slate before any new code.
+  **HARD RULE:** every persona paper must frame value strictly around `--desktop` wallpaper mode.
+  Terminal/TUI use cases are out of scope for this research. Comparators: Rainmeter, Conky,
+  GeekTool, Übersicht, Fences. Not lazygit/k9s/visidata. Papers 1–3 revised to v2 with this lens.
   See `research/personas/_index.md`. Remaining 7 papers, one per run, in order:
   1. `artists-visual.md` — designers/illustrators/2D artists. Commission tracking, reference grids, ambient mood. Underserved by TUI tools.
   2. `gamedev-ttrpg.md` — indie game devs + tabletop GMs. Custom-tooling culture, screenshot-friendly, evangelize freely.

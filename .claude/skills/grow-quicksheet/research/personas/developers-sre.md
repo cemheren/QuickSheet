@@ -1,84 +1,91 @@
-# Persona 1 — Developers (refined: SRE / DevOps / platform engineers)
+# Persona 1 — On-call SRE / DevOps (second-monitor desktop)
 
-Status: **done** · Last revised: 2026-05-16
+Status: **done** (v2, desktop-mode focus) · Last revised: 2026-05-16
 
 ## TL;DR (5 lines)
 
-- QuickSheet's current beachhead. Strongest sub-segment = SRE/DevOps/platform — on-call shifts, multi-cluster dashboards, ambient-display culture.
-- They already use `--desktop` wallpaper conceptually (Grafana TVs, second-monitor `htop`/`k9s`).
-- Pain points: dashboards in browsers steal attention; CLI is great per query, bad as an ambient display.
-- Best-leverage extensions to build next: `incident:` (PagerDuty/OpsGenie), `gha:` (GitHub Actions runs), `prom:` (Prometheus PromQL one-shot), `aws-cost:`, `loki:`/`grep:`.
-- Best community to seed: r/sre, r/devops, r/kubernetes, HackerNews "Show HN", lobste.rs, and the Console Newsletter.
+- Audience = SRE/DevOps with a second monitor that currently runs a Grafana TV, Slack, or nothing. We want to *replace that surface* with a QuickSheet wallpaper.
+- They already accept "ambient dashboard behind everything" as a workflow. The pitch is "your wallpaper IS that dashboard, no TV mode, no browser, survives reboots, every cell live."
+- Highest-leverage glanceable cells: incident state (PagerDuty/OpsGenie), GitHub Actions run status, k8s pod health, cert expiry, AWS spend, queue depth.
+- Where to seed: **r/unixporn** (with a desktop screenshot, not a terminal), **r/homelab**, **r/sre**, **r/devops**, HN with "I replaced my Grafana TV with a wallpaper" angle.
+- Direct competition for this slot = Rainmeter on Windows, Conky on Linux. Neither has an extension protocol — that is our moat.
 
 ## 1. Profile
 
-- Job titles: SRE, DevOps engineer, platform engineer, infra engineer, "production engineer," cloud engineer, on-call developer.
-- Headcount (US/EN): ~600k SRE/DevOps-tagged on LinkedIn; ~2M+ developers who spend ≥25 % of their day in ops.
-- Day-shape: 2–4 hours in IDE, the rest split between terminal, browser tabs of dashboards, Slack/Teams, on-call paging.
-- Pays attention to: tools that survive a `tmux` session, run on every machine, don't require a login, and don't add a SaaS.
+- Titles: SRE, DevOps engineer, platform engineer, on-call developer.
+- US/EN headcount: ~600k SRE/DevOps-tagged on LinkedIn; ~2M+ devs who do ≥25% ops.
+- Hardware: 2–3 monitors typical. Primary = IDE. Secondary = dashboards/Slack/terminal. **The secondary monitor is our seat.**
+- Buying brain: "Can I keep this glanceable while I keep typing in the IDE?" If yes → installed forever.
 
-## 2. Current toolchain
+## 2. Why their desktop is wasted
 
-| Tool                    | Used for                                | Pain                                                          |
-|-------------------------|------------------------------------------|----------------------------------------------------------------|
-| Grafana / DataDog       | Metric dashboards in the browser         | Tab overload; not glanceable while typing in IDE.              |
-| `k9s`, `lazygit`, `htop`| Terminal TUIs for a single domain        | Each owns a whole terminal; can't co-render four at once.      |
-| Slack reminders         | "Check X in 30 min"                      | Noisy; not visible as a state.                                 |
-| Tmux dashboards         | Pasted-together `watch` loops            | Brittle; everyone's is different; no shared dotfiles primitive.|
-| 2nd monitor with Chrome | Live dashboards behind windows           | Static; tab refresh, browser RAM, breaks on sleep.             |
+What currently lives behind their windows on the second monitor:
 
-Big unmet need: **a low-fi, always-on, click-through, multi-domain status board that sits on the desktop and survives reboots.** That is, literally, QuickSheet's product.
+- A static wallpaper (most common). Wasted entirely.
+- A maximised Grafana / DataDog browser tab. Burns RAM, refresh-spins, focus-steals.
+- A `tmux` session with `watch kubectl` panes. Owns a whole terminal; not glanceable while editing config.
+- Slack channels. Anxiety-inducing, low signal density.
+- A spotify window. Honest.
 
-## 3. Pain points QuickSheet could touch
+What QuickSheet replaces: the second-monitor browser-tab dashboard. **Same surface, lower friction, transparent so windows still float over it, click-anywhere scratchpad for "stop and check this" notes.**
 
-1. **Glanceable on-call state.** Are any of my services paging? Pods crashing? Builds red?
-2. **Multi-cluster context.** k8s nodes, container health, regional latency in one grid.
-3. **Cost paranoia.** Daily AWS/GCP/Azure spend without opening Cost Explorer.
-4. **Per-repo CI snapshot.** Which of my 12 repos has a failing pipeline right now?
-5. **Personal SLA timers.** SLO burn, certificate expiry, queue depth.
+## 3. Glanceable data they actually want behind windows
 
-## 4. Candidate extensions / features (ranked)
+Concrete cells, in priority order:
 
-| Rank | Extension                  | Cost | Hit probability | Why                                                           |
-|------|----------------------------|------|------------------|----------------------------------------------------------------|
-| 1    | `gha:` GitHub Actions      | low  | high             | Free API; near-zero auth (PAT). Half the audience uses it.    |
-| 2    | `prom:` Prometheus one-shot| low  | high             | Curl + label parse. PromQL strings paste straight in.         |
-| 3    | `incident:` PagerDuty      | med  | high             | Read-only `/incidents` endpoint. Token in env var. High WOW.  |
-| 4    | `aws-cost:`                | med  | high             | `aws ce` CLI wrap; cache 1 h. Lights up cost-conscious teams. |
-| 5    | `loki:` / `grep:` log tail | high | med              | Streamed output (already has `i:` machinery).                  |
-| 6    | `slo:` SLO burn-rate       | med  | med              | Composite of `prom:` + math; build after `prom:`.             |
-| 7    | `cve:` CVE lookup (NVD)    | low  | med              | Dev-news ambient bar.                                          |
-| 8    | `gh-review:` review queue  | low  | low–med          | Already covered by `ghpr`; refine instead.                    |
+1. **Incident state row** — N cells, one per service, red if paging.
+2. **CI status grid** — N cells, one per repo, green/yellow/red for last workflow run.
+3. **Cluster health** — pod count, restart count, nodes notReady. Colour-coded.
+4. **Cert expiry strip** — N domains, "12d", "94d", "EXPIRED" in red.
+5. **Cost row** — yesterday's AWS/GCP/Azure spend; arrow vs 7-day avg.
+6. **Queue depth** — SQS / RabbitMQ / Kafka lag counters.
+7. **On-call rota** — "you are on-call until Thu 18:00."
+8. **A scratch column** — typed notes for "thing to remember after standup," autosaved.
 
-QuickSheet *features* (vs extensions) worth queuing for this persona:
+All of these must update *in place* without stealing focus and *without growing the grid*.
 
-- **Cell expiry / staleness highlight** — if `i:` or extension output hasn't refreshed in N seconds, dim the cell. SREs trust *time-stamped* dashboards, not stale ones.
-- **`L:` loop visual** — already exists; add a tiny progress tick so they see "yes it just refreshed."
-- **Per-cell color rules** — `if value > X color red` as a cell prefix. Status-board basic. Currently `c:color:` is static.
+## 4. Candidate extensions / desktop-only features (ranked)
 
-## 5. Where they hang out
+| Rank | Item                                   | Type    | Cost | Hit prob | Why                                                                                |
+|------|----------------------------------------|---------|------|----------|-------------------------------------------------------------------------------------|
+| 1    | `gha:` GitHub Actions status           | ext     | low  | high     | Free API, near-zero auth, half the audience uses GH. One green/red cell per repo. |
+| 2    | `incident:` PagerDuty / OpsGenie       | ext     | med  | high     | Read-only /incidents endpoint. One red cell during an incident = sold.            |
+| 3    | `k8s:` already exists — promote it     | docs    | low  | high     | Wallpaper-mode demo screenshots. The ext exists; no one's seen it on a desktop.    |
+| 4    | **Cell staleness dimming**             | feat    | low  | high     | Cells not refreshed in N seconds dim to 30% alpha. Trust signal for "is this live?"|
+| 5    | **Value-driven cell colour**           | feat    | low  | high     | `c?:>500=red,>200=yellow,*=green: 423` — colour reacts to current cell value.     |
+| 6    | `prom:` Prometheus one-shot            | ext     | low  | med-high | Curl + label parse. PromQL pastes directly.                                       |
+| 7    | `aws-cost:`                            | ext     | med  | med-high | `aws ce` CLI wrap; 1h cache. High WOW for cost-paranoid teams.                    |
+| 8    | **Per-row blink-on-change**            | feat    | low  | med      | A subtle 1s highlight when a cell value changes. Catches eye without sound.       |
+| 9    | `loki:` / log tail                     | ext     | high | med      | Streams via `i:` infra; harder for ambient (logs scroll fast).                    |
+| 10   | `gh-review:` review queue              | ext     | low  | low-med  | `ghpr:` already covers it; refine instead of duplicating.                          |
 
-- **Reddit:** r/sre, r/devops, r/kubernetes, r/programming, r/sysadmin, r/homelab (crossover with persona 8).
-- **HN:** Show HN section consistently rewards "I built a TUI for X" if X is on-call / infra-flavoured.
-- **Newsletters:** Console (console.dev), TLDR DevOps, SRE Weekly, KubeWeekly, Last Week in AWS.
-- **Discords:** CNCF Slack (#k8s-novice, #sig-instrumentation), DevOps subreddit Discord.
-- **Conferences:** SRECon, KubeCon (booths/swag won't apply, but talk recordings → demo blog).
-- **People to be visible to (no @ spam):** Liz Fong-Jones, Charity Majors, Julia Evans, Cindy Sridharan, Will Larson — they signal-boost on-call-ergonomics tools they actually use.
+Note: features 4, 5, 8 are **desktop-only ergonomics** — they are why someone keeps the wallpaper on for more than a day.
+
+## 5. Where they hang out (desktop-customization first)
+
+- **r/unixporn** — their *desktop* community. Screenshot post with the grid behind a code editor + a Slack window = the right shape of post here. Title pattern: `[Linux/Hyprland] Interactive spreadsheet wallpaper with live k8s + GH Actions`.
+- **r/Rainmeter** — Windows side. Pitch as "Rainmeter widgets but each widget is a CSV cell with a JSON-lines extension protocol; install in one line."
+- **r/homelab** + **r/selfhosted** — overlap. They love wallpaper dashboards.
+- **r/sre / r/devops / r/kubernetes** — profession side. Post comes second, after the desktop-rice post earns a screenshot.
+- **HN** — "Show HN: I replaced my Grafana TV with a desktop wallpaper" or "Show HN: a wallpaper-grid for on-call engineers."
+- **People to be visible to:** rice-curators on r/unixporn; Liz Fong-Jones, Charity Majors, Julia Evans for the profession side. They share interesting *desktops* readily.
 
 ## 6. Discoverability hooks
 
-Headlines that consistently land for this segment on HN/Reddit:
+Hero image = **full screen, three windows open (VSCode, Slack, browser), QuickSheet grid visible behind them with one red incident cell and a green CI strip**. Not a terminal.
 
-- "Show HN: My desktop wallpaper is a Kubernetes dashboard (zero deps)"
-- "Show HN: I replaced Grafana TVs with a 200-line TUI"
-- "I track PagerDuty incidents on my wallpaper now — here's the protocol"
+Headlines that land:
 
-Lead with **screenshot first**, then the technical hook (zero deps, JSON-lines, X11/WorkerW), then the "you can install this in one cell" GIF. Avoid: enterprise-flavoured framing, ROI language, "platform for X."
+- "[Linux/Hyprland] My wallpaper is an interactive spreadsheet that shows incidents + CI"
+- "I replaced my second-monitor Grafana TV with a wallpaper grid (zero deps, open source)"
+- "Rainmeter is great but I wanted CSV-first: built a wallpaper-grid with an extension protocol"
+
+Avoid: TUI screenshots, terminal-only demos, lazygit/k9s comparisons.
 
 ## 7. Implications (queue these)
 
-1. **Build `gha:` extension next Bucket F run.** Highest hit-prob on the ranked list. Aim for "show last 5 workflow runs across N repos with red/yellow/green."
-2. **Bucket E: add cell staleness dimming.** If a cell hasn't been written-to by an extension/`L:`/`i:` in N seconds, render in a 30 %-alpha foreground. Trust signal.
-3. **Bucket C draft: r/sre Show post.** Lead with k8s/PagerDuty screenshot (once that ext exists). Title: "I replaced my Grafana TV with a 200-line wallpaper grid."
+1. **Build `gha:` extension next Bucket F run.** One green/red cell per workflow run. Hero screenshot material.
+2. **Bucket E: cell staleness dimming + value-driven cell colour.** These are the two features that make the wallpaper *believable* for SREs. Without them, cells could be lying.
+3. **Bucket C: r/unixporn screenshot post.** Drafted only after `gha:` + colour rules ship. Title with distro tag, image = full desktop, body = "here's the install one-liner; here's the protocol."
 
-Cross-link: see also [niche-communities.md](../niche-communities.md) for tone notes per subreddit.
+Cross-link: [homelab.md](homelab.md) — heavy overlap; share the wallpaper-rice post angle.

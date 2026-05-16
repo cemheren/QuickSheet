@@ -1,91 +1,87 @@
-# Persona 2 — Lawyers (solo + small-firm)
+# Persona 2 — Solo + small-firm lawyers (single-monitor desktop)
 
-Status: **done** · Last revised: 2026-05-16
+Status: **done** (v2, desktop-mode focus) · Last revised: 2026-05-16
 
 ## TL;DR (5 lines)
 
-- Solo + 2–10-attorney firms ~400k+ in the US. Underserved by modern desktop tooling, locked into legacy practice-management SaaS.
-- Spreadsheets are *native*: billable hours, conflict checks, matter lists. CSV-first matches the audit-trail mindset.
-- High-leverage extensions: `bill:` (6-min increments), `dock:` (court docket pull), `stat:` (statute lookup), `cite:` (Bluebook formatter — distinct from academic `cite`), `clock:` (matter timer).
-- Pain: practice-management software (Clio, MyCase) is $50–100/mo per seat and feels like SaaS bloat. QuickSheet's "your data is a CSV" is a *feature*, not a limitation.
-- Where to find them: r/Lawyertalk, r/LawFirm, r/solopractice, Lawyerist podcast & community, ABA TECHSHOW, /r/lawyers.
+- ~400k solo US attorneys + 2–10-attorney firms; mostly **single-monitor laptops**. The desktop wallpaper is the only surface that's *always visible* between document tasks.
+- They are not TUI users. The wallpaper sell is "open the laptop → see today's billable hours, deadlines, and unbilled matters before opening Word."
+- Highest-leverage wallpaper cells: 6-min billing timer running per matter, deadline countdowns (FRCP-day math), conflict-check search, today's unbilled total.
+- Where to seed: r/Lawyertalk, r/solopractice, Lawyerist Lab Slack, Lawyerist Podcast. *Plus* r/macsetups / r/desktops for the "lawyer desktop rice" angle — surprisingly engaged.
+- Direct competition for wallpaper slot: Stardock Fences (Windows), GeekTool (macOS), nothing native. Practice-management SaaS (Clio) does NOT touch the desktop.
 
 ## 1. Profile
 
-- ~1.3M licensed US attorneys; ~75 % work in firms of <20 attorneys; ~50 % in firms of <10. Source: ABA Profile of the Legal Profession 2024.
-- Solo practitioners alone ≈ 400k. They write their own systems.
-- Day-shape: meetings + drafting + discovery review + billing capture. *Billing capture is the productivity black hole.*
-- Pays attention to: tools that respect data ownership (audit, retention), don't phone home, and look professional next to a client on a screen-share.
+- ~1.3M licensed US attorneys; ~50% in firms <10 attorneys. ABA Profile 2024.
+- Solo = ~400k. Their tooling decisions are personal, not committee-driven.
+- Hardware: laptop with one external monitor at most. Often *no* external monitor in court / coffee shop. **Wallpaper is high-value real estate because it is reliable real estate.**
+- Buying brain: "Where does my data live, and will this still work if the SaaS company dies?" CSV-first answers this.
 
-## 2. Current toolchain
+## 2. Why their desktop is wasted
 
-| Tool                              | Used for                                | Pain                                                                  |
-|-----------------------------------|------------------------------------------|------------------------------------------------------------------------|
-| Clio / MyCase / PracticePanther    | Billing, matter mgmt, document storage   | $50–$120/seat/month; "another SaaS to log into."                       |
-| Excel (constantly)                 | Conflict checks, matter lists, time logs | Files on desktop everywhere; version drift across paralegals.          |
-| Outlook / Gmail                    | Communication + dated artifacts          | Time spent re-entering "what did I do for client X yesterday."         |
-| Westlaw / Lexis                    | Research                                 | Per-search billing anxiety; tab graveyard.                              |
-| PACER                              | Federal court docket access              | $0.10/page; tooling around it is from 1998.                            |
-| Sticky notes                       | "Don't forget to call back"              | Lost; not audit-trail-able.                                            |
+What lives behind their windows now:
 
-Unmet need: **a desktop layer that captures small atomic facts (time entries, statute citations, matter notes) without launching an app, then exports clean CSV** when it's time to send to billing software or paralegal.
+- Static law-firm wallpaper or vacation photo.
+- A messy folder grid of "Smith v Jones drafts," "tax stuff 2024," "intake forms."
+- Maybe Clio in a browser tab they have to click into.
 
-## 3. Pain points QuickSheet could touch
+What QuickSheet replaces: the *intent* of opening Clio every morning to "see where I am." With the wallpaper, that view is already on-screen the moment the laptop wakes — no login, no tab. **And the data is the user's own CSV, not a SaaS captive.**
 
-1. **Billing capture in 6-min increments** while drafting. The hardest, most-money problem.
-2. **Conflict-check list** open on a second monitor while taking a call: search a CSV of every client/adverse party.
-3. **Court calendar / docket countdown** — deadlines are malpractice if missed.
-4. **Statute & rule snippet pinning** — recall "what does 28 U.S.C. § 1331 say" without opening Westlaw.
-5. **Bluebook citation formatter** — distinct from academic `cite:`; uses *signal + reporter + court + year* format.
+## 3. Glanceable data they actually want behind windows
 
-## 4. Candidate extensions / features (ranked)
+1. **Today's billable hours so far** — single big cell that sums all matter timers. The day's score.
+2. **Per-matter timer row** — N cells, one per active matter, each `bill: smith-v-jones` ticking up in 6-min increments. Click to stop/start.
+3. **Deadline strip** — N cells, "3d to motion response," "12d to discovery cutoff," red if <24h.
+4. **Unbilled matters list** — column of matter names with last-billed date; old ones go red.
+5. **Conflict-check search** — top cell is a search box that filters a `clients.csv` next to the file. Live.
+6. **Court calendar countdown** — next hearing in days.
+7. **A scratch column** for "remember to follow up with X" — autosaved every 5s.
 
-| Rank | Extension                            | Cost | Hit probability | Why                                                                |
-|------|--------------------------------------|------|------------------|---------------------------------------------------------------------|
-| 1    | `bill:` — 6-min increment timer      | low  | high             | Type matter ID → cell starts ticking; auto-rounds to .1h. CSV out. |
-| 2    | `dock:` — federal court deadline calc| med  | high             | FRCP day-counting (skip weekends/holidays). Hand-coded table.       |
-| 3    | `cite:` — Bluebook formatter         | low  | med-high         | Lookup of reporter abbreviations; rename existing `cite:` → `doi:`. |
-| 4    | `stat:` — USC / state statute lookup | med  | med              | Cornell LII has free, scrapable text. Cache aggressively.           |
-| 5    | `conflict:` — fuzzy match local CSV  | low  | high             | Pure-local fuzzy match against `clients.csv` next to the QuickSheet.|
-| 6    | `pacer:` — docket pull               | high | med              | Real auth + paid. Defer until users ask.                            |
-| 7    | `caselaw:` — Caselaw Access Project  | low  | med              | Free, no auth. Returns case name, court, year, snippet.             |
+All visible without opening anything. The whole UX is "wake the laptop, glance, get back to drafting."
 
-QuickSheet *features* worth queuing for this persona:
+## 4. Candidate extensions / desktop-only features (ranked)
 
-- **Per-cell timer prefix** (`t:` perhaps) — Bucket E. Cell auto-increments while focused; right-click stop. Output is `.h` (decimal hour). Foundational for `bill:`.
-- **CSV → Markdown table export already exists** (`--export-md`) — perfect for pasting into a "weekly billing summary" email. Should be marketed *to this persona* explicitly.
-- **"Audit log" mode** — every edit writes a timestamp to a side log file. Lawyers + accountants + medical all care.
+| Rank | Item                                          | Type | Cost | Hit prob | Why                                                              |
+|------|-----------------------------------------------|------|------|----------|-------------------------------------------------------------------|
+| 1    | **Per-cell ticking timer** (`bill:` semantic) | feat | low  | high     | The single highest-leverage desktop primitive for this persona.   |
+| 2    | `bill:` extension on top of timer feature     | ext  | low  | high     | Wraps timer with matter ID + .1h rounding. CSV-exportable.        |
+| 3    | `dock:` court deadline (FRCP-day math)        | ext  | med  | high     | Skip-weekends + federal holidays. Red countdown on wallpaper.     |
+| 4    | **Cell value-driven colour** (`<24h = red`)    | feat | low  | high     | Already needed for SREs; equally critical for lawyers.            |
+| 5    | `conflict:` local CSV fuzzy-search             | ext  | low  | high     | Pure-local, no network. Trust-builder.                            |
+| 6    | `cite:` Bluebook formatter (rename current → `doi:`) | ext | low | med-high | Solo lawyers cite constantly; useful daily.                       |
+| 7    | **Always-on-top "pinned cell"** mode           | feat | med  | med      | One cell stays visible even on focused windows. Deadline strip.   |
+| 8    | `stat:` USC / state statute lookup            | ext  | med  | med      | Cornell LII scrape. Useful but lower frequency than billing.      |
+| 9    | `caselaw:` Caselaw Access Project              | ext  | low  | med      | Free; case-name + snippet lookup.                                 |
+| 10   | `pacer:` docket pull                           | ext  | high | med      | Paid + auth. Defer until users explicitly ask.                    |
 
-## 5. Where they hang out
+The timer feature (#1) is the unlock — without it, none of the billing cells work as a wallpaper.
 
-- **Reddit:** r/Lawyertalk (private, ~120k), r/LawFirm (~50k), r/solopractice, r/legaltech (~10k but high signal).
-- **Podcasts:** Lawyerist Podcast, Above the Law, Legal Talk Network. Lawyerist also has an online community ("Lawyerist Lab").
-- **Conferences:** ABA TECHSHOW (Chicago, every spring), Clio Cloud Conference, ALA conference.
-- **Newsletters:** Bob Ambrogi's "LawSites," 3 Geeks and a Law Blog, Lawyerist Insider.
-- **Discords/Slacks:** smaller; the Lawyerist Lab Slack is the closest to a "hangout."
-- **People to be visible to:** Bob Ambrogi (LawSites), Carolyn Elefant (MyShingle), Sam Glover (Lawyerist), Nicole Black (MyCase legal tech writer). They review tools genuinely.
+## 5. Where they hang out (desktop-relevant first)
+
+- **r/macsetups / r/desktops** — surprisingly engaged with professional desktop setups; a "lawyer desktop with live billing and deadlines on wallpaper" post is novel here.
+- **r/Lawyertalk** (~120k private), **r/solopractice**, **r/LawFirm** — profession side. Post after the desktop post earns the screenshot.
+- **Lawyerist Lab Slack** — small but high-signal solo-lawyer community. Bob Ambrogi's LawSites blog reviews tools genuinely.
+- **Podcasts:** Lawyerist Podcast, Above the Law. Pitch "your wallpaper as your billing assistant" — concrete enough to land as a segment.
+- **Conferences:** ABA TECHSHOW (Chicago, spring); the legal-tech press attends.
+- **People to be visible to:** Bob Ambrogi (LawSites), Carolyn Elefant (MyShingle), Sam Glover (Lawyerist), Nicole Black.
 
 ## 6. Discoverability hooks
 
-This audience is *intensely* allergic to startup-bro language. Wins are framed as:
+Hero image = **a MacBook desktop, Word open with a brief draft, QuickSheet wallpaper visible to the right of the document showing a ticking timer for "smith-v-jones," today's total billable hours, and a red 18-hour countdown to "motion response due."**
 
-- "I built a desktop tool that captures billable time without making me open another app"
-- "Open-source, your data is just CSV, runs offline, no SaaS to subscribe to"
-- "For lawyers who already use Excel for everything"
+Headlines that land:
 
-Headlines that would land in r/Lawyertalk or LawSites:
+- "My laptop wallpaper now tracks my billable hours and court deadlines (open source, CSV)"
+- "Built a free desktop billing capture for solos — no SaaS, your data stays local"
+- "A wallpaper that reminds you that the motion is due tomorrow"
 
-- "I built a desktop spreadsheet for tracking billable hours — local, free, no SaaS"
-- "My matter list now sits on my desktop wallpaper. Here's the build."
-- "A Bluebook citation formatter you can paste into any cell"
-
-Lead with the **billing-capture screenshot** (matter ID + ticking timer + day's hours summed). That image alone does the selling — every solo lawyer has cried over forgotten time entries.
+Avoid: terminal screenshots, "TUI" anywhere in the copy, dev-jargon (`stdin`, `JSON-lines`, etc. — those go in a separate "how it works" section).
 
 ## 7. Implications (queue these)
 
-1. **Build `bill:` extension** (Bucket F). 6-min auto-rounding timer cell. Highest-leverage on the list. Pairs naturally with `--export-md` for end-of-day billing summary.
-2. **Rename `cite:` → `doi:` and free up `cite:` for Bluebook** (Bucket A breaking-rename — needs deprecation path: keep `cite:` aliasing to `doi:` for 1 release, log a one-line warning). Bluebook formatter is the higher-frequency use.
-3. **Bucket C draft: r/Lawyertalk post + LawSites email pitch to Bob Ambrogi.** Save in `drafts/lawyers-launch.md`. User submits. Lead with billing-capture screenshot, end with "MIT-licensed, your data stays on your machine."
-4. **Bucket B: add `legal`, `lawtech`, `billing` topics** to QuickSheet repo once a legal extension exists (no false advertising before then).
+1. **Bucket E: ship per-cell ticking timer prefix.** Foundational for billing/Pomodoro/anything time-shaped. <80 LOC additive. Without this, lawyer extensions are not viable.
+2. **Bucket E: value-driven cell colour rules.** Required so deadlines turn red automatically — non-negotiable for the persona.
+3. **Build `bill:` extension** after timer + colour land. Pair with already-existing `--export-md` for end-of-day billing summaries.
+4. **Bucket C drafts:** `drafts/lawyers-launch.md` — r/macsetups post + LawSites email pitch + Lawyerist Podcast outreach. Lead with hero image above. *Save only after timer feature merged.*
 
-Cross-link: [accountants.md](accountants.md) (next persona) will overlap heavily on the audit/CSV-trust angle.
+Cross-link: [accountants.md](accountants.md) — same audit/CSV-trust value-prop; the timer feature serves both.
