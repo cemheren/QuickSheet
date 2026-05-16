@@ -169,6 +169,7 @@ tls: github.com, 1, 4
 | `jwtdec:` | JWT token decoder | `ext: github:cemheren/quicksheet-jwtdec` |
 | `cronck:` | Cron expression parser | `ext: github:cemheren/quicksheet-cronck` |
 | `guid:` | GUID/UUID generator | `ext: github:cemheren/quicksheet-guid` |
+| `regex:` | Regex pattern explainer | `ext: github:cemheren/quicksheet-regex` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
