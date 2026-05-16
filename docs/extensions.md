@@ -38,6 +38,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `mileage` | IRS mileage       | Standard-mileage deduction (business/medical/charity, 2021-2025) | [`quicksheet-mileage-ext`](https://github.com/cemheren/quicksheet-mileage-ext) |
 | `depr`    | Depreciation      | Straight-line + MACRS half-year schedules (IRS Pub 946)          | [`quicksheet-depr-ext`](https://github.com/cemheren/quicksheet-depr-ext) |
 | `jwtdec`  | JWT decoder       | Decode JWT tokens locally — header, claims, expiry. Tokens never leave your machine. | [`quicksheet-jwtdec`](https://github.com/cemheren/quicksheet-jwtdec) |
+| `gitlog`  | Git log           | Recent commits at a glance — hash, author, time, message. Point at any repo. | [`quicksheet-gitlog`](https://github.com/cemheren/quicksheet-gitlog) |
 
 ## Install
 
