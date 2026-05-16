@@ -54,12 +54,14 @@ QuickSheet clones the repo, reads its `quicksheet-extension.json` manifest, and 
 
 ## Build your own
 
-The protocol is intentionally tiny:
+See **[Extension Protocol Specification](extension-protocol.md)** for the complete, strict protocol reference — message formats, coordinate system, rules, common mistakes, and working examples in C# and Python.
+
+**Quick summary:** The protocol is intentionally tiny:
 
 1. QuickSheet sends `{"type":"init"}` → extension replies with `{"type":"register","prefix":"xyz",...}`.
 2. When a cell matching the prefix is activated, QuickSheet sends `{"type":"activate","id":"...","params":[...],"gridRows":N,"gridCols":M}` → extension replies with `{"type":"write","id":"...","cells":[[...]]}`.
 
-Manifest format:
+Manifest format (`quicksheet-extension.json` at repo root):
 
 ```json
 {
