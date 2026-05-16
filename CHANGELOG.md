@@ -6,6 +6,40 @@ All notable changes to QuickSheet. Format roughly follows [Keep a Changelog](htt
 
 (empty — bump here before the next tag)
 
+## 0.16.0 — 2026-05-16
+
+### Added
+- **quicksheet-news extension** — RSS/Atom feed reader with 15+ built-in aliases (HN, Reddit, Lobsters, dev.to, BBC, TechCrunch). Supports any feed URL.
+- **CONTRIBUTING.md refresh** — architecture diagram, extension authoring guide with protocol details, scannable ground rules table.
+- **gh-pages update** — 9 new extension cards (cntdn, worldtm, margin, mileage, depr, jwtdec, cronck, k8s, news), version bump to 0.15.0, comparison table updated to "40+ extensions".
+
+## 0.15.0 — 2026-05-15
+
+### Added
+- **Sparkline rendering in Windows desktop mode** (#9) — `s: 1,2,3,4,5` now renders as unicode block-bar glyphs in wallpaper mode, matching the Linux implementation.
+- **README badges** — GitHub release version (dynamic), zero dependencies, 30+ extensions count.
+
+### Fixed (extensions)
+- Fixed `quicksheet-cronck` activate handler to read from `params` array instead of `cells`.
+
+## 0.14.0 — 2026-05-15
+
+### Fixed
+- **Theme cycling in Windows desktop mode** (#77) — `ConsoleColorToRgb()` full 16-color mapper replaces hardcoded colors. All theme presets (Dark/Light/Nord/Solarized/Matrix) now render correctly in desktop wallpaper mode.
+- **5 missing desktop shortcuts restored** (#66) — Ctrl+Z (undo), Ctrl+Y (redo), Ctrl+T (theme), Ctrl+G (goto cell), Ctrl+H (help overlay) now work in Windows desktop mode.
+
+### Fixed (extensions)
+- Fixed protocol bugs in 4 extensions: `quicksheet-cronck`, `quicksheet-jwtdec`, `quicksheet-rate`, `quicksheet-gitlog`.
+
+## 0.13.0 — 2026-05-15
+
+### Added
+- **quicksheet-cronck extension** — cron expression parser. Ranges, lists, steps, named days/months.
+- **quicksheet-gitlog extension** — recent git commits in cells for project dashboards.
+
+### Fixed
+- Fixed duplicate `colorParsed` variable (#75) — build error on some configurations.
+
 ## 0.12.0 — 2026-05-15
 
 ### Fixed
