@@ -1,3 +1,11 @@
+## 2026-05-16 (research phase — persona 5: gamedev + TTRPG GMs)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket R — wrote `research/personas/gamedev-ttrpg.md` (paper 5/10). Two adjacent subsegments: indie game devs (Godot/Unity/itch/Steam) + tabletop RPG GMs (D&D 5e/OSR/PbtA). Desktop-mode framing: dev wallpaper = wishlist + revenue + reviews + build status; GM wallpaper = initiative tracker + NPC pile + quest log + loot table on the GM-side monitor. Cultural moments leveraged: post-OGL backlash (TTRPG, local-first goodwill), Roll20 fatigue. Two distinct hero screenshots required for outreach.
+- Bucket: R
+- Outcome: paper pushed to main (skill self-edit). Highest-cross-persona-leverage features (value-driven cell colour + per-cell ticking timer) reinforced. Implications queued: `roll:` extension, `init:` initiative tracker extension, `itch:` extension, starter CSVs for DM screen + indie-dev launch, r/unixporn rice post (likely most-viral persona).
+- Follow-up: 5 personas remain. Next: writers-academics.
+
 ## 2026-05-16 (research phase — persona 4: artists)
 
 - Stars: 1 (Δ 0)
@@ -605,28 +613,28 @@
   **HARD RULE:** every persona paper must frame value strictly around `--desktop` wallpaper mode.
   Terminal/TUI use cases are out of scope for this research. Comparators: Rainmeter, Conky,
   GeekTool, Übersicht, Fences. Not lazygit/k9s/visidata. Papers 1–3 revised to v2 with this lens.
-  See `research/personas/_index.md`. Remaining 6 papers, one per run, in order:
-  1. `gamedev-ttrpg.md` — indie game devs + tabletop GMs. Custom-tooling culture, screenshot-friendly, evangelize freely.
-  2. `writers-academics.md` — citation, distraction-free desktop, manuscript todo. `cite:` already exists, room to grow.
-  3. `traders.md` — day traders + quant hobbyists. Live data on wallpaper is the actual product. `stock`/`fx`/`price` already exist.
-  4. `homelab.md` — homelab/sysadmin hobbyists. Adjacent to current beachhead; `k8s`/`docker`/`ping`/`portck` already there.
-  5. `students.md` — CS/STEM students. Viral audience, zero-budget, star-per-install ratio high.
-  6. `teachers.md` — K–12/college educators. Grading, attendance, schedule — CSV-native, untapped.
+  See `research/personas/_index.md`. Remaining 5 papers, one per run, in order:
+  1. `writers-academics.md` — citation, distraction-free desktop, manuscript todo. `cite:` already exists, room to grow.
+  2. `traders.md` — day traders + quant hobbyists. Live data on wallpaper is the actual product. `stock`/`fx`/`price` already exist.
+  3. `homelab.md` — homelab/sysadmin hobbyists. Adjacent to current beachhead; `k8s`/`docker`/`ping`/`portck` already there.
+  4. `students.md` — CS/STEM students. Viral audience, zero-budget, star-per-install ratio high.
+  5. `teachers.md` — K–12/college educators. Grading, attendance, schedule — CSV-native, untapped.
   After all 10 are `done`, rank the union of implications by build-cost × hit-probability and resume Bucket E/F shipping.
-- **Top implications already surfaced (papers 1–4)** — do NOT pick these up yet; they're the after-research backlog:
+- **Top implications already surfaced (papers 1–5)** — do NOT pick these up yet; they're the after-research backlog:
   - Build `gha:` extension (developers-sre, rank 1).
   - Build `bill:` 6-min increment timer extension (lawyers, rank 1) + cell-timer prefix in main repo.
   - Build `payroll:` + `sales-tax:` extensions (accountants, rank 1–2).
   - Build `gumroad:` extension (artists, rank 6).
+  - Build `roll:` dice roller + `init:` initiative tracker + `itch:` revenue (gamedev-ttrpg, rank 1–3).
   - Bucket E features (recurring across personas — high leverage):
-    * Value-driven cell colour (`c?:>X=red,...`) — SRE + lawyers + accountants + artists.
+    * Value-driven cell colour (`c?:>X=red,...`) — SRE + lawyers + accountants + artists + GMs (HP=red). **5/5 personas so far.**
+    * Per-cell ticking timer — lawyers + accountants + artists + GMs (session timer). **4/5 personas.**
     * Cell staleness dimming — SRE + accountants.
-    * Per-cell ticking timer — lawyers + accountants + artists.
     * `audit:` sidecar log mode — lawyers + accountants.
-    * Hex-color `c:#RRGGBB:` extension to existing `c:color:` — artists.
-    * Inline image thumbnails (`img:`) — artists. Needs feasibility brief first.
-  - Bucket A: audience landing pages — `docs/for-accountants.md`, `for-lawyers.md`, `for-sre.md`, `for-artists.md`.
-  - Bucket C drafts: r/Lawyertalk, r/Accounting, r/sre, r/desktops, Cara.app launch posts.
+    * Hex-color `c:#RRGGBB:` — artists + GMs (faction colours).
+    * Inline image thumbnails (`img:`) — artists + GMs (token images). Needs feasibility brief first.
+  - Bucket A: audience landing pages — `docs/for-accountants.md`, `for-lawyers.md`, `for-sre.md`, `for-artists.md`, `for-dms.md`, `for-indiedevs.md`. Starter CSVs in `examples/`.
+  - Bucket C drafts: r/Lawyertalk, r/Accounting, r/sre, r/desktops, r/unixporn (DM screen — top viral candidate), Cara.app, itch.io devlog.
 - **From #15 accounting research (2026-05-15)** — next 3 Bucket F picks in order:
   1. `quicksheet-mileage-ext` — IRS std-mileage (business/medical/charity).
   2. `quicksheet-margin-ext` — break-even + contribution margin.

@@ -39,7 +39,7 @@ Not comparators: lazygit, k9s, visidata, harlequin. Those are TUIs that occupy a
 | 2 | Solo / small-firm lawyers            | done     | `lawyers.md`                        | Single-monitor laptop most of the day; deadline anxiety = always-visible countdowns.            |
 | 3 | Accountants & bookkeepers            | done     | `accountants.md`                    | Tax-season deadline storm — desktop is the only surface they never close.                       |
 | 4 | Visual designers & illustrators      | done     | `artists-visual.md`                 | Reference grids, color palettes, commission queue pinned behind Photoshop/Procreate windows.    |
-| 5 | Indie game devs / TTRPG GMs          | queued   | `gamedev-ttrpg.md`                  | r/unixporn-adjacent crowd; love custom desktops; campaign trackers as wallpaper.                |
+| 5 | Indie game devs / TTRPG GMs          | done     | `gamedev-ttrpg.md`                  | r/unixporn-adjacent crowd; love custom desktops; campaign trackers as wallpaper.                |
 | 6 | Writers, researchers, academics      | queued   | `writers-academics.md`              | Distraction-free desktop; word-count, citation queue, draft list visible without context switch.|
 | 7 | Day traders / quant hobbyists        | queued   | `traders.md`                        | Multi-monitor culture; tickers behind every window is exactly what they pay Bloomberg for.      |
 | 8 | Homelab / sysadmin hobbyists         | queued   | `homelab.md`                        | r/homelab/r/selfhosted; second monitor of Grafana → second monitor of QuickSheet.               |
