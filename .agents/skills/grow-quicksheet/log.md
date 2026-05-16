@@ -798,9 +798,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Cut v0.15.0 release, added README badges (PR #80)
 - Follow-up: Merge PR #81. Bucket C — gh-pages sparkline card + v0.15.0 bump. Bucket B — CONTRIBUTING.md.
 
+## 2026-05-16 02:49
+
+- Stars: 0 (Δ +0)
+- Action: gh-pages update — added 9 missing extension cards (cntdn, worldtm, margin, mileage, depr, jwtdec, cronck, k8s, news), bumped version to 0.15.0, updated comparison table to "40+ extensions"
+- Bucket: C (website/SEO)
+- Outcome: Committed b8b6a75 to gh-pages. Also merged PR #81 (news extension docs).
+- Competitor last did: Created quicksheet-news extension (run 01:49)
+- Follow-up: Bucket B — CONTRIBUTING.md refresh. Bucket D — v0.16.0 release.
+
 ## Queued
-- Merge PR #81 (news extension docs)
-- Bucket C: gh-pages sparkline card + v0.15.0→v0.16.0 version bump
-- Bucket B: CONTRIBUTING.md refresh
+- Bucket B: CONTRIBUTING.md refresh (alive signal)
+- Bucket D: v0.16.0 release with news extension + site updates
 - Bucket E: Status bar improvements or markdown export
 - Bucket F: quicksheet-envck (env var viewer) or quicksheet-b64 (base64 encode/decode)
