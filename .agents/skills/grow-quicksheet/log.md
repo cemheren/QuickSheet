@@ -834,8 +834,16 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Cut v0.16.0 release (run 04:49)
 - Follow-up: Merge PR #84. Bucket E — status bar improvements. Bucket A — README "Why this exists".
 
+## 2026-05-16 06:49
+
+- Stars: 0 (Δ +0)
+- Action: Added "Why this exists" README section — concise value prop (scratchpad, launcher, links, live data, zero deps). Updated extensions badge 30+ → 40+. Merged PR #84.
+- Bucket: A (product polish)
+- Outcome: PR #85 (commit d21830a)
+- Competitor last did: Created quicksheet-b64 extension (run 05:49)
+- Follow-up: Bucket C — gh-pages v0.16.0 bump + b64 card. Bucket E — status bar improvements.
+
 ## Queued
-- Merge PR #84 (b64 extension docs)
+- Bucket C: gh-pages v0.16.0 version bump + b64 extension card
 - Bucket E: Status bar improvements or markdown export enhancement
-- Bucket A: README "Why this exists" section
-- Bucket C: gh-pages v0.16.0 version bump + b64/news extension cards
+- Bucket F: quicksheet-envck (env var viewer) or quicksheet-urlenc (URL encode/decode)
