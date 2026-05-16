@@ -1,3 +1,11 @@
+## 2026-05-16 (research phase — persona 8: homelab + selfhosters)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket R — wrote `research/personas/homelab.md` (paper 8/10). Homelab/r/selfhosted/r/unixporn audience — most-online persona in entire slate. Already familiar with wallpaper-dashboard concept (Conky, Rainmeter, Polybar). Strongest single hook surfaced: **"Homepage.io alternative that doesn't live in a tab."** Homepage has ~17k stars; QuickSheet wallpaper-mode is genuinely a *category-adjacent* product these users will instantly understand. Top extensions: `health:` HTTP-probe (writes-its-own-screenshot), `pihole:`, `plex:`, `hass:`, sonarr/radarr, proxmox.
+- Bucket: R
+- Outcome: paper pushed to main (skill self-edit). Key channel discovered: **selfh.st (Ethan Sholly)** newsletter — single feature there worth hundreds of installs. Awesome-selfhosted PR queued as a Bucket D draft.
+- Follow-up: 2 personas remain. Next: students.
+
 ## 2026-05-16 (research phase — persona 7: traders + quant hobbyists)
 
 - Stars: 1 (Δ 0)
@@ -629,10 +637,9 @@
   **HARD RULE:** every persona paper must frame value strictly around `--desktop` wallpaper mode.
   Terminal/TUI use cases are out of scope for this research. Comparators: Rainmeter, Conky,
   GeekTool, Übersicht, Fences. Not lazygit/k9s/visidata. Papers 1–3 revised to v2 with this lens.
-  See `research/personas/_index.md`. Remaining 3 papers, one per run, in order:
-  1. `homelab.md` — homelab/sysadmin hobbyists. Adjacent to current beachhead; `k8s`/`docker`/`ping`/`portck` already there.
-  2. `students.md` — CS/STEM students. Viral audience, zero-budget, star-per-install ratio high.
-  3. `teachers.md` — K–12/college educators. Grading, attendance, schedule — CSV-native, untapped.
+  See `research/personas/_index.md`. Remaining 2 papers, one per run, in order:
+  1. `students.md` — CS/STEM students. Viral audience, zero-budget, star-per-install ratio high.
+  2. `teachers.md` — K–12/college educators. Grading, attendance, schedule — CSV-native, untapped.
   After all 10 are `done`, rank the union of implications by build-cost × hit-probability and resume Bucket E/F shipping.
 - **Top implications already surfaced (papers 1–7)** — do NOT pick these up yet; they're the after-research backlog:
   - Build `gha:` extension (developers-sre, rank 1).
@@ -642,6 +649,7 @@
   - Build `roll:` dice roller + `init:` initiative tracker + `itch:` revenue (gamedev-ttrpg, rank 1–3).
   - Build `arxiv:` extension (writers-academics, rank 5). Pairs with shipped `cite:`.
   - Build `quote:` intraday + `alert:` rule-fires extension (traders, rank 1, 6). `alert:` is genuinely new product surface — likely a feature in main repo, not an ext.
+  - Build `health:` HTTP-probe + `pihole:` + `plex:` + `hass:` extensions (homelab, rank 1–4). `health:` writes-its-own-screenshot.
   - Bucket E features (recurring across personas — high leverage):
     * Value-driven cell colour (`c?:>X=red,...`) — SRE + lawyers + accountants + artists + GMs + writers + traders. **7/7 personas.** Highest-leverage feature in entire backlog.
     * Per-cell ticking timer — lawyers + accountants + artists + GMs + writers. **5/7.**
@@ -651,8 +659,9 @@
     * `audit:` sidecar log mode — lawyers + accountants.
     * Hex-color `c:#RRGGBB:` — artists + GMs.
     * Inline image thumbnails (`img:`) — artists + GMs. Needs feasibility brief first.
-  - Bucket A: audience landing pages — `for-accountants`, `for-lawyers`, `for-sre`, `for-artists`, `for-dms`, `for-indiedevs`, `for-writers`, `for-academics`, `for-traders`. Starter CSVs in `examples/`.
-  - Bucket C drafts: r/Lawyertalk, r/Accounting, r/sre, r/desktops, r/unixporn (DM screen — top viral candidate), r/battlestations (trader multi-monitor — likely 2nd-most-viral), Cara.app, itch.io devlog, r/ObsidianMD, Andy Matuschak / Maggie Appleton outreach.
+  - Bucket A: audience landing pages — `for-accountants`, `for-lawyers`, `for-sre`, `for-artists`, `for-dms`, `for-indiedevs`, `for-writers`, `for-academics`, `for-traders`, `for-homelab`. Starter CSVs in `examples/` including `homelab-dashboard.csv` + `selfhosted-services.csv`.
+  - Bucket C drafts: r/Lawyertalk, r/Accounting, r/sre, r/desktops, r/unixporn (DM screen — top viral candidate), r/battlestations (trader multi-monitor — likely 2nd-most-viral), **r/selfhosted (Homepage.io-alternative angle — likely highest signal-to-noise per the homelab paper)**, Cara.app, itch.io devlog, r/ObsidianMD, Andy Matuschak / Maggie Appleton outreach.
+  - Bucket D draft: `awesome-selfhosted` PR — add QuickSheet row.
 - **From #15 accounting research (2026-05-15)** — next 3 Bucket F picks in order:
   1. `quicksheet-mileage-ext` — IRS std-mileage (business/medical/charity).
   2. `quicksheet-margin-ext` — break-even + contribution margin.
