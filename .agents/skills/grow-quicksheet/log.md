@@ -860,3 +860,12 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Stalled since May 14
 - Follow-up: Bucket D — v0.17.0 release. Bucket F — quicksheet-regex (#90).
 
+
+## 2026-05-16 14:00
+
+- Stars: 1 (Δ +0)
+- Action: Created quicksheet-regex extension — regex pattern explainer that tokenizes and explains anchors, character classes, escape sequences, quantifiers, groups (capturing/non-capturing/named/lookahead/lookbehind), alternation. Validates patterns. Includes summary line.
+- Bucket: F (new extension)
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-regex (commit 8dbfb52). PR #97 on main repo for docs. Closes #90.
+- Competitor last did: Stalled since May 14
+- Follow-up: Bucket D — v0.17.0 release. Bucket C — gh-pages update with regex card.
