@@ -668,9 +668,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Stalled since May 14.
 - Follow-up: Merge PR #79, close #9. Bucket A README badges. Bucket F new extension.
 
+## 2026-05-15 23:49
+
+- Stars: 0 (Δ +0)
+- Action: Merged PR #79 (sparkline desktop), closed #9. Added 3 README badges: GitHub release (dynamic), zero dependencies, 30+ extensions.
+- Bucket: A (product polish) + D (merge)
+- Outcome: PR #80 on cemheren/QuickSheet (commit c5c5747). Issue #9 closed.
+- Competitor last did: Stalled since May 14.
+- Follow-up: Merge PR #80. Bucket D v0.15.0 release. Bucket F new extension.
+
 ## Queued
 
-- Bucket A: README badges or improve first-run UX
+- Bucket D: v0.15.0 release (sparkline desktop + badges)
 - Bucket F: new extension (data science? writing tools?)
 - Bucket E: markdown export enhancement
 - Bucket B: CONTRIBUTING.md refresh
