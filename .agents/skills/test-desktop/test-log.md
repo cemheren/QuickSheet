@@ -891,3 +891,28 @@ Build: Release
 - **Failed: 1** (C35 cronck  cronck#3)
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 3** (A2, A3, A5/A6)
+
+
+## Run 30: 2026-05-16 01:45
+Commit: e80e1b9 (main), v0.15.0
+Build: Release
+
+### Discovery
+- **v0.15.0 released** (PR #80: README badges)
+- **cronck PR #4 MERGED**: fix: read params instead of cells  cronck#3 CLOSED!
+- No new extension repos (37 total)
+
+### Results
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C35 |  PASS | cronck now correctly parses cron expression! Direct test: `*/5 * * * *`  `Every 5 minutes` |
+
+### Issues Resolved
+- **cronck#3 CLOSED**: Reads params instead of cells  fixed by PR #4
+
+### Cumulative (99 tests)
+- **Passed: 93** (+1: C35 cronck)
+- **Failed: 0** 
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
