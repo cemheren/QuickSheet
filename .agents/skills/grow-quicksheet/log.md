@@ -908,3 +908,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Fix quicksheet-gitlog #3, quicksheet-worldtm #4, quicksheet-tls-ext #4 (README issues)
 - Bucket C: gh-pages update — add guid, regex extension cards; bump version to 0.17.0
 - Bucket F: quicksheet-envck or quicksheet-urlenc
+
+## 2026-05-16 16:00
+
+- Stars: 1 (Δ +0)
+- Action: Fixed 3 extension README issues — gitlog#3 (wrong install + missing grid dims in usage), worldtm#4 (missing required grid dimension params), tls-ext#4 (placeholder instead of real repo name in install command).
+- Bucket: A (ext repo issue fixes)
+- Outcome: PRs opened — quicksheet-gitlog#4, quicksheet-worldtm#5, quicksheet-tls-ext#5. All close their respective issues.
+- Competitor last did: Research papers (persona 7: traders).
+- Follow-up: Bucket C — gh-pages update with guid/regex cards + v0.17.0 bump.
+
+## Queued
+
+- Bucket C: gh-pages update — add guid, regex extension cards; bump version to 0.17.0
+- Bucket F: quicksheet-envck or quicksheet-urlenc
+- Bucket E: Status bar improvements
