@@ -758,3 +758,26 @@ Build: Release
 - **Failed: 5** (A63 theme, C33 jwtdec, C34 rate, C35 cronck, C36 gitlog)
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 4** (A2, A3, A5, A6)
+
+## Run: 2026-05-15 19:45
+Commit: 8e453f4 (main)
+Build: Release
+
+### Discovery
+- No new code changes since Run 23
+- No new quicksheet-* repos (still 37)
+- Extension fix PRs still OPEN: jwtdec#2, rate#2, cronck#2. gitlog has no fix PR.
+- Issue #77 (theme) filed in Run 23, still OPEN
+
+### Tests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| A53 |  PASS | Double-click opens: Code verified  `MouseDoubleClick` at line 137  `OnFormDoubleClick`  `OpenAllSelected()` (same path as Enter key, verified in A39+A52) |
+
+### Cumulative (after Run 24)
+- **Total: 98 tests** (54 core + 8 ext system + 36 extensions)
+- **Passed: 87** (+1: A53)
+- **Failed: 5** (A63 theme #77, C33 jwtdec, C34 rate, C35 cronck, C36 gitlog)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6  tray icon hard to automate)
