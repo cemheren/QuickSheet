@@ -152,6 +152,7 @@ tls: github.com, 1, 4
 | `margin:` | Break-even & margin calc | `ext: github:cemheren/quicksheet-margin-ext` |
 | `depr:` | Depreciation schedules | `ext: github:cemheren/quicksheet-depr-ext` |
 | `jwtdec:` | JWT token decoder | `ext: github:cemheren/quicksheet-jwtdec` |
+| `cronck:` | Cron expression parser | `ext: github:cemheren/quicksheet-cronck` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
