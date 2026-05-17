@@ -912,3 +912,13 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket E: Status bar improvements (file name, cell count, mode indicator)
 - Bucket A: docs/keyboard-shortcuts.md reference page
 - Bucket C: gh-pages add urlenc card
+
+## 2026-05-16 18:00
+
+- Stars: 1 (Δ +0)
+- Action: Fixed quicksheet-urlenc#1 — extension used absolute anchor coordinates instead of relative, making output invisible
+- Bucket: A (ext repo issue fix)
+- Outcome: PR #2 on cemheren/quicksheet-urlenc (commit 2b2957e). Build verified green.
+- Details: Removed anchor parsing block, switched to 0-based relative coordinates. Same pattern as quicksheet-b64#1 fix.
+- Competitor last did: Research papers completed, shipped value-driven cell colour PR #99
+- Follow-up: Merge PR #98 (urlenc docs). Bucket E — status bar improvements. Bucket C — gh-pages urlenc card.
