@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace ExcelConsole;
@@ -136,22 +135,16 @@ public static class CellPrefix
 
     /// <summary>
     /// Checks if a cell value uses the color prefix: "c:color: text"
-    /// or the value-driven color prefix: "c?: rule, rule, *=default: value".
     /// </summary>
     public static bool IsColored(string value) =>
-        (value.StartsWith("c:", StringComparison.OrdinalIgnoreCase) ||
-         value.StartsWith("c?:", StringComparison.OrdinalIgnoreCase))
-        && ParseColor(value) != null;
+        value.StartsWith("c:", StringComparison.OrdinalIgnoreCase) && ParseColor(value) != null;
 
     /// <summary>
-    /// Parses "c:red: some text" into (ConsoleColor, displayText), or
-    /// "c?: &gt;100=red, &gt;50=yellow, *=green: 73" into the colour the value matches.
-    /// Returns null if the prefix or rules don't yield a colour.
+    /// Parses "c:red: some text" into (ConsoleColor, displayText).
+    /// Returns null if the prefix or color name is invalid.
     /// </summary>
     public static (ConsoleColor bg, string text)? ParseColor(string value)
     {
-        if (value.StartsWith("c?:", StringComparison.OrdinalIgnoreCase))
-            return ParseConditionalColor(value);
         if (!value.StartsWith("c:", StringComparison.OrdinalIgnoreCase)) return null;
         // Format: c:COLOR: text
         int secondColon = value.IndexOf(':', 2);
@@ -162,62 +155,6 @@ public static class CellPrefix
 
         string text = value[(secondColon + 1)..].TrimStart();
         return (color, text);
-    }
-
-    /// <summary>
-    /// Parses "c?: &gt;100=red, &gt;50=yellow, *=green: 73". Rules are comma-separated
-    /// "OP NUMBER = COLOR" where OP is one of &gt; &lt; &gt;= &lt;= =, plus a "*=COLOR"
-    /// default. Rules are evaluated left-to-right; first match wins. Non-numeric values
-    /// only match the "*=COLOR" default. Returns null if no rule matches.
-    /// </summary>
-    static (ConsoleColor bg, string text)? ParseConditionalColor(string value)
-    {
-        int lastColon = value.LastIndexOf(':');
-        if (lastColon <= 2) return null;
-
-        string rulesPart = value[3..lastColon];
-        string text = value[(lastColon + 1)..].TrimStart();
-
-        bool numeric = double.TryParse(text.Trim(), NumberStyles.Float,
-            CultureInfo.InvariantCulture, out double v);
-
-        foreach (var rawRule in rulesPart.Split(','))
-        {
-            var rule = rawRule.Trim();
-            if (rule.Length == 0) continue;
-            int eq = rule.IndexOf('=');
-            if (eq <= 0) continue;
-            string condition = rule[..eq].Trim();
-            string colorName = rule[(eq + 1)..].Trim();
-            if (!ColorMap.TryGetValue(colorName, out var color)) continue;
-
-            if (condition == "*") return (color, text);
-            if (!numeric) continue;
-
-            string op;
-            string numStr;
-            if (condition.StartsWith(">=")) { op = ">="; numStr = condition[2..]; }
-            else if (condition.StartsWith("<=")) { op = "<="; numStr = condition[2..]; }
-            else if (condition.StartsWith(">")) { op = ">"; numStr = condition[1..]; }
-            else if (condition.StartsWith("<")) { op = "<"; numStr = condition[1..]; }
-            else if (condition.StartsWith("=")) { op = "="; numStr = condition[1..]; }
-            else continue;
-
-            if (!double.TryParse(numStr.Trim(), NumberStyles.Float,
-                CultureInfo.InvariantCulture, out double n)) continue;
-
-            bool match = op switch
-            {
-                ">" => v > n,
-                "<" => v < n,
-                ">=" => v >= n,
-                "<=" => v <= n,
-                "=" => v == n,
-                _ => false,
-            };
-            if (match) return (color, text);
-        }
-        return null;
     }
 
     public static bool IsExtension(string value) =>

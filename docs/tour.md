@@ -21,7 +21,6 @@ Every cell is plain text by default. Add a prefix and the cell *does something*.
 | `i: `               | Inline subprocess. Output streams back into the cell, live.       | `i: ping -c 1 example.com`         |
 | `s: `               | Sparkline. Numbers render as unicode bars (▁▂▃▄▅▆▇█). Range form: `s: A1::A10`. | `s: 4,7,9,3,8,12`                  |
 | `c:color: `         | Cell color. Highlights background with a named color.             | `c:red: URGENT`                    |
-| `c?: rules: value`  | Value-driven cell color. Rules pick a colour based on the value.  | `c?: >100=red, >50=yellow, *=green: 73` |
 | `L: `               | Loop a target cell on an interval.                                | `L: A10, 5m`                       |
 | `ext: `             | Install an extension repo. One line.                              | `ext: github:cemheren/quicksheet-weather` |
 | `http://` `https://`| Hyperlink. Highlighted, opens on Enter.                           | `https://news.ycombinator.com`     |
