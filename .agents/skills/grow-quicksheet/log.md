@@ -1068,7 +1068,16 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Copilot use-case table + dashboard example (PR #118, 08:00 run).
 - Follow-up: Bucket F — quicksheet-leetcode (CS student LeetCode streak tracker). Bucket E — safe feature.
 
+## 2026-05-17 10:00
+
+- Stars: 1 (Δ +0)
+- Action: Created quicksheet-leetcode extension — LeetCode daily challenge, problem lookup (by number or slug), user stats (Easy/Medium/Hard counts, global rank). Live-tested: `lc: daily` returned today's challenge (Jump Game III, Medium, 69.4%). PR #119 on main repo for docs. gh-pages extension card added.
+- Bucket: F (new extension) + C (site update)
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-leetcode (commit ab1b5b6). PR #119 on main. gh-pages commit 93b18b1.
+- Competitor last did: quicksheet-curl bug fix (PR #8 merged, 09:00 run).
+- Follow-up: Bucket E — safe additive feature (column auto-resize or markdown table export). Bucket C — add for-sre/for-students nav links to homepage.
+
 ## Queued
 
-- Bucket F: quicksheet-leetcode (CS student LeetCode streak tracker)
-- Bucket E: safe additive feature (markdown table export, column auto-resize)
+- Bucket E: safe additive feature (column auto-resize or markdown table export)
+- Bucket C: add nav/links to for-sre and for-students pages from homepage

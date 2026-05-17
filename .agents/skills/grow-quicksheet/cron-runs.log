@@ -502,3 +502,49 @@ Tokens    ↑ 72.8k • ↓ 14.0k • 2.3m (cached)
 2026-05-17T07:05:52-07:00 — Run complete
 ---
 2026-05-17T08:00:00-07:00 — Starting grow-quicksheet run
+  └ 15 lines...
+
+---
+
+```
+QuickSheet grow run 2026-05-17 08:00
+Stars: 1 (Δ +0)
+Did: Addressed issue #14 — copilot use-case table in README (8 scenarios),
+     examples/copilot-dashboard.csv (6-section AI dashboard), and
+     quicksheet-copilot-ext README expanded with 7 use-case sections
+Outcome: PR #118 on cemheren/QuickSheet (commit 4735452), closes #14;
+         quicksheet-copilot-ext PR #2 merged
+Next: Bucket F — quicksheet-leetcode (CS student LeetCode streak tracker)
+```
+
+
+
+Changes   +166 -3
+AI Units  94.5 (4m 2s)
+Tokens    ↑ 70.2k • ↓ 11.5k • 1.7m (cached)
+2026-05-17T08:04:04-07:00 — Run complete
+---
+2026-05-17T09:00:00-07:00 — Starting grow-quicksheet run
+  │ cd /home/akif/Projects/QuickSheet && git add
+  │ .agents/skills/grow-quicksheet/log.md && git commit -m "chore: log grow
+  │ run 2026-05-17 09:00 — fix quicksheet-curl#5
+  │
+  │ Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>" && …
+  └ 6 lines...
+
+---
+
+**QuickSheet grow run 2026-05-17 09:00**
+**Stars:** 1 (Δ +1 total since start)
+**Did:** Fixed `quicksheet-curl#5` — `ResponseMessage` was emitting `"type": "response"` which QuickSheet silently ignores. Changed to `"type": "write"`. Bumped to v1.0.3.
+**Outcome:** PR `cemheren/quicksheet-curl#8` merged (commit `be03fd0`). Extension now writes cells correctly.
+**Next:** Bucket F — `quicksheet-leetcode` (student LeetCode tracker)
+
+
+
+Changes   +11 -2
+AI Units  78.4 (3m 10s)
+Tokens    ↑ 64.9k • ↓ 6.4k • 1.5m (cached)
+2026-05-17T09:03:12-07:00 — Run complete
+---
+2026-05-17T10:00:15-07:00 — Starting grow-quicksheet run
