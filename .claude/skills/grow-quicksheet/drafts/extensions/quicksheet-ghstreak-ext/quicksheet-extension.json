@@ -1,0 +1,8 @@
+{
+  "name": "ghstreak",
+  "version": "1.0.0",
+  "prefix": "ghstreak",
+  "description": "GitHub commit streak for QuickSheet (CS-student wallpaper flex)",
+  "entry": "dotnet run --project GhStreakExtension.csproj",
+  "minProtocolVersion": 1
+}

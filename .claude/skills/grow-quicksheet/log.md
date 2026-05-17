@@ -1,3 +1,11 @@
+## 2026-05-17 (Bucket F scaffold-only — quicksheet-ghstreak-ext)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket F (scaffold only — did NOT `gh repo create`). New extension `drafts/extensions/quicksheet-ghstreak-ext/`: Program.cs (~160 LOC, .NET 9, zero NuGet) + manifest + README + LICENSE + .gitignore. Prefix `ghstreak:` (avoids collision with `gha:` ext per PR #111). Reads public unauthenticated `api.github.com/users/<u>/events/public`, derives commits-today + consecutive-UTC-day streak + 90d total from PushEvent payloads. 15-min disk cache (XDG/LOCALAPPDATA per OS). 0/0 build; smoke-tested against live API with `torvalds` — returned register + 4 cells (`@torvalds`, `0 today`, `🔥 30d streak`, `92 in 90d`).
+- Bucket: F (scaffold)
+- Outcome: Skill self-edit push to main. User decides when to `gh repo create cemheren/quicksheet-ghstreak-ext --public --source=. --push`. Completes the "CS-student flex bundle" pair with the already-scaffolded `quicksheet-leetcode-ext`.
+- Follow-up: Persona-fit one-line: *"CS student installs QuickSheet because they want their GitHub commit-streak + commits-today on their rice wallpaper alongside their LeetCode streak, behind every IDE window."* Pairs with the CS-student rice variant in `drafts/unixporn-rice.md`. Honest caveats included in README: public events only, no auth (60 req/hr limit), UTC day skew.
+
 ## 2026-05-17 (Bucket C — showhn iteration-speed paragraph)
 
 - Stars: 1 (Δ 0)
