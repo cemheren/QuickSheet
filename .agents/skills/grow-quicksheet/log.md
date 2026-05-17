@@ -1050,6 +1050,15 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: v0.20.0 release (06:00 run).
 - Follow-up: Bucket F — quicksheet-leetcode (CS student LeetCode streak tracker). Bucket E — safe feature.
 
+## 2026-05-17 08:00
+
+- Stars: 1 (Δ +0 since last run)
+- Action: Addressed issue #14 — added copilot use-case table to README (8 scenarios), created examples/copilot-dashboard.csv (6-section AI dashboard template), and expanded quicksheet-copilot-ext README with 7 use-case sections.
+- Bucket: A (product polish / issue fix)
+- Outcome: PR #118 on cemheren/QuickSheet (commit 4735452). quicksheet-copilot-ext PR #2 merged. Closes #14.
+- Competitor last did: v0.20.0 release (06:00 run).
+- Follow-up: Bucket F — quicksheet-leetcode (CS student LeetCode streak tracker). Bucket E — safe feature.
+
 ## Queued
 
 - Bucket F: quicksheet-leetcode (CS student LeetCode streak tracker)
