@@ -1,3 +1,7 @@
+## 2026-05-17 (no-op #13 — identical to #12)
+
+- Stars: 1 (Δ 0). Same. PRs #117–#121 still open. No new ext-repo issues.
+
 ## 2026-05-17 (no-op #12 — all 5 protocol-bug issues closed)
 
 - Stars: 1 (Δ 0). User merged the protocol-fix PRs for envck/pihole/gha/dice/leetcode (or closed the issues another way) — all 5 ext-repo bug issues from the last cycle are gone. Only `quicksheet-todo#2` (meta, skip) + main #3 (Wayland, needs human) remain. PRs #117/#118/#119/#120/#121 still open. Nothing actionable for me.
