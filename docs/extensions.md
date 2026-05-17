@@ -51,6 +51,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `health`  | HTTP health check | Probe multiple HTTP endpoints in parallel — 🟢/🔴 status with latency, self-signed cert support | [`quicksheet-health`](https://github.com/cemheren/quicksheet-health) |
 | `env`     | Env var inspector | Lookup, filter, PATH exploder — auto-masks secrets (API keys, tokens) | [`quicksheet-envck`](https://github.com/cemheren/quicksheet-envck) |
 | `roll`    | Dice roller       | Roll any dice notation — 2d6+3, d20, 4d6kh3, Fudge dice, crit/fumble detection | [`quicksheet-dice`](https://github.com/cemheren/quicksheet-dice) |
+| `lc`      | LeetCode tracker  | Daily challenge, problem lookup by number/slug, user solve stats (Easy/Medium/Hard, rank) | [`quicksheet-leetcode`](https://github.com/cemheren/quicksheet-leetcode) |
 
 ## Install
 
