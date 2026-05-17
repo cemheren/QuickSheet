@@ -6,6 +6,15 @@ All notable changes to QuickSheet. Format roughly follows [Keep a Changelog](htt
 
 (empty — bump here before the next tag)
 
+## 0.21.0 — 2026-05-17
+
+### Added
+- **quicksheet-leetcode extension** — LeetCode daily challenge, problem lookup by number/slug, user solve stats (Easy/Medium/Hard counts, global rank).
+- **quicksheet-ghstreak extension** — GitHub contribution streak tracker. Current streak 🔥, longest streak, total contributions, 14-day unicode sparkline. No auth needed.
+- **Startup launcher scripts** — `scripts/quicksheet-startup.ps1` (Windows) and [docs/install-startup.md](docs/install-startup.md) walkthrough for Task Scheduler, Startup folder, and XDG autostart. Opt-in `-Update` flag for auto-pull-and-build.
+- **Copilot use-case table** in README + `examples/copilot-dashboard.csv` template (8 AI workflow scenarios).
+
+
 ## 0.20.0 — 2026-05-17
 
 ### Added
