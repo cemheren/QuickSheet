@@ -951,25 +951,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Persona landing pages (for-traders PR #105), curl docs PR #104, for-sre PR #106.
 - Follow-up: docs/for-students.md landing page. gh-pages update with curl card. quicksheet-pihole.
 
+## 2026-05-16 21:27
+
+- Stars: 1 (delta +0)
+- Action: Fixed quicksheet-curl issue #3 — entry path was 'QuickSheetHttp.csproj' but .csproj lives in QuickSheetHttp/ subdirectory. Fixed to 'QuickSheetHttp/QuickSheetHttp.csproj'. Bumped to v1.0.2.
+- Bucket: F (bug fix in extension repo)
+- Outcome: PR cemheren/quicksheet-curl#4 merged. Closes #3. Extension now launches from correct path.
+- Competitor last did: for-sre landing page (PR #106), for-traders (PR #105).
+- Follow-up: docs/for-students.md landing page. gh-pages curl card. quicksheet-pihole.
+
 ## Queued
 
 - Bucket A: docs/for-students.md landing page (CS-student persona)
-- Bucket C: gh-pages update — add curl extension card, bump to v0.18.0
+- Bucket C: gh-pages update — add curl extension card
 - Bucket F: quicksheet-pihole (Pi-hole API stats — homelab persona #2 need)
 - Bucket F: quicksheet-gha (GitHub Actions status — SRE persona need)
-
-## 2026-05-16 21:00
-
-- Stars: 1 (Δ +0)
-- Action: Bucket A — created docs/for-students.md landing page + examples/student-dashboard.csv. Covers coursework tracker, budget (quicksheet-budget), developer tools in-cell (jwtdec, regex, b64, urlenc), HN/gitlog strips, hackathon mode. README audience guides line updated.
-- Bucket: A
-- Outcome: PR #107 (commit a83d3fb) — docs-only, build clean.
-- Competitor last did: for-sre landing page (PR #106), curl fix.
-- Follow-up: Bucket C — gh-pages curl card + student landing link. Bucket F — quicksheet-pihole or quicksheet-gha.
-
-## Queued
-
-- Bucket C: gh-pages update — add curl + student landing page link, bump to v0.18.0
-- Bucket F: quicksheet-pihole (Pi-hole API stats — homelab persona #2 need)
-- Bucket F: quicksheet-gha (GitHub Actions status — SRE persona need)
-- Bucket A: docs/for-dms.md (dungeon-master persona — pairs with dice/initiative research)
