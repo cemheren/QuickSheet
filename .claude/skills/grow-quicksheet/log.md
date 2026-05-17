@@ -1,4 +1,12 @@
-## 2026-05-16 (post-research — Bucket E trinity #2: countdown timer prefix)
+## 2026-05-17 (USER FEEDBACK — revert + scope correction)
+
+- Stars: 1 (Δ 0)
+- Action: Opened PR #102 reverting #99 (c?: value-driven cell colour) per user: *"this PR should be reverted... it's awful."* PR #101 (t: timer prefix) closed by user without merge. User added two standing rules: (a) **never auto-merge PRs on the main repo** — user gates every merge; (b) **stop building timer-related stuff** — pomo/qtr/cntdn already cover it, generic primitives waste runs. Memory updated with three new feedback entries: feedback-no-value-colour, feedback-no-timer-extensions, feedback-no-auto-merge.
+- Bucket: feedback-correction
+- Outcome: Revert PR https://github.com/cemheren/QuickSheet/pull/102. Trinity programme abandoned (was: value-colour → timer → progress bar). Backlog rebuilt below.
+- Follow-up: Pause new code. Next run pick from the rebuilt backlog (`health:` ext likely first), but lean toward research/doc/draft work until a specific persona-shaped feature is validated with the user.
+
+## 2026-05-16 (post-research — Bucket E trinity #2: countdown timer prefix — CLOSED, NOT MERGED)
 
 - Stars: 1 (Δ 0)
 - Action: Bucket E — opened PR #101. New `t: <time>` cell prefix. Pure render-on-read countdown — accepts `HH:MM` (today), `YYYY-MM-DD`, or `YYYY-MM-DD HH:MM`. Magnitude-adaptive output (`Nd Nh` / `Nh Nm` / `Nm Ns` / `Ns` / `EXPIRED`). Mirrors the existing sparkline render pattern exactly: new IsTimer + RenderTimer in CellPrefix.cs + one branch added in each of 4 existing render sites (SpreadsheetApp.cs GetColumnWidths + main render, DesktopForm.cs, DesktopWindow.cs). 0/0 build.
@@ -673,67 +681,45 @@
 
 ## Queued
 
-- **RESEARCH PHASE COMPLETE (2026-05-16).** All 10 persona papers `done`.
-  Synthesis is at the end of `research/personas/teachers.md`. Trinity features confirmed
-  (value-colour 10/10, ticking timer 6/10, progress bar 5/10). Viral-action ranking and
-  first-extension ranking finalised. Cron resumes normal Bucket A/B/C/E/F selection.
+- **STANDING RULES (2026-05-17):**
+  - **Do not auto-merge PRs on cemheren/QuickSheet.** User reviews every merge. No `gh pr merge`, no `--auto`. See [[feedback-no-auto-merge]].
+  - **No timer/clock/countdown features or extensions.** Already covered by shipped `pomo`, `qtr`, `cntdn`. Drop `bill:`, ticking-timer, session-timer, bell-timer, break-countdown, etc. See [[feedback-no-timer-extensions]].
+  - **No value-driven / rule-embedded-in-text colour primitives.** `c?:` was rejected. Don't re-propose conditional-formatting designs without first asking the user. See [[feedback-no-value-colour]].
+  - **Generic-primitive justifications are not enough.** "Hits N/M personas" alone is not a green light — persona-shaped specifics are required.
 
-- **POST-RESEARCH BUILD PRIORITY (ranked):**
-  1. **Bucket E: trinity features**, in order: value-driven cell colour, then per-cell ticking timer, then in-cell progress bar prefix. These collectively unlock every persona. Each <80 LOC additive. **One per run.**
-  2. **Bucket F: extension waterfall** (after the trinity ships), in order:
-     a. `health:` HTTP probe (homelab; writes its own screenshot from `services.csv`).
-     b. `leetcode:` + `gh:` user-streak (students; viral combo).
-     c. `roll:` dice roller + `init:` initiative tracker (gamedev DM bundle).
-     d. `gha:` GitHub Actions status (SRE).
-     e. `bill:` billing timer ext (lawyers + accountants — depends on trinity timer feature).
-  3. **Bucket A: audience landing pages + starter CSVs.** Ship per persona as the matching extensions land. Pre-built CSVs in `examples/` are higher-leverage than the docs (the screenshot IS the post).
-  4. **Bucket C: ranked viral drafts.** Save AFTER matching code lands, in this order:
-     1. r/unixporn student-rice (persona 9 — highest expected virality).
-     2. r/unixporn DM-screen rice (persona 5).
-     3. r/selfhosted "Homepage.io alternative, not in a tab" (persona 8).
-     4. r/battlestations trader multi-monitor (persona 7).
-     5. Cult of Pedagogy + Cara.app outreach (slower, high-trust).
-  5. **Bucket D: awesome-selfhosted PR** — draft now, no code dependency.
-  After all 10 are `done`, rank the union of implications by build-cost × hit-probability and resume Bucket E/F shipping.
-- **Top implications already surfaced (papers 1–7)** — do NOT pick these up yet; they're the after-research backlog:
-  - Build `gha:` extension (developers-sre, rank 1).
-  - Build `bill:` 6-min increment timer extension (lawyers, rank 1) + cell-timer prefix in main repo.
-  - Build `payroll:` + `sales-tax:` extensions (accountants, rank 1–2).
-  - Build `gumroad:` extension (artists, rank 6).
-  - Build `roll:` dice roller + `init:` initiative tracker + `itch:` revenue (gamedev-ttrpg, rank 1–3).
-  - Build `arxiv:` extension (writers-academics, rank 5). Pairs with shipped `cite:`.
-  - Build `quote:` intraday + `alert:` rule-fires extension (traders, rank 1, 6). `alert:` is genuinely new product surface — likely a feature in main repo, not an ext.
-  - Build `health:` HTTP-probe + `pihole:` + `plex:` + `hass:` extensions (homelab, rank 1–4). `health:` writes-its-own-screenshot.
-  - Build `leetcode:` + `gh:` user-streak + `schedule:` ICS + `canvas:` LMS extensions (students, rank 1–4 + 9). `leetcode:` + `gh:` together = "CS-student flex bundle."
-  - Bucket E features (recurring across personas — high leverage):
-    * Value-driven cell colour (`c?:>X=red,...`) — SRE + lawyers + accountants + artists + GMs + writers + traders + homelab + students. **9/9 personas so far.** Highest-leverage feature in entire backlog.
-    * Per-cell ticking timer — lawyers + accountants + artists + GMs + writers. **5/7.**
-    * **In-cell progress bar prefix (`p: 712/1500` → `▓▓▓▓░░ 712/1500`)** — writers + accountants + artists + gamedev. **4/7.** ~30 LOC.
-    * **`alert:` cell rule** — fires when other cell crosses threshold; trader + SRE overlap. **NEW from paper 7.**
-    * Cell staleness dimming — SRE + accountants + writers + traders.
-    * `audit:` sidecar log mode — lawyers + accountants.
-    * Hex-color `c:#RRGGBB:` — artists + GMs.
-    * Inline image thumbnails (`img:`) — artists + GMs. Needs feasibility brief first.
-  - Bucket A: audience landing pages — `for-accountants`, `for-lawyers`, `for-sre`, `for-artists`, `for-dms`, `for-indiedevs`, `for-writers`, `for-academics`, `for-traders`, `for-homelab`, `for-students`. Starter CSVs in `examples/` (homelab-dashboard, selfhosted-services, student-dashboard).
-  - Bucket C drafts (ranked by expected virality):
-    1. **r/unixporn student-rice post** — combines rice + student status + free OSS. Likely highest-virality of any single action.
-    2. r/unixporn DM-screen rice (gamedev-ttrpg).
-    3. r/battlestations trader multi-monitor.
-    4. r/selfhosted Homepage.io-alternative angle (homelab).
-    5. r/Lawyertalk, r/Accounting, r/sre, r/desktops, Cara.app, itch.io devlog, r/ObsidianMD, Andy Matuschak / Maggie Appleton outreach.
-  - Bucket D draft: `awesome-selfhosted` PR — add QuickSheet row.
+- **Live backlog (re-ranked after the c?:/timer revert):**
+  Pre-flight rule for any item below: if you can't explain in one sentence *why this specific persona will install QuickSheet because of this* (not "it could be useful for everyone"), skip and pick something else.
+  1. **Bucket F: `health:` HTTP-probe extension.** Reads `services.csv` (name,url,expected_status); fills a row of green/red dots. Homelab persona; writes its own r/selfhosted screenshot. New extension repo on user's account.
+  2. **Bucket F: `leetcode:` + `gh:` user-streak combo.** Students persona; "CS-student flex bundle." Free APIs, lowest auth.
+  3. **Bucket F: `roll:` dice roller + `init:` initiative tracker.** TTRPG GM bundle. r/unixporn-rice candidate. `roll:` is genuinely novel because it's not a timer — it's a dice + table-lookup primitive.
+  4. **Bucket F: `gha:` GitHub Actions status row.** SRE persona; pairs with already-shipped `tls`/`docker`/`k8s`.
+  5. **Bucket F: `arxiv:` and `pubmed:`** for academics; pair with shipped `cite:`.
+  6. **Bucket F: `payroll:` + `sales-tax:` lookup tables** for accountants. Pure-table, no timing.
+  7. **Bucket A: more audience landing pages**, in `docs/for-*.md` + matching `examples/*.csv`. Already shipped: `for-homelab.md` (PR #100). Next candidates that don't depend on timer/value-colour: `for-students.md`, `for-dms.md`, `for-traders.md`, `for-artists.md`. Skip `for-lawyers.md` and `for-accountants.md` until a non-timer billing/accounting angle is found.
+  8. **Bucket D: `awesome-selfhosted` PR draft.** Zero code dep.
+  9. **Bucket C: r/unixporn DM-screen and student-rice posts.** Drafts only, save when matching extensions land. r/selfhosted "Homepage.io-alternative" post after `health:` ships.
+
+- **EXPLICITLY DROPPED from backlog (do not revive without user nod):**
+  - Trinity feature programme (value-colour / ticking timer / progress bar).
+  - `bill:` extension and any timer-as-extension wrapper.
+  - `alert:` cell rule (rule-embedded-in-text design — same failure mode as `c?:`).
+  - `audit:` sidecar log mode (no specific user request; speculative).
+  - Hex-color `c:#RRGGBB:` extension (speculative; current named colours sufficient).
+  - Inline image thumbnails feasibility brief (speculative).
+  - Cell staleness dimming (speculative; visual noise risk).
+
+- **Inactive (older queue items, kept for reference, still no specific request):**
+  - Capture sparkline screenshot for README/social (needs human).
+  - `w: url` live web-fetch prefix (defer).
+  - More Bucket F verticals: finance (yfinance), real estate (Zillow), email (gravatar/MX).
+  - Demo GIF (needs human).
+  - Audit screenshot filenames (`image.png`, `image-1.png`).
+  - Set social preview image (openGraphImage).
+  - Sparkline range refs already shipped.
 - **From #15 accounting research (2026-05-15)** — next 3 Bucket F picks in order:
   1. `quicksheet-mileage-ext` — IRS std-mileage (business/medical/charity).
   2. `quicksheet-margin-ext` — break-even + contribution margin.
   3. `quicksheet-depr-ext` — straight-line + MACRS depreciation tables.
   Brief: `.claude/skills/grow-quicksheet/research/accounting-extensions.md`.
   Close #15 after first one ships.
-- Capture sparkline screenshot for README/social (needs human or `--desktop` smoke test).
-- More Bucket E small wins: theme presets, `w: url` live web-fetch prefix, markdown export (each <50 LOC, additive).
-- More Bucket F verticals: finance (yfinance JSON), real estate (Zillow), writing (dictionary), email (gravatar/MX).
-- Demo GIF of desktop wallpaper mode (needs human capture — deferred).
-- Audit screenshot filenames (`image.png`, `image-1.png`, etc.) — give meaningful names and update README refs.
-- Set social preview image (openGraphImage) — needs custom upload via web UI or API.
-- Draft r/commandline + r/dotnet posts (Bucket C) once Show HN result is known.
-- Sparkline could accept range refs (`s: A1::A10`) — open enhancement.
-- Open 1–2 "good first issue" stubs (alive signal, after CONTRIBUTING is live).
+(End of queue.)
