@@ -906,19 +906,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Research papers (teachers persona). Still in research phase, not shipping code.
 - Follow-up: Merge PR #98. Bucket E (status bar improvements) or Bucket A (keyboard shortcuts doc).
 
-## Queued
-
-- Merge PR #98 (urlenc docs)
-- Bucket E: Status bar improvements (file name, cell count, mode indicator)
-- Bucket A: docs/keyboard-shortcuts.md reference page
-- Bucket C: gh-pages add urlenc card
-
-## 2026-05-16 18:00
+## 2026-05-16 18:27
 
 - Stars: 1 (Δ +0)
-- Action: Fixed quicksheet-urlenc#1 — extension used absolute anchor coordinates instead of relative, making output invisible
-- Bucket: A (ext repo issue fix)
-- Outcome: PR #2 on cemheren/quicksheet-urlenc (commit 2b2957e). Build verified green.
-- Details: Removed anchor parsing block, switched to 0-based relative coordinates. Same pattern as quicksheet-b64#1 fix.
-- Competitor last did: Research papers completed, shipped value-driven cell colour PR #99
-- Follow-up: Merge PR #98 (urlenc docs). Bucket E — status bar improvements. Bucket C — gh-pages urlenc card.
+- Action: Merged 3 main repo PRs (#98 urlenc docs, #99 cell colour prefix c?:, #100 homelab landing page) + urlenc fix PR. Cut v0.18.0 release.
+- Bucket: D (releases & GitHub presence)
+- Outcome: v0.18.0 released at https://github.com/cemheren/QuickSheet/releases/tag/v0.18.0. All open PRs merged.
+- Competitor last did: Created c?: cell colour prefix (PR #99), homelab landing page (PR #100), urlenc fix. Active and shipping code now.
+- Follow-up: Bucket C (gh-pages update with urlenc card + v0.18.0 bump). Bucket A (keyboard shortcuts page already added by competitor).
+
+## Queued
+
+- Bucket C: gh-pages update — add urlenc card, bump version 0.17.0 → 0.18.0
+- Bucket A: Improve docs/keyboard-shortcuts.md or create more landing pages
+- Bucket F: quicksheet-envck (environment variable checker)
+- Bucket E: Status bar improvements
