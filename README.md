@@ -181,6 +181,9 @@ tls: github.com, 1, 4
 | `urlenc:` | URL encode/decode | `ext: github:cemheren/quicksheet-urlenc` |
 | `curl:` | HTTP client (Postman-in-a-cell) | `ext: github:cemheren/quicksheet-curl` |
 | `arxiv:` | arXiv paper lookup | `ext: github:cemheren/quicksheet-arxiv` |
+| `pihole:` | Pi-hole DNS stats | `ext: github:cemheren/quicksheet-pihole` |
+| `health:` | HTTP endpoint health checker | `ext: github:cemheren/quicksheet-health` |
+| `env:` | Env var inspector (lookup/filter/PATH, auto-masks secrets) | `ext: github:cemheren/quicksheet-envck` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 

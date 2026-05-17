@@ -47,6 +47,9 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `urlenc`  | URL codec         | URL encode/decode with auto-detect, component, path, and full URI modes | [`quicksheet-urlenc`](https://github.com/cemheren/quicksheet-urlenc) |
 | `curl`    | HTTP client       | cURL-style HTTP client — GET/POST/PUT/DELETE from cells with headers, JSON bodies, pretty-print | [`quicksheet-curl`](https://github.com/cemheren/quicksheet-curl) |
 | `arxiv`   | arXiv paper lookup | Look up papers by ID or keyword search — title, authors, year, abstract. No API key. | [`quicksheet-arxiv`](https://github.com/cemheren/quicksheet-arxiv) |
+| `pihole`  | Pi-hole stats     | DNS blocking stats from Pi-hole — status, block %, query counts, domains blocked | [`quicksheet-pihole`](https://github.com/cemheren/quicksheet-pihole) |
+| `health`  | HTTP health check | Probe multiple HTTP endpoints in parallel — 🟢/🔴 status with latency, self-signed cert support | [`quicksheet-health`](https://github.com/cemheren/quicksheet-health) |
+| `env`     | Env var inspector | Lookup, filter, PATH exploder — auto-masks secrets (API keys, tokens) | [`quicksheet-envck`](https://github.com/cemheren/quicksheet-envck) |
 
 ## Install
 
