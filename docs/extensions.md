@@ -44,6 +44,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `guid`    | GUID generator    | Generate UUIDs on demand — standard, no-dash, braced, uppercase, batch up to 20 | [`quicksheet-guid`](https://github.com/cemheren/quicksheet-guid) |
 | `regex`   | Regex explainer   | Tokenize and explain regex patterns — anchors, classes, quantifiers, groups | [`quicksheet-regex`](https://github.com/cemheren/quicksheet-regex) |
 | `urlenc`  | URL codec         | URL encode/decode with auto-detect, component, path, and full URI modes | [`quicksheet-urlenc`](https://github.com/cemheren/quicksheet-urlenc) |
+| `health`  | HTTP health check | Probe multiple HTTP endpoints in parallel — 🟢/🔴 status with latency, self-signed cert support | [`quicksheet-health`](https://github.com/cemheren/quicksheet-health) |
 
 ## Install
 
