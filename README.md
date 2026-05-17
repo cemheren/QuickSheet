@@ -173,6 +173,7 @@ tls: github.com, 1, 4
 | `guid:` | GUID/UUID generator | `ext: github:cemheren/quicksheet-guid` |
 | `regex:` | Regex pattern explainer | `ext: github:cemheren/quicksheet-regex` |
 | `urlenc:` | URL encode/decode | `ext: github:cemheren/quicksheet-urlenc` |
+| `curl:` | HTTP client (Postman-in-a-cell) | `ext: github:cemheren/quicksheet-curl` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
