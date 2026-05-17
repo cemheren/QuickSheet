@@ -1104,8 +1104,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: manifest entry bug fixes across 5 extension repos (11:25 run).
 - Follow-up: Bucket D — v0.21.0 release after pending PRs merge. Bucket E — safe additive feature.
 
+## 2026-05-17 14:24
+
+- Stars: 1 (delta +0)
+- Action: Fixed protocol write bugs across 5 extensions (dice, leetcode, gha, pihole, envck) — random/hardcoded IDs, per-cell writes instead of cells array, anchor GetString() crash. All now use correct activation ID + cells array format.
+- Bucket: F (systemic bug fix across extension repos)
+- Outcome: 5 PRs created and merged: dice#4, leetcode#4, gha#4, pihole#4, envck#5. All close issue #3.
+- Competitor last did: 5 manifest entry fixes (11:25 run).
+- Follow-up: Bucket D — v0.21.0 release. Bucket C — gh-pages refresh. Bucket E — safe additive feature.
+
 ## Queued
 
-- Bucket D: v0.21.0 release after pending main PRs (#117–#121) merge
+- Bucket D: v0.21.0 release after pending main PRs merge
+- Bucket C: gh-pages refresh with updated extension cards
 - Bucket E: safe additive feature (column auto-resize or markdown table export)
-- Bucket F: quicksheet-ghstreak done ✓ — next could be quicksheet-dotenv (parse .env files in cells) or quicksheet-semver (semver range checker)
