@@ -1390,3 +1390,44 @@ Build: Release (no rebuild needed — no code changes)
 
 ### Cumulative Status (unchanged)
 - **Passed: 101** | **Failed: 5** | **Blocked: 3** | **Skipped: 3** | **N/A: 1** | **Total: 113**
+
+---
+
+## Run 51: 2026-05-17 12:05
+Commit: f420ae4
+Build: Release
+
+### Discovery
+- 5 entry bug issues (dice/envck/gha/leetcode/pihole #1) all CLOSED — manifests fixed
+- Fresh reinstall of all 5 extensions — entry commands now use `dotnet run --project`
+
+### Retests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C45 | ❌ FAIL | dice — random write IDs + no cells array → filed quicksheet-dice#3 |
+| C46 | ❌ FAIL | envck — `anchor.GetString()` on JSON object throws silently → filed quicksheet-envck#3 |
+| C47 | ❌ FAIL | gha — individual writes instead of cells array → filed quicksheet-gha#3 |
+| C48 | ❌ FAIL | leetcode — random write IDs + no cells array → filed quicksheet-leetcode#3 |
+| C49 | ❌ FAIL | pihole — hardcoded write ID `"pihole"` → filed quicksheet-pihole#3 |
+
+### Protocol bugs found (distinct per extension)
+- **dice/leetcode**: Random `Guid.NewGuid()` write IDs + flat `r,c,v` instead of `cells` array
+- **gha**: Correct ID but flat `r,c,v` writes + empty "flush" write
+- **envck**: `GetString()` on `anchor` JSON object throws, silently caught, activate handler never completes
+- **pihole**: Hardcoded `"pihole"` ID + wrong anchor parsing (reads top-level row/col)
+
+### Issues Filed This Run
+- quicksheet-dice#3: Protocol bug — random IDs + no cells array
+- quicksheet-envck#3: Silent crash — GetString() on anchor object
+- quicksheet-gha#3: Protocol bug — individual writes, no cells array
+- quicksheet-leetcode#3: Protocol bug — random IDs + no cells array
+- quicksheet-pihole#3: Protocol bug — hardcoded ID + wrong anchor
+
+### Cumulative Status
+- **Passed: 101** (unchanged)
+- **Failed: 5** (C45 dice, C46 envck, C47 gha, C48 leetcode, C49 pihole — NEW protocol bugs, entry bugs fixed)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+- **N/A: 1** (A68 — feature reverted)
+- **Total: 113**
