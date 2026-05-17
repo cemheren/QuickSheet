@@ -1,3 +1,11 @@
+## 2026-05-17 (Bucket A — for-traders landing + starter CSV)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket A — opened PR #105. `docs/for-traders.md` audience landing page positioning wallpaper-mode as the "orientation layer on top of the chart layer" for day traders + quant hobbyists. References ONLY already-shipped extensions (`stock`, `price`, `fx`, `news`, `qtr`, `1099` + built-in sparklines). Honest "what's missing" section (no alerts, no intraday, no broker connector). Plus `examples/trader-dashboard.csv` starter. README gains second pointer in the audience-guides row.
+- Bucket: A
+- Outcome: PR https://github.com/cemheren/QuickSheet/pull/105 — awaits user merge. Also noted open PR #104 (curl extension) from another agent.
+- Follow-up: Future for-* docs blocked behind shipped extensions. `for-students`, `for-dms`, `for-artists` need `leetcode`/`gh`, `roll`/`init`, `gumroad` ext first. Next non-A non-D run could draft `awesome-windows.md` (still Bucket D — variety means swap to research or non-A).
+
 ## 2026-05-17 (Bucket R + D — awesome-list fit analysis, Awesome-Linux-Software draft)
 
 - Stars: 1 (Δ 0)
