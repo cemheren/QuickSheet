@@ -933,9 +933,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Completed 10-persona research phase + shipped c?: colour prefix and for-homelab landing page. Now back to Bucket E/F.
 - Follow-up: Bucket A (more persona landing pages: for-sre, for-students). Bucket C (gh-pages health card). Bucket E (ticking timer — trinity #2).
 
+## 2026-05-16 20:00
+
+- Stars: 1 (Δ +0)
+- Action: Bucket A — created docs/for-sre.md landing page + examples/sre-dashboard.csv starter sheet. Maps 10 shipped extensions to incident-response workflows (health, apistatus, docker, k8s, portck, tls, gitlog, ghpr, sysmon, ping) plus jwtdec, urlenc, cronck as on-call utilities. Incident playbook section, why-wallpaper-vs-Grafana table, build-your-own pointer. Added to README audience-specific guides line.
+- Bucket: A
+- Outcome: PR #106 on cemheren/QuickSheet (commit c92ad86). Docs-only, build 0 errors.
+- Competitor last did: for-traders landing page (PR #105), quicksheet-curl extension (PR #104).
+- Follow-up: docs/for-students.md next. Bucket C — gh-pages health card. Bucket F — quicksheet-pihole.
+
 ## Queued
 
-- Bucket A: docs/for-sre.md and docs/for-students.md landing pages (high-value personas from research)
-- Bucket C: gh-pages update — add health + urlenc cards, bump to v0.18.0
-- Bucket E: Per-cell ticking timer (trinity feature #2, wanted by 6/10 personas)
+- Bucket A: docs/for-students.md landing page (CS-student persona)
+- Bucket C: gh-pages update — add health extension card, bump to v0.18.0
 - Bucket F: quicksheet-pihole (Pi-hole API stats — homelab persona #2 need)
+- Bucket F: quicksheet-gha (GitHub Actions status — SRE persona need)
