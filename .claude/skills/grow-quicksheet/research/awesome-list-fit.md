@@ -26,7 +26,7 @@
 | List | Fit | Why |
 |------|-----|-----|
 | **luong-komorebi/Awesome-Linux-Software** | ✅ strong | Productivity / Office sections; QuickSheet --desktop on X11 is exactly the kind of desktop-app this list catalogues. ~22k stars. Active. |
-| **Stefan-Stojanovic/Awesome-Windows**     | ✅ strong | Productivity / Desktop categories; QuickSheet WorkerW desktop integration is the angle. Active list. |
+| **0PandaDEV/awesome-windows** (~2.4k★, active) | ✅ medium | Productivity / Customization sections; QuickSheet WorkerW desktop integration is the angle. Active list. Maintainer is explicit about quality bar — keep the entry sober. Older `Awesome-Windows/Awesome` link is dead (404). |
 | **secretGeek/awesome-csv** (or similar)    | ✅ strong | QuickSheet IS a CSV viewer/editor with grid; fits the "CSV tools" niche directly. |
 | **iggredible/Awesome-Vim** / vim-spreadsheet adjacency | ❌ | not vim |
 | **awesome-hyprland** / **awesome-i3**     | ⚠ marginal | rice-aesthetic adjacency; submit only if a wallpaper screenshot exists |

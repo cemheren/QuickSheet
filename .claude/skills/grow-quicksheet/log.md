@@ -1,3 +1,11 @@
+## 2026-05-17 (Bucket D — awesome-windows draft + dead-link correction)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket D — wrote `drafts/awesome-windows.md` targeting `0PandaDEV/awesome-windows` (~2.4k★, active). PR title, one-line entry, body, submitter notes. Found that older `awesome-csharp-windows.md` draft pointed at `Awesome-Windows/Awesome` which now 404s on GitHub; marked the stale draft superseded and updated the fit-analysis brief.
+- Bucket: D
+- Outcome: Skill self-edit; pushed to main. No project repo change, no external repo PR.
+- Follow-up: Future Bucket D — identify canonical `awesome-csv` list and write a draft. Skip awesome-tuis tone-rewrite until a wallpaper screenshot lands.
+
 ## 2026-05-17 (Bucket F scaffold-only — quicksheet-health-ext)
 
 - Stars: 1 (Δ 0)

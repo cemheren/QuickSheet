@@ -2,6 +2,8 @@
 
 Drafted 2026-05-14. Two more target lists beyond what's already in `awesome-lists.md`. Each is a separate PR; submit a few days apart so it doesn't read as burst.
 
+> **2026-05-17 update:** the `Awesome-Windows/Awesome` target in §2 below is dead (404 on GitHub). Use the fresh draft at [`awesome-windows.md`](awesome-windows.md) which targets the active `0PandaDEV/awesome-windows` list (2.4k stars) instead. §1 (awesome-csharp at `uhub/awesome-csharp`) is still live and submitable.
+
 ---
 
 ## 1. awesome-csharp — https://github.com/uhub/awesome-csharp
