@@ -1,3 +1,11 @@
+## 2026-05-17 (Bucket R — wallpaper-tool launch venue analysis)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket R — wrote `research/wallpaper-launch-venues.md`. Pulled HN Algolia for "show hn wallpaper" + "desktop dashboard" + Übersicht specifically. Finding: wallpaper-tool genre is dead-on-arrival on HN (Übersicht 5/5 submissions <10 pts; whole genre averages <10 pts; one outlier — Parallax wallpaper engine at 225 pts — led with technique not product). The earlier `show-hn-tui-patterns.md` brief modelled QuickSheet as a TUI launch — wrong peer set now that the README hero leads with wallpaper.
+- Bucket: R
+- Outcome: Skill self-edit. Pushed to main. **Recommended launch reordering: r/unixporn rice FIRST → r/selfhosted SECOND → HN THIRD with mechanism-led reframe** (protocol + zero-NuGet + WorkerW/X11). Existing draft set covers all venues; no new drafts needed.
+- Follow-up: Audit `drafts/unixporn-rice.md` for 2025-26 r/unixporn title-pattern conformance. Sharpen `drafts/showhn.md` to add a JSON-lines-protocol technical hook paragraph (still leading with personal-itch opening).
+
 ## 2026-05-17 (Bucket A — --help missing c:color: prefix)
 
 - Stars: 1 (Δ 0)
