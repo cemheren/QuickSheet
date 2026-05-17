@@ -1,3 +1,11 @@
+## 2026-05-17 (no-op — saturation snapshot pushed to queue)
+
+- Stars: 1 (Δ 0)
+- Action: NO-OP. Swept main + ext-repo issues — only quicksheet-curl#5 (my PR #7 awaits user merge), quicksheet-todo#2 (meta question, skip), and main #14/#3 (both need human). All bucket lanes saturated: 4 ext scaffolds ready to publish, 8+ awesome-list drafts, 9+ social drafts, multiple docs/for-*.md PRs open. Per SKILL.md "If genuinely nothing concrete to do, log a no-op." Manufactured filler loses runs.
+- Bucket: no-op
+- Outcome: Replaced the empty "End of queue" line in the queue block with a **saturation snapshot** (what's awaiting user, what's pickable when an opening appears, what's explicitly dropped). Pushed to main as skill self-edit.
+- Follow-up: Next non-no-op trigger = (a) a new GitHub issue from a real user or agent, (b) user signals which queued item to act on, or (c) star delta indicating an outreach landed.
+
 ## 2026-05-17 (ext-issue fix — quicksheet-curl#5)
 
 - Stars: 1 (Δ 0)
@@ -866,4 +874,47 @@
   3. `quicksheet-depr-ext` — straight-line + MACRS depreciation tables.
   Brief: `.claude/skills/grow-quicksheet/research/accounting-extensions.md`.
   Close #15 after first one ships.
-(End of queue.)
+## Saturation snapshot (2026-05-17, post-curl-fix)
+
+All near-term skill-shaped work is done. Bottleneck is **publication**, not
+production. Don't manufacture filler. Future cron runs should:
+
+1. **Re-sweep ext-repo issues first** (priority rule #1). New issues opened
+   by another agent or a real user are the most valuable thing to pick.
+2. **No-op if nothing concrete.** SKILL.md authorises this; padding loses runs.
+
+### Ready and waiting on the user (not on the skill):
+
+- **PRs awaiting user merge** (last counted: ~10+ open across main + ext repos).
+- **Extension scaffolds ready to `gh repo create`** under
+  `drafts/extensions/`: quicksheet-health-ext, quicksheet-roll-ext,
+  quicksheet-leetcode-ext, quicksheet-ghstreak-ext. Each is built, smoke-tested,
+  and protocol-correct. None pushed as public repos yet — user gates.
+- **Awesome-list submission drafts** ready under `drafts/`: awesome-csharp,
+  awesome-dotnet, awesome-tuis, awesome-linux-software, awesome-windows,
+  awesome-csv, terminaltrove, console.dev. User submits manually.
+- **Social-post drafts** ready under `drafts/`: showhn (revised twice today),
+  lobsters, twitter, mastodon-bluesky, dev.to, 4 reddits, unixporn-rice
+  (with persona variants and venue-aware launch ordering). User posts manually.
+- **Audience landing pages** in `docs/for-*.md`: homelab (merged via #100),
+  traders (PR #105), sre (PR #106), students (PR #107), plus the csvkit
+  comparison (PR #113).
+
+### Future-pickable items if a cron run insists on action:
+
+These each pass the persona-fit one-line test but are *not* high-priority — only
+worth running when a specific persona-shaped opening appears:
+
+- Bucket F (scaffold-only): `gravatar:`, `mxck:`-style adjacent contact-data
+  extensions for accountants/lawyers. Existing `mxck` ext might already cover it.
+- Bucket F: tax / accounting verticals (`tax:`, `1099:`-extensions). The
+  `1099:` ext is already shipped per docs/extensions.md; check before drafting.
+- Bucket A: per-extension README screenshot pointers when human captures one.
+
+### Explicitly dropped (do NOT revive — see MEMORY.md / [[feedback-no-*]]):
+
+- Timer/clock/countdown features and extensions ([[feedback-no-timer-extensions]]).
+- Value-driven / rule-embedded-in-text colour primitives ([[feedback-no-value-colour]]).
+- Auto-merging PRs on main ([[feedback-no-auto-merge]]).
+- Generic primitives justified by N/M-persona counts alone — persona-shaped
+  specifics required ([[feedback-quality-over-quantity]]).
