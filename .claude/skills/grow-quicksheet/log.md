@@ -1,3 +1,11 @@
+## 2026-05-17 (Bucket R — adjacent-project pitch teardown)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket R — read README/landing-page openers for Rainmeter, Conky, Übersicht, GeekTool. Distilled into `research/adjacent-pitch-teardown.md`. Key finding: QuickSheet's metaphor opener ("Your desktop is a spreadsheet") is uniquely strong vs peers' category-first/benefit-first taglines — keep it. But hero buries three QuickSheet-only differentiators that peers would put up-front: (a) CSV persistence, (b) runnable cells, (c) cross-platform with same data file. Concrete 13-word add-line proposed for a future Bucket A README-hero edit PR.
+- Bucket: R
+- Outcome: Skill self-edit; brief pushed to main. Three queued actions: README hero edit (13-word add), cell-prefix-count badge, Show HN draft revision.
+- Follow-up: Next non-R run can pick the README hero edit (Bucket A) — it's the highest-leverage discoverable single edit in the backlog.
+
 ## 2026-05-17 (Bucket D — awesome-windows draft + dead-link correction)
 
 - Stars: 1 (Δ 0)
