@@ -236,7 +236,7 @@ Also use PowerShell for:
 | ID | Test | Steps | Expected |
 |----|------|-------|----------|
 | A61 | c:color: prefix | Type `c:red: URGENT` in a cell | Cell background turns red, text shows "URGENT" only |
-| A68 | c?: conditional color | Type `c?: >80=red, >50=yellow, *=green: 73` | Cell bg yellow (73>50), text shows "73" only |
+| A68 | c?: conditional color | ~~Reverted (PR #102)~~ | Feature removed — `c?:` cells show as plain text, no crash |
 
 ### Sparkline Prefix
 
@@ -318,6 +318,7 @@ First install each extension via its `ext:` cell. Then test the prefix.
 | C39 | quicksheet-guid | `ext: github:cemheren/quicksheet-guid` | `guid: 3` | 3 GUIDs in standard format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) |
 | C40 | quicksheet-regex | `ext: github:cemheren/quicksheet-regex` | `regex: ^[a-z]+\d{2}$` | Token breakdown table: pattern + each token with explanation + summary |
 | C41 | quicksheet-urlenc | `ext: github:cemheren/quicksheet-urlenc` | `urlenc: hello world` | URL-encoded string: `hello%20world` |
+| C42 | quicksheet-health | `ext: github:cemheren/quicksheet-health` | `health: https://google.com, https://github.com` | Per-endpoint rows: name → 🟢/🔴 status code (latency) |
 
 ---
 
