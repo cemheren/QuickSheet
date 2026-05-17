@@ -996,7 +996,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: for-students landing (PR #107), README hero tighten (PR #108), pihole ext (PR #109).
 - Follow-up: Bucket D — v0.19.0 release after pending PRs (#103-#111) merge. Bucket F — new extension from backlog (health:, leetcode:, or arxiv:).
 
+## 2026-05-17 02:00
+
+- Stars: 1 (Δ +0)
+- Action: Bucket F — created quicksheet-arxiv extension. arXiv paper lookup by ID or keyword search. ID mode: detail view (title, authors, year, abstract). Search mode: relevance-ranked results table. Atom XML parsed with System.Xml.Linq BCL (zero NuGet). 30-min cache. No API key. Smoke-tested live against arXiv API.
+- Bucket: F (new extension)
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-arxiv. PR #112 on main repo for docs.
+- Competitor last did: for-students landing (PR #107), README hero (PR #108), pihole ext (PR #109), gha extension (PR #111).
+- Follow-up: Bucket C — add arxiv card to gh-pages. Bucket D — v0.19.0 release after pending PRs merge.
+
 ## Queued
 
-- Bucket D: v0.19.0 release after pending PRs (#103-#111) merge
-- Bucket F: quicksheet-arxiv (academic paper lookup, pairs with cite-ext) or quicksheet-envck (env var inspector)
+- Bucket C: add quicksheet-arxiv card to gh-pages extensions page
+- Bucket D: v0.19.0 release after pending PRs (#103-#112) merge
+- Bucket F: quicksheet-envck (env var inspector) or quicksheet-leetcode (CS student streak)
