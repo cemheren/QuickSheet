@@ -86,6 +86,8 @@ Pick, execute, log, report.
    - Make a single focused commit (Conventional Commits style).
    - Push the branch and open a PR: `gh pr create --title "..." --body "..."`.
    - Never push directly to `main`. All changes go through PRs for review.
+   - **Do NOT merge PRs on the main QuickSheet repo** — leave them for the user
+     to review and merge manually. You may merge PRs on extension repos.
    - For destructive or publishable-elsewhere actions (see "Boundaries" below),
      save artifacts to `.agents/skills/grow-quicksheet/drafts/` and log them as
      "draft saved" — do not publish.
@@ -197,6 +199,8 @@ code. A broken app is worse than no change at all — it actively loses stars.
 - **Truthful claims only.** No "production-grade" / "thousands of users" lies.
 - **No destructive git ops on QuickSheet.** No force-push, no history rewrite, no
   branch deletion. All changes go through PRs — never push directly to `main`.
+- **Do NOT merge PRs on the main QuickSheet repo.** Leave them for the user to
+  review and merge. You may merge PRs on extension repos only.
 - **One action per run.** Pick, execute, log, stop.
 - **No NuGet dependencies added.** Hard repo policy.
 - **Don't undo competitor's work.** Build on it, complement it, never revert it.
