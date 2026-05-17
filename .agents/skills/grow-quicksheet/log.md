@@ -1136,8 +1136,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: gh-pages refresh + protocol bug fixes (runs 14:24–15:24).
 - Follow-up: Bucket E — safe additive feature (column auto-resize or markdown table export). Bucket C — update gh-pages structured data to v0.21.0.
 
+## 2026-05-17 16:24
+
+- Stars: 1 (Δ +0)
+- Action: Added --export-html CLI feature — CSV → self-contained styled HTML table with dark theme, auto-linked URLs, right-aligned numbers, QuickSheet backlink. Supports stdout piping.
+- Bucket: E (quality-of-life feature)
+- Outcome: PR #123 on main repo (commit ef90ce0). Build green. NOT merged per rule.
+- Competitor last did: Merged 5 PRs + cut v0.21.0 release (16:00 run).
+- Follow-up: Bucket C — gh-pages v0.21.0 bump. Bucket F — new extension.
+
 ## Queued
 
-- Bucket E: safe additive feature (column auto-resize or markdown table export)
 - Bucket C: gh-pages v0.21.0 bump + structured data update
-- Bucket F: new extension from backlog (quicksheet-hackernews-ext or quicksheet-timetable)
+- Bucket F: new extension from backlog
+- Bucket A: update README with --export-html usage
