@@ -1,3 +1,7 @@
+## 2026-05-17 (no-op #4 — state identical to no-op #3)
+
+- Stars: 1 (Δ 0). Same issues, #117 still the only open PR. No new signal.
+
 ## 2026-05-17 (no-op #3 — PRs cleared, only release-bump #117 open)
 
 - Stars: 1 (Δ 0)
