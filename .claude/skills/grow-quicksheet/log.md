@@ -1,3 +1,11 @@
+## 2026-05-17 (Bucket A — csvkit comparison page, surfaces --export-md)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket A — opened PR #113. New `docs/csvkit-comparison.md` positions `--export-md` as the *drop-in replacement* feature for the csvkit / Miller / xsv / qsv crowd (per the inverse-teardown brief — Harlequin's "drop-in replacement for DuckDB CLI" framing scored 183 HN pts). Honest "what QuickSheet doesn't try to do" section. README gains a one-line pointer next to the existing `--export-md` example. Smoke-tested `--export-md -` (stdout) — produces valid GitHub-flavoured markdown.
+- Bucket: A
+- Outcome: PR https://github.com/cemheren/QuickSheet/pull/113 — awaits user merge. Build 0/0.
+- Follow-up: After #113 merges, the inverse-teardown brief still has: (a) user-question about the `extensions-40+` badge angle (don't act without user signal), (b) Bucket C re-revision of `drafts/showhn.md` to add the iteration-speed paragraph. Both queued.
+
 ## 2026-05-17 (Bucket R — loved-features inverse teardown of adjacent TUIs)
 
 - Stars: 1 (Δ 0)
