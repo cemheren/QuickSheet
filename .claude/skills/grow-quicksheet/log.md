@@ -1,3 +1,11 @@
+## 2026-05-17 (Bucket R — loved-features inverse teardown of adjacent TUIs)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket R — pulled HN Algolia data for VisiData (top 221 pts), Lazygit (top 436 pts), Harlequin (top 183 pts). Distilled in `research/loved-features-inverse-teardown.md`. Three repeating patterns: (a) loved feature is *iteration speed* not breadth — "I do the thing in fewer keystrokes" recurs across all 3 tools; (b) "drop-in replacement for X" framing beats "alternative to X" (Harlequin's edge); (c) demo videos compound — VisiData's lightning demo at PyCascades alone hit 195 HN pts separately from the Show HN.
+- Bucket: R
+- Outcome: Skill self-edit; pushed to main. Concrete next-action implications queued: (1) Bucket A — *question for user, not unilateral* — whether the `extensions-40+` badge sells the wrong angle (breadth vs speed). (2) Bucket A — surface `--export-md` more (most "drop-in replacement"-shaped feature in the project). (3) Human-required demo video. (4) Bucket C — re-revise `drafts/showhn.md` to add an iteration-speed-angle paragraph alongside the protocol angle.
+- Follow-up: First three implications are non-trivial — don't act without user confirmation. Stick to: queue, surface, defer.
+
 ## 2026-05-17 (Bucket F scaffold-only — quicksheet-leetcode-ext)
 
 - Stars: 1 (Δ 0)
