@@ -1198,3 +1198,26 @@ Build: Release
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 3** (A2, A3, A5/A6)
 - **Total: 104** (added C41)
+
+## Run 44: 2026-05-16 18:46
+Commit: 89fb919 (main), v0.18.0
+Build: Release
+
+### Discovery
+- **PR #99 merged**: Value-driven cell colour (`c?:` prefix) — conditional coloring based on rules like `c?: >80=red, >50=yellow, *=green: 73`
+- **PR #98 merged**: urlenc docs
+- **urlenc PR #2 merged**: Fixed absolute coordinates bug ? relative coordinates now correct
+
+### Tests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C41 | ? PASS | urlenc fix PR #2 merged — `Component: hello%20world` and `Full URI: hello%20world` visible |
+| A68 | ? PASS | c?: conditional color — 73 shows yellow (>50), 95 shows red (>80), 30 shows green (default) |
+
+### Cumulative
+- **Passed: 99** (+2: C41 retest, A68 new)
+- **Failed: 0**
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+- **Total: 105** (added A68)

@@ -236,6 +236,7 @@ Also use PowerShell for:
 | ID | Test | Steps | Expected |
 |----|------|-------|----------|
 | A61 | c:color: prefix | Type `c:red: URGENT` in a cell | Cell background turns red, text shows "URGENT" only |
+| A68 | c?: conditional color | Type `c?: >80=red, >50=yellow, *=green: 73` | Cell bg yellow (73>50), text shows "73" only |
 
 ### Sparkline Prefix
 
