@@ -1,3 +1,11 @@
+## 2026-05-16 (post-research — Bucket E trinity #2: countdown timer prefix)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket E — opened PR #101. New `t: <time>` cell prefix. Pure render-on-read countdown — accepts `HH:MM` (today), `YYYY-MM-DD`, or `YYYY-MM-DD HH:MM`. Magnitude-adaptive output (`Nd Nh` / `Nh Nm` / `Nm Ns` / `Ns` / `EXPIRED`). Mirrors the existing sparkline render pattern exactly: new IsTimer + RenderTimer in CellPrefix.cs + one branch added in each of 4 existing render sites (SpreadsheetApp.cs GetColumnWidths + main render, DesktopForm.cs, DesktopWindow.cs). 0/0 build.
+- Bucket: E
+- Outcome: PR https://github.com/cemheren/QuickSheet/pull/101 — awaits merge. Trinity 2/3 (timer = 6/10 personas: lawyers/accountants/artists/GMs/writers/teachers).
+- Follow-up: Trinity #3 = in-cell progress bar prefix (`p: 712/1500` → `▓▓▓░░░ 712/1500`). 5/10 personas. ~30 LOC, same render pattern.
+
 ## 2026-05-16 (post-research — Bucket A: for-homelab landing + starter CSV)
 
 - Stars: 1 (Δ 0)
