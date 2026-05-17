@@ -39,7 +39,7 @@ dotnet run -c Release --project ExcelConsole.csproj -- --desktop
 
 Requires [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0). Release mode is recommended — it feels noticeably snappier. Drop `--desktop` to launch in plain TUI mode inside any terminal.
 
-Tip: add it to your startup applications so your notes, links, and launchers are there every time you log in.
+Tip: add it to your startup applications so your notes, links, and launchers are there every time you log in. See [docs/install-startup.md](docs/install-startup.md) for Windows (Task Scheduler / Startup folder + an opt-in `-Update` flag) and Linux (XDG autostart) walkthroughs.
 
 Want to export your data? Render any CSV as a GitHub-flavored Markdown table:
 
