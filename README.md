@@ -47,6 +47,8 @@ Want to export your data? Render any CSV as a GitHub-flavored Markdown table:
 dotnet run --project ExcelConsole.csproj -- mydata.csv --export-md mydata.md
 ```
 
+Use `--export-md -` to write to stdout — handy in csvkit / Miller / qsv pipelines. See [docs/csvkit-comparison.md](docs/csvkit-comparison.md) for the drop-in pipeline notes.
+
 New here? The 60-second tour is in [docs/tour.md](docs/tour.md). Or jump straight to [docs/recipes.md](docs/recipes.md) for ready-to-paste dashboard layouts. All keyboard shortcuts are in [docs/keyboard-shortcuts.md](docs/keyboard-shortcuts.md). Common questions: [docs/faq.md](docs/faq.md).
 
 Audience-specific guides: [for homelabbers](docs/for-homelab.md) (Plex / Pi-hole / *arr / Home Assistant) · [for traders](docs/for-traders.md) (P/L, watchlist, FX, news strip).
