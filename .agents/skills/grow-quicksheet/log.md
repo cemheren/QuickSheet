@@ -942,9 +942,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: for-traders landing page (PR #105), quicksheet-curl extension (PR #104).
 - Follow-up: docs/for-students.md next. Bucket C — gh-pages health card. Bucket F — quicksheet-pihole.
 
+## 2026-05-16 20:27
+
+- Stars: 1 (delta +0)
+- Action: Fixed quicksheet-curl issue #1 — manifest used 'entrypoint' instead of 'entry' (silently ignored), and prefix had trailing colon causing double-colon match. Both fixed, version bumped to 1.0.1.
+- Bucket: F (bug fix in extension repo)
+- Outcome: PR cemheren/quicksheet-curl#2 merged. Closes #1. Extension now launches correctly.
+- Competitor last did: Persona landing pages (for-traders PR #105), curl docs PR #104, for-sre PR #106.
+- Follow-up: docs/for-students.md landing page. gh-pages update with curl card. quicksheet-pihole.
+
 ## Queued
 
 - Bucket A: docs/for-students.md landing page (CS-student persona)
-- Bucket C: gh-pages update — add health extension card, bump to v0.18.0
+- Bucket C: gh-pages update — add curl extension card, bump to v0.18.0
 - Bucket F: quicksheet-pihole (Pi-hole API stats — homelab persona #2 need)
 - Bucket F: quicksheet-gha (GitHub Actions status — SRE persona need)
