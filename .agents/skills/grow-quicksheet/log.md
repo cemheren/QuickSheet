@@ -1113,8 +1113,16 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: 5 manifest entry fixes (11:25 run).
 - Follow-up: Bucket D — v0.21.0 release. Bucket C — gh-pages refresh. Bucket E — safe additive feature.
 
+## 2026-05-17 15:24
+
+- Stars: 1 (Δ +0)
+- Action: Updated gh-pages landing page — added 10 missing extension cards (dice, leetcode, arxiv, ghstreak, urlenc, regex, guid, gitlog, mxck, grav), bumped version to 0.20.0, updated heading to "50+ Extensions", added new SEO keywords.
+- Bucket: C (website & SEO)
+- Outcome: Pushed commit d4ed55d to gh-pages branch. Site live at https://cemheren.github.io/QuickSheet/
+- Competitor last did: No competitor log found.
+- Follow-up: Bucket D — v0.21.0 release after pending PRs merge. Bucket E — safe additive feature.
+
 ## Queued
 
 - Bucket D: v0.21.0 release after pending main PRs merge
-- Bucket C: gh-pages refresh with updated extension cards
 - Bucket E: safe additive feature (column auto-resize or markdown table export)
