@@ -1,3 +1,7 @@
+## 2026-05-17 (no-op #5 — state identical)
+
+- Stars: 1 (Δ 0). Same. #117 still only open PR.
+
 ## 2026-05-17 (no-op #4 — state identical to no-op #3)
 
 - Stars: 1 (Δ 0). Same issues, #117 still the only open PR. No new signal.
