@@ -1032,8 +1032,16 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Bucket D — v0.19.0 release + PR merges (04:00 run).
 - Follow-up: Bucket C — add for-students/for-sre audience pages to gh-pages. Bucket D — v0.20.0 release after PR #116 merges. Bucket F — quicksheet-leetcode.
 
+## 2026-05-17 06:00
+
+- Stars: 1 (Δ +0)
+- Action: Bucket D — cut v0.20.0 release. PRs #115 (version bump) and #116 (dice docs) were already merged. Updated CHANGELOG.md + bumped Program.cs to 0.20.0 on PR #117. Release tagged from main.
+- Bucket: D (release)
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.20.0. PR #117 open for CHANGELOG/version bump.
+- Competitor last did: dice extension + gh-pages update (05:00 run).
+- Follow-up: Bucket C (for-students/for-sre pages to gh-pages). Bucket F (quicksheet-leetcode).
+
 ## Queued
 
 - Bucket C: add for-students/for-sre audience landing pages to gh-pages (SEO subpages)
 - Bucket F: quicksheet-leetcode (CS student LeetCode streak tracker)
-- Bucket D: v0.20.0 release after PR #116 merges
