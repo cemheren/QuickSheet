@@ -1,3 +1,7 @@
+## 2026-05-17 (no-op #11 — same state plus my #120 awaiting merge)
+
+- Stars: 1 (Δ 0). My #120 (startup script) + #117/#118/#119 still open. todo#2 + main #3 still need human. Nothing actionable for me.
+
 ## 2026-05-17 (Bucket A — startup script per user request)
 
 - Stars: 1 (Δ 0). User asked "should we offer a windows startup script" in conversation; I recommended split (ship script, make auto-update opt-in); user invoked /grow-quicksheet right after = implicit nod. Opened PR #120.
