@@ -1,3 +1,11 @@
+## 2026-05-16 (post-research — Bucket A: for-homelab landing + starter CSV)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket A — opened PR #100. New `docs/for-homelab.md` audience landing page positioning wallpaper-mode as Homepage.io/Dashy/Conky-alt-not-in-a-tab. Maps each homelab use case to already-shipped extensions (k8s/docker/tls/ping/portck/sysmon/mxck). Plus `examples/homelab-dashboard.csv` ready-to-launch starter sheet (first file in a new `examples/` top-level dir). README gains one pointer line. Picked Bucket A over Bucket E trinity #2 per variety rule (last run was E).
+- Bucket: A
+- Outcome: PR https://github.com/cemheren/QuickSheet/pull/100. PRs awaiting merge: #96 (themes), #98 (urlenc), #99 (c?: colour), #100 (for-homelab). 4 stacked PRs is the user's queue.
+- Follow-up: Next non-A run = trinity #2 (ticking timer). Or another for-* doc on a different run.
+
 ## 2026-05-16 (post-research — Bucket E trinity #1: value-driven cell colour)
 
 - Stars: 1 (Δ 0)
