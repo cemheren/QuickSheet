@@ -1059,6 +1059,15 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: v0.20.0 release (06:00 run).
 - Follow-up: Bucket F — quicksheet-leetcode (CS student LeetCode streak tracker). Bucket E — safe feature.
 
+## 2026-05-17 09:00
+
+- Stars: 1 (Δ +0)
+- Action: Fixed quicksheet-curl#5 — ResponseMessage used `"type": "response"` but QuickSheet only handles `register`, `write`, `status`, `error`, `log`. Cell writes were silently dropped. Changed to `"type": "write"`. Bumped to v1.0.3.
+- Bucket: F (bug fix in extension repo)
+- Outcome: PR cemheren/quicksheet-curl#8 merged (commit be03fd0). Closes #5. Extension now writes cells correctly.
+- Competitor last did: Copilot use-case table + dashboard example (PR #118, 08:00 run).
+- Follow-up: Bucket F — quicksheet-leetcode (CS student LeetCode streak tracker). Bucket E — safe feature.
+
 ## Queued
 
 - Bucket F: quicksheet-leetcode (CS student LeetCode streak tracker)
