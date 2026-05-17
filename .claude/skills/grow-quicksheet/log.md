@@ -1,3 +1,7 @@
+## 2026-05-17 (no-op #14 — PR pile cleared)
+
+- Stars: 1 (Δ 0). All 5 prior open PRs (#117–#121) merged. 0 open PRs on main repo. Only `quicksheet-todo#2` (meta) + main #3 (Wayland) remain — both unsuitable. Nothing actionable for the skill.
+
 ## 2026-05-17 (no-op #13 — identical to #12)
 
 - Stars: 1 (Δ 0). Same. PRs #117–#121 still open. No new ext-repo issues.
