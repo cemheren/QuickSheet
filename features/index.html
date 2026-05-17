@@ -228,6 +228,10 @@
         <p>Prefix any cell with <code>c:red:</code>, <code>c:blue:</code>, <code>c:green:</code>, etc. to set its background color. 16 console colors supported. The prefix is hidden during display — only the color and content are shown.</p>
       </div>
       <div class="feature-block">
+        <h3><span class="prefix">c?: rule, *=default:</span> Conditional color</h3>
+        <p>Value-driven cell coloring. Set rules like <code>c?: >90=green, >50=yellow, *=red: 85</code> to dynamically pick background color based on the cell value. Supports <code>&gt; &lt; &gt;= &lt;= =</code> operators and a <code>*</code> wildcard default.</p>
+      </div>
+      <div class="feature-block">
         <h3><span class="prefix">ext: name args</span> Extension call</h3>
         <p>Invoke any installed extension. The extension reads/writes cells via the JSON-lines stdin/stdout protocol.</p>
       </div>
