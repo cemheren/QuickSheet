@@ -1,3 +1,11 @@
+## 2026-05-17 (Bucket R + D — awesome-list fit analysis, Awesome-Linux-Software draft)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket R + D combo. Researched awesome-list fit (`research/awesome-list-fit.md`). Key finding: **awesome-selfhosted is wrong fit** — that list is for *server* software (Plex/Nextcloud/Pi-hole) not desktop apps. Dropped from backlog. Identified Awesome-Linux-Software (22k stars, active) as best-fit unsubmitted list. Wrote concrete submission draft `drafts/awesome-linux-software.md` — PR title, body, two entry-line variants, submission notes.
+- Bucket: R + D
+- Outcome: Skill self-edit; pushed direct to main. PR #102 (revert) status unknown to me yet. No new project-repo code or external-repo PRs this run.
+- Follow-up: Future runs — `drafts/awesome-windows.md` (same pitch, WorkerW emphasis), then identify canonical `awesome-csv` list.
+
 ## 2026-05-17 (USER FEEDBACK — revert + scope correction)
 
 - Stars: 1 (Δ 0)
@@ -696,7 +704,7 @@
   5. **Bucket F: `arxiv:` and `pubmed:`** for academics; pair with shipped `cite:`.
   6. **Bucket F: `payroll:` + `sales-tax:` lookup tables** for accountants. Pure-table, no timing.
   7. **Bucket A: more audience landing pages**, in `docs/for-*.md` + matching `examples/*.csv`. Already shipped: `for-homelab.md` (PR #100). Next candidates that don't depend on timer/value-colour: `for-students.md`, `for-dms.md`, `for-traders.md`, `for-artists.md`. Skip `for-lawyers.md` and `for-accountants.md` until a non-timer billing/accounting angle is found.
-  8. **Bucket D: `awesome-selfhosted` PR draft.** Zero code dep.
+  8. **Bucket D: awesome-list submissions.** awesome-selfhosted DROPPED (wrong fit — server software). Use the queue in `research/awesome-list-fit.md`: Awesome-Linux-Software draft now done (`drafts/awesome-linux-software.md`); next draft Awesome-Windows; then identify canonical `awesome-csv`. Skip awesome-tuis tone-rewrite until a wallpaper screenshot lands.
   9. **Bucket C: r/unixporn DM-screen and student-rice posts.** Drafts only, save when matching extensions land. r/selfhosted "Homepage.io-alternative" post after `health:` ships.
 
 - **EXPLICITLY DROPPED from backlog (do not revive without user nod):**
