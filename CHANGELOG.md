@@ -6,7 +6,38 @@ All notable changes to QuickSheet. Format roughly follows [Keep a Changelog](htt
 
 (empty — bump here before the next tag)
 
-## 0.16.0 — 2026-05-16
+## 0.19.0 — 2026-05-17
+
+### Added
+- **5 new extensions**: quicksheet-pihole (Pi-hole DNS stats), quicksheet-health (HTTP endpoint health checker), quicksheet-envck (env var inspector with secret masking), quicksheet-gha (GitHub Actions workflow status), quicksheet-arxiv (arXiv paper lookup).
+- **Audience landing pages**: [for-traders](docs/for-traders.md), [for-sre](docs/for-sre.md), [for-students](docs/for-students.md) — with starter CSV dashboards.
+- **csvkit/Miller/qsv comparison page** ([docs/csvkit-comparison.md](docs/csvkit-comparison.md)) — SEO-targeted.
+- **README hero tightened** — highlights CSV format, runnable cells, cross-platform.
+
+### Fixed
+- `--help` output now lists `c:color:` cell prefix.
+
+## 0.18.0 — 2026-05-16
+
+### Added
+- **quicksheet-urlenc extension** — URL encode/decode with auto-detect, UTF-8 aware.
+- **quicksheet-curl extension** — cURL-style HTTP client (GET/POST/PUT/DELETE) with JSON pretty-print.
+- **c?: conditional color prefix** — color only applied when cell value is non-empty.
+- **for-homelab landing page** ([docs/for-homelab.md](docs/for-homelab.md)) with starter CSV.
+
+## 0.17.0 — 2026-05-16
+
+### Added
+- **quicksheet-guid extension** — generates GUIDs/UUIDs with format options (standard/no-dash/braced/uppercase), batch up to 20. Closes #91.
+- **quicksheet-regex extension** — regex pattern explainer. Tokenizes anchors, character classes, quantifiers, groups. Closes #90.
+- **quicksheet-b64 extension** — base64 encode/decode with auto-detect.
+- **5 additional themes** (Dracula, Gruvbox, Tokyo Night, Catppuccin, One Dark) added to theme cycling.
+- **Extension protocol spec** ([docs/extension-protocol.md](docs/extension-protocol.md)) — full lifecycle, message schemas, coordinate system, common mistakes. Closes #89.
+
+### Fixed
+- Themes now render correctly in Linux desktop mode (#94) — `ConsoleColorToRgb()` drives all color decisions.
+
+
 
 ### Added
 - **quicksheet-news extension** — RSS/Atom feed reader with 15+ built-in aliases (HN, Reddit, Lobsters, dev.to, BBC, TechCrunch). Supports any feed URL.
