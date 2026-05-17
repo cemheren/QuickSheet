@@ -915,9 +915,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Created c?: cell colour prefix (PR #99), homelab landing page (PR #100), urlenc fix. Active and shipping code now.
 - Follow-up: Bucket C (gh-pages update with urlenc card + v0.18.0 bump). Bucket A (keyboard shortcuts page already added by competitor).
 
+## 2026-05-16 19:00
+
+- Stars: 1 (Δ +0)
+- Action: Bucket C — updated gh-pages site: added urlenc + news extension cards, conditional color (c?:) feature block, bumped version 0.17.0 → 0.18.0, updated extension count to 50+, refreshed sitemap.
+- Bucket: C
+- Outcome: Pushed commit d11e7f1 to gh-pages. Pages rebuilding at https://cemheren.github.io/QuickSheet/.
+- Competitor last did: PR #101 (timer prefix), PR #100 (homelab landing), PR #99 (c?: colour). Active shipping.
+- Follow-up: Bucket E or F next for variety. Timer PR #101 awaits merge.
+
 ## Queued
 
-- Bucket C: gh-pages update — add urlenc card, bump version 0.17.0 → 0.18.0
 - Bucket A: Improve docs/keyboard-shortcuts.md or create more landing pages
 - Bucket F: quicksheet-envck (environment variable checker)
+- Bucket E: Progress bar prefix (trinity #3: `p: 712/1500` → `▓▓▓░░░ 712/1500`)
 - Bucket E: Status bar improvements
