@@ -51,7 +51,7 @@ Use `--export-md -` to write to stdout — handy in csvkit / Miller / qsv pipeli
 
 New here? The 60-second tour is in [docs/tour.md](docs/tour.md). Or jump straight to [docs/recipes.md](docs/recipes.md) for ready-to-paste dashboard layouts. All keyboard shortcuts are in [docs/keyboard-shortcuts.md](docs/keyboard-shortcuts.md). Common questions: [docs/faq.md](docs/faq.md).
 
-Audience-specific guides: [for homelabbers](docs/for-homelab.md) (Plex / Pi-hole / *arr / Home Assistant) · [for traders](docs/for-traders.md) (P/L, watchlist, FX, news strip).
+Audience-specific guides: [for homelabbers](docs/for-homelab.md) (Plex / Pi-hole / *arr / Home Assistant) · [for traders](docs/for-traders.md) (P/L, watchlist, FX, news strip) · [for SREs & DevOps](docs/for-sre.md) (service health, k8s pods, TLS expiry) · [for students](docs/for-students.md) (coursework, budget, developer tools).
 
 ## A note on the code
 
