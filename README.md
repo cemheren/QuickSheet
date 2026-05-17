@@ -202,6 +202,7 @@ tls: github.com, 1, 4
 | `env:` | Env var inspector (lookup/filter/PATH, auto-masks secrets) | `ext: github:cemheren/quicksheet-envck` |
 | `roll:` | Dice roller — 2d6+3, d20, 4d6kh3, Fudge, critical detection | `ext: github:cemheren/quicksheet-dice` |
 | `lc:` | LeetCode — daily challenge, problem lookup, user stats | `ext: github:cemheren/quicksheet-leetcode` |
+| `ghst:` | GitHub contribution streak — current streak, longest, sparkline | `ext: github:cemheren/quicksheet-ghstreak` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
