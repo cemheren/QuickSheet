@@ -1,3 +1,7 @@
+## 2026-05-17 (no-op #8 — state identical to no-op #7)
+
+- Stars: 1 (Δ 0). Same. #117 + #118 still open.
+
 ## 2026-05-17 (no-op #7 — #14 closed by another agent, new PR #118)
 
 - Stars: 1 (Δ 0). Main #14 (copilot use cases) closed by another agent's PR #118 (docs only). #3 Wayland still needs human. Open PRs: #117, #118. Nothing actionable for me.
