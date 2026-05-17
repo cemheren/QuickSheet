@@ -319,6 +319,7 @@ First install each extension via its `ext:` cell. Then test the prefix.
 | C40 | quicksheet-regex | `ext: github:cemheren/quicksheet-regex` | `regex: ^[a-z]+\d{2}$` | Token breakdown table: pattern + each token with explanation + summary |
 | C41 | quicksheet-urlenc | `ext: github:cemheren/quicksheet-urlenc` | `urlenc: hello world` | URL-encoded string: `hello%20world` |
 | C42 | quicksheet-health | `ext: github:cemheren/quicksheet-health` | `health: https://google.com, https://github.com` | Per-endpoint rows: name → 🟢/🔴 status code (latency) |
+| C43 | quicksheet-curl | `ext: github:cemheren/quicksheet-curl` | `curl: GET https://httpbin.org/get` | HTTP response: status, headers, body in grid cells |
 
 ---
 

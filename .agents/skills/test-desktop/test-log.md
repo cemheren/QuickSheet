@@ -1247,3 +1247,31 @@ Build: Release
 - **Skipped: 3** (A2, A3, A5/A6)
 - **N/A: 1** (A68 — feature reverted)
 - **Total: 106** (added C42; A68 ? N/A)
+
+## Run 46: 2026-05-16 20:19
+Commit: 11bc1eb (main)
+Build: Release
+
+### Discovery
+- **New extension: quicksheet-curl** (44th repo) — cURL-style HTTP client (GET/POST/PUT/DELETE from cells)
+- PR #104 open: docs for curl extension
+- PR #105 open: for-traders landing page
+- PR #106 open: for-sre landing page
+- No code changes to QuickSheet core since Run 45
+
+### Tests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C43 | ? FAIL | curl extension manifest uses `entrypoint` instead of `entry` ? filed quicksheet-curl#1 |
+
+### Issue Filed
+- **quicksheet-curl#1**: Manifest `entrypoint` ? should be `entry` (same pattern as gitst#1, hntop#1, etc.)
+
+### Cumulative
+- **Passed: 100**
+- **Failed: 1** (C43 curl — manifest bug)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+- **N/A: 1** (A68 — feature reverted)
+- **Total: 107** (added C43)
