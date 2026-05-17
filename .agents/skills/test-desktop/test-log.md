@@ -1302,3 +1302,30 @@ Build: Release
 - **Skipped: 3** (A2, A3, A5/A6)
 - **N/A: 1** (A68 — feature reverted)
 - **Total: 107**
+
+## Run 48: 2026-05-16 21:48
+Commit: 8715383 (main)
+Build: Release
+
+### Discovery
+- No new extensions (still 43 quicksheet-* repos)
+- No QuickSheet core code changes
+- curl issues #1 + #3 both closed (manifest fixes applied: v1.0.2)
+- curl extension now installs, builds, registers, and process runs — but protocol bug remains
+
+### Tests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C43 | ? FAIL | curl extension sends `type: response` instead of `type: write` — QuickSheet silently ignores it, no cells appear ? filed quicksheet-curl#5 |
+
+### Issue Filed
+- **quicksheet-curl#5**: Wrong message type `response` instead of `write` — cells never appear
+
+### Cumulative
+- **Passed: 100**
+- **Failed: 1** (C43 curl — wrong response type)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+- **N/A: 1** (A68 — feature reverted)
+- **Total: 107**
