@@ -1,6 +1,6 @@
 # Show HN draft — QuickSheet
 
-Drafted 2026-05-14. Author posts manually. Pick one title; tweak copy as you like.
+Drafted 2026-05-14, revised 2026-05-17 to lead with the differentiator line per `research/adjacent-pitch-teardown.md`. Author posts manually. Pick one title; tweak copy as you like.
 
 ---
 
@@ -23,6 +23,8 @@ Recommended: **#1**. Short, concrete, slightly weird — the wallpaper angle is 
 
 ```
 I'm Akif. My wallpaper has been a static image I never interact with for years, and at the same time I always had a small handful of things I wanted at hand — notes, app launchers, a couple of URLs I open every morning, small running totals. I wanted those things to *be* the wallpaper, so I built QuickSheet for myself and it's been the surface I use most.
+
+The simplest way to say what it is, vs Rainmeter / Conky / Übersicht / GeekTool: **the data is a CSV file. Cells can run shell commands. Same file on Windows or Linux.**
 
 Two run modes share one CSV file: a normal terminal TUI in any shell, and a `--desktop` mode that embeds the same grid as the wallpaper (Win32 WorkerW on Windows, `_NET_WM_WINDOW_TYPE_DESKTOP` on X11).
 

@@ -1,3 +1,11 @@
+## 2026-05-17 (Bucket C — Show HN draft revision per teardown brief)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket C — revised `drafts/showhn.md` to insert the differentiator one-liner ("the data is a CSV file. Cells can run shell commands. Same file on Windows or Linux.") immediately after the personal-itch opening of the first comment. Surgical edit — no other content touched. Names Rainmeter/Conky/Übersicht/GeekTool directly so HN readers who recognise those see the contrast instantly.
+- Bucket: C
+- Outcome: Skill self-edit; pushed to main. Show HN draft now consistent with README hero (PR #108) and the teardown brief.
+- Follow-up: When user is ready for an actual launch, this draft + the Lobsters/Reddit/Twitter drafts can all be posted. Or another non-C run can identify canonical awesome-csv list (Bucket D).
+
 ## 2026-05-17 (Bucket A — README hero tightening per teardown brief)
 
 - Stars: 1 (Δ 0)
