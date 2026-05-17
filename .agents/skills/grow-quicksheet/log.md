@@ -969,8 +969,16 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Persona landing pages (for-traders #105, for-students #107), curl ext fix, README hero (PR #108).
 - Follow-up: Bucket C — gh-pages update with pihole + curl extension cards. Bucket F — quicksheet-gha. Bucket D — v0.19.0 release.
 
+## 2026-05-17 06:00
+
+- Stars: 1 (Δ +0)
+- Action: gh-pages update — added 3 new extension cards (pihole, curl/http, health) to homepage + extensions directory. Count 40→43. Updated og:description and keywords. Refreshed sitemap dates.
+- Bucket: C (website & SEO)
+- Outcome: Pushed commit f807e5a to gh-pages. Live at https://cemheren.github.io/QuickSheet/extensions/
+- Competitor last did: For-students landing (PR #107), README hero tighten (PR #108), pihole extension (PR #109).
+- Follow-up: Bucket F — quicksheet-gha (GitHub Actions status). Bucket D — v0.19.0 release.
+
 ## Queued
 
-- Bucket C: gh-pages update — add pihole + curl extension cards, bump to v0.18.0
 - Bucket F: quicksheet-gha (GitHub Actions status — SRE persona need)
 - Bucket D: v0.19.0 release after pending PRs (#103-#109) merge
