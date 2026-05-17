@@ -4,6 +4,8 @@
 
 QuickSheet replaces your wallpaper with a transparent, interactive grid. Pin notes, launch apps, paste links, track numbers — all without opening a window. The idea: keep something lightweight always present in the background, instead of a static wallpaper you never interact with.
 
+The data is a CSV file. Cells can run shell commands. Same file on Windows or Linux.
+
 ![QuickSheet running as the desktop wallpaper — cells holding runnable commands behind every open window](desktop-wallpaper-commands.png)
 
 ![.NET 9](https://img.shields.io/badge/.NET-9.0-purple)
@@ -13,6 +15,7 @@ QuickSheet replaces your wallpaper with a transparent, interactive grid. Pin not
 ![GitHub release](https://img.shields.io/github/v/release/cemheren/QuickSheet?color=green)
 ![Zero Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)
 ![Extensions](https://img.shields.io/badge/extensions-40%2B-orange)
+![Cell prefixes](https://img.shields.io/badge/cell_prefixes-6-blue)
 
 ## Why this exists
 
