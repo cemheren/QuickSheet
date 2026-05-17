@@ -159,6 +159,7 @@ tls: github.com, 1, 4
 | `todo:` | Task management | `ext: github:cemheren/quicksheet-todo` |
 | `ping:` | HTTP status & latency | `ext: github:cemheren/quicksheet-ping-ext` |
 | `fx:` | Currency conversion | `ext: github:cemheren/quicksheet-fx` |
+| `gha:` | GitHub Actions status | `ext: github:cemheren/quicksheet-gha` |
 | `ghpr:` | GitHub PR dashboard | `ext: github:cemheren/quicksheet-ghpr` |
 | `docker:` | Container health | `ext: github:cemheren/quicksheet-docker` |
 | `gitst:` | Git repo status | `ext: github:cemheren/quicksheet-gitst` |
