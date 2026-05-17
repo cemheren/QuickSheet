@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuickSheet for Students — Coursework, Budget &amp; Dev Tools on Your Wallpaper</title>
+  <meta name="description" content="CS students: track coursework deadlines, budget, HN headlines, GitHub commits, and developer tools (JWT decoder, regex explainer, base64) — all on your desktop wallpaper. Zero subscriptions.">
+  <meta name="keywords" content="student desktop wallpaper tracker, coursework deadline tracker terminal, student budget tracker desktop, notion alternative desktop, obsidian alternative terminal, jwt decoder privacy, regex explainer terminal, base64 terminal, student productivity desktop, cs student tools terminal, tui spreadsheet student">
+  <link rel="canonical" href="https://cemheren.github.io/QuickSheet/for-students/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="QuickSheet for Students — Coursework, Budget &amp; Dev Tools on Your Wallpaper">
+  <meta property="og:description" content="Track deadlines, budget, HN headlines, GitHub commits, and dev tools on your desktop wallpaper. Zero subscriptions, zero cloud.">
+  <meta property="og:url" content="https://cemheren.github.io/QuickSheet/for-students/">
+  <meta property="og:site_name" content="QuickSheet">
+  <meta property="og:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QuickSheet for Students">
+  <meta name="twitter:description" content="Coursework, budget, dev tools and live data on your desktop wallpaper. Zero subscriptions.">
+  <meta name="twitter:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "QuickSheet for Students",
+    "description": "Use QuickSheet as a coursework tracker, budget monitor, and developer toolbox — all on your desktop wallpaper, with zero cloud and zero subscriptions.",
+    "url": "https://cemheren.github.io/QuickSheet/for-students/",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "QuickSheet",
+      "url": "https://cemheren.github.io/QuickSheet/"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --purple: #bc8cff;
+      --orange: #d29922;
+      --max-w: 960px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+    nav .logo { font-weight: 700; font-size: 1.1rem; }
+    nav a { color: var(--muted); font-size: 0.9rem; }
+    nav a:hover { color: var(--text); text-decoration: none; }
+    nav a.active { color: var(--accent); }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      background: linear-gradient(180deg, #161b22 0%, var(--bg) 100%);
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(188,140,255,0.1);
+      border: 1px solid rgba(188,140,255,0.3);
+      color: var(--purple);
+      padding: 0.3em 0.9em;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero .tagline {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 620px;
+      margin: 0 auto 2rem;
+    }
+    .hero blockquote {
+      font-size: 1rem;
+      color: var(--muted);
+      border-left: 3px solid var(--purple);
+      padding: 0.5rem 1rem;
+      display: inline-block;
+      text-align: left;
+      margin-bottom: 2rem;
+      max-width: 580px;
+    }
+    .install-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      display: inline-block;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 0.9rem;
+      color: var(--accent2);
+      text-align: left;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+    .install-box .comment { color: var(--muted); }
+    .cta-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: opacity 0.15s;
+    }
+    .btn:hover { opacity: 0.85; text-decoration: none; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+
+    section { padding: 3.5rem 1.5rem; max-width: var(--max-w); margin: 0 auto; }
+    section h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+    section h2 span { color: var(--accent); }
+    .section-desc {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 1.75rem;
+      max-width: 640px;
+    }
+
+    .zone-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .zone-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+    .zone-card .emoji { font-size: 1.6rem; margin-bottom: 0.4rem; display: block; }
+    .zone-card h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+    .zone-card p { color: var(--muted); font-size: 0.88rem; }
+    .zone-card code {
+      color: var(--accent2);
+      background: rgba(63,185,80,0.1);
+      padding: 0.1em 0.35em;
+      border-radius: 4px;
+      font-size: 0.82rem;
+    }
+
+    pre {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      font-family: 'SFMono-Regular', Consolas, monospace;
+      font-size: 0.85rem;
+      color: var(--accent2);
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+    pre .comment { color: var(--muted); }
+    pre .dim { color: var(--muted); }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .tool-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+    }
+    .tool-card code {
+      color: var(--accent2);
+      background: rgba(63,185,80,0.1);
+      padding: 0.1em 0.4em;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+    .tool-card p { color: var(--muted); font-size: 0.9rem; margin-top: 0.4rem; }
+
+    .why-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .why-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    .why-item .check { color: var(--accent2); font-weight: 700; margin-bottom: 0.3rem; }
+    .why-item p { color: var(--muted); font-size: 0.88rem; }
+
+    footer {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--accent); }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8rem; }
+      section h2 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="logo">⚡ QuickSheet</span>
+    <a href="../">Home</a>
+    <a href="../features/">Features</a>
+    <a href="../extensions/">Extensions</a>
+    <a href="../shortcuts/">Shortcuts</a>
+    <a href="../for-sre/">For SREs</a>
+    <a href="../for-students/" class="active">For Students</a>
+    <a href="https://github.com/cemheren/QuickSheet">GitHub</a>
+  </nav>
+
+  <header class="hero">
+    <div class="badge">🎓 For Students</div>
+    <h1>Your <span>Wallpaper</span> Tracks Everything</h1>
+    <p class="tagline">Coursework deadlines, monthly budget, HN headlines, your GitHub commits, and developer tools — all on your desktop, zero subscriptions, zero cloud.</p>
+    <blockquote>Already use Notion, Obsidian, or Logseq? Think "those, but on the actual wallpaper, zero cloud, and talking to live APIs through extensions you can write in 50 lines."</blockquote>
+
+    <div class="install-box">
+      <span class="comment"># 5-minute setup</span><br>
+      git clone https://github.com/cemheren/QuickSheet.git &amp;&amp; cd QuickSheet<br>
+      dotnet run -c Release --project ExcelConsole.csproj -- --desktop examples/student-dashboard.csv
+    </div>
+    <div class="cta-row">
+      <a href="https://github.com/cemheren/QuickSheet" class="btn btn-primary">⭐ Star on GitHub</a>
+      <a href="../extensions/" class="btn btn-secondary">Browse Extensions</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>Four zones on your <span>wallpaper</span></h2>
+    <p class="section-desc">The starter sheet covers the most common student needs. Each zone is a block of cells — resize, swap, or delete as you like.</p>
+    <div class="zone-grid">
+      <div class="zone-card">
+        <span class="emoji">📚</span>
+        <h3>Coursework tracker</h3>
+        <p>Class, assignment, due date, status. Plain cells — no extension needed. Sort by due date with <strong>Ctrl+B</strong>. Search with <strong>Ctrl+F</strong>. Undo with <strong>Ctrl+Z</strong>.</p>
+      </div>
+      <div class="zone-card">
+        <span class="emoji">💰</span>
+        <h3>Budget envelopes</h3>
+        <p><code>budget: Groceries:180:250</code> — renders a live progress bar with 🟢🟡🟠🔴 indicator. No bank API; you type what you spend. (<a href="https://github.com/cemheren/quicksheet-budget">quicksheet-budget</a>)</p>
+      </div>
+      <div class="zone-card">
+        <span class="emoji">🛠️</span>
+        <h3>Dev tools in-cell</h3>
+        <p>JWT decoder, regex explainer, base64 codec, URL encoder — all run locally. No browser tab, no privacy risk. One <code>ext: github:...</code> cell to install each.</p>
+      </div>
+      <div class="zone-card">
+        <span class="emoji">📰</span>
+        <h3>News &amp; activity</h3>
+        <p><code>hntop: 5</code> for HN top stories. <code>gitlog: /path 8</code> for your recent commits. Stay in the loop without opening a browser.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Coursework <span>tracker</span></h2>
+    <p class="section-desc">Plain CSV cells are all you need. Ctrl+B sorts by due date. No app to open — it's right on your wallpaper.</p>
+    <pre>Course,Assignment,Due,Status
+CS 301,Homework 3,2026-05-20,🟡 In progress
+CS 420,Term paper,2026-06-01,⬜ Not started
+MATH 201,Problem set 5,2026-05-18,🟢 Done</pre>
+    <p style="color:var(--muted);font-size:0.9rem;margin-top:0.5rem">Add a world-clock row for remote study partners: <code>worldtm: ny</code> <code>worldtm: london</code> <code>worldtm: tokyo</code> — <a href="https://github.com/cemheren/quicksheet-worldtm">quicksheet-worldtm</a></p>
+  </section>
+
+  <section>
+    <h2>Dev tools always <span>one glance away</span></h2>
+    <p class="section-desc">These run as local subprocesses — nothing leaves your machine.</p>
+    <div class="tool-grid">
+      <div class="tool-card">
+        <code>jwtdec: eyJhbGciOiJIUzI1NiIs...</code>
+        <p>Decode JWT header + claims without opening jwt.io. Flags expired tokens, annotates <code>iat</code>/<code>exp</code>. Privacy win for assignments using OAuth. (<a href="https://github.com/cemheren/quicksheet-jwtdec">quicksheet-jwtdec</a>)</p>
+      </div>
+      <div class="tool-card">
+        <code>regex: ^(\d{4})-(0[1-9]|1[0-2])-...</code>
+        <p>Explains a regex pattern token by token. Useful when stuck on a validation assignment. (<a href="https://github.com/cemheren/quicksheet-regex">quicksheet-regex</a>)</p>
+      </div>
+      <div class="tool-card">
+        <code>b64: SGVsbG8gQ1MgMzAxIQ==</code>
+        <p>Base64 encode or decode with auto-detect. Useful for API response blobs. (<a href="https://github.com/cemheren/quicksheet-b64">quicksheet-b64</a>)</p>
+      </div>
+      <div class="tool-card">
+        <code>urlenc: https://api.example.com/path?q=hello world</code>
+        <p>URL encode/decode with auto-detect. Handy when debugging REST endpoints. (<a href="https://github.com/cemheren/quicksheet-urlenc">quicksheet-urlenc</a>)</p>
+      </div>
+      <div class="tool-card">
+        <code>guid: standard</code>
+        <p>Generate GUIDs/UUIDs in multiple formats — useful for database seed scripts. (<a href="https://github.com/cemheren/quicksheet-guid">quicksheet-guid</a>)</p>
+      </div>
+      <div class="tool-card">
+        <code>arxiv: 2303.08774</code>
+        <p>Look up papers by arXiv ID or search by keyword — title, authors, abstract without a browser. (<a href="https://github.com/cemheren/quicksheet-arxiv">quicksheet-arxiv</a>)</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Hackathon <span>mode</span></h2>
+    <p class="section-desc">Swap the coursework zone for a task list and the budget zone for a service-health strip on hackathon day.</p>
+    <pre><span class="comment"># Service health strip — know instantly if your API server crashed</span>
+ext: github:cemheren/quicksheet-health
+<span class="dim">---</span>
+health: http://localhost:3000
+health: http://localhost:8080/api/health
+health: https://api.github.com</pre>
+    <p style="color:var(--muted);font-size:0.9rem;margin-top:0.5rem">Every service glows green/red on your wallpaper. No browser tab needed.</p>
+
+    <pre style="margin-top:1.5rem"><span class="comment"># See your GitHub Actions runs live</span>
+ext: github:cemheren/quicksheet-gha
+<span class="dim">---</span>
+gha: yourname/yourrepo</pre>
+  </section>
+
+  <section>
+    <h2>Why wallpaper beats <span>another app</span></h2>
+    <div class="why-list">
+      <div class="why-item">
+        <div class="check">✓ Always visible</div>
+        <p>The tracker is behind every window, no tab-switching or Alt+Tab required.</p>
+      </div>
+      <div class="why-item">
+        <div class="check">✓ Zero cloud</div>
+        <p>Your schedule is a CSV on your machine. No account, no sync, no subscription.</p>
+      </div>
+      <div class="why-item">
+        <div class="check">✓ Zero cost</div>
+        <p>MIT licensed, .NET 9 runtime is free. Nothing to pay, ever.</p>
+      </div>
+      <div class="why-item">
+        <div class="check">✓ Hackable</div>
+        <p>Write a 50-line extension for your course's API. JSON-lines over stdin/stdout, any language.</p>
+      </div>
+      <div class="why-item">
+        <div class="check">✓ Resume line</div>
+        <p>Built a QuickSheet extension as a systems programming project. Some professors accept it as coursework.</p>
+      </div>
+      <div class="why-item">
+        <div class="check">✓ Themes</div>
+        <p>Ctrl+T cycles: Dark, Light, Nord, Solarized, Matrix, Dracula, Synthwave, Gruvbox, Monokai.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>See also</h2>
+    <p><a href="../extensions/">Full extension directory</a> · <a href="../shortcuts/">Keyboard shortcuts</a> · <a href="https://github.com/cemheren/QuickSheet/blob/main/docs/extension-protocol.md">Extension protocol spec</a> · <a href="../for-sre/">For SREs &amp; DevOps</a></p>
+  </section>
+
+  <footer>
+    <p>QuickSheet is <a href="https://github.com/cemheren/QuickSheet">open source</a> · MIT License · Built with .NET 9</p>
+    <p style="margin-top:0.5rem"><a href="../">Home</a> · <a href="../extensions/">Extensions</a> · <a href="../features/">Features</a> · <a href="../for-sre/">For SREs</a> · <a href="https://github.com/cemheren/QuickSheet">GitHub</a></p>
+  </footer>
+
+</body>
+</html>

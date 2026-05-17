@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuickSheet for SREs &amp; DevOps — Incident Dashboard on Your Wallpaper</title>
+  <meta name="description" content="SREs and DevOps engineers: put service health, Docker status, Kubernetes pods, GitHub Actions, TLS expiry, and open PRs on your desktop wallpaper. Zero tabs. Always visible.">
+  <meta name="keywords" content="sre desktop dashboard, devops wallpaper monitor, service health terminal, kubernetes pod status wallpaper, docker status desktop, github actions status terminal, tls expiry monitor, incident dashboard terminal, sysmon terminal, on-call dashboard wallpaper">
+  <link rel="canonical" href="https://cemheren.github.io/QuickSheet/for-sre/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="QuickSheet for SREs &amp; DevOps — Incident Dashboard on Your Wallpaper">
+  <meta property="og:description" content="Put service health, Docker, Kubernetes, GitHub Actions, and TLS expiry on your desktop wallpaper. Always visible, never stealing focus.">
+  <meta property="og:url" content="https://cemheren.github.io/QuickSheet/for-sre/">
+  <meta property="og:site_name" content="QuickSheet">
+  <meta property="og:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QuickSheet for SREs &amp; DevOps">
+  <meta name="twitter:description" content="Service health, Docker, Kubernetes, GitHub Actions, TLS expiry — all on your wallpaper.">
+  <meta name="twitter:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "QuickSheet for SREs and DevOps",
+    "description": "Use QuickSheet as an ambient incident dashboard on your desktop wallpaper — service health, containers, pods, TLS, CI status all in one view.",
+    "url": "https://cemheren.github.io/QuickSheet/for-sre/",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "QuickSheet",
+      "url": "https://cemheren.github.io/QuickSheet/"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --purple: #bc8cff;
+      --orange: #d29922;
+      --red: #f85149;
+      --max-w: 960px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+    nav .logo { font-weight: 700; font-size: 1.1rem; }
+    nav a { color: var(--muted); font-size: 0.9rem; }
+    nav a:hover { color: var(--text); text-decoration: none; }
+    nav a.active { color: var(--accent); }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      background: linear-gradient(180deg, #161b22 0%, var(--bg) 100%);
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(88,166,255,0.1);
+      border: 1px solid rgba(88,166,255,0.3);
+      color: var(--accent);
+      padding: 0.3em 0.9em;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero .tagline {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 620px;
+      margin: 0 auto 2rem;
+    }
+    .hero blockquote {
+      font-size: 1rem;
+      color: var(--muted);
+      border-left: 3px solid var(--accent);
+      padding: 0.5rem 1rem;
+      display: inline-block;
+      text-align: left;
+      margin-bottom: 2rem;
+      max-width: 580px;
+    }
+
+    .install-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      display: inline-block;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 0.9rem;
+      color: var(--accent2);
+      text-align: left;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+    .install-box .comment { color: var(--muted); }
+
+    .cta-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: opacity 0.15s;
+    }
+    .btn:hover { opacity: 0.85; text-decoration: none; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+
+    section { padding: 3.5rem 1.5rem; max-width: var(--max-w); margin: 0 auto; }
+    section h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+    section h2 span { color: var(--accent); }
+    .section-desc {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 1.75rem;
+      max-width: 640px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+    th, td { padding: 0.6rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+    th { color: var(--muted); font-weight: 600; }
+    td:first-child { font-weight: 600; }
+    .yes { color: var(--accent2); }
+    .no { color: var(--muted); }
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .checklist li {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+    .checklist li .num {
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border-radius: 50%;
+      min-width: 1.6rem;
+      height: 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .checklist li .content h3 { font-size: 1rem; margin-bottom: 0.2rem; }
+    .checklist li .content p { color: var(--muted); font-size: 0.9rem; }
+
+    pre {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      font-family: 'SFMono-Regular', Consolas, monospace;
+      font-size: 0.85rem;
+      color: var(--accent2);
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+    pre .comment { color: var(--muted); }
+
+    .ext-pair {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .ext-pair .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+    }
+    .ext-pair .card code {
+      color: var(--accent2);
+      background: rgba(63,185,80,0.1);
+      padding: 0.1em 0.4em;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+    .ext-pair .card p { color: var(--muted); font-size: 0.9rem; margin-top: 0.4rem; }
+
+    footer {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--accent); }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8rem; }
+      section h2 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="logo">⚡ QuickSheet</span>
+    <a href="../">Home</a>
+    <a href="../features/">Features</a>
+    <a href="../extensions/">Extensions</a>
+    <a href="../shortcuts/">Shortcuts</a>
+    <a href="../for-sre/" class="active">For SREs</a>
+    <a href="../for-students/">For Students</a>
+    <a href="https://github.com/cemheren/QuickSheet">GitHub</a>
+  </nav>
+
+  <header class="hero">
+    <div class="badge">🔧 For SREs &amp; DevOps</div>
+    <h1><span>Your Wallpaper</span> Is Your Incident Dashboard</h1>
+    <p class="tagline">Service health, Docker containers, Kubernetes pods, GitHub Actions, TLS expiry, and open PRs — all behind your windows, always visible, never stealing focus.</p>
+    <blockquote>Already use k9s, lazygit, or gh-dash? QuickSheet is the ambient layer that stays on-screen <em>behind</em> every window.</blockquote>
+
+    <div class="install-box">
+      <span class="comment"># 5-minute setup</span><br>
+      git clone https://github.com/cemheren/QuickSheet.git &amp;&amp; cd QuickSheet<br>
+      dotnet run -c Release --project ExcelConsole.csproj -- --desktop examples/sre-dashboard.csv
+    </div>
+    <div class="cta-row">
+      <a href="https://github.com/cemheren/QuickSheet" class="btn btn-primary">⭐ Star on GitHub</a>
+      <a href="../extensions/" class="btn btn-secondary">Browse Extensions</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>What goes on the <span>wallpaper</span></h2>
+    <p class="section-desc">Add an <code>ext: github:cemheren/quicksheet-&lt;name&gt;</code> cell to install any extension. No package manager, no daemon config.</p>
+    <table>
+      <thead>
+        <tr><th>What to monitor</th><th>What it shows</th><th>Extension</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Service health</td><td>HTTP ✓/✗ + latency per endpoint</td><td><a href="https://github.com/cemheren/quicksheet-health">quicksheet-health</a></td></tr>
+        <tr><td>Vendor status</td><td>GitHub / Cloudflare / npm / Vercel live pages</td><td><a href="https://github.com/cemheren/quicksheet-apistatus">quicksheet-apistatus</a></td></tr>
+        <tr><td>Container health</td><td>Running/stopped/restarting per Docker container</td><td><a href="https://github.com/cemheren/quicksheet-docker">quicksheet-docker</a></td></tr>
+        <tr><td>Pod status</td><td>Kubernetes pod state by namespace</td><td><a href="https://github.com/cemheren/quicksheet-k8s">quicksheet-k8s</a></td></tr>
+        <tr><td>Port probe</td><td>TCP open/closed for local ports</td><td><a href="https://github.com/cemheren/quicksheet-portck">quicksheet-portck</a></td></tr>
+        <tr><td>TLS expiry</td><td>Days remaining per certificate</td><td><a href="https://github.com/cemheren/quicksheet-tls-ext">quicksheet-tls-ext</a></td></tr>
+        <tr><td>Recent commits</td><td>Last N commits: hash, author, relative time</td><td><a href="https://github.com/cemheren/quicksheet-gitlog">quicksheet-gitlog</a></td></tr>
+        <tr><td>Open PRs</td><td>PR count + titles per repo</td><td><a href="https://github.com/cemheren/quicksheet-ghpr">quicksheet-ghpr</a></td></tr>
+        <tr><td>CI/CD status</td><td>GitHub Actions workflow run statuses</td><td><a href="https://github.com/cemheren/quicksheet-gha">quicksheet-gha</a></td></tr>
+        <tr><td>System metrics</td><td>CPU / RAM / disk / uptime</td><td><a href="https://github.com/cemheren/quicksheet-sysmon">quicksheet-sysmon</a></td></tr>
+        <tr><td>Latency</td><td>Round-trip to upstreams and DNS resolvers</td><td><a href="https://github.com/cemheren/quicksheet-ping-ext">quicksheet-ping-ext</a></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>During an <span>incident</span></h2>
+    <p class="section-desc">Five questions every on-call answers in the first 5 minutes. Now you can answer them without opening a browser tab.</p>
+    <ul class="checklist">
+      <li>
+        <div class="num">1</div>
+        <div class="content">
+          <h3>Which services are degraded?</h3>
+          <p>Put a <code>health: https://your-endpoint.com</code> row per service. Probes run in parallel; green ✓ or red ✗ refreshes on every activation.</p>
+        </div>
+      </li>
+      <li>
+        <div class="num">2</div>
+        <div class="content">
+          <h3>Is it us or the vendor?</h3>
+          <p><code>apistatus: github</code>, <code>apistatus: cloudflare</code>, <code>apistatus: aws</code> — one row each. Checks live Statuspage.io APIs. Immediately tells you if it's your infra or theirs.</p>
+        </div>
+      </li>
+      <li>
+        <div class="num">3</div>
+        <div class="content">
+          <h3>Is it the cert?</h3>
+          <p><code>tls: api.example.com</code> shows days remaining. Expired certs cause deceptively generic errors and are easy to miss without a dedicated monitor.</p>
+        </div>
+      </li>
+      <li>
+        <div class="num">4</div>
+        <div class="content">
+          <h3>What changed recently?</h3>
+          <p><code>gitlog: /path/to/repo 10</code> shows the last 10 commits. Paste a hash into a runnable cell: <code>r: git show &lt;hash&gt;</code> — press Enter to run.</p>
+        </div>
+      </li>
+      <li>
+        <div class="num">5</div>
+        <div class="content">
+          <h3>Is the pod actually running?</h3>
+          <p><code>k8s: production</code> lists pods and their status without opening another terminal tab.</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>On-call <span>utilities</span></h2>
+    <p class="section-desc">Two tools that come up in every auth or API routing incident.</p>
+    <div class="ext-pair">
+      <div class="card">
+        <code>jwtdec: eyJhbGciOiJIUzI1NiIs...</code>
+        <p>Decodes JWT header + claims locally. Flags expired tokens, annotates <code>iat</code>/<code>exp</code>/<code>nbf</code>. Privacy-first — no token leaves your machine. (<a href="https://github.com/cemheren/quicksheet-jwtdec">quicksheet-jwtdec</a>)</p>
+      </div>
+      <div class="card">
+        <code>urlenc: https://api.example.com/path?q=...</code>
+        <p>URL-encodes or decodes with auto-detect. Useful for debugging redirect chains and malformed query strings. (<a href="https://github.com/cemheren/quicksheet-urlenc">quicksheet-urlenc</a>)</p>
+      </div>
+    </div>
+    <div class="ext-pair">
+      <div class="card">
+        <code>cronck: 0 3 * * MON-FRI</code>
+        <p>Turns cron expressions into plain English. Document all job schedules in a column without opening a wiki. (<a href="https://github.com/cemheren/quicksheet-cronck">quicksheet-cronck</a>)</p>
+      </div>
+      <div class="card">
+        <code>envck: JAVA_HOME</code>
+        <p>Inspect env vars in-cell. Auto-masks secrets (API keys, tokens, passwords shown as <code>****</code>). (<a href="https://github.com/cemheren/quicksheet-envck">quicksheet-envck</a>)</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Runnable <span>cells</span></h2>
+    <p class="section-desc">Prefix any cell with <code>r: </code> to make it a one-keypress shell command. Press <strong>Enter</strong> to run; output replaces cell content.</p>
+    <pre>r: kubectl get nodes
+r: docker ps --format "table {{.Names}}\t{{.Status}}"
+r: systemctl status nginx
+r: journalctl -u myservice --since "5 min ago" --no-pager
+r: curl -s https://api.example.com/health | jq .status</pre>
+  </section>
+
+  <section>
+    <h2>Why wallpaper beats a <span>Grafana tab</span></h2>
+    <table>
+      <thead>
+        <tr><th>Pain point</th><th>Grafana / Datadog</th><th>QuickSheet wallpaper</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Visible during code review</td><td class="no">No (alt-tab)</td><td class="yes">✓ Behind every window</td></tr>
+        <tr><td>Setup time</td><td class="no">Hours (datasources, panels)</td><td class="yes">✓ 5 minutes (CSV + ext: cells)</td></tr>
+        <tr><td>Custom extension for one-off service</td><td class="no">Requires plugins</td><td class="yes">✓ 50-line script, any language</td></tr>
+        <tr><td>Data leaves your machine</td><td class="no">Yes (SaaS)</td><td class="yes">✓ No — local subprocesses</td></tr>
+        <tr><td>Works offline</td><td class="no">No</td><td class="yes">✓ Yes (local probes)</td></tr>
+        <tr><td>Per-team customization</td><td class="no">Dashboard-as-code (complex)</td><td class="yes">✓ Edit CSV directly</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Build your own in <span>50 lines</span></h2>
+    <p class="section-desc">Don't see an extension for your specific service? The protocol is two message types: <code>register</code> and <code>write</code>. Standard-library Python, Go, or Bash is enough.</p>
+    <pre><span class="comment"># Python skeleton — reads stdin, writes cells to stdout</span>
+import json, sys
+
+line = input()
+msg = json.loads(line)
+if msg["type"] == "register":
+    print(json.dumps({"type":"register","prefix":"myext","width":1,"height":3}))
+    sys.stdout.flush()
+
+for line in sys.stdin:
+    msg = json.loads(line)
+    if msg["type"] == "activate":
+        cells = [{"r":0,"c":0,"v":"🟢 healthy"},{"r":1,"c":0,"v":"latency: 12ms"}]
+        print(json.dumps({"type":"write","id":msg["id"],"cells":cells}))
+        sys.stdout.flush()</pre>
+    <p>Full spec: <a href="https://github.com/cemheren/QuickSheet/blob/main/docs/extension-protocol.md">docs/extension-protocol.md</a></p>
+  </section>
+
+  <footer>
+    <p>QuickSheet is <a href="https://github.com/cemheren/QuickSheet">open source</a> · MIT License · Built with .NET 9</p>
+    <p style="margin-top:0.5rem"><a href="../">Home</a> · <a href="../extensions/">Extensions</a> · <a href="../features/">Features</a> · <a href="../for-students/">For Students</a> · <a href="https://github.com/cemheren/QuickSheet">GitHub</a></p>
+  </footer>
+
+</body>
+</html>
