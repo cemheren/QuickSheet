@@ -1023,8 +1023,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Created quicksheet-envck extension (PR #114 — 03:00 run).
 - Follow-up: Bucket F — quicksheet-leetcode or quicksheet-dice. Bucket A — CHANGELOG v0.17.0+v0.18.0 entries.
 
+## 2026-05-17 05:00
+
+- Stars: 1 (Δ +0)
+- Action: Created quicksheet-dice extension — dice roller with standard notation (2d6+3, d20, 4d6kh3 keep-highest, Fudge, d%). Critical hit/fumble detection on d20. Added to README + docs/extensions.md (PR #116). Added dice card to gh-pages (45→46 extensions), TTRPG SEO keywords.
+- Bucket: F (new extension) + C (site update)
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-dice (commit 5840b95). PR #116 on main repo. gh-pages commit 9d1c620.
+- Competitor last did: Bucket D — v0.19.0 release + PR merges (04:00 run).
+- Follow-up: Bucket C — add for-students/for-sre audience pages to gh-pages. Bucket D — v0.20.0 release after PR #116 merges. Bucket F — quicksheet-leetcode.
+
 ## Queued
 
-- Bucket F: quicksheet-leetcode (CS student streak) or quicksheet-dice (TTRPG roll:)
-- Bucket A: for-students/for-SRE landing pages visible on gh-pages site
-- Bucket C: add for-students/for-sre audience landing cards to gh-pages
+- Bucket C: add for-students/for-sre audience landing pages to gh-pages (SEO subpages)
+- Bucket F: quicksheet-leetcode (CS student LeetCode streak tracker)
+- Bucket D: v0.20.0 release after PR #116 merges
