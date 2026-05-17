@@ -1,3 +1,11 @@
+## 2026-05-17 (Bucket A — version constant 0.3.0 → 0.19.0)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket A — opened PR #115. Caught that `Program.cs` had `Version = "0.3.0"` across 16 published GitHub releases (v0.4.0 → v0.19.0); `--version` lied to every user. Found via post-no-op re-sweep: state changed (PR pile cleared, new release v0.19.0 cut), so a real polish target appeared. One-line constant fix. 0/0 build, smoke-tested `dotnet run -- --version` → `QuickSheet 0.19.0 (linux, .NET 9.0.15)`. PR body suggests bumping this in same commit as future release-tag commits (or a single-source-of-truth refactor, out-of-scope here).
+- Bucket: A
+- Outcome: PR https://github.com/cemheren/QuickSheet/pull/115 — awaits user merge.
+- Follow-up: After #115 merges, the release flow stays brittle until `Version` is sourced from csproj `<Version>`. Defer the refactor unless user signals.
+
 ## 2026-05-17 (no-op — saturation snapshot pushed to queue)
 
 - Stars: 1 (Δ 0)
