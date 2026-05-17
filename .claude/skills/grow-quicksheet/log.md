@@ -1,3 +1,11 @@
+## 2026-05-17 (Bucket D — AwesomeCSV draft)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket D — identified canonical `secretGeek/AwesomeCSV` (926★, active) for the CSV-tools niche. Wrote `drafts/awesome-csv.md` with PR title, body, two entry-line variants matching the list's existing style, submitter notes (alphabetical insertion under Tools, maintainer signal). Lead with CSV (list's framing) and use the wallpaper angle as the differentiator vs Tad / Modern CSV / csvkit already on the list. Updated `research/awesome-list-fit.md` with canonical name + draft pointer. Suggested submission order across the four list drafts.
+- Bucket: D
+- Outcome: Skill self-edit; pushed to main. No project repo change, no external repo PRs.
+- Follow-up: Bucket D queue now empty of unique high-fit targets. Future Bucket D would be terminal-tool directories (TerminalTrove, console.dev) — drafts already exist in `drafts/awesome-lists.md`. Next runs lean toward A (more for-* docs once unshipped extensions land) or F (scaffold another non-timer ext like `roll:` dice).
+
 ## 2026-05-17 (Bucket C — Show HN draft revision per teardown brief)
 
 - Stars: 1 (Δ 0)
