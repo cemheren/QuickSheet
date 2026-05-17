@@ -6,6 +6,14 @@ All notable changes to QuickSheet. Format roughly follows [Keep a Changelog](htt
 
 (empty — bump here before the next tag)
 
+## 0.20.0 — 2026-05-17
+
+### Added
+- **quicksheet-dice extension** — dice roller with standard notation (`roll: 2d6+3`, `roll: d20`, `roll: 4d6kh3` keep-highest, Fudge/FATE `dF`, percentile `d%`). Critical hit/fumble detection on d20.
+
+### Fixed
+- `Program.cs` version constant updated to match v0.19.0 tag.
+
 ## 0.19.0 — 2026-05-17
 
 ### Added
