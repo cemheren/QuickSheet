@@ -1005,8 +1005,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: for-students landing (PR #107), README hero (PR #108), pihole ext (PR #109), gha extension (PR #111).
 - Follow-up: Bucket C — add arxiv card to gh-pages. Bucket D — v0.19.0 release after pending PRs merge.
 
+## 2026-05-17 03:00
+
+- Stars: 1 (Δ +0)
+- Action: Bucket F — created quicksheet-envck extension. Env var inspector: lookup, filter, PATH exploder, auto-masks secrets (API keys, tokens, passwords shown as `****`). Zero NuGet, zero network. Build-tested.
+- Bucket: F (new extension)
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-envck. PR #114 on main repo for docs.
+- Competitor last did: For-students landing (PR #107), README hero tighten (PR #108), csvkit comparison (PR #113).
+- Follow-up: Bucket C — add envck card to gh-pages. Bucket D — v0.19.0 release after pending PRs (#103-#114) merge.
+
 ## Queued
 
-- Bucket C: add quicksheet-arxiv card to gh-pages extensions page
-- Bucket D: v0.19.0 release after pending PRs (#103-#112) merge
-- Bucket F: quicksheet-envck (env var inspector) or quicksheet-leetcode (CS student streak)
+- Bucket C: add quicksheet-envck card to gh-pages extensions page
+- Bucket D: v0.19.0 release after pending PRs (#103-#114) merge
+- Bucket F: quicksheet-leetcode (CS student streak) or quicksheet-dice (TTRPG roll:)
