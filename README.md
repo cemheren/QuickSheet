@@ -170,6 +170,7 @@ tls: github.com, 1, 4
 | `cronck:` | Cron expression parser | `ext: github:cemheren/quicksheet-cronck` |
 | `guid:` | GUID/UUID generator | `ext: github:cemheren/quicksheet-guid` |
 | `regex:` | Regex pattern explainer | `ext: github:cemheren/quicksheet-regex` |
+| `urlenc:` | URL encode/decode | `ext: github:cemheren/quicksheet-urlenc` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 

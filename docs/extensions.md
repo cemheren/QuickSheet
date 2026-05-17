@@ -43,6 +43,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `b64`     | Base64 codec      | Encode/decode base64 with auto-detect — paste tokens, config blobs, JWTs | [`quicksheet-b64`](https://github.com/cemheren/quicksheet-b64) |
 | `guid`    | GUID generator    | Generate UUIDs on demand — standard, no-dash, braced, uppercase, batch up to 20 | [`quicksheet-guid`](https://github.com/cemheren/quicksheet-guid) |
 | `regex`   | Regex explainer   | Tokenize and explain regex patterns — anchors, classes, quantifiers, groups | [`quicksheet-regex`](https://github.com/cemheren/quicksheet-regex) |
+| `urlenc`  | URL codec         | URL encode/decode with auto-detect, component, path, and full URI modes | [`quicksheet-urlenc`](https://github.com/cemheren/quicksheet-urlenc) |
 
 ## Install
 
