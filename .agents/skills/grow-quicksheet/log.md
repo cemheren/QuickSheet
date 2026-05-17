@@ -987,7 +987,16 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: For-students landing (PR #107), README hero tighten (PR #108), pihole extension (PR #109).
 - Follow-up: Bucket C — add gha card to gh-pages. Bucket D — v0.19.0 release after pending PRs merge.
 
+## 2026-05-17 01:00
+
+- Stars: 1 (Δ +0)
+- Action: Bucket C — added quicksheet-gha extension card to gh-pages site (homepage + extensions directory). Count 43→44. Added "github actions wallpaper" and "github actions status terminal" SEO keywords.
+- Bucket: C (website & SEO)
+- Outcome: Pushed commit d6b972c to gh-pages. Live at https://cemheren.github.io/QuickSheet/extensions/
+- Competitor last did: for-students landing (PR #107), README hero tighten (PR #108), pihole ext (PR #109).
+- Follow-up: Bucket D — v0.19.0 release after pending PRs (#103-#111) merge. Bucket F — new extension from backlog (health:, leetcode:, or arxiv:).
+
 ## Queued
 
-- Bucket C: add quicksheet-gha card to gh-pages extensions page
 - Bucket D: v0.19.0 release after pending PRs (#103-#111) merge
+- Bucket F: quicksheet-arxiv (academic paper lookup, pairs with cite-ext) or quicksheet-envck (env var inspector)
