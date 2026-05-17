@@ -1,3 +1,11 @@
+## 2026-05-17 (Bucket A — README hero tightening per teardown brief)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket A — opened PR #108. Added a single 13-word sentence under the existing hero paragraph ("The data is a CSV file. Cells can run shell commands. Same file on Windows or Linux.") + one `cell_prefixes-6` badge. Pure additive, no other content touched. Both changes come straight from `research/adjacent-pitch-teardown.md` — they fill the three gaps vs Rainmeter/Conky/Übersicht/GeekTool that the teardown identified.
+- Bucket: A
+- Outcome: PR https://github.com/cemheren/QuickSheet/pull/108 — awaits user merge. Build 0/0.
+- Follow-up: After #108 merges, Bucket C draft revision for `drafts/showhn.md` to lead with the same metaphor + differentiator line.
+
 ## 2026-05-17 (Bucket R — adjacent-project pitch teardown)
 
 - Stars: 1 (Δ 0)
