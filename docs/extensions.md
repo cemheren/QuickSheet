@@ -50,6 +50,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `pihole`  | Pi-hole stats     | DNS blocking stats from Pi-hole — status, block %, query counts, domains blocked | [`quicksheet-pihole`](https://github.com/cemheren/quicksheet-pihole) |
 | `health`  | HTTP health check | Probe multiple HTTP endpoints in parallel — 🟢/🔴 status with latency, self-signed cert support | [`quicksheet-health`](https://github.com/cemheren/quicksheet-health) |
 | `env`     | Env var inspector | Lookup, filter, PATH exploder — auto-masks secrets (API keys, tokens) | [`quicksheet-envck`](https://github.com/cemheren/quicksheet-envck) |
+| `roll`    | Dice roller       | Roll any dice notation — 2d6+3, d20, 4d6kh3, Fudge dice, crit/fumble detection | [`quicksheet-dice`](https://github.com/cemheren/quicksheet-dice) |
 
 ## Install
 
