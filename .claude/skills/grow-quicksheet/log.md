@@ -1,3 +1,10 @@
+## 2026-05-17 (ext-issue fix — quicksheet-envck#3)
+
+- Stars: 1 (Δ 0). 5 new ext-repo issues appeared (pihole, gha, envck, dice, leetcode — all [Test] auto-filed protocol bugs). Picked envck as smallest single-crash case. PR https://github.com/cemheren/quicksheet-envck/pull/4 (default branch is `master` on that repo) — closes #3. Three bugs fixed together: (a) `_anchor = a.GetString()` on a JSON-object property crashed, swallowed silently; (b) waited for `init` from host (host doesn't send init); (c) `prefix:"env:"` had trailing colon (same as jwtdec#1 pattern). Net -28/+21 lines. Smoke-tested with realistic activate payload including the `anchor:{row,col}` that previously crashed.
+- Bucket: ext-repo fix
+- Outcome: PR awaits user merge. Other 4 sibling issues queued for subsequent runs (pihole, gha, dice, leetcode — same triage pattern).
+- Follow-up: next non-ext-fix run can pick another of those 4. Or wait for batch + fix in one round.
+
 ## 2026-05-17 (no-op #11 — same state plus my #120 awaiting merge)
 
 - Stars: 1 (Δ 0). My #120 (startup script) + #117/#118/#119 still open. todo#2 + main #3 still need human. Nothing actionable for me.
