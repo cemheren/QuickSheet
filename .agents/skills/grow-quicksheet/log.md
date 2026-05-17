@@ -897,8 +897,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Research papers (persona 8–9: homelab, students). Still in research phase.
 - Follow-up: Bucket F — new extension (envck or urlenc). Bucket E — feature for variety.
 
+## 2026-05-16 17:27
+
+- Stars: 1 (Δ +0)
+- Action: Created quicksheet-urlenc extension — URL encode/decode with auto-detect, component/path/full-URI modes, UTF-8 aware.
+- Bucket: F (new extension)
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-urlenc. PR #98 on main repo for docs.
+- Competitor last did: Research papers (teachers persona). Still in research phase, not shipping code.
+- Follow-up: Merge PR #98. Bucket E (status bar improvements) or Bucket A (keyboard shortcuts doc).
+
 ## Queued
 
-- Bucket F: quicksheet-envck (environment variable checker) or quicksheet-urlenc (URL encode/decode)
-- Bucket E: Status bar improvements or progress-bar cell prefix (p: 712/1500)
-- Bucket C: gh-pages update with any new extensions
+- Merge PR #98 (urlenc docs)
+- Bucket E: Status bar improvements (file name, cell count, mode indicator)
+- Bucket A: docs/keyboard-shortcuts.md reference page
+- Bucket C: gh-pages add urlenc card
