@@ -1,5 +1,9 @@
 # quicksheet-roll-ext
 
+> **2026-05-17: SUPERSEDED.** PR [#116](https://github.com/cemheren/QuickSheet/pull/116) on the main repo ships `quicksheet-dice` (different repo name, same `roll:` cell prefix) with standard dice notation including `2d6+3`, `4d6kh3` (keep highest), Fudge dice, crit/fumble detection. That covers the same persona surface as this scaffold. Do NOT `gh repo create` this scaffold — would collide on the `roll:` prefix at runtime.
+>
+> Keep this scaffold in-tree as a reference implementation of: (a) the JSON-lines protocol with `register`-on-startup + `activate`-handling, (b) the encounter-table lookup pattern (range-prefixed line lookup against a CSV file), which `quicksheet-dice` may or may not include. If `quicksheet-dice` lacks table lookup, the relevant chunks here can be lifted into a PR against that repo.
+
 A QuickSheet extension that rolls dice in a cell and (optionally) looks the result up in an encounter / loot table file. Aimed at tabletop RPG GMs running QuickSheet on their behind-the-laptop monitor while their players see only the shared map.
 
 ```
