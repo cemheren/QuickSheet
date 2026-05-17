@@ -532,8 +532,14 @@ internal class DesktopForm : DesktopFormBase
                     string? spark = CellPrefix.RenderSparkline(cellVal, _grid);
                     if (spark != null) displayVal = spark;
                 }
+                bool isTimer = !isSparkline && CellPrefix.IsTimer(cellVal);
+                if (isTimer)
+                {
+                    string? timer = CellPrefix.RenderTimer(cellVal);
+                    if (timer != null) displayVal = timer;
+                }
 
-                var colorParsed = !isSparkline ? CellPrefix.ParseColor(cellVal) : null;
+                var colorParsed = (!isSparkline && !isTimer) ? CellPrefix.ParseColor(cellVal) : null;
                 if (colorParsed != null)
                     displayVal = colorParsed.Value.text;
 

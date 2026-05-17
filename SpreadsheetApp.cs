@@ -47,6 +47,8 @@ public class SpreadsheetApp
                 int len;
                 if (CellPrefix.IsSparkline(val))
                     len = CellPrefix.RenderSparkline(val, _grid)?.Length ?? val.Length;
+                else if (CellPrefix.IsTimer(val))
+                    len = CellPrefix.RenderTimer(val)?.Length ?? val.Length;
                 else
                 {
                     var cp = CellPrefix.ParseColor(val);
@@ -291,6 +293,10 @@ public class SpreadsheetApp
                 if (CellPrefix.IsSparkline(cellVal))
                 {
                     rendered = CellPrefix.RenderSparkline(cellVal, _grid) ?? cellVal;
+                }
+                else if (CellPrefix.IsTimer(cellVal))
+                {
+                    rendered = CellPrefix.RenderTimer(cellVal) ?? cellVal;
                 }
                 else
                 {

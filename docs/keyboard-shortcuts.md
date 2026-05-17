@@ -71,6 +71,7 @@ Type these at the start of a cell value to activate special behavior:
 | `r: <cmd>` | **Run command** — press Enter on the cell to execute | `r: echo hello` |
 | `i: <cmd>` | **Inline process** — live subprocess output streams into cells below | `i: top -b -n1` |
 | `s: <values>` | **Sparkline** — renders a mini bar chart from comma-separated numbers | `s: 3,1,4,1,5,9` |
+| `t: <time>` | **Timer** — countdown to `HH:MM` (today) or `YYYY-MM-DD [HH:MM]` | `t: 18:30` / `t: 2026-12-31` |
 | `c:<color>: <text>` | **Cell color** — highlights the cell background with a named color | `c:red: URGENT` |
 | `L: <path>` | **Load file** — imports contents of a text file | `L: data.csv` |
 | `ext: <source>` | **Extension** — installs and activates an extension | `ext: github:cemheren/quicksheet-weather` |

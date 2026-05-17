@@ -701,8 +701,16 @@ internal class DesktopWindow : IDisposable
                     if (spark != null) displayVal = spark;
                 }
 
+                // Render timer cells as compact countdowns ("3d 2h", "14m 32s", "EXPIRED")
+                bool isTimer = !isEditingThisCell && !isSparkline && CellPrefix.IsTimer(cellVal);
+                if (isTimer)
+                {
+                    string? timer = CellPrefix.RenderTimer(cellVal);
+                    if (timer != null) displayVal = timer;
+                }
+
                 // Render color-prefixed cells: strip prefix from display
-                var colorParsed = (!isEditingThisCell && !isSparkline) ? CellPrefix.ParseColor(cellVal) : null;
+                var colorParsed = (!isEditingThisCell && !isSparkline && !isTimer) ? CellPrefix.ParseColor(cellVal) : null;
                 if (colorParsed != null)
                     displayVal = colorParsed.Value.text;
 

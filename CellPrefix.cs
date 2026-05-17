@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace ExcelConsole;
@@ -52,6 +53,45 @@ public static class CellPrefix
 
     public static bool IsSparkline(string value) =>
         value.StartsWith("s: ", StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// "t: HH:MM" (today), "t: YYYY-MM-DD", or "t: YYYY-MM-DD HH:MM" — countdown to a wall-clock time.
+    /// </summary>
+    public static bool IsTimer(string value) =>
+        value.StartsWith("t: ", StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// Renders a "t: ..." cell as a compact countdown string. Returns null if not a timer
+    /// cell or the time spec can't be parsed.
+    /// </summary>
+    public static string? RenderTimer(string value)
+    {
+        if (!IsTimer(value)) return null;
+        string rest = value[3..].Trim();
+        if (rest.Length == 0) return null;
+
+        DateTime now = DateTime.Now;
+        DateTime target;
+
+        if (DateTime.TryParseExact(rest, "yyyy-MM-dd HH:mm",
+                CultureInfo.InvariantCulture, DateTimeStyles.None, out var dt1))
+            target = dt1;
+        else if (DateTime.TryParseExact(rest, "yyyy-MM-dd",
+                CultureInfo.InvariantCulture, DateTimeStyles.None, out var dt2))
+            target = dt2;
+        else if (DateTime.TryParseExact(rest, "HH:mm",
+                CultureInfo.InvariantCulture, DateTimeStyles.None, out var dt3))
+            target = new DateTime(now.Year, now.Month, now.Day, dt3.Hour, dt3.Minute, 0);
+        else
+            return null;
+
+        TimeSpan d = target - now;
+        if (d.TotalSeconds < 0) return "EXPIRED";
+        if (d.TotalDays >= 1) return $"{(int)d.TotalDays}d {d.Hours}h";
+        if (d.TotalHours >= 1) return $"{(int)d.TotalHours}h {d.Minutes}m";
+        if (d.TotalMinutes >= 1) return $"{(int)d.TotalMinutes}m {d.Seconds}s";
+        return $"{(int)d.TotalSeconds}s";
+    }
 
     private static readonly char[] SparklineChars = ['▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'];
 
