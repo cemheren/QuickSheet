@@ -122,12 +122,28 @@ copilot: test, 1, 1
 
 ![Copilot extension running on the desktop](copilot-ext-example.png)
 
-You can reference cell ranges with `{A1::C10}` syntax and Copilot receives the actual cell contents as context:
+The `copilot:` prefix takes a natural-language prompt followed by the number of columns and rows you want written to the grid:
 
 ```
-copilot: summarize this data {B1::E50}, 3, 1
-copilot: generate random test data with name and age, 2, 10
+copilot: <your prompt>, <columns>, <rows>
 ```
+
+**Use cases:**
+
+| Use case | Example cell |
+|---|---|
+| Generate test data | `copilot: 10 user records with name email city, 4, 10` |
+| Compare technologies | `copilot: compare React Vue Angular on performance learning-curve, 3, 4` |
+| Create quiz questions | `copilot: 5 Python beginner questions with answers, 2, 5` |
+| Summarize your notes | `copilot: summarize key points from {A1::A20}, 1, 5` |
+| Sprint planning agenda | `copilot: 8 sprint planning agenda items as task and duration, 2, 8` |
+| List best practices | `copilot: 6 REST API best practices as rule and reason, 2, 6` |
+| Debug cheat sheet | `copilot: common Python errors with cause and fix, 2, 8` |
+| Salary benchmarks | `copilot: software engineer salaries by level junior mid senior, 2, 5` |
+
+Cell references like `{A1::C10}` are expanded before being sent to Copilot, so it receives the actual cell contents as context — useful for summarization, analysis, or transformation of existing data.
+
+A ready-made multi-section dashboard is available in [`examples/copilot-dashboard.csv`](examples/copilot-dashboard.csv) — open it with `quicksheet copilot-dashboard.csv` to see data generation, research, learning, planning, and finance sections all in one grid.
 
 ### Example: Weather forecast widget
 
