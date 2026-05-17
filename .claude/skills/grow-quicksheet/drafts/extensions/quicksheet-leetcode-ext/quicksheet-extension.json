@@ -1,0 +1,8 @@
+{
+  "name": "leetcode",
+  "version": "1.0.0",
+  "prefix": "leetcode",
+  "description": "LeetCode solved-count + streak for QuickSheet (CS-student wallpaper flex)",
+  "entry": "dotnet run --project LeetCodeExtension.csproj",
+  "minProtocolVersion": 1
+}

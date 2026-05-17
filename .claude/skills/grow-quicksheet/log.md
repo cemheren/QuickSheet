@@ -1,3 +1,11 @@
+## 2026-05-17 (Bucket F scaffold-only — quicksheet-leetcode-ext)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket F (scaffold only — did NOT `gh repo create`). New extension `drafts/extensions/quicksheet-leetcode-ext/`: Program.cs (~150 LOC, .NET 9, zero NuGet), manifest, README, LICENSE, .gitignore. Queries LeetCode public GraphQL `matchedUser` for username; returns 4 cells: `@user`, total solved, difficulty breakdown (E/M/H), streak. 1-hour disk cache (XDG/LOCALAPPDATA per OS) to be polite to LeetCode rate limits. 0/0 build; smoke-tested against live API with `neetcode` username — returned correct register + 4 cells (`@NeetCode`, `205 solved`, `E 103 · M 98 · H 4`, `no streak`).
+- Bucket: F (scaffold)
+- Outcome: Skill self-edit push to main. User decides when to `gh repo create cemheren/quicksheet-leetcode-ext --public --source=. --push` and open the README/tour cross-link PR. Note: PR #111 (another agent) already shipped `gha:` ext, so the SRE-side ranked-#1 slot is now covered.
+- Follow-up: Persona-fit one-line: *"CS student installs QuickSheet because they want their LeetCode solved count + streak on their rice wallpaper as a flex visible behind every IDE window."* Pairs with the CS-student rice variant in `drafts/unixporn-rice.md` (added last run). Natural Bucket F next: `gh:` user-streak ext to complete the "CS-student flex bundle."
+
 ## 2026-05-17 (Bucket C — unixporn-rice draft revision per venue brief)
 
 - Stars: 1 (Δ 0)
