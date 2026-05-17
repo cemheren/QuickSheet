@@ -72,6 +72,7 @@ Type these at the start of a cell value to activate special behavior:
 | `i: <cmd>` | **Inline process** — live subprocess output streams into cells below | `i: top -b -n1` |
 | `s: <values>` | **Sparkline** — renders a mini bar chart from comma-separated numbers | `s: 3,1,4,1,5,9` |
 | `c:<color>: <text>` | **Cell color** — highlights the cell background with a named color | `c:red: URGENT` |
+| `c?: <rules>: <value>` | **Value-driven cell color** — rules pick the colour based on the numeric value | `c?: >100=red, >50=yellow, *=green: 73` |
 | `L: <path>` | **Load file** — imports contents of a text file | `L: data.csv` |
 | `ext: <source>` | **Extension** — installs and activates an extension | `ext: github:cemheren/quicksheet-weather` |
 | `http://` / `https://` | **Hyperlink** — auto-detected, opens in browser on Enter | `https://github.com` |
