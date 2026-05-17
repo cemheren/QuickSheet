@@ -1149,3 +1149,26 @@ Build: Release
 - **Failed: 1** (C40 regex)
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 3** (A2, A3, A5/A6)
+
+
+## Run 42: 2026-05-16 17:13
+Commit: a6a6323 (main), v0.17.0
+Build: Release
+
+### Discovery
+- **quicksheet-regex PR #2 merged**: Fixed {row,col,value} → {r,c,v}
+- Grow log: "merged 4 ext PRs" — regex fix included
+- No new repos (41 total)
+
+### Tests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C40 | ✅ PASS | regex extension fixed — pattern ^[a-z]+\d{2}$ correctly breaks down: ^ (anchor), [a-z]+ (class), \d{2} (digit), $ (anchor), Summary: 4 components |
+
+### Cumulative
+- **Passed: 97** (+1: C40 fixed)
+- **Failed: 0**
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+- **Total: 103**
