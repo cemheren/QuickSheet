@@ -1,3 +1,7 @@
+## 2026-05-17 (no-op #12 — all 5 protocol-bug issues closed)
+
+- Stars: 1 (Δ 0). User merged the protocol-fix PRs for envck/pihole/gha/dice/leetcode (or closed the issues another way) — all 5 ext-repo bug issues from the last cycle are gone. Only `quicksheet-todo#2` (meta, skip) + main #3 (Wayland, needs human) remain. PRs #117/#118/#119/#120/#121 still open. Nothing actionable for me.
+
 ## 2026-05-17 (ext-issue fix — quicksheet-envck#3)
 
 - Stars: 1 (Δ 0). 5 new ext-repo issues appeared (pihole, gha, envck, dice, leetcode — all [Test] auto-filed protocol bugs). Picked envck as smallest single-crash case. PR https://github.com/cemheren/quicksheet-envck/pull/4 (default branch is `master` on that repo) — closes #3. Three bugs fixed together: (a) `_anchor = a.GetString()` on a JSON-object property crashed, swallowed silently; (b) waited for `init` from host (host doesn't send init); (c) `prefix:"env:"` had trailing colon (same as jwtdec#1 pattern). Net -28/+21 lines. Smoke-tested with realistic activate payload including the `anchor:{row,col}` that previously crashed.
