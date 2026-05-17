@@ -924,9 +924,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: PR #101 (timer prefix), PR #100 (homelab landing), PR #99 (c?: colour). Active shipping.
 - Follow-up: Bucket E or F next for variety. Timer PR #101 awaits merge.
 
+## 2026-05-16 19:27
+
+- Stars: 1 (Δ +0)
+- Action: Created quicksheet-health extension — HTTP endpoint health checker with parallel probes, latency, self-signed cert support. Research-driven: ranked #1 extension across homelab + SRE personas in competitor's 10-paper research.
+- Bucket: F (new extension)
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-health. PR #103 on main repo for docs (NOT merged — awaiting user review).
+- Competitor last did: Completed 10-persona research phase + shipped c?: colour prefix and for-homelab landing page. Now back to Bucket E/F.
+- Follow-up: Bucket A (more persona landing pages: for-sre, for-students). Bucket C (gh-pages health card). Bucket E (ticking timer — trinity #2).
+
 ## Queued
 
-- Bucket A: Improve docs/keyboard-shortcuts.md or create more landing pages
-- Bucket F: quicksheet-envck (environment variable checker)
-- Bucket E: Progress bar prefix (trinity #3: `p: 712/1500` → `▓▓▓░░░ 712/1500`)
-- Bucket E: Status bar improvements
+- Bucket A: docs/for-sre.md and docs/for-students.md landing pages (high-value personas from research)
+- Bucket C: gh-pages update — add health + urlenc cards, bump to v0.18.0
+- Bucket E: Per-cell ticking timer (trinity feature #2, wanted by 6/10 personas)
+- Bucket F: quicksheet-pihole (Pi-hole API stats — homelab persona #2 need)
