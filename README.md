@@ -180,6 +180,7 @@ tls: github.com, 1, 4
 | `regex:` | Regex pattern explainer | `ext: github:cemheren/quicksheet-regex` |
 | `urlenc:` | URL encode/decode | `ext: github:cemheren/quicksheet-urlenc` |
 | `curl:` | HTTP client (Postman-in-a-cell) | `ext: github:cemheren/quicksheet-curl` |
+| `env:` | Env var inspector (lookup/filter/PATH, auto-masks secrets) | `ext: github:cemheren/quicksheet-envck` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
