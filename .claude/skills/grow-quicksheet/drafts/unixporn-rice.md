@@ -1,6 +1,8 @@
 # r/unixporn rice-style submission — QuickSheet
 
-Drafted 2026-05-14, informed by `research/niche-communities.md`. **Distinct from `drafts/reddit-commandline.md` etc. — that's a project announcement; this is a rice post.**
+Drafted 2026-05-14; revised 2026-05-17 per `research/wallpaper-launch-venues.md`. **Distinct from `drafts/reddit-commandline.md` etc. — that's a project announcement; this is a rice post.**
+
+> **Position in launch sequence:** This is now the **#1 launch venue** (per the venue brief — HN underperforms hard for the wallpaper-tool genre). Submit this *before* Show HN / Lobsters / Reddit-commandline. The screenshot does 80% of the work.
 
 ## Framing rule
 
@@ -20,7 +22,7 @@ Examples (pick one matching your actual desktop):
 2. `[KDE] interactive grid in place of the wallpaper`
 3. `[Xfce] live cells on the desktop`
 4. `[i3] tiling, but the wallpaper is a TUI`
-5. `[Hyprland] interactive grid as the desktop` *(skip — Wayland doesn't work, see issue #3)*
+5. `[Hyprland] interactive grid as the desktop` *(blocked today — Wayland not yet supported. r/unixporn 2024–26 is Hyprland-dominated, so this is the biggest missed-audience tag. Workaround: capture the screenshot from a separate X11 session on the same machine (Xorg login, or a TTY-launched Xfce/i3) and post the [DE] tag matching THAT session. Don't claim Hyprland if it's not.)*
 
 Recommended: **#1 or #2** depending on which DE you actually use. If neither, swap the bracketed tag for whichever DE you screenshotted on.
 
@@ -80,3 +82,56 @@ For r/unixporn specifically:
 - 500+ upvotes within 24h is a strong day. 100+ is fine.
 - 30+ comments with rice-element questions = the screenshot landed.
 - Star delta: indirect but consistent. Rice screenshots with project link in details get a clear "this looks cool, what's the project?" → click → star flow. Typically a single decent post = 10-50 stars.
+
+## Persona-variant screenshots (pick one — the highest-virality is the student rice)
+
+The persona research (`research/personas/`) identified four rice-shaped wallpaper screenshots, in expected-virality order:
+
+### 1. CS-student rice — highest viral candidate
+
+Identified in `research/personas/students.md` as the single highest-virality opportunity across the 10-persona slate. The student rice combines (a) rice culture, (b) student-flex identity, (c) free + open-source.
+
+Grid contents to compose:
+- Today's class strip ("Calc II 10:00 · CS101 14:00") with current highlighted via `c:yellow:`.
+- GitHub commit-today cell (`gh:` ext — currently scaffolded, not yet a public repo).
+- LeetCode streak cell (`leetcode:` ext — not yet scaffolded; user can fake this with a static cell for the screenshot).
+- GPA / per-class grade column.
+- Pomodoro session count.
+
+Theme suggestion: **Gruvbox** or **Nord** (already shipped Ctrl+T themes). Catppuccin works too — needs adding to theme presets first.
+
+### 2. TTRPG GM-screen rice — second viral candidate
+
+Identified in `research/personas/gamedev-ttrpg.md`. The GM-side monitor is never seen by players, always glanceable to the GM — a uniquely clean wallpaper use case.
+
+Grid contents:
+- Initiative tracker column (current turn highlighted).
+- NPC HP grid.
+- Quest log column.
+- Loot table.
+- A `roll: 1d20` cell ready to fire (the `roll:` extension is scaffolded but not yet a public repo).
+
+Theme suggestion: **Dracula** (already shipped) or any dark theme.
+
+### 3. Trader multi-monitor rice
+
+`research/personas/traders.md`. r/battlestations is a closer fit than r/unixporn for the multi-monitor angle, but a single-monitor trader rice still works on r/unixporn.
+
+Grid contents:
+- Watchlist column (`stock:`, `price:` extensions — already shipped).
+- Today's P/L mega-cell.
+- News strip (`news:` ext — already shipped).
+- FX side-row (`fx:` ext — already shipped).
+
+### 4. Homelab rice
+
+`research/personas/homelab.md`. Lower r/unixporn fit than r/selfhosted, but works as crossover.
+
+Grid contents:
+- Service-health row (`health:` ext — currently scaffolded).
+- Pi-hole stats (`pihole:` ext — currently a PR per #109).
+- Disk usage strip + cert expiry strip.
+
+### Choosing one for the actual post
+
+Pick whichever the user can authentically screenshot from their own machine. The persona narratives are scaffolding — what matters is that the screenshot looks lived-in, not staged. Faking with placeholder cells reads as marketing and gets called out in comments.

@@ -1,3 +1,11 @@
+## 2026-05-17 (Bucket C — unixporn-rice draft revision per venue brief)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket C — revised `drafts/unixporn-rice.md` per `research/wallpaper-launch-venues.md` findings. Three targeted edits: (a) header now says this is the **#1 launch venue** (was implicit, now explicit); (b) Hyprland note replaced "skip" hand-wave with honest workaround (capture from a separate X11 session, don't claim Hyprland if it's not); (c) appended "persona-variant screenshots" section with four ranked rice compositions (CS-student, GM-screen, trader, homelab) tied directly to `research/personas/*.md` files. No existing content removed.
+- Bucket: C
+- Outcome: Skill self-edit; pushed to main. Draft now reflects post-research understanding of channel ordering and persona-targeted screenshot composition.
+- Follow-up: Sharpen `drafts/showhn.md` technical-hook paragraph (still queued from the venue brief) on a later non-C run.
+
 ## 2026-05-17 (Bucket R — wallpaper-tool launch venue analysis)
 
 - Stars: 1 (Δ 0)
