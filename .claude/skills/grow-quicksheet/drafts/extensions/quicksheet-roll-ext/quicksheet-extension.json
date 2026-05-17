@@ -1,0 +1,8 @@
+{
+  "name": "roll",
+  "version": "1.0.0",
+  "prefix": "roll",
+  "description": "Dice roller + encounter-table lookup for QuickSheet (TTRPG GMs)",
+  "entry": "dotnet run --project RollExtension.csproj",
+  "minProtocolVersion": 1
+}

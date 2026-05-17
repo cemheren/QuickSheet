@@ -1,3 +1,11 @@
+## 2026-05-17 (Bucket F scaffold-only — quicksheet-roll-ext)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket F (scaffold only — did NOT `gh repo create`). New extension `drafts/extensions/quicksheet-roll-ext/`: Program.cs (~150 LOC, .NET 9, zero NuGet) + manifest + README + LICENSE + .gitignore. Dice parser: `NdM[+/-K]`, `drop lowest|highest`, `adv|dis` (D&D 5e advantage/disadvantage), optional table-file lookup (`roll: 1d100, encounters.txt`). 0/0 build; smoke-tested 5 expressions including table lookup — all correct.
+- Bucket: F (scaffold)
+- Outcome: Skill self-edit push to main. User decides when to `gh repo create cemheren/quicksheet-roll-ext --public --source=. --push` and open the cross-link PR.
+- Follow-up: Persona-fit one-line: *"TTRPG GM installs QuickSheet because they want a dice roller + encounter-table lookup on their GM-side wallpaper without using Roll20."* Pairs naturally with the queued `for-dms.md` audience landing page (once at least one TTRPG ext is live).
+
 ## 2026-05-17 (Bucket D — AwesomeCSV draft)
 
 - Stars: 1 (Δ 0)
