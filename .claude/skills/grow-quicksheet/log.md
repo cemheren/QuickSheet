@@ -1,3 +1,11 @@
+## 2026-05-17 (Bucket C — showhn iteration-speed paragraph)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket C — surgical edit to `drafts/showhn.md`. Inserted one paragraph between the cell-prefix bullets and the "few constraints" section. New text uses the Lazygit-style **iteration-speed angle** from `research/loved-features-inverse-teardown.md` — names three concrete things the OP opens *less* since using QuickSheet (Trello → `r:` cells, htop → `sysmon:`, status-page tabs → `apistatus:`/`tls:`/`health:`) and notes "I never *open* QuickSheet, it's always there." Header gets a second revision note. No content removed.
+- Bucket: C
+- Outcome: Skill self-edit; pushed to main. Show HN draft now reflects both pitch-teardown (differentiator one-liner) and inverse-teardown (iteration-speed) findings.
+- Follow-up: Remaining queued: user-question about `extensions-40+` badge angle (don't act unilaterally). Bucket E features intentionally paused after recent feedback.
+
 ## 2026-05-17 (Bucket A — csvkit comparison page, surfaces --export-md)
 
 - Stars: 1 (Δ 0)

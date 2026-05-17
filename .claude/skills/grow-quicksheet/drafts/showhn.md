@@ -1,6 +1,6 @@
 # Show HN draft — QuickSheet
 
-Drafted 2026-05-14, revised 2026-05-17 to lead with the differentiator line per `research/adjacent-pitch-teardown.md`. Author posts manually. Pick one title; tweak copy as you like.
+Drafted 2026-05-14, revised 2026-05-17 twice — once for the differentiator line per `research/adjacent-pitch-teardown.md`, and once for the iteration-speed paragraph per `research/loved-features-inverse-teardown.md`. Author posts manually. Pick one title; tweak copy as you like.
 
 ---
 
@@ -35,6 +35,8 @@ Cell prefixes are the whole feature set:
 - `L: <cell>, 5m` — loops a target cell on an interval.
 - `ext: github:user/repo` — clones the repo and registers a new prefix at runtime.
 - Any URL — highlighted, opens on Enter.
+
+What I open less since this exists: Trello (replaced by a column of `r: code .` cells for the morning repos), htop (`sysmon:` ext pinned in a corner), browser tabs for service status pages (`apistatus:`, `tls:`, `health:`). The wallpaper sits *behind* everything and is glanceable on alt-tab — no app to launch, no tab to find. The thing that surprised me using my own tool: I never *open* QuickSheet, it's always there.
 
 A few constraints I held to and am glad I did:
 - Zero NuGet dependencies. All native interop (X11, WinForms, ConPTY) is hand-written P/Invoke. Clone, build, run.
