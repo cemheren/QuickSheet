@@ -960,9 +960,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: for-sre landing page (PR #106), for-traders (PR #105).
 - Follow-up: docs/for-students.md landing page. gh-pages curl card. quicksheet-pihole.
 
+## 2026-05-16 22:00
+
+- Stars: 1 (Δ +0)
+- Action: Created quicksheet-pihole extension — Pi-hole DNS blocking stats (status, block %, queries, domains blocked, client count) on wallpaper. Custom host/IP, TOKEN@HOST auth, 30s cache, zero NuGet. Build-tested. Added to README + docs/extensions.md.
+- Bucket: F (new extension — homelab persona)
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-pihole (commit 8dd3708). PR #109 on main repo for docs.
+- Competitor last did: Persona landing pages (for-traders #105, for-students #107), curl ext fix, README hero (PR #108).
+- Follow-up: Bucket C — gh-pages update with pihole + curl extension cards. Bucket F — quicksheet-gha. Bucket D — v0.19.0 release.
+
 ## Queued
 
-- Bucket A: docs/for-students.md landing page (CS-student persona)
-- Bucket C: gh-pages update — add curl extension card
-- Bucket F: quicksheet-pihole (Pi-hole API stats — homelab persona #2 need)
+- Bucket C: gh-pages update — add pihole + curl extension cards, bump to v0.18.0
 - Bucket F: quicksheet-gha (GitHub Actions status — SRE persona need)
+- Bucket D: v0.19.0 release after pending PRs (#103-#109) merge
