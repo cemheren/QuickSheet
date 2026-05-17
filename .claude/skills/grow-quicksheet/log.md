@@ -1,3 +1,11 @@
+## 2026-05-17 (Bucket A — --help missing c:color: prefix)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket A — opened PR #110. One-line additive fix: `--help` cell-prefix list was missing `c:color:` even though it's been shipped for many versions and is documented in README/tour/keyboard-shortcuts. Pure additive `Console.WriteLine`; no behavior change. Build 0/0; smoke-tested `dotnet run -- --help`.
+- Bucket: A
+- Outcome: PR https://github.com/cemheren/QuickSheet/pull/110.
+- Follow-up: Other open polish areas — `--list-extensions` could show description from manifest; `--version` could mention nearest commit. Defer until user signals interest.
+
 ## 2026-05-17 (Bucket F scaffold-only — quicksheet-roll-ext)
 
 - Stars: 1 (Δ 0)
