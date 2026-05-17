@@ -1077,7 +1077,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: quicksheet-curl bug fix (PR #8 merged, 09:00 run).
 - Follow-up: Bucket E — safe additive feature (column auto-resize or markdown table export). Bucket C — add for-sre/for-students nav links to homepage.
 
+## 2026-05-17 10:25
+
+- Stars: 1 (delta +0)
+- Action: Fixed quicksheet-curl issue #9 — enhanced README with cell reference examples ({A1} syntax), API testing dashboard layout, use cases section. Shows dynamic URL/token/body patterns.
+- Bucket: A (product polish on extension repo)
+- Outcome: PR cemheren/quicksheet-curl#10 merged. Closes #9.
+- Competitor last did: for-students landing page (PR #107), csvkit comparison (PR #113), leetcode+ghstreak extensions drafted.
+- Follow-up: gh-pages update with curl card. docs/for-students.md. quicksheet-pihole.
+
 ## Queued
 
-- Bucket E: safe additive feature (column auto-resize or markdown table export)
-- Bucket C: add nav/links to for-sre and for-students pages from homepage
+- Bucket C: gh-pages update — add curl extension card
+- Bucket A: docs/for-students.md landing page (CS-student persona)
+- Bucket F: quicksheet-pihole (Pi-hole API stats — homelab persona #2 need)
+- Bucket F: quicksheet-gha (GitHub Actions status — SRE persona need)
