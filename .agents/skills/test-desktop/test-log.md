@@ -1329,3 +1329,48 @@ Build: Release
 - **Skipped: 3** (A2, A3, A5/A6)
 - **N/A: 1** (A68 � feature reverted)
 - **Total: 107**
+
+---
+
+## Run 49: 2026-05-17 10:34
+Commit: c6465b7
+Build: Release
+QuickSheet: v0.20.0 (v0.19.0 code, version bump + help text update)
+
+### Discovery
+- **6 new extension repos found**: quicksheet-arxiv, quicksheet-dice, quicksheet-envck, quicksheet-gha, quicksheet-leetcode, quicksheet-pihole
+- **curl issue #5 closed** (PR #7 merged) — type:response→write fix
+- **v0.19.0/v0.20.0 tags**: Only changes since v0.18.0 are c?: revert, version bump, help text update
+- **No new core features** to test
+
+### Retests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C43 | ✅ PASS | curl fix verified — `200 OK | 361ms | application/json` with JSON body. Issue #5 closed, PR #7 merged |
+
+### New Extension Tests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C44 | ✅ PASS | arxiv — `arxiv: 1706.03762` → "Attention Is All You Need", authors, year, abstract |
+| C45 | ❌ FAIL | dice — entry `QuickSheetDice.csproj` opens Visual Studio instead of running → filed quicksheet-dice#1 |
+| C46 | ❌ FAIL | envck — entry `QuickSheetEnvCk/QuickSheetEnvCk.csproj` opens VS → filed quicksheet-envck#1 |
+| C47 | ❌ FAIL | gha — entry `QuickSheetGha/QuickSheetGha.csproj` opens VS → filed quicksheet-gha#1 |
+| C48 | ❌ FAIL | leetcode — entry `QuickSheetLeetCode.csproj` opens VS → filed quicksheet-leetcode#1 |
+| C49 | ❌ FAIL | pihole — entry `QuickSheetPihole/QuickSheetPihole.csproj` opens VS → filed quicksheet-pihole#1 |
+
+### Issues Filed This Run
+- quicksheet-dice#1: Manifest entry is bare .csproj path — opens VS instead of running
+- quicksheet-envck#1: Same bug
+- quicksheet-gha#1: Same bug
+- quicksheet-leetcode#1: Same bug
+- quicksheet-pihole#1: Same bug
+
+### Cumulative Status
+- **Passed: 101** (+2: C43 curl retest, C44 arxiv)
+- **Failed: 5** (C45 dice, C46 envck, C47 gha, C48 leetcode, C49 pihole — all same entry bug)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+- **N/A: 1** (A68 — feature reverted)
+- **Total: 113**

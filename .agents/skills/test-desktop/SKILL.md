@@ -271,7 +271,7 @@ Also use PowerShell for:
 
 ---
 
-## Test Group C: Individual Extensions (19 extensions)
+## Test Group C: Individual Extensions (49 extensions)
 
 First install each extension via its `ext:` cell. Then test the prefix.
 
@@ -320,6 +320,12 @@ First install each extension via its `ext:` cell. Then test the prefix.
 | C41 | quicksheet-urlenc | `ext: github:cemheren/quicksheet-urlenc` | `urlenc: hello world` | URL-encoded string: `hello%20world` |
 | C42 | quicksheet-health | `ext: github:cemheren/quicksheet-health` | `health: https://google.com, https://github.com` | Per-endpoint rows: name → 🟢/🔴 status code (latency) |
 | C43 | quicksheet-curl | `ext: github:cemheren/quicksheet-curl` | `curl: GET https://httpbin.org/get` | HTTP response: status, headers, body in grid cells |
+| C44 | quicksheet-arxiv | `ext: github:cemheren/quicksheet-arxiv` | `arxiv: 1706.03762` | Paper title, authors, year, abstract from arXiv |
+| C45 | quicksheet-dice | `ext: github:cemheren/quicksheet-dice` | `roll: 2d6` | Dice roll result with notation breakdown |
+| C46 | quicksheet-envck | `ext: github:cemheren/quicksheet-envck` | `env: PATH` | Environment variable value display |
+| C47 | quicksheet-gha | `ext: github:cemheren/quicksheet-gha` | `gha: cemheren/QuickSheet,1,5` | GitHub Actions workflow run statuses |
+| C48 | quicksheet-leetcode | `ext: github:cemheren/quicksheet-leetcode` | `lc: daily` | LeetCode daily challenge or problem lookup |
+| C49 | quicksheet-pihole | `ext: github:cemheren/quicksheet-pihole` | `pihole: 192.168.1.1,1,3` | Pi-hole DNS blocking stats |
 
 ---
 
