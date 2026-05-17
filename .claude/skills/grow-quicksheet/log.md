@@ -1,3 +1,11 @@
+## 2026-05-17 (ext-issue fix — quicksheet-curl#5)
+
+- Stars: 1 (Δ 0)
+- Action: Priority rule #1 — fixed quicksheet-curl#5 (open issue on ext repo). Two protocol bugs surfaced: (a) the title-flagged `type:"response"` instead of `"write"`, and (b) under smoke-test discovered Main() waited for `init` from host (host never sends init) which silently ate the first activate. Cleaner fix: drop InitMessage, emit register on startup with explicit Console.Out.Flush(), default ResponseMessage.Type to "write". Net diff -16/+7. Smoke-tested with empty params (synthetic usage cells) and live GET api.github.com/zen (+ 200 OK | 120ms | text/plain).
+- Bucket: ext-repo fix
+- Outcome: PR https://github.com/cemheren/quicksheet-curl/pull/7 — closes #5. Build clean. PR opened in the ext repo per skill workflow (this is the rare case where the skill DOES open PRs against an external repo, because cemheren owns it and Bucket F covers ext-repo work).
+- Follow-up: Other ext issue (quicksheet-todo#2) is a meta question, skipped. Main-repo issues unchanged (#14 copilot, #3 Wayland — both require human).
+
 ## 2026-05-17 (Bucket F scaffold-only — quicksheet-ghstreak-ext)
 
 - Stars: 1 (Δ 0)
