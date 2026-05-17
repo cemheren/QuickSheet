@@ -1,3 +1,11 @@
+## 2026-05-17 (Bucket F scaffold-only — quicksheet-health-ext)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket F (scaffold only — did NOT `gh repo create`). Wrote `.claude/skills/grow-quicksheet/drafts/extensions/quicksheet-health-ext/`: Program.cs (~120 LOC, .NET 9, zero NuGet), HealthExtension.csproj, manifest, README, LICENSE, .gitignore. Reads inline `name=url,...` or a path to `services.csv`; HEAD/GET probe; one row per service with name + indicator (✓⚠✗) + status code + latency. 0/0 build; smoke-test with `github` + `example.com` returned correct register message and 8 cells.
+- Bucket: F (scaffold)
+- Outcome: Skill self-edit push to main. User decides when to `gh repo create cemheren/quicksheet-health-ext --public --source=. --push` and open the cross-link PR against QuickSheet README/tour.
+- Follow-up: Persona-fit one-line: *"r/selfhosted user installs QuickSheet because they want Plex/Pi-hole/Nextcloud up/down dots on their wallpaper without opening Homepage.io."* If user approves, ship the repo on next run (or do it themselves).
+
 ## 2026-05-17 (Bucket A — for-traders landing + starter CSV)
 
 - Stars: 1 (Δ 0)

@@ -1,0 +1,8 @@
+{
+  "name": "health",
+  "version": "1.0.0",
+  "prefix": "health",
+  "description": "Service health grid for QuickSheet — green/yellow/red dots for a list of HTTP services",
+  "entry": "dotnet run --project HealthExtension.csproj",
+  "minProtocolVersion": 1
+}
