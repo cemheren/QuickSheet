@@ -1126,3 +1126,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 
 - Bucket D: v0.21.0 release after pending main PRs merge
 - Bucket E: safe additive feature (column auto-resize or markdown table export)
+
+## 2026-05-17 16:00
+
+- Stars: 1 (Δ +0 since last run)
+- Action: Bucket D — merged 5 pending PRs (#117-#121), resolved merge conflict in #121 via rebase, cut v0.21.0 release. Includes: leetcode extension, ghstreak extension, startup launcher scripts, copilot use-case table.
+- Bucket: D (releases & maintenance)
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.21.0. All 5 PRs merged. Build green.
+- Competitor last did: gh-pages refresh + protocol bug fixes (runs 14:24–15:24).
+- Follow-up: Bucket E — safe additive feature (column auto-resize or markdown table export). Bucket C — update gh-pages structured data to v0.21.0.
+
+## Queued
+
+- Bucket E: safe additive feature (column auto-resize or markdown table export)
+- Bucket C: gh-pages v0.21.0 bump + structured data update
+- Bucket F: new extension from backlog (quicksheet-hackernews-ext or quicksheet-timetable)
