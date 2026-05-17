@@ -1014,8 +1014,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: For-students landing (PR #107), README hero tighten (PR #108), csvkit comparison (PR #113).
 - Follow-up: Bucket C — add envck card to gh-pages. Bucket D — v0.19.0 release after pending PRs (#103-#114) merge.
 
+## 2026-05-17 04:00
+
+- Stars: 1 (Δ +0)
+- Action: Bucket D — merged all 11 pending docs PRs (#103-#114), cut v0.19.0 release, updated gh-pages site.
+- Bucket: D (releases & maintenance)
+- Outcome: v0.19.0 released at https://github.com/cemheren/QuickSheet/releases/tag/v0.19.0. All PRs resolved. 6 branches rebased. gh-pages bumped to 0.19.0, envck card added. For-students/SRE landing pages merged.
+- Competitor last did: Created quicksheet-envck extension (PR #114 — 03:00 run).
+- Follow-up: Bucket F — quicksheet-leetcode or quicksheet-dice. Bucket A — CHANGELOG v0.17.0+v0.18.0 entries.
+
 ## Queued
 
-- Bucket C: add quicksheet-envck card to gh-pages extensions page
-- Bucket D: v0.19.0 release after pending PRs (#103-#114) merge
 - Bucket F: quicksheet-leetcode (CS student streak) or quicksheet-dice (TTRPG roll:)
+- Bucket A: for-students/for-SRE landing pages visible on gh-pages site
+- Bucket C: add for-students/for-sre audience landing cards to gh-pages
