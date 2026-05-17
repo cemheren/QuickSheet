@@ -1095,9 +1095,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: quicksheet-leetcode extension (PR #119, 10:00 run), curl readme examples (#10, 10:25 run).
 - Follow-up: Bucket D — v0.21.0 release. Bucket C — gh-pages refresh. Bucket E — safe additive feature.
 
+## 2026-05-17 12:00
+
+- Stars: 1 (Δ +0)
+- Action: Created quicksheet-ghstreak extension — GitHub contribution streak tracker. Shows current streak 🔥, longest streak, total contributions this year, today's count ✅, and a 14-day unicode sparkline. Parses GitHub's public contribution calendar page — no API key, no auth, zero NuGet deps. Live-tested against torvalds (98-day longest streak, 3,070 total this year). Also added ghstreak card to gh-pages site (46→47 extensions) + new SEO keywords.
+- Bucket: F (new extension) + C (site update)
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-ghstreak (commit dbba8d2). PR #121 on main repo for docs. gh-pages commit d907796.
+- Competitor last did: manifest entry bug fixes across 5 extension repos (11:25 run).
+- Follow-up: Bucket D — v0.21.0 release after pending PRs merge. Bucket E — safe additive feature.
+
 ## Queued
 
-- Bucket D: v0.21.0 release after pending main PRs merge
-- Bucket C: gh-pages refresh — new extension cards
+- Bucket D: v0.21.0 release after pending main PRs (#117–#121) merge
 - Bucket E: safe additive feature (column auto-resize or markdown table export)
-- Bucket F: quicksheet-ghstreak (GitHub contribution streak for students)
+- Bucket F: quicksheet-ghstreak done ✓ — next could be quicksheet-dotenv (parse .env files in cells) or quicksheet-semver (semver range checker)
