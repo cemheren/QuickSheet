@@ -1172,3 +1172,29 @@ Build: Release
 - **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
 - **Skipped: 3** (A2, A3, A5/A6)
 - **Total: 103**
+
+
+## Run 43: 2026-05-16 17:58
+Commit: 498948d (main), v0.17.0
+Build: Release
+
+### Discovery
+- **New extension repo: quicksheet-urlenc** (42nd repo) — URL encode/decode
+- PR #99 open: value-driven cell colour feature
+- No other code changes
+
+### Tests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C41 | ❌ FAIL | urlenc extension uses absolute coordinates (anchorRow/anchorCol) instead of relative → filed quicksheet-urlenc#1 |
+
+### Issue Filed
+- **quicksheet-urlenc#1**: Absolute coordinates bug (same as b64#1 pattern)
+
+### Cumulative
+- **Passed: 97**
+- **Failed: 1** (C41 urlenc — absolute coords)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+- **Total: 104** (added C41)

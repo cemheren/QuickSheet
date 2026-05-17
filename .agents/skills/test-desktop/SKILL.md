@@ -316,6 +316,7 @@ First install each extension via its `ext:` cell. Then test the prefix.
 | C38 | quicksheet-b64 | `ext: github:cemheren/quicksheet-b64` | `b64: Hello World` | Base64 encode: "🔒 ENCODED" header + base64 string + byte count |
 | C39 | quicksheet-guid | `ext: github:cemheren/quicksheet-guid` | `guid: 3` | 3 GUIDs in standard format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) |
 | C40 | quicksheet-regex | `ext: github:cemheren/quicksheet-regex` | `regex: ^[a-z]+\d{2}$` | Token breakdown table: pattern + each token with explanation + summary |
+| C41 | quicksheet-urlenc | `ext: github:cemheren/quicksheet-urlenc` | `urlenc: hello world` | URL-encoded string: `hello%20world` |
 
 ---
 
