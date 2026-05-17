@@ -1,3 +1,11 @@
+## 2026-05-16 (post-research — Bucket E trinity #1: value-driven cell colour)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket E — opened PR #99. New cell prefix `c?: rule, rule, *=default: value` that picks bg colour from numeric value. Operators `> < >= <= = *`. ~70 LOC additive, single file (`CellPrefix.cs`) + 1 row each in tour.md and keyboard-shortcuts.md. Existing `c:color:` syntax unchanged; existing render call-sites (TUI/Win/Linux desktop) need no changes because `ParseColor` return type is reused. 0/0 build.
+- Bucket: E
+- Outcome: PR https://github.com/cemheren/QuickSheet/pull/99 — awaits merge. PR #96 (themes) and #98 (urlenc ext) still open. Trinity feature #1 of 3 (10/10 personas wanted this).
+- Follow-up: After #99 merges, trinity feature #2 = per-cell ticking timer prefix.
+
 ## 2026-05-16 (research phase — persona 10: teachers + END OF RESEARCH PHASE)
 
 - Stars: 1 (Δ 0)
