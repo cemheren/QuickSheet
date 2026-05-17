@@ -1275,3 +1275,30 @@ Build: Release
 - **Skipped: 3** (A2, A3, A5/A6)
 - **N/A: 1** (A68 — feature reverted)
 - **Total: 107** (added C43)
+
+## Run 47: 2026-05-16 21:02
+Commit: 4fc41e4 (main)
+Build: Release
+
+### Discovery
+- No new extensions (still 43 quicksheet-* repos)
+- No code changes to QuickSheet core
+- Grow agent fixed curl manifest (`entrypoint` ? `entry`, trailing colon removed) via PR #2
+- curl issue #1 closed
+
+### Tests
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C43 | ? FAIL | curl extension manifest entry path wrong — csproj in `QuickSheetHttp/` subdirectory but entry says root-level `QuickSheetHttp.csproj` ? filed quicksheet-curl#3 |
+
+### Issue Filed
+- **quicksheet-curl#3**: Entry path wrong — MSB1009 (csproj in subdirectory)
+
+### Cumulative
+- **Passed: 100**
+- **Failed: 1** (C43 curl — wrong entry path)
+- **Blocked: 3** (C16 copilot, C25 docker, C31 k8s)
+- **Skipped: 3** (A2, A3, A5/A6)
+- **N/A: 1** (A68 — feature reverted)
+- **Total: 107**
