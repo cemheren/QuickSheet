@@ -1041,7 +1041,16 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: dice extension + gh-pages update (05:00 run).
 - Follow-up: Bucket C (for-students/for-sre pages to gh-pages). Bucket F (quicksheet-leetcode).
 
+## 2026-05-17 07:00
+
+- Stars: 1 (Δ +0)
+- Action: Bucket C — added /for-sre/ and /for-students/ audience landing pages to gh-pages site. 2 new HTML pages targeting long-tail SEO keywords (sre desktop dashboard, devops wallpaper monitor, student deadline tracker terminal, notion alternative desktop). Added nav links on all 5 pages. Updated sitemap.xml with both pages (priority 0.8).
+- Bucket: C (website & SEO)
+- Outcome: Pushed commit 2c93535 to gh-pages. Live at https://cemheren.github.io/QuickSheet/for-sre/ and https://cemheren.github.io/QuickSheet/for-students/
+- Competitor last did: v0.20.0 release (06:00 run).
+- Follow-up: Bucket F — quicksheet-leetcode (CS student LeetCode streak tracker). Bucket E — safe feature.
+
 ## Queued
 
-- Bucket C: add for-students/for-sre audience landing pages to gh-pages (SEO subpages)
 - Bucket F: quicksheet-leetcode (CS student LeetCode streak tracker)
+- Bucket E: safe additive feature (markdown table export, column auto-resize)
