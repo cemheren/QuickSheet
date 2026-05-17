@@ -460,6 +460,77 @@ public class GridManager
         }
     }
 
+    public void SaveToHtml(string path)
+    {
+        using var writer = new StreamWriter(path);
+        WriteHtmlTo(writer);
+    }
+
+    /// <summary>
+    /// Writes the grid as a self-contained HTML table with inline styling.
+    /// Used by `--export-html -` to write to stdout for piping.
+    /// </summary>
+    public void WriteHtmlTo(TextWriter writer)
+    {
+        int lastRow = -1, lastCol = -1;
+        for (int r = 0; r < RowCount; r++)
+            for (int c = 0; c < ColumnCount; c++)
+                if (!string.IsNullOrEmpty(_data[r, c]) && !_isFile[r, c])
+                {
+                    if (r > lastRow) lastRow = r;
+                    if (c > lastCol) lastCol = c;
+                }
+        if (lastRow < 0 || lastCol < 0) return;
+
+        writer.WriteLine("<!DOCTYPE html>");
+        writer.WriteLine("<html lang=\"en\"><head><meta charset=\"utf-8\">");
+        writer.WriteLine("<title>QuickSheet Export</title>");
+        writer.WriteLine("<style>");
+        writer.WriteLine("body{font-family:system-ui,-apple-system,sans-serif;background:#0d1117;color:#e6edf3;padding:2rem}");
+        writer.WriteLine("table{border-collapse:collapse;width:100%}");
+        writer.WriteLine("th,td{border:1px solid #30363d;padding:6px 10px;text-align:left}");
+        writer.WriteLine("th{background:#161b22;color:#8b949e;font-weight:600}");
+        writer.WriteLine("tr:nth-child(even) td{background:#161b22}");
+        writer.WriteLine("tr:hover td{background:#1c2129}");
+        writer.WriteLine("a{color:#58a6ff}");
+        writer.WriteLine(".num{text-align:right;font-variant-numeric:tabular-nums}");
+        writer.WriteLine("</style></head><body>");
+        writer.WriteLine("<table>");
+
+        for (int r = 0; r <= lastRow; r++)
+        {
+            string tag = r == 0 ? "th" : "td";
+            writer.Write("<tr>");
+            for (int c = 0; c <= lastCol; c++)
+            {
+                string v = _isFile[r, c] ? "" : (_data[r, c] ?? "");
+                string escaped = System.Net.WebUtility.HtmlEncode(v);
+                string cls = "";
+
+                // Auto-detect URLs and make them clickable
+                if (v.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
+                    v.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+                {
+                    escaped = $"<a href=\"{System.Net.WebUtility.HtmlEncode(v)}\">{escaped}</a>";
+                }
+
+                // Detect numeric cells for right-alignment
+                if (r > 0 && double.TryParse(v, System.Globalization.NumberStyles.Any,
+                    System.Globalization.CultureInfo.InvariantCulture, out _))
+                {
+                    cls = " class=\"num\"";
+                }
+
+                writer.Write($"<{tag}{cls}>{escaped}</{tag}>");
+            }
+            writer.WriteLine("</tr>");
+        }
+
+        writer.WriteLine("</table>");
+        writer.WriteLine("<p style=\"color:#8b949e;font-size:0.8rem;margin-top:1rem\">Exported by <a href=\"https://github.com/cemheren/QuickSheet\">QuickSheet</a></p>");
+        writer.WriteLine("</body></html>");
+    }
+
     public void LoadFromCsv(string path)
     {
         if (!File.Exists(path)) return;
