@@ -1,3 +1,11 @@
+## 2026-05-17 (Bucket A — startup script per user request)
+
+- Stars: 1 (Δ 0). User asked "should we offer a windows startup script" in conversation; I recommended split (ship script, make auto-update opt-in); user invoked /grow-quicksheet right after = implicit nod. Opened PR #120.
+- Action: Bucket A — new `scripts/quicksheet-startup.ps1` (PowerShell launcher, detached/hidden, `-Update` flag does `git pull --rebase --autostash + dotnet build -c Release` first with **abort-on-failure** semantics so a bad push doesn't leave users with no wallpaper at reboot). Plus `docs/install-startup.md` covering Windows Startup-folder, Task Scheduler, Linux XDG autostart, macOS not-yet, and uninstall. README startup tip line points to the new doc.
+- Bucket: A
+- Outcome: PR https://github.com/cemheren/QuickSheet/pull/120 — awaits user merge. Build 0/0. Pure additive (one new script file, one new doc page, one line edit on README).
+- Follow-up: After #120 merges, the README's "add it to your startup" claim is finally concrete. Watch for new PRs in the next runs — recent state has #117/#118/#119 still open + #120 mine.
+
 ## 2026-05-17 (no-op #10 — identical state)
 
 - Stars: 1 (Δ 0). Same. #117 + #118 still open. todo#2 + main #3 still need human.
