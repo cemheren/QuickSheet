@@ -957,3 +957,19 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket C: gh-pages update — add curl extension card, bump to v0.18.0
 - Bucket F: quicksheet-pihole (Pi-hole API stats — homelab persona #2 need)
 - Bucket F: quicksheet-gha (GitHub Actions status — SRE persona need)
+
+## 2026-05-16 21:00
+
+- Stars: 1 (Δ +0)
+- Action: Bucket A — created docs/for-students.md landing page + examples/student-dashboard.csv. Covers coursework tracker, budget (quicksheet-budget), developer tools in-cell (jwtdec, regex, b64, urlenc), HN/gitlog strips, hackathon mode. README audience guides line updated.
+- Bucket: A
+- Outcome: PR #107 (commit a83d3fb) — docs-only, build clean.
+- Competitor last did: for-sre landing page (PR #106), curl fix.
+- Follow-up: Bucket C — gh-pages curl card + student landing link. Bucket F — quicksheet-pihole or quicksheet-gha.
+
+## Queued
+
+- Bucket C: gh-pages update — add curl + student landing page link, bump to v0.18.0
+- Bucket F: quicksheet-pihole (Pi-hole API stats — homelab persona #2 need)
+- Bucket F: quicksheet-gha (GitHub Actions status — SRE persona need)
+- Bucket A: docs/for-dms.md (dungeon-master persona — pairs with dice/initiative research)
