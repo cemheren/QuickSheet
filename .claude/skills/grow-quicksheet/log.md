@@ -1,3 +1,11 @@
+## 2026-05-16 (research phase — persona 10: teachers + END OF RESEARCH PHASE)
+
+- Stars: 1 (Δ 0)
+- Action: Bucket R — wrote `research/personas/teachers.md` (paper 10/10). K–12 teachers + college faculty + tutors. The most data-handling-skeptical persona (FERPA, ed-tech fatigue). Wallpaper-mode framing: between-class glance surface; grading queue, attendance summary, parent-contact log, lesson-deadline countdowns. Key trust angle: "your gradebook is just a CSV in your folder, not a SaaS in another country."
+- Bucket: R
+- Outcome: 10/10 papers `done`. Paper includes full **post-research synthesis**: the trinity features (value-colour 10/10, ticking timer 6/10, progress bar 5/10) confirmed; viral-action ranking finalised (r/unixporn student rice #1); first-extension-to-build ranking finalised (`health:` HTTP probe #1). Pushed to main.
+- Follow-up: **Research phase ENDS.** Queue header lifted. Cron resumes normal Bucket A/B/C/E/F selection per skill priority rules. First post-research pick should be the trinity Bucket E features.
+
 ## 2026-05-16 (research phase — persona 9: students)
 
 - Stars: 1 (Δ 0)
@@ -641,12 +649,27 @@
 
 ## Queued
 
-- **RESEARCH PHASE ACTIVE (2026-05-16, desktop-mode-only)** — finish 10-persona slate before any new code.
-  **HARD RULE:** every persona paper must frame value strictly around `--desktop` wallpaper mode.
-  Terminal/TUI use cases are out of scope for this research. Comparators: Rainmeter, Conky,
-  GeekTool, Übersicht, Fences. Not lazygit/k9s/visidata. Papers 1–3 revised to v2 with this lens.
-  See `research/personas/_index.md`. Remaining 1 paper, then research phase ends:
-  1. `teachers.md` — K–12/college educators. Grading, attendance, schedule — CSV-native, untapped.
+- **RESEARCH PHASE COMPLETE (2026-05-16).** All 10 persona papers `done`.
+  Synthesis is at the end of `research/personas/teachers.md`. Trinity features confirmed
+  (value-colour 10/10, ticking timer 6/10, progress bar 5/10). Viral-action ranking and
+  first-extension ranking finalised. Cron resumes normal Bucket A/B/C/E/F selection.
+
+- **POST-RESEARCH BUILD PRIORITY (ranked):**
+  1. **Bucket E: trinity features**, in order: value-driven cell colour, then per-cell ticking timer, then in-cell progress bar prefix. These collectively unlock every persona. Each <80 LOC additive. **One per run.**
+  2. **Bucket F: extension waterfall** (after the trinity ships), in order:
+     a. `health:` HTTP probe (homelab; writes its own screenshot from `services.csv`).
+     b. `leetcode:` + `gh:` user-streak (students; viral combo).
+     c. `roll:` dice roller + `init:` initiative tracker (gamedev DM bundle).
+     d. `gha:` GitHub Actions status (SRE).
+     e. `bill:` billing timer ext (lawyers + accountants — depends on trinity timer feature).
+  3. **Bucket A: audience landing pages + starter CSVs.** Ship per persona as the matching extensions land. Pre-built CSVs in `examples/` are higher-leverage than the docs (the screenshot IS the post).
+  4. **Bucket C: ranked viral drafts.** Save AFTER matching code lands, in this order:
+     1. r/unixporn student-rice (persona 9 — highest expected virality).
+     2. r/unixporn DM-screen rice (persona 5).
+     3. r/selfhosted "Homepage.io alternative, not in a tab" (persona 8).
+     4. r/battlestations trader multi-monitor (persona 7).
+     5. Cult of Pedagogy + Cara.app outreach (slower, high-trust).
+  5. **Bucket D: awesome-selfhosted PR** — draft now, no code dependency.
   After all 10 are `done`, rank the union of implications by build-cost × hit-probability and resume Bucket E/F shipping.
 - **Top implications already surfaced (papers 1–7)** — do NOT pick these up yet; they're the after-research backlog:
   - Build `gha:` extension (developers-sre, rank 1).
