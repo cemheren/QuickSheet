@@ -1,3 +1,7 @@
+## 2026-05-17 (no-op #21 — identical)
+
+- Stars: 1 (Δ 0). Same. #126/#127 still open.
+
 ## 2026-05-17 (no-op #20 — PR #127 by other agent)
 
 - Stars: 1 (Δ 0). New PR #127 (`w: url` live web-fetch prefix). #126 still open. Issues unchanged.
