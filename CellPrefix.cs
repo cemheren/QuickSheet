@@ -157,6 +157,18 @@ public static class CellPrefix
         return (color, text);
     }
 
+    /// <summary>Returns true for "w: url" live web-fetch cells.</summary>
+    public static bool IsWebFetch(string value) =>
+        value.StartsWith("w: ", StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>Extracts the URL from a "w: url" cell. Returns null if invalid.</summary>
+    public static string? ParseWebFetchUrl(string value)
+    {
+        if (!IsWebFetch(value)) return null;
+        string url = value[3..].Trim();
+        return string.IsNullOrEmpty(url) ? null : url;
+    }
+
     public static bool IsExtension(string value) =>
         value.StartsWith("ext: ", StringComparison.OrdinalIgnoreCase);
 

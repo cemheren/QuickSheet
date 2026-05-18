@@ -11,6 +11,7 @@ public class SpreadsheetApp
     private string? _searchTerm;
     private List<(int row, int col)> _searchMatches = new();
     private int _searchMatchIndex = -1;
+    private readonly WebFetchManager _webFetch = new();
     private const int MinColWidth = 10;
     private const int RowHeaderWidth = 4;
 
@@ -47,6 +48,12 @@ public class SpreadsheetApp
                 int len;
                 if (CellPrefix.IsSparkline(val))
                     len = CellPrefix.RenderSparkline(val, _grid)?.Length ?? val.Length;
+                else if (CellPrefix.IsWebFetch(val))
+                {
+                    string? url = CellPrefix.ParseWebFetchUrl(val);
+                    string display = url != null ? _webFetch.GetDisplay(url) : val;
+                    len = display.Length;
+                }
                 else
                 {
                     var cp = CellPrefix.ParseColor(val);
@@ -68,7 +75,25 @@ public class SpreadsheetApp
 
         while (true)
         {
-            var key = Console.ReadKey(intercept: true);
+            ConsoleKeyInfo key;
+            if (_webFetch.HasPending)
+            {
+                // Polling mode: check for key every 50 ms, re-render to show fetch progress
+                if (Console.KeyAvailable)
+                {
+                    key = Console.ReadKey(intercept: true);
+                }
+                else
+                {
+                    Thread.Sleep(50);
+                    Render();
+                    continue;
+                }
+            }
+            else
+            {
+                key = Console.ReadKey(intercept: true);
+            }
 
             if (key.Modifiers.HasFlag(ConsoleModifiers.Control) && key.Key == ConsoleKey.Q)
                 break;
@@ -194,6 +219,9 @@ public class SpreadsheetApp
                     _grid.SetCellValue(_selectedRow, _selectedCol, "");
                     _dirty = true;
                     break;
+                case ConsoleKey.F5:
+                    _webFetch.InvalidateAll();
+                    break;
                 case ConsoleKey.Escape:
                     break;
                 case ConsoleKey.Tab:
@@ -217,6 +245,7 @@ public class SpreadsheetApp
         Directory.CreateDirectory(StateDir);
         _grid.SaveToCsv(AutoSavePath);
 
+        _webFetch.Dispose();
         Console.ResetColor();
         Console.CursorVisible = true;
         Console.Clear();
@@ -285,12 +314,17 @@ public class SpreadsheetApp
                 int w = colWidths[c];
                 string cellVal = _grid.GetCellValue(r, c);
 
-                // Resolve display text: sparkline > color prefix > raw
+                // Resolve display text: sparkline > web fetch > color prefix > raw
                 string rendered;
                 ConsoleColor? colorBg = null;
                 if (CellPrefix.IsSparkline(cellVal))
                 {
                     rendered = CellPrefix.RenderSparkline(cellVal, _grid) ?? cellVal;
+                }
+                else if (CellPrefix.IsWebFetch(cellVal))
+                {
+                    string? url = CellPrefix.ParseWebFetchUrl(cellVal);
+                    rendered = url != null ? _webFetch.GetDisplay(url) : cellVal;
                 }
                 else
                 {
@@ -428,6 +462,8 @@ public class SpreadsheetApp
             "  ║  Ctrl+T         Cycle theme               ║",
             "  ║  Ctrl+H         Show this help            ║",
             "  ║  Ctrl+Q         Quit                     ║",
+            "  ║                                          ║",
+            "  ║  F5             Refresh w: web cells     ║",
             "  ║                                          ║",
             "  ║  Usage: dotnet run [file.csv]            ║",
             "  ║                                          ║",
