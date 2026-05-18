@@ -20,6 +20,9 @@ public class SpreadsheetApp
 
     public SpreadsheetApp(string? csvPath = null)
     {
+        AppConfig.Load();
+        Theme.SetByName(AppConfig.Get("theme"));
+
         int w = Console.WindowWidth;
         int h = Console.WindowHeight;
         _grid = new GridManager(w, h - 3);
@@ -140,6 +143,7 @@ public class SpreadsheetApp
                         break;
                     case ConsoleKey.T:
                         Theme.CycleNext();
+                        AppConfig.Set("theme", Theme.Current.Name);
                         Console.Clear();
                         break;
                     case ConsoleKey.G:

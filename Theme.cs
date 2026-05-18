@@ -186,4 +186,11 @@ public class Theme
     {
         _currentIndex = (_currentIndex + 1) % Presets.Length;
     }
+
+    public static void SetByName(string? name)
+    {
+        if (name is null) return;
+        var idx = Array.FindIndex(Presets, t => t.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+        if (idx >= 0) _currentIndex = idx;
+    }
 }
