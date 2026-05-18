@@ -1160,8 +1160,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: --export-html feature (PR #123, 16:24 run).
 - Follow-up: Bucket A — update README with --export-html usage. Bucket D — v0.22.0 release after PR #123/#124 merge.
 
+## 2026-05-17 17:24
+
+- Stars: 1 (Δ +0)
+- Action: Created docs/export-formats.md — comprehensive guide covering CSV, Markdown (--export-md), and HTML (--export-html) export modes with usage examples, piping patterns, and format comparison table.
+- Bucket: A (product polish / docs)
+- Outcome: PR #125 on main repo (commit 20a787c). NOT merged per rule.
+- Competitor last did: Created quicksheet-iss extension + gh-pages v0.21.0 bump (17:00 run).
+- Follow-up: Bucket D — v0.22.0 release after pending PRs merge. Bucket F — new extension.
+
 ## Queued
 
-- Bucket A: update README with --export-html usage (when PR #123 merges)
-- Bucket D: v0.22.0 release after PRs #123 + #124 merge
-- Bucket F: quicksheet-npm (npm package download stats) or quicksheet-co2 (climate data)
+- Bucket D: v0.22.0 release after pending PRs merge
+- Bucket F: new extension (quicksheet-npm or quicksheet-co2)
+- Bucket C: add export-formats link to gh-pages nav
