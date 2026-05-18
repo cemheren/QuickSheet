@@ -1174,3 +1174,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket D: v0.22.0 release after pending PRs merge
 - Bucket F: new extension (quicksheet-npm or quicksheet-co2)
 - Bucket C: add export-formats link to gh-pages nav
+
+## 2026-05-17 18:00
+
+- Stars: 1 (Δ +0)
+- Action: Merged PRs #123 (--export-html), #124 (ISS docs), #125 (export-formats docs). Cut v0.22.0 release. Created quicksheet-npm extension — npm package info (version, weekly downloads, license, author) via npmjs.org + downloads API. Single-package detail view or multi-package comparison table. Zero NuGet, no API key, 30-min cache. Smoke-tested live (react: v19.2.6, 133.3M/wk DL). Added npm card to gh-pages.
+- Bucket: D (release) + F (new extension) + C (site update)
+- Outcome: v0.22.0 at https://github.com/cemheren/QuickSheet/releases/tag/v0.22.0. Repo live at https://github.com/cemheren/quicksheet-npm. PR #126 on main for docs. gh-pages commit 4c791ef.
+- Competitor last did: --export-html feature (PR #123, 16:24), export-formats docs (PR #125, 17:24), ISS extension (PR #124, 17:00).
+- Follow-up: Bucket C — add export-formats link to gh-pages nav. Bucket E — safe additive feature.
+
+## Queued
+
+- Bucket C: add export-formats link to gh-pages nav/footer
+- Bucket E: safe additive feature (column auto-resize or cell range selection)
+- Bucket F: quicksheet-co2 or quicksheet-pypi
