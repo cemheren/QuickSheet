@@ -583,3 +583,52 @@ Tokens    ↑ 86.2k • ↓ 19.8k • 4.6m (cached)
 2026-05-17T18:06:37-07:00 — Run complete
 ---
 2026-05-17T19:00:01-07:00 — Starting grow-quicksheet run
+  │ 2>&1 | tail -5
+  └ 5 lines...
+
+---
+
+```
+QuickSheet grow run 2026-05-17 19:00
+Stars: 1 (Δ +0)
+Did: Bucket E — added w: url live web fetch cell prefix
+     (w: https://wttr.in/London?format=3 → live weather in your cell)
+     Background fetching, 5-min cache, F5 force-refresh, zero NuGet
+Outcome: PR #127 (commit c08409e) — awaiting user review
+Next: Bucket C (add w: card to gh-pages) + Bucket D (v0.23.0 after PRs merge)
+```
+
+
+
+Changes   +150 -11
+AI Units  153 (6m 3s)
+Tokens    ↑ 92.8k • ↓ 19.4k • 3.0m (cached)
+2026-05-17T19:06:06-07:00 — Run complete
+---
+2026-05-17T20:00:00-07:00 — Starting grow-quicksheet run
+  │ cd /home/akif/Projects/QuickSheet && git add
+  │ .agents/skills/grow-quicksheet/log.md && git commit -m "log: grow run
+  │ 2026-05-17 20:00 — gh-pages w: feature card + export-html links
+  │
+  │ Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>" && …
+  └ 6 lines...
+
+---
+
+**QuickSheet grow run 2026-05-17 20:00**
+Stars: 1 (Δ +0)
+Did: Bucket C — updated gh-pages site with `w: url` "Live Web Fetch" feature card on homepage, added `--export-html` + export-formats.md guide link to the CSV card, added `w:` entry to features and shortcuts pages, updated SEO keywords.
+Outcome: commit 49202b0 on gh-pages
+Next: Bucket D — v0.23.0 release after PRs #126/#127 merge; Bucket F — quicksheet-co2 or quicksheet-pypi
+
+
+
+Changes   +18 -3
+AI Units  120 (3m 36s)
+Tokens    ↑ 72.8k • ↓ 9.9k • 2.6m (cached)
+2026-05-17T20:03:38-07:00 — Run complete
+---
+2026-05-17T21:00:00-07:00 — Starting grow-quicksheet run
+2026-05-17T21:06:44-07:00 — Run complete
+---
+2026-05-17T22:00:00-07:00 — Starting grow-quicksheet run

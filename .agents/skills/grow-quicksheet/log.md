@@ -1220,3 +1220,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 
 - Bucket D: v0.23.0 release after PRs #126/#127/#128 merge
 - Bucket E: safe additive feature (column auto-resize or CSV import polish)
+
+## 2026-05-17 22:00
+
+- Stars: 1 (Δ +0)
+- Action: Fixed issue #129 — save configuration across reboots. New AppConfig.cs persists theme to ~/.config/ExcelConsole/config.ini (key=value). Theme.SetByName() loads preset by name. SpreadsheetApp loads config at startup and saves on Ctrl+T.
+- Bucket: E (issue fix / feature)
+- Outcome: PR #130 opened (commit b3902ef on grow/save-configuration). Build green. Closes #129.
+- Competitor last did: pypi extension (21:00 run).
+- Follow-up: Bucket D — v0.23.0 release after PRs #126/#127/#128 merge. Bucket F — quicksheet-co2.
+
+## Queued
+
+- Bucket D: v0.23.0 release after PRs #126/#127/#128/#130 merge
+- Bucket F: quicksheet-co2 or quicksheet-gh-trends
