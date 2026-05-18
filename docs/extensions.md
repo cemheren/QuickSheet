@@ -56,6 +56,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `iss`     | ISS tracker       | Live ISS position (lat/lon/region/altitude/speed) + all people currently in space, grouped by spacecraft | [`quicksheet-iss`](https://github.com/cemheren/quicksheet-iss) |
 | `npm`     | npm package info  | Package version, weekly downloads, license, author, last publish date. Multi-package comparison with comma-separated names. | [`quicksheet-npm`](https://github.com/cemheren/quicksheet-npm) |
 | `pypi`    | PyPI package info | Version, license, author, Python requirement, release date — single package or comparison table | [`quicksheet-pypi`](https://github.com/cemheren/quicksheet-pypi) |
+| `ghtrend` | GitHub trending   | Today's trending repos by language — name, stars, forks, description. Type `ghtrend: python` or `ghtrend: all` | [`quicksheet-gh-trends`](https://github.com/cemheren/quicksheet-gh-trends) |
 
 ## Install
 
