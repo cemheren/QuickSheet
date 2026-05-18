@@ -1,3 +1,10 @@
+## 2026-05-17 (re-do #129 via config: cell prefix per PR #130 closing directive)
+
+- Stars: 1 (Δ 0). Read closing comments on PR #130 + #127 (user correction: *"you should read PR comments, and take action based on why the rejection happened"*). PR #130 closing comment was a design directive — *"I don't want it to be a file, it should be a value with a prefix"* — so re-implemented #129 as a `config:` cell prefix. Added `CellPrefix.IsConfig/ParseConfig/FormatConfig`, `Theme.SetByName`, new `ConfigCell` helper. Wired into TUI + Win + Linux. Persists theme inside the CSV itself — no sidecar file. Build 0/0. PR #131 opened. PR #127 (w: web-fetch) closing comment was purely negative ("Just no, this is dumb") — feature permanently dropped, no re-attempt. Saved both lessons as memory: [[feedback-config-as-cell-prefix]] + [[feedback-read-pr-comments]].
+- Action: PR #131 — feat(config): config: cell prefix persists theme inside the CSV. Closes #129.
+- Bucket: E (feature on main repo, smallest viable surface).
+- Follow-up: Wait for user merge/comment on #131; do NOT re-attempt #127 in any form.
+
 ## 2026-05-17 (no-op #27 — user closed #130 + #127 without merge)
 
 - Stars: 1 (Δ 0). User closed PR #130 (save-config impl for #129) and PR #127 (w: web-fetch prefix) without merging. Issue #129 still open but re-attempting risks repeating the rejected design — wait for user signal on what they actually want before another go. #128/#126 still open. Lesson: user is selectively rejecting feature PRs; default to no-op until a clear signal lands.
