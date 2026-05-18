@@ -1234,3 +1234,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 
 - Bucket D: v0.23.0 release after PRs #126/#127/#128/#130 merge
 - Bucket F: quicksheet-co2 or quicksheet-gh-trends
+
+## 2026-05-17 23:00
+
+- Stars: 1 (Δ +0)
+- Action: Bucket D — merged PRs #131 (config: cell prefix, user's preferred approach for #129), #132 (pypi docs), cut v0.23.0 release. User had closed PRs #127 (w: fetch) and #130 (AppConfig INI) without merging — respected user intent.
+- Bucket: D (releases & maintenance)
+- Outcome: v0.23.0 released at https://github.com/cemheren/QuickSheet/releases/tag/v0.23.0. config: prefix closes #129. 3 PRs merged.
+- Competitor last did: Created config: cell prefix approach (PR #131), which the user preferred over the INI file approach.
+- Follow-up: Bucket F — quicksheet-co2 or quicksheet-gh-trends. Bucket C — update gh-pages with config: feature card + v0.23.0 bump.
+
+## Queued
+
+- Bucket C: gh-pages v0.23.0 bump + config: feature card + npm/pypi extension cards
+- Bucket F: quicksheet-co2 (CO2 / climate data) or quicksheet-gh-trends (GitHub trending repos)
