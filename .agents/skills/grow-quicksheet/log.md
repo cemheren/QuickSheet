@@ -1150,3 +1150,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket C: gh-pages v0.21.0 bump + structured data update
 - Bucket F: new extension from backlog
 - Bucket A: update README with --export-html usage
+
+## 2026-05-17 17:00
+
+- Stars: 1 (Δ +0)
+- Action: Created quicksheet-iss extension — live ISS position (lat/lon/region/altitude/speed) + all people in space grouped by spacecraft (ISS & Tiangong). Uses open-notify.org (free, no API key). Smoke-tested live. Also bumped gh-pages to v0.21.0 + added ISS card (47→51+ extensions count).
+- Bucket: F (new extension) + C (site update)
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-iss (commit c14aed9). PR #124 on main repo for docs. gh-pages commit bedaf5a.
+- Competitor last did: --export-html feature (PR #123, 16:24 run).
+- Follow-up: Bucket A — update README with --export-html usage. Bucket D — v0.22.0 release after PR #123/#124 merge.
+
+## Queued
+
+- Bucket A: update README with --export-html usage (when PR #123 merges)
+- Bucket D: v0.22.0 release after PRs #123 + #124 merge
+- Bucket F: quicksheet-npm (npm package download stats) or quicksheet-co2 (climate data)
