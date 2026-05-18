@@ -6,6 +6,13 @@ All notable changes to QuickSheet. Format roughly follows [Keep a Changelog](htt
 
 (empty — bump here before the next tag)
 
+## 0.23.0 — 2026-05-18
+
+### Added
+- **`config:` cell prefix** — persist configuration (e.g. active theme) inside the CSV itself. Type `config: theme=Nord` in any cell; theme restores on next load. Ctrl+T writes back the new theme. No sidecar files — CSV is the only persistence. Closes #129.
+- **quicksheet-npm extension** — npm package info (version, weekly downloads, license, author, last publish date). Single-package detail view or multi-package comparison table. No API key required.
+- **quicksheet-pypi extension** — PyPI package info (version, license, author, Python requirement, release date, homepage). Single-package detail or comparison table. Free pypi.org JSON API.
+
 ## 0.22.0 — 2026-05-17
 
 ### Added

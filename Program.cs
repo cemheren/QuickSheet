@@ -149,7 +149,7 @@ public class Program
         }
     }
 
-    private const string Version = "0.22.0";
+    private const string Version = "0.23.0";
 
     private static void PrintInstalledExtensions()
     {
