@@ -1,3 +1,7 @@
+## 2026-05-17 (no-op #26 — new issue #129 already PR'd by other agent)
+
+- Stars: 1 (Δ 0). New main issue #129 ("save configuration") — but another cron run already shipped PR #130 implementing it. Don't duplicate. Nothing actionable for me.
+
 ## 2026-05-17 (no-op #25 — identical)
 
 - Stars: 1 (Δ 0). Same.
