@@ -205,6 +205,7 @@ tls: github.com, 1, 4
 | `ghst:` | GitHub contribution streak — current streak, longest, sparkline | `ext: github:cemheren/quicksheet-ghstreak` |
 | `iss:` | Live ISS position + people in space — lat/lon, region, crew by craft | `ext: github:cemheren/quicksheet-iss` |
 | `npm:` | npm package info — version, weekly downloads, license, author; multi-package compare | `ext: github:cemheren/quicksheet-npm` |
+| `pypi:` | PyPI package info — version, license, author, Python requirement, release date | `ext: github:cemheren/quicksheet-pypi` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
