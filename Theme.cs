@@ -186,4 +186,21 @@ public class Theme
     {
         _currentIndex = (_currentIndex + 1) % Presets.Length;
     }
+
+    /// <summary>
+    /// Set the active theme by preset name (case-insensitive). No-op if name doesn't match.
+    /// Used by `config: theme=...` cells to restore the theme on load.
+    /// </summary>
+    public static void SetByName(string? name)
+    {
+        if (string.IsNullOrWhiteSpace(name)) return;
+        for (int i = 0; i < Presets.Length; i++)
+        {
+            if (Presets[i].Name.Equals(name, StringComparison.OrdinalIgnoreCase))
+            {
+                _currentIndex = i;
+                return;
+            }
+        }
+    }
 }

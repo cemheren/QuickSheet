@@ -157,6 +157,47 @@ public static class CellPrefix
         return (color, text);
     }
 
+    /// <summary>
+    /// Checks if a cell value uses the config prefix: "config: key=value, key=value".
+    /// Used to persist UI state (theme, etc.) inside the CSV itself.
+    /// </summary>
+    public static bool IsConfig(string value) =>
+        value.StartsWith("config:", StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// Parses "config: theme=Nord, foo=bar" into a case-insensitive key→value map.
+    /// Returns an empty dict if the cell isn't a config cell or the body is empty.
+    /// </summary>
+    public static Dictionary<string, string> ParseConfig(string value)
+    {
+        var map = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        if (!IsConfig(value)) return map;
+        string body = value[7..].Trim();
+        if (body.Length == 0) return map;
+        foreach (var part in body.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries))
+        {
+            int eq = part.IndexOf('=');
+            if (eq <= 0) continue;
+            string k = part[..eq].Trim();
+            string v = part[(eq + 1)..].Trim();
+            if (k.Length > 0) map[k] = v;
+        }
+        return map;
+    }
+
+    /// <summary>
+    /// Re-serialises a config map back to a cell value: "config: k1=v1, k2=v2".
+    /// Keys are emitted in case-insensitive sorted order for stable diffs.
+    /// </summary>
+    public static string FormatConfig(Dictionary<string, string> map)
+    {
+        if (map.Count == 0) return "config:";
+        var parts = map
+            .OrderBy(kv => kv.Key, StringComparer.OrdinalIgnoreCase)
+            .Select(kv => $"{kv.Key}={kv.Value}");
+        return "config: " + string.Join(", ", parts);
+    }
+
     public static bool IsExtension(string value) =>
         value.StartsWith("ext: ", StringComparison.OrdinalIgnoreCase);
 
