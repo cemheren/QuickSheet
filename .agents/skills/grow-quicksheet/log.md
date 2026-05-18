@@ -1262,8 +1262,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: idle (no new runs overnight).
 - Follow-up: Bucket D — v0.24.0 release after pending PRs merge. Bucket E — safe additive feature.
 
+## 2026-05-18 09:33
+
+- Stars: 1 (Δ +0)
+- Action: Added --export-json CLI flag — headless CSV → JSON array of objects. First row = keys, numeric detection, proper escaping, stdout support.
+- Bucket: E (quality-of-life feature)
+- Outcome: PR #136 (commit 2a14132 on grow/export-json). Build green, smoke tested.
+- Competitor last did: idle.
+- Follow-up: Update docs/export-formats.md with JSON section. Bucket D — v0.24.0 release.
+
 ## Queued
 
+- Update docs/export-formats.md with JSON section
 - Bucket D: v0.24.0 release after pending PRs merge
-- Bucket E: safe additive feature
 - Bucket F: quicksheet-co2 (climate data)
