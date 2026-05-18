@@ -74,6 +74,51 @@ public class Program
             return;
         }
 
+        int htmlIdx = Array.IndexOf(args, "--export-html");
+        if (htmlIdx >= 0)
+        {
+            if (csvPath == null || htmlIdx + 1 >= args.Length)
+            {
+                Console.Error.WriteLine("Usage: ExcelConsole <input.csv> --export-html <output.html>");
+                Environment.Exit(2);
+                return;
+            }
+            string htmlOut = args[htmlIdx + 1];
+            if (!File.Exists(csvPath))
+            {
+                Console.Error.WriteLine($"Input CSV not found: {csvPath}");
+                Environment.Exit(1);
+                return;
+            }
+
+            var lines = File.ReadAllLines(csvPath);
+            int rows = Math.Max(1, lines.Length);
+            int cols = 1;
+            foreach (var line in lines)
+            {
+                int n = 1;
+                bool inQuotes = false;
+                foreach (char ch in line)
+                {
+                    if (ch == '"') inQuotes = !inQuotes;
+                    else if (ch == ',' && !inQuotes) n++;
+                }
+                if (n > cols) cols = n;
+            }
+            var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
+            grid.LoadFromCsv(csvPath);
+            if (htmlOut == "-")
+            {
+                grid.WriteHtmlTo(Console.Out);
+            }
+            else
+            {
+                grid.SaveToHtml(htmlOut);
+                Console.WriteLine($"Wrote HTML: {htmlOut}");
+            }
+            return;
+        }
+
         if (desktopMode)
         {
 #if PLATFORM_WINDOWS
@@ -173,6 +218,7 @@ public class Program
         Console.WriteLine("  ExcelConsole [<file.csv>]                  TUI mode (default)");
         Console.WriteLine("  ExcelConsole [<file.csv>] --desktop        Embed as desktop wallpaper");
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>  Headless: CSV → Markdown table (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>  Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole --help                        Show this help");
         Console.WriteLine("  ExcelConsole --version                     Show version");
         Console.WriteLine("  ExcelConsole --list-extensions             List installed extensions");
