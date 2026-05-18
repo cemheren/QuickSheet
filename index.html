@@ -33,7 +33,7 @@
     "description": "A zero-dependency .NET 9 spreadsheet that replaces your desktop wallpaper with a transparent interactive grid.",
     "url": "https://github.com/cemheren/QuickSheet",
     "downloadUrl": "https://github.com/cemheren/QuickSheet",
-    "softwareVersion": "0.21.0",
+    "softwareVersion": "0.23.0",
     "license": "https://opensource.org/licenses/MIT",
     "programmingLanguage": "C#",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -390,12 +390,17 @@
         <h3>Live Web Fetch</h3>
         <p>Prefix a cell with <code>w: https://...</code> to pull live data from any URL. Auto-refreshes every 5 minutes; press <code>F5</code> to force-refresh all web cells.</p>
       </div>
+      <div class="feature-card">
+        <span class="icon">⚙️</span>
+        <h3>Persistent Config</h3>
+        <p>Type <code>config: theme dark</code> to save settings. Theme, column width, and preferences persist across reboots — no config files to hand-edit.</p>
+      </div>
     </div>
   </section>
 
   <!-- Extensions -->
   <section>
-    <h2><span>51+ Extensions</span> — one cell to install</h2>
+    <h2><span>55+ Extensions</span> — one cell to install</h2>
     <p class="section-desc">Type <code>ext: github:user/repo</code> into any cell. QuickSheet clones the repo and starts the extension. No package managers.</p>
     <div class="ext-grid">
       <div class="ext-card">
@@ -602,6 +607,18 @@
         <code>pypi:</code>
         <p>PyPI package info — version, license, Python requirement, release date. Type <code>pypi: requests</code> or compare multiple packages</p>
       </div>
+      <div class="ext-card">
+        <code>npm:</code>
+        <p>npm package info — version, weekly downloads, license, author. Compare multiple packages side by side</p>
+      </div>
+      <div class="ext-card">
+        <code>iss:</code>
+        <p>Live ISS position — latitude, longitude, altitude, speed, plus all astronauts currently in space</p>
+      </div>
+      <div class="ext-card">
+        <code>config:</code>
+        <p>Persist settings across reboots — theme, column width. Type <code>config: theme dark</code> to save</p>
+      </div>
     </div>
     <p style="margin-top:1.5rem;color:var(--muted);font-size:0.9rem;">
       See the <a href="https://github.com/cemheren/QuickSheet/blob/main/docs/extensions.md">full extension directory</a> for install commands and protocol docs.
@@ -619,7 +636,7 @@
       <tbody>
         <tr><td>Desktop wallpaper mode</td><td class="yes">âœ“</td><td class="no">â€”</td><td class="no">â€”</td></tr>
         <tr><td>Terminal TUI mode</td><td class="yes">âœ“</td><td class="yes">âœ“</td><td class="yes">âœ“</td></tr>
-        <tr><td>Extension system</td><td class="yes">✓ (51+ extensions)</td><td class="no">—</td><td class="no">—</td></tr>
+        <tr><td>Extension system</td><td class="yes">✓ (55+ extensions)</td><td class="no">—</td><td class="no">—</td></tr>
         <tr><td>Inline subprocesses</td><td class="yes">âœ“ (i: prefix)</td><td class="no">â€”</td><td class="no">â€”</td></tr>
         <tr><td>App launcher</td><td class="yes">âœ“ (r: prefix)</td><td class="no">â€”</td><td class="no">â€”</td></tr>
         <tr><td>Sparklines</td><td class="yes">âœ“</td><td class="no">â€”</td><td class="yes">âœ“</td></tr>
