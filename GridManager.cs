@@ -531,6 +531,72 @@ public class GridManager
         writer.WriteLine("</body></html>");
     }
 
+    public void SaveToJson(string path)
+    {
+        using var writer = new StreamWriter(path);
+        WriteJsonTo(writer);
+    }
+
+    /// <summary>
+    /// Writes the grid as a JSON array of objects (first row = keys).
+    /// Used by `--export-json -` to write to stdout for piping.
+    /// </summary>
+    public void WriteJsonTo(TextWriter writer)
+    {
+        int lastRow = -1, lastCol = -1;
+        for (int r = 0; r < RowCount; r++)
+            for (int c = 0; c < ColumnCount; c++)
+                if (!string.IsNullOrEmpty(_data[r, c]) && !_isFile[r, c])
+                {
+                    if (r > lastRow) lastRow = r;
+                    if (c > lastCol) lastCol = c;
+                }
+        if (lastRow < 0 || lastCol < 0) { writer.WriteLine("[]"); return; }
+
+        // First row = column headers (keys)
+        var keys = new string[lastCol + 1];
+        for (int c = 0; c <= lastCol; c++)
+        {
+            string v = _isFile[0, c] ? "" : (_data[0, c] ?? "");
+            keys[c] = v.Length > 0 ? v : $"col{c}";
+        }
+
+        writer.WriteLine("[");
+        for (int r = 1; r <= lastRow; r++)
+        {
+            writer.Write("  {");
+            for (int c = 0; c <= lastCol; c++)
+            {
+                string v = _isFile[r, c] ? "" : (_data[r, c] ?? "");
+                string key = JsonEscape(keys[c]);
+                string val = JsonEscape(v);
+
+                // Try to output numbers without quotes
+                if (double.TryParse(v, System.Globalization.NumberStyles.Any,
+                    System.Globalization.CultureInfo.InvariantCulture, out double num))
+                {
+                    writer.Write($"\"{key}\":{num}");
+                }
+                else
+                {
+                    writer.Write($"\"{key}\":\"{val}\"");
+                }
+
+                if (c < lastCol) writer.Write(",");
+            }
+            writer.Write("}");
+            if (r < lastRow) writer.Write(",");
+            writer.WriteLine();
+        }
+        writer.WriteLine("]");
+    }
+
+    private static string JsonEscape(string s)
+    {
+        return s.Replace("\\", "\\\\").Replace("\"", "\\\"")
+                .Replace("\n", "\\n").Replace("\r", "\\r").Replace("\t", "\\t");
+    }
+
     public void LoadFromCsv(string path)
     {
         if (!File.Exists(path)) return;
