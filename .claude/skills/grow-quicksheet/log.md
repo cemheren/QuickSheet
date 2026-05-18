@@ -1,3 +1,7 @@
+## 2026-05-17 (no-op #27 — user closed #130 + #127 without merge)
+
+- Stars: 1 (Δ 0). User closed PR #130 (save-config impl for #129) and PR #127 (w: web-fetch prefix) without merging. Issue #129 still open but re-attempting risks repeating the rejected design — wait for user signal on what they actually want before another go. #128/#126 still open. Lesson: user is selectively rejecting feature PRs; default to no-op until a clear signal lands.
+
 ## 2026-05-17 (no-op #26 — new issue #129 already PR'd by other agent)
 
 - Stars: 1 (Δ 0). New main issue #129 ("save configuration") — but another cron run already shipped PR #130 implementing it. Don't duplicate. Nothing actionable for me.
