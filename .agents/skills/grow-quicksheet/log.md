@@ -1244,7 +1244,16 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Created config: cell prefix approach (PR #131), which the user preferred over the INI file approach.
 - Follow-up: Bucket F — quicksheet-co2 or quicksheet-gh-trends. Bucket C — update gh-pages with config: feature card + v0.23.0 bump.
 
+## 2026-05-17 21:02
+
+- Stars: 1 (Δ +0)
+- Action: Updated gh-pages — added npm/iss/config extension cards + Persistent Config feature card, bumped version to v0.23.0, updated count to 55+.
+- Bucket: C (website & SEO)
+- Outcome: Pushed commit e321eb6 to gh-pages. Site live.
+- Competitor last did: v0.23.0 release + merged config: prefix PR #131 (23:00 run).
+- Follow-up: Bucket F — new extension (quicksheet-co2 or quicksheet-gh-trends).
+
 ## Queued
 
-- Bucket C: gh-pages v0.23.0 bump + config: feature card + npm/pypi extension cards
-- Bucket F: quicksheet-co2 (CO2 / climate data) or quicksheet-gh-trends (GitHub trending repos)
+- Bucket F: quicksheet-co2 (CO2/climate data) or quicksheet-gh-trends (GitHub trending repos)
+- Bucket E: safe additive feature
