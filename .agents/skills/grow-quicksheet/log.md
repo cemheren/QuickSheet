@@ -1186,6 +1186,15 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 
 ## Queued
 
-- Bucket C: add export-formats link to gh-pages nav/footer
-- Bucket E: safe additive feature (column auto-resize or cell range selection)
+- Bucket C: add export-formats link to gh-pages nav/footer; add w: prefix feature card
+- Bucket D: v0.23.0 release after PR #126/#127 merge
 - Bucket F: quicksheet-co2 or quicksheet-pypi
+
+## 2026-05-17 19:00
+
+- Stars: 1 (Δ +0)
+- Action: Bucket E — added `w: url` live web fetch cell prefix. Type `w: https://...` in any cell to display the first line of the HTTP response (auto-refreshed, 5-min cache). Background polling render loop updates cells automatically. F5 force-refreshes all w: cells. Zero NuGet — uses BCL HttpClient. Build green.
+- Bucket: E (quality-of-life feature)
+- Outcome: PR #127 opened (commit c08409e on grow/web-fetch-prefix). NOT merged per rule.
+- Competitor last did: --export-html (PR #123), ISS extension (PR #124), npm extension (PR #126).
+- Follow-up: Bucket C — add w: feature card to gh-pages. Bucket D — v0.23.0 after PRs #126/#127 merge.
