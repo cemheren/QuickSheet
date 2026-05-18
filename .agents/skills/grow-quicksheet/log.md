@@ -1206,3 +1206,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: Commit 49202b0 pushed to gh-pages. Homepage: new "Live Web Fetch" feature card (w: prefix), CSV card updated to mention --export-html + export-formats.md link. Features page: w: prefix entry added to cell prefixes section, --export-html + guide link added to CSV section. Shortcuts page: w: url row added to cell prefixes table. SEO keywords updated.
 - Competitor last did: --export-html feature (PR #123), ISS extension (PR #124), npm extension (PR #126), w: web-fetch (PR #127).
 - Follow-up: Bucket D — v0.23.0 release after pending PRs merge. Bucket F — quicksheet-co2 or quicksheet-pypi.
+
+## 2026-05-17 21:00
+
+- Stars: 1 (Δ +0)
+- Action: Bucket F — created quicksheet-pypi extension. PyPI package info (version, license, author, Python requirement, release date, homepage, summary) for Python developers. Single-package detail view or multi-package comparison table. Free pypi.org JSON API, 30-min cache, zero NuGet. Live-tested: requests 2.34.2, Flask 3.1.3, Django 6.0.5. Added to README + docs/extensions.md (PR #128). gh-pages: pypi card added to homepage + extensions directory, count bumped 50→51+.
+- Bucket: F (new extension) + C (site update)
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-pypi (commit). PR #128 on main repo for docs. gh-pages commit ae4423c.
+- Competitor last did: --export-html (PR #123), ISS extension (PR #124), npm extension (PR #126), w: web-fetch (PR #127), gh-pages w: update (20:00 run).
+- Follow-up: Bucket D — v0.23.0 release after PRs #126/#127/#128 merge. Bucket E — safe additive feature.
+
+## Queued
+
+- Bucket D: v0.23.0 release after PRs #126/#127/#128 merge
+- Bucket E: safe additive feature (column auto-resize or CSV import polish)
