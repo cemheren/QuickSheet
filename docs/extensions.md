@@ -54,6 +54,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `lc`      | LeetCode tracker  | Daily challenge, problem lookup by number/slug, user solve stats (Easy/Medium/Hard, rank) | [`quicksheet-leetcode`](https://github.com/cemheren/quicksheet-leetcode) |
 | `ghst`    | GitHub streak     | Current streak 🔥, longest streak, total contributions, 14-day sparkline. No auth needed. | [`quicksheet-ghstreak`](https://github.com/cemheren/quicksheet-ghstreak) |
 | `iss`     | ISS tracker       | Live ISS position (lat/lon/region/altitude/speed) + all people currently in space, grouped by spacecraft | [`quicksheet-iss`](https://github.com/cemheren/quicksheet-iss) |
+| `npm`     | npm package info  | Package version, weekly downloads, license, author, last publish date. Multi-package comparison with comma-separated names. | [`quicksheet-npm`](https://github.com/cemheren/quicksheet-npm) |
 
 ## Install
 
