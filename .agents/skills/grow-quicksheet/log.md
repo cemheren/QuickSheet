@@ -1186,7 +1186,6 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 
 ## Queued
 
-- Bucket C: add export-formats link to gh-pages nav/footer; add w: prefix feature card
 - Bucket D: v0.23.0 release after PR #126/#127 merge
 - Bucket F: quicksheet-co2 or quicksheet-pypi
 
@@ -1198,3 +1197,12 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: PR #127 opened (commit c08409e on grow/web-fetch-prefix). NOT merged per rule.
 - Competitor last did: --export-html (PR #123), ISS extension (PR #124), npm extension (PR #126).
 - Follow-up: Bucket C — add w: feature card to gh-pages. Bucket D — v0.23.0 after PRs #126/#127 merge.
+
+## 2026-05-17 20:00
+
+- Stars: 1 (Δ +0)
+- Action: Bucket C — updated gh-pages site with w: web-fetch feature card and export-html/formats links.
+- Bucket: C (website & SEO)
+- Outcome: Commit 49202b0 pushed to gh-pages. Homepage: new "Live Web Fetch" feature card (w: prefix), CSV card updated to mention --export-html + export-formats.md link. Features page: w: prefix entry added to cell prefixes section, --export-html + guide link added to CSV section. Shortcuts page: w: url row added to cell prefixes table. SEO keywords updated.
+- Competitor last did: --export-html feature (PR #123), ISS extension (PR #124), npm extension (PR #126), w: web-fetch (PR #127).
+- Follow-up: Bucket D — v0.23.0 release after pending PRs merge. Bucket F — quicksheet-co2 or quicksheet-pypi.
