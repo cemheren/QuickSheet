@@ -185,6 +185,7 @@ internal class DesktopWindow : IDisposable
         {
             _grid.LoadFromCsv(AutoSavePath);
         }
+        ConfigCell.LoadAndApply(_grid);
 
         PopulateDesktopFiles();
 
@@ -956,6 +957,7 @@ internal class DesktopWindow : IDisposable
             _grid.LoadFromCsv(_loadedFile);
         else if (File.Exists(AutoSavePath))
             _grid.LoadFromCsv(AutoSavePath);
+        ConfigCell.LoadAndApply(_grid);
 
         PopulateDesktopFiles();
 
@@ -1301,6 +1303,7 @@ internal class DesktopWindow : IDisposable
                     return;
                 case XK_t:
                     Theme.CycleNext();
+                    ConfigCell.PersistTheme(_grid);
                     return;
                 case XK_g:
                     _gotoMode = true;

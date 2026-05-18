@@ -32,6 +32,7 @@ public class SpreadsheetApp
         {
             _grid.LoadFromCsv(AutoSavePath);
         }
+        ConfigCell.LoadAndApply(_grid);
     }
 
     private int[] GetColumnWidths()
@@ -140,6 +141,8 @@ public class SpreadsheetApp
                         break;
                     case ConsoleKey.T:
                         Theme.CycleNext();
+                        ConfigCell.PersistTheme(_grid);
+                        _dirty = true;
                         Console.Clear();
                         break;
                     case ConsoleKey.G:

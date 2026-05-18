@@ -114,6 +114,7 @@ internal class DesktopForm : DesktopFormBase
         {
             _grid.LoadFromCsv(AutoSavePath);
         }
+        ConfigCell.LoadAndApply(_grid);
 
         PopulateDesktopFiles();
 
@@ -245,6 +246,7 @@ internal class DesktopForm : DesktopFormBase
             _grid.LoadFromCsv(_loadedFile);
         else if (File.Exists(AutoSavePath))
             _grid.LoadFromCsv(AutoSavePath);
+        ConfigCell.LoadAndApply(_grid);
 
         PopulateDesktopFiles();
 
@@ -1146,6 +1148,7 @@ internal class DesktopForm : DesktopFormBase
                     break;
                 case Keys.T:
                     Theme.CycleNext();
+                    ConfigCell.PersistTheme(_grid);
                     break;
                 case Keys.G:
                     _gotoMode = true;
