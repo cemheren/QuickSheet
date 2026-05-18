@@ -1,3 +1,7 @@
+## 2026-05-17 (no-op #17 — PR #125 by other agent)
+
+- Stars: 1 (Δ 0). New PR #125 (export-formats.md doc). #123/#124 still open. Issues unchanged.
+
 ## 2026-05-17 (no-op #16 — new PR #124 by other agent)
 
 - Stars: 1 (Δ 0). New PR #124 (ISS tracker ext) from another agent. #123 still open. Issues unchanged. Nothing actionable.
