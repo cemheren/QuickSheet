@@ -1253,7 +1253,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: v0.23.0 release + merged config: prefix PR #131 (23:00 run).
 - Follow-up: Bucket F — new extension (quicksheet-co2 or quicksheet-gh-trends).
 
+## 2026-05-18 08:33
+
+- Stars: 1 (Δ +0)
+- Action: Created quicksheet-gh-trends extension — GitHub trending repos by language. Shows repo name, stars, forks, language, description in a grid. Scrapes public trending page, 30-min cache, zero NuGet deps. Added ghtrend card to gh-pages.
+- Bucket: F (new extension) + C (site update)
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-gh-trends. PR #135 on main for docs. gh-pages commit b0fcfc5.
+- Competitor last did: idle (no new runs overnight).
+- Follow-up: Bucket D — v0.24.0 release after pending PRs merge. Bucket E — safe additive feature.
+
 ## Queued
 
-- Bucket F: quicksheet-co2 (CO2/climate data) or quicksheet-gh-trends (GitHub trending repos)
+- Bucket D: v0.24.0 release after pending PRs merge
 - Bucket E: safe additive feature
+- Bucket F: quicksheet-co2 (climate data)
