@@ -237,6 +237,10 @@
         <h3><span class="prefix">ext: name args</span> Extension call</h3>
         <p>Invoke any installed extension. The extension reads/writes cells via the JSON-lines stdin/stdout protocol.</p>
       </div>
+      <div class="feature-block">
+        <h3><span class="prefix">w: https://...</span> Live web fetch</h3>
+        <p>Fetches the first line of any HTTP/HTTPS URL and displays it in the cell. Auto-refreshes every 5 minutes. Press <code>F5</code> to force-refresh all <code>w:</code> cells instantly. Zero NuGet — uses BCL <code>HttpClient</code>.</p>
+      </div>
     </div>
   </section>
 
@@ -312,7 +316,9 @@
         <li>Load any CSV: <code>dotnet run -- mydata.csv</code></li>
         <li>Autosave preserves rows and columns beyond the visible grid</li>
         <li>Export to Markdown: <code>dotnet run -- data.csv --export-md out.md</code></li>
+        <li>Export to styled HTML: <code>dotnet run -- data.csv --export-html out.html</code></li>
       </ul>
+      <p style="margin-top:0.75rem;"><a href="https://github.com/cemheren/QuickSheet/blob/main/docs/export-formats.md">Full export formats guide →</a></p>
     </div>
   </section>
 

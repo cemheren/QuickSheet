@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>QuickSheet â€” Your Desktop Is a Spreadsheet</title>
   <meta name="description" content="QuickSheet replaces your wallpaper with a transparent, interactive spreadsheet grid. Pin notes, launch apps, track numbers â€” all without opening a window. Zero dependencies, .NET 9, Windows &amp; Linux.">
-  <meta name="keywords" content="terminal spreadsheet, desktop wallpaper spreadsheet, tui spreadsheet linux, dotnet spreadsheet cli, console spreadsheet, csv editor terminal, desktop productivity tool, cell coloring terminal, spreadsheet cell colors, keyboard shortcuts spreadsheet, find and replace csv, help overlay terminal, undo redo spreadsheet, arxiv terminal, research papers terminal, env var inspector terminal, environment variables terminal, github actions status terminal, dice roller terminal, leetcode daily terminal, arxiv paper lookup, github contribution streak, url encoder terminal, regex explainer, uuid generator terminal, git log terminal">
+  <meta name="keywords" content="terminal spreadsheet, desktop wallpaper spreadsheet, tui spreadsheet linux, dotnet spreadsheet cli, console spreadsheet, csv editor terminal, desktop productivity tool, cell coloring terminal, spreadsheet cell colors, keyboard shortcuts spreadsheet, find and replace csv, help overlay terminal, undo redo spreadsheet, arxiv terminal, research papers terminal, env var inspector terminal, environment variables terminal, github actions status terminal, dice roller terminal, leetcode daily terminal, arxiv paper lookup, github contribution streak, url encoder terminal, regex explainer, uuid generator terminal, git log terminal, live web fetch cell, w: prefix spreadsheet, http cell fetch terminal, export html csv, export markdown csv">
   <link rel="canonical" href="https://cemheren.github.io/QuickSheet/">
 
   <!-- Open Graph -->
@@ -343,7 +343,7 @@
       <div class="feature-card">
         <span class="icon">ðŸ“</span>
         <h3>CSV Everywhere</h3>
-        <p>CSV is the only persistence format. Export to Markdown with <code>--export-md</code>. No databases, no lock-in.</p>
+        <p>CSV is the only persistence format. Export to Markdown (<code>--export-md</code>) or styled HTML (<code>--export-html</code>). No databases, no lock-in. <a href="https://github.com/cemheren/QuickSheet/blob/main/docs/export-formats.md">Export formats guide →</a></p>
       </div>
       <div class="feature-card">
         <span class="icon">â†©ï¸</span>
@@ -384,6 +384,11 @@
         <span class="icon">âŒ¨ï¸</span>
         <h3>Full Desktop Parity</h3>
         <p>Desktop wallpaper mode now supports all shortcuts: undo, redo, goto, theme cycling, help overlay, find &amp; replace â€” same as console.</p>
+      </div>
+      <div class="feature-card">
+        <span class="icon">🌐</span>
+        <h3>Live Web Fetch</h3>
+        <p>Prefix a cell with <code>w: https://...</code> to pull live data from any URL. Auto-refreshes every 5 minutes; press <code>F5</code> to force-refresh all web cells.</p>
       </div>
     </div>
   </section>
