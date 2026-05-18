@@ -1,3 +1,10 @@
+## 2026-05-18 (doc config: prefix in tour after PR #131 merged)
+
+- Stars: 1 (Δ 0). PR #131 (config: cell prefix) merged 2026-05-18 06:04Z — validates the directed design. Followed up with a 2-line addition to docs/tour.md: new row in the prefix table for `config:`, and the Ctrl+T entry now mentions theme persistence. PR #134. No code change; build 0/0 confirmed.
+- Bucket: A (docs polish, smallest viable surface).
+- Outcome: PR #134 — docs(tour): document config: cell prefix and theme persistence.
+- Follow-up: none. Don't bloat docs further until more config keys exist or a real user asks.
+
 ## 2026-05-17 (re-do #129 via config: cell prefix per PR #130 closing directive)
 
 - Stars: 1 (Δ 0). Read closing comments on PR #130 + #127 (user correction: *"you should read PR comments, and take action based on why the rejection happened"*). PR #130 closing comment was a design directive — *"I don't want it to be a file, it should be a value with a prefix"* — so re-implemented #129 as a `config:` cell prefix. Added `CellPrefix.IsConfig/ParseConfig/FormatConfig`, `Theme.SetByName`, new `ConfigCell` helper. Wired into TUI + Win + Linux. Persists theme inside the CSV itself — no sidecar file. Build 0/0. PR #131 opened. PR #127 (w: web-fetch) closing comment was purely negative ("Just no, this is dumb") — feature permanently dropped, no re-attempt. Saved both lessons as memory: [[feedback-config-as-cell-prefix]] + [[feedback-read-pr-comments]].
