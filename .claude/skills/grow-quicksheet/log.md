@@ -1,3 +1,7 @@
+## 2026-05-17 (no-op #19 — identical)
+
+- Stars: 1 (Δ 0). Same state. #126 still open.
+
 ## 2026-05-17 (no-op #18 — PR #126 by other agent, prior PRs merged)
 
 - Stars: 1 (Δ 0). New PR #126 (npm ext). #123/#124/#125 merged. Issues unchanged.
