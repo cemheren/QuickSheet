@@ -6,6 +6,13 @@ All notable changes to QuickSheet. Format roughly follows [Keep a Changelog](htt
 
 (empty — bump here before the next tag)
 
+## 0.22.0 — 2026-05-17
+
+### Added
+- **`--export-html`** CLI flag — exports CSV as a self-contained dark-themed HTML table with auto-linked URLs, right-aligned numbers, and a QuickSheet backlink. Supports stdout piping for scripts.
+- **quicksheet-iss extension** — live International Space Station tracker. Shows lat/lon, altitude, speed, and ground region, plus all people currently in space grouped by spacecraft.
+- **Export formats guide** — `docs/export-formats.md` covering CSV, Markdown (`--export-md`), and HTML (`--export-html`) with usage examples and piping patterns.
+
 ## 0.21.0 — 2026-05-17
 
 ### Added
