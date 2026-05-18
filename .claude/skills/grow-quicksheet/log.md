@@ -1,3 +1,7 @@
+## 2026-05-17 (no-op #24 — PR #128 by other agent)
+
+- Stars: 1 (Δ 0). New PR #128 (pypi ext). #126/#127 still open. Issues unchanged.
+
 ## 2026-05-17 (no-op #23 — identical)
 
 - Stars: 1 (Δ 0). Same.
