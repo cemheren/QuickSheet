@@ -70,6 +70,41 @@ dotnet run --project ExcelConsole.csproj -- data.csv --export-html - | clip
 dotnet run --project ExcelConsole.csproj -- data.csv --export-html report.html && start report.html
 ```
 
+## JSON array (`--export-json`)
+
+Convert a CSV file into a JSON array of objects. The first row is used as keys;
+numeric cells are emitted as numbers (not strings).
+
+```bash
+# Export to a file
+dotnet run --project ExcelConsole.csproj -- data.csv --export-json data.json
+
+# Pipe to stdout
+dotnet run --project ExcelConsole.csproj -- data.csv --export-json -
+
+# Pipe into jq for filtering / transformation
+dotnet run --project ExcelConsole.csproj -- data.csv --export-json - | jq '.[] | select(.Priority == "High")'
+```
+
+**Example input** (`tasks.csv`):
+
+```csv
+Task,Status,Priority,Hours
+Fix login bug,Done,High,3
+Add dark mode,In Progress,Medium,8
+Write docs,Pending,Low,2
+```
+
+**Output**:
+
+```json
+[
+  {"Task":"Fix login bug","Status":"Done","Priority":"High","Hours":3},
+  {"Task":"Add dark mode","Status":"In Progress","Priority":"Medium","Hours":8},
+  {"Task":"Write docs","Status":"Pending","Priority":"Low","Hours":2}
+]
+```
+
 ## Piping and composition
 
 All export modes support `-` as the output path, writing to stdout instead of a file.
@@ -78,6 +113,9 @@ This makes QuickSheet composable with other CLI tools:
 ```bash
 # CSV → Markdown → copy to clipboard (macOS)
 dotnet run --project ExcelConsole.csproj -- data.csv --export-md - | pbcopy
+
+# CSV → JSON → pipe into jq
+dotnet run --project ExcelConsole.csproj -- data.csv --export-json - | jq '.[0]'
 
 # CSV → HTML → serve with Python
 dotnet run --project ExcelConsole.csproj -- data.csv --export-html - > /tmp/report.html
@@ -89,15 +127,16 @@ dotnet run --project ExcelConsole.csproj -- data.csv --export-md - | head -5
 
 ## Format comparison
 
-| Feature | CSV | Markdown | HTML |
-|---|---|---|---|
-| Human readable | ○ | ● | ● |
-| Machine parseable | ● | ○ | ○ |
-| Styled output | — | — | ● |
-| Clickable URLs | — | ● (on GitHub) | ● |
-| Numeric alignment | — | — | ● |
-| Embeddable | — | ● (README/wiki) | ● (browser) |
-| Round-trip editable | ● | — | — |
+| Feature | CSV | Markdown | HTML | JSON |
+|---|---|---|---|---|
+| Human readable | ○ | ● | ● | ○ |
+| Machine parseable | ● | ○ | ○ | ● |
+| Styled output | — | — | ● | — |
+| Clickable URLs | — | ● (on GitHub) | ● | — |
+| Numeric alignment | — | — | ● | ● (native) |
+| Embeddable | — | ● (README/wiki) | ● (browser) | ● (APIs/scripts) |
+| Round-trip editable | ● | — | — | — |
+| jq / tool-friendly | — | — | — | ● |
 
 ---
 
