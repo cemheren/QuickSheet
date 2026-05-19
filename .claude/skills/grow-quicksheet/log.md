@@ -1,3 +1,10 @@
+## 2026-05-18 (AI-hero research + ai-workflow.csv for screenshot reproduction)
+
+- Stars: 0. User asked for top-10 Claude/Copilot/Aider commands to build an AI-focused hero PNG. Wrote `research/ai-commands-for-hero.md` with the ranked top-10 by recognizability × demo value (`/init`, `/compact`, `/cost`, `claude --continue`, `gh copilot suggest`, `/ask` aider, copilot chat `/fix /tests /explain /doc`, etc.), per-cell layout mock, hard rules for the capture (real data, Nord/Dracula theme, ≥1920×1080), and source links. Then shipped `examples/ai-workflow.csv` matching the layout so the screenshot is reproducible with one command. PR #138.
+- Bucket: R (research) + A (example asset).
+- Outcome: research saved to skill dir (direct main); PR #138 against repo for the CSV.
+- Follow-up: when user captures the hero PNG, swap README hero to it. Also queued: r/MachineLearning + r/LocalLLaMA venue draft framing QuickSheet as ambient AI-cost monitor.
+
 ## 2026-05-18 (social strategy playbook drafted — user asked, user executes)
 
 - Stars: 0 (Δ 0). User signal: *"we lost the one star we had... Let's build a social media strategy. I will try execute it."* Wrote `drafts/social-strategy.md` — ordered 7-day launch playbook with asset gate (screenshot A1 first, no post without it), per-venue sequencing pulled from `research/wallpaper-launch-venues.md` (r/unixporn first, HN reframed to Day 4, NOT primary), engagement rules for first-60-min, hard "do not" list (no cross-post, no re-post after flop, no alts), and a measurement template to log per-post.
