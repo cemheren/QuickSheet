@@ -1335,3 +1335,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 
 - Bucket F: quicksheet-ipinfo (IP geolocation, ISP, org, timezone — free ipinfo.io API)
 - Bucket D: v0.25.0 release after PRs #142/#144/#148 merge
+
+## 2026-05-19 16:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket F — created quicksheet-ipinfo extension. IP geolocation, ISP, org, ASN, timezone, hostname, coords via ipinfo.io. Free, no API key. Supports `ip:` (own public IP) or `ip: 8.8.8.8` (any IPv4/IPv6). 10-min cache. Live-tested: 8.8.8.8 → Google LLC, Mountain View CA. Added ip: card to gh-pages (58→59 extensions). Updated main repo README + docs/extensions.md (PR #149).
+- Bucket: F (new extension) + C (site update)
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-ipinfo (commit b39430b). PR #149 on main for docs. gh-pages commit f1d55f7.
+- Competitor last did: idle (last seen activity: grow/column-width-override PR #144, May 19 11:00).
+- Follow-up: Bucket D — v0.25.0 release after pending PRs merge (#142/#144/#148/#149). Bucket E — safe additive feature (column auto-resize or cell formatting).
+
+## Queued
+
+- Bucket D: v0.25.0 release after PRs #142/#144/#148/#149 merge
+- Bucket E: column auto-resize or cell formatting (bold/color via ANSI) — safe additive
+- Bucket F: quicksheet-openmeteo (DONE), quicksheet-ipinfo (DONE). Next: quicksheet-ipapi2 variant or quicksheet-dns
