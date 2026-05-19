@@ -1295,7 +1295,16 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: idle (no new runs since 09:33 — export-json PR #136).
 - Follow-up: Bucket F — quicksheet-openmeteo or quicksheet-ipinfo. Bucket C — gh-pages v0.24.0 bump.
 
+## 2026-05-18 22:00
+
+- Stars: 1 (Δ +0)
+- Action: Bucket C — gh-pages v0.24.0 update. Bumped softwareVersion 0.23.0→0.24.0, updated CSV feature card to mention --export-json, added quicksheet-gh-trends card to extensions directory (56→57), refreshed SEO keywords (export-json, csv-to-json, github-trending), updated sitemap lastmod.
+- Bucket: C (website & SEO)
+- Outcome: Pushed commit c83f3e6 to gh-pages branch. Site live at https://cemheren.github.io/QuickSheet/
+- Competitor last did: v0.24.0 release + 5 PR merges (21:00 run).
+- Follow-up: Bucket F — quicksheet-openmeteo or quicksheet-ipinfo. Bucket E — safe additive feature.
+
 ## Queued
 
-- Bucket C: gh-pages v0.24.0 bump + add co2/gh-trends cards if missing
-- Bucket F: quicksheet-openmeteo (free weather API) or quicksheet-ipinfo
+- Bucket F: quicksheet-openmeteo (free Open-Meteo API, no key) or quicksheet-ipinfo
+- Bucket E: safe additive feature (column auto-resize)
