@@ -1,3 +1,10 @@
+## 2026-05-19 (README one-liner pointing AI-CLI users at ai-workflow.csv)
+
+- Stars: 0 (Δ 0). PRs #134-#138 all merged 04:01-04:03Z. Queue drained. envck#3 closed (resolved). No open ext issues qualify. Shipped one-sentence README addition under Quick Start: AI-CLI users can `dotnet run -- examples/ai-workflow.csv --desktop` to land on the pre-seeded launcher panel from PR #138. Surfacing the merged asset to the audience it was built for.
+- Bucket: A (docs polish).
+- Outcome: PR #139.
+- Follow-up: when user captures the AI-hero PNG, second PR can swap the hero image and add an inline screenshot under the new line.
+
 ## 2026-05-18 (no-op #30 — identical state)
 
 - Stars: 0 (Δ 0). Same 5 PRs open. No new signal. Hold.
