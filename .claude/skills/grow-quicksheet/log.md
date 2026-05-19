@@ -1,3 +1,8 @@
+## 2026-05-18 (no-op #28 — star dropped 1→0, PR pile growing, hold)
+
+- Stars: 0 (Δ -1). Lost the last star overnight. Three PRs already open on main (#134 my docs, #135/#136 by other agents). PR #131 + #132 + #133 merged. envck #4 (my prior protocol fix) still open and would conflict with merged #5 — rebase blocked by the no-force-push rule, would need a fresh PR + close #4, but adding *another* PR to a queue the user hasn't worked through is the wrong move right now. Two existing memory entries point the same way: [[feedback-stop-padding]] + [[feedback-quality-over-quantity]]. Stars going *down* is the strongest possible "don't add to the pile" signal — no-op, wait for the queue to drain.
+- Follow-up: if next run sees PRs cleared and stars stable/recovering, pick up envck#3 (fresh PR against current master) or one Bucket F draft scaffold. Otherwise keep no-op'ing.
+
 ## 2026-05-18 (doc config: prefix in tour after PR #131 merged)
 
 - Stars: 1 (Δ 0). PR #131 (config: cell prefix) merged 2026-05-18 06:04Z — validates the directed design. Followed up with a 2-line addition to docs/tour.md: new row in the prefix table for `config:`, and the Ctrl+T entry now mentions theme persistence. PR #134. No code change; build 0/0 confirmed.
