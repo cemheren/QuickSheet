@@ -65,7 +65,10 @@ internal class DesktopWindow : IDisposable
     private const int MaxColumnWidth = 40;
     private const int ColumnWidthStep = 4;
     private const int RowHeaderWidth = 4;
-    private const string FontName = "monospace:size=14";
+    // Fontconfig pattern: first installed family wins. Prefer modern dev fonts
+    // ("JetBrains Mono" and "Cascadia Code" are widely installed on dev machines).
+    // Last entry is the generic alias; fontconfig resolves it to the system mono.
+    private const string FontName = "JetBrains Mono,JetBrainsMono Nerd Font,Cascadia Code,Cascadia Mono,Fira Code,Source Code Pro,DejaVu Sans Mono,monospace:size=14";
 
     private bool _running;
     private bool _isNativeX11;

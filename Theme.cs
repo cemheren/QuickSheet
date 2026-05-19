@@ -77,42 +77,44 @@ public class Theme
             HeaderHighlightRgb  = (  7,  54,  66),  // base02 #073642
             SelectionBgRgb      = (  7,  54,  66),
             SelectionFgRgb      = (147, 161, 161),  // base1  #93a1a1
-            SearchMatchBgRgb    = (181, 137,   0),  // yellow #b58900
+            SearchMatchBgRgb    = (203, 173,  77),  // softened yellow
             SearchMatchFgRgb    = (  0,  43,  54),
-            SearchSelectedBgRgb = (203,  75,  22),  // orange #cb4b16
+            SearchSelectedBgRgb = (213, 122,  84),  // softened orange
             SearchSelectedFgRgb = (253, 246, 227),
-            StatusBarBgRgb      = ( 42, 161, 152),  // cyan   #2aa198
+            StatusBarBgRgb      = ( 95, 183, 175),  // softened cyan
             StatusBarFgRgb      = (  0,  43,  54),
         },
         new Theme
         {
-            // Solarized Light — Schoonover. Cream background, slate text, VSCode vibe.
+            // Solarized Light — matches VSCode's solarized-light-color-theme.json
+            // (microsoft/vscode/extensions/theme-solarized-light). Status bar is the
+            // light base2, not dark base02 — matching VSCode's actual look.
             Name = "SolarizedLight",
             BackgroundRgb       = (253, 246, 227),  // base3   #fdf6e3
             ForegroundRgb       = (101, 123, 131),  // base00  #657b83
-            HeaderHighlightRgb  = (147, 161, 161),  // base1   #93a1a1
+            HeaderHighlightRgb  = (238, 232, 213),  // base2   #eee8d5 (editorWidget bg)
             SelectionBgRgb      = (238, 232, 213),  // base2   #eee8d5
-            SelectionFgRgb      = ( 88, 110, 117),  // base01  #586e75
-            SearchMatchBgRgb    = (181, 137,   0),  // yellow  #b58900
-            SearchMatchFgRgb    = (253, 246, 227),
-            SearchSelectedBgRgb = (203,  75,  22),  // orange  #cb4b16
-            SearchSelectedFgRgb = (253, 246, 227),
-            StatusBarBgRgb      = (  7,  54,  66),  // base02  #073642
-            StatusBarFgRgb      = (147, 161, 161),  // base1
+            SelectionFgRgb      = (101, 123, 131),  // base00
+            SearchMatchBgRgb    = (229, 229, 161),  // VSCode findMatchHighlight #e5e5a1
+            SearchMatchFgRgb    = (101, 123, 131),  // base00
+            SearchSelectedBgRgb = (245, 164,  15),  // VSCode findMatch #f5a40f
+            SearchSelectedFgRgb = (253, 246, 227),  // base3
+            StatusBarBgRgb      = (238, 232, 213),  // base2   #eee8d5 (VSCode statusBar bg)
+            StatusBarFgRgb      = (101, 123, 131),  // base00  (VSCode statusBar fg)
         },
         new Theme
         {
             Name = "Matrix",
             BackgroundRgb       = (  0,   0,   0),
-            ForegroundRgb       = (  0, 200,   0),
-            HeaderHighlightRgb  = (  0, 100,   0),
-            SelectionBgRgb      = (  0, 100,   0),
+            ForegroundRgb       = ( 90, 200, 110),  // softer phosphor green
+            HeaderHighlightRgb  = ( 30,  80,  40),
+            SelectionBgRgb      = ( 30,  80,  40),
             SelectionFgRgb      = (240, 240, 240),
-            SearchMatchBgRgb    = (139, 139,   0),
+            SearchMatchBgRgb    = (170, 170,  80),  // softened olive
             SearchMatchFgRgb    = (  0,   0,   0),
-            SearchSelectedBgRgb = (  0, 200, 200),
+            SearchSelectedBgRgb = ( 90, 200, 200),  // softened cyan
             SearchSelectedFgRgb = (  0,   0,   0),
-            StatusBarBgRgb      = (  0, 100,   0),
+            StatusBarBgRgb      = ( 30,  80,  40),
             StatusBarFgRgb      = (240, 240, 240),
         },
         new Theme
@@ -135,32 +137,32 @@ public class Theme
         {
             // Synthwave — outrun-era magenta + cyan
             Name = "Synthwave",
-            BackgroundRgb       = ( 26,  16,  41),
-            ForegroundRgb       = (255,  64, 200),
-            HeaderHighlightRgb  = (100,  20, 100),
-            SelectionBgRgb      = (  0, 139, 139),
+            BackgroundRgb       = ( 30,  20,  50),
+            ForegroundRgb       = (255, 140, 220),  // softened pink
+            HeaderHighlightRgb  = (120,  50, 130),
+            SelectionBgRgb      = ( 90, 170, 180),
             SelectionFgRgb      = (240, 240, 240),
-            SearchMatchBgRgb    = (255, 230,  80),
-            SearchMatchFgRgb    = (100,  20, 100),
-            SearchSelectedBgRgb = (  0, 230, 230),
+            SearchMatchBgRgb    = (240, 220, 130),
+            SearchMatchFgRgb    = (120,  50, 130),
+            SearchSelectedBgRgb = (130, 220, 220),
             SearchSelectedFgRgb = (  0,   0,   0),
-            StatusBarBgRgb      = (255,  64, 200),
+            StatusBarBgRgb      = (220, 130, 200),  // softened magenta
             StatusBarFgRgb      = (  0,   0,   0),
         },
         new Theme
         {
             // Gruvbox — warm earth tones
             Name = "Gruvbox",
-            BackgroundRgb       = ( 40,  40,  40),  // bg0    #282828
-            ForegroundRgb       = (235, 219, 178),  // fg     #ebdbb2
-            HeaderHighlightRgb  = ( 80,  73,  69),  // bg1    #504945
-            SelectionBgRgb      = (215, 153,  33),  // yellow #d79921
+            BackgroundRgb       = ( 40,  40,  40),  // bg0   #282828
+            ForegroundRgb       = (235, 219, 178),  // fg    #ebdbb2
+            HeaderHighlightRgb  = ( 80,  73,  69),  // bg1   #504945
+            SelectionBgRgb      = (220, 175,  90),  // softened yellow
             SelectionFgRgb      = ( 40,  40,  40),
-            SearchMatchBgRgb    = (204,  36,  29),  // red    #cc241d
+            SearchMatchBgRgb    = (215, 110, 100),  // softened red
             SearchMatchFgRgb    = (235, 219, 178),
-            SearchSelectedBgRgb = (251,  73,  52),  // bright red #fb4934
-            SearchSelectedFgRgb = (235, 219, 178),
-            StatusBarBgRgb      = (215, 153,  33),
+            SearchSelectedBgRgb = (250, 140, 120),  // softened bright red
+            SearchSelectedFgRgb = ( 40,  40,  40),
+            StatusBarBgRgb      = (220, 175,  90),
             StatusBarFgRgb      = ( 40,  40,  40),
         },
         new Theme
@@ -172,11 +174,11 @@ public class Theme
             HeaderHighlightRgb  = (117, 113,  94),  // comment #75715e
             SelectionBgRgb      = ( 73,  72,  62),
             SelectionFgRgb      = (248, 248, 242),
-            SearchMatchBgRgb    = (230, 219, 116),  // yellow  #e6db74
+            SearchMatchBgRgb    = (230, 219, 140),  // softened yellow
             SearchMatchFgRgb    = ( 39,  40,  34),
-            SearchSelectedBgRgb = (166, 226,  46),  // green   #a6e22e
+            SearchSelectedBgRgb = (180, 220,  90),  // softened green
             SearchSelectedFgRgb = ( 39,  40,  34),
-            StatusBarBgRgb      = (249,  38, 114),  // pink    #f92672
+            StatusBarBgRgb      = (235, 110, 150),  // softened pink
             StatusBarFgRgb      = (248, 248, 242),
         },
         new Theme
