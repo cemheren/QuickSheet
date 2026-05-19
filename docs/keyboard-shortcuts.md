@@ -45,6 +45,7 @@ and **desktop mode** (wallpaper) unless noted otherwise.
 |-----|--------|
 | `Ctrl+F` | Find — substring search across all cells |
 | `Ctrl+B` | Sort by current column (toggles ascending ↔ descending) |
+| `Ctrl+W` | Set column width — enter a number to fix width, Enter to reset to auto-fit |
 
 ## Undo / Redo
 

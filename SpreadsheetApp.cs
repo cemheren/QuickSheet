@@ -11,8 +11,10 @@ public class SpreadsheetApp
     private string? _searchTerm;
     private List<(int row, int col)> _searchMatches = new();
     private int _searchMatchIndex = -1;
-    private const int MinColWidth = 10;
+    private const int MinColWidth = 5;
     private const int RowHeaderWidth = 4;
+    // Per-column manual width overrides (null = auto-fit).
+    private readonly Dictionary<int, int> _colWidthOverrides = new();
 
     private static readonly string StateDir = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ExcelConsole");
@@ -40,6 +42,11 @@ public class SpreadsheetApp
         var widths = new int[_grid.ColumnCount];
         for (int c = 0; c < _grid.ColumnCount; c++)
         {
+            if (_colWidthOverrides.TryGetValue(c, out int overrideW))
+            {
+                widths[c] = overrideW;
+                continue;
+            }
             int max = GridManager.GetColumnName(c).Length;
             for (int r = 0; r < _grid.RowCount; r++)
             {
@@ -162,6 +169,9 @@ public class SpreadsheetApp
                         break;
                     case ConsoleKey.R:
                         PromptFindReplace();
+                        break;
+                    case ConsoleKey.W:
+                        PromptColumnWidth();
                         break;
                 }
                 Render();
@@ -425,6 +435,7 @@ public class SpreadsheetApp
             "  ║  Ctrl+Z         Undo                     ║",
             "  ║  Ctrl+Y         Redo                     ║",
             "  ║  Ctrl+B         Sort by column (toggle)  ║",
+            "  ║  Ctrl+W         Set column width         ║",
             "  ║  Enter          Next search match         ║",
             "  ║  Shift+Enter    Previous search match     ║",
             "  ║  Escape         Clear search              ║",
@@ -579,6 +590,40 @@ public class SpreadsheetApp
         Console.Write($" Replaced {replaced} cell(s)".PadRight(totalWidth));
         Console.ResetColor();
         Console.ReadKey(intercept: true);
+    }
+
+    private void PromptColumnWidth()
+    {
+        int statusY = Console.WindowHeight - 1;
+        int totalWidth = Console.WindowWidth;
+        string colName = GridManager.GetColumnName(_selectedCol);
+
+        // Show current width in the prompt so user knows what to override.
+        int currentAuto = GetColumnWidths()[_selectedCol];
+        bool hasOverride = _colWidthOverrides.ContainsKey(_selectedCol);
+        string currentDesc = hasOverride ? $"fixed={_colWidthOverrides[_selectedCol]}" : $"auto={currentAuto}";
+
+        string? input = PromptInput($" Column {colName} width ({currentDesc}, Enter=auto): ", statusY, totalWidth);
+        if (input == null) return; // Escape
+
+        if (string.IsNullOrWhiteSpace(input))
+        {
+            // Reset to auto-fit
+            _colWidthOverrides.Remove(_selectedCol);
+        }
+        else if (int.TryParse(input.Trim(), out int w) && w >= MinColWidth)
+        {
+            _colWidthOverrides[_selectedCol] = w;
+        }
+        else
+        {
+            Console.SetCursorPosition(0, statusY);
+            Console.BackgroundColor = ConsoleColor.DarkRed;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write($" Invalid width (min {MinColWidth})".PadRight(totalWidth));
+            Console.ResetColor();
+            Console.ReadKey(intercept: true);
+        }
     }
 
     private string? PromptInput(string prompt, int statusY, int totalWidth)
