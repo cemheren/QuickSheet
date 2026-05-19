@@ -201,11 +201,28 @@ internal class DesktopForm : DesktopFormBase
         }
     }
 
+    // Prefer modern monospace fonts (Cascadia Code ships with Windows 11 and matches the
+    // VSCode terminal aesthetic; JetBrains Mono and Fira Code are common dev installs).
+    // Fall back to Consolas, which has been on Windows since Vista.
+    private static readonly string[] PreferredFonts =
+    [
+        "Cascadia Code", "Cascadia Mono", "JetBrains Mono", "Fira Code", "Consolas",
+    ];
+
+    private static readonly Lazy<string> ResolvedFontFamily = new(() =>
+    {
+        using var installed = new System.Drawing.Text.InstalledFontCollection();
+        var available = installed.Families.Select(f => f.Name).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        foreach (var name in PreferredFonts)
+            if (available.Contains(name)) return name;
+        return "Consolas";
+    });
+
     private void UpdateFontMetrics()
     {
         float fontSize = Math.Clamp(_columnWidth * 0.7f, 6f, 22f);
         _monoFont?.Dispose();
-        _monoFont = new Font("Consolas", fontSize, FontStyle.Regular);
+        _monoFont = new Font(ResolvedFontFamily.Value, fontSize, FontStyle.Regular);
         using var bmp = new Bitmap(1, 1);
         using var g = Graphics.FromImage(bmp);
         g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
