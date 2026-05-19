@@ -1313,11 +1313,6 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: idle (no new runs since 09:33 — export-json PR #136).
 - Follow-up: Bucket F — quicksheet-ipinfo (IP geolocation + network info). Bucket E — column auto-resize or safe additive feature.
 
-## Queued
-
-- Bucket F: quicksheet-ipinfo (IP geolocation, ISP, org, timezone — free ipinfo.io API)
-- Bucket E: column auto-resize (Ctrl+W or similar keybinding)
-
 ## 2026-05-19 11:00
 
 - Stars: 1 (Δ +0)
@@ -1326,3 +1321,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: PR #144 opened (commit 15eb576 on grow/column-width-override). Build green. NOT merged per rule.
 - Competitor last did: idle (last activity was openmeteo extension 23:00).
 - Follow-up: Bucket F — quicksheet-ipinfo next. Bucket D — v0.25.0 release after pending PRs merge.
+
+## 2026-05-19 15:00
+
+- Stars: 1 (Δ +0)
+- Action: Fixed issue #147 — removed Ctrl+B column sort from both desktop hosts (Linux + Windows). User reported it "messes up the entire desktop." Sort remains in TUI/console mode where it was designed. Also removed now-unused XK_b constant.
+- Bucket: E (bug fix / issue)
+- Outcome: PR #148 opened (commit a7faf6d on grow/revert-ctrl-b-desktop-sort). Build green. Closes #147.
+- Competitor last did: idle (last activity was openmeteo extension, May 18 23:00).
+- Follow-up: Bucket F — quicksheet-ipinfo. Bucket D — v0.25.0 release after PRs #142/#144/#148 merge.
+
+## Queued
+
+- Bucket F: quicksheet-ipinfo (IP geolocation, ISP, org, timezone — free ipinfo.io API)
+- Bucket D: v0.25.0 release after PRs #142/#144/#148 merge
