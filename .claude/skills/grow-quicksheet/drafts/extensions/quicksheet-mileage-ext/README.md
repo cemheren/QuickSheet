@@ -7,7 +7,7 @@ US IRS standard-mileage deduction calculator for [QuickSheet](https://github.com
 In any QuickSheet cell:
 
 ```
-ext: github:cemheren/quicksheet-mileage-ext
+ext: github:Deskworks/quicksheet-mileage-ext
 ```
 
 ## Use

@@ -5,7 +5,7 @@ US self-employment tax estimator for [QuickSheet](https://github.com/cemheren/Qu
 ## Install
 
 ```
-ext: github:cemheren/quicksheet-1099-ext
+ext: github:Deskworks/quicksheet-1099-ext
 ```
 
 ## Use

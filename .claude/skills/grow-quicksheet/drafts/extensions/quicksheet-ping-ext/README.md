@@ -7,7 +7,7 @@ HTTP ping (status + latency) for [QuickSheet](https://github.com/cemheren/QuickS
 Type into any cell:
 
 ```
-ext: github:cemheren/quicksheet-ping-ext
+ext: github:Deskworks/quicksheet-ping-ext
 ```
 
 ## Use

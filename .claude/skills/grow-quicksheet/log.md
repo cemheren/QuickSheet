@@ -117,7 +117,7 @@
 
 ## 2026-05-17 (ext-issue fix — quicksheet-envck#3)
 
-- Stars: 1 (Δ 0). 5 new ext-repo issues appeared (pihole, gha, envck, dice, leetcode — all [Test] auto-filed protocol bugs). Picked envck as smallest single-crash case. PR https://github.com/cemheren/quicksheet-envck/pull/4 (default branch is `master` on that repo) — closes #3. Three bugs fixed together: (a) `_anchor = a.GetString()` on a JSON-object property crashed, swallowed silently; (b) waited for `init` from host (host doesn't send init); (c) `prefix:"env:"` had trailing colon (same as jwtdec#1 pattern). Net -28/+21 lines. Smoke-tested with realistic activate payload including the `anchor:{row,col}` that previously crashed.
+- Stars: 1 (Δ 0). 5 new ext-repo issues appeared (pihole, gha, envck, dice, leetcode — all [Test] auto-filed protocol bugs). Picked envck as smallest single-crash case. PR https://github.com/Deskworks/quicksheet-envck/pull/4 (default branch is `master` on that repo) — closes #3. Three bugs fixed together: (a) `_anchor = a.GetString()` on a JSON-object property crashed, swallowed silently; (b) waited for `init` from host (host doesn't send init); (c) `prefix:"env:"` had trailing colon (same as jwtdec#1 pattern). Net -28/+21 lines. Smoke-tested with realistic activate payload including the `anchor:{row,col}` that previously crashed.
 - Bucket: ext-repo fix
 - Outcome: PR awaits user merge. Other 4 sibling issues queued for subsequent runs (pihole, gha, dice, leetcode — same triage pattern).
 - Follow-up: next non-ext-fix run can pick another of those 4. Or wait for batch + fix in one round.
@@ -207,7 +207,7 @@
 - Stars: 1 (Δ 0)
 - Action: Priority rule #1 — fixed quicksheet-curl#5 (open issue on ext repo). Two protocol bugs surfaced: (a) the title-flagged `type:"response"` instead of `"write"`, and (b) under smoke-test discovered Main() waited for `init` from host (host never sends init) which silently ate the first activate. Cleaner fix: drop InitMessage, emit register on startup with explicit Console.Out.Flush(), default ResponseMessage.Type to "write". Net diff -16/+7. Smoke-tested with empty params (synthetic usage cells) and live GET api.github.com/zen (+ 200 OK | 120ms | text/plain).
 - Bucket: ext-repo fix
-- Outcome: PR https://github.com/cemheren/quicksheet-curl/pull/7 — closes #5. Build clean. PR opened in the ext repo per skill workflow (this is the rare case where the skill DOES open PRs against an external repo, because cemheren owns it and Bucket F covers ext-repo work).
+- Outcome: PR https://github.com/Deskworks/quicksheet-curl/pull/7 — closes #5. Build clean. PR opened in the ext repo per skill workflow (this is the rare case where the skill DOES open PRs against an external repo, because cemheren owns it and Bucket F covers ext-repo work).
 - Follow-up: Other ext issue (quicksheet-todo#2) is a meta question, skipped. Main-repo issues unchanged (#14 copilot, #3 Wayland — both require human).
 
 ## 2026-05-17 (Bucket F scaffold-only — quicksheet-ghstreak-ext)
@@ -215,7 +215,7 @@
 - Stars: 1 (Δ 0)
 - Action: Bucket F (scaffold only — did NOT `gh repo create`). New extension `drafts/extensions/quicksheet-ghstreak-ext/`: Program.cs (~160 LOC, .NET 9, zero NuGet) + manifest + README + LICENSE + .gitignore. Prefix `ghstreak:` (avoids collision with `gha:` ext per PR #111). Reads public unauthenticated `api.github.com/users/<u>/events/public`, derives commits-today + consecutive-UTC-day streak + 90d total from PushEvent payloads. 15-min disk cache (XDG/LOCALAPPDATA per OS). 0/0 build; smoke-tested against live API with `torvalds` — returned register + 4 cells (`@torvalds`, `0 today`, `🔥 30d streak`, `92 in 90d`).
 - Bucket: F (scaffold)
-- Outcome: Skill self-edit push to main. User decides when to `gh repo create cemheren/quicksheet-ghstreak-ext --public --source=. --push`. Completes the "CS-student flex bundle" pair with the already-scaffolded `quicksheet-leetcode-ext`.
+- Outcome: Skill self-edit push to main. User decides when to `gh repo create Deskworks/quicksheet-ghstreak-ext --public --source=. --push`. Completes the "CS-student flex bundle" pair with the already-scaffolded `quicksheet-leetcode-ext`.
 - Follow-up: Persona-fit one-line: *"CS student installs QuickSheet because they want their GitHub commit-streak + commits-today on their rice wallpaper alongside their LeetCode streak, behind every IDE window."* Pairs with the CS-student rice variant in `drafts/unixporn-rice.md`. Honest caveats included in README: public events only, no auth (60 req/hr limit), UTC day skew.
 
 ## 2026-05-17 (Bucket C — showhn iteration-speed paragraph)
@@ -247,7 +247,7 @@
 - Stars: 1 (Δ 0)
 - Action: Bucket F (scaffold only — did NOT `gh repo create`). New extension `drafts/extensions/quicksheet-leetcode-ext/`: Program.cs (~150 LOC, .NET 9, zero NuGet), manifest, README, LICENSE, .gitignore. Queries LeetCode public GraphQL `matchedUser` for username; returns 4 cells: `@user`, total solved, difficulty breakdown (E/M/H), streak. 1-hour disk cache (XDG/LOCALAPPDATA per OS) to be polite to LeetCode rate limits. 0/0 build; smoke-tested against live API with `neetcode` username — returned correct register + 4 cells (`@NeetCode`, `205 solved`, `E 103 · M 98 · H 4`, `no streak`).
 - Bucket: F (scaffold)
-- Outcome: Skill self-edit push to main. User decides when to `gh repo create cemheren/quicksheet-leetcode-ext --public --source=. --push` and open the README/tour cross-link PR. Note: PR #111 (another agent) already shipped `gha:` ext, so the SRE-side ranked-#1 slot is now covered.
+- Outcome: Skill self-edit push to main. User decides when to `gh repo create Deskworks/quicksheet-leetcode-ext --public --source=. --push` and open the README/tour cross-link PR. Note: PR #111 (another agent) already shipped `gha:` ext, so the SRE-side ranked-#1 slot is now covered.
 - Follow-up: Persona-fit one-line: *"CS student installs QuickSheet because they want their LeetCode solved count + streak on their rice wallpaper as a flex visible behind every IDE window."* Pairs with the CS-student rice variant in `drafts/unixporn-rice.md` (added last run). Natural Bucket F next: `gh:` user-streak ext to complete the "CS-student flex bundle."
 
 ## 2026-05-17 (Bucket C — unixporn-rice draft revision per venue brief)
@@ -279,7 +279,7 @@
 - Stars: 1 (Δ 0)
 - Action: Bucket F (scaffold only — did NOT `gh repo create`). New extension `drafts/extensions/quicksheet-roll-ext/`: Program.cs (~150 LOC, .NET 9, zero NuGet) + manifest + README + LICENSE + .gitignore. Dice parser: `NdM[+/-K]`, `drop lowest|highest`, `adv|dis` (D&D 5e advantage/disadvantage), optional table-file lookup (`roll: 1d100, encounters.txt`). 0/0 build; smoke-tested 5 expressions including table lookup — all correct.
 - Bucket: F (scaffold)
-- Outcome: Skill self-edit push to main. User decides when to `gh repo create cemheren/quicksheet-roll-ext --public --source=. --push` and open the cross-link PR.
+- Outcome: Skill self-edit push to main. User decides when to `gh repo create Deskworks/quicksheet-roll-ext --public --source=. --push` and open the cross-link PR.
 - Follow-up: Persona-fit one-line: *"TTRPG GM installs QuickSheet because they want a dice roller + encounter-table lookup on their GM-side wallpaper without using Roll20."* Pairs naturally with the queued `for-dms.md` audience landing page (once at least one TTRPG ext is live).
 
 ## 2026-05-17 (Bucket D — AwesomeCSV draft)
@@ -327,7 +327,7 @@
 - Stars: 1 (Δ 0)
 - Action: Bucket F (scaffold only — did NOT `gh repo create`). Wrote `.claude/skills/grow-quicksheet/drafts/extensions/quicksheet-health-ext/`: Program.cs (~120 LOC, .NET 9, zero NuGet), HealthExtension.csproj, manifest, README, LICENSE, .gitignore. Reads inline `name=url,...` or a path to `services.csv`; HEAD/GET probe; one row per service with name + indicator (✓⚠✗) + status code + latency. 0/0 build; smoke-test with `github` + `example.com` returned correct register message and 8 cells.
 - Bucket: F (scaffold)
-- Outcome: Skill self-edit push to main. User decides when to `gh repo create cemheren/quicksheet-health-ext --public --source=. --push` and open the cross-link PR against QuickSheet README/tour.
+- Outcome: Skill self-edit push to main. User decides when to `gh repo create Deskworks/quicksheet-health-ext --public --source=. --push` and open the cross-link PR against QuickSheet README/tour.
 - Follow-up: Persona-fit one-line: *"r/selfhosted user installs QuickSheet because they want Plex/Pi-hole/Nextcloud up/down dots on their wallpaper without opening Homepage.io."* If user approves, ship the repo on next run (or do it themselves).
 
 ## 2026-05-17 (Bucket A — for-traders landing + starter CSV)
@@ -455,7 +455,7 @@
 - Stars: 0 (Δ 0)
 - Action: Bucket A (ext repo) — closed quicksheet-jwtdec#1. Manifest had `prefix: "jwtdec:"` (trailing colon broke prefix match). Main waited for `init` instead of emitting `register` on startup. Activate response was `type:"response"` instead of `type:"write"`. Fixed all three + propagated activate id. Smoke-tested with HS256 token.
 - Bucket: A
-- Outcome: PR https://github.com/cemheren/quicksheet-jwtdec/pull/2
+- Outcome: PR https://github.com/Deskworks/quicksheet-jwtdec/pull/2
 - Follow-up: none queued; all known ext bug issues now have PRs.
 
 ## 2026-05-15 (local run, rate cells→write)
@@ -463,7 +463,7 @@
 - Stars: 0 (Δ 0)
 - Action: Bucket A (ext repo) — closed quicksheet-rate#1. Activate response used `type:"cells"`; host only handles `type:"write"`. Two-line rename. Smoke-tested.
 - Bucket: A
-- Outcome: PR https://github.com/cemheren/quicksheet-rate/pull/2. NOTE: quicksheet-rate default branch is `master`, not `main` — other ext repos use `main`. Worth flagging.
+- Outcome: PR https://github.com/Deskworks/quicksheet-rate/pull/2. NOTE: quicksheet-rate default branch is `master`, not `main` — other ext repos use `main`. Worth flagging.
 - Follow-up: jwtdec#1 next (similar protocol fix + manifest trailing-colon).
 
 ## 2026-05-15 (local run, c:color: desktop render)
@@ -495,7 +495,7 @@
 - Stars: 0 (Δ 0)
 - Action: Bucket A (ext repo) — closed quicksheet-depr-ext#1. Parallel agent's ext had 3 protocol bugs: waited for incoming register instead of emitting on startup; handled `invoke` not `activate`; used `{row,col,value}` cells not `{r,c,v}`. Rewrote Main + bulk-renamed cell record fields. Smoke-tested.
 - Bucket: A
-- Outcome: PR https://github.com/cemheren/quicksheet-depr-ext/pull/3. Build clean.
+- Outcome: PR https://github.com/Deskworks/quicksheet-depr-ext/pull/3. Build clean.
 - Follow-up: All known small ext issues have PRs again.
 
 ## 2026-05-15 (local run, FAQ doc)
@@ -509,7 +509,7 @@
 ## 2026-05-15 (local run, depr cross-link)
 
 - Stars: 0 (Δ 0)
-- Action: Bucket F→A pivot. Started building quicksheet-depr-ext; discovered parallel agent already shipped it (https://github.com/cemheren/quicksheet-depr-ext). Discarded my draft. Cross-linked depr-ext + back-filled missing mileage in extensions.md + back-filled missing margin/depr in tour.md.
+- Action: Bucket F→A pivot. Started building quicksheet-depr-ext; discovered parallel agent already shipped it (https://github.com/Deskworks/quicksheet-depr-ext). Discarded my draft. Cross-linked depr-ext + back-filled missing mileage in extensions.md + back-filled missing margin/depr in tour.md.
 - Bucket: A
 - Outcome: PR https://github.com/cemheren/QuickSheet/pull/62. Build clean. Issue #15 effectively closeable (mileage/margin/depr all shipped) — next run should close it.
 - Follow-up: Close #15. Then bucket variety (E feature or C/D).
@@ -519,7 +519,7 @@
 - Stars: 0 (Δ 0)
 - Action: Bucket A (ext repo) — closed quicksheet-mileage-ext#1. Added `prefix`, `description`, `author`, `repository` fields to manifest. Host technically only requires `entry`, but adding the convention fields satisfies tooling and matches other ext manifests.
 - Bucket: A
-- Outcome: PR https://github.com/cemheren/quicksheet-mileage-ext/pull/3
+- Outcome: PR https://github.com/Deskworks/quicksheet-mileage-ext/pull/3
 - Follow-up: All known small ext issues now have PRs. Next: depr-ext (Bucket F) or Bucket E small main-repo feature.
 
 ## 2026-05-15 (local run, worldtm manifest fix)
@@ -527,7 +527,7 @@
 - Stars: 0 (Δ 0)
 - Action: Bucket A (ext repo) — closed quicksheet-worldtm#1. Manifest used `entrypoint`; host reads `entry` (camelCase of C# `Entry`). One-line rename. Recently-opened mileage#1 ("manifest missing prefix") is a false-positive — host's `ExtensionInstaller` only requires `entry`; prefix comes from register message. Documented in extensions.md docs PR #56. Will close mileage#1 next run with explanation.
 - Bucket: A
-- Outcome: PR https://github.com/cemheren/quicksheet-worldtm/pull/3
+- Outcome: PR https://github.com/Deskworks/quicksheet-worldtm/pull/3
 - Follow-up: mileage#1 close-with-comment, then margin-ext (Bucket F).
 
 ## 2026-05-15 (local run, ext protocol docs)
@@ -543,7 +543,7 @@
 - Stars: 0 (Δ 0)
 - Action: Bucket F — built `quicksheet-mileage-ext`. IRS standard-mileage deduction (business/medical/charity, 2021-2025). ~120 LOC, pure math, zero NuGet, version=string, params=array, cells={r,c,v}. Smoke-tested: register + activate `1250, business` → 3-cell write valid.
 - Bucket: F
-- Outcome: Repo live https://github.com/cemheren/quicksheet-mileage-ext. Cross-link PR https://github.com/cemheren/QuickSheet/pull/55 (README + tour.md). Build clean.
+- Outcome: Repo live https://github.com/Deskworks/quicksheet-mileage-ext. Cross-link PR https://github.com/cemheren/QuickSheet/pull/55 (README + tour.md). Build clean.
 - Follow-up: Margin ext next (break-even + contribution margin from fixed/variable/price). Close #15 after.
 
 ## 2026-05-15 (local run, accounting research)
@@ -559,7 +559,7 @@
 - Stars: 0 (Δ 0)
 - Action: Bucket A (ext repo) — closed quicksheet-docker#3. Same ASCII→cell-grid README treatment as ghpr#3 and gitst#3. Issue body also asked for cell-count params; noted in PR that QuickSheet already sends gridCols/gridRows in activate, but honoring those is a separate enhancement.
 - Bucket: A
-- Outcome: PR https://github.com/cemheren/quicksheet-docker/pull/5
+- Outcome: PR https://github.com/Deskworks/quicksheet-docker/pull/5
 - Follow-up: All three ASCII→cell docs PRs now open (ghpr#4, gitst#6, docker#5). Next bucket: vary — Bucket B/C/D/R/E/F all valid.
 
 ## 2026-05-15 (local run, issue cleanup)
@@ -575,7 +575,7 @@
 - Stars: 0 (Δ 0)
 - Action: Bucket A (ext repo) — closed quicksheet-gitst#3. README example was ASCII box; replaced with A1:E4 cell-grid table matching what the extension actually writes. Same treatment as ghpr#3.
 - Bucket: A
-- Outcome: PR https://github.com/cemheren/quicksheet-gitst/pull/6
+- Outcome: PR https://github.com/Deskworks/quicksheet-gitst/pull/6
 - Follow-up: docker#3 is the larger version of this issue ("interface modeled wrong" — wants params for grid size, not just docs). Defer for now; pick a different bucket next run.
 
 ## 2026-05-15 (local run, ghpr docs)
@@ -583,7 +583,7 @@
 - Stars: 0 (Δ 0)
 - Action: Bucket A (ext repo) — closed quicksheet-ghpr#3. Replaced ASCII-box example in README with A1:E4 cell-grid layout matching what the extension actually writes. Kept the status-icon legend (it's a legend, not a UI mockup).
 - Bucket: A
-- Outcome: PR https://github.com/cemheren/quicksheet-ghpr/pull/4
+- Outcome: PR https://github.com/Deskworks/quicksheet-ghpr/pull/4
 - Follow-up: gitst#3 + docker#3 are parallel doc-shaped issues — same treatment (cell-grid example, not ascii). Queue.
 
 ## 2026-05-15 (no-op)
@@ -643,7 +643,7 @@
 - Stars: 0 (Δ 0)
 - Action: Added Bucket F (vertical extensions, scaffold + auto-create repo + push). Drafted, created repo, and pushed: `quicksheet-tls-ext` — TLS cert expiry + issuer checker. Targets SRE/sysadmin vertical, zero NuGet (BCL `System.Net.Security`). Builds clean on .NET 9. Linked from main README's Extensions section.
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-tls-ext. SKILL.md updated to allow autonomous repo create/push (no user interrupt). Main README updated with link.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-tls-ext. SKILL.md updated to allow autonomous repo create/push (no user interrupt). Main README updated with link.
 - Follow-up: Pick next vertical (finance — yfinance JSON, real estate — Zillow API, writing — dictionary). Smoke-test the TLS ext end-to-end inside QuickSheet on next interactive opportunity.
 
 ## 2026-05-14 (local run #6)
@@ -784,7 +784,7 @@
 - Stars: 0 (Δ 0)
 - Action: Bucket F — scaffolded, built, created+pushed `quicksheet-grav-ext`. MD5-hash email → Gravatar profile JSON (en.gravatar.com/<md5>.json) for name + location + avatar URL. Falls back to identicon URL if no profile. 24h cache. Zero NuGet (BCL MD5 only). Added to docs.
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-grav-ext. 14 extensions in directory now (counting theme presets feature; F count 11 of 14).
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-grav-ext. 14 extensions in directory now (counting theme presets feature; F count 11 of 14).
 - Follow-up: Remaining vertical from skill list: legal/case lookup. Yield ext blocked on unstable APIs.
 
 ## 2026-05-14 (local run #36)
@@ -816,7 +816,7 @@
 - Stars: 0 (Δ 0)
 - Action: Bucket F — scaffolded, built, created+pushed `quicksheet-1099-ext`. US SE tax estimate (SS @ 12.4% capped at $176,100, Medicare @ 2.9% uncapped, 0.9235 adjustment) + quarterly. Explicit "Not tax advice" framing in output and README. Federal income tax intentionally left out. Pure math, no network, zero NuGet. Added to docs.
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-1099-ext. 13 extensions in directory now.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-1099-ext. 13 extensions in directory now.
 - Follow-up: Bumpable Social Security wage base constant noted. Could add a freelancer recipe (`1099:` + `mort:` + sparkline-of-net-monthly).
 
 ## 2026-05-14 (local run #32)
@@ -832,7 +832,7 @@
 - Stars: 0 (Δ 0)
 - Action: Bucket F — scaffolded, built, created+pushed `quicksheet-stock-ext`. Stock quotes via Stooq's free CSV endpoint. Default `.us` suffix; supports any Stooq exchange suffix. 5min cache. Zero NuGet. Linked from docs.
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-stock-ext. 12 extensions in directory now.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-stock-ext. 12 extensions in directory now.
 - Follow-up: Could ship a "watchlist" recipe combining stock + sparkline range (manual close-history) in docs/recipes.md.
 
 ## 2026-05-14 (local run #30)
@@ -864,7 +864,7 @@
 - Stars: 0 (Δ 0)
 - Action: Bucket F — scaffolded, built, created+pushed `quicksheet-thes-ext`. Thesaurus via free Datamuse API (`rel_syn`). Pairs naturally with `quicksheet-define-ext`. Cached in-memory; zero NuGet. Added to extensions directory and tour.
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-thes-ext. 11 extensions in directory now.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-thes-ext. 11 extensions in directory now.
 - Follow-up: Could pair-extend the writer recipe with `thes:` column. Remaining verticals: gravatar, tax/1099, legal (Caselaw). Prebuilt binaries for v0.2.0 still open.
 
 ## 2026-05-14 (local run #26)
@@ -880,7 +880,7 @@
 - Stars: 0 (Δ 0)
 - Action: Bucket F — scaffolded, built, created+pushed `quicksheet-cite-ext`. DOI → citation lookup via Crossref's free API. Normalizes `https://doi.org/`, `doi:`, raw forms. Author list truncated to 3 + "et al.". Cached in-memory. Polite User-Agent header per Crossref etiquette. Zero NuGet. Added to extensions directory and tour.
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-cite-ext. 10 extensions in directory now.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-cite-ext. 10 extensions in directory now.
 - Follow-up: Remaining verticals: gravatar, tax/1099, legal (Caselaw), thesaurus. Or pause Bucket F and broaden — recipes for academic-writing dashboard combining cite + define.
 
 ## 2026-05-14 (local run #24)
@@ -912,7 +912,7 @@
 - Stars: 0 (Δ 0)
 - Action: Bucket F — scaffolded, built, created+pushed `quicksheet-ping-ext`. HTTP HEAD (falls back to GET) returns status code + latency. Indicator glyph (✓/⚠/✗). No cache — designed to be polled with `L:`. Zero NuGet. Added to extensions directory and tour.
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-ping-ext. 9 extensions in directory now.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-ping-ext. 9 extensions in directory now.
 - Follow-up: gravatar, cite (DOI), tax, legal verticals remain. Could also write a `docs/wallpaper-dashboards.md` showing combined recipes (ping + tls + mxck for an ops dashboard).
 
 ## 2026-05-14 (local run #20)
@@ -936,7 +936,7 @@
 - Stars: 0 (Δ 0)
 - Action: Bucket F — scaffolded, built, created+pushed `quicksheet-mxck-ext`. MX record lookup via Google's DNS-over-HTTPS resolver. 1h cache. Zero NuGet. Added to docs/extensions.md and docs/tour.md.
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-mxck-ext.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-mxck-ext.
 - Follow-up: 8 extensions in directory now. Next verticals: gravatar (email contacts), tax/1099, legal (Caselaw API), cite (DOI formatter), ping (latency check).
 
 ## 2026-05-14 (local run #17)
@@ -968,7 +968,7 @@
 - Stars: 0 (Δ 0)
 - Action: Bucket F — scaffolded, built, created+pushed `quicksheet-mortgage-ext`. Fixed-rate amortization calculator (monthly payment, total interest, total cost). Pure math, no network, no cache, no state. Zero NuGet. Linked from README + tour.
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-mortgage-ext.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-mortgage-ext.
 - Follow-up: Next vertical — email/MX, legal (Caselaw API), tax calc. Smoke-test running extensions inside QuickSheet on user's next interactive session.
 
 ## 2026-05-14 (local run #13)
@@ -992,7 +992,7 @@
 - Stars: 0 (Δ 0)
 - Action: Bucket F — scaffolded, built, created+pushed `quicksheet-define-ext`. Inline dictionary lookups via free dictionaryapi.dev (no key). Returns one definition per part-of-speech. 24h cache. Zero NuGet. Linked from README + tour.
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-define-ext.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-define-ext.
 - Follow-up: Next vertical candidates — email/gravatar/MX, legal/case lookup, mortgage calc. Or smoke-test the running extensions inside QuickSheet on user's next interactive session.
 
 ## 2026-05-14 (local run #10)
@@ -1016,7 +1016,7 @@
 - Stars: 0 (Δ 0)
 - Action: Bucket F — scaffolded, built, created repo, and pushed `quicksheet-price-ext`. Live CoinGecko crypto price quotes with 24h change arrow. Built-in ticker alias map (btc/eth/sol/etc) plus raw CoinGecko id pass-through. 60s response cache. Zero NuGet deps. Linked from main README + docs/tour.md.
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-price-ext. README + tour updated.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-price-ext. README + tour updated.
 - Follow-up: Next Bucket F — writing (define/thesaurus) or email (gravatar/MX). Smoke-test price ext in actual QuickSheet on user's next interactive session.
 
 ## 2026-05-14 (local run #7)

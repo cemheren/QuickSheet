@@ -113,10 +113,10 @@ Type `ext: github:user/repo` into any cell and press Enter. QuickSheet clones th
 
 ### Example: GitHub Copilot on your desktop
 
-The [quicksheet-copilot-ext](https://github.com/cemheren/quicksheet-copilot-ext) extension brings AI directly into your spreadsheet grid. Ask questions, generate structured data, or summarize cell ranges — all without leaving your desktop.
+The [quicksheet-copilot-ext](https://github.com/Deskworks/quicksheet-copilot-ext) extension brings AI directly into your spreadsheet grid. Ask questions, generate structured data, or summarize cell ranges — all without leaving your desktop.
 
 ```
-ext: github:cemheren/quicksheet-copilot-ext
+ext: github:Deskworks/quicksheet-copilot-ext
 copilot: test, 1, 1
 ```
 
@@ -147,10 +147,10 @@ A ready-made multi-section dashboard is available in [`examples/copilot-dashboar
 
 ### Example: Weather forecast widget
 
-The [quicksheet-weather](https://github.com/cemheren/quicksheet-weather) extension turns a cell into a live 7-day weather forecast:
+The [quicksheet-weather](https://github.com/Deskworks/quicksheet-weather) extension turns a cell into a live 7-day weather forecast:
 
 ```
-ext: github:cemheren/quicksheet-weather
+ext: github:Deskworks/quicksheet-weather
 wthr: Seattle, 2, 7
 ```
 
@@ -158,10 +158,10 @@ wthr: Seattle, 2, 7
 
 ### Example: TLS certificate checker
 
-The [quicksheet-tls-ext](https://github.com/cemheren/quicksheet-tls-ext) extension shows TLS cert expiry and issuer — useful as an ambient SRE dashboard:
+The [quicksheet-tls-ext](https://github.com/Deskworks/quicksheet-tls-ext) extension shows TLS cert expiry and issuer — useful as an ambient SRE dashboard:
 
 ```
-ext: github:cemheren/quicksheet-tls-ext
+ext: github:Deskworks/quicksheet-tls-ext
 tls: github.com, 1, 4
 ```
 
@@ -169,45 +169,45 @@ tls: github.com, 1, 4
 
 | Prefix | What it does | Install |
 |--------|-------------|---------|
-| `price:` | Crypto prices (CoinGecko) | `ext: github:cemheren/quicksheet-price-ext` |
-| `def:` | Dictionary lookups | `ext: github:cemheren/quicksheet-define-ext` |
-| `mort:` | Mortgage calculator | `ext: github:cemheren/quicksheet-mortgage-ext` |
-| `stock:` | Stock quotes (Stooq) | `ext: github:cemheren/quicksheet-stock-ext` |
-| `cal:` | Calendar events (.ics) | `ext: github:cemheren/quicksheet-cal` |
-| `todo:` | Task management | `ext: github:cemheren/quicksheet-todo` |
-| `ping:` | HTTP status & latency | `ext: github:cemheren/quicksheet-ping-ext` |
-| `fx:` | Currency conversion | `ext: github:cemheren/quicksheet-fx` |
-| `gha:` | GitHub Actions status | `ext: github:cemheren/quicksheet-gha` |
-| `ghpr:` | GitHub PR dashboard | `ext: github:cemheren/quicksheet-ghpr` |
-| `docker:` | Container health | `ext: github:cemheren/quicksheet-docker` |
-| `gitst:` | Git repo status | `ext: github:cemheren/quicksheet-gitst` |
-| `portck:` | TCP port checker | `ext: github:cemheren/quicksheet-portck` |
-| `k8s:` | Kubernetes pod status | `ext: github:cemheren/quicksheet-k8s` |
-| `cntdn:` | Countdown timers | `ext: github:cemheren/quicksheet-cntdn` |
-| `1099:` | US self-employment tax | `ext: github:cemheren/quicksheet-1099-ext` |
-| `mileage:` | IRS mileage deduction | `ext: github:cemheren/quicksheet-mileage-ext` |
-| `budget:` | Budget envelopes | `ext: github:cemheren/quicksheet-budget` |
-| `worldtm:` | World clock / timezones | `ext: github:cemheren/quicksheet-worldtm` |
-| `margin:` | Break-even & margin calc | `ext: github:cemheren/quicksheet-margin-ext` |
-| `depr:` | Depreciation schedules | `ext: github:cemheren/quicksheet-depr-ext` |
-| `jwtdec:` | JWT token decoder | `ext: github:cemheren/quicksheet-jwtdec` |
-| `cronck:` | Cron expression parser | `ext: github:cemheren/quicksheet-cronck` |
-| `guid:` | GUID/UUID generator | `ext: github:cemheren/quicksheet-guid` |
-| `regex:` | Regex pattern explainer | `ext: github:cemheren/quicksheet-regex` |
-| `urlenc:` | URL encode/decode | `ext: github:cemheren/quicksheet-urlenc` |
-| `curl:` | HTTP client (Postman-in-a-cell) | `ext: github:cemheren/quicksheet-curl` |
-| `arxiv:` | arXiv paper lookup | `ext: github:cemheren/quicksheet-arxiv` |
-| `pihole:` | Pi-hole DNS stats | `ext: github:cemheren/quicksheet-pihole` |
-| `health:` | HTTP endpoint health checker | `ext: github:cemheren/quicksheet-health` |
-| `env:` | Env var inspector (lookup/filter/PATH, auto-masks secrets) | `ext: github:cemheren/quicksheet-envck` |
-| `roll:` | Dice roller — 2d6+3, d20, 4d6kh3, Fudge, critical detection | `ext: github:cemheren/quicksheet-dice` |
-| `lc:` | LeetCode — daily challenge, problem lookup, user stats | `ext: github:cemheren/quicksheet-leetcode` |
-| `ghst:` | GitHub contribution streak — current streak, longest, sparkline | `ext: github:cemheren/quicksheet-ghstreak` |
-| `iss:` | Live ISS position + people in space — lat/lon, region, crew by craft | `ext: github:cemheren/quicksheet-iss` |
-| `npm:` | npm package info — version, weekly downloads, license, author; multi-package compare | `ext: github:cemheren/quicksheet-npm` |
-| `pypi:` | PyPI package info — version, license, author, Python requirement, release date | `ext: github:cemheren/quicksheet-pypi` |
-| `ghtrend:` | GitHub trending repos — stars, forks, language, description by language or overall | `ext: github:cemheren/quicksheet-gh-trends` |
-| `co2:` | Live atmospheric CO₂ from NOAA Mauna Loa — ppm, baseline, YoY, 30-day trend | `ext: github:cemheren/quicksheet-co2` |
+| `price:` | Crypto prices (CoinGecko) | `ext: github:Deskworks/quicksheet-price-ext` |
+| `def:` | Dictionary lookups | `ext: github:Deskworks/quicksheet-define-ext` |
+| `mort:` | Mortgage calculator | `ext: github:Deskworks/quicksheet-mortgage-ext` |
+| `stock:` | Stock quotes (Stooq) | `ext: github:Deskworks/quicksheet-stock-ext` |
+| `cal:` | Calendar events (.ics) | `ext: github:Deskworks/quicksheet-cal` |
+| `todo:` | Task management | `ext: github:Deskworks/quicksheet-todo` |
+| `ping:` | HTTP status & latency | `ext: github:Deskworks/quicksheet-ping-ext` |
+| `fx:` | Currency conversion | `ext: github:Deskworks/quicksheet-fx` |
+| `gha:` | GitHub Actions status | `ext: github:Deskworks/quicksheet-gha` |
+| `ghpr:` | GitHub PR dashboard | `ext: github:Deskworks/quicksheet-ghpr` |
+| `docker:` | Container health | `ext: github:Deskworks/quicksheet-docker` |
+| `gitst:` | Git repo status | `ext: github:Deskworks/quicksheet-gitst` |
+| `portck:` | TCP port checker | `ext: github:Deskworks/quicksheet-portck` |
+| `k8s:` | Kubernetes pod status | `ext: github:Deskworks/quicksheet-k8s` |
+| `cntdn:` | Countdown timers | `ext: github:Deskworks/quicksheet-cntdn` |
+| `1099:` | US self-employment tax | `ext: github:Deskworks/quicksheet-1099-ext` |
+| `mileage:` | IRS mileage deduction | `ext: github:Deskworks/quicksheet-mileage-ext` |
+| `budget:` | Budget envelopes | `ext: github:Deskworks/quicksheet-budget` |
+| `worldtm:` | World clock / timezones | `ext: github:Deskworks/quicksheet-worldtm` |
+| `margin:` | Break-even & margin calc | `ext: github:Deskworks/quicksheet-margin-ext` |
+| `depr:` | Depreciation schedules | `ext: github:Deskworks/quicksheet-depr-ext` |
+| `jwtdec:` | JWT token decoder | `ext: github:Deskworks/quicksheet-jwtdec` |
+| `cronck:` | Cron expression parser | `ext: github:Deskworks/quicksheet-cronck` |
+| `guid:` | GUID/UUID generator | `ext: github:Deskworks/quicksheet-guid` |
+| `regex:` | Regex pattern explainer | `ext: github:Deskworks/quicksheet-regex` |
+| `urlenc:` | URL encode/decode | `ext: github:Deskworks/quicksheet-urlenc` |
+| `curl:` | HTTP client (Postman-in-a-cell) | `ext: github:Deskworks/quicksheet-curl` |
+| `arxiv:` | arXiv paper lookup | `ext: github:Deskworks/quicksheet-arxiv` |
+| `pihole:` | Pi-hole DNS stats | `ext: github:Deskworks/quicksheet-pihole` |
+| `health:` | HTTP endpoint health checker | `ext: github:Deskworks/quicksheet-health` |
+| `env:` | Env var inspector (lookup/filter/PATH, auto-masks secrets) | `ext: github:Deskworks/quicksheet-envck` |
+| `roll:` | Dice roller — 2d6+3, d20, 4d6kh3, Fudge, critical detection | `ext: github:Deskworks/quicksheet-dice` |
+| `lc:` | LeetCode — daily challenge, problem lookup, user stats | `ext: github:Deskworks/quicksheet-leetcode` |
+| `ghst:` | GitHub contribution streak — current streak, longest, sparkline | `ext: github:Deskworks/quicksheet-ghstreak` |
+| `iss:` | Live ISS position + people in space — lat/lon, region, crew by craft | `ext: github:Deskworks/quicksheet-iss` |
+| `npm:` | npm package info — version, weekly downloads, license, author; multi-package compare | `ext: github:Deskworks/quicksheet-npm` |
+| `pypi:` | PyPI package info — version, license, author, Python requirement, release date | `ext: github:Deskworks/quicksheet-pypi` |
+| `ghtrend:` | GitHub trending repos — stars, forks, language, description by language or overall | `ext: github:Deskworks/quicksheet-gh-trends` |
+| `co2:` | Live atmospheric CO₂ from NOAA Mauna Loa — ppm, baseline, YoY, 30-day trend | `ext: github:Deskworks/quicksheet-co2` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
@@ -218,7 +218,7 @@ Extensions are regular .NET (or any language) programs that read/write JSON line
 1. QuickSheet sends `{"type":"init"}` → extension replies with `{"type":"register", "prefix":"xyz", ...}`
 2. When a user activates a cell matching the prefix, QuickSheet sends `{"type":"activate", ...}` → extension replies with `{"type":"write", "cells":[...]}` to fill the grid.
 
-Ship a `quicksheet-extension.json` manifest in your repo and you're done. See the **[full protocol spec](docs/extension-protocol.md)** for message formats, coordinate system, rules, and working examples in C# and Python. Or check the [weather extension](https://github.com/cemheren/quicksheet-weather) for a minimal working example.
+Ship a `quicksheet-extension.json` manifest in your repo and you're done. See the **[full protocol spec](docs/extension-protocol.md)** for message formats, coordinate system, rules, and working examples in C# and Python. Or check the [weather extension](https://github.com/Deskworks/quicksheet-weather) for a minimal working example.
 
 ## Keyboard Shortcuts
 

@@ -1,9 +1,9 @@
 # quicksheet-ghstreak-ext
 
-A QuickSheet extension that shows a GitHub user's commit-day streak + commits-today on the wallpaper. Pairs with [quicksheet-leetcode-ext](https://github.com/cemheren/quicksheet-leetcode-ext) for the **CS-student wallpaper flex bundle**.
+A QuickSheet extension that shows a GitHub user's commit-day streak + commits-today on the wallpaper. Pairs with [quicksheet-leetcode-ext](https://github.com/Deskworks/quicksheet-leetcode-ext) for the **CS-student wallpaper flex bundle**.
 
 ```
-ext: github:cemheren/quicksheet-ghstreak-ext
+ext: github:Deskworks/quicksheet-ghstreak-ext
 ghstreak: <github-username>
 ```
 

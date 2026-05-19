@@ -59,7 +59,7 @@ Extensions are **separate repos** that communicate via JSON-lines on stdin/stdou
    - Receive `{"type":"activate","id":"...","params":[...],...}` → reply `{"type":"write","id":"<same-id>","cells":[{"r":0,"c":0,"v":"..."},...]}`
 4. Users install with: `ext: github:yourname/quicksheet-myext`
 
-See the [extensions directory](docs/extensions.md) for all existing extensions and the [weather extension](https://github.com/cemheren/quicksheet-weather) for a minimal reference.
+See the [extensions directory](docs/extensions.md) for all existing extensions and the [weather extension](https://github.com/Deskworks/quicksheet-weather) for a minimal reference.
 
 > **Tip:** Read from `params` array (not `cells`) in activate messages. The `anchor` field gives cell positioning. Cache network responses with appropriate TTLs.
 

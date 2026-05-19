@@ -260,7 +260,7 @@ Also use PowerShell for:
 
 | ID | Test | Steps | Expected |
 |----|------|-------|----------|
-| B1 | Install from GitHub | Type `ext: github:cemheren/quicksheet-weather` | Extension cloned, process launched, cell shows green (running) |
+| B1 | Install from GitHub | Type `ext: github:Deskworks/quicksheet-weather` | Extension cloned, process launched, cell shows green (running) |
 | B2 | Bad repo install | Type `ext: github:cemheren/nonexistent-repo` | Cell appended with `[install failed]` |
 | B3 | No manifest repo | Type `ext: github:cemheren/1brc` | Cell appended with `[bad manifest]` |
 | B4 | Prefix activation | After B1, type `wthr: Seattle,2,7` | Weather data fills cells below the prefix cell |
@@ -277,55 +277,55 @@ First install each extension via its `ext:` cell. Then test the prefix.
 
 | ID | Repo | Install cell | Test cell | Expected |
 |----|------|-------------|-----------|----------|
-| C1 | quicksheet-weather | `ext: github:cemheren/quicksheet-weather` | `wthr: Seattle,2,7` | 7 rows: day abbreviations + weather emoji + temps |
-| C2 | quicksheet-todo | `ext: github:cemheren/quicksheet-todo` | `todo: list,1,5` then `todo: add Buy milk,1,3` then `todo: list,1,5` | Task appears, list shows it |
-| C3 | quicksheet-sysmon | `ext: github:cemheren/quicksheet-sysmon` | `sys: all,2,4` | 4 rows: CPU/RAM/disk/uptime with color bars, updates every 2s |
-| C4 | quicksheet-pomodoro | `ext: github:cemheren/quicksheet-pomodoro` | `pomo: 1,1,2` | 1-min countdown with progress bar, updates every 1s |
-| C5 | quicksheet-stock-ext | `ext: github:cemheren/quicksheet-stock-ext` | `stock: AAPL,1,3` | Price + change + date |
-| C6 | quicksheet-price-ext | `ext: github:cemheren/quicksheet-price-ext` | `price: btc,1,2` | Bitcoin price + 24h change % |
-| C7 | quicksheet-define-ext | `ext: github:cemheren/quicksheet-define-ext` | `def: laconic,1,4` | Word + part-of-speech definitions |
-| C8 | quicksheet-thes-ext | `ext: github:cemheren/quicksheet-thes-ext` | `thes: happy,1,6` | Word + synonyms |
-| C9 | quicksheet-cite-ext | `ext: github:cemheren/quicksheet-cite-ext` | `cite: 10.1145/3623476.3623525,1,4` | Citation: authors, title, venue, DOI |
-| C10 | quicksheet-ping-ext | `ext: github:cemheren/quicksheet-ping-ext` | `ping: https://github.com,1,3` | ✓ URL + 200 OK + latency ms |
-| C11 | quicksheet-mxck-ext | `ext: github:cemheren/quicksheet-mxck-ext` | `mxck: github.com,1,5` | MX records sorted by priority |
-| C12 | quicksheet-mortgage-ext | `ext: github:cemheren/quicksheet-mortgage-ext` | `mort: 500000,6.5,30,1,4` | Loan summary + monthly + interest + total |
-| C13 | quicksheet-tls-ext | `ext: github:cemheren/quicksheet-tls-ext` | `tls: github.com,1,4` | Host:443 + expiry days + issuer + CN |
-| C14 | quicksheet-grav-ext | `ext: github:cemheren/quicksheet-grav-ext` | `grav: test@example.com,1,4` | Email + name + location + avatar URL |
-| C15 | quicksheet-1099-ext | `ext: github:cemheren/quicksheet-1099-ext` | `1099: 80000,1,5` | Income + SE tax + quarterly + federal note + disclaimer |
-| C16 | quicksheet-copilot-ext | `ext: github:cemheren/quicksheet-copilot-ext` | `copilot: list 3 colors,2,3` | AI response in grid cells (requires auth) |
-| C17 | quicksheet-cal | `ext: github:cemheren/quicksheet-cal` | `cal: week,1,8` | Upcoming calendar events for next 7 days |
-| C18 | quicksheet-fx | `ext: github:cemheren/quicksheet-fx` | `fx: 1000,USD,EUR,1,3` | Currency conversion: amount + rate + converted value (ECB rates) |
-| C19 | quicksheet-qtr | `ext: github:cemheren/quicksheet-qtr` | `qtr: 2026,1,5` | Tax year + 4 quarterly deadlines with countdown |
-| C20 | quicksheet-budget | `ext: github:cemheren/quicksheet-budget` | `budget: Groceries,500,350,1,3` | Category + progress bar + spent/budget + remaining |
-| C21 | quicksheet-hntop | `ext: github:cemheren/quicksheet-hntop` | `hntop: 5,1,6` | Top 5 HN stories with scores and comment counts |
-| C22 | quicksheet-apistatus | `ext: github:cemheren/quicksheet-apistatus` | `apistatus: github,npm,cloudflare,1,6` | Service status: emoji + name + operational/minor + description |
-| C23 | quicksheet-ghpr | `ext: github:cemheren/quicksheet-ghpr` | `ghpr: cemheren/QuickSheet,1,5` | GitHub PRs needing attention (requires `gh` CLI auth) |
-| C24 | quicksheet-portck | `ext: github:cemheren/quicksheet-portck` | `portck: 80,443,8080,1,5` | TCP port status: open/closed for each port |
-| C25 | quicksheet-docker | `ext: github:cemheren/quicksheet-docker` | `docker: all,1,5` | Docker container status dashboard (requires Docker Desktop) |
-| C26 | quicksheet-gitst | `ext: github:cemheren/quicksheet-gitst` | `gitst: .,1,5` | Git repo status: branch, clean/dirty, stash count, last commit |
-| C27 | quicksheet-cntdn | `ext: github:cemheren/quicksheet-cntdn` | `cntdn: 2026-12-25,1,3` | Countdown to date: days, hours, minutes remaining with progress |
-| C28 | quicksheet-worldtm | `ext: github:cemheren/quicksheet-worldtm` | `worldtm: London,Tokyo,NY,1,5` | Multi-timezone world clock with current times |
-| C29 | quicksheet-mileage-ext | `ext: github:cemheren/quicksheet-mileage-ext` | `mileage: 1000,1,4` | IRS standard mileage rate calculation |
-| C30 | quicksheet-margin-ext | `ext: github:cemheren/quicksheet-margin-ext` | `margin: 100000,60000,25000,1,5` | Break-even analysis: CM per unit, break-even units, revenue |
-| C31 | quicksheet-k8s | `ext: github:cemheren/quicksheet-k8s` | `k8s: default,1,5` | Kubernetes pod status from kubeconfig (requires kubectl) |
-| C32 | quicksheet-depr-ext | `ext: github:cemheren/quicksheet-depr-ext` | `depr: 50000 5 straight 5000,1,10` | Straight-line depreciation schedule: cost, salvage, yearly expense |
-| C33 | quicksheet-jwtdec | `ext: github:cemheren/quicksheet-jwtdec` | `jwtdec: <jwt-token>,1,8` | Decoded JWT header + claims in grid cells |
-| C34 | quicksheet-rate | `ext: github:cemheren/quicksheet-rate` | `rate: 120000,1,6` | Freelance rate calculator: min rate, take-home, billable hours |
-| C35 | quicksheet-cronck | `ext: github:cemheren/quicksheet-cronck` | `cronck: */5 * * * *,1,3` | Human-readable cron schedule description |
-| C36 | quicksheet-gitlog | `ext: github:cemheren/quicksheet-gitlog` | `gitlog: 5,1,6` | Recent 5 git commits from current repo |
-| C37 | quicksheet-news | `ext: github:cemheren/quicksheet-news` | `news: hn,1,6` | RSS/Atom feed headlines (HN, Reddit, etc.) with titles + links |
-| C38 | quicksheet-b64 | `ext: github:cemheren/quicksheet-b64` | `b64: Hello World` | Base64 encode: "🔒 ENCODED" header + base64 string + byte count |
-| C39 | quicksheet-guid | `ext: github:cemheren/quicksheet-guid` | `guid: 3` | 3 GUIDs in standard format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) |
-| C40 | quicksheet-regex | `ext: github:cemheren/quicksheet-regex` | `regex: ^[a-z]+\d{2}$` | Token breakdown table: pattern + each token with explanation + summary |
-| C41 | quicksheet-urlenc | `ext: github:cemheren/quicksheet-urlenc` | `urlenc: hello world` | URL-encoded string: `hello%20world` |
-| C42 | quicksheet-health | `ext: github:cemheren/quicksheet-health` | `health: https://google.com, https://github.com` | Per-endpoint rows: name → 🟢/🔴 status code (latency) |
-| C43 | quicksheet-curl | `ext: github:cemheren/quicksheet-curl` | `curl: GET https://httpbin.org/get` | HTTP response: status, headers, body in grid cells |
-| C44 | quicksheet-arxiv | `ext: github:cemheren/quicksheet-arxiv` | `arxiv: 1706.03762` | Paper title, authors, year, abstract from arXiv |
-| C45 | quicksheet-dice | `ext: github:cemheren/quicksheet-dice` | `roll: 2d6` | Dice roll result with notation breakdown |
-| C46 | quicksheet-envck | `ext: github:cemheren/quicksheet-envck` | `env: PATH` | Environment variable value display |
-| C47 | quicksheet-gha | `ext: github:cemheren/quicksheet-gha` | `gha: cemheren/QuickSheet,1,5` | GitHub Actions workflow run statuses |
-| C48 | quicksheet-leetcode | `ext: github:cemheren/quicksheet-leetcode` | `lc: daily` | LeetCode daily challenge or problem lookup |
-| C49 | quicksheet-pihole | `ext: github:cemheren/quicksheet-pihole` | `pihole: 192.168.1.1,1,3` | Pi-hole DNS blocking stats |
+| C1 | quicksheet-weather | `ext: github:Deskworks/quicksheet-weather` | `wthr: Seattle,2,7` | 7 rows: day abbreviations + weather emoji + temps |
+| C2 | quicksheet-todo | `ext: github:Deskworks/quicksheet-todo` | `todo: list,1,5` then `todo: add Buy milk,1,3` then `todo: list,1,5` | Task appears, list shows it |
+| C3 | quicksheet-sysmon | `ext: github:Deskworks/quicksheet-sysmon` | `sys: all,2,4` | 4 rows: CPU/RAM/disk/uptime with color bars, updates every 2s |
+| C4 | quicksheet-pomodoro | `ext: github:Deskworks/quicksheet-pomodoro` | `pomo: 1,1,2` | 1-min countdown with progress bar, updates every 1s |
+| C5 | quicksheet-stock-ext | `ext: github:Deskworks/quicksheet-stock-ext` | `stock: AAPL,1,3` | Price + change + date |
+| C6 | quicksheet-price-ext | `ext: github:Deskworks/quicksheet-price-ext` | `price: btc,1,2` | Bitcoin price + 24h change % |
+| C7 | quicksheet-define-ext | `ext: github:Deskworks/quicksheet-define-ext` | `def: laconic,1,4` | Word + part-of-speech definitions |
+| C8 | quicksheet-thes-ext | `ext: github:Deskworks/quicksheet-thes-ext` | `thes: happy,1,6` | Word + synonyms |
+| C9 | quicksheet-cite-ext | `ext: github:Deskworks/quicksheet-cite-ext` | `cite: 10.1145/3623476.3623525,1,4` | Citation: authors, title, venue, DOI |
+| C10 | quicksheet-ping-ext | `ext: github:Deskworks/quicksheet-ping-ext` | `ping: https://github.com,1,3` | ✓ URL + 200 OK + latency ms |
+| C11 | quicksheet-mxck-ext | `ext: github:Deskworks/quicksheet-mxck-ext` | `mxck: github.com,1,5` | MX records sorted by priority |
+| C12 | quicksheet-mortgage-ext | `ext: github:Deskworks/quicksheet-mortgage-ext` | `mort: 500000,6.5,30,1,4` | Loan summary + monthly + interest + total |
+| C13 | quicksheet-tls-ext | `ext: github:Deskworks/quicksheet-tls-ext` | `tls: github.com,1,4` | Host:443 + expiry days + issuer + CN |
+| C14 | quicksheet-grav-ext | `ext: github:Deskworks/quicksheet-grav-ext` | `grav: test@example.com,1,4` | Email + name + location + avatar URL |
+| C15 | quicksheet-1099-ext | `ext: github:Deskworks/quicksheet-1099-ext` | `1099: 80000,1,5` | Income + SE tax + quarterly + federal note + disclaimer |
+| C16 | quicksheet-copilot-ext | `ext: github:Deskworks/quicksheet-copilot-ext` | `copilot: list 3 colors,2,3` | AI response in grid cells (requires auth) |
+| C17 | quicksheet-cal | `ext: github:Deskworks/quicksheet-cal` | `cal: week,1,8` | Upcoming calendar events for next 7 days |
+| C18 | quicksheet-fx | `ext: github:Deskworks/quicksheet-fx` | `fx: 1000,USD,EUR,1,3` | Currency conversion: amount + rate + converted value (ECB rates) |
+| C19 | quicksheet-qtr | `ext: github:Deskworks/quicksheet-qtr` | `qtr: 2026,1,5` | Tax year + 4 quarterly deadlines with countdown |
+| C20 | quicksheet-budget | `ext: github:Deskworks/quicksheet-budget` | `budget: Groceries,500,350,1,3` | Category + progress bar + spent/budget + remaining |
+| C21 | quicksheet-hntop | `ext: github:Deskworks/quicksheet-hntop` | `hntop: 5,1,6` | Top 5 HN stories with scores and comment counts |
+| C22 | quicksheet-apistatus | `ext: github:Deskworks/quicksheet-apistatus` | `apistatus: github,npm,cloudflare,1,6` | Service status: emoji + name + operational/minor + description |
+| C23 | quicksheet-ghpr | `ext: github:Deskworks/quicksheet-ghpr` | `ghpr: cemheren/QuickSheet,1,5` | GitHub PRs needing attention (requires `gh` CLI auth) |
+| C24 | quicksheet-portck | `ext: github:Deskworks/quicksheet-portck` | `portck: 80,443,8080,1,5` | TCP port status: open/closed for each port |
+| C25 | quicksheet-docker | `ext: github:Deskworks/quicksheet-docker` | `docker: all,1,5` | Docker container status dashboard (requires Docker Desktop) |
+| C26 | quicksheet-gitst | `ext: github:Deskworks/quicksheet-gitst` | `gitst: .,1,5` | Git repo status: branch, clean/dirty, stash count, last commit |
+| C27 | quicksheet-cntdn | `ext: github:Deskworks/quicksheet-cntdn` | `cntdn: 2026-12-25,1,3` | Countdown to date: days, hours, minutes remaining with progress |
+| C28 | quicksheet-worldtm | `ext: github:Deskworks/quicksheet-worldtm` | `worldtm: London,Tokyo,NY,1,5` | Multi-timezone world clock with current times |
+| C29 | quicksheet-mileage-ext | `ext: github:Deskworks/quicksheet-mileage-ext` | `mileage: 1000,1,4` | IRS standard mileage rate calculation |
+| C30 | quicksheet-margin-ext | `ext: github:Deskworks/quicksheet-margin-ext` | `margin: 100000,60000,25000,1,5` | Break-even analysis: CM per unit, break-even units, revenue |
+| C31 | quicksheet-k8s | `ext: github:Deskworks/quicksheet-k8s` | `k8s: default,1,5` | Kubernetes pod status from kubeconfig (requires kubectl) |
+| C32 | quicksheet-depr-ext | `ext: github:Deskworks/quicksheet-depr-ext` | `depr: 50000 5 straight 5000,1,10` | Straight-line depreciation schedule: cost, salvage, yearly expense |
+| C33 | quicksheet-jwtdec | `ext: github:Deskworks/quicksheet-jwtdec` | `jwtdec: <jwt-token>,1,8` | Decoded JWT header + claims in grid cells |
+| C34 | quicksheet-rate | `ext: github:Deskworks/quicksheet-rate` | `rate: 120000,1,6` | Freelance rate calculator: min rate, take-home, billable hours |
+| C35 | quicksheet-cronck | `ext: github:Deskworks/quicksheet-cronck` | `cronck: */5 * * * *,1,3` | Human-readable cron schedule description |
+| C36 | quicksheet-gitlog | `ext: github:Deskworks/quicksheet-gitlog` | `gitlog: 5,1,6` | Recent 5 git commits from current repo |
+| C37 | quicksheet-news | `ext: github:Deskworks/quicksheet-news` | `news: hn,1,6` | RSS/Atom feed headlines (HN, Reddit, etc.) with titles + links |
+| C38 | quicksheet-b64 | `ext: github:Deskworks/quicksheet-b64` | `b64: Hello World` | Base64 encode: "🔒 ENCODED" header + base64 string + byte count |
+| C39 | quicksheet-guid | `ext: github:Deskworks/quicksheet-guid` | `guid: 3` | 3 GUIDs in standard format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) |
+| C40 | quicksheet-regex | `ext: github:Deskworks/quicksheet-regex` | `regex: ^[a-z]+\d{2}$` | Token breakdown table: pattern + each token with explanation + summary |
+| C41 | quicksheet-urlenc | `ext: github:Deskworks/quicksheet-urlenc` | `urlenc: hello world` | URL-encoded string: `hello%20world` |
+| C42 | quicksheet-health | `ext: github:Deskworks/quicksheet-health` | `health: https://google.com, https://github.com` | Per-endpoint rows: name → 🟢/🔴 status code (latency) |
+| C43 | quicksheet-curl | `ext: github:Deskworks/quicksheet-curl` | `curl: GET https://httpbin.org/get` | HTTP response: status, headers, body in grid cells |
+| C44 | quicksheet-arxiv | `ext: github:Deskworks/quicksheet-arxiv` | `arxiv: 1706.03762` | Paper title, authors, year, abstract from arXiv |
+| C45 | quicksheet-dice | `ext: github:Deskworks/quicksheet-dice` | `roll: 2d6` | Dice roll result with notation breakdown |
+| C46 | quicksheet-envck | `ext: github:Deskworks/quicksheet-envck` | `env: PATH` | Environment variable value display |
+| C47 | quicksheet-gha | `ext: github:Deskworks/quicksheet-gha` | `gha: cemheren/QuickSheet,1,5` | GitHub Actions workflow run statuses |
+| C48 | quicksheet-leetcode | `ext: github:Deskworks/quicksheet-leetcode` | `lc: daily` | LeetCode daily challenge or problem lookup |
+| C49 | quicksheet-pihole | `ext: github:Deskworks/quicksheet-pihole` | `pihole: 192.168.1.1,1,3` | Pi-hole DNS blocking stats |
 
 ---
 

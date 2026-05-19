@@ -27,11 +27,11 @@ swap out:
 | Zone              | What it shows                                              | How                                                         |
 |-------------------|------------------------------------------------------------|-------------------------------------------------------------|
 | **Coursework**    | Class, assignment, due date, status                        | Plain cells — edit directly                                 |
-| **Budget**        | Spend vs budget per category, colour-coded progress bars   | [`budget`](https://github.com/cemheren/quicksheet-budget)  |
-| **Tech tools**    | JWT decoder, regex explainer, base64, URL encoder in-cell  | [`jwtdec`](https://github.com/cemheren/quicksheet-jwtdec) · [`regex`](https://github.com/cemheren/quicksheet-regex) · [`b64`](https://github.com/cemheren/quicksheet-b64) · [`urlenc`](https://github.com/cemheren/quicksheet-urlenc) |
-| **News & GitHub** | HN top 5, your GitHub commit log                           | [`hntop`](https://github.com/cemheren/quicksheet-hntop) · [`gitlog`](https://github.com/cemheren/quicksheet-gitlog) |
+| **Budget**        | Spend vs budget per category, colour-coded progress bars   | [`budget`](https://github.com/Deskworks/quicksheet-budget)  |
+| **Tech tools**    | JWT decoder, regex explainer, base64, URL encoder in-cell  | [`jwtdec`](https://github.com/Deskworks/quicksheet-jwtdec) · [`regex`](https://github.com/Deskworks/quicksheet-regex) · [`b64`](https://github.com/Deskworks/quicksheet-b64) · [`urlenc`](https://github.com/Deskworks/quicksheet-urlenc) |
+| **News & GitHub** | HN top 5, your GitHub commit log                           | [`hntop`](https://github.com/Deskworks/quicksheet-hntop) · [`gitlog`](https://github.com/Deskworks/quicksheet-gitlog) |
 
-All extensions install with a single `ext: github:cemheren/quicksheet-<name>` cell —
+All extensions install with a single `ext: github:Deskworks/quicksheet-<name>` cell —
 QuickSheet clones the repo and the prefix is live instantly.
 
 ## Coursework + deadline tracking
@@ -50,7 +50,7 @@ Ctrl+B to sort by due date. Ctrl+F to search. Ctrl+Z if you accidentally cleared
 Add a world-clock strip for remote study partners:
 
 ```
-ext: github:cemheren/quicksheet-worldtm
+ext: github:Deskworks/quicksheet-worldtm
 ---
 worldtm: ny
 worldtm: london
@@ -59,11 +59,11 @@ worldtm: tokyo
 
 ## Budget tracker on your desktop
 
-The [`budget`](https://github.com/cemheren/quicksheet-budget) extension turns a CSV into a
+The [`budget`](https://github.com/Deskworks/quicksheet-budget) extension turns a CSV into a
 live envelope-budget display:
 
 ```
-ext: github:cemheren/quicksheet-budget
+ext: github:Deskworks/quicksheet-budget
 ---
 budget: Rent:1200:1200
 budget: Groceries:180:250
@@ -79,21 +79,21 @@ Each cell renders a progress bar and a 🟢🟡🟠🔴 indicator.  No subscript
 Paste a JWT and decode it in-cell without opening jwt.io (privacy win):
 
 ```
-ext: github:cemheren/quicksheet-jwtdec
+ext: github:Deskworks/quicksheet-jwtdec
 jwtdec: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
 Stuck on a regex in an assignment? Explain it in-cell:
 
 ```
-ext: github:cemheren/quicksheet-regex
+ext: github:Deskworks/quicksheet-regex
 regex: ^(\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
 ```
 
 Decode a base64 blob from an API response without leaving the terminal:
 
 ```
-ext: github:cemheren/quicksheet-b64
+ext: github:Deskworks/quicksheet-b64
 b64: SGVsbG8gQ1MgMzAxIQ==
 ```
 
@@ -102,14 +102,14 @@ b64: SGVsbG8gQ1MgMzAxIQ==
 Keep HN's top 5 stories visible on your wallpaper — never miss a link that matters:
 
 ```
-ext: github:cemheren/quicksheet-hntop
+ext: github:Deskworks/quicksheet-hntop
 hntop: 5
 ```
 
 See your own recent commits without running `git log`:
 
 ```
-ext: github:cemheren/quicksheet-gitlog
+ext: github:Deskworks/quicksheet-gitlog
 gitlog: /path/to/your/project, 8
 ```
 
@@ -119,7 +119,7 @@ The day of a hackathon, swap the coursework zone for a task list and the budget 
 a service-health strip:
 
 ```
-ext: github:cemheren/quicksheet-health
+ext: github:Deskworks/quicksheet-health
 health: http://localhost:3000
 health: http://localhost:8080/api/health
 health: https://api.github.com

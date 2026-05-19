@@ -31,7 +31,7 @@ Now the status column refreshes every minute. TLS only changes daily — point a
 L: D2, 720m
 ```
 
-Extensions used: [ping](https://github.com/cemheren/quicksheet-ping-ext), [tls](https://github.com/cemheren/quicksheet-tls-ext), [mxck](https://github.com/cemheren/quicksheet-mxck-ext).
+Extensions used: [ping](https://github.com/Deskworks/quicksheet-ping-ext), [tls](https://github.com/Deskworks/quicksheet-tls-ext), [mxck](https://github.com/Deskworks/quicksheet-mxck-ext).
 
 ---
 
@@ -50,7 +50,7 @@ SOL,80,"price: sol, 1, 2",
 
 The price extension auto-caches for 60 seconds, so the loop never hammers the API even at faster cadence.
 
-Extensions used: [price](https://github.com/cemheren/quicksheet-price-ext).
+Extensions used: [price](https://github.com/Deskworks/quicksheet-price-ext).
 
 ---
 
@@ -68,7 +68,7 @@ VOO,"stock: VOO, 1, 3",
 
 `L: B2, 30m` is plenty — Stooq's data is end-of-day for most exchanges, and intraday updates lag 15+ minutes anyway.
 
-Extensions used: [stock](https://github.com/cemheren/quicksheet-stock-ext).
+Extensions used: [stock](https://github.com/Deskworks/quicksheet-stock-ext).
 
 ---
 
@@ -98,7 +98,7 @@ eponymous,"def: eponymous, 1, 2",
 
 Wrap the column in a `L:` if you want them to refresh, though definitions don't change.
 
-Extensions used: [define](https://github.com/cemheren/quicksheet-define-ext).
+Extensions used: [define](https://github.com/Deskworks/quicksheet-define-ext).
 
 ---
 
@@ -113,7 +113,7 @@ Timer,Tasks
 
 When the timer runs, the rest of the row stays where it is — the timer cell expands within its allotted span.
 
-Extensions used: [pomodoro](https://github.com/cemheren/quicksheet-pomodoro).
+Extensions used: [pomodoro](https://github.com/Deskworks/quicksheet-pomodoro).
 
 ---
 
@@ -131,7 +131,7 @@ Globex,3800,"1099: 45600, 1, 5","mort: 380000, 6.5, 30, 1, 4",this month
 
 Pair with a sparkline of monthly gross in column F (`s: B2::B13`) for an at-a-glance income curve.
 
-Extensions used: [1099](https://github.com/cemheren/quicksheet-1099-ext), [mortgage](https://github.com/cemheren/quicksheet-mortgage-ext).
+Extensions used: [1099](https://github.com/Deskworks/quicksheet-1099-ext), [mortgage](https://github.com/Deskworks/quicksheet-mortgage-ext).
 
 ---
 
@@ -147,7 +147,7 @@ DOI,Citation,Term,Definition
 
 Citations are cached forever in the extension subprocess (DOIs don't change), so loading is fast on repeat views.
 
-Extensions used: [cite](https://github.com/cemheren/quicksheet-cite-ext), [define](https://github.com/cemheren/quicksheet-define-ext).
+Extensions used: [cite](https://github.com/Deskworks/quicksheet-cite-ext), [define](https://github.com/Deskworks/quicksheet-define-ext).
 
 ---
 
@@ -165,7 +165,7 @@ top story,,"i: curl -s 'https://hacker-news.firebaseio.com/v0/topstories.json' |
 
 Multi-select column B, hit Enter to open all four in your browser. Add `L: <cell>, 30m` on the status column for a passive uptime indicator.
 
-Extensions used: [ping](https://github.com/cemheren/quicksheet-ping-ext). The `i:` cell is built-in.
+Extensions used: [ping](https://github.com/Deskworks/quicksheet-ping-ext). The `i:` cell is built-in.
 
 ---
 
@@ -179,7 +179,7 @@ copilot: summarize the data in {A1::E20}, 5, 1
 
 This makes the wallpaper a live "what am I looking at?" surface.
 
-Extensions used: [copilot](https://github.com/cemheren/quicksheet-copilot-ext).
+Extensions used: [copilot](https://github.com/Deskworks/quicksheet-copilot-ext).
 
 ---
 

@@ -24,18 +24,18 @@ situational-awareness layer is there every boot.
 
 | Row/column             | What it shows                                           | Extension                                                                   |
 |------------------------|---------------------------------------------------------|-----------------------------------------------------------------------------|
-| **Service health**     | HTTP ✓/✗ + latency for each endpoint in `services.csv` | [`health`](https://github.com/cemheren/quicksheet-health)                   |
-| **Vendor status**      | GitHub / Cloudflare / npm / Vercel / Discord live pages | [`apistatus`](https://github.com/cemheren/quicksheet-apistatus)             |
-| **Container health**   | Running/stopped/restarting per Docker container name    | [`docker`](https://github.com/cemheren/quicksheet-docker)                   |
-| **Pod status**         | Kubernetes pod state by namespace                       | [`k8s`](https://github.com/cemheren/quicksheet-k8s)                        |
-| **Port probe**         | TCP open/closed for well-known local ports              | [`portck`](https://github.com/cemheren/quicksheet-portck)                  |
-| **TLS expiry**         | Days remaining on each certificate                      | [`tls`](https://github.com/cemheren/quicksheet-tls-ext)                    |
-| **Recent commits**     | Last N git commits: hash, author, relative time         | [`gitlog`](https://github.com/cemheren/quicksheet-gitlog)                  |
-| **Open PRs**           | PR count + titles per repo                              | [`ghpr`](https://github.com/cemheren/quicksheet-ghpr)                      |
-| **System metrics**     | CPU / RAM / disk / uptime of the host                   | [`sysmon`](https://github.com/cemheren/quicksheet-sysmon)                  |
-| **Latency**            | Round-trip to upstreams and DNS resolvers               | [`ping`](https://github.com/cemheren/quicksheet-ping-ext)                  |
+| **Service health**     | HTTP ✓/✗ + latency for each endpoint in `services.csv` | [`health`](https://github.com/Deskworks/quicksheet-health)                   |
+| **Vendor status**      | GitHub / Cloudflare / npm / Vercel / Discord live pages | [`apistatus`](https://github.com/Deskworks/quicksheet-apistatus)             |
+| **Container health**   | Running/stopped/restarting per Docker container name    | [`docker`](https://github.com/Deskworks/quicksheet-docker)                   |
+| **Pod status**         | Kubernetes pod state by namespace                       | [`k8s`](https://github.com/Deskworks/quicksheet-k8s)                        |
+| **Port probe**         | TCP open/closed for well-known local ports              | [`portck`](https://github.com/Deskworks/quicksheet-portck)                  |
+| **TLS expiry**         | Days remaining on each certificate                      | [`tls`](https://github.com/Deskworks/quicksheet-tls-ext)                    |
+| **Recent commits**     | Last N git commits: hash, author, relative time         | [`gitlog`](https://github.com/Deskworks/quicksheet-gitlog)                  |
+| **Open PRs**           | PR count + titles per repo                              | [`ghpr`](https://github.com/Deskworks/quicksheet-ghpr)                      |
+| **System metrics**     | CPU / RAM / disk / uptime of the host                   | [`sysmon`](https://github.com/Deskworks/quicksheet-sysmon)                  |
+| **Latency**            | Round-trip to upstreams and DNS resolvers               | [`ping`](https://github.com/Deskworks/quicksheet-ping-ext)                  |
 
-All extensions install with a single cell: `ext: github:cemheren/quicksheet-<name>`. No
+All extensions install with a single cell: `ext: github:Deskworks/quicksheet-<name>`. No
 package manager. No daemon config. QuickSheet clones the repo, starts the subprocess, and
 the prefix is live.
 
@@ -63,9 +63,9 @@ In an incident, you want to see:
 Two utilities that come up in every incident involving auth or API routing:
 
 - `jwtdec: <paste-token-here>` — decodes header + claims locally, flags expired tokens,
-  annotates `iat`/`exp`/`nbf`. [Privacy-first alternative to jwt.io](https://github.com/cemheren/quicksheet-jwtdec).
+  annotates `iat`/`exp`/`nbf`. [Privacy-first alternative to jwt.io](https://github.com/Deskworks/quicksheet-jwtdec).
 - `urlenc: <url>` — URL-encodes or decodes with auto-detect. Useful for debugging redirect
-  chains and malformed query strings. [quicksheet-urlenc](https://github.com/cemheren/quicksheet-urlenc)
+  chains and malformed query strings. [quicksheet-urlenc](https://github.com/Deskworks/quicksheet-urlenc)
 
 Both run as local subprocesses — no token leaves your machine.
 
@@ -75,7 +75,7 @@ If you maintain cron jobs, `cronck: 0 3 * * MON-FRI` turns any cron expression i
 English: "At 03:00 on every day-of-week from Monday through Friday." Add a column of
 `cronck:` cells next to each job row to document schedules without opening a wiki.
 
-See [quicksheet-cronck](https://github.com/cemheren/quicksheet-cronck).
+See [quicksheet-cronck](https://github.com/Deskworks/quicksheet-cronck).
 
 ## Terminal commands as runnable cells
 

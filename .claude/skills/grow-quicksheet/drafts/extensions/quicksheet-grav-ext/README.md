@@ -5,7 +5,7 @@ Gravatar lookup for [QuickSheet](https://github.com/cemheren/QuickSheet). Given 
 ## Install
 
 ```
-ext: github:cemheren/quicksheet-grav-ext
+ext: github:Deskworks/quicksheet-grav-ext
 ```
 
 ## Use
