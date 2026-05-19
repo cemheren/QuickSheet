@@ -183,19 +183,20 @@ public class Theme
         },
         new Theme
         {
-            // Hotdog Stand — Windows 3.1 cursed palette. On purpose.
+            // Hotdog Stand — Windows 3.1 cursed palette, softened to pastel
+            // (salmon + butter) so it's a vibe rather than an eyesore.
             Name = "HotdogStand",
-            BackgroundRgb       = (200,   0,   0),
-            ForegroundRgb       = (255, 255,   0),
-            HeaderHighlightRgb  = (255, 255,   0),
-            SelectionBgRgb      = (255, 255,   0),
-            SelectionFgRgb      = (200,   0,   0),
-            SearchMatchBgRgb    = (  0,   0,   0),
-            SearchMatchFgRgb    = (255, 255,   0),
-            SearchSelectedBgRgb = (255, 255, 255),
-            SearchSelectedFgRgb = (200,   0,   0),
-            StatusBarBgRgb      = (255, 255,   0),
-            StatusBarFgRgb      = (  0,   0,   0),
+            BackgroundRgb       = (242, 180, 180),  // pastel salmon
+            ForegroundRgb       = (115,  60,  60),  // muted brick text
+            HeaderHighlightRgb  = (250, 230, 170),  // pastel butter
+            SelectionBgRgb      = (250, 230, 170),
+            SelectionFgRgb      = (115,  60,  60),
+            SearchMatchBgRgb    = (235, 195, 200),
+            SearchMatchFgRgb    = ( 90,  40,  40),
+            SearchSelectedBgRgb = (255, 245, 220),
+            SearchSelectedFgRgb = (180,  60,  60),
+            StatusBarBgRgb      = (250, 230, 170),
+            StatusBarFgRgb      = (115,  60,  60),
         },
     ];
 
