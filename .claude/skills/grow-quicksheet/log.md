@@ -1,3 +1,10 @@
+## 2026-05-18 (social strategy playbook drafted — user asked, user executes)
+
+- Stars: 0 (Δ 0). User signal: *"we lost the one star we had... Let's build a social media strategy. I will try execute it."* Wrote `drafts/social-strategy.md` — ordered 7-day launch playbook with asset gate (screenshot A1 first, no post without it), per-venue sequencing pulled from `research/wallpaper-launch-venues.md` (r/unixporn first, HN reframed to Day 4, NOT primary), engagement rules for first-60-min, hard "do not" list (no cross-post, no re-post after flop, no alts), and a measurement template to log per-post.
+- Bucket: C (content draft; user posts manually).
+- Outcome: skill-only file, push direct to main per skill-self-edit rule. No project code touched. Existing per-venue drafts referenced, not re-written.
+- Follow-up: when A1 (wallpaper screenshot) is committed by user, queue (a) skill writes r/selfhosted post variant, (b) README hero swap PR.
+
 ## 2026-05-18 (no-op #28 — star dropped 1→0, PR pile growing, hold)
 
 - Stars: 0 (Δ -1). Lost the last star overnight. Three PRs already open on main (#134 my docs, #135/#136 by other agents). PR #131 + #132 + #133 merged. envck #4 (my prior protocol fix) still open and would conflict with merged #5 — rebase blocked by the no-force-push rule, would need a fresh PR + close #4, but adding *another* PR to a queue the user hasn't worked through is the wrong move right now. Two existing memory entries point the same way: [[feedback-stop-padding]] + [[feedback-quality-over-quantity]]. Stars going *down* is the strongest possible "don't add to the pile" signal — no-op, wait for the queue to drain.
