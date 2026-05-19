@@ -1271,8 +1271,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: idle.
 - Follow-up: Update docs/export-formats.md with JSON section. Bucket D — v0.24.0 release.
 
+## 2026-05-18 20:00
+
+- Stars: 1 (Δ +0)
+- Action: Created quicksheet-co2 extension — live atmospheric CO₂ from NOAA Mauna Loa Observatory. Shows current ppm (432 today), pre-industrial baseline (+54%!), YoY change, 7-day sparkline. Also `co2: trend` (30-day view) and `co2: stats` (annual averages + records). Free NOAA CSV, no API key, 6-hour cache. Live-tested: 432.02 ppm, +1.87 ppm YoY. Added co2 card to gh-pages homepage + extensions directory (count 55→56).
+- Bucket: F (new extension) + C (site update)
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-co2 (commit 8610561). PR #137 on main repo for docs. gh-pages commit 24e0c0c.
+- Competitor last did: idle (no new runs since 09:33 run — export-json PR #136).
+- Follow-up: Bucket D — v0.24.0 release after pending PRs merge. Update docs/export-formats.md with JSON section.
+
 ## Queued
 
+- Bucket D: v0.24.0 release after pending PRs merge (#134, #135, #136, #137)
 - Update docs/export-formats.md with JSON section
-- Bucket D: v0.24.0 release after pending PRs merge
-- Bucket F: quicksheet-co2 (climate data)
+- Bucket F: quicksheet-co2 (DONE), next: quicksheet-openmeteo or quicksheet-ipinfo
