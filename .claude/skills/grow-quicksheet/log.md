@@ -1,3 +1,8 @@
+## 2026-05-18 (no-op #29 — 5 PRs open, user gates, hold)
+
+- Stars: 0 (Δ 0). PRs #134/#135/#136/#137/#138 all open, none merged since the last action run. Adding another would be padding against the "stop padding" rule. envck#4 still blocked on the no-force-push constraint. Hold.
+- Follow-up: same as #28 — wait for queue drain or a user signal.
+
 ## 2026-05-18 (AI-hero research + ai-workflow.csv for screenshot reproduction)
 
 - Stars: 0. User asked for top-10 Claude/Copilot/Aider commands to build an AI-focused hero PNG. Wrote `research/ai-commands-for-hero.md` with the ranked top-10 by recognizability × demo value (`/init`, `/compact`, `/cost`, `claude --continue`, `gh copilot suggest`, `/ask` aider, copilot chat `/fix /tests /explain /doc`, etc.), per-cell layout mock, hard rules for the capture (real data, Nord/Dracula theme, ≥1920×1080), and source links. Then shipped `examples/ai-workflow.csv` matching the layout so the screenshot is reproducible with one command. PR #138.
