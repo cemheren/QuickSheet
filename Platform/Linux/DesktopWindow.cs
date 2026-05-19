@@ -65,9 +65,10 @@ internal class DesktopWindow : IDisposable
     private const int MaxColumnWidth = 40;
     private const int ColumnWidthStep = 4;
     private const int RowHeaderWidth = 4;
-    // Fontconfig pattern: first installed family wins. Generic 'monospace' alias
-    // is the safety net.
-    private const string FontName = "JetBrainsMono Nerd Font,JetBrains Mono,Cascadia Code,Cascadia Mono,Fira Code,Source Code Pro,DejaVu Sans Mono,monospace:size=14";
+    // Fontconfig pattern: first installed family wins. Iosevka is intentionally
+    // narrow (~half the advance width of Cascadia/JetBrains). Generic 'monospace'
+    // alias is the safety net.
+    private const string FontName = "Iosevka,Iosevka Nerd Font,JetBrainsMono Nerd Font,JetBrains Mono,Cascadia Code,Cascadia Mono,Fira Code,Source Code Pro,DejaVu Sans Mono,monospace:size=12";
 
     private bool _running;
     private bool _isNativeX11;
