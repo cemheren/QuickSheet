@@ -67,10 +67,10 @@ EOF
 Replace `$HOME/code/QuickSheet` with your clone path. Log out and back in to
 test.
 
-Wayland note: `--desktop` mode currently requires X11
+Wayland note: QuickSheet's wallpaper integration currently requires X11
 ([issue #3](https://github.com/cemheren/QuickSheet/issues/3) tracks Wayland
-support). If you're on Wayland, the autostart entry will print the warning and
-fall back to TUI mode in a terminal — usable but no longer a wallpaper.
+support). On Wayland the program prints a warning and attempts to start under
+XWayland, but the result is not a true desktop layer.
 
 ### Optional: auto-update on Linux
 
@@ -84,10 +84,9 @@ Same trade-off as Windows: failure of git or build aborts the chain.
 
 ## macOS
 
-Not supported yet — `--desktop` mode uses Win32 WorkerW on Windows and X11 on
-Linux. macOS would need an NSWindow-based path. PRs welcome (see
-[CONTRIBUTING.md](../CONTRIBUTING.md)). For now, run the plain terminal TUI
-via the standard `Login Items` flow.
+Not supported yet — the wallpaper integration uses Win32 WorkerW on Windows
+and X11 on Linux. macOS would need an NSWindow-based path. PRs welcome (see
+[CONTRIBUTING.md](../CONTRIBUTING.md)).
 
 ## Uninstall
 

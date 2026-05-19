@@ -555,17 +555,17 @@ internal class DesktopWindow : IDisposable
         int[] colWidths = GetColumnWidths();
 
         var theme = Theme.Current;
-        var (tBgR, tBgG, tBgB) = ConsoleColorToRgb(theme.Background);
-        var (tFgR, tFgG, tFgB) = ConsoleColorToRgb(theme.Foreground);
-        var (tHdrR, tHdrG, tHdrB) = ConsoleColorToRgb(theme.HeaderHighlight);
-        var (tSelBgR, tSelBgG, tSelBgB) = ConsoleColorToRgb(theme.SelectionBg);
-        var (tSelFgR, tSelFgG, tSelFgB) = ConsoleColorToRgb(theme.SelectionFg);
-        var (tSrchBgR, tSrchBgG, tSrchBgB) = ConsoleColorToRgb(theme.SearchMatchBg);
-        var (tSrchFgR, tSrchFgG, tSrchFgB) = ConsoleColorToRgb(theme.SearchMatchFg);
-        var (tSrchSelBgR, tSrchSelBgG, tSrchSelBgB) = ConsoleColorToRgb(theme.SearchSelectedBg);
-        var (tSrchSelFgR, tSrchSelFgG, tSrchSelFgB) = ConsoleColorToRgb(theme.SearchSelectedFg);
-        var (tStatBgR, tStatBgG, tStatBgB) = ConsoleColorToRgb(theme.StatusBarBg);
-        var (tStatFgR, tStatFgG, tStatFgB) = ConsoleColorToRgb(theme.StatusBarFg);
+        var (tBgR, tBgG, tBgB) = theme.BackgroundRgb;
+        var (tFgR, tFgG, tFgB) = theme.ForegroundRgb;
+        var (tHdrR, tHdrG, tHdrB) = theme.HeaderHighlightRgb;
+        var (tSelBgR, tSelBgG, tSelBgB) = theme.SelectionBgRgb;
+        var (tSelFgR, tSelFgG, tSelFgB) = theme.SelectionFgRgb;
+        var (tSrchBgR, tSrchBgG, tSrchBgB) = theme.SearchMatchBgRgb;
+        var (tSrchFgR, tSrchFgG, tSrchFgB) = theme.SearchMatchFgRgb;
+        var (tSrchSelBgR, tSrchSelBgG, tSrchSelBgB) = theme.SearchSelectedBgRgb;
+        var (tSrchSelFgR, tSrchSelFgG, tSrchSelFgB) = theme.SearchSelectedFgRgb;
+        var (tStatBgR, tStatBgG, tStatBgB) = theme.StatusBarBgRgb;
+        var (tStatFgR, tStatFgG, tStatFgB) = theme.StatusBarFgRgb;
 
         // Clear background (semi-transparent if ARGB visual available)
         SetGCColor(tBgR, tBgG, tBgB, _hasArgbVisual ? _bgAlpha : 255);
@@ -995,27 +995,6 @@ internal class DesktopWindow : IDisposable
             : (ulong)(r << 16 | g << 8 | b);
         XSetForeground(_display, _gc, pixel);
     }
-
-    private static (int r, int g, int b) ConsoleColorToRgb(ConsoleColor cc) => cc switch
-    {
-        ConsoleColor.Black => (0, 0, 0),
-        ConsoleColor.DarkBlue => (0, 0, 139),
-        ConsoleColor.DarkGreen => (0, 100, 0),
-        ConsoleColor.DarkCyan => (0, 139, 139),
-        ConsoleColor.DarkRed => (139, 0, 0),
-        ConsoleColor.DarkMagenta => (139, 0, 139),
-        ConsoleColor.DarkYellow => (139, 139, 0),
-        ConsoleColor.Gray => (169, 169, 169),
-        ConsoleColor.DarkGray => (64, 64, 64),
-        ConsoleColor.Blue => (30, 80, 200),
-        ConsoleColor.Green => (0, 200, 0),
-        ConsoleColor.Cyan => (0, 200, 200),
-        ConsoleColor.Red => (200, 0, 0),
-        ConsoleColor.Magenta => (200, 0, 200),
-        ConsoleColor.Yellow => (200, 200, 0),
-        ConsoleColor.White => (240, 240, 240),
-        _ => (15, 15, 15)
-    };
 
     private void DrawTextWithBg(string text, int x, int y, int fgR, int fgG, int fgB, int bgR, int bgG, int bgB, int bgA = -1)
     {

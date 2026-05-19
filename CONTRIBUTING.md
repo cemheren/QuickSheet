@@ -8,9 +8,8 @@ Thanks for your interest! QuickSheet is a zero-dependency .NET 9 spreadsheet tha
 git clone https://github.com/cemheren/QuickSheet.git
 cd QuickSheet
 dotnet build ExcelConsole.csproj
-dotnet run --project ExcelConsole.csproj                          # TUI mode
-dotnet run --project ExcelConsole.csproj -- --desktop             # Wallpaper mode (Windows/Linux X11)
-dotnet run -c Release --project ExcelConsole.csproj -- --desktop  # Release build (recommended)
+dotnet run --project ExcelConsole.csproj                          # Run as desktop wallpaper
+dotnet run -c Release --project ExcelConsole.csproj               # Release build (recommended)
 ```
 
 Requires the [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0). Nothing else — zero NuGet packages.
@@ -75,7 +74,6 @@ Especially for desktop mode, themes, sparklines, and extension showcases. Great 
 
 ```
 GridManager          — Pure data layer (grid, CSV I/O, Σ/Π). No UI deps.
-SpreadsheetApp       — Console TUI (keyboard, render, search, autosave)
 Platform/IDesktopHost — Desktop mode interface: Run(csvPath) + Dispose()
 Platform/Windows/    — WinForms host, Win32 WorkerW embedding
 Platform/Linux/      — Raw X11 + Xft P/Invoke, _NET_WM_WINDOW_TYPE_DESKTOP
@@ -90,7 +88,7 @@ CellPrefix.cs        — Prefix parser (i:, r:, s:, c:color:, ext:, URLs)
 - Run `dotnet build ExcelConsole.csproj` before pushing — 0 warnings, 0 errors.
 - Conventional Commits in the title (`feat:`, `fix:`, `docs:`, `chore:`).
 - If you touch shared cross-platform code, note what you tested on (Windows / Linux / both).
-- Desktop mode changes should be verified in wallpaper mode, not just TUI.
+- Verify changes on the desktop wallpaper on at least one platform (Windows / Linux X11).
 
 ## License
 

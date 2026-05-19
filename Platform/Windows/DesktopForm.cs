@@ -387,14 +387,14 @@ internal class DesktopForm : DesktopFormBase
         int ch = _charHeight;
         int[] colWidths = GetColumnWidths();
         var theme = Theme.Current;
-        Color themeBg = ConsoleColorToRgb(theme.Background);
-        Color themeFg = ConsoleColorToRgb(theme.Foreground);
-        Color themeSelBg = ConsoleColorToRgb(theme.SelectionBg);
-        Color themeSelFg = ConsoleColorToRgb(theme.SelectionFg);
-        Color themeSearchBg = ConsoleColorToRgb(theme.SearchMatchBg);
-        Color themeSearchSelBg = ConsoleColorToRgb(theme.SearchSelectedBg);
-        Color themeStatusBg = ConsoleColorToRgb(theme.StatusBarBg);
-        Color themeStatusFg = ConsoleColorToRgb(theme.StatusBarFg);
+        Color themeBg = ToColor(theme.BackgroundRgb);
+        Color themeFg = ToColor(theme.ForegroundRgb);
+        Color themeSelBg = ToColor(theme.SelectionBgRgb);
+        Color themeSelFg = ToColor(theme.SelectionFgRgb);
+        Color themeSearchBg = ToColor(theme.SearchMatchBgRgb);
+        Color themeSearchSelBg = ToColor(theme.SearchSelectedBgRgb);
+        Color themeStatusBg = ToColor(theme.StatusBarBgRgb);
+        Color themeStatusFg = ToColor(theme.StatusBarFgRgb);
         g.Clear(themeBg);
         int y = 0;
 
@@ -789,26 +789,8 @@ internal class DesktopForm : DesktopFormBase
         }
     }
 
-    private static Color ConsoleColorToRgb(ConsoleColor cc) => cc switch
-    {
-        ConsoleColor.Black => Color.FromArgb(0, 0, 0),
-        ConsoleColor.DarkBlue => Color.FromArgb(0, 0, 139),
-        ConsoleColor.DarkGreen => Color.FromArgb(0, 100, 0),
-        ConsoleColor.DarkCyan => Color.FromArgb(0, 139, 139),
-        ConsoleColor.DarkRed => Color.FromArgb(139, 0, 0),
-        ConsoleColor.DarkMagenta => Color.FromArgb(139, 0, 139),
-        ConsoleColor.DarkYellow => Color.FromArgb(139, 139, 0),
-        ConsoleColor.Gray => Color.FromArgb(169, 169, 169),
-        ConsoleColor.DarkGray => Color.FromArgb(64, 64, 64),
-        ConsoleColor.Blue => Color.FromArgb(30, 80, 200),
-        ConsoleColor.Green => Color.FromArgb(0, 200, 0),
-        ConsoleColor.Cyan => Color.FromArgb(0, 200, 200),
-        ConsoleColor.Red => Color.FromArgb(200, 0, 0),
-        ConsoleColor.Magenta => Color.FromArgb(200, 0, 200),
-        ConsoleColor.Yellow => Color.FromArgb(200, 200, 0),
-        ConsoleColor.White => Color.FromArgb(240, 240, 240),
-        _ => Color.FromArgb(15, 15, 15)
-    };
+    private static Color ToColor((int r, int g, int b) rgb)
+        => Color.FromArgb(rgb.r, rgb.g, rgb.b);
 
     private static Color ConsoleColorToBg(ConsoleColor cc) => cc switch
     {
