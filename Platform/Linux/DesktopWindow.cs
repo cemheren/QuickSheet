@@ -555,17 +555,17 @@ internal class DesktopWindow : IDisposable
         int[] colWidths = GetColumnWidths();
 
         var theme = Theme.Current;
-        var (tBgR, tBgG, tBgB) = ConsoleColorToRgb(theme.Background);
-        var (tFgR, tFgG, tFgB) = ConsoleColorToRgb(theme.Foreground);
-        var (tHdrR, tHdrG, tHdrB) = ConsoleColorToRgb(theme.HeaderHighlight);
-        var (tSelBgR, tSelBgG, tSelBgB) = ConsoleColorToRgb(theme.SelectionBg);
-        var (tSelFgR, tSelFgG, tSelFgB) = ConsoleColorToRgb(theme.SelectionFg);
-        var (tSrchBgR, tSrchBgG, tSrchBgB) = ConsoleColorToRgb(theme.SearchMatchBg);
-        var (tSrchFgR, tSrchFgG, tSrchFgB) = ConsoleColorToRgb(theme.SearchMatchFg);
-        var (tSrchSelBgR, tSrchSelBgG, tSrchSelBgB) = ConsoleColorToRgb(theme.SearchSelectedBg);
-        var (tSrchSelFgR, tSrchSelFgG, tSrchSelFgB) = ConsoleColorToRgb(theme.SearchSelectedFg);
-        var (tStatBgR, tStatBgG, tStatBgB) = ConsoleColorToRgb(theme.StatusBarBg);
-        var (tStatFgR, tStatFgG, tStatFgB) = ConsoleColorToRgb(theme.StatusBarFg);
+        var (tBgR, tBgG, tBgB) = theme.BackgroundRgb;
+        var (tFgR, tFgG, tFgB) = theme.ForegroundRgb;
+        var (tHdrR, tHdrG, tHdrB) = theme.HeaderHighlightRgb;
+        var (tSelBgR, tSelBgG, tSelBgB) = theme.SelectionBgRgb;
+        var (tSelFgR, tSelFgG, tSelFgB) = theme.SelectionFgRgb;
+        var (tSrchBgR, tSrchBgG, tSrchBgB) = theme.SearchMatchBgRgb;
+        var (tSrchFgR, tSrchFgG, tSrchFgB) = theme.SearchMatchFgRgb;
+        var (tSrchSelBgR, tSrchSelBgG, tSrchSelBgB) = theme.SearchSelectedBgRgb;
+        var (tSrchSelFgR, tSrchSelFgG, tSrchSelFgB) = theme.SearchSelectedFgRgb;
+        var (tStatBgR, tStatBgG, tStatBgB) = theme.StatusBarBgRgb;
+        var (tStatFgR, tStatFgG, tStatFgB) = theme.StatusBarFgRgb;
 
         // Clear background (semi-transparent if ARGB visual available)
         SetGCColor(tBgR, tBgG, tBgB, _hasArgbVisual ? _bgAlpha : 255);

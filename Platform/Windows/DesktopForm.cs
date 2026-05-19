@@ -387,14 +387,14 @@ internal class DesktopForm : DesktopFormBase
         int ch = _charHeight;
         int[] colWidths = GetColumnWidths();
         var theme = Theme.Current;
-        Color themeBg = ConsoleColorToRgb(theme.Background);
-        Color themeFg = ConsoleColorToRgb(theme.Foreground);
-        Color themeSelBg = ConsoleColorToRgb(theme.SelectionBg);
-        Color themeSelFg = ConsoleColorToRgb(theme.SelectionFg);
-        Color themeSearchBg = ConsoleColorToRgb(theme.SearchMatchBg);
-        Color themeSearchSelBg = ConsoleColorToRgb(theme.SearchSelectedBg);
-        Color themeStatusBg = ConsoleColorToRgb(theme.StatusBarBg);
-        Color themeStatusFg = ConsoleColorToRgb(theme.StatusBarFg);
+        Color themeBg = ToColor(theme.BackgroundRgb);
+        Color themeFg = ToColor(theme.ForegroundRgb);
+        Color themeSelBg = ToColor(theme.SelectionBgRgb);
+        Color themeSelFg = ToColor(theme.SelectionFgRgb);
+        Color themeSearchBg = ToColor(theme.SearchMatchBgRgb);
+        Color themeSearchSelBg = ToColor(theme.SearchSelectedBgRgb);
+        Color themeStatusBg = ToColor(theme.StatusBarBgRgb);
+        Color themeStatusFg = ToColor(theme.StatusBarFgRgb);
         g.Clear(themeBg);
         int y = 0;
 
@@ -788,6 +788,9 @@ internal class DesktopForm : DesktopFormBase
             }
         }
     }
+
+    private static Color ToColor((int r, int g, int b) rgb)
+        => Color.FromArgb(rgb.r, rgb.g, rgb.b);
 
     private static Color ConsoleColorToRgb(ConsoleColor cc) => cc switch
     {
