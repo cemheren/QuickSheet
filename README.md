@@ -207,6 +207,7 @@ tls: github.com, 1, 4
 | `npm:` | npm package info — version, weekly downloads, license, author; multi-package compare | `ext: github:cemheren/quicksheet-npm` |
 | `pypi:` | PyPI package info — version, license, author, Python requirement, release date | `ext: github:cemheren/quicksheet-pypi` |
 | `ghtrend:` | GitHub trending repos — stars, forks, language, description by language or overall | `ext: github:cemheren/quicksheet-gh-trends` |
+| `co2:` | Live atmospheric CO₂ from NOAA Mauna Loa — ppm, baseline, YoY, 30-day trend | `ext: github:cemheren/quicksheet-co2` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 

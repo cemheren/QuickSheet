@@ -57,6 +57,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `npm`     | npm package info  | Package version, weekly downloads, license, author, last publish date. Multi-package comparison with comma-separated names. | [`quicksheet-npm`](https://github.com/cemheren/quicksheet-npm) |
 | `pypi`    | PyPI package info | Version, license, author, Python requirement, release date — single package or comparison table | [`quicksheet-pypi`](https://github.com/cemheren/quicksheet-pypi) |
 | `ghtrend` | GitHub trending   | Today's trending repos by language — name, stars, forks, description. Type `ghtrend: python` or `ghtrend: all` | [`quicksheet-gh-trends`](https://github.com/cemheren/quicksheet-gh-trends) |
+| `co2`     | CO₂ Monitor       | Live atmospheric CO₂ from NOAA Mauna Loa (free, no key) — current ppm, pre-industrial baseline, year-over-year change, 30-day trend, annual averages | [`quicksheet-co2`](https://github.com/cemheren/quicksheet-co2) |
 
 ## Install
 
