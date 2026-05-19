@@ -45,7 +45,7 @@ A few keyboard shortcuts that round out the editing experience:
 |----------|-------------|
 | `Ctrl+Z` | Undo (up to 200 steps, action-grouped) |
 | `Ctrl+Y` | Redo |
-| `Ctrl+T` | Cycle theme: Dark, Light, Nord, Solarized, Matrix, Dracula, Synthwave, Gruvbox, Monokai, HotdogStand. Choice persists via a `config:` cell in the CSV. |
+| `Ctrl+T` | Cycle theme: Dark, Light, Nord, Solarized, SolarizedLight, Matrix, Dracula, Synthwave, Gruvbox, Monokai, HotdogStand. Choice persists via a `config:` cell in the CSV. |
 | `Ctrl+G` | Go-to cell — type a reference like `C5` and jump there |
 | `Ctrl+H` | Help overlay with all shortcuts |
 

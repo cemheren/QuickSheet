@@ -83,6 +83,23 @@ public class Theme
         },
         new Theme
         {
+            // Solarized Light — Ethan Schoonover's cream-on-slate light palette.
+            // ConsoleColor.White is the closest 16-color match to base3 (#fdf6e3).
+            Name = "SolarizedLight",
+            Background = ConsoleColor.White,
+            Foreground = ConsoleColor.DarkGray,
+            HeaderHighlight = ConsoleColor.Gray,
+            SelectionBg = ConsoleColor.DarkCyan,
+            SelectionFg = ConsoleColor.White,
+            SearchMatchBg = ConsoleColor.DarkYellow,
+            SearchMatchFg = ConsoleColor.Black,
+            SearchSelectedBg = ConsoleColor.DarkMagenta,
+            SearchSelectedFg = ConsoleColor.White,
+            StatusBarBg = ConsoleColor.DarkCyan,
+            StatusBarFg = ConsoleColor.White,
+        },
+        new Theme
+        {
             Name = "Matrix",
             Background = ConsoleColor.Black,
             Foreground = ConsoleColor.Green,
