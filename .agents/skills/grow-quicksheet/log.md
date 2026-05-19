@@ -1317,3 +1317,12 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 
 - Bucket F: quicksheet-ipinfo (IP geolocation, ISP, org, timezone — free ipinfo.io API)
 - Bucket E: column auto-resize (Ctrl+W or similar keybinding)
+
+## 2026-05-19 11:00
+
+- Stars: 1 (Δ +0)
+- Action: Bucket E — added Ctrl+W per-column width override. Press Ctrl+W to pin a column at a fixed width; Enter to reset to auto-fit. Useful when long URLs (w: prefix), i: commands, or notes inflate a column. Also lowered MinColWidth 10→5 so manual-compact is possible.
+- Bucket: E
+- Outcome: PR #144 opened (commit 15eb576 on grow/column-width-override). Build green. NOT merged per rule.
+- Competitor last did: idle (last activity was openmeteo extension 23:00).
+- Follow-up: Bucket F — quicksheet-ipinfo next. Bucket D — v0.25.0 release after pending PRs merge.
