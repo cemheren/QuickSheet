@@ -7,7 +7,7 @@
 A QuickSheet extension that rolls dice in a cell and (optionally) looks the result up in an encounter / loot table file. Aimed at tabletop RPG GMs running QuickSheet on their behind-the-laptop monitor while their players see only the shared map.
 
 ```
-ext: github:cemheren/quicksheet-roll-ext
+ext: github:Deskworks/quicksheet-roll-ext
 roll: 1d20
 roll: 4d6 drop lowest
 roll: 2d6+3

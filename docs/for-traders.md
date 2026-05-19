@@ -25,15 +25,15 @@ Starter sheet at `examples/trader-dashboard.csv`. Columns:
 
 | Column           | What it shows                                                  | Extension                                                                                |
 |------------------|----------------------------------------------------------------|-------------------------------------------------------------------------------------------|
-| **Equities**     | Daily close + intra-day change for each ticker                 | [`stock`](https://github.com/cemheren/quicksheet-stock-ext) (Stooq, no API key)          |
-| **Crypto**       | Last trade + 24h change                                        | [`price`](https://github.com/cemheren/quicksheet-price-ext) (CoinGecko, no API key)      |
-| **FX**           | Live currency conversion, 200+ pairs                           | [`fx`](https://github.com/cemheren/quicksheet-fx) (ECB rates, no API key)                |
-| **News strip**   | Headlines from any RSS/Atom feed (FinTwit aggregators, BBC, …) | [`news`](https://github.com/cemheren/quicksheet-news)                                    |
-| **Tax pacing**   | Days to next IRS estimated tax deadline                        | [`qtr`](https://github.com/cemheren/quicksheet-qtr)                                      |
-| **SE tax**       | Self-employment tax estimate for full-time traders             | [`1099`](https://github.com/cemheren/quicksheet-1099-ext)                                 |
+| **Equities**     | Daily close + intra-day change for each ticker                 | [`stock`](https://github.com/Deskworks/quicksheet-stock-ext) (Stooq, no API key)          |
+| **Crypto**       | Last trade + 24h change                                        | [`price`](https://github.com/Deskworks/quicksheet-price-ext) (CoinGecko, no API key)      |
+| **FX**           | Live currency conversion, 200+ pairs                           | [`fx`](https://github.com/Deskworks/quicksheet-fx) (ECB rates, no API key)                |
+| **News strip**   | Headlines from any RSS/Atom feed (FinTwit aggregators, BBC, …) | [`news`](https://github.com/Deskworks/quicksheet-news)                                    |
+| **Tax pacing**   | Days to next IRS estimated tax deadline                        | [`qtr`](https://github.com/Deskworks/quicksheet-qtr)                                      |
+| **SE tax**       | Self-employment tax estimate for full-time traders             | [`1099`](https://github.com/Deskworks/quicksheet-1099-ext)                                 |
 | **Sparklines**   | Mini intraday-equity chart from a range of cells               | built-in `s: A1::A30`                                                                     |
 
-All six extensions install with a single `ext: github:cemheren/quicksheet-<name>` cell.
+All six extensions install with a single `ext: github:Deskworks/quicksheet-<name>` cell.
 
 ## What the wallpaper IS NOT for
 
@@ -60,11 +60,11 @@ headlines. The boring stuff that should be glanceable, not the active surface.
 
 If you trade full-time as your own LLC / sole proprietorship:
 
-- [`qtr`](https://github.com/cemheren/quicksheet-qtr) counts down to your next
+- [`qtr`](https://github.com/Deskworks/quicksheet-qtr) counts down to your next
   estimated-tax deadline.
-- [`1099`](https://github.com/cemheren/quicksheet-1099-ext) estimates SE tax from
+- [`1099`](https://github.com/Deskworks/quicksheet-1099-ext) estimates SE tax from
   your YTD gross.
-- [`rate`](https://github.com/cemheren/quicksheet-rate) calculates the minimum
+- [`rate`](https://github.com/Deskworks/quicksheet-rate) calculates the minimum
   viable hourly rate against your target income (useful for anyone consulting on
   the side of trading).
 - Existing built-in CSV columns track your YTD realised P/L; the wallpaper makes
@@ -89,10 +89,10 @@ own a row of CSV cells, not a notification stack.
 
 ## More to mix in
 
-- [`fx`](https://github.com/cemheren/quicksheet-fx) for daily FX conversion side-row.
-- [`pomo`](https://github.com/cemheren/quicksheet-pomodoro) if you trade in
+- [`fx`](https://github.com/Deskworks/quicksheet-fx) for daily FX conversion side-row.
+- [`pomo`](https://github.com/Deskworks/quicksheet-pomodoro) if you trade in
   defined sessions and want a session-boundary marker.
-- [`news`](https://github.com/cemheren/quicksheet-news) subscribed to a FinTwit
+- [`news`](https://github.com/Deskworks/quicksheet-news) subscribed to a FinTwit
   aggregator RSS for headline scroll.
 - [Full extension directory](extensions.md).
 

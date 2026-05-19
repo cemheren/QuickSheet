@@ -3,7 +3,7 @@
 A QuickSheet extension that shows a LeetCode user's solved count + difficulty breakdown + current streak on the wallpaper. Aimed at CS students and grinders who want their progress glanceable behind every IDE window.
 
 ```
-ext: github:cemheren/quicksheet-leetcode-ext
+ext: github:Deskworks/quicksheet-leetcode-ext
 leetcode: <username>
 ```
 

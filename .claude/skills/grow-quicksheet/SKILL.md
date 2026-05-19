@@ -55,7 +55,7 @@ Pick, execute, log, report.
 ## Action priority
 
 1. **Outstanding issues first — across the whole repo family.** Sweep open
-   issues on the main repo *and every* `cemheren/quicksheet-*` extension repo:
+   issues on the main repo *and every* `Deskworks/quicksheet-*` extension repo:
    ```bash
    gh issue list --repo cemheren/QuickSheet --state open --json number,title,labels,url
    for r in $(gh repo list cemheren --limit 200 --json name \

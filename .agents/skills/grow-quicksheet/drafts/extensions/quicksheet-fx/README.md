@@ -8,7 +8,7 @@ Uses the [Frankfurter API](https://frankfurter.dev) (European Central Bank rates
 
 Type in any QuickSheet cell:
 ```
-ext: github:cemheren/quicksheet-fx
+ext: github:Deskworks/quicksheet-fx
 ```
 
 ## Usage
@@ -47,9 +47,9 @@ ECB · 2026-05-15
 
 | Extension | Prefix | What it does |
 |-----------|--------|-------------|
-| [quicksheet-1099-ext](https://github.com/cemheren/quicksheet-1099-ext) | `1099:` | Self-employment tax estimation |
-| [quicksheet-budget](https://github.com/cemheren/quicksheet-budget) | `budget:` | Budget envelope tracking with visual bars |
-| [quicksheet-qtr](https://github.com/cemheren/quicksheet-qtr) | `qtr:` | IRS quarterly tax deadline countdown |
+| [quicksheet-1099-ext](https://github.com/Deskworks/quicksheet-1099-ext) | `1099:` | Self-employment tax estimation |
+| [quicksheet-budget](https://github.com/Deskworks/quicksheet-budget) | `budget:` | Budget envelope tracking with visual bars |
+| [quicksheet-qtr](https://github.com/Deskworks/quicksheet-qtr) | `qtr:` | IRS quarterly tax deadline countdown |
 | **quicksheet-fx** | `fx:` | **Currency conversion (this extension)** |
 
 ## Requirements

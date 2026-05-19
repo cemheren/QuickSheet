@@ -5,7 +5,7 @@ DOI → citation lookup for [QuickSheet](https://github.com/cemheren/QuickSheet)
 ## Install
 
 ```
-ext: github:cemheren/quicksheet-cite-ext
+ext: github:Deskworks/quicksheet-cite-ext
 ```
 
 ## Use

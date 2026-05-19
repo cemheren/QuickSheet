@@ -7,7 +7,7 @@ Live crypto price quotes (CoinGecko) for [QuickSheet](https://github.com/cemhere
 Type into any cell:
 
 ```
-ext: github:cemheren/quicksheet-price-ext
+ext: github:Deskworks/quicksheet-price-ext
 ```
 
 ## Use

@@ -57,7 +57,7 @@ Derived from studying k9s, lazygit, gh-dash, uptime-kuma, yazi, and WTF terminal
 ### Pattern 3: Zero-Config Start
 - k9s: `brew install k9s`, type namespace, done. No YAML.
 - yazi: `cargo install yazi-fm`, no config.
-- **QuickSheet extension equivalent**: `ext: github:cemheren/quicksheet-k8s` + `k8s: default, 3, 10` and it works with your existing `~/.kube/config`.
+- **QuickSheet extension equivalent**: `ext: github:Deskworks/quicksheet-k8s` + `k8s: default, 3, 10` and it works with your existing `~/.kube/config`.
 
 ### Pattern 4: Beautiful Output (Screenshotable)
 - People post screenshots on Reddit/Twitter. The ASCII sparklines (`s:` prefix) already work this way.

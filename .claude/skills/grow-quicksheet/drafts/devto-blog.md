@@ -115,7 +115,7 @@ QuickSheet has an extension system, but it doesn't have a registry, a package ma
 - a `quicksheet-extension.json` manifest with a `prefix` and an `entry` command,
 - a subprocess that talks JSON-lines on stdin/stdout.
 
-When you type `ext: github:cemheren/quicksheet-weather` into a cell, QuickSheet clones the repo, reads the manifest, runs the `entry` command, sends `{"type":"init"}`, gets back `{"type":"register","prefix":"wthr",...}`, and now `wthr:` is a live cell prefix. That's it.
+When you type `ext: github:Deskworks/quicksheet-weather` into a cell, QuickSheet clones the repo, reads the manifest, runs the `entry` command, sends `{"type":"init"}`, gets back `{"type":"register","prefix":"wthr",...}`, and now `wthr:` is a live cell prefix. That's it.
 
 The protocol is two message types — `init` and `activate`. Extensions can be any language: the reference set is .NET 9 (because that's what the host is), but Python stdlib or Go would work equally well. I've shipped a handful so far:
 

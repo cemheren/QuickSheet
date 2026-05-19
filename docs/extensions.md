@@ -4,60 +4,60 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 
 | Prefix    | Name              | What it does                                       | Repo |
 |-----------|-------------------|----------------------------------------------------|------|
-| `copilot` | Copilot           | AI in a cell. Q&A, range summarization, generation | [`quicksheet-copilot-ext`](https://github.com/cemheren/quicksheet-copilot-ext) |
-| `wthr`    | Weather forecast  | 7-day forecast for a location                      | [`quicksheet-weather`](https://github.com/cemheren/quicksheet-weather) |
-| `tls`     | TLS cert checker  | Cert expiry, issuer, CN for a host                 | [`quicksheet-tls-ext`](https://github.com/cemheren/quicksheet-tls-ext) |
-| `price`   | Crypto price      | Last trade + 24h change (CoinGecko)                | [`quicksheet-price-ext`](https://github.com/cemheren/quicksheet-price-ext) |
-| `def`     | Dictionary        | Inline definitions (dictionaryapi.dev)             | [`quicksheet-define-ext`](https://github.com/cemheren/quicksheet-define-ext) |
-| `mort`    | Mortgage calc     | Monthly payment, total interest, total cost        | [`quicksheet-mortgage-ext`](https://github.com/cemheren/quicksheet-mortgage-ext) |
-| `pomo`    | Pomodoro timer    | Live countdown with progress bar                   | [`quicksheet-pomodoro`](https://github.com/cemheren/quicksheet-pomodoro) |
-| `sys`     | System monitor    | Live CPU, RAM, disk usage with visual bars         | [`quicksheet-sysmon`](https://github.com/cemheren/quicksheet-sysmon) |
-| `mxck`    | MX record check   | MX records for a domain (DNS-over-HTTPS)           | [`quicksheet-mxck-ext`](https://github.com/cemheren/quicksheet-mxck-ext) |
-| `ping`    | HTTP ping         | Status code + latency for a URL                    | [`quicksheet-ping-ext`](https://github.com/cemheren/quicksheet-ping-ext) |
-| `cite`    | DOI citation      | Authors / year / title / venue from Crossref       | [`quicksheet-cite-ext`](https://github.com/cemheren/quicksheet-cite-ext) |
-| `thes`    | Thesaurus         | Synonyms for a word (Datamuse)                     | [`quicksheet-thes-ext`](https://github.com/cemheren/quicksheet-thes-ext) |
-| `stock`   | Stock quote       | Last close + intra-day change (Stooq)              | [`quicksheet-stock-ext`](https://github.com/cemheren/quicksheet-stock-ext) |
-| `1099`    | SE tax estimate   | US self-employment tax + quarterly estimate        | [`quicksheet-1099-ext`](https://github.com/cemheren/quicksheet-1099-ext) |
-| `qtr`     | Tax countdown     | Next IRS estimated tax deadline + days remaining   | [`quicksheet-qtr`](https://github.com/cemheren/quicksheet-qtr) |
-| `fx`      | Currency convert  | Live ECB rates, 200+ currencies, no API key        | [`quicksheet-fx`](https://github.com/cemheren/quicksheet-fx) |
-| `grav`    | Gravatar lookup   | Profile name, location, avatar URL for an email    | [`quicksheet-grav-ext`](https://github.com/cemheren/quicksheet-grav-ext) |
-| `todo`    | Todo manager      | Tasks with priorities, due dates, completion stats  | [`quicksheet-todo`](https://github.com/cemheren/quicksheet-todo) |
-| `cal`     | Calendar          | Upcoming events from .ics files, grouped by date    | [`quicksheet-cal`](https://github.com/cemheren/quicksheet-cal) |
-| `budget`  | Budget envelopes  | Track spending with visual progress bars            | [`quicksheet-budget`](https://github.com/cemheren/quicksheet-budget) |
-| `hntop`   | HN Top Stories    | Top Hacker News stories with scores & comments      | [`quicksheet-hntop`](https://github.com/cemheren/quicksheet-hntop) |
-| `apistatus` | Service Status  | Monitor GitHub/Cloudflare/npm/Discord status pages  | [`quicksheet-apistatus`](https://github.com/cemheren/quicksheet-apistatus) |
-| `portck`  | Port Checker      | TCP port/service health — which local services are up | [`quicksheet-portck`](https://github.com/cemheren/quicksheet-portck) |
-| `k8s`     | Kubernetes Pods   | Live pod status from kubeconfig — ambient CrashLoopBackOff alerts | [`quicksheet-k8s`](https://github.com/cemheren/quicksheet-k8s) |
-| `ghpr`    | GitHub PRs        | PR review dashboard — see review requests on wallpaper | [`quicksheet-ghpr`](https://github.com/cemheren/quicksheet-ghpr) |
-| `gha`     | GitHub Actions    | Live CI/CD workflow run statuses — ✅❌🔄 on wallpaper, optional token for private repos | [`quicksheet-gha`](https://github.com/cemheren/quicksheet-gha) |
-| `docker`  | Docker Health     | Container status dashboard via Docker Engine API       | [`quicksheet-docker`](https://github.com/cemheren/quicksheet-docker) |
-| `rate`    | Freelance Rate    | Min viable hourly rate for target income (taxes+benefits) | [`quicksheet-rate`](https://github.com/cemheren/quicksheet-rate) |
-| `gitst`   | Git Status        | Branch, changes, stashes, last commit for your repos   | [`quicksheet-gitst`](https://github.com/cemheren/quicksheet-gitst) |
-| `cntdn`   | Countdown Timer   | Days/hours to deadlines, launches, holidays with progress bars | [`quicksheet-cntdn`](https://github.com/cemheren/quicksheet-cntdn) |
-| `worldtm` | World Time        | Multi-timezone clock with business-hours indicators, 40+ aliases | [`quicksheet-worldtm`](https://github.com/cemheren/quicksheet-worldtm) |
-| `margin`  | Margin Calculator | Break-even point & contribution margin from price/cost/fixed     | [`quicksheet-margin-ext`](https://github.com/cemheren/quicksheet-margin-ext) |
-| `mileage` | IRS mileage       | Standard-mileage deduction (business/medical/charity, 2021-2025) | [`quicksheet-mileage-ext`](https://github.com/cemheren/quicksheet-mileage-ext) |
-| `depr`    | Depreciation      | Straight-line + MACRS half-year schedules (IRS Pub 946)          | [`quicksheet-depr-ext`](https://github.com/cemheren/quicksheet-depr-ext) |
-| `jwtdec`  | JWT decoder       | Decode JWT tokens locally — header, claims, expiry. Tokens never leave your machine. | [`quicksheet-jwtdec`](https://github.com/cemheren/quicksheet-jwtdec) |
-| `cronck`  | Cron parser       | Convert 5-field cron expressions to human-readable descriptions. Ranges, steps, named days/months. | [`quicksheet-cronck`](https://github.com/cemheren/quicksheet-cronck) |
-| `news`    | RSS feed reader   | Headlines from HN, Reddit, dev.to, BBC, TechCrunch, or any RSS/Atom URL | [`quicksheet-news`](https://github.com/cemheren/quicksheet-news) |
-| `b64`     | Base64 codec      | Encode/decode base64 with auto-detect — paste tokens, config blobs, JWTs | [`quicksheet-b64`](https://github.com/cemheren/quicksheet-b64) |
-| `guid`    | GUID generator    | Generate UUIDs on demand — standard, no-dash, braced, uppercase, batch up to 20 | [`quicksheet-guid`](https://github.com/cemheren/quicksheet-guid) |
-| `regex`   | Regex explainer   | Tokenize and explain regex patterns — anchors, classes, quantifiers, groups | [`quicksheet-regex`](https://github.com/cemheren/quicksheet-regex) |
-| `urlenc`  | URL codec         | URL encode/decode with auto-detect, component, path, and full URI modes | [`quicksheet-urlenc`](https://github.com/cemheren/quicksheet-urlenc) |
-| `curl`    | HTTP client       | cURL-style HTTP client — GET/POST/PUT/DELETE from cells with headers, JSON bodies, pretty-print | [`quicksheet-curl`](https://github.com/cemheren/quicksheet-curl) |
-| `arxiv`   | arXiv paper lookup | Look up papers by ID or keyword search — title, authors, year, abstract. No API key. | [`quicksheet-arxiv`](https://github.com/cemheren/quicksheet-arxiv) |
-| `pihole`  | Pi-hole stats     | DNS blocking stats from Pi-hole — status, block %, query counts, domains blocked | [`quicksheet-pihole`](https://github.com/cemheren/quicksheet-pihole) |
-| `health`  | HTTP health check | Probe multiple HTTP endpoints in parallel — 🟢/🔴 status with latency, self-signed cert support | [`quicksheet-health`](https://github.com/cemheren/quicksheet-health) |
-| `env`     | Env var inspector | Lookup, filter, PATH exploder — auto-masks secrets (API keys, tokens) | [`quicksheet-envck`](https://github.com/cemheren/quicksheet-envck) |
-| `roll`    | Dice roller       | Roll any dice notation — 2d6+3, d20, 4d6kh3, Fudge dice, crit/fumble detection | [`quicksheet-dice`](https://github.com/cemheren/quicksheet-dice) |
-| `lc`      | LeetCode tracker  | Daily challenge, problem lookup by number/slug, user solve stats (Easy/Medium/Hard, rank) | [`quicksheet-leetcode`](https://github.com/cemheren/quicksheet-leetcode) |
-| `ghst`    | GitHub streak     | Current streak 🔥, longest streak, total contributions, 14-day sparkline. No auth needed. | [`quicksheet-ghstreak`](https://github.com/cemheren/quicksheet-ghstreak) |
-| `iss`     | ISS tracker       | Live ISS position (lat/lon/region/altitude/speed) + all people currently in space, grouped by spacecraft | [`quicksheet-iss`](https://github.com/cemheren/quicksheet-iss) |
-| `npm`     | npm package info  | Package version, weekly downloads, license, author, last publish date. Multi-package comparison with comma-separated names. | [`quicksheet-npm`](https://github.com/cemheren/quicksheet-npm) |
-| `pypi`    | PyPI package info | Version, license, author, Python requirement, release date — single package or comparison table | [`quicksheet-pypi`](https://github.com/cemheren/quicksheet-pypi) |
-| `ghtrend` | GitHub trending   | Today's trending repos by language — name, stars, forks, description. Type `ghtrend: python` or `ghtrend: all` | [`quicksheet-gh-trends`](https://github.com/cemheren/quicksheet-gh-trends) |
-| `co2`     | CO₂ Monitor       | Live atmospheric CO₂ from NOAA Mauna Loa (free, no key) — current ppm, pre-industrial baseline, year-over-year change, 30-day trend, annual averages | [`quicksheet-co2`](https://github.com/cemheren/quicksheet-co2) |
+| `copilot` | Copilot           | AI in a cell. Q&A, range summarization, generation | [`quicksheet-copilot-ext`](https://github.com/Deskworks/quicksheet-copilot-ext) |
+| `wthr`    | Weather forecast  | 7-day forecast for a location                      | [`quicksheet-weather`](https://github.com/Deskworks/quicksheet-weather) |
+| `tls`     | TLS cert checker  | Cert expiry, issuer, CN for a host                 | [`quicksheet-tls-ext`](https://github.com/Deskworks/quicksheet-tls-ext) |
+| `price`   | Crypto price      | Last trade + 24h change (CoinGecko)                | [`quicksheet-price-ext`](https://github.com/Deskworks/quicksheet-price-ext) |
+| `def`     | Dictionary        | Inline definitions (dictionaryapi.dev)             | [`quicksheet-define-ext`](https://github.com/Deskworks/quicksheet-define-ext) |
+| `mort`    | Mortgage calc     | Monthly payment, total interest, total cost        | [`quicksheet-mortgage-ext`](https://github.com/Deskworks/quicksheet-mortgage-ext) |
+| `pomo`    | Pomodoro timer    | Live countdown with progress bar                   | [`quicksheet-pomodoro`](https://github.com/Deskworks/quicksheet-pomodoro) |
+| `sys`     | System monitor    | Live CPU, RAM, disk usage with visual bars         | [`quicksheet-sysmon`](https://github.com/Deskworks/quicksheet-sysmon) |
+| `mxck`    | MX record check   | MX records for a domain (DNS-over-HTTPS)           | [`quicksheet-mxck-ext`](https://github.com/Deskworks/quicksheet-mxck-ext) |
+| `ping`    | HTTP ping         | Status code + latency for a URL                    | [`quicksheet-ping-ext`](https://github.com/Deskworks/quicksheet-ping-ext) |
+| `cite`    | DOI citation      | Authors / year / title / venue from Crossref       | [`quicksheet-cite-ext`](https://github.com/Deskworks/quicksheet-cite-ext) |
+| `thes`    | Thesaurus         | Synonyms for a word (Datamuse)                     | [`quicksheet-thes-ext`](https://github.com/Deskworks/quicksheet-thes-ext) |
+| `stock`   | Stock quote       | Last close + intra-day change (Stooq)              | [`quicksheet-stock-ext`](https://github.com/Deskworks/quicksheet-stock-ext) |
+| `1099`    | SE tax estimate   | US self-employment tax + quarterly estimate        | [`quicksheet-1099-ext`](https://github.com/Deskworks/quicksheet-1099-ext) |
+| `qtr`     | Tax countdown     | Next IRS estimated tax deadline + days remaining   | [`quicksheet-qtr`](https://github.com/Deskworks/quicksheet-qtr) |
+| `fx`      | Currency convert  | Live ECB rates, 200+ currencies, no API key        | [`quicksheet-fx`](https://github.com/Deskworks/quicksheet-fx) |
+| `grav`    | Gravatar lookup   | Profile name, location, avatar URL for an email    | [`quicksheet-grav-ext`](https://github.com/Deskworks/quicksheet-grav-ext) |
+| `todo`    | Todo manager      | Tasks with priorities, due dates, completion stats  | [`quicksheet-todo`](https://github.com/Deskworks/quicksheet-todo) |
+| `cal`     | Calendar          | Upcoming events from .ics files, grouped by date    | [`quicksheet-cal`](https://github.com/Deskworks/quicksheet-cal) |
+| `budget`  | Budget envelopes  | Track spending with visual progress bars            | [`quicksheet-budget`](https://github.com/Deskworks/quicksheet-budget) |
+| `hntop`   | HN Top Stories    | Top Hacker News stories with scores & comments      | [`quicksheet-hntop`](https://github.com/Deskworks/quicksheet-hntop) |
+| `apistatus` | Service Status  | Monitor GitHub/Cloudflare/npm/Discord status pages  | [`quicksheet-apistatus`](https://github.com/Deskworks/quicksheet-apistatus) |
+| `portck`  | Port Checker      | TCP port/service health — which local services are up | [`quicksheet-portck`](https://github.com/Deskworks/quicksheet-portck) |
+| `k8s`     | Kubernetes Pods   | Live pod status from kubeconfig — ambient CrashLoopBackOff alerts | [`quicksheet-k8s`](https://github.com/Deskworks/quicksheet-k8s) |
+| `ghpr`    | GitHub PRs        | PR review dashboard — see review requests on wallpaper | [`quicksheet-ghpr`](https://github.com/Deskworks/quicksheet-ghpr) |
+| `gha`     | GitHub Actions    | Live CI/CD workflow run statuses — ✅❌🔄 on wallpaper, optional token for private repos | [`quicksheet-gha`](https://github.com/Deskworks/quicksheet-gha) |
+| `docker`  | Docker Health     | Container status dashboard via Docker Engine API       | [`quicksheet-docker`](https://github.com/Deskworks/quicksheet-docker) |
+| `rate`    | Freelance Rate    | Min viable hourly rate for target income (taxes+benefits) | [`quicksheet-rate`](https://github.com/Deskworks/quicksheet-rate) |
+| `gitst`   | Git Status        | Branch, changes, stashes, last commit for your repos   | [`quicksheet-gitst`](https://github.com/Deskworks/quicksheet-gitst) |
+| `cntdn`   | Countdown Timer   | Days/hours to deadlines, launches, holidays with progress bars | [`quicksheet-cntdn`](https://github.com/Deskworks/quicksheet-cntdn) |
+| `worldtm` | World Time        | Multi-timezone clock with business-hours indicators, 40+ aliases | [`quicksheet-worldtm`](https://github.com/Deskworks/quicksheet-worldtm) |
+| `margin`  | Margin Calculator | Break-even point & contribution margin from price/cost/fixed     | [`quicksheet-margin-ext`](https://github.com/Deskworks/quicksheet-margin-ext) |
+| `mileage` | IRS mileage       | Standard-mileage deduction (business/medical/charity, 2021-2025) | [`quicksheet-mileage-ext`](https://github.com/Deskworks/quicksheet-mileage-ext) |
+| `depr`    | Depreciation      | Straight-line + MACRS half-year schedules (IRS Pub 946)          | [`quicksheet-depr-ext`](https://github.com/Deskworks/quicksheet-depr-ext) |
+| `jwtdec`  | JWT decoder       | Decode JWT tokens locally — header, claims, expiry. Tokens never leave your machine. | [`quicksheet-jwtdec`](https://github.com/Deskworks/quicksheet-jwtdec) |
+| `cronck`  | Cron parser       | Convert 5-field cron expressions to human-readable descriptions. Ranges, steps, named days/months. | [`quicksheet-cronck`](https://github.com/Deskworks/quicksheet-cronck) |
+| `news`    | RSS feed reader   | Headlines from HN, Reddit, dev.to, BBC, TechCrunch, or any RSS/Atom URL | [`quicksheet-news`](https://github.com/Deskworks/quicksheet-news) |
+| `b64`     | Base64 codec      | Encode/decode base64 with auto-detect — paste tokens, config blobs, JWTs | [`quicksheet-b64`](https://github.com/Deskworks/quicksheet-b64) |
+| `guid`    | GUID generator    | Generate UUIDs on demand — standard, no-dash, braced, uppercase, batch up to 20 | [`quicksheet-guid`](https://github.com/Deskworks/quicksheet-guid) |
+| `regex`   | Regex explainer   | Tokenize and explain regex patterns — anchors, classes, quantifiers, groups | [`quicksheet-regex`](https://github.com/Deskworks/quicksheet-regex) |
+| `urlenc`  | URL codec         | URL encode/decode with auto-detect, component, path, and full URI modes | [`quicksheet-urlenc`](https://github.com/Deskworks/quicksheet-urlenc) |
+| `curl`    | HTTP client       | cURL-style HTTP client — GET/POST/PUT/DELETE from cells with headers, JSON bodies, pretty-print | [`quicksheet-curl`](https://github.com/Deskworks/quicksheet-curl) |
+| `arxiv`   | arXiv paper lookup | Look up papers by ID or keyword search — title, authors, year, abstract. No API key. | [`quicksheet-arxiv`](https://github.com/Deskworks/quicksheet-arxiv) |
+| `pihole`  | Pi-hole stats     | DNS blocking stats from Pi-hole — status, block %, query counts, domains blocked | [`quicksheet-pihole`](https://github.com/Deskworks/quicksheet-pihole) |
+| `health`  | HTTP health check | Probe multiple HTTP endpoints in parallel — 🟢/🔴 status with latency, self-signed cert support | [`quicksheet-health`](https://github.com/Deskworks/quicksheet-health) |
+| `env`     | Env var inspector | Lookup, filter, PATH exploder — auto-masks secrets (API keys, tokens) | [`quicksheet-envck`](https://github.com/Deskworks/quicksheet-envck) |
+| `roll`    | Dice roller       | Roll any dice notation — 2d6+3, d20, 4d6kh3, Fudge dice, crit/fumble detection | [`quicksheet-dice`](https://github.com/Deskworks/quicksheet-dice) |
+| `lc`      | LeetCode tracker  | Daily challenge, problem lookup by number/slug, user solve stats (Easy/Medium/Hard, rank) | [`quicksheet-leetcode`](https://github.com/Deskworks/quicksheet-leetcode) |
+| `ghst`    | GitHub streak     | Current streak 🔥, longest streak, total contributions, 14-day sparkline. No auth needed. | [`quicksheet-ghstreak`](https://github.com/Deskworks/quicksheet-ghstreak) |
+| `iss`     | ISS tracker       | Live ISS position (lat/lon/region/altitude/speed) + all people currently in space, grouped by spacecraft | [`quicksheet-iss`](https://github.com/Deskworks/quicksheet-iss) |
+| `npm`     | npm package info  | Package version, weekly downloads, license, author, last publish date. Multi-package comparison with comma-separated names. | [`quicksheet-npm`](https://github.com/Deskworks/quicksheet-npm) |
+| `pypi`    | PyPI package info | Version, license, author, Python requirement, release date — single package or comparison table | [`quicksheet-pypi`](https://github.com/Deskworks/quicksheet-pypi) |
+| `ghtrend` | GitHub trending   | Today's trending repos by language — name, stars, forks, description. Type `ghtrend: python` or `ghtrend: all` | [`quicksheet-gh-trends`](https://github.com/Deskworks/quicksheet-gh-trends) |
+| `co2`     | CO₂ Monitor       | Live atmospheric CO₂ from NOAA Mauna Loa (free, no key) — current ppm, pre-industrial baseline, year-over-year change, 30-day trend, annual averages | [`quicksheet-co2`](https://github.com/Deskworks/quicksheet-co2) |
 
 ## Install
 

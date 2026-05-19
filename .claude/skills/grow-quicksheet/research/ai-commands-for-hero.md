@@ -51,7 +51,7 @@ Sources at bottom.
 │ r: claude              r: claude --continue        i: claude --version  │  ← Row 2
 │ r: claude /init        r: claude /review           /compact at 70%      │  ← Row 3
 │ r: gh copilot suggest  r: gh copilot explain       /fix /tests /explain │  ← Row 4
-│ r: aider --ask "..."   ext: cemheren/quicksheet-copilot-ext             │  ← Row 5
+│ r: aider --ask "..."   ext: Deskworks/quicksheet-copilot-ext             │  ← Row 5
 │                                                                         │
 │ TOKENS THIS WEEK                                                        │
 │ s: 12,8,15,22,9,7,14   $/day: i: claude /cost      Σ: 87,341 tok        │  ← Row 7

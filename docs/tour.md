@@ -22,7 +22,7 @@ Every cell is plain text by default. Add a prefix and the cell *does something*.
 | `s: `               | Sparkline. Numbers render as unicode bars (▁▂▃▄▅▆▇█). Range form: `s: A1::A10`. | `s: 4,7,9,3,8,12`                  |
 | `c:color: `         | Cell color. Highlights background with a named color.             | `c:red: URGENT`                    |
 | `L: `               | Loop a target cell on an interval.                                | `L: A10, 5m`                       |
-| `ext: `             | Install an extension repo. One line.                              | `ext: github:cemheren/quicksheet-weather` |
+| `ext: `             | Install an extension repo. One line.                              | `ext: github:Deskworks/quicksheet-weather` |
 | `config: `          | Persistent settings (currently `theme=…`). Auto-created when you press `Ctrl+T`; survives restart via the CSV itself — no sidecar file. | `config: theme=Nord`               |
 | `http://` `https://`| Hyperlink. Highlighted, opens on Enter.                           | `https://news.ycombinator.com`     |
 
@@ -62,30 +62,30 @@ r: kubectl describe pod {A2::A2}
 `ext: github:user/repo` clones the repo, reads its `quicksheet-extension.json` manifest, and starts a subprocess that talks JSON-lines with QuickSheet. Then a new prefix appears.
 
 Currently public:
-- [`quicksheet-copilot-ext`](https://github.com/cemheren/quicksheet-copilot-ext) — AI in a cell.
-- [`quicksheet-weather`](https://github.com/cemheren/quicksheet-weather) — 7-day forecast.
-- [`quicksheet-tls-ext`](https://github.com/cemheren/quicksheet-tls-ext) — TLS certificate checker.
-- [`quicksheet-pomodoro`](https://github.com/cemheren/quicksheet-pomodoro) — focus timer.
-- [`quicksheet-price-ext`](https://github.com/cemheren/quicksheet-price-ext) — crypto price quotes (CoinGecko).
-- [`quicksheet-define-ext`](https://github.com/cemheren/quicksheet-define-ext) — inline dictionary lookups.
-- [`quicksheet-mortgage-ext`](https://github.com/cemheren/quicksheet-mortgage-ext) — mortgage payment calculator.
-- [`quicksheet-mxck-ext`](https://github.com/cemheren/quicksheet-mxck-ext) — MX record check (DNS-over-HTTPS).
-- [`quicksheet-ping-ext`](https://github.com/cemheren/quicksheet-ping-ext) — HTTP status code + latency probe.
-- [`quicksheet-cite-ext`](https://github.com/cemheren/quicksheet-cite-ext) — DOI → citation (Crossref).
-- [`quicksheet-thes-ext`](https://github.com/cemheren/quicksheet-thes-ext) — thesaurus (Datamuse).
-- [`quicksheet-stock-ext`](https://github.com/cemheren/quicksheet-stock-ext) — stock ticker quotes (Stooq).
-- [`quicksheet-1099-ext`](https://github.com/cemheren/quicksheet-1099-ext) — US self-employment tax estimate.
-- [`quicksheet-mileage-ext`](https://github.com/cemheren/quicksheet-mileage-ext) — IRS standard-mileage deduction calculator.
-- [`quicksheet-margin-ext`](https://github.com/cemheren/quicksheet-margin-ext) — break-even point + contribution margin.
-- [`quicksheet-depr-ext`](https://github.com/cemheren/quicksheet-depr-ext) — straight-line + MACRS depreciation schedules.
-- [`quicksheet-grav-ext`](https://github.com/cemheren/quicksheet-grav-ext) — Gravatar profile + avatar URL.
-- [`quicksheet-sysmon`](https://github.com/cemheren/quicksheet-sysmon) — live CPU/RAM/disk/uptime monitor.
-- [`quicksheet-todo`](https://github.com/cemheren/quicksheet-todo) — task management with priorities + due dates.
-- [`quicksheet-cal`](https://github.com/cemheren/quicksheet-cal) — upcoming calendar events from .ics files.
-- [`quicksheet-budget`](https://github.com/cemheren/quicksheet-budget) — budget envelope visualizer with progress bars.
-- [`quicksheet-qtr`](https://github.com/cemheren/quicksheet-qtr) — IRS quarterly tax deadline countdown.
-- [`quicksheet-fx`](https://github.com/cemheren/quicksheet-fx) — live currency conversion (200+ currencies, ECB rates).
-- [`quicksheet-rate`](https://github.com/cemheren/quicksheet-rate) — freelance hourly rate calculator (taxes, benefits, billable time).
+- [`quicksheet-copilot-ext`](https://github.com/Deskworks/quicksheet-copilot-ext) — AI in a cell.
+- [`quicksheet-weather`](https://github.com/Deskworks/quicksheet-weather) — 7-day forecast.
+- [`quicksheet-tls-ext`](https://github.com/Deskworks/quicksheet-tls-ext) — TLS certificate checker.
+- [`quicksheet-pomodoro`](https://github.com/Deskworks/quicksheet-pomodoro) — focus timer.
+- [`quicksheet-price-ext`](https://github.com/Deskworks/quicksheet-price-ext) — crypto price quotes (CoinGecko).
+- [`quicksheet-define-ext`](https://github.com/Deskworks/quicksheet-define-ext) — inline dictionary lookups.
+- [`quicksheet-mortgage-ext`](https://github.com/Deskworks/quicksheet-mortgage-ext) — mortgage payment calculator.
+- [`quicksheet-mxck-ext`](https://github.com/Deskworks/quicksheet-mxck-ext) — MX record check (DNS-over-HTTPS).
+- [`quicksheet-ping-ext`](https://github.com/Deskworks/quicksheet-ping-ext) — HTTP status code + latency probe.
+- [`quicksheet-cite-ext`](https://github.com/Deskworks/quicksheet-cite-ext) — DOI → citation (Crossref).
+- [`quicksheet-thes-ext`](https://github.com/Deskworks/quicksheet-thes-ext) — thesaurus (Datamuse).
+- [`quicksheet-stock-ext`](https://github.com/Deskworks/quicksheet-stock-ext) — stock ticker quotes (Stooq).
+- [`quicksheet-1099-ext`](https://github.com/Deskworks/quicksheet-1099-ext) — US self-employment tax estimate.
+- [`quicksheet-mileage-ext`](https://github.com/Deskworks/quicksheet-mileage-ext) — IRS standard-mileage deduction calculator.
+- [`quicksheet-margin-ext`](https://github.com/Deskworks/quicksheet-margin-ext) — break-even point + contribution margin.
+- [`quicksheet-depr-ext`](https://github.com/Deskworks/quicksheet-depr-ext) — straight-line + MACRS depreciation schedules.
+- [`quicksheet-grav-ext`](https://github.com/Deskworks/quicksheet-grav-ext) — Gravatar profile + avatar URL.
+- [`quicksheet-sysmon`](https://github.com/Deskworks/quicksheet-sysmon) — live CPU/RAM/disk/uptime monitor.
+- [`quicksheet-todo`](https://github.com/Deskworks/quicksheet-todo) — task management with priorities + due dates.
+- [`quicksheet-cal`](https://github.com/Deskworks/quicksheet-cal) — upcoming calendar events from .ics files.
+- [`quicksheet-budget`](https://github.com/Deskworks/quicksheet-budget) — budget envelope visualizer with progress bars.
+- [`quicksheet-qtr`](https://github.com/Deskworks/quicksheet-qtr) — IRS quarterly tax deadline countdown.
+- [`quicksheet-fx`](https://github.com/Deskworks/quicksheet-fx) — live currency conversion (200+ currencies, ECB rates).
+- [`quicksheet-rate`](https://github.com/Deskworks/quicksheet-rate) — freelance hourly rate calculator (taxes, benefits, billable time).
 
 [Write your own](../README.md#build-your-own) in whatever language you want — the protocol is two message types.
 

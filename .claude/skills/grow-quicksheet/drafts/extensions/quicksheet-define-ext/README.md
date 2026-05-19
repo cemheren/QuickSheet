@@ -7,7 +7,7 @@ Inline dictionary lookups for [QuickSheet](https://github.com/cemheren/QuickShee
 Type into any cell:
 
 ```
-ext: github:cemheren/quicksheet-define-ext
+ext: github:Deskworks/quicksheet-define-ext
 ```
 
 ## Use

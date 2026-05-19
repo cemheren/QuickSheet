@@ -26,13 +26,13 @@ place. The columns:
 
 | Column      | What it shows                                                      | Extension used                          |
 |-------------|--------------------------------------------------------------------|-----------------------------------------|
-| **Status**  | Per-service health — green dot if up, red if down                  | [`k8s`](https://github.com/cemheren/quicksheet-k8s) / [`docker`](https://github.com/cemheren/quicksheet-docker) |
-| **Cert expiry** | Days remaining on each Let's Encrypt cert                       | [`tls`](https://github.com/cemheren/quicksheet-tls-ext) |
-| **Network** | Latency to upstreams + open TCP ports                              | [`ping`](https://github.com/cemheren/quicksheet-ping-ext) / [`portck`](https://github.com/cemheren/quicksheet-portck) |
-| **System**  | CPU / RAM / disk / uptime of the box running QuickSheet            | [`sysmon`](https://github.com/cemheren/quicksheet-sysmon) |
-| **DNS**     | MX records — useful when your selfhosted mail goes weird           | [`mxck`](https://github.com/cemheren/quicksheet-mxck-ext) |
+| **Status**  | Per-service health — green dot if up, red if down                  | [`k8s`](https://github.com/Deskworks/quicksheet-k8s) / [`docker`](https://github.com/Deskworks/quicksheet-docker) |
+| **Cert expiry** | Days remaining on each Let's Encrypt cert                       | [`tls`](https://github.com/Deskworks/quicksheet-tls-ext) |
+| **Network** | Latency to upstreams + open TCP ports                              | [`ping`](https://github.com/Deskworks/quicksheet-ping-ext) / [`portck`](https://github.com/Deskworks/quicksheet-portck) |
+| **System**  | CPU / RAM / disk / uptime of the box running QuickSheet            | [`sysmon`](https://github.com/Deskworks/quicksheet-sysmon) |
+| **DNS**     | MX records — useful when your selfhosted mail goes weird           | [`mxck`](https://github.com/Deskworks/quicksheet-mxck-ext) |
 
-All six extensions install with a single `ext: github:cemheren/quicksheet-<name>` cell.
+All six extensions install with a single `ext: github:Deskworks/quicksheet-<name>` cell.
 QuickSheet clones the repo, starts the subprocess, and the prefix is live.
 
 ## Make it pretty
@@ -68,12 +68,12 @@ Disk usage > 85 % renders red, > 70 % yellow, else green. Pair with `i: df --out
 
 ## More extensions to mix in
 
-- [`hntop`](https://github.com/cemheren/quicksheet-hntop) — HN front page in a strip.
-- [`news`](https://github.com/cemheren/quicksheet-news) — RSS feed reader (subscribe to
+- [`hntop`](https://github.com/Deskworks/quicksheet-hntop) — HN front page in a strip.
+- [`news`](https://github.com/Deskworks/quicksheet-news) — RSS feed reader (subscribe to
   selfh.st or your own homelab RSS).
-- [`apistatus`](https://github.com/cemheren/quicksheet-apistatus) — GitHub / Cloudflare /
+- [`apistatus`](https://github.com/Deskworks/quicksheet-apistatus) — GitHub / Cloudflare /
   npm status pages.
-- [`fx`](https://github.com/cemheren/quicksheet-fx) — currency conversion (for the
+- [`fx`](https://github.com/Deskworks/quicksheet-fx) — currency conversion (for the
   homelab-also-a-finance-nerd subset).
 
 See the [full extension directory](extensions.md).

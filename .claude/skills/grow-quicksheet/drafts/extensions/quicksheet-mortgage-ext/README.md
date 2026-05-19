@@ -7,7 +7,7 @@ Fixed-rate mortgage payment calculator for [QuickSheet](https://github.com/cemhe
 Type into any cell:
 
 ```
-ext: github:cemheren/quicksheet-mortgage-ext
+ext: github:Deskworks/quicksheet-mortgage-ext
 ```
 
 ## Use

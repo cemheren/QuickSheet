@@ -154,7 +154,7 @@ Create new QuickSheet extensions as **separate GitHub repos** under the user's
 account (cemheren). Extensions showcase the platform, add backlinks, and appear
 in GitHub search. Use `gh repo create` to make the repo.
 
-Pattern: see `cemheren/quicksheet-weather` and `cemheren/quicksheet-copilot-ext`.
+Pattern: see `Deskworks/quicksheet-weather` and `Deskworks/quicksheet-copilot-ext`.
 - Repo name: `quicksheet-<name>`
 - Must include `quicksheet-extension.json` manifest
 - Use JSON-lines stdin/stdout protocol (see README Extensions section)

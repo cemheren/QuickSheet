@@ -25,7 +25,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Created quicksheet-pomodoro extension as separate repo + added to main README.
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-pomodoro (commit 25298ee). README updated on main (commit a4cafc0).
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-pomodoro (commit 25298ee). README updated on main (commit a4cafc0).
 - Competitor last did: Bucket B (topics), Bucket A (README).
 - Follow-up: Next run â€” create quicksheet-sysmon (CPU/RAM monitor) or build the GitHub Pages site.
 
@@ -61,7 +61,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Created quicksheet-sysmon extension â€” live CPU/RAM/disk/uptime monitor with visual progress bars and color-coded indicators.
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-sysmon. README + docs/extensions.md updated on main (commit 43edee4).
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-sysmon. README + docs/extensions.md updated on main (commit 43edee4).
 - Competitor last did: 17 runs â€” extensive extensions (F), features (E), docs (A), issues (B), drafts (C). Column auto-width fix for sparklines.
 - Follow-up: Next run â€” Bucket E (small feature) or Bucket A (screenshot rename polish) for variety. OG image still needed for website.
 
@@ -133,7 +133,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Created quicksheet-todo extension â€” task management with priorities (!low/normal/high/critical), due dates (@YYYY-MM-DD), completion tracking, persistent CSV storage, progress stats with visual bar.
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-todo. README + docs/extensions.md updated on main (commit 703c0dd).
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-todo. README + docs/extensions.md updated on main (commit 703c0dd).
 - Competitor last did: 4+ consecutive no-op runs â€” "supply saturated, publication is bottleneck."
 - Follow-up: Column auto-resize (Bucket E) or quicksheet-cal (Bucket F) for variety next.
 
@@ -178,7 +178,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Created quicksheet-cal extension â€” reads .ics calendar files (RFC 5545), shows upcoming events grouped by date with time/summary/location/duration. Auto-scans common calendar dirs (Evolution, Thunderbird, KDE, Calcurse, ~/Calendars). Supports "cal: today", "cal: week", "cal: month", "cal: path/to/file.ics".
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-cal. README + docs/extensions.md updated on main (commit 71a2e27).
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-cal. README + docs/extensions.md updated on main (commit 71a2e27).
 - Competitor last did: 4+ consecutive no-op runs â€” "supply saturated, publication is bottleneck."
 - Follow-up: Update gh-pages with cal extension card. quicksheet-news (RSS) for variety next.
 
@@ -214,7 +214,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Created quicksheet-budget extension â€” budget envelope visualizer with visual progress bars, color-coded spending indicators (ðŸŸ¢ðŸŸ¡ðŸŸ ðŸ”´), remaining balance tracking. Uses correct {r,c,v} cell format.
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-budget (commit 4783662). PR #20 adds to README/docs.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-budget (commit 4783662). PR #20 adds to README/docs.
 - Competitor last did: 4+ consecutive no-op runs â€” "supply saturated, publication is bottleneck."
 - Follow-up: Build quicksheet-qtr (quarterly tax countdown) next. Then quicksheet-fx (currency).
 
@@ -232,7 +232,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Created quicksheet-qtr extension â€” quarterly IRS estimated tax deadline countdown with urgency indicators (ðŸ”´ðŸŸ ðŸŸ¡ðŸŸ¢), progress bar, and full-year view. Auto-detects next deadline, adjusts for weekends. Pairs with 1099-ext and budget.
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-qtr. PR #22 adds to README/docs.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-qtr. PR #22 adds to README/docs.
 - Competitor last did: Fixed issue #19 ext typing race (PR #21).
 - Follow-up: Build quicksheet-fx (currency conversion) next. Then update gh-pages site.
 
@@ -241,7 +241,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Built and shipped quicksheet-fx extension â€” live currency conversion via ECB/Frankfurter API. 200+ currencies, no API key, 1-hour rate cache, multi-target conversion. Tested with real API calls. Created repo, added to README + docs/extensions.md.
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-fx. PR #24 adds to README/docs.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-fx. PR #24 adds to README/docs.
 - Competitor last did: Created quicksheet-qtr (PR #22).
 - Follow-up: Update gh-pages site with recent extension cards. Then Tier 2 extensions.
 
@@ -313,7 +313,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Created quicksheet-hntop extension â€” Top Hacker News stories with scores and comment counts on your wallpaper. Uses free HN Firebase API, 5-min cache, correct {r,c,v} format. Tested with live data (real stories returned).
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-hntop (commit 892d696). PR #30 adds to README/docs.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-hntop (commit 892d696). PR #30 adds to README/docs.
 - Competitor last did: Deep research for devops extensions (drafts/designs/devops-sre-extensions.md).
 - Follow-up: Build quicksheet-apistatus (service health) next. Merge PRs #27/#28 when ready.
 
@@ -322,7 +322,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Built and shipped quicksheet-apistatus â€” service status aggregator monitoring 18 services (GitHub, Cloudflare, npm, Discord, Vercel, etc.) via public Statuspage.io APIs. Tested with real calls (caught a live Cloudflare minor outage!). Created repo, added to README + docs.
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-apistatus. PR #31 adds to README/docs.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-apistatus. PR #31 adds to README/docs.
 - Competitor last did: Shipped quicksheet-hntop (PR #30), fixed #26 suffix stripping (PR #29).
 - Follow-up: Build quicksheet-ghpr (PR dashboard via gh CLI) or quicksheet-docker next.
 
@@ -331,7 +331,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Fixed quicksheet-price-ext issue #4 â€” CoinGecko API 403 Forbidden. Switched to CoinCap API v2 as primary (free, no key), kept CoinGecko as automatic fallback. Added User-Agent header. Tested live: BTC $80,709 â–²1.51%.
 - Bucket: F (bug fix in extension repo)
-- Outcome: PR cemheren/quicksheet-price-ext#5 opened (commit 4ed8f6c on fix/coingecko-403-fallback). Closes #4.
+- Outcome: PR Deskworks/quicksheet-price-ext#5 opened (commit 4ed8f6c on fix/coingecko-403-fallback). Closes #4.
 - Competitor last did: Built quicksheet-apistatus (PR #31).
 - Follow-up: Build quicksheet-ghpr or quicksheet-docker next.
 
@@ -350,7 +350,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (delta +0)
 - Action: Created quicksheet-portck  TCP port/service health checker. Probes local ports (20 well-known names), color-coded UP/DOWN with latency. Also merged PRs #33 (define-ext fix) and #34 (ghpr docs).
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-portck (commit 5e3438e). PR #36 adds to README/docs.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-portck (commit 5e3438e). PR #36 adds to README/docs.
 - Competitor last did: Built quicksheet-ghpr (PR #34, merged), fixed #17 (PR #33, merged), drafted Reddit posts.
 - Follow-up: Build quicksheet-docker or quicksheet-gitst next. Or gh-pages update with portck card.
 ## 2026-05-15 06:49
@@ -412,7 +412,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Fixed quicksheet-gitst #4 â€” reads 'arguments' but QuickSheet sends 'params'. Added params array parsing with fallback.
 - Bucket: E (issue fix on extension repo)
-- Outcome: PR #7 on cemheren/quicksheet-gitst (commit 3f34013). Build green.
+- Outcome: PR #7 on Deskworks/quicksheet-gitst (commit 3f34013). Build green.
 - Competitor last did: Still stalled since May 14.
 - Follow-up: Bucket B topic refresh, or Bucket F Tier 2 extension.
 
@@ -457,7 +457,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Created quicksheet-worldtm extension â€” multi-timezone world clock with 40+ aliases (NY, London, PST, etc.), business-hours indicators (ðŸŸ¢ðŸŸ¡ðŸ”´), time-of-day icons, fuzzy matching. Pure local, zero network calls.
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-worldtm. PR #54 adds to README/docs.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-worldtm. PR #54 adds to README/docs.
 - Competitor last did: Accounting extension research for #15, closed 18 filler issues.
 - Follow-up: Bucket C â€” add worldtm + cntdn cards to gh-pages. Or quicksheet-k8s next.
 
@@ -475,7 +475,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Created quicksheet-k8s extension â€” live Kubernetes pod status from kubeconfig. Color-coded status icons (ðŸŸ¢ðŸ”´ðŸŸ¡ðŸŸ ), namespace support, truncated pod names, kubectl subprocess. Also merged PRs #52-55 as prep.
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-k8s (commit 710f9ec). PR #57 adds to README/docs.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-k8s (commit 710f9ec). PR #57 adds to README/docs.
 - Competitor last did: Created quicksheet-mileage-ext (PR #55, merged). Accounting research for #15.
 - Follow-up: Bucket C â€” add k8s card to gh-pages. Or quicksheet-margin-ext next.
 
@@ -485,7 +485,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Fixed 2 extension manifest bugs â€” worldtm#1 (entrypointâ†’entry), mileage-ext#1 (missing prefix field + enriched manifest).
 - Bucket: E (issue fixes)
-- Outcome: PR #2 on cemheren/quicksheet-worldtm (84bda51). PR #2 on cemheren/quicksheet-mileage-ext (ac89b6c).
+- Outcome: PR #2 on Deskworks/quicksheet-worldtm (84bda51). PR #2 on Deskworks/quicksheet-mileage-ext (ac89b6c).
 - Competitor last did: Created quicksheet-k8s, merged PRs #52-55.
 - Follow-up: Bucket C add k8s card to gh-pages, or accounting extensions.
 
@@ -494,7 +494,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Created quicksheet-margin-ext â€” break-even & contribution margin calculator. Pure math, zero NuGet. Color-coded health indicators (ðŸŸ¢ðŸŸ¡ðŸŸ ðŸ”´). Added to README + docs/extensions.md.
 - Bucket: F (accounting)
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-margin-ext (commit fac8e1c). PR #58 adds to main repo docs.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-margin-ext (commit fac8e1c). PR #58 adds to main repo docs.
 - Competitor last did: Created quicksheet-k8s, worldtm manifest fixes.
 - Follow-up: quicksheet-depr-ext next for #15. Or Bucket C to add margin card to gh-pages.
 
@@ -529,7 +529,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Created quicksheet-depr-ext â€” straight-line & MACRS depreciation calculator. IRS Pub 946 tables (3/5/7/10/15/20-yr), salvage value support, auto-maps to nearest MACRS class. Build-tested. Added to README. Completes accounting suite for #15.
 - Bucket: F (accounting)
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-depr-ext (10b54a5). PR #60 adds to README.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-depr-ext (10b54a5). PR #60 adds to README.
 - Competitor last did: Created quicksheet-k8s, margin-ext. Stalled on Claude side since May 14.
 - Follow-up: Bucket C add depr-ext card to gh-pages. Bucket D v0.10.0 release.
 
@@ -564,7 +564,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Fixed quicksheet-depr-ext#1 â€” 3 protocol bugs (init/activate types, r/c/v cell format).
 - Bucket: E (issue fix)
-- Outcome: PR #2 on cemheren/quicksheet-depr-ext (2541d68). Build-tested.
+- Outcome: PR #2 on Deskworks/quicksheet-depr-ext (2541d68). Build-tested.
 - Competitor last did: Stalled since May 14.
 - Follow-up: Bucket D v0.11.0 release. Bucket A document c: prefix.
 
@@ -601,7 +601,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Created quicksheet-jwtdec extension â€” JWT decoder that runs 100% locally. Privacy-first alternative to jwt.io. Decodes header + claims, annotates timestamps, flags expired tokens, labels well-known claims. Zero network, zero NuGet.
 - Bucket: F (devops/security vertical)
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-jwtdec. PR #69 adds to README/docs.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-jwtdec. PR #69 adds to README/docs.
 - Competitor last did: Stalled since May 14.
 - Follow-up: Bucket C â€” add jwtdec card to gh-pages. Bucket D â€” v0.12.0 release.
 
@@ -710,7 +710,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Created quicksheet-cronck extension â€” cron expression parser with human-readable output
 - Bucket: F (extension)
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-cronck (commit ac728f2). PR #73 adds to README/docs.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-cronck (commit ac728f2). PR #73 adds to README/docs.
 - Details: 5-field cron â†’ text. Ranges, lists, steps, named days/months, common presets. Build-tested, smoke-tested.
 - Competitor last did: Stalled since May 14
 - Follow-up: Bucket C â€” add cronck card to gh-pages. Bucket A â€” README badges.
@@ -720,7 +720,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Bucket F â€” created quicksheet-gitlog extension. Shows recent git commits in cells (hash, author, relative time, message). Supports custom repo path and commit count (up to 50). Zero NuGet deps. Build verified, smoke-tested against live repo.
 - Bucket: F
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-gitlog. PR #74 adds to README + docs/extensions.md.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-gitlog. PR #74 adds to README + docs/extensions.md.
 - Competitor last did: Stalled since May 14.
 - Follow-up: Bucket B â€” CONTRIBUTING.md or issue templates. Bucket E â€” status bar improvement.
 
@@ -747,7 +747,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Fixed quicksheet-cronck#1 â€” protocol bugs (init_responseâ†’register, activate_responseâ†’write+id)
 - Bucket: A (ext repo issue fix)
-- Outcome: PR #2 on cemheren/quicksheet-cronck (commit 816aaa2). Build verified, smoke-tested.
+- Outcome: PR #2 on Deskworks/quicksheet-cronck (commit 816aaa2). Build verified, smoke-tested.
 - Competitor last did: Cut v0.13.0 release, added cronck/gitlog cards to gh-pages
 - Follow-up: Fix quicksheet-gitlog#1 (same protocol bug). Then Bucket B CONTRIBUTING.md.
 
@@ -756,7 +756,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Created quicksheet-news â€” RSS/Atom feed headlines extension with 15+ built-in aliases (HN, Reddit, Lobsters, dev.to, BBC, TechCrunch, etc.)
 - Bucket: F (new extension)
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-news (commit 8fd0040). PR #81 on main repo to add to extensions directory.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-news (commit 8fd0040). PR #81 on main repo to add to extensions directory.
 - Competitor last did: Cut v0.15.0 release, added README badges (PR #80)
 - Follow-up: Merge PR #81. Bucket C â€” gh-pages sparkline card + v0.15.0 bump. Bucket B â€” CONTRIBUTING.md.
 
@@ -792,7 +792,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Created quicksheet-b64 â€” base64 encode/decode extension with auto-detect, explicit modes, multi-line output
 - Bucket: F (new extension)
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-b64 (commit ff99271). PR #84 on main repo for docs.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-b64 (commit ff99271). PR #84 on main repo for docs.
 - Competitor last did: Cut v0.16.0 release (run 04:49)
 - Follow-up: Merge PR #84. Bucket E â€” status bar improvements. Bucket A â€” README "Why this exists".
 
@@ -819,7 +819,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 0 (Î” +0)
 - Action: Fixed quicksheet-b64#1 â€” extension used absolute anchor coordinates instead of relative, making output invisible
 - Bucket: A (ext repo issue fix)
-- Outcome: PR #2 on cemheren/quicksheet-b64 (commit 82f198b). Build verified, smoke-tested.
+- Outcome: PR #2 on Deskworks/quicksheet-b64 (commit 82f198b). Build verified, smoke-tested.
 - Details: Removed anchor-to-absolute parsing logic. Now uses 0-based relative coords matching all other extensions.
 - Competitor last did: Stalled since May 14
 - Follow-up: Bucket B â€” README badges. Bucket E â€” status bar. Bucket C â€” add b64 fix to gh-pages notes.
@@ -838,7 +838,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 1 (Î” +1 since last recorded!)
 - Action: Created quicksheet-guid extension â€” generates GUIDs/UUIDs with format options (standard/no-dash/braced/uppercase) and batch up to 20. Fulfills issue #91.
 - Bucket: F (new extension)
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-guid (commit 26b253e). PR #92 on main repo for docs. Closes #91.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-guid (commit 26b253e). PR #92 on main repo for docs. Closes #91.
 - Competitor last did: Stalled since May 14
 - Follow-up: Bucket D â€” v0.17.0 release. Bucket E â€” status bar. Issue #90 (regex explainer ext).
 
@@ -866,7 +866,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 1 (Î” +0)
 - Action: Created quicksheet-regex extension â€” regex pattern explainer that tokenizes and explains anchors, character classes, escape sequences, quantifiers, groups (capturing/non-capturing/named/lookahead/lookbehind), alternation. Validates patterns. Includes summary line.
 - Bucket: F (new extension)
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-regex (commit 8dbfb52). PR #97 on main repo for docs. Closes #90.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-regex (commit 8dbfb52). PR #97 on main repo for docs. Closes #90.
 - Competitor last did: Stalled since May 14
 - Follow-up: Bucket D â€” v0.17.0 release. Bucket C â€” gh-pages update with regex card.
 
@@ -902,7 +902,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 1 (Δ +0)
 - Action: Created quicksheet-urlenc extension — URL encode/decode with auto-detect, component/path/full-URI modes, UTF-8 aware.
 - Bucket: F (new extension)
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-urlenc. PR #98 on main repo for docs.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-urlenc. PR #98 on main repo for docs.
 - Competitor last did: Research papers (teachers persona). Still in research phase, not shipping code.
 - Follow-up: Merge PR #98. Bucket E (status bar improvements) or Bucket A (keyboard shortcuts doc).
 
@@ -929,7 +929,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 1 (Δ +0)
 - Action: Created quicksheet-health extension — HTTP endpoint health checker with parallel probes, latency, self-signed cert support. Research-driven: ranked #1 extension across homelab + SRE personas in competitor's 10-paper research.
 - Bucket: F (new extension)
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-health. PR #103 on main repo for docs (NOT merged — awaiting user review).
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-health. PR #103 on main repo for docs (NOT merged — awaiting user review).
 - Competitor last did: Completed 10-persona research phase + shipped c?: colour prefix and for-homelab landing page. Now back to Bucket E/F.
 - Follow-up: Bucket A (more persona landing pages: for-sre, for-students). Bucket C (gh-pages health card). Bucket E (ticking timer — trinity #2).
 
@@ -947,7 +947,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 1 (delta +0)
 - Action: Fixed quicksheet-curl issue #1 — manifest used 'entrypoint' instead of 'entry' (silently ignored), and prefix had trailing colon causing double-colon match. Both fixed, version bumped to 1.0.1.
 - Bucket: F (bug fix in extension repo)
-- Outcome: PR cemheren/quicksheet-curl#2 merged. Closes #1. Extension now launches correctly.
+- Outcome: PR Deskworks/quicksheet-curl#2 merged. Closes #1. Extension now launches correctly.
 - Competitor last did: Persona landing pages (for-traders PR #105), curl docs PR #104, for-sre PR #106.
 - Follow-up: docs/for-students.md landing page. gh-pages update with curl card. quicksheet-pihole.
 
@@ -956,7 +956,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 1 (delta +0)
 - Action: Fixed quicksheet-curl issue #3 — entry path was 'QuickSheetHttp.csproj' but .csproj lives in QuickSheetHttp/ subdirectory. Fixed to 'QuickSheetHttp/QuickSheetHttp.csproj'. Bumped to v1.0.2.
 - Bucket: F (bug fix in extension repo)
-- Outcome: PR cemheren/quicksheet-curl#4 merged. Closes #3. Extension now launches from correct path.
+- Outcome: PR Deskworks/quicksheet-curl#4 merged. Closes #3. Extension now launches from correct path.
 - Competitor last did: for-sre landing page (PR #106), for-traders (PR #105).
 - Follow-up: docs/for-students.md landing page. gh-pages curl card. quicksheet-pihole.
 
@@ -965,7 +965,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 1 (Δ +0)
 - Action: Created quicksheet-pihole extension — Pi-hole DNS blocking stats (status, block %, queries, domains blocked, client count) on wallpaper. Custom host/IP, TOKEN@HOST auth, 30s cache, zero NuGet. Build-tested. Added to README + docs/extensions.md.
 - Bucket: F (new extension — homelab persona)
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-pihole (commit 8dd3708). PR #109 on main repo for docs.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-pihole (commit 8dd3708). PR #109 on main repo for docs.
 - Competitor last did: Persona landing pages (for-traders #105, for-students #107), curl ext fix, README hero (PR #108).
 - Follow-up: Bucket C — gh-pages update with pihole + curl extension cards. Bucket F — quicksheet-gha. Bucket D — v0.19.0 release.
 
@@ -983,7 +983,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 1 (Δ +1 since last run)
 - Action: Created quicksheet-gha extension — live GitHub Actions workflow run statuses on desktop wallpaper. Shows ✅❌🔄⏳⏸️🚫 status, workflow name, branch, and age for any public GitHub repo. Optional GITHUB_TOKEN for private repos.
 - Bucket: F (new extension)
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-gha (commit 9ddc45f). PR #111 adds to README + docs/extensions.md.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-gha (commit 9ddc45f). PR #111 adds to README + docs/extensions.md.
 - Competitor last did: For-students landing (PR #107), README hero tighten (PR #108), pihole extension (PR #109).
 - Follow-up: Bucket C — add gha card to gh-pages. Bucket D — v0.19.0 release after pending PRs merge.
 
@@ -1001,7 +1001,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 1 (Δ +0)
 - Action: Bucket F — created quicksheet-arxiv extension. arXiv paper lookup by ID or keyword search. ID mode: detail view (title, authors, year, abstract). Search mode: relevance-ranked results table. Atom XML parsed with System.Xml.Linq BCL (zero NuGet). 30-min cache. No API key. Smoke-tested live against arXiv API.
 - Bucket: F (new extension)
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-arxiv. PR #112 on main repo for docs.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-arxiv. PR #112 on main repo for docs.
 - Competitor last did: for-students landing (PR #107), README hero (PR #108), pihole ext (PR #109), gha extension (PR #111).
 - Follow-up: Bucket C — add arxiv card to gh-pages. Bucket D — v0.19.0 release after pending PRs merge.
 
@@ -1010,7 +1010,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 1 (Δ +0)
 - Action: Bucket F — created quicksheet-envck extension. Env var inspector: lookup, filter, PATH exploder, auto-masks secrets (API keys, tokens, passwords shown as `****`). Zero NuGet, zero network. Build-tested.
 - Bucket: F (new extension)
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-envck. PR #114 on main repo for docs.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-envck. PR #114 on main repo for docs.
 - Competitor last did: For-students landing (PR #107), README hero tighten (PR #108), csvkit comparison (PR #113).
 - Follow-up: Bucket C — add envck card to gh-pages. Bucket D — v0.19.0 release after pending PRs (#103-#114) merge.
 
@@ -1028,7 +1028,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 1 (Δ +0)
 - Action: Created quicksheet-dice extension — dice roller with standard notation (2d6+3, d20, 4d6kh3 keep-highest, Fudge, d%). Critical hit/fumble detection on d20. Added to README + docs/extensions.md (PR #116). Added dice card to gh-pages (45→46 extensions), TTRPG SEO keywords.
 - Bucket: F (new extension) + C (site update)
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-dice (commit 5840b95). PR #116 on main repo. gh-pages commit 9d1c620.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-dice (commit 5840b95). PR #116 on main repo. gh-pages commit 9d1c620.
 - Competitor last did: Bucket D — v0.19.0 release + PR merges (04:00 run).
 - Follow-up: Bucket C — add for-students/for-sre audience pages to gh-pages. Bucket D — v0.20.0 release after PR #116 merges. Bucket F — quicksheet-leetcode.
 
@@ -1064,7 +1064,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 1 (Δ +0)
 - Action: Fixed quicksheet-curl#5 — ResponseMessage used `"type": "response"` but QuickSheet only handles `register`, `write`, `status`, `error`, `log`. Cell writes were silently dropped. Changed to `"type": "write"`. Bumped to v1.0.3.
 - Bucket: F (bug fix in extension repo)
-- Outcome: PR cemheren/quicksheet-curl#8 merged (commit be03fd0). Closes #5. Extension now writes cells correctly.
+- Outcome: PR Deskworks/quicksheet-curl#8 merged (commit be03fd0). Closes #5. Extension now writes cells correctly.
 - Competitor last did: Copilot use-case table + dashboard example (PR #118, 08:00 run).
 - Follow-up: Bucket F — quicksheet-leetcode (CS student LeetCode streak tracker). Bucket E — safe feature.
 
@@ -1073,7 +1073,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 1 (Δ +0)
 - Action: Created quicksheet-leetcode extension — LeetCode daily challenge, problem lookup (by number or slug), user stats (Easy/Medium/Hard counts, global rank). Live-tested: `lc: daily` returned today's challenge (Jump Game III, Medium, 69.4%). PR #119 on main repo for docs. gh-pages extension card added.
 - Bucket: F (new extension) + C (site update)
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-leetcode (commit ab1b5b6). PR #119 on main. gh-pages commit 93b18b1.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-leetcode (commit ab1b5b6). PR #119 on main. gh-pages commit 93b18b1.
 - Competitor last did: quicksheet-curl bug fix (PR #8 merged, 09:00 run).
 - Follow-up: Bucket E — safe additive feature (column auto-resize or markdown table export). Bucket C — add for-sre/for-students nav links to homepage.
 
@@ -1082,7 +1082,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 1 (delta +0)
 - Action: Fixed quicksheet-curl issue #9 — enhanced README with cell reference examples ({A1} syntax), API testing dashboard layout, use cases section. Shows dynamic URL/token/body patterns.
 - Bucket: A (product polish on extension repo)
-- Outcome: PR cemheren/quicksheet-curl#10 merged. Closes #9.
+- Outcome: PR Deskworks/quicksheet-curl#10 merged. Closes #9.
 - Competitor last did: for-students landing page (PR #107), csvkit comparison (PR #113), leetcode+ghstreak extensions drafted.
 - Follow-up: gh-pages update with curl card. docs/for-students.md. quicksheet-pihole.
 
@@ -1100,7 +1100,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 1 (Δ +0)
 - Action: Created quicksheet-ghstreak extension — GitHub contribution streak tracker. Shows current streak 🔥, longest streak, total contributions this year, today's count ✅, and a 14-day unicode sparkline. Parses GitHub's public contribution calendar page — no API key, no auth, zero NuGet deps. Live-tested against torvalds (98-day longest streak, 3,070 total this year). Also added ghstreak card to gh-pages site (46→47 extensions) + new SEO keywords.
 - Bucket: F (new extension) + C (site update)
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-ghstreak (commit dbba8d2). PR #121 on main repo for docs. gh-pages commit d907796.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-ghstreak (commit dbba8d2). PR #121 on main repo for docs. gh-pages commit d907796.
 - Competitor last did: manifest entry bug fixes across 5 extension repos (11:25 run).
 - Follow-up: Bucket D — v0.21.0 release after pending PRs merge. Bucket E — safe additive feature.
 
@@ -1156,7 +1156,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 1 (Δ +0)
 - Action: Created quicksheet-iss extension — live ISS position (lat/lon/region/altitude/speed) + all people in space grouped by spacecraft (ISS & Tiangong). Uses open-notify.org (free, no API key). Smoke-tested live. Also bumped gh-pages to v0.21.0 + added ISS card (47→51+ extensions count).
 - Bucket: F (new extension) + C (site update)
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-iss (commit c14aed9). PR #124 on main repo for docs. gh-pages commit bedaf5a.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-iss (commit c14aed9). PR #124 on main repo for docs. gh-pages commit bedaf5a.
 - Competitor last did: --export-html feature (PR #123, 16:24 run).
 - Follow-up: Bucket A — update README with --export-html usage. Bucket D — v0.22.0 release after PR #123/#124 merge.
 
@@ -1180,7 +1180,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 1 (Δ +0)
 - Action: Merged PRs #123 (--export-html), #124 (ISS docs), #125 (export-formats docs). Cut v0.22.0 release. Created quicksheet-npm extension — npm package info (version, weekly downloads, license, author) via npmjs.org + downloads API. Single-package detail view or multi-package comparison table. Zero NuGet, no API key, 30-min cache. Smoke-tested live (react: v19.2.6, 133.3M/wk DL). Added npm card to gh-pages.
 - Bucket: D (release) + F (new extension) + C (site update)
-- Outcome: v0.22.0 at https://github.com/cemheren/QuickSheet/releases/tag/v0.22.0. Repo live at https://github.com/cemheren/quicksheet-npm. PR #126 on main for docs. gh-pages commit 4c791ef.
+- Outcome: v0.22.0 at https://github.com/cemheren/QuickSheet/releases/tag/v0.22.0. Repo live at https://github.com/Deskworks/quicksheet-npm. PR #126 on main for docs. gh-pages commit 4c791ef.
 - Competitor last did: --export-html feature (PR #123, 16:24), export-formats docs (PR #125, 17:24), ISS extension (PR #124, 17:00).
 - Follow-up: Bucket C — add export-formats link to gh-pages nav. Bucket E — safe additive feature.
 
@@ -1212,7 +1212,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 1 (Δ +0)
 - Action: Bucket F — created quicksheet-pypi extension. PyPI package info (version, license, author, Python requirement, release date, homepage, summary) for Python developers. Single-package detail view or multi-package comparison table. Free pypi.org JSON API, 30-min cache, zero NuGet. Live-tested: requests 2.34.2, Flask 3.1.3, Django 6.0.5. Added to README + docs/extensions.md (PR #128). gh-pages: pypi card added to homepage + extensions directory, count bumped 50→51+.
 - Bucket: F (new extension) + C (site update)
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-pypi (commit). PR #128 on main repo for docs. gh-pages commit ae4423c.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-pypi (commit). PR #128 on main repo for docs. gh-pages commit ae4423c.
 - Competitor last did: --export-html (PR #123), ISS extension (PR #124), npm extension (PR #126), w: web-fetch (PR #127), gh-pages w: update (20:00 run).
 - Follow-up: Bucket D — v0.23.0 release after PRs #126/#127/#128 merge. Bucket E — safe additive feature.
 
@@ -1258,7 +1258,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 1 (Δ +0)
 - Action: Created quicksheet-gh-trends extension — GitHub trending repos by language. Shows repo name, stars, forks, language, description in a grid. Scrapes public trending page, 30-min cache, zero NuGet deps. Added ghtrend card to gh-pages.
 - Bucket: F (new extension) + C (site update)
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-gh-trends. PR #135 on main for docs. gh-pages commit b0fcfc5.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-gh-trends. PR #135 on main for docs. gh-pages commit b0fcfc5.
 - Competitor last did: idle (no new runs overnight).
 - Follow-up: Bucket D — v0.24.0 release after pending PRs merge. Bucket E — safe additive feature.
 
@@ -1276,7 +1276,7 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Stars: 1 (Δ +0)
 - Action: Created quicksheet-co2 extension — live atmospheric CO₂ from NOAA Mauna Loa Observatory. Shows current ppm (432 today), pre-industrial baseline (+54%!), YoY change, 7-day sparkline. Also `co2: trend` (30-day view) and `co2: stats` (annual averages + records). Free NOAA CSV, no API key, 6-hour cache. Live-tested: 432.02 ppm, +1.87 ppm YoY. Added co2 card to gh-pages homepage + extensions directory (count 55→56).
 - Bucket: F (new extension) + C (site update)
-- Outcome: Repo live at https://github.com/cemheren/quicksheet-co2 (commit 8610561). PR #137 on main repo for docs. gh-pages commit 24e0c0c.
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-co2 (commit 8610561). PR #137 on main repo for docs. gh-pages commit 24e0c0c.
 - Competitor last did: idle (no new runs since 09:33 run — export-json PR #136).
 - Follow-up: Bucket D — v0.24.0 release after pending PRs merge. Update docs/export-formats.md with JSON section.
 

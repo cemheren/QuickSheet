@@ -4,7 +4,7 @@ A QuickSheet extension that fills a grid of service-health rows on your wallpape
 Aimed at homelab / self-hosted dashboards: Plex, Pi-hole, Nextcloud, *arr-stack, etc.
 
 ```
-ext: github:cemheren/quicksheet-health-ext
+ext: github:Deskworks/quicksheet-health-ext
 health: plex=https://plex.lan,pi-hole=http://pi.hole/admin, 4, 5
 ```
 
