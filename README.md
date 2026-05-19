@@ -211,6 +211,7 @@ tls: github.com, 1, 4
 | `ghtrend:` | GitHub trending repos — stars, forks, language, description by language or overall | `ext: github:Deskworks/quicksheet-gh-trends` |
 | `co2:` | Live atmospheric CO₂ from NOAA Mauna Loa — ppm, baseline, YoY, 30-day trend | `ext: github:Deskworks/quicksheet-co2` |
 | `weather:` | Live weather via Open-Meteo — temperature, conditions, wind, humidity, pressure (free, no API key) | `ext: github:Deskworks/quicksheet-openmeteo` |
+| `ip:` | IP geolocation — ISP, org, ASN, timezone, hostname, coords for any IP or your own | `ext: github:Deskworks/quicksheet-ipinfo` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
