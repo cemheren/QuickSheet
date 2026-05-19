@@ -6,6 +6,18 @@ All notable changes to QuickSheet. Format roughly follows [Keep a Changelog](htt
 
 (empty — bump here before the next tag)
 
+## 0.24.0 — 2026-05-18
+
+### Added
+- **`--export-json`** CLI flag — exports CSV as a JSON array of objects. First row becomes object keys; numeric cells become JSON numbers. Supports stdout (`-`) for piping into `jq` and other tools.
+- **quicksheet-co2 extension** (`co2:`) — live atmospheric CO₂ from NOAA Mauna Loa Observatory. Shows current ppm, pre-industrial baseline comparison, year-over-year change, 7-day sparkline. `co2: trend` (30-day view), `co2: stats` (annual averages). Free NOAA CSV, no API key.
+- **quicksheet-gh-trends extension** (`ghtrend:`) — GitHub trending repos by language. Name, stars, forks, description grid. `ghtrend: python`, `ghtrend: rust`, `ghtrend: all`, etc.
+- **`examples/ai-workflow.csv`** — pre-built Claude/Copilot/Aider launcher panel template.
+
+### Docs
+- `docs/export-formats.md` updated with `--export-json` section including `jq` piping examples and updated format comparison table.
+- `docs/tour.md` updated with `config:` cell prefix documentation.
+
 ## 0.23.0 — 2026-05-18
 
 ### Added
