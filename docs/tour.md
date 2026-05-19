@@ -23,6 +23,7 @@ Every cell is plain text by default. Add a prefix and the cell *does something*.
 | `c:color: `         | Cell color. Highlights background with a named color.             | `c:red: URGENT`                    |
 | `L: `               | Loop a target cell on an interval.                                | `L: A10, 5m`                       |
 | `ext: `             | Install an extension repo. One line.                              | `ext: github:cemheren/quicksheet-weather` |
+| `config: `          | Persistent settings (currently `theme=…`). Auto-created when you press `Ctrl+T`; survives restart via the CSV itself — no sidecar file. | `config: theme=Nord`               |
 | `http://` `https://`| Hyperlink. Highlighted, opens on Enter.                           | `https://news.ycombinator.com`     |
 
 Multi-select cells and hit Enter to fire all of them at once. That's how launching "my dev environment" works: pick the row of `r: ` cells, Enter.
@@ -44,7 +45,7 @@ A few keyboard shortcuts that round out the editing experience:
 |----------|-------------|
 | `Ctrl+Z` | Undo (up to 200 steps, action-grouped) |
 | `Ctrl+Y` | Redo |
-| `Ctrl+T` | Cycle theme: Dark, Light, Nord, Solarized, Matrix, Dracula, Synthwave, Gruvbox, Monokai, HotdogStand |
+| `Ctrl+T` | Cycle theme: Dark, Light, Nord, Solarized, Matrix, Dracula, Synthwave, Gruvbox, Monokai, HotdogStand. Choice persists via a `config:` cell in the CSV. |
 | `Ctrl+G` | Go-to cell — type a reference like `C5` and jump there |
 | `Ctrl+H` | Help overlay with all shortcuts |
 
