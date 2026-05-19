@@ -387,14 +387,14 @@ internal class DesktopForm : DesktopFormBase
         int ch = _charHeight;
         int[] colWidths = GetColumnWidths();
         var theme = Theme.Current;
-        Color themeBg = ConsoleColorToRgb(theme.Background);
-        Color themeFg = ConsoleColorToRgb(theme.Foreground);
-        Color themeSelBg = ConsoleColorToRgb(theme.SelectionBg);
-        Color themeSelFg = ConsoleColorToRgb(theme.SelectionFg);
-        Color themeSearchBg = ConsoleColorToRgb(theme.SearchMatchBg);
-        Color themeSearchSelBg = ConsoleColorToRgb(theme.SearchSelectedBg);
-        Color themeStatusBg = ConsoleColorToRgb(theme.StatusBarBg);
-        Color themeStatusFg = ConsoleColorToRgb(theme.StatusBarFg);
+        Color themeBg = ResolveRgb(theme.BackgroundRgb, theme.Background);
+        Color themeFg = ResolveRgb(theme.ForegroundRgb, theme.Foreground);
+        Color themeSelBg = ResolveRgb(theme.SelectionBgRgb, theme.SelectionBg);
+        Color themeSelFg = ResolveRgb(theme.SelectionFgRgb, theme.SelectionFg);
+        Color themeSearchBg = ResolveRgb(theme.SearchMatchBgRgb, theme.SearchMatchBg);
+        Color themeSearchSelBg = ResolveRgb(theme.SearchSelectedBgRgb, theme.SearchSelectedBg);
+        Color themeStatusBg = ResolveRgb(theme.StatusBarBgRgb, theme.StatusBarBg);
+        Color themeStatusFg = ResolveRgb(theme.StatusBarFgRgb, theme.StatusBarFg);
         g.Clear(themeBg);
         int y = 0;
 
@@ -788,6 +788,9 @@ internal class DesktopForm : DesktopFormBase
             }
         }
     }
+
+    private static Color ResolveRgb((int r, int g, int b)? rgb, ConsoleColor fallback)
+        => rgb is { } v ? Color.FromArgb(v.r, v.g, v.b) : ConsoleColorToRgb(fallback);
 
     private static Color ConsoleColorToRgb(ConsoleColor cc) => cc switch
     {

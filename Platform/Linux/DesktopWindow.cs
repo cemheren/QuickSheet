@@ -555,17 +555,17 @@ internal class DesktopWindow : IDisposable
         int[] colWidths = GetColumnWidths();
 
         var theme = Theme.Current;
-        var (tBgR, tBgG, tBgB) = ConsoleColorToRgb(theme.Background);
-        var (tFgR, tFgG, tFgB) = ConsoleColorToRgb(theme.Foreground);
-        var (tHdrR, tHdrG, tHdrB) = ConsoleColorToRgb(theme.HeaderHighlight);
-        var (tSelBgR, tSelBgG, tSelBgB) = ConsoleColorToRgb(theme.SelectionBg);
-        var (tSelFgR, tSelFgG, tSelFgB) = ConsoleColorToRgb(theme.SelectionFg);
-        var (tSrchBgR, tSrchBgG, tSrchBgB) = ConsoleColorToRgb(theme.SearchMatchBg);
-        var (tSrchFgR, tSrchFgG, tSrchFgB) = ConsoleColorToRgb(theme.SearchMatchFg);
-        var (tSrchSelBgR, tSrchSelBgG, tSrchSelBgB) = ConsoleColorToRgb(theme.SearchSelectedBg);
-        var (tSrchSelFgR, tSrchSelFgG, tSrchSelFgB) = ConsoleColorToRgb(theme.SearchSelectedFg);
-        var (tStatBgR, tStatBgG, tStatBgB) = ConsoleColorToRgb(theme.StatusBarBg);
-        var (tStatFgR, tStatFgG, tStatFgB) = ConsoleColorToRgb(theme.StatusBarFg);
+        var (tBgR, tBgG, tBgB) = ResolveRgb(theme.BackgroundRgb, theme.Background);
+        var (tFgR, tFgG, tFgB) = ResolveRgb(theme.ForegroundRgb, theme.Foreground);
+        var (tHdrR, tHdrG, tHdrB) = ResolveRgb(theme.HeaderHighlightRgb, theme.HeaderHighlight);
+        var (tSelBgR, tSelBgG, tSelBgB) = ResolveRgb(theme.SelectionBgRgb, theme.SelectionBg);
+        var (tSelFgR, tSelFgG, tSelFgB) = ResolveRgb(theme.SelectionFgRgb, theme.SelectionFg);
+        var (tSrchBgR, tSrchBgG, tSrchBgB) = ResolveRgb(theme.SearchMatchBgRgb, theme.SearchMatchBg);
+        var (tSrchFgR, tSrchFgG, tSrchFgB) = ResolveRgb(theme.SearchMatchFgRgb, theme.SearchMatchFg);
+        var (tSrchSelBgR, tSrchSelBgG, tSrchSelBgB) = ResolveRgb(theme.SearchSelectedBgRgb, theme.SearchSelectedBg);
+        var (tSrchSelFgR, tSrchSelFgG, tSrchSelFgB) = ResolveRgb(theme.SearchSelectedFgRgb, theme.SearchSelectedFg);
+        var (tStatBgR, tStatBgG, tStatBgB) = ResolveRgb(theme.StatusBarBgRgb, theme.StatusBarBg);
+        var (tStatFgR, tStatFgG, tStatFgB) = ResolveRgb(theme.StatusBarFgRgb, theme.StatusBarFg);
 
         // Clear background (semi-transparent if ARGB visual available)
         SetGCColor(tBgR, tBgG, tBgB, _hasArgbVisual ? _bgAlpha : 255);
@@ -995,6 +995,9 @@ internal class DesktopWindow : IDisposable
             : (ulong)(r << 16 | g << 8 | b);
         XSetForeground(_display, _gc, pixel);
     }
+
+    private static (int r, int g, int b) ResolveRgb((int r, int g, int b)? rgb, ConsoleColor fallback)
+        => rgb ?? ConsoleColorToRgb(fallback);
 
     private static (int r, int g, int b) ConsoleColorToRgb(ConsoleColor cc) => cc switch
     {

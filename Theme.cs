@@ -19,6 +19,21 @@ public class Theme
     public ConsoleColor StatusBarBg { get; init; } = ConsoleColor.White;
     public ConsoleColor StatusBarFg { get; init; } = ConsoleColor.Black;
 
+    // Optional true-color overrides used only by the desktop renderers (WinForms / X11+Xft).
+    // Console/TUI mode always falls back to the 16-color ConsoleColor fields above.
+    // null = let the desktop renderer use ConsoleColorToRgb on the matching slot.
+    public (int r, int g, int b)? BackgroundRgb { get; init; }
+    public (int r, int g, int b)? ForegroundRgb { get; init; }
+    public (int r, int g, int b)? HeaderHighlightRgb { get; init; }
+    public (int r, int g, int b)? SelectionBgRgb { get; init; }
+    public (int r, int g, int b)? SelectionFgRgb { get; init; }
+    public (int r, int g, int b)? SearchMatchBgRgb { get; init; }
+    public (int r, int g, int b)? SearchMatchFgRgb { get; init; }
+    public (int r, int g, int b)? SearchSelectedBgRgb { get; init; }
+    public (int r, int g, int b)? SearchSelectedFgRgb { get; init; }
+    public (int r, int g, int b)? StatusBarBgRgb { get; init; }
+    public (int r, int g, int b)? StatusBarFgRgb { get; init; }
+
     public static readonly Theme[] Presets =
     [
         new Theme
@@ -84,7 +99,8 @@ public class Theme
         new Theme
         {
             // Solarized Light — Ethan Schoonover's cream-on-slate light palette.
-            // ConsoleColor.White is the closest 16-color match to base3 (#fdf6e3).
+            // ConsoleColor fields are the 16-color TUI fallback; *Rgb overrides land
+            // the actual Solarized hex on the desktop renderers (WinForms / X11+Xft).
             Name = "SolarizedLight",
             Background = ConsoleColor.White,
             Foreground = ConsoleColor.DarkGray,
@@ -97,6 +113,18 @@ public class Theme
             SearchSelectedFg = ConsoleColor.White,
             StatusBarBg = ConsoleColor.DarkCyan,
             StatusBarFg = ConsoleColor.White,
+            // True Solarized hex per https://ethanschoonover.com/solarized/
+            BackgroundRgb       = (253, 246, 227), // base3   #fdf6e3
+            ForegroundRgb       = (101, 123, 131), // base00  #657b83
+            HeaderHighlightRgb  = (147, 161, 161), // base1   #93a1a1
+            SelectionBgRgb      = (238, 232, 213), // base2   #eee8d5
+            SelectionFgRgb      = ( 88, 110, 117), // base01  #586e75
+            SearchMatchBgRgb    = (181, 137,   0), // yellow  #b58900
+            SearchMatchFgRgb    = (253, 246, 227), // base3
+            SearchSelectedBgRgb = (203,  75,  22), // orange  #cb4b16
+            SearchSelectedFgRgb = (253, 246, 227), // base3
+            StatusBarBgRgb      = (  7,  54,  66), // base02  #073642
+            StatusBarFgRgb      = (147, 161, 161), // base1
         },
         new Theme
         {
