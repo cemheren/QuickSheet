@@ -1304,7 +1304,16 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: v0.24.0 release + 5 PR merges (21:00 run).
 - Follow-up: Bucket F — quicksheet-openmeteo or quicksheet-ipinfo. Bucket E — safe additive feature.
 
+## 2026-05-18 23:00
+
+- Stars: 1 (Δ +0)
+- Action: Bucket F — created quicksheet-openmeteo extension. Live weather via Open-Meteo (free, no API key). City geocoding → current temperature, feels-like, WMO conditions (emoji), wind speed/direction, humidity, precipitation, pressure. 5-min cache. Supports city names, city+country, and lat/lon. Live-tested: London 11.3°C Moderate drizzle, 94% humidity. Added weather: card to gh-pages (57→58), SEO keywords. Updated main repo README + docs/extensions.md (PR #142).
+- Bucket: F (new extension) + C (site update)
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-openmeteo. PR #142 on main for docs. gh-pages commit b248461.
+- Competitor last did: idle (no new runs since 09:33 — export-json PR #136).
+- Follow-up: Bucket F — quicksheet-ipinfo (IP geolocation + network info). Bucket E — column auto-resize or safe additive feature.
+
 ## Queued
 
-- Bucket F: quicksheet-openmeteo (free Open-Meteo API, no key) or quicksheet-ipinfo
-- Bucket E: safe additive feature (column auto-resize)
+- Bucket F: quicksheet-ipinfo (IP geolocation, ISP, org, timezone — free ipinfo.io API)
+- Bucket E: column auto-resize (Ctrl+W or similar keybinding)
