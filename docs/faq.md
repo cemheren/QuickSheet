@@ -16,11 +16,11 @@ The project started in C# because the author was using Windows daily and wanted 
 
 ## Will this run on macOS?
 
-No native macOS port yet. The TUI mode works under `dotnet run` on macOS, but the `--desktop` wallpaper mode needs a per-platform host (`Platform/Windows/` uses WorkerW; `Platform/Linux/` uses raw X11). Wiring up an AppKit host would be a sizable but contained piece of work — contributions welcome.
+No native macOS port yet. QuickSheet is wallpaper-only, and the per-platform hosts are Windows (`WorkerW`) and Linux (raw X11). Wiring up an AppKit host would be a sizable but contained piece of work — contributions welcome.
 
 ## Wayland?
 
-Not supported. `--desktop` mode requires the X11 `_NET_WM_WINDOW_TYPE_DESKTOP` hint, which Wayland compositors don't implement. The program prints a warning when it detects Wayland. Track [issue #3](https://github.com/cemheren/QuickSheet/issues/3) for the investigation.
+Not supported. The wallpaper integration requires the X11 `_NET_WM_WINDOW_TYPE_DESKTOP` hint, which Wayland compositors don't implement. The program prints a warning when it detects Wayland. Track [issue #3](https://github.com/cemheren/QuickSheet/issues/3) for the investigation.
 
 ## Where is my data stored?
 
@@ -41,10 +41,6 @@ Any language with stdin/stdout works. Minimum: a register message on startup, a 
 ## Why so many extensions?
 
 The extension network is the discoverability story — each extension is a tiny separate repo, and they fan out across the user's tax / dev / ops / personal verticals. The core stays small (no plugin loader, just a JSON-lines subprocess), and the network grows by adding repos rather than touching QuickSheet itself.
-
-## Can I use it without the desktop mode?
-
-Yes. `dotnet run --project ExcelConsole.csproj` (without `--desktop`) gives a plain terminal TUI inside any shell. Same data file, same cell prefixes, same extensions.
 
 ## Is there an installer?
 

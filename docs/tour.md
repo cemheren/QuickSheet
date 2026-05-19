@@ -6,9 +6,7 @@ A guided tour of what makes QuickSheet different from "yet another TUI spreadshe
 
 ## 1. It's a desktop wallpaper
 
-Run with `--desktop` and the grid becomes your wallpaper — transparent, click-through-aware, but interactive when you focus it. Your notes, launchers, and live data sit *behind* every window, always at hand, never stealing focus.
-
-Drop the flag and you get a plain terminal TUI inside any shell. Same data, two surfaces.
+QuickSheet replaces your wallpaper with a transparent, click-through-aware grid. Your notes, launchers, and live data sit *behind* every window, always at hand, never stealing focus, until you click the grid to start typing.
 
 ## 2. Cell prefixes are the whole feature set
 

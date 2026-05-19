@@ -8,22 +8,18 @@ No tests, no linters. .NET 9 SDK required.
 
 ```bash
 dotnet build ExcelConsole.csproj                                  # Build
-dotnet run --project ExcelConsole.csproj                          # Console TUI mode
-dotnet run --project ExcelConsole.csproj -- --desktop             # Desktop wallpaper mode
-dotnet run --project ExcelConsole.csproj -- --desktop data.csv    # Desktop mode with CSV
-dotnet run -c Release --project ExcelConsole.csproj -- --desktop  # Release (recommended for desktop)
+dotnet run --project ExcelConsole.csproj                          # Run as desktop wallpaper
+dotnet run --project ExcelConsole.csproj -- data.csv              # With a specific CSV
+dotnet run -c Release --project ExcelConsole.csproj               # Release (recommended)
 dotnet run --project ExcelConsole.csproj -- data.csv --export-md data.md  # Headless: CSV → Markdown
 ```
 
-`Program.cs` dispatches: `--desktop` → platform `IDesktopHost`; otherwise → `SpreadsheetApp` (TUI).
+`Program.cs` always launches the platform `IDesktopHost` (after handling headless `--export-*` flags). There is no TUI mode — the project is desktop-wallpaper only.
 
 ## Architecture
 
-Two run modes share one data layer:
-
 - **`GridManager`** — pure data: cell grid, CSV I/O, column sums (Σ), row products (Π). No platform/UI deps. `SaveToCsv` preserves rows/cols beyond visible grid.
-- **`SpreadsheetApp`** — console TUI via `System.Console`. Handles input, render, search, autosave to `%APPDATA%/ExcelConsole/autosave.csv`.
-- **`Platform/IDesktopHost`** — `Run(csvPath)` + `Dispose()`. Per-platform impls embed grid as wallpaper. Desktop mode autosaves every 5s.
+- **`Platform/IDesktopHost`** — `Run(csvPath)` + `Dispose()`. Per-platform impls embed grid as wallpaper. Autosaves every 5s.
 - **`Platform/Windows/`** — WinForms host. `DesktopFormBase` does Z-order locking, Alt+Tab hide, Win+D detection. `NativeMethods.cs` Win32 P/Invoke. `WorkerW` embedding.
 - **`Platform/Linux/`** — raw X11 P/Invoke (`libX11.so.6`, `libXft.so.2`). Sets `_NET_WM_WINDOW_TYPE_DESKTOP`. Requires X11 (Wayland warning emitted).
 - **`Features/IMode.cs`** — modal input interface (Enter/Exit/Commit/HandleKeyEvent).

@@ -99,11 +99,10 @@ QuickSheet automatically computes:
 - **Σ (Column Sum)** — shown in the status bar for numeric columns
 - **Π (Row Product)** — shown in the status bar for numeric rows
 
-## Desktop Mode Notes
+## Implementation notes
 
-Desktop mode (`--desktop`) supports the same shortcuts but input is handled via
-platform-native key events (WinForms on Windows, X11 on Linux) rather than
-`System.Console`. A few differences:
+Input is handled via platform-native key events (WinForms on Windows, X11 on
+Linux). A few things to know:
 
 - **No terminal cursor** — navigation is visual only
 - **Auto-saves every 5 seconds** to the loaded CSV file
