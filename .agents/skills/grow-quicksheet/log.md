@@ -1285,3 +1285,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket D: v0.24.0 release after pending PRs merge (#134, #135, #136, #137)
 - Update docs/export-formats.md with JSON section
 - Bucket F: quicksheet-co2 (DONE), next: quicksheet-openmeteo or quicksheet-ipinfo
+
+## 2026-05-18 21:00
+
+- Stars: 1 (Δ +0)
+- Action: Bucket D — merged all 5 pending PRs (#134 tour docs, #135 gh-trends docs, #136 --export-json feature, #137 co2 docs, #138 ai-workflow example). Resolved rebase conflicts on #137. Updated docs/export-formats.md with --export-json section + jq examples + updated comparison table. Updated CHANGELOG. Cut v0.24.0 release.
+- Bucket: D (releases & maintenance)
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.24.0. All 5 PRs merged. Build green.
+- Competitor last did: idle (no new runs since 09:33 — export-json PR #136).
+- Follow-up: Bucket F — quicksheet-openmeteo or quicksheet-ipinfo. Bucket C — gh-pages v0.24.0 bump.
+
+## Queued
+
+- Bucket C: gh-pages v0.24.0 bump + add co2/gh-trends cards if missing
+- Bucket F: quicksheet-openmeteo (free weather API) or quicksheet-ipinfo
