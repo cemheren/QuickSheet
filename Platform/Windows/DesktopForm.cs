@@ -779,7 +779,6 @@ internal class DesktopForm : DesktopFormBase
                 "  ║  Ctrl+G         Go to cell (e.g. A1)     ║",
                 "  ║  Ctrl+Z         Undo                     ║",
                 "  ║  Ctrl+Y         Redo                     ║",
-                "  ║  Ctrl+B         Sort by column            ║",
                 "  ║  Ctrl+T         Cycle theme               ║",
                 "  ║  Ctrl+H         Show this help            ║",
                 "  ║  Ctrl+Q         Quit                     ║",
@@ -1133,12 +1132,6 @@ internal class DesktopForm : DesktopFormBase
                     _replaceFindInput = "";
                     _replaceWithInput = "";
                     break;
-                case Keys.B:
-                    {
-                        var (_, sortCol) = _grid.GetCurrentCell();
-                        _grid.SortByColumn(sortCol);
-                        break;
-                    }
                 case Keys.Z:
                     _grid.Undo();
                     break;
