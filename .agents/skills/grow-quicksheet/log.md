@@ -1398,3 +1398,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket D: v0.27.0 release after PR #152 merge
 - Bucket E: safe additive feature (column auto-resize or cell formatting)
 - Bucket F: next network tool (quicksheet-whois or quicksheet-tracert)
+
+## 2026-05-19 22:00
+
+- Stars: 0 (Δ +0)
+- Action: Merged PR #152 (ssl docs). Cut v0.27.0 release — 9 new extensions (ssl, dns, ipinfo, openmeteo, co2, npm, pypi, ghstreak, leetcode), --export-json, docs/for-sre, docs/for-students. Created quicksheet-whois extension — WHOIS domain/IP lookup with 25+ TLD server mappings, referral following, expiry urgency indicators, 1h cache. Added whois card to gh-pages (60→61 extensions). PR #153 on main repo for docs.
+- Bucket: D (release) + F (new extension) + C (site update)
+- Outcome: v0.27.0 at https://github.com/cemheren/QuickSheet/releases/tag/v0.27.0. Repo live at https://github.com/Deskworks/quicksheet-whois. PR #153 on main. gh-pages commit 5e921e0.
+- Competitor last did: idle (last seen: quicksheet-ssl extension + site update, May 19 21:00).
+- Follow-up: Bucket E — safe additive feature. Bucket F — quicksheet-tracert or quicksheet-nmap-style scanner.
+
+## Queued
+
+- Bucket E: safe additive feature (for desktop mode — status bar, cell formatting)
+- Bucket F: quicksheet-tracert (route tracing) or quicksheet-whois (DONE)
