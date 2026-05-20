@@ -214,6 +214,7 @@ tls: github.com, 1, 4
 | `ip:` | IP geolocation — ISP, org, ASN, timezone, hostname, coords for any IP or your own | `ext: github:Deskworks/quicksheet-ipinfo` |
 | `dns:` | DNS record lookup — A, AAAA, MX, TXT, NS, CNAME, PTR. `dns: MX gmail.com` · `dns: PTR 8.8.8.8` | `ext: github:Deskworks/quicksheet-dns` |
 | `ssl:` | SSL certificate expiry checker — status 🟢/🟡/🔴, days left, issuer. `ssl: github.com` · `ssl: api.internal:8443` | `ext: github:Deskworks/quicksheet-ssl` |
+| `whois:` | WHOIS domain/IP lookup — registrar, status, expiry urgency 🟡🔴, nameservers. `whois: github.com` · `whois: 8.8.8.8` | `ext: github:Deskworks/quicksheet-whois` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
