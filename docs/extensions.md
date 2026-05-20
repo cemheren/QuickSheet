@@ -59,6 +59,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `ghtrend` | GitHub trending   | Today's trending repos by language — name, stars, forks, description. Type `ghtrend: python` or `ghtrend: all` | [`quicksheet-gh-trends`](https://github.com/Deskworks/quicksheet-gh-trends) |
 | `co2`     | CO₂ Monitor       | Live atmospheric CO₂ from NOAA Mauna Loa (free, no key) — current ppm, pre-industrial baseline, year-over-year change, 30-day trend, annual averages | [`quicksheet-co2`](https://github.com/Deskworks/quicksheet-co2) |
 | `weather` | Live Weather      | Current weather via Open-Meteo (free, no API key) — temperature, feels-like, conditions, wind, humidity, pressure. Usage: `weather: London` or `weather: 48.85,2.35` | [`quicksheet-openmeteo`](https://github.com/Deskworks/quicksheet-openmeteo) |
+| `ip`      | IP Info           | IP geolocation, ISP, org, ASN, timezone, hostname, and coords via ipinfo.io. Free, no API key. Type `ip:` (own IP) or `ip: 8.8.8.8` | [`quicksheet-ipinfo`](https://github.com/Deskworks/quicksheet-ipinfo) |
 
 ## Install
 
