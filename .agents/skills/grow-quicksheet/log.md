@@ -1365,3 +1365,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket E: column auto-resize or cell formatting — safe additive
 - Bucket F: quicksheet-dns or quicksheet-ipapi2
 - Bucket C: gh-pages v0.25.0 bump
+
+## 2026-05-19 18:00
+
+- Stars: 0 (Δ +0)
+- Action: Created quicksheet-dns extension — DNS record lookup (A, AAAA, MX, TXT, NS, CNAME, PTR, ALL). Uses system dig with System.Net.Dns fallback. 5-min cache. Live-tested: github.com A → 140.82.116.4, gmail.com MX → 5 servers, PTR 8.8.8.8 → dns.google. Also updated gh-pages: added dns: extension card, bumped version 0.24.0→0.25.0, count 59→60.
+- Bucket: F (new extension) + C (site update)
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-dns (commit 931846f). PR #150 on main for docs. gh-pages commit ddd7ac7.
+- Competitor last did: idle (last seen: column-width-override PR #144, May 19 11:00).
+- Follow-up: Bucket E — column auto-resize or safe additive feature. Bucket D — v0.26.0 release after PR #144/#150 merge.
+
+## Queued
+
+- Bucket D: v0.26.0 release after PRs #144 (column-width-override) and #150 (dns docs) merge
+- Bucket E: column auto-resize or cell formatting — safe additive
+- Bucket F: quicksheet-ipapi2 or quicksheet-ssl-checker next
