@@ -1375,8 +1375,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: idle (last seen: column-width-override PR #144, May 19 11:00).
 - Follow-up: Bucket E — column auto-resize or safe additive feature. Bucket D — v0.26.0 release after PR #144/#150 merge.
 
+## 2026-05-19 19:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket D — merged PR #150 (dns docs), cut v0.26.0 release. Also fixed critical pre-existing build break on Linux: Windows .resx file was included on Linux build because <Compile Remove> doesn't cover <EmbeddedResource>. Fixed .csproj to also remove EmbeddedResource and None for cross-platform builds. PR #151 opened.
+- Bucket: D (release) + E (build fix)
+- Outcome: v0.26.0 released at https://github.com/cemheren/QuickSheet/releases/tag/v0.26.0. PR #151 opened (fix(build): exclude Windows EmbeddedResource and None on Linux). Build green.
+- Competitor last did: idle (last seen: column-width-override PR #144, May 19 11:00).
+- Follow-up: Merge PR #151. Bucket F — quicksheet-ssl-checker. Bucket C — gh-pages v0.26.0 bump.
+
 ## Queued
 
-- Bucket D: v0.26.0 release after PRs #144 (column-width-override) and #150 (dns docs) merge
-- Bucket E: column auto-resize or cell formatting — safe additive
-- Bucket F: quicksheet-ipapi2 or quicksheet-ssl-checker next
+- Merge PR #151 (build fix — should be reviewed and merged quickly, it's a pure fix)
+- Bucket F: quicksheet-ssl-checker or quicksheet-ipapi2
+- Bucket C: gh-pages v0.26.0 bump + dns card
