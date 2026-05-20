@@ -1350,3 +1350,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket D: v0.25.0 release after PRs #142/#144/#148/#149 merge
 - Bucket E: column auto-resize or cell formatting (bold/color via ANSI) — safe additive
 - Bucket F: quicksheet-openmeteo (DONE), quicksheet-ipinfo (DONE). Next: quicksheet-ipapi2 variant or quicksheet-dns
+
+## 2026-05-19 17:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket D — merged PRs #142 (openmeteo docs), #148 (Ctrl+B desktop sort fix, closes #147), #149 (ipinfo docs). Rebased #149 to resolve conflicts. Cut v0.25.0 release.
+- Bucket: D (releases & maintenance)
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.25.0. All 3 PRs merged. Issues #147 closed.
+- Competitor last did: idle (last seen: column-width-override PR #144, May 19 11:00).
+- Follow-up: Bucket E — safe additive feature (column auto-resize). Bucket F — quicksheet-dns or quicksheet-ipapi2.
+
+## Queued
+
+- Bucket E: column auto-resize or cell formatting — safe additive
+- Bucket F: quicksheet-dns or quicksheet-ipapi2
+- Bucket C: gh-pages v0.25.0 bump
