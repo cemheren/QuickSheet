@@ -1274,9 +1274,6 @@ internal class DesktopWindow : IDisposable
                     _replaceFindInput = "";
                     _replaceWithInput = "";
                     return;
-                case XK_b:
-                    _grid.SortByColumn(_selectedCol);
-                    return;
                 case XK_z:
                     _grid.Undo();
                     return;
