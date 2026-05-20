@@ -25,10 +25,14 @@
   <!-- Only compile the platform code for the current OS -->
   <ItemGroup Condition="!$([MSBuild]::IsOSPlatform('Windows'))">
     <Compile Remove="Platform/Windows/**" />
+    <EmbeddedResource Remove="Platform/Windows/**" />
+    <None Remove="Platform/Windows/**" />
   </ItemGroup>
 
   <ItemGroup Condition="!$([MSBuild]::IsOSPlatform('Linux'))">
     <Compile Remove="Platform/Linux/**" />
+    <EmbeddedResource Remove="Platform/Linux/**" />
+    <None Remove="Platform/Linux/**" />
   </ItemGroup>
 
 </Project>
