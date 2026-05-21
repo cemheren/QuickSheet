@@ -242,7 +242,7 @@ public class ExtensionManager : IDisposable
                             if (reg != null)
                             {
                                 ext.Process.HandleRegister(reg);
-                                string prefix = reg.Prefix.ToLowerInvariant();
+                                string prefix = reg.Prefix.TrimEnd(':').ToLowerInvariant();
                                 _prefixMap.TryAdd(prefix, ext.Source);
                             }
                             break;
