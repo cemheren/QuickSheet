@@ -1431,3 +1431,51 @@ Build: Release
 - **Skipped: 3** (A2, A3, A5/A6)
 - **N/A: 1** (A68 — feature reverted)
 - **Total: 113**
+
+## Run 52: 2026-05-21 11:20
+Commit: a087370 (main), v0.27.0
+Build: Release
+
+### Discovery
+- 15 new commits since last run (May 17)
+- PR #148 merged: Ctrl+B sort removed from desktop mode (reverted PR #38)
+- 6 new extension repos found: ghstreak, iss, npm, pypi, gh-trends, co2
+- 5 "docs-only" extensions (openmeteo, ipinfo, dns, ssl, whois) — repos don't exist yet
+- All 5 protocol bug issues (#3) CLOSED with fix PRs merged
+
+### Bug Found: Extension prefix trailing colon mismatch (#154)
+Extensions registering with trailing colon in prefix (e.g. "roll:") are stored as-is in _prefixMap, but ParseExtensionCall extracts prefix WITHOUT the colon. So "roll" != "roll:" and prefix cells never match. Only extensions without trailing colon (gha, co2) work.
+
+| ID | Result | Notes |
+|----|--------|-------|
+| C45 | ❌ FAIL | dice: protocol fix works in isolation but blocked by #154 (trailing colon mismatch) |
+| C46 | ❌ FAIL | envck: same — blocked by #154 |
+| C47 | ✅ PASS | gha: works — prefix "gha" has no trailing colon. Shows 10 workflow runs with status/branch/age |
+| C48 | ❌ FAIL | leetcode: same — blocked by #154 |
+| C49 | ❌ FAIL | pihole: same — blocked by #154 |
+| C50 | ❌ FAIL | ghstreak: prefix "ghst:" has trailing colon → blocked by #154 |
+| C51 | ❌ FAIL | iss: prefix "iss:" has trailing colon → blocked by #154 |
+| C52 | ❌ FAIL | npm: prefix "npm:" has trailing colon → blocked by #154 |
+| C53 | ❌ FAIL | pypi: prefix "pypi:" has trailing colon → blocked by #154 (also file lock from multiple processes) |
+| C54 | ❌ FAIL | gh-trends: doesn't implement init/register protocol → filed gh-trends#1 |
+| C55 | ✅ PASS | co2: prefix "co2" has no trailing colon. Shows CO₂ 432.19ppm + trend + source |
+| A60 | N/A | Ctrl+B sort REMOVED from desktop mode (PR #148, closes #147) |
+
+### Issues Filed
+- **cemheren/QuickSheet#154**: Extension prefix cells with trailing colon never activate (affects 8+ extensions)
+- **cemheren/quicksheet-gh-trends#1**: Missing init/register protocol handler — extension never activates
+
+### Summary
+- Tests run: 12 (re-test of C45-C49, new C50-C55, A60 status update)
+- Passed: 2 (C47, C55)
+- Failed: 10 (C45-C46, C48-C54)
+- N/A: 1 (A60 — feature removed)
+- Issues filed: 2 (#154, gh-trends#1)
+- Root cause: Bug #154 is a systemic issue blocking ALL extensions with trailing colon in manifest prefix field
+
+### Cumulative Status (113 + 6 new = 119 tests)
+- ✅ Pass: 103 (101 prior + C47 re-confirmed + C55 new)
+- ❌ Fail: 11 (C45-C46, C48-C54 — all blocked by #154 or protocol bugs)
+- ⚠️ Blocked: 3 (C16 copilot, C25 docker, C31 k8s)
+- ⏭️ Skip: 3 (A2, A3, A5/A6)
+- N/A: 2 (A60 Ctrl+B removed, A68 c?: reverted)

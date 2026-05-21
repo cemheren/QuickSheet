@@ -326,6 +326,12 @@ First install each extension via its `ext:` cell. Then test the prefix.
 | C47 | quicksheet-gha | `ext: github:Deskworks/quicksheet-gha` | `gha: cemheren/QuickSheet,1,5` | GitHub Actions workflow run statuses |
 | C48 | quicksheet-leetcode | `ext: github:Deskworks/quicksheet-leetcode` | `lc: daily` | LeetCode daily challenge or problem lookup |
 | C49 | quicksheet-pihole | `ext: github:Deskworks/quicksheet-pihole` | `pihole: 192.168.1.1,1,3` | Pi-hole DNS blocking stats |
+| C50 | quicksheet-ghstreak | `ext: github:cemheren/quicksheet-ghstreak` | `ghst: torvalds` | Current streak 🔥, longest streak, total contributions, 14-day sparkline |
+| C51 | quicksheet-iss | `ext: github:cemheren/quicksheet-iss` | `iss: position` | Live ISS lat/lon, altitude, speed + people in space |
+| C52 | quicksheet-npm | `ext: github:cemheren/quicksheet-npm` | `npm: react` | Package version, weekly downloads, license, author |
+| C53 | quicksheet-pypi | `ext: github:cemheren/quicksheet-pypi` | `pypi: requests` | Version, license, author, Python requirement, release date |
+| C54 | quicksheet-gh-trends | `ext: github:cemheren/quicksheet-gh-trends` | `ghtrend: python` | Today's trending repos by language — name, stars, forks, description |
+| C55 | quicksheet-co2 | `ext: github:cemheren/quicksheet-co2` | `co2: current` | Live atmospheric CO₂ from NOAA — current ppm, trend, year-over-year change |
 
 ---
 
