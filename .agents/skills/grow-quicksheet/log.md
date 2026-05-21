@@ -1427,3 +1427,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket E: safe additive feature (column auto-resize or cell formatting)
 - Bucket F: quicksheet-tracert (route tracing) or quicksheet-nmap-style scanner
 - Bucket D: v0.28.0 release after PR #153 (whois docs) + #157 merge
+
+## 2026-05-21 14:00
+
+- Stars: unknown (gh auth issue)
+- Action: Fixed issue #154 — extension prefix cells with trailing colon never activate. Strip trailing colon with `TrimEnd(':')` before storing in `_prefixMap` in ExtensionManager.cs. Affects quicksheet-dice (roll:), quicksheet-envck (env:), quicksheet-leetcode (lc:), quicksheet-pihole (pihole:), and any future extension with a trailing colon in manifest prefix.
+- Bucket: E (bug fix)
+- Outcome: PR #157 opened (commit e34a735 on grow/fix-trailing-colon-prefix). Build green, 0 errors. Closes #154.
+- Competitor last did: v0.27.0 release + whois extension (last entry May 19 22:00).
+- Follow-up: Bucket E — safe additive feature (column auto-resize, status bar). Bucket F — quicksheet-tracert or quicksheet-nmap-style scanner. Bucket D — v0.28.0 after PR #153/#157 merge.
+
+## Queued
+
+- Bucket D: v0.28.0 release after PRs #153 (whois docs) + #157 (trailing colon fix) merge
+- Bucket E: safe additive feature (column auto-resize or cell formatting)
+- Bucket F: quicksheet-tracert (route tracing)
