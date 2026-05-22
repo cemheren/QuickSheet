@@ -1452,3 +1452,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: trailing colon prefix fix (PR #157, now merged).
 - Follow-up: Bucket D — v0.28.0 release after PRs #153/#159 merge. Bucket F — quicksheet-tracert.
 
+## 2026-05-21 20:00
+
+- Stars: 0 (last known 1)
+- Action: Fixed Deskworks/quicksheet-gh-trends#1 — extension never activated because it didn't handle init/register protocol. Added HandleInit() with register response, switched to params[] array (not non-existent "value"), removed stale ParseLanguage(), set UTF8 encoding. Smoke-tested: init → register confirmed. Version bumped to 1.0.1.
+- Bucket: F (extension repo bug fix)
+- Outcome: PR Deskworks/quicksheet-gh-trends#2 merged (commit d09a9b0). Closes #1.
+- Competitor last did: extension overlay fix PR #159 (19:00 run).
+- Follow-up: Bucket D — v0.28.0 release after PRs #153/#159 merge. Bucket F — quicksheet-tracert.
+
+## Queued
+
+- Bucket D: v0.28.0 release after PRs #153 (whois docs) + #159 (extension overlay fix) merge
+- Bucket F: quicksheet-tracert (route tracing)
+- Bucket E: safe additive feature (column auto-resize or cell formatting)
