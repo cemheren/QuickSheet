@@ -1439,6 +1439,16 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 
 ## Queued
 
-- Bucket D: v0.28.0 release after PRs #153 (whois docs) + #157 (trailing colon fix) merge
+- Bucket D: v0.28.0 release after PRs #153 (whois docs) + #159 (extension overlay fix) merge
 - Bucket E: safe additive feature (column auto-resize or cell formatting)
 - Bucket F: quicksheet-tracert (route tracing)
+
+## 2026-05-21 19:00
+
+- Stars: 0 (gh auth issue — last known count was 1)
+- Action: Fixed issue #156 — extension outputs no longer saved to CSV. Added _extensionOverlay dict to GridManager; SetExtensionCellValue() writes to overlay only; GetCellValue checks overlay first (visible on screen); SaveToCsv reads _data directly (overlay excluded). Also fixed HandleStatus/HandleError to use overlay so ext: anchor cell value is preserved in _data.
+- Bucket: E (bug fix)
+- Outcome: PR #159 opened (commit 6dee5d2 on grow/fix-extension-csv-pollution). Build green, 0 errors. Closes #156.
+- Competitor last did: trailing colon prefix fix (PR #157, now merged).
+- Follow-up: Bucket D — v0.28.0 release after PRs #153/#159 merge. Bucket F — quicksheet-tracert.
+
