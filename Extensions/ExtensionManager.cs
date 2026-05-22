@@ -362,10 +362,17 @@ public class ExtensionManager : IDisposable
             int targetRow = call.AnchorRow + cell.Row;
             int targetCol = call.AnchorCol + cell.Col;
 
+            // Never overwrite the anchor cell — it holds the user's trigger text
+            // (the `ext:`/`prefix:` command) and must persist so the extension
+            // re-activates after a reload.
+            if (targetRow == call.AnchorRow && targetCol == call.AnchorCol)
+                continue;
+
             if (targetRow >= 0 && targetRow < _grid.RowCount &&
                 targetCol >= 0 && targetCol < _grid.ColumnCount)
             {
-                _grid.SetCellValue(targetRow, targetCol, cell.Value);
+                // Ephemeral: renders on the grid, not written to the CSV (issue #156).
+                _grid.SetEphemeralCellValue(targetRow, targetCol, cell.Value);
             }
         }
 

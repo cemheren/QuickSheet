@@ -5,6 +5,10 @@ public class GridManager
     private readonly string[,] _data;
     private readonly bool[,] _isFile;
     private readonly string[,] _filePath;
+    // Cells written by extension output. They render on the grid but are NOT
+    // persisted to the CSV and never set IsDirty — see issue #156: persisting
+    // extension output triggered an autosave → sync → conflict loop on OneDrive.
+    private readonly bool[,] _isEphemeral;
     public int ColumnCount { get; }
     public int RowCount { get; }
     public bool IsDirty { get; private set; }
@@ -48,6 +52,7 @@ public class GridManager
         _data = new string[RowCount, ColumnCount];
         _isFile = new bool[RowCount, ColumnCount];
         _filePath = new string[RowCount, ColumnCount];
+        _isEphemeral = new bool[RowCount, ColumnCount];
         for (int r = 0; r < RowCount; r++)
             for (int c = 0; c < ColumnCount; c++)
             {
@@ -91,9 +96,28 @@ public class GridManager
         {
             _undo.RecordChange(row, col, _data[row, col], value);
             _data[row, col] = value;
+            _isEphemeral[row, col] = false; // a real edit makes the cell persistent
             IsDirty = true;
         }
     }
+
+    /// <summary>
+    /// Write a cell value produced by an extension. The value renders on the grid
+    /// but is NOT persisted to the CSV and does NOT mark the grid dirty — this is
+    /// what stops extension output from triggering the autosave/sync conflict loop
+    /// described in issue #156.
+    /// </summary>
+    public void SetEphemeralCellValue(int row, int col, string value)
+    {
+        if (row >= 0 && row < RowCount && col >= 0 && col < ColumnCount)
+        {
+            _data[row, col] = value;
+            _isEphemeral[row, col] = true;
+        }
+    }
+
+    public bool IsEphemeral(int row, int col)
+        => row >= 0 && row < RowCount && col >= 0 && col < ColumnCount && _isEphemeral[row, col];
 
     /// <summary>Apply cell values directly without recording undo (used by Undo/Redo restore).</summary>
     private void SetCellValueRaw(int row, int col, string value)
@@ -393,8 +417,9 @@ public class GridManager
             {
                 if (r < RowCount && c < ColumnCount)
                 {
-                    // Within grid bounds: use grid data
-                    fields[c] = EscapeCsvField(_isFile[r, c] ? "" : _data[r, c]);
+                    // Within grid bounds: use grid data. File entries and extension
+                    // output (ephemeral) are display-only — never written to disk.
+                    fields[c] = EscapeCsvField(_isFile[r, c] || _isEphemeral[r, c] ? "" : _data[r, c]);
                 }
                 else if (existingRows != null && r < existingRows.Count && c < existingRows[r].Count)
                 {
@@ -627,7 +652,9 @@ public class GridManager
             var fields = ParseCsvLine(lines[r]);
             for (int c = 0; c < Math.Min(fields.Count, ColumnCount); c++)
             {
-                if (_isFile[r, c]) continue;
+                // Skip file entries and extension output — neither is persisted,
+                // so an external file will never legitimately conflict with them.
+                if (_isFile[r, c] || _isEphemeral[r, c]) continue;
 
                 string external = fields[c];
                 string local = _data[r, c];
