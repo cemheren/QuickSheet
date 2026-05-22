@@ -9,6 +9,10 @@ public class GridManager
     public int RowCount { get; }
     public bool IsDirty { get; private set; }
 
+    // Extension output overlay — values visible on grid but NOT persisted to CSV.
+    // Key: (row, col). Extensions write here via SetExtensionCellValue().
+    private readonly Dictionary<(int row, int col), string> _extensionOverlay = new();
+
     // ── Undo / Redo ────────────────────────────────────────────────
     private readonly UndoManager _undo = new();
     public void BeginUndoGroup() => _undo.BeginGroup();
@@ -77,8 +81,40 @@ public class GridManager
     public string GetCellValue(int row, int col)
     {
         if (row >= 0 && row < RowCount && col >= 0 && col < ColumnCount)
+        {
+            // Extension overlay takes priority for display but is never saved to CSV.
+            if (_extensionOverlay.TryGetValue((row, col), out string? overlayVal))
+                return overlayVal;
             return _data[row, col];
+        }
         return "";
+    }
+
+    /// <summary>
+    /// Writes a value that should be visible on screen but NOT persisted to CSV.
+    /// Used by extensions so their output doesn't pollute the saved data file.
+    /// </summary>
+    public void SetExtensionCellValue(int row, int col, string value)
+    {
+        if (row >= 0 && row < RowCount && col >= 0 && col < ColumnCount)
+        {
+            if (string.IsNullOrEmpty(value))
+                _extensionOverlay.Remove((row, col));
+            else
+                _extensionOverlay[(row, col)] = value;
+        }
+    }
+
+    /// <summary>
+    /// Clears all extension overlay values in the rectangular region starting at
+    /// (anchorRow, anchorCol) with the given height and width. Call this when an
+    /// extension reactivates so stale output doesn't linger.
+    /// </summary>
+    public void ClearExtensionOverlay(int anchorRow, int anchorCol, int height, int width)
+    {
+        for (int r = anchorRow; r < anchorRow + height; r++)
+            for (int c = anchorCol; c < anchorCol + width; c++)
+                _extensionOverlay.Remove((r, c));
     }
 
     public string GetSelectedCellValue() => GetCellValue(_selectedRow, _selectedCol);

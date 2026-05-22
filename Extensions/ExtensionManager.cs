@@ -365,7 +365,7 @@ public class ExtensionManager : IDisposable
             if (targetRow >= 0 && targetRow < _grid.RowCount &&
                 targetCol >= 0 && targetCol < _grid.ColumnCount)
             {
-                _grid.SetCellValue(targetRow, targetCol, cell.Value);
+                _grid.SetExtensionCellValue(targetRow, targetCol, cell.Value);
             }
         }
 
@@ -384,7 +384,7 @@ public class ExtensionManager : IDisposable
                 if (ac.AnchorRow >= 0 && ac.AnchorRow < _grid.RowCount &&
                     ac.AnchorCol >= 0 && ac.AnchorCol < _grid.ColumnCount)
                 {
-                    _grid.SetCellValue(ac.AnchorRow, ac.AnchorCol, msg.Message);
+                    _grid.SetExtensionCellValue(ac.AnchorRow, ac.AnchorCol, msg.Message);
                     HasChanges = true;
                 }
                 break;
@@ -406,7 +406,7 @@ public class ExtensionManager : IDisposable
                 if (ac.AnchorRow >= 0 && ac.AnchorRow < _grid.RowCount &&
                     ac.AnchorCol >= 0 && ac.AnchorCol < _grid.ColumnCount)
                 {
-                    _grid.SetCellValue(ac.AnchorRow, ac.AnchorCol, $"[err: {msg.Message}]");
+                    _grid.SetExtensionCellValue(ac.AnchorRow, ac.AnchorCol, $"[err: {msg.Message}]");
                     HasChanges = true;
                 }
                 break;
