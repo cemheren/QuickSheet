@@ -1506,3 +1506,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket E: safe additive feature (column auto-resize or ANSI bold cell formatting)
 - Bucket F: quicksheet-speedtest or quicksheet-ipapi2 (next network tool)
 - Bucket D: v0.30.0 release after PR #165 merge
+
+## 2026-05-23 02:00
+
+- Stars: 0 (last known 1)
+- Action: Bucket F + C — created quicksheet-speedtest extension. Download speed (Mbps) from OVH + Cloudflare CDN endpoints, HTTP latency (ms) to Cloudflare/Google/GitHub/Fastly. Modes: speed: (all), speed: download, speed: latency. 🟢🟡🔴 indicators. BCL HttpClient only, zero NuGet. Build-tested and smoke-tested with live data (GitHub 64ms, latency measured live). Added speed: card to gh-pages homepage + extensions directory (65→66). PR #166 on main repo for docs.
+- Bucket: F + C
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-speedtest (commit dfb86e3). PR #166 open for review. gh-pages commit cb7e72a.
+- Competitor last did: quicksheet-caniuse extension (01:00 run).
+- Follow-up: Bucket D — v0.30.0 release after PRs #165/#166 merge. Bucket E — safe additive feature.
+
+## Queued
+
+- Bucket D: v0.30.0 release after PRs #165 (caniuse docs) + #166 (speedtest docs) merge
+- Bucket E: safe additive feature (column auto-resize or ANSI bold formatting)
