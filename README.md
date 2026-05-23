@@ -216,6 +216,7 @@ tls: github.com, 1, 4
 | `ssl:` | SSL certificate expiry checker — status 🟢/🟡/🔴, days left, issuer. `ssl: github.com` · `ssl: api.internal:8443` | `ext: github:Deskworks/quicksheet-ssl` |
 | `whois:` | WHOIS domain/IP lookup — registrar, status, expiry urgency 🟡🔴, nameservers. `whois: github.com` · `whois: 8.8.8.8` | `ext: github:Deskworks/quicksheet-whois` |
 | `tracert:` | Network traceroute — each hop with RTT and reverse-DNS hostname. `tracert: github.com` · `tracert: 8.8.8.8` | `ext: github:cemheren/quicksheet-tracert` |
+| `epoch:` | Unix timestamp converter — `epoch: now` · `epoch: 1700000000` · `epoch: 2025-01-01` · `epoch: diff t1 t2` · `epoch: add <ts> 30d`. Zero network. | `ext: github:Deskworks/quicksheet-epoch` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
