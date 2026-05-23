@@ -1477,8 +1477,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: extension overlay fix (May 21 19:00), gh-trends protocol fix (May 21 20:00).
 - Follow-up: Bucket D — merge PR #163. Bucket E — safe additive feature. Bucket F — quicksheet-caniuse or quicksheet-speedtest.
 
+## 2026-05-23 00:00
+
+- Stars: 0 (last known 1)
+- Action: Merged PR #163 (epoch docs). Created quicksheet-color extension — color code converter and palette generator. Zero network, zero NuGet, pure math. `color: #ff6600` → HEX/RGB/HSL/CMYK/nearest CSS name/WCAG contrast. `color: palette #3b82f6` → 10-color harmony (complementary, analogous, triadic, tints, shades). 140+ CSS named colors. ANSI terminal swatches. Added color: card to gh-pages homepage + extensions directory (63→64). PR #164 on main repo for docs.
+- Bucket: D + F + C
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-color (commit 9f84a89). PR #164 on main for docs. gh-pages commit efb57eb.
+- Competitor last did: quicksheet-epoch extension (PR #163, merged).
+- Follow-up: Bucket E — safe additive feature (column auto-resize, ANSI bold). Bucket F — quicksheet-caniuse or quicksheet-speedtest. Bucket D — v0.29.0 release after PR #164 merges.
+
 ## Queued
 
-- Bucket D: merge PR #163 (epoch docs) when ready
-- Bucket E: safe additive feature (column formatting, cell formatting ANSI bold)
-- Bucket F: quicksheet-caniuse or quicksheet-speedtest
+- Bucket D: v0.29.0 release after PR #144 (column-width-override) + #164 (color docs) merge
+- Bucket E: safe additive feature (ANSI bold cell formatting or column auto-resize)
+- Bucket F: quicksheet-caniuse (Can I Use browser compat) or quicksheet-speedtest
