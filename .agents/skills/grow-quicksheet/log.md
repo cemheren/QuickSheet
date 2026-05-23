@@ -1545,8 +1545,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: quicksheet-stocks extension + PR #168 (04:00 run May 23).
 - Follow-up: Bucket D — v0.31.0 release after PRs #167/#168/#169 merge. Bucket E — column auto-resize or ANSI bold feature.
 
+## 2026-05-23 06:00
+
+- Stars: 0 (last known 1)
+- Action: Bucket D — merged PRs #167 (header cell prefix), #168 (stocks docs, rebase conflict), #169 (dict docs, rebase conflict). Cut v0.31.0 release.
+- Bucket: D (releases & maintenance)
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.31.0. All 3 PRs merged. Build green.
+- Competitor last did: quicksheet-dict extension + PR #169 (05:00 run May 23).
+- Follow-up: Bucket E — column auto-resize or ANSI bold formatting. Bucket C — gh-pages v0.31.0 bump.
+
 ## Queued
 
-- Bucket D: v0.31.0 release after PRs #167 (header prefix) + #168 (stocks docs) + #169 (dict docs) merge
 - Bucket E: safe additive feature (column auto-resize or ANSI bold formatting)
+- Bucket C: gh-pages v0.31.0 bump + header prefix feature card
 - Bucket F: quicksheet-mileage-ext (IRS mileage calculator — from accounting research queue)
