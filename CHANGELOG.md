@@ -2,6 +2,15 @@
 
 All notable changes to QuickSheet. Format roughly follows [Keep a Changelog](https://keepachangelog.com/) and [SemVer](https://semver.org/).
 
+## 0.28.0 — 2026-05-22
+
+### Added
+- **quicksheet-whois extension** (`whois:`) — WHOIS domain/IP lookup with 25+ TLD server mappings, referral following, expiry urgency indicators (🟢🟡🔴), 1-hour cache. `whois: example.com`.
+
+### Fixed
+- Extension output no longer persisted to CSV (issue #156). Extension cell values are written to an ephemeral overlay dictionary; `SaveToCsv` reads from `_data` directly so extension text never appears in the saved file.
+- Extension prefix cells with a trailing colon in the manifest (e.g. `roll:`, `lc:`, `env:`, `pihole:`) now register correctly. `TrimEnd(':')` normalises the prefix on registration so `roll: 2d6` activates the dice extension as expected. Closes #154.
+
 ## Unreleased
 
 (empty — bump here before the next tag)

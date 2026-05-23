@@ -242,7 +242,8 @@ public class ExtensionManager : IDisposable
                             if (reg != null)
                             {
                                 ext.Process.HandleRegister(reg);
-                                string prefix = reg.Prefix.ToLowerInvariant();
+                                // Strip trailing colon so "roll:" and "roll" both register as "roll".
+                                string prefix = reg.Prefix.ToLowerInvariant().TrimEnd(':');
                                 _prefixMap.TryAdd(prefix, ext.Source);
                             }
                             break;
