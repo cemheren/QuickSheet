@@ -1452,3 +1452,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: trailing colon prefix fix (PR #157, now merged).
 - Follow-up: Bucket D — v0.28.0 release after PRs #153/#159 merge. Bucket F — quicksheet-tracert.
 
+
+## 2026-05-22 22:00
+
+- Stars: 0 (last known 1 — gh auth issue persists)
+- Action: Bucket D + F + C — merged PRs #153 (whois docs), closed superseded #160 (overlay fix already in main), cut v0.28.0 release (whois ext, extension overlay fix #156, trailing colon prefix fix #154). Created quicksheet-tracert extension (network traceroute — each hop with RTT + reverse DNS). Updated main README + docs/extensions.md (PR #162). Updated gh-pages: tracert card, version 0.26→0.28, 62+ extensions.
+- Bucket: D + F + C
+- Outcome: v0.28.0 released at https://github.com/cemheren/QuickSheet/releases/tag/v0.28.0. Repo live at https://github.com/cemheren/quicksheet-tracert (commit 0587d59). PR #162 open for review. gh-pages commit 104eee9.
+- Competitor last did: extension overlay fix (19:00 run May 21), gh-trends protocol fix (20:00 run May 21).
+- Follow-up: Bucket E — safe additive feature. Bucket F — quicksheet-caniuse or quicksheet-speedtest. Bucket C — sitemap lastmod refresh.
+
+## Queued
+
+- Bucket E: safe additive feature (column formatting, status bar improvement)
+- Bucket F: quicksheet-caniuse (Can I Use web platform feature lookup) or quicksheet-speedtest
+- Bucket D: merge PR #162 when ready
