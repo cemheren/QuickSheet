@@ -228,6 +228,7 @@ tls: github.com, 1, 4
 | `color:` | Color converter + palette — `color: #ff6600` · `color: rgb(255,102,0)` · `color: orange` · `color: palette #3b82f6`. HEX↔RGB↔HSL↔CMYK, WCAG contrast. Zero network. | `ext: github:Deskworks/quicksheet-color` |
 | `caniuse:` | Browser compat lookup via caniuse-db — `caniuse: css-grid` · `caniuse: flexbox` · `caniuse: webassembly`. Shows support across Chrome/Firefox/Safari/Edge + usage %. No API key. | `ext: github:Deskworks/quicksheet-caniuse` |
 | `stocks:` | Live stock & crypto quotes — `stocks: AAPL` · `stocks: AAPL, MSFT, BTC-USD`. Price, change ▲▼, day range, 52W, volume. Via Yahoo Finance, no API key, 60s cache. | `ext: github:Deskworks/quicksheet-stocks` |
+| `dict:` | English dictionary — `dict: serendipity` (definition + phonetics + examples), `dict: syn happy` (synonyms), `dict: ant brave` (antonyms). No API key. | `ext: github:Deskworks/quicksheet-dict` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
