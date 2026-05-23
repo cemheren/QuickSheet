@@ -1577,3 +1577,12 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket D: v0.32.0 release after PR #170 (bold prefix) merge
 - Bucket C: add b: bold feature card to gh-pages features + shortcuts pages
 - Bucket F: quicksheet-mtr or another network tool
+
+## 2026-05-23 13:00
+
+- Stars: 0 (last known 1)
+- Action: Fixed issue #171 — removed duplicate `stocks:` and `dict:` extension entries from README and docs/extensions.md. `stocks:` duplicates `stock:` + `price:`. `dict:` duplicates `def:`. Updated count badge 67+ → 65+.
+- Bucket: A (issue fix / docs polish)
+- Outcome: PR #172 opened (commit 5888262 on grow/fix-duplicate-extensions). Closes #171.
+- Competitor last did: bold cell prefix (PR #170, 08:00 run May 23).
+- Follow-up: Bucket D — v0.32.0 release after PR #170 merge. Bucket C — add b: card to gh-pages.
