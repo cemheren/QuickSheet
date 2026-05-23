@@ -1520,3 +1520,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 
 - Bucket D: v0.30.0 release after PRs #165 (caniuse docs) + #166 (speedtest docs) merge
 - Bucket E: safe additive feature (column auto-resize or ANSI bold formatting)
+
+## 2026-05-23 04:00
+
+- Stars: 0 (last known 1)
+- Action: Bucket F + C — created quicksheet-stocks extension (live stock & crypto ticker via Yahoo Finance). Single ticker detail view (price, ▲▼ change, day/52W range, volume, mktcap) and multi-ticker comparison table. Supports stocks, ETFs, indices, crypto (BTC-USD), forex. No API key, 60s cache, zero NuGet. Build-tested and smoke-tested live (AAPL $308.82, MSFT $418.57, BTC-USD $74650). PR #168 on main repo for docs. gh-pages: stocks card added, count 66→67, v0.30.0 structured data bump.
+- Bucket: F + C
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-stocks (commit 04a3131). PR #168 open for review. gh-pages commit 5c52667.
+- Competitor last did: PR #167 (header cell prefix, grow/header-cell-prefix) opened at 03:00 run.
+- Follow-up: Merge PR #168. Bucket D — v0.31.0 release after PR #167 + #168 merge. Bucket E — column auto-resize or ANSI bold.
+
+## Queued
+
+- Bucket D: v0.31.0 release after PRs #167 (header prefix) + #168 (stocks docs) merge
+- Bucket E: safe additive feature (column auto-resize or ANSI bold formatting)
+- Bucket F: quicksheet-dict (dictionary lookup via free API) for variety
