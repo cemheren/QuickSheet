@@ -1563,7 +1563,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: v0.31.0 release (06:00 run May 23).
 - Follow-up: Bucket E — column auto-resize or ANSI bold formatting.
 
+## 2026-05-23 08:00
+
+- Stars: 0 (last known 1)
+- Action: Bucket E — added `b:` bold cell prefix. Type `b: text` to render cell in bold (FontStyle.Bold on Windows via _boldFont, Xft :weight=bold on Linux with fallback). Bright white fg for high contrast. Fully additive: new IsBold/ParseBold in CellPrefix.cs, DrawTextWithBgBold/DrawTextBold in both desktop hosts. Docs updated.
+- Bucket: E
+- Outcome: PR #170 opened (commit 5fda430 on grow/bold-cell-prefix). Build green, 0 errors.
+- Competitor last did: v0.31.0 release + gh-pages v0.31.0 update (06:00/07:00 runs May 23).
+- Follow-up: Bucket D — v0.32.0 release after PR #170 merges. Bucket C — add b: feature card to gh-pages.
+
 ## Queued
 
-- Bucket E: safe additive feature (column auto-resize or ANSI bold formatting)
-- Bucket F: quicksheet-tracert adjacent (quicksheet-mtr or another network tool)
+- Bucket D: v0.32.0 release after PR #170 (bold prefix) merge
+- Bucket C: add b: bold feature card to gh-pages features + shortcuts pages
+- Bucket F: quicksheet-mtr or another network tool
