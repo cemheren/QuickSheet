@@ -1535,3 +1535,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket D: v0.31.0 release after PRs #167 (header prefix) + #168 (stocks docs) merge
 - Bucket E: safe additive feature (column auto-resize or ANSI bold formatting)
 - Bucket F: quicksheet-dict (dictionary lookup via free API) for variety
+
+## 2026-05-23 05:00
+
+- Stars: 0 (last known 1 — gh auth issue persists)
+- Action: Bucket F + C — created quicksheet-dict extension (English dictionary). `dict: <word>` full definition (phonetics, parts of speech, usage examples, synonyms, antonyms) via free dictionaryapi.dev API. `dict: syn <word>` synonyms only. `dict: ant <word>` antonyms only. Zero NuGet, BCL HttpClient + System.Text.Json, 1h cache. Build-tested and smoke-tested live (serendipity → phonetics + defs + synonyms/antonyms). Added dict: card to gh-pages homepage + extensions directory (67→68). PR #169 on main repo for docs.
+- Bucket: F + C
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-dict (commit 9abd3eb). PR #169 open for review. gh-pages commit 9aabbf2.
+- Competitor last did: quicksheet-stocks extension + PR #168 (04:00 run May 23).
+- Follow-up: Bucket D — v0.31.0 release after PRs #167/#168/#169 merge. Bucket E — column auto-resize or ANSI bold feature.
+
+## Queued
+
+- Bucket D: v0.31.0 release after PRs #167 (header prefix) + #168 (stocks docs) + #169 (dict docs) merge
+- Bucket E: safe additive feature (column auto-resize or ANSI bold formatting)
+- Bucket F: quicksheet-mileage-ext (IRS mileage calculator — from accounting research queue)
