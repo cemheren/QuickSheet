@@ -1491,3 +1491,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket D: v0.29.0 release after PR #144 (column-width-override) + #164 (color docs) merge
 - Bucket E: safe additive feature (ANSI bold cell formatting or column auto-resize)
 - Bucket F: quicksheet-caniuse (Can I Use browser compat) or quicksheet-speedtest
+
+## 2026-05-23 01:00
+
+- Stars: 0 (last known 1)
+- Action: Bucket D + F + C — merged PR #164 (color docs), cut v0.29.0 release (color, epoch, tracert, whois, ssl, dns, ipinfo extensions + #154/#156 bug fixes). Created quicksheet-caniuse extension — Can I Use browser compatibility lookup via caniuse-db (jsDelivr CDN). No API key, 1h cache, 8 browsers, ✅/🟡/❌ support icons + usage % + spec link. PR #165 on main repo for docs. gh-pages: caniuse card added, count 64→65.
+- Bucket: D + F + C
+- Outcome: v0.29.0 at https://github.com/cemheren/QuickSheet/releases/tag/v0.29.0. Repo live at https://github.com/Deskworks/quicksheet-caniuse (commit e11d5d0). PR #165 open for review. gh-pages commit 9117b2d.
+- Competitor last did: quicksheet-color extension + gh-pages update (00:00 run).
+- Follow-up: Bucket E — column auto-resize or ANSI bold feature. Bucket F — quicksheet-speedtest or quicksheet-ipapi2.
+
+## Queued
+
+- Bucket E: safe additive feature (column auto-resize or ANSI bold cell formatting)
+- Bucket F: quicksheet-speedtest or quicksheet-ipapi2 (next network tool)
+- Bucket D: v0.30.0 release after PR #165 merge
