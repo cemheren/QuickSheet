@@ -66,6 +66,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `tracert` | Network Traceroute | Route trace to any host — each hop with RTT latency and reverse-DNS hostname. Up to 30 hops, 3 probes/hop, 5-min cache. Usage: `tracert: github.com` · `tracert: 8.8.8.8`. BCL Ping, zero NuGet. | [`quicksheet-tracert`](https://github.com/cemheren/quicksheet-tracert) |
 | `epoch`   | Epoch Converter   | Unix timestamp converter — no network, pure math. `epoch: now` (current ts), `epoch: 1700000000` (epoch→date+age), `epoch: 2025-01-01` (date→epoch), `epoch: diff t1 t2` (time difference), `epoch: add <ts> 30d` (add duration: y/d/h/m/s). | [`quicksheet-epoch`](https://github.com/Deskworks/quicksheet-epoch) |
 | `color`   | Color Converter   | Color code converter and palette generator — zero network, pure math. `color: #ff6600` (hex→RGB/HSL/CMYK/name/WCAG), `color: rgb(255,102,0)`, `color: hsl(24,100%,50%)`, `color: orange` (CSS name), `color: palette #3b82f6` (10-color harmony palette). ANSI swatches, 140+ CSS names. | [`quicksheet-color`](https://github.com/Deskworks/quicksheet-color) |
+| `caniuse` | Browser Compat    | Can I Use browser compatibility lookup via caniuse-db. Shows support status for CSS/HTML/JS features across Chrome, Firefox, Safari, Edge, Opera, Samsung, iOS Safari. Usage: `caniuse: css-grid` · `caniuse: flexbox` · `caniuse: webassembly`. Usage %, spec link, notes. 1h cache, no API key. | [`quicksheet-caniuse`](https://github.com/Deskworks/quicksheet-caniuse) |
 
 ## Install
 

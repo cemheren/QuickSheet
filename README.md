@@ -218,6 +218,7 @@ tls: github.com, 1, 4
 | `tracert:` | Network traceroute — each hop with RTT and reverse-DNS hostname. `tracert: github.com` · `tracert: 8.8.8.8` | `ext: github:cemheren/quicksheet-tracert` |
 | `epoch:` | Unix timestamp converter — `epoch: now` · `epoch: 1700000000` · `epoch: 2025-01-01` · `epoch: diff t1 t2` · `epoch: add <ts> 30d`. Zero network. | `ext: github:Deskworks/quicksheet-epoch` |
 | `color:` | Color converter + palette — `color: #ff6600` · `color: rgb(255,102,0)` · `color: orange` · `color: palette #3b82f6`. HEX↔RGB↔HSL↔CMYK, WCAG contrast. Zero network. | `ext: github:Deskworks/quicksheet-color` |
+| `caniuse:` | Browser compat lookup via caniuse-db — `caniuse: css-grid` · `caniuse: flexbox` · `caniuse: webassembly`. Shows support across Chrome/Firefox/Safari/Edge + usage %. No API key. | `ext: github:Deskworks/quicksheet-caniuse` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
