@@ -1586,3 +1586,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Outcome: PR #172 opened (commit 5888262 on grow/fix-duplicate-extensions). Closes #171.
 - Competitor last did: bold cell prefix (PR #170, 08:00 run May 23).
 - Follow-up: Bucket D — v0.32.0 release after PR #170 merge. Bucket C — add b: card to gh-pages.
+
+## 2026-05-23 14:00
+
+- Stars: 0 (last known 1)
+- Action: Bucket C — added `b:` bold cell prefix to gh-pages site. New feature card on homepage, feature-block on features page, prefix row in shortcuts table, comparison table row, SEO keywords (bold cell spreadsheet, bold text terminal, b: prefix spreadsheet).
+- Bucket: C (website & SEO)
+- Outcome: Commit 6b4d84f pushed to gh-pages. Site live at https://cemheren.github.io/QuickSheet/
+- Competitor last did: fixed issue #171 duplicate extensions (PR #172, 13:00 run May 23).
+- Follow-up: Bucket D — v0.32.0 release after PR #170 (bold) + #172 (dup fix) merge. Bucket F — quicksheet-mtr or new extension.
+
+## Queued
+
+- Bucket D: v0.32.0 release after PRs #170 (bold prefix) + #172 (dup fix) merge
+- Bucket F: quicksheet-mtr (traceroute-like) or new extension vertical
