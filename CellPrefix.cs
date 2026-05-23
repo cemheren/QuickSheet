@@ -157,6 +157,23 @@ public static class CellPrefix
         return (color, text);
     }
 
+    // ── Bold prefix ─────────────────────────────────────────────────
+
+    /// <summary>
+    /// Returns true when a cell starts with "b: " (bold/emphasized text).
+    /// </summary>
+    public static bool IsBold(string value) =>
+        value.StartsWith("b: ", StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// Returns the display text for a "b: text" cell, or null if not a bold cell.
+    /// </summary>
+    public static string? ParseBold(string value)
+    {
+        if (!IsBold(value)) return null;
+        return value[3..];
+    }
+
     // ── Header prefix ───────────────────────────────────────────────
 
     /// <summary>

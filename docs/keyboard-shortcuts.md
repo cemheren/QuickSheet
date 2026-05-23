@@ -72,6 +72,9 @@ Type these at the start of a cell value to activate special behavior:
 | `i: <cmd>` | **Inline process** — live subprocess output streams into cells below | `i: top -b -n1` |
 | `s: <values>` | **Sparkline** — renders a mini bar chart from comma-separated numbers | `s: 3,1,4,1,5,9` |
 | `c:<color>: <text>` | **Cell color** — highlights the cell background with a named color | `c:red: URGENT` |
+| `b: <text>` | **Bold** — renders cell text in bold (bright white) to emphasize important values | `b: DO NOT EDIT` |
+| `# <text>` | **H1 header** — section heading with gold foreground | `# Budget 2025` |
+| `## <text>` | **H2 header** — subsection heading with cyan foreground | `## Q1 Summary` |
 | `L: <path>` | **Load file** — imports contents of a text file | `L: data.csv` |
 | `ext: <source>` | **Extension** — installs and activates an extension | `ext: github:Deskworks/quicksheet-weather` |
 | `http://` / `https://` | **Hyperlink** — auto-detected, opens in browser on Enter | `https://github.com` |
