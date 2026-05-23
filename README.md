@@ -24,7 +24,7 @@ Most developers have a second monitor — or at least a desktop — that shows a
 - **Always-on scratchpad.** Click anywhere on the desktop to jot a note. No window to find, no app to open. Autosaves every 5 seconds.
 - **App launcher.** Prefix a cell with `r: code .` and hit Enter. Multi-select cells to launch your whole morning stack in one keystroke.
 - **Link dashboard.** Paste URLs into cells. They're highlighted and open on Enter — a personal start page that lives behind your windows.
-- **Live data.** Column sums, sparklines, inline subprocesses (`i: top`), and 67+ extensions for weather, stocks, RSS, system monitoring, and more.
+- **Live data.** Column sums, sparklines, inline subprocesses (`i: top`), and 65+ extensions for weather, stocks, RSS, system monitoring, and more.
 - **Zero dependencies.** Clone → `dotnet build` → run. No NuGet packages, no npm, no Docker. The entire supply chain is the .NET SDK.
 
 If you spend your day in a terminal or IDE and want your desktop to *do* something, QuickSheet is for you.
@@ -227,8 +227,6 @@ tls: github.com, 1, 4
 | `epoch:` | Unix timestamp converter — `epoch: now` · `epoch: 1700000000` · `epoch: 2025-01-01` · `epoch: diff t1 t2` · `epoch: add <ts> 30d`. Zero network. | `ext: github:Deskworks/quicksheet-epoch` |
 | `color:` | Color converter + palette — `color: #ff6600` · `color: rgb(255,102,0)` · `color: orange` · `color: palette #3b82f6`. HEX↔RGB↔HSL↔CMYK, WCAG contrast. Zero network. | `ext: github:Deskworks/quicksheet-color` |
 | `caniuse:` | Browser compat lookup via caniuse-db — `caniuse: css-grid` · `caniuse: flexbox` · `caniuse: webassembly`. Shows support across Chrome/Firefox/Safari/Edge + usage %. No API key. | `ext: github:Deskworks/quicksheet-caniuse` |
-| `stocks:` | Live stock & crypto quotes — `stocks: AAPL` · `stocks: AAPL, MSFT, BTC-USD`. Price, change ▲▼, day range, 52W, volume. Via Yahoo Finance, no API key, 60s cache. | `ext: github:Deskworks/quicksheet-stocks` |
-| `dict:` | English dictionary — `dict: serendipity` (definition + phonetics + examples), `dict: syn happy` (synonyms), `dict: ant brave` (antonyms). No API key. | `ext: github:Deskworks/quicksheet-dict` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
