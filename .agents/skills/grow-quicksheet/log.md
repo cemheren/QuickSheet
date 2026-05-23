@@ -1554,8 +1554,16 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: quicksheet-dict extension + PR #169 (05:00 run May 23).
 - Follow-up: Bucket E — column auto-resize or ANSI bold formatting. Bucket C — gh-pages v0.31.0 bump.
 
+## 2026-05-23 07:00
+
+- Stars: 0 (last known 1)
+- Action: Bucket C — updated gh-pages for v0.31.0. Bumped softwareVersion 0.30.0→0.31.0. Added "Section Headers" feature card (# and ## prefix). Updated extension count heading 58+→70+, comparison table 68+→70+. Added stocks and dict extension cards to extensions directory. Added # / ## to features/index.html cell prefix section and shortcuts/index.html prefix table. Added SEO keywords for section headers.
+- Bucket: C (website & SEO)
+- Outcome: Pushed commit 06c0b1c to gh-pages. Site live at https://cemheren.github.io/QuickSheet/
+- Competitor last did: v0.31.0 release (06:00 run May 23).
+- Follow-up: Bucket E — column auto-resize or ANSI bold formatting.
+
 ## Queued
 
 - Bucket E: safe additive feature (column auto-resize or ANSI bold formatting)
-- Bucket C: gh-pages v0.31.0 bump + header prefix feature card
-- Bucket F: quicksheet-mileage-ext (IRS mileage calculator — from accounting research queue)
+- Bucket F: quicksheet-tracert adjacent (quicksheet-mtr or another network tool)
