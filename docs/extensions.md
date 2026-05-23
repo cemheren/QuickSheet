@@ -63,6 +63,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `dns`     | DNS Lookup        | DNS record lookup — A, AAAA, MX, TXT, NS, CNAME, PTR. Usage: `dns: github.com` · `dns: MX gmail.com` · `dns: PTR 8.8.8.8` · `dns: ALL example.com`. Uses system `dig`, 5-min cache. | [`quicksheet-dns`](https://github.com/Deskworks/quicksheet-dns) |
 | `ssl`     | SSL Cert Checker  | SSL certificate expiry — status 🟢/🟡/🔴, days left, subject, issuer. Usage: `ssl: github.com` or `ssl: example.com:8443`. BCL SslStream, 30-min cache, zero NuGet. | [`quicksheet-ssl`](https://github.com/Deskworks/quicksheet-ssl) |
 | `whois`   | WHOIS Lookup      | WHOIS domain and IP lookup — registrar, status, expiry urgency 🟡🔴, nameservers, IP org/CIDR. Usage: `whois: github.com` · `whois: 8.8.8.8`. 25+ TLD servers, 1h cache, zero NuGet. | [`quicksheet-whois`](https://github.com/Deskworks/quicksheet-whois) |
+| `tracert` | Network Traceroute | Route trace to any host — each hop with RTT latency and reverse-DNS hostname. Up to 30 hops, 3 probes/hop, 5-min cache. Usage: `tracert: github.com` · `tracert: 8.8.8.8`. BCL Ping, zero NuGet. | [`quicksheet-tracert`](https://github.com/cemheren/quicksheet-tracert) |
 
 ## Install
 
