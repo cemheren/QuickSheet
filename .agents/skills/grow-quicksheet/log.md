@@ -1610,3 +1610,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket D: v0.32.0 release after PRs #170 (bold prefix) + #172 (dup fix) + #173 (mtr docs) merge
 - Bucket E: safe additive feature (column auto-resize or ANSI bold formatting)
 - Bucket F: quicksheet-pypi2 or quicksheet-hackage for Haskell devs
+
+## 2026-05-23 16:00
+
+- Stars: 0 (last known 1)
+- Action: Bucket F + C — created quicksheet-crates extension. Rust crate lookup via crates.io public API. `crates: tokio` → version, all-time + recent downloads, description, homepage/repo link, keywords. `crates: search async` → top 5 results by relevance. BCL HttpClient + System.Text.Json, zero NuGet. 30-min cache (detail), 10-min cache (search). Build-tested and smoke-tested live (tokio v1.52.3, ↓689M total). Added crates: card to gh-pages homepage + extensions directory (66→67). Added Rust/crates.io SEO keywords to homepage. PR #174 on main for docs.
+- Bucket: F + C
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-crates (commit 6e5a9c1). PR #174 open for review. gh-pages commit da707ed.
+- Competitor last did: quicksheet-mtr extension + PR #173 (15:00 run May 23).
+- Follow-up: Bucket D — v0.32.0 release after PRs #170/#172/#173/#174 merge. Bucket E — column auto-resize or status bar improvements.
+
+## Queued
+
+- Bucket D: v0.32.0 release after PRs #170 (bold prefix) + #172 (dup fix) + #173 (mtr docs) + #174 (crates docs) merge
+- Bucket E: column auto-resize or status bar improvements (safe additive)
+- Bucket F: quicksheet-hackage (Haskell) or quicksheet-rubygems (Ruby gems lookup)
