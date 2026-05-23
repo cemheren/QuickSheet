@@ -710,6 +710,11 @@ internal class DesktopWindow : IDisposable
                 if (colorParsed != null)
                     displayVal = colorParsed.Value.text;
 
+                // Render header cells (# text / ## text): strip prefix from display
+                var headerParsed = (!isEditingThisCell) ? CellPrefix.ParseHeader(cellVal) : null;
+                if (headerParsed != null)
+                    displayVal = headerParsed.Value.text;
+
                 string display = isEditingThisCell
                     ? _editMode.GetCellDisplay(w)
                     : (displayVal.Length >= w ? displayVal[..w] : displayVal.PadRight(w));
@@ -733,6 +738,13 @@ internal class DesktopWindow : IDisposable
                 else if (isCmd) { bgR = 40; bgG = 40; bgB = 0; }
                 else if (isLoop) { bgR = 0; bgG = 40; bgB = 40; }
                 else if (isSparkline) { bgR = 20; bgG = 30; bgB = 50; }
+                else if (headerParsed != null)
+                {
+                    // H1: warm gold tint; H2: cool teal tint
+                    (bgR, bgG, bgB) = headerParsed.Value.level == 1
+                        ? (35, 28, 5)
+                        : (5, 28, 35);
+                }
                 else if (colorParsed != null)
                 {
                     // Map ConsoleColor to RGB for desktop
@@ -758,6 +770,13 @@ internal class DesktopWindow : IDisposable
                 else if (isCmd) { fgR = 255; fgG = 220; fgB = 100; }
                 else if (isLoop) { fgR = 100; fgG = 220; fgB = 200; }
                 else if (isSparkline) { fgR = 100; fgG = 180; fgB = 255; }
+                else if (headerParsed != null)
+                {
+                    // H1: bright gold; H2: bright cyan
+                    (fgR, fgG, fgB) = headerParsed.Value.level == 1
+                        ? (255, 220, 80)
+                        : (80, 220, 255);
+                }
                 else if (extStatus == Extensions.ExtensionCellStatus.Error) { fgR = 255; fgG = 80; fgB = 80; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Running) { fgR = 80; fgG = 255; fgB = 80; }
                 else { fgR = tFgR; fgG = tFgG; fgB = tFgB; }
