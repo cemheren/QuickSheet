@@ -15,7 +15,7 @@ The data is a CSV file. Cells can run shell commands. Same file on Windows or Li
 ![GitHub release](https://img.shields.io/github/v/release/cemheren/QuickSheet?color=green)
 ![Zero Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)
 ![Extensions](https://img.shields.io/badge/extensions-40%2B-orange)
-![Cell prefixes](https://img.shields.io/badge/cell_prefixes-6-blue)
+![Cell prefixes](https://img.shields.io/badge/cell_prefixes-8-blue)
 
 ## Why this exists
 
@@ -89,6 +89,13 @@ Auto-sum (Σ) per column and auto-product (Π) per row in the status bar. Import
 Prefix a cell with `s: 1,2,3,4,5,6` to render the values as a unicode bar sparkline (`▁▂▃▄▅▆`). Handy for tracking a small series next to other notes — paste a row of numbers, get a tiny chart, no extra column.
 
 You can also point at a range of cells: `s: A1::A10` pulls numeric values from the referenced grid range and renders them. Non-numeric cells in the range are skipped.
+
+### Section headers in a cell
+Prefix a cell with `# ` (H1) or `## ` (H2) to create a visually distinct section header.
+- `# Work` → rendered in **gold** — ideal for top-level dashboard sections
+- `## Servers` → rendered in **cyan** — ideal for sub-sections
+
+The prefix is hidden during display; only the label is shown. Combine with color-coded cells and links to build organized, scannable desktop dashboards.
 
 <!-- 
 ## Add your own sections here!

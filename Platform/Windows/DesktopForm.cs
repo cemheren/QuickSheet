@@ -556,6 +556,10 @@ internal class DesktopForm : DesktopFormBase
                 if (colorParsed != null)
                     displayVal = colorParsed.Value.text;
 
+                var headerParsed = CellPrefix.ParseHeader(cellVal);
+                if (headerParsed != null)
+                    displayVal = headerParsed.Value.text;
+
                 string display = displayVal.Length >= w ? displayVal[..w] : displayVal.PadRight(w);
                 bool isCursor = r == selRow && c == selCol;
                 bool isMultiSel = _selection.Contains((r, c));
@@ -580,6 +584,7 @@ internal class DesktopForm : DesktopFormBase
                          : isCmd      ? Color.FromArgb(40, 40, 0)
                          : isLoop     ? Color.FromArgb(0, 40, 40)
                          : isSparkline ? Color.FromArgb(20, 30, 50)
+                         : headerParsed != null ? (headerParsed.Value.level == 1 ? Color.FromArgb(35, 28, 5) : Color.FromArgb(5, 28, 35))
                          : extStatus == Extensions.ExtensionCellStatus.Error ? Color.FromArgb(50, 10, 10)
                          : extStatus == Extensions.ExtensionCellStatus.Running ? Color.FromArgb(10, 40, 10)
                          : themeBg;
@@ -592,6 +597,7 @@ internal class DesktopForm : DesktopFormBase
                          : isCmd  ? Color.FromArgb(255, 220, 100)
                          : isLoop ? Color.FromArgb(100, 220, 200)
                          : isSparkline ? Color.FromArgb(100, 180, 255)
+                         : headerParsed != null ? (headerParsed.Value.level == 1 ? Color.FromArgb(255, 220, 80) : Color.FromArgb(80, 220, 255))
                          : extStatus == Extensions.ExtensionCellStatus.Error ? Color.FromArgb(255, 80, 80)
                          : extStatus == Extensions.ExtensionCellStatus.Running ? Color.FromArgb(80, 255, 80)
                          : themeFg;

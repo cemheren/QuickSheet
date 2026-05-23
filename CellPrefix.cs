@@ -157,6 +157,29 @@ public static class CellPrefix
         return (color, text);
     }
 
+    // ── Header prefix ───────────────────────────────────────────────
+
+    /// <summary>
+    /// Returns true when a cell starts with "# " (H1) or "## " (H2).
+    /// </summary>
+    public static bool IsHeader(string value) =>
+        value.StartsWith("# ", StringComparison.Ordinal) ||
+        value.StartsWith("## ", StringComparison.Ordinal);
+
+    /// <summary>
+    /// Parses a header cell into (level, text).
+    /// Level 1 = "# text", Level 2 = "## text".
+    /// Returns null if the value is not a header cell.
+    /// </summary>
+    public static (int level, string text)? ParseHeader(string value)
+    {
+        if (value.StartsWith("## ", StringComparison.Ordinal))
+            return (2, value[3..]);
+        if (value.StartsWith("# ", StringComparison.Ordinal))
+            return (1, value[2..]);
+        return null;
+    }
+
     /// <summary>
     /// Checks if a cell value uses the config prefix: "config: key=value, key=value".
     /// Used to persist UI state (theme, etc.) inside the CSV itself.
