@@ -46,6 +46,8 @@ internal class DesktopWindow : IDisposable
     private IntPtr _gc;
     private IntPtr _xftDraw;
     private IntPtr _xftFont;
+    private IntPtr _xftFontBold;
+    private bool _boldFontOwned; // true if _xftFontBold was separately allocated
     private IntPtr _visual;
     private IntPtr _colormap;
     private IntPtr _backBuffer;
@@ -121,6 +123,16 @@ internal class DesktopWindow : IDisposable
         {
             _xftFont = XftFontOpenName(display, _screen, "monospace:size=12");
         }
+
+        // Load bold variant; fall back to regular font if not available
+        _xftFontBold = XftFontOpenName(display, _screen, FontName + ":weight=bold");
+        if (_xftFontBold == IntPtr.Zero)
+            _xftFontBold = XftFontOpenName(display, _screen, "monospace:size=12:weight=bold");
+        if (_xftFontBold != IntPtr.Zero)
+            _boldFontOwned = true;
+        else
+            _xftFontBold = _xftFont; // graceful fallback
+
         MeasureFont();
 
         int availableWidth = _screenWidth / _charWidth;
@@ -715,6 +727,13 @@ internal class DesktopWindow : IDisposable
                 if (headerParsed != null)
                     displayVal = headerParsed.Value.text;
 
+                // Render bold cells (b: text): strip prefix from display
+                string? boldText = (!isEditingThisCell && colorParsed == null && headerParsed == null)
+                    ? CellPrefix.ParseBold(cellVal)
+                    : null;
+                if (boldText != null)
+                    displayVal = boldText;
+
                 string display = isEditingThisCell
                     ? _editMode.GetCellDisplay(w)
                     : (displayVal.Length >= w ? displayVal[..w] : displayVal.PadRight(w));
@@ -761,6 +780,7 @@ internal class DesktopWindow : IDisposable
                         _ => (15, 15, 15)
                     };
                 }
+                else if (boldText != null) { bgR = tBgR; bgG = tBgG; bgB = tBgB; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Error) { bgR = 50; bgG = 10; bgB = 10; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Running) { bgR = 10; bgG = 40; bgB = 10; }
                 else { bgR = tBgR; bgG = tBgG; bgB = tBgB; }
@@ -777,11 +797,15 @@ internal class DesktopWindow : IDisposable
                         ? (255, 220, 80)
                         : (80, 220, 255);
                 }
+                else if (boldText != null) { fgR = 255; fgG = 255; fgB = 255; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Error) { fgR = 255; fgG = 80; fgB = 80; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Running) { fgR = 80; fgG = 255; fgB = 80; }
                 else { fgR = tFgR; fgG = tFgG; fgB = tFgB; }
 
-                DrawTextWithBg(display, x, y, fgR, fgG, fgB, bgR, bgG, bgB);
+                if (boldText != null && !isCursor)
+                    DrawTextWithBgBold(display, x, y, fgR, fgG, fgB, bgR, bgG, bgB);
+                else
+                    DrawTextWithBg(display, x, y, fgR, fgG, fgB, bgR, bgG, bgB);
                 x += w * cw;
             }
             // Subtle horizontal grid line at the bottom of each row
@@ -1039,6 +1063,28 @@ internal class DesktopWindow : IDisposable
 
         byte[] utf8 = Encoding.UTF8.GetBytes(text);
         XftDrawStringUtf8(_renderXftDraw, ref xftColor, _xftFont, x, y + _fontAscent, utf8, utf8.Length);
+
+        XftColorFree(_display, _visual, _colormap, ref xftColor);
+    }
+
+    private void DrawTextWithBgBold(string text, int x, int y, int fgR, int fgG, int fgB, int bgR, int bgG, int bgB)
+    {
+        int w = text.Length * _charWidth;
+        int alpha = _hasArgbVisual ? _bgAlpha : 255;
+        SetGCColor(bgR, bgG, bgB, alpha);
+        XFillRectangle(_display, _renderDrawable, _gc, x, y, (uint)w, (uint)_charHeight);
+
+        var renderColor = new XRenderColor
+        {
+            red = (ushort)(fgR * 257),
+            green = (ushort)(fgG * 257),
+            blue = (ushort)(fgB * 257),
+            alpha = 0xFFFF
+        };
+        XftColorAllocValue(_display, _visual, _colormap, ref renderColor, out XftColor xftColor);
+
+        byte[] utf8 = Encoding.UTF8.GetBytes(text);
+        XftDrawStringUtf8(_renderXftDraw, ref xftColor, _xftFontBold, x, y + _fontAscent, utf8, utf8.Length);
 
         XftColorFree(_display, _visual, _colormap, ref xftColor);
     }
@@ -1718,6 +1764,8 @@ internal class DesktopWindow : IDisposable
 
         if (_xftDraw != IntPtr.Zero)
             XftDrawDestroy(_xftDraw);
+        if (_boldFontOwned && _xftFontBold != IntPtr.Zero)
+            XftFontClose(_display, _xftFontBold);
         if (_xftFont != IntPtr.Zero)
             XftFontClose(_display, _xftFont);
         if (_gc != IntPtr.Zero)

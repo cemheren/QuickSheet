@@ -52,6 +52,7 @@ internal class DesktopForm : DesktopFormBase
     private int _dragAnchorCol;
 
     private Font _monoFont;
+    private Font? _boldFont;
     private int _charWidth;
     private int _charHeight;
 
@@ -222,7 +223,9 @@ internal class DesktopForm : DesktopFormBase
     {
         float fontSize = Math.Clamp(_columnWidth * 0.7f, 6f, 22f);
         _monoFont?.Dispose();
+        _boldFont?.Dispose();
         _monoFont = new Font(ResolvedFontFamily.Value, fontSize, FontStyle.Regular);
+        _boldFont = new Font(ResolvedFontFamily.Value, fontSize, FontStyle.Bold);
         using var bmp = new Bitmap(1, 1);
         using var g = Graphics.FromImage(bmp);
         g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
@@ -560,6 +563,12 @@ internal class DesktopForm : DesktopFormBase
                 if (headerParsed != null)
                     displayVal = headerParsed.Value.text;
 
+                string? boldText = (!isSparkline && colorParsed == null && headerParsed == null)
+                    ? CellPrefix.ParseBold(cellVal)
+                    : null;
+                if (boldText != null)
+                    displayVal = boldText;
+
                 string display = displayVal.Length >= w ? displayVal[..w] : displayVal.PadRight(w);
                 bool isCursor = r == selRow && c == selCol;
                 bool isMultiSel = _selection.Contains((r, c));
@@ -598,10 +607,14 @@ internal class DesktopForm : DesktopFormBase
                          : isLoop ? Color.FromArgb(100, 220, 200)
                          : isSparkline ? Color.FromArgb(100, 180, 255)
                          : headerParsed != null ? (headerParsed.Value.level == 1 ? Color.FromArgb(255, 220, 80) : Color.FromArgb(80, 220, 255))
+                         : boldText != null ? Color.White
                          : extStatus == Extensions.ExtensionCellStatus.Error ? Color.FromArgb(255, 80, 80)
                          : extStatus == Extensions.ExtensionCellStatus.Running ? Color.FromArgb(80, 255, 80)
                          : themeFg;
-                DrawText(g, display, x, y, fg, bg);
+                if (boldText != null && !isCursor)
+                    DrawTextBold(g, display, x, y, fg, bg);
+                else
+                    DrawText(g, display, x, y, fg, bg);
                 x += w * cw;
             }
             y += ch;
@@ -833,6 +846,15 @@ internal class DesktopForm : DesktopFormBase
         using var bgBrush = new SolidBrush(bg);
         g.FillRectangle(bgBrush, x, y, w, _charHeight);
         TextRenderer.DrawText(g, text, _monoFont, new Point(x, y), fg, bg,
+            TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix);
+    }
+
+    private void DrawTextBold(Graphics g, string text, int x, int y, Color fg, Color bg)
+    {
+        int w = text.Length * _charWidth;
+        using var bgBrush = new SolidBrush(bg);
+        g.FillRectangle(bgBrush, x, y, w, _charHeight);
+        TextRenderer.DrawText(g, text, _boldFont ?? _monoFont, new Point(x, y), fg, bg,
             TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix);
     }
 
@@ -1458,6 +1480,7 @@ internal class DesktopForm : DesktopFormBase
             _processManager.Dispose();
             _extensionManager.Dispose();
             _monoFont.Dispose();
+            _boldFont?.Dispose();
             _trayIcon.Dispose();
         }
         base.Dispose(disposing);
