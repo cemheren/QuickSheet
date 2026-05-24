@@ -185,7 +185,7 @@ public class Program
 #endif
     }
 
-    private const string Version = "0.28.0";
+    private const string Version = "0.36.0";
 
     private static void PrintInstalledExtensions()
     {
