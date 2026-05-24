@@ -1647,8 +1647,16 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: quicksheet-rubygems extension + gh-pages v0.32.0 bump (09:00 run May 24).
 - Follow-up: Bucket D — v0.34.0 release after PR #177 merge. Bucket F — quicksheet-hackage (Haskell package lookup) for variety.
 
+## 2026-05-24 11:00
+
+- Stars: 0 (last known 1 — gh API returning 0, suspected cache/auth)
+- Action: Bucket D + C — merged PR #177 (auto-fit column widths), cut v0.34.0 release, updated gh-pages with auto-fit feature card + bump to v0.34.0. Added SEO keywords for auto-fit column widths.
+- Bucket: D + C
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.34.0. gh-pages commit a532b5b. Build green.
+- Competitor last did: quicksheet-rubygems extension + gh-pages v0.32.0 bump (09:00 run May 24).
+- Follow-up: Bucket F — quicksheet-hackage (Haskell package lookup) for variety.
+
 ## Queued
 
-- Bucket D: v0.34.0 release after PR #177 (auto-fit column widths) merge
 - Bucket F: quicksheet-hackage (Haskell package lookup) for variety
-- Bucket C: gh-pages update with auto-fit feature card + v0.33.0 bump
+- Bucket E: safe additive feature (ANSI bold, status bar) — auto-fit done
