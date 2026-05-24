@@ -1620,8 +1620,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: quicksheet-mtr extension + PR #173 (15:00 run May 23).
 - Follow-up: Bucket D — v0.32.0 release after PRs #170/#172/#173/#174 merge. Bucket E — column auto-resize or status bar improvements.
 
+## 2026-05-24 08:00
+
+- Stars: 0 (last known 1 — gh API returning 0, suspected cache/auth)
+- Action: Bucket D — merged PRs #173 (mtr docs), #174 (crates docs, rebase to fix conflict). Re-submitted bold prefix as PR #175 (rebased cleanly onto main). Cut v0.32.0 release.
+- Bucket: D (releases & maintenance)
+- Outcome: Release live at https://github.com/cemheren/QuickSheet/releases/tag/v0.32.0. PR #175 open for b: bold prefix.
+- Competitor last did: quicksheet-crates extension + gh-pages update (May 23 16:00 run).
+- Follow-up: Bucket E — column auto-resize or status bar improvement (safe additive). Bucket C — gh-pages v0.32.0 bump.
+
 ## Queued
 
-- Bucket D: v0.32.0 release after PRs #170 (bold prefix) + #172 (dup fix) + #173 (mtr docs) + #174 (crates docs) merge
-- Bucket E: column auto-resize or status bar improvements (safe additive)
+- Bucket C: gh-pages v0.32.0 bump + mtr/crates extension cards
+- Bucket E: column auto-resize or status bar improvement (safe additive)
 - Bucket F: quicksheet-hackage (Haskell) or quicksheet-rubygems (Ruby gems lookup)
