@@ -258,7 +258,33 @@ public class GridManager
     public void ShiftSelectedRowDown() => ShiftRowsDown(_selectedRow);
     public void ShiftSelectedRowUp() => ShiftRowsUp(_selectedRow);
 
-    // ── Sort ──────────────────────────────────────────────────────────
+    /// <summary>
+    /// Duplicates the given row by inserting a copy immediately below it.
+    /// The original row is preserved; all rows from (row+1) down shift down by one.
+    /// </summary>
+    public void DuplicateRow(int row)
+    {
+        if (row < 0 || row >= RowCount) return;
+        _undo.BeginGroup();
+        // Shift everything from (row+1) downward to make room
+        for (int r = RowCount - 1; r > row + 1; r--)
+            for (int c = 0; c < ColumnCount; c++)
+            {
+                _undo.RecordChange(r, c, _data[r, c], _data[r - 1, c]);
+                _data[r, c] = _data[r - 1, c];
+            }
+        // Write the copy into (row+1)
+        for (int c = 0; c < ColumnCount; c++)
+        {
+            string orig = _data[row, c];
+            _undo.RecordChange(row + 1, c, _data[row + 1, c], orig);
+            _data[row + 1, c] = orig;
+        }
+        _undo.EndGroup();
+        IsDirty = true;
+    }
+
+
 
     private int _lastSortCol = -1;
     private bool _lastSortAscending = true;

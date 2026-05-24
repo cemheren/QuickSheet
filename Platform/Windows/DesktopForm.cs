@@ -832,6 +832,7 @@ internal class DesktopForm : DesktopFormBase
                 "  ║  Ctrl+X         Cut cell                 ║",
                 "  ║  Ctrl+V         Paste cell               ║",
                 "  ║  Ctrl+D         Delete row               ║",
+                "  ║  Ctrl+K         Duplicate row            ║",
                 "  ║  Ctrl+S         Save to CSV              ║",
                 "  ║  Ctrl+F         Find (search)            ║",
                 "  ║  Ctrl+R         Find & Replace           ║",
@@ -1213,6 +1214,10 @@ internal class DesktopForm : DesktopFormBase
                 case Keys.G:
                     _gotoMode = true;
                     _gotoInput = "";
+                    break;
+                case Keys.K:
+                    _grid.DuplicateRow(_grid.GetCurrentCell().row);
+                    _grid.MoveDown();
                     break;
                 case Keys.H:
                     _showHelp = !_showHelp;

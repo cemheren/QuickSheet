@@ -1393,6 +1393,10 @@ internal class DesktopWindow : IDisposable
                     _gotoMode = true;
                     _gotoInput = "";
                     return;
+                case XK_k:
+                    _grid.DuplicateRow(_selectedRow);
+                    if (_selectedRow < _grid.RowCount - 1) _selectedRow++;
+                    return;
             }
         }
 
