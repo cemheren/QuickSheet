@@ -71,6 +71,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `color`   | Color Converter   | Color code converter and palette generator — zero network, pure math. `color: #ff6600` (hex→RGB/HSL/CMYK/name/WCAG), `color: rgb(255,102,0)`, `color: hsl(24,100%,50%)`, `color: orange` (CSS name), `color: palette #3b82f6` (10-color harmony palette). ANSI swatches, 140+ CSS names. | [`quicksheet-color`](https://github.com/Deskworks/quicksheet-color) |
 | `caniuse` | Browser Compat    | Can I Use browser compatibility lookup via caniuse-db. Shows support status for CSS/HTML/JS features across Chrome, Firefox, Safari, Edge, Opera, Samsung, iOS Safari. Usage: `caniuse: css-grid` · `caniuse: flexbox` · `caniuse: webassembly`. Usage %, spec link, notes. 1h cache, no API key. | [`quicksheet-caniuse`](https://github.com/Deskworks/quicksheet-caniuse) |
 | `gem`     | Ruby Gem Lookup   | Ruby gem info and search via rubygems.org. Version, total downloads, authors, license, Ruby requirement, homepage, description. `gem: rails` (detail), `gem: search json parser` (top 5). No API key, 30-min cache, zero NuGet. | [`quicksheet-rubygems`](https://github.com/Deskworks/quicksheet-rubygems) |
+| `hackage` | Haskell Packages  | Haskell package lookup from Hackage. `hackage: aeson` shows latest version, synopsis, author, category, license, and homepage. `hackage: search json` lists top matching packages. No API key, 30-min cache, zero NuGet. | [`quicksheet-hackage`](https://github.com/Deskworks/quicksheet-hackage) |
 
 ## Install
 
