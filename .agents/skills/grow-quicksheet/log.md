@@ -1675,3 +1675,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket D: v0.35.0 release after PR #178 (hackage docs) merge
 - Bucket E: safe additive feature (status bar improvements)
 - Bucket F: quicksheet-pypi2 (Haskell done; try a new vertical or Java/Maven)
+
+## 2026-05-24 13:00
+
+- Stars: 0 (last known 1 — gh API returning 0, suspected cache/auth)
+- Action: Merged PR #178 (hackage docs), cut v0.35.0 release. Then Bucket E — added Ctrl+K row duplication in desktop mode. Press Ctrl+K to insert an exact copy of the current row below it, cursor moves to duplicate. Fully undoable. Works on Linux (X11) and Windows (WinForms). DuplicateRow() in GridManager uses undo group. Help overlay updated.
+- Bucket: D + E
+- Outcome: v0.35.0 at https://github.com/cemheren/QuickSheet/releases/tag/v0.35.0. PR #179 opened (commit 3274dc9 on grow/duplicate-row). Build green.
+- Competitor last did: quicksheet-hackage extension (12:00 run May 24).
+- Follow-up: Bucket C — add Ctrl+K to gh-pages shortcuts page. Bucket F — quicksheet-maven or quicksheet-nuget for Java/NuGet devs.
+
+## Queued
+
+- Bucket D: v0.36.0 release after PR #179 merge
+- Bucket C: add Ctrl+K row duplication to gh-pages shortcuts + features pages
+- Bucket F: quicksheet-maven or quicksheet-nuget (new package ecosystem vertical)
