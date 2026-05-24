@@ -24,7 +24,7 @@ Most developers have a second monitor — or at least a desktop — that shows a
 - **Always-on scratchpad.** Click anywhere on the desktop to jot a note. No window to find, no app to open. Autosaves every 5 seconds.
 - **App launcher.** Prefix a cell with `r: code .` and hit Enter. Multi-select cells to launch your whole morning stack in one keystroke.
 - **Link dashboard.** Paste URLs into cells. They're highlighted and open on Enter — a personal start page that lives behind your windows.
-- **Live data.** Column sums, sparklines, inline subprocesses (`i: top`), and 65+ extensions for weather, stocks, RSS, system monitoring, and more.
+- **Live data.** Column sums, sparklines, inline subprocesses (`i: top`), and 68+ extensions for weather, stocks, RSS, system monitoring, and more.
 - **Zero dependencies.** Clone → `dotnet build` → run. No NuGet packages, no npm, no Docker. The entire supply chain is the .NET SDK.
 
 If you spend your day in a terminal or IDE and want your desktop to *do* something, QuickSheet is for you.
@@ -215,6 +215,7 @@ tls: github.com, 1, 4
 | `iss:` | Live ISS position + people in space — lat/lon, region, crew by craft | `ext: github:Deskworks/quicksheet-iss` |
 | `npm:` | npm package info — version, weekly downloads, license, author; multi-package compare | `ext: github:Deskworks/quicksheet-npm` |
 | `pypi:` | PyPI package info — version, license, author, Python requirement, release date | `ext: github:Deskworks/quicksheet-pypi` |
+| `crates:` | Rust crate lookup — `crates: tokio` (version, downloads, description, keywords), `crates: search async` (top 5). Via crates.io, no API key. | `ext: github:Deskworks/quicksheet-crates` |
 | `ghtrend:` | GitHub trending repos — stars, forks, language, description by language or overall | `ext: github:Deskworks/quicksheet-gh-trends` |
 | `co2:` | Live atmospheric CO₂ from NOAA Mauna Loa — ppm, baseline, YoY, 30-day trend | `ext: github:Deskworks/quicksheet-co2` |
 | `weather:` | Live weather via Open-Meteo — temperature, conditions, wind, humidity, pressure (free, no API key) | `ext: github:Deskworks/quicksheet-openmeteo` |
