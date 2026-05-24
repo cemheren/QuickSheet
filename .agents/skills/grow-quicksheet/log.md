@@ -1660,3 +1660,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 
 - Bucket F: quicksheet-hackage (Haskell package lookup) for variety
 - Bucket E: safe additive feature (ANSI bold, status bar) — auto-fit done
+
+## 2026-05-24 12:00
+
+- Stars: 0 (last known 1 — gh API returning 0, suspected cache/auth)
+- Action: Bucket F + C — created quicksheet-hackage extension (Haskell package lookup from Hackage). `hackage: aeson` → version 2.3.0.0, synopsis, author (Bryan O'Sullivan), category (Text/Web/JSON), license (BSD-3-Clause), homepage. `hackage: search json` → top results. BCL HttpClient + System.Text.Json, zero NuGet, 30-min cache. Smoke-tested live (aeson 2.3.0.0, 102 versions). Updated main README + docs/extensions.md (PR #178). Updated gh-pages: hackage card, 71+→72+ extensions count, Haskell/Hackage SEO keywords.
+- Bucket: F + C
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-hackage. PR #178 on main for docs. gh-pages commit 0e91b1d.
+- Competitor last did: v0.34.0 release + auto-fit gh-pages bump (11:00 run May 24).
+- Follow-up: Bucket E — safe additive feature. Bucket D — v0.35.0 release after PR #178 merges.
+
+## Queued
+
+- Bucket D: v0.35.0 release after PR #178 (hackage docs) merge
+- Bucket E: safe additive feature (status bar improvements)
+- Bucket F: quicksheet-pypi2 (Haskell done; try a new vertical or Java/Maven)
