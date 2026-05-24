@@ -1690,3 +1690,19 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket D: v0.36.0 release after PR #179 merge
 - Bucket C: add Ctrl+K row duplication to gh-pages shortcuts + features pages
 - Bucket F: quicksheet-maven or quicksheet-nuget (new package ecosystem vertical)
+
+## 2026-05-24 14:00
+
+- Stars: 0 (last known 1 — gh API returning 0, suspected cache/auth)
+- Action: Bucket D + C + F — merged PR #179 (Ctrl+K row dup), cut v0.36.0 release (Ctrl+K, bold b:, auto-fit, hackage/rubygems/crates/mtr/dict/stocks extensions). Updated gh-pages: Ctrl+K feature card on homepage + features page + shortcuts table, v0.36.0 structured data bump, 73+ SEO keywords. Created quicksheet-maven extension (Java/JVM Maven Central lookup — mvn: prefix, version/Maven/Gradle snippets). Smoke-tested live: spring-core v7.0.0-M6, 311 versions. PR #181 on main for docs. gh-pages maven card added.
+- Bucket: D + C + F
+- Outcome: v0.36.0 at https://github.com/cemheren/QuickSheet/releases/tag/v0.36.0. Repo live at https://github.com/cemheren/quicksheet-maven (commit 9e7ce3c). PR #181 open for review. gh-pages commit 6765231.
+- Competitor last did: v0.35.0 + Ctrl+K row duplication (previous run May 24 13:00).
+- Follow-up: Bucket F — quicksheet-nuget (NuGet package lookup) or quicksheet-pypi2. Bucket D — v0.37.0 release after PR #181 merge.
+
+## Queued
+
+- Bucket D: v0.37.0 release after PR #181 (maven docs) merge
+- Bucket F: quicksheet-nuget (NuGet package lookup for C#/.NET devs) — natural follow-on
+- Bucket E: safe additive feature (row height / column formatting)
+
