@@ -963,11 +963,51 @@ internal class DesktopWindow : IDisposable
         XFlush(_display);
     }
 
+    /// <summary>
+    /// Returns the visible display length of a cell value (stripping known prefixes).
+    /// Used for auto-fitting column widths to content.
+    /// </summary>
+    private static int GetDisplayLength(string cellVal)
+    {
+        if (string.IsNullOrEmpty(cellVal)) return 0;
+        var colorParsed = CellPrefix.ParseColor(cellVal);
+        if (colorParsed != null) return colorParsed.Value.text.Length;
+        var headerParsed = CellPrefix.ParseHeader(cellVal);
+        if (headerParsed != null) return headerParsed.Value.text.Length;
+        string? boldText = CellPrefix.ParseBold(cellVal);
+        if (boldText != null) return boldText.Length;
+        return cellVal.Length;
+    }
+
     private int[] GetColumnWidths()
     {
+        const int MinW = 5;
+        const int MaxW = 30;
+        const int Padding = 2;
+
+        int availableChars = _screenWidth / _charWidth - RowHeaderWidth;
         var widths = new int[_grid.ColumnCount];
+
         for (int c = 0; c < _grid.ColumnCount; c++)
-            widths[c] = _columnWidth;
+        {
+            int maxLen = GridManager.GetColumnName(c).Length;
+            for (int r = 0; r < _grid.RowCount; r++)
+            {
+                int len = GetDisplayLength(_grid.GetCellValue(r, c)) + Padding;
+                if (len > maxLen) maxLen = len;
+            }
+            widths[c] = Math.Clamp(maxLen, MinW, MaxW);
+        }
+
+        // Scale down proportionally if total exceeds available screen width
+        int total = widths.Sum();
+        if (total > availableChars && availableChars > 0)
+        {
+            double scale = (double)availableChars / total;
+            for (int c = 0; c < widths.Length; c++)
+                widths[c] = Math.Max(MinW, (int)(widths[c] * scale));
+        }
+
         return widths;
     }
 
