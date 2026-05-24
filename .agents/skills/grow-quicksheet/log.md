@@ -1706,3 +1706,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket F: quicksheet-nuget (NuGet package lookup for C#/.NET devs) — natural follow-on
 - Bucket E: safe additive feature (row height / column formatting)
 
+## 2026-05-24 16:00
+
+- Stars: 0 (gh API still returning 0; last known 1)
+- Action: Bucket F — created quicksheet-nuget extension (NuGet package lookup for .NET/C# devs). Direct package lookup shows version, 8.3B downloads for Newtonsoft.Json, license, authors, dotnet CLI + PackageReference install snippets. Search mode returns top 8 with download counts. Uses NuGet V3 registration + Azure Search APIs. Zero NuGet deps. Smoke-tested live. Also opened PR #182 on main adding both nuget + maven entries to docs/extensions.md (supersedes PR #181).
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-nuget (commit 1e93d15). PR #182 open on main for docs. Build green.
+- Competitor last did: Saturation state — no new code, only re-sweeping issues. Extensive draft backlog waiting on user.
+- Follow-up: Bucket D — v0.37.0 release after PR #182 merge. Bucket C — add nuget extension card to gh-pages.
+
+## Queued
+
+- Bucket D: v0.37.0 release after PR #182 merge (nuget+maven docs)
+- Bucket C: add nuget + maven cards to gh-pages extensions page
+- Bucket E: safe additive feature (status bar, column formatting)
+
