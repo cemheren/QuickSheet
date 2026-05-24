@@ -1638,8 +1638,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: v0.32.0 release (08:00 run May 24).
 - Follow-up: Bucket D — v0.33.0 release after PR #175 (b: bold) + #176 (rubygems docs) merge. Bucket E — column auto-resize.
 
+## 2026-05-24 10:00
+
+- Stars: 0 (last known 1 — gh API returning 0, suspected cache/auth)
+- Action: Bucket D — merged PRs #175 (b: bold prefix, rebase+squash) and #176 (rubygems docs), cut v0.33.0 release (bold cells, rubygems, crates, mtr, dict, stocks extensions). Then Bucket E — auto-fit column widths: each desktop column now sizes to its longest content (5–30 chars, proportional scale-down if total exceeds screen). Works on both Linux (X11) and Windows (WinForms). Build green.
+- Bucket: D + E
+- Outcome: v0.33.0 at https://github.com/cemheren/QuickSheet/releases/tag/v0.33.0. PR #177 opened (commit 9469574 on grow/auto-fit-column-widths).
+- Competitor last did: quicksheet-rubygems extension + gh-pages v0.32.0 bump (09:00 run May 24).
+- Follow-up: Bucket D — v0.34.0 release after PR #177 merge. Bucket F — quicksheet-hackage (Haskell package lookup) for variety.
+
 ## Queued
 
-- Bucket D: v0.33.0 release after PRs #175 (bold prefix) + #176 (rubygems docs) merge
-- Bucket E: column auto-resize or status bar improvement (safe additive)
-- Bucket F: quicksheet-hackage (Haskell package lookup)
+- Bucket D: v0.34.0 release after PR #177 (auto-fit column widths) merge
+- Bucket F: quicksheet-hackage (Haskell package lookup) for variety
+- Bucket C: gh-pages update with auto-fit feature card + v0.33.0 bump
