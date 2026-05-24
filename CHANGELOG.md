@@ -11,6 +11,19 @@ All notable changes to QuickSheet. Format roughly follows [Keep a Changelog](htt
 - Extension output no longer persisted to CSV (issue #156). Extension cell values are written to an ephemeral overlay dictionary; `SaveToCsv` reads from `_data` directly so extension text never appears in the saved file.
 - Extension prefix cells with a trailing colon in the manifest (e.g. `roll:`, `lc:`, `env:`, `pihole:`) now register correctly. `TrimEnd(':')` normalises the prefix on registration so `roll: 2d6` activates the dice extension as expected. Closes #154.
 
+## 0.36.0 — 2026-05-24
+
+### Added
+- **Ctrl+K row duplication** — press Ctrl+K in desktop mode to insert an exact copy of the current row below it; cursor moves to the duplicate. Fully undoable with Ctrl+Z.
+- **`b:` bold cell prefix** — render any cell in bold. Type `b: text` to display text in bold weight (FontStyle.Bold on Windows, Xft bold on Linux). Bright white foreground for high contrast.
+- **Auto-fit column widths** — desktop mode now sizes each column to its longest content (5–30 chars) with proportional scale-down when total exceeds screen width.
+- **quicksheet-hackage extension** (`hackage:`) — Haskell package lookup from Hackage. Version, synopsis, author, category, license, homepage. `hackage: search <query>` for top results.
+- **quicksheet-rubygems extension** (`gem:`) — Ruby gem lookup via rubygems.org. Version, download counts, authors, license, description. `gem: search <query>` for results.
+- **quicksheet-crates extension** (`crates:`) — Rust crate lookup via crates.io. Version, download stats, description, links. `crates: search <query>` for results.
+- **quicksheet-mtr extension** (`mtr:`) — network route tracer with per-hop RTT stats and packet loss. `mtr: google.com` (traceroute), `mtr: ping 8.8.8.8` (ping stats).
+- **quicksheet-dict extension** (`dict:`) — English dictionary definitions, synonyms, and antonyms via free dictionaryapi.dev. `dict: syn <word>` / `dict: ant <word>` for targeted lookups.
+- **quicksheet-stocks extension** (`stocks:`) — live stock and crypto ticker via Yahoo Finance. Single-ticker detail view or multi-ticker comparison table.
+
 ## Unreleased
 
 (empty — bump here before the next tag)
