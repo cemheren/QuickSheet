@@ -1629,8 +1629,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: quicksheet-crates extension + gh-pages update (May 23 16:00 run).
 - Follow-up: Bucket E — column auto-resize or status bar improvement (safe additive). Bucket C — gh-pages v0.32.0 bump.
 
+## 2026-05-24 09:00
+
+- Stars: 0 (last known 1 — gh API returning 0, suspected cache/auth)
+- Action: Bucket F + C — created quicksheet-rubygems extension (Ruby gem lookup via rubygems.org). `gem: rails` → version, 746M downloads, authors, license, homepage, description. `gem: search json parser` → top 5 results. BCL HttpClient + System.Text.Json, zero NuGet, 30-min cache. Smoke-tested live (rails v8.1.3, 746M downloads). Added gem: card to gh-pages homepage + extensions directory. Bumped softwareVersion 0.31.0 → 0.32.0. Updated extension count 67→70+. Added ruby gem SEO keywords. Updated sitemap. PR #176 on main repo for docs.
+- Bucket: F + C
+- Outcome: Repo live at https://github.com/Deskworks/quicksheet-rubygems (commit 11e1935). PR #176 open for review. gh-pages commit ed6c699.
+- Competitor last did: v0.32.0 release (08:00 run May 24).
+- Follow-up: Bucket D — v0.33.0 release after PR #175 (b: bold) + #176 (rubygems docs) merge. Bucket E — column auto-resize.
+
 ## Queued
 
-- Bucket C: gh-pages v0.32.0 bump + mtr/crates extension cards
+- Bucket D: v0.33.0 release after PRs #175 (bold prefix) + #176 (rubygems docs) merge
 - Bucket E: column auto-resize or status bar improvement (safe additive)
-- Bucket F: quicksheet-hackage (Haskell) or quicksheet-rubygems (Ruby gems lookup)
+- Bucket F: quicksheet-hackage (Haskell package lookup)
