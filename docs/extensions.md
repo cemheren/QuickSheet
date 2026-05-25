@@ -30,7 +30,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `k8s`     | Kubernetes Pods   | Live pod status from kubeconfig — ambient CrashLoopBackOff alerts | [`quicksheet-k8s`](https://github.com/Deskworks/quicksheet-k8s) |
 | `ghpr`    | GitHub PRs        | PR review dashboard — see review requests on wallpaper | [`quicksheet-ghpr`](https://github.com/Deskworks/quicksheet-ghpr) |
 | `gha`     | GitHub Actions    | Live CI/CD workflow run statuses — ✅❌🔄 on wallpaper, optional token for private repos | [`quicksheet-gha`](https://github.com/Deskworks/quicksheet-gha) |
-| `docker`  | Docker Health     | Container status dashboard via Docker Engine API       | [`quicksheet-docker`](https://github.com/Deskworks/quicksheet-docker) |
+| `docker`  | Docker Health     | Container status, CPU/memory stats, images via Docker Engine API (Unix socket). `docker:` (running), `docker: stats` (resources), `docker: images`, `docker: inspect <name>` | [`quicksheet-docker`](https://github.com/cemheren/quicksheet-docker) |
 | `rate`    | Freelance Rate    | Min viable hourly rate for target income (taxes+benefits) | [`quicksheet-rate`](https://github.com/Deskworks/quicksheet-rate) |
 | `gitst`   | Git Status        | Branch, changes, stashes, last commit for your repos   | [`quicksheet-gitst`](https://github.com/Deskworks/quicksheet-gitst) |
 | `cntdn`   | Countdown Timer   | Days/hours to deadlines, launches, holidays with progress bars | [`quicksheet-cntdn`](https://github.com/Deskworks/quicksheet-cntdn) |

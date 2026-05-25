@@ -188,7 +188,7 @@ tls: github.com, 1, 4
 | `fx:` | Currency conversion | `ext: github:Deskworks/quicksheet-fx` |
 | `gha:` | GitHub Actions status | `ext: github:Deskworks/quicksheet-gha` |
 | `ghpr:` | GitHub PR dashboard | `ext: github:Deskworks/quicksheet-ghpr` |
-| `docker:` | Container health | `ext: github:Deskworks/quicksheet-docker` |
+| `docker:` | Container health | `ext: github:cemheren/quicksheet-docker` |
 | `gitst:` | Git repo status | `ext: github:Deskworks/quicksheet-gitst` |
 | `portck:` | TCP port checker | `ext: github:Deskworks/quicksheet-portck` |
 | `k8s:` | Kubernetes pod status | `ext: github:Deskworks/quicksheet-k8s` |
