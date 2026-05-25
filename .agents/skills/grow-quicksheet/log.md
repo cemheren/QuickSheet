@@ -1706,3 +1706,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket F: quicksheet-nuget (NuGet package lookup for C#/.NET devs) — natural follow-on
 - Bucket E: safe additive feature (row height / column formatting)
 
+
+## 2026-05-24 20:00
+
+- Stars: 0 (last known 1 — gh API returning 0, suspected cache/auth)
+- Action: Bucket F — created quicksheet-docker extension (Docker container monitoring via Engine API). Lists running/all containers, CPU/memory stats, images, inspect. Communicates over Unix socket (UnixDomainSocketEndPoint), zero NuGet deps. Build green. Targets DevOps users — "replace Docker Desktop's container list with always-visible wallpaper widget." Updated README + docs/extensions.md (PR #183).
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-docker (commit 347f3b0). PR #183 on main for docs.
+- Competitor last did: v0.35.0 + Ctrl+K row dup PR #179 (13:00 run May 24).
+- Follow-up: Bucket E — safe additive feature. Bucket D — v0.37.0 release after PR merges.
+
+## Queued
+
+- Bucket D: v0.37.0 release after PRs #181/#182/#183 merge
+- Bucket E: safe additive feature (cell formatting, row height)
+- Bucket F: quicksheet-k8s or quicksheet-gh-actions (real implementation targeting DevOps)
