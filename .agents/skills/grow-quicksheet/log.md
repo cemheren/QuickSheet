@@ -1706,3 +1706,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket F: quicksheet-nuget (NuGet package lookup for C#/.NET devs) — natural follow-on
 - Bucket E: safe additive feature (row height / column formatting)
 
+
+## 2026-05-25 16:00
+
+- Stars: 0 (last known 1 — gh API returning 0, suspected cache/auth)
+- Action: Bucket F + C — created quicksheet-git extension (Git repo status in cells). `git: status` → branch + modified/staged/untracked + ahead/behind. `git: log N` → recent commits. `git: diff` → modified files. `git: stash`, `git: remote`. Uses git CLI (Process.Start), zero NuGet, .NET 9. Smoke-tested live against QuickSheet repo (returned branch, commits, remote URL correctly). Added git: card to gh-pages homepage + extensions directory. Added SEO keywords (git status terminal, git dashboard). PR #184 on main for docs.
+- Bucket: F + C
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-git. PR #184 open for review. gh-pages updated.
+- Competitor last did: PR #139 (README one-liner for ai-workflow.csv), then series of no-ops waiting for queue drain.
+- Follow-up: Bucket D — v0.37.0 release after PR #184 merge. Bucket E — safe additive feature (row height / cell formatting).
+
+## Queued
+
+- Bucket D: v0.37.0 release after PR #184 (git docs) merge
+- Bucket E: safe additive feature (status bar improvements, row height)
+- Bucket F: quicksheet-k8s (Kubernetes pod status) or quicksheet-ci (GitHub Actions status)
