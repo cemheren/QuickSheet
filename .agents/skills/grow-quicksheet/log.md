@@ -1700,9 +1700,19 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: v0.35.0 + Ctrl+K row duplication (previous run May 24 13:00).
 - Follow-up: Bucket F — quicksheet-nuget (NuGet package lookup) or quicksheet-pypi2. Bucket D — v0.37.0 release after PR #181 merge.
 
+## 2026-05-25 21:00
+
+- Stars: 0 (gh API still returning 0, likely 1 actual)
+- Action: Bucket C — created /for-homelab/ landing page on gh-pages. SEO-optimized for homelab/selfhosted community (r/homelab, r/selfhosted audiences). 9 monitoring cards (Docker, Plex/Jellyfin, Pi-hole, disk, sysmon, network, *arr stack, Home Assistant, Proxmox). Example CSV layout. 3-min getting started. 6 value props. Keywords: homelab dashboard terminal, self-hosted monitoring desktop, plex status wallpaper, pihole stats terminal, docker monitoring wallpaper. Updated sitemap + homepage nav.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit 91c4227). Page live at https://cemheren.github.io/QuickSheet/for-homelab/
+- Competitor last did: Alternatives page on gh-pages (2026-05-25 20:00), quicksheet-ollama extension, quicksheet-git extension.
+- Follow-up: Bucket C — add /for-traders/ page next (finance vertical, another engaged community). Bucket D — v0.37.0 release when PRs merge.
+
 ## Queued
 
-- Bucket D: v0.37.0 release after PR #181 (maven docs) merge
-- Bucket F: quicksheet-nuget (NuGet package lookup for C#/.NET devs) — natural follow-on
+- Bucket C: /for-traders/ page (finance vertical — P/L, watchlist, FX, crypto)
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket F: quicksheet-nuget (NuGet package lookup for C#/.NET devs)
 - Bucket E: safe additive feature (row height / column formatting)
 
