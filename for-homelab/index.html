@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuickSheet for Homelabbers — Monitor Your Self-Hosted Stack from the Desktop</title>
+  <meta name="description" content="Homelabbers: put Plex status, Pi-hole stats, Docker containers, disk usage, and service health on your desktop wallpaper. No browser tabs. Always visible. Self-hosted monitoring you can see at a glance.">
+  <meta name="keywords" content="homelab dashboard terminal, self-hosted monitoring desktop, plex status wallpaper, pihole stats terminal, docker monitoring wallpaper, proxmox dashboard desktop, truenas status terminal, arr stack monitor, sonarr radarr status, homelab wallpaper tool, self-hosted dashboard linux, homelab terminal spreadsheet, media server monitor, unraid dashboard terminal, home assistant terminal, jellyfin status desktop">
+  <link rel="canonical" href="https://cemheren.github.io/QuickSheet/for-homelab/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="QuickSheet for Homelabbers — Self-Hosted Stack on Your Wallpaper">
+  <meta property="og:description" content="Monitor Plex, Pi-hole, Docker, disks, and services from your desktop wallpaper. No browser tabs needed.">
+  <meta property="og:url" content="https://cemheren.github.io/QuickSheet/for-homelab/">
+  <meta property="og:site_name" content="QuickSheet">
+  <meta property="og:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QuickSheet for Homelabbers">
+  <meta name="twitter:description" content="Self-hosted stack monitoring on your desktop wallpaper — Plex, Docker, Pi-hole, disks, and more.">
+  <meta name="twitter:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "QuickSheet for Homelabbers",
+    "description": "Use QuickSheet as an ambient homelab dashboard on your desktop wallpaper — monitor Plex, Pi-hole, Docker containers, disk health, and service status at a glance.",
+    "url": "https://cemheren.github.io/QuickSheet/for-homelab/",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "QuickSheet",
+      "url": "https://cemheren.github.io/QuickSheet/"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --purple: #bc8cff;
+      --orange: #d29922;
+      --red: #f85149;
+      --max-w: 960px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+    nav .logo { font-weight: 700; font-size: 1.1rem; }
+    nav a { color: var(--muted); font-size: 0.9rem; }
+    nav a:hover { color: var(--text); text-decoration: none; }
+    nav a.active { color: var(--accent); }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      background: linear-gradient(180deg, #161b22 0%, var(--bg) 100%);
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(63,185,80,0.1);
+      border: 1px solid rgba(63,185,80,0.3);
+      color: var(--accent2);
+      padding: 0.3em 0.9em;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--accent2); }
+    .hero .tagline {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 620px;
+      margin: 0 auto 2rem;
+    }
+    .hero blockquote {
+      font-size: 1rem;
+      color: var(--muted);
+      border-left: 3px solid var(--accent2);
+      padding: 0.5rem 1rem;
+      display: inline-block;
+      text-align: left;
+      margin-bottom: 2rem;
+      max-width: 580px;
+    }
+
+    .install-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      display: inline-block;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 0.9rem;
+      color: var(--accent2);
+      text-align: left;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+    .install-box .comment { color: var(--muted); }
+
+    .cta-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: opacity 0.15s;
+    }
+    .btn:hover { opacity: 0.85; text-decoration: none; }
+    .btn-primary { background: var(--accent2); color: #fff; }
+    .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+
+    section { padding: 3.5rem 1.5rem; max-width: var(--max-w); margin: 0 auto; }
+    section h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+    section h2 span { color: var(--accent2); }
+    .section-desc {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 1.75rem;
+      max-width: 640px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--accent2); }
+    .card .icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .card p { color: var(--muted); font-size: 0.9rem; }
+    .card code {
+      display: block;
+      margin-top: 0.75rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.4rem 0.6rem;
+      font-family: 'SFMono-Regular', Consolas, monospace;
+      font-size: 0.8rem;
+      color: var(--accent2);
+      overflow-x: auto;
+    }
+
+    .layout-example {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-top: 1.75rem;
+      overflow-x: auto;
+    }
+    .layout-example h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--accent2);
+    }
+    .layout-example table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'SFMono-Regular', Consolas, monospace;
+      font-size: 0.8rem;
+    }
+    .layout-example th,
+    .layout-example td {
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+    .layout-example th {
+      background: var(--bg);
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .layout-example .prefix { color: var(--purple); }
+    .layout-example .url { color: var(--accent); }
+    .layout-example .header { color: var(--orange); }
+    .layout-example .ext { color: var(--accent2); }
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .checklist li {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+    .checklist li .num {
+      background: var(--accent2);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.85rem;
+      min-width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .checklist li .content { flex: 1; }
+    .checklist li .content strong { display: block; margin-bottom: 0.25rem; }
+    .checklist li .content p { color: var(--muted); font-size: 0.9rem; }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    .why-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+    .why-card .icon { font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .why-card h4 { font-weight: 700; margin-bottom: 0.3rem; }
+    .why-card p { color: var(--muted); font-size: 0.9rem; }
+
+    footer {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 1.8rem; }
+      .grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">QuickSheet</a>
+  <a href="/features/">Features</a>
+  <a href="/extensions/">Extensions</a>
+  <a href="/shortcuts/">Shortcuts</a>
+  <a href="/for-sre/">For SREs</a>
+  <a href="/for-homelab/" class="active">For Homelab</a>
+  <a href="/for-students/">For Students</a>
+  <a href="/alternatives/">Alternatives</a>
+  <a href="https://github.com/cemheren/QuickSheet">GitHub</a>
+</nav>
+
+<div class="hero">
+  <div class="badge">🏠 For Homelabbers</div>
+  <h1>Your Homelab Status,<br><span>Always on Your Desktop</span></h1>
+  <p class="tagline">Monitor Plex, Pi-hole, Docker containers, disk health, and every self-hosted service — without opening a single browser tab. QuickSheet turns your wallpaper into a homelab dashboard.</p>
+
+  <blockquote>
+    "I used to keep a Grafana tab open just to see if my *arr stack was running. Now it's literally my wallpaper."
+  </blockquote>
+
+  <div class="install-box">
+    <span class="comment"># Clone and run — zero dependencies beyond .NET 9 SDK</span><br>
+    git clone https://github.com/cemheren/QuickSheet.git<br>
+    cd QuickSheet<br>
+    dotnet run -c Release --project ExcelConsole.csproj -- examples/homelab.csv --desktop
+  </div>
+
+  <div class="cta-row">
+    <a href="https://github.com/cemheren/QuickSheet" class="btn btn-primary">⭐ Star on GitHub</a>
+    <a href="/extensions/" class="btn btn-secondary">Browse Extensions</a>
+  </div>
+</div>
+
+<section>
+  <h2>What You Can <span>Monitor</span></h2>
+  <p class="section-desc">QuickSheet extensions and cell prefixes let you surface data from any service with an API, CLI, or log file. Here's what homelabbers typically put on their desktop:</p>
+
+  <div class="grid">
+    <div class="card">
+      <div class="icon">🐳</div>
+      <h3>Docker Containers</h3>
+      <p>Live container status, CPU/memory usage, restart counts. See which services are up or down at a glance.</p>
+      <code>ext: docker ps</code>
+    </div>
+
+    <div class="card">
+      <div class="icon">📺</div>
+      <h3>Plex / Jellyfin</h3>
+      <p>Active streams, library size, recently added media. Use an inline process cell to poll Tautulli or Jellyfin API.</p>
+      <code>i: curl -s localhost:8181/api/v2?cmd=get_activity | jq .response.data.stream_count</code>
+    </div>
+
+    <div class="card">
+      <div class="icon">🛡️</div>
+      <h3>Pi-hole / AdGuard</h3>
+      <p>Queries blocked today, top blocked domains, DNS response time. Instant visibility without opening the admin panel.</p>
+      <code>i: curl -s http://pi.hole/admin/api.php | jq '.ads_blocked_today'</code>
+    </div>
+
+    <div class="card">
+      <div class="icon">💾</div>
+      <h3>Disk Health & Storage</h3>
+      <p>ZFS pool status, SMART warnings, free space on each mount. Never get surprised by a full NAS again.</p>
+      <code>i: df -h /mnt/data | awk 'NR==2{print $5 " used"}'</code>
+    </div>
+
+    <div class="card">
+      <div class="icon">📊</div>
+      <h3>System Resources</h3>
+      <p>CPU load, RAM usage, temperatures, uptime — via the quicksheet-sysmon extension or inline commands.</p>
+      <code>ext: sysmon</code>
+    </div>
+
+    <div class="card">
+      <div class="icon">🌐</div>
+      <h3>Network & Connectivity</h3>
+      <p>WAN IP, speedtest results, VPN status, port forwarding checks. Know when your connection drops.</p>
+      <code>i: curl -s ifconfig.me</code>
+    </div>
+
+    <div class="card">
+      <div class="icon">🔄</div>
+      <h3>*arr Stack (Sonarr/Radarr)</h3>
+      <p>Queue size, upcoming episodes, recent grabs. One glance tells you if downloads are healthy.</p>
+      <code>i: curl -s "localhost:8989/api/v3/queue?apikey=KEY" | jq '.totalRecords'</code>
+    </div>
+
+    <div class="card">
+      <div class="icon">🏡</div>
+      <h3>Home Assistant</h3>
+      <p>Entity states, sensor readings, automation status. Pull data via the HA REST API into cells.</p>
+      <code>i: curl -sH "Authorization: Bearer TOKEN" http://ha:8123/api/states/sensor.temp | jq .state</code>
+    </div>
+
+    <div class="card">
+      <div class="icon">📡</div>
+      <h3>Proxmox / Unraid</h3>
+      <p>VM status, container uptime, storage pool usage. Surface hypervisor data without the web UI.</p>
+      <code>i: pvesh get /cluster/resources --type vm --output-format json | jq '.[].status'</code>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Example <span>Dashboard Layout</span></h2>
+  <p class="section-desc">Here's what a typical homelab QuickSheet looks like. Each cell is a live data source or quick-launch command.</p>
+
+  <div class="layout-example">
+    <h3>homelab.csv — paste this into your QuickSheet</h3>
+    <table>
+      <tr>
+        <th>A</th><th>B</th><th>C</th><th>D</th>
+      </tr>
+      <tr>
+        <td><span class="header"># Infrastructure</span></td>
+        <td></td>
+        <td><span class="header"># Media</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="ext">ext: docker ps</span></td>
+        <td><span class="ext">ext: sysmon</span></td>
+        <td><span class="prefix">i: curl -s localhost:8181/api</span></td>
+        <td><span class="url">http://plex:32400</span></td>
+      </tr>
+      <tr>
+        <td><span class="prefix">i: df -h / | tail -1</span></td>
+        <td><span class="prefix">i: uptime -p</span></td>
+        <td><span class="prefix">i: sonarr queue count</span></td>
+        <td><span class="url">http://radarr:7878</span></td>
+      </tr>
+      <tr>
+        <td><span class="header">## Network</span></td>
+        <td></td>
+        <td><span class="header">## Quick Launch</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="prefix">i: curl -s ifconfig.me</span></td>
+        <td><span class="prefix">i: pihole status</span></td>
+        <td><span class="prefix">r: ssh server01</span></td>
+        <td><span class="prefix">r: docker compose up -d</span></td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Get Started in <span>3 Minutes</span></h2>
+  <ol class="checklist">
+    <li>
+      <span class="num">1</span>
+      <div class="content">
+        <strong>Install .NET 9 SDK</strong>
+        <p>Already have it? Skip ahead. Otherwise: <a href="https://dotnet.microsoft.com/download/dotnet/9.0">dotnet.microsoft.com/download</a> — available on every distro.</p>
+      </div>
+    </li>
+    <li>
+      <span class="num">2</span>
+      <div class="content">
+        <strong>Clone & Build</strong>
+        <p><code style="background:var(--bg);padding:2px 6px;border-radius:3px;font-size:0.85rem;">git clone https://github.com/cemheren/QuickSheet.git && cd QuickSheet && dotnet build ExcelConsole.csproj</code></p>
+      </div>
+    </li>
+    <li>
+      <span class="num">3</span>
+      <div class="content">
+        <strong>Create your homelab CSV</strong>
+        <p>Copy the example layout above into <code style="background:var(--bg);padding:2px 6px;border-radius:3px;font-size:0.85rem;">homelab.csv</code>, customize the API endpoints for your services, and run:</p>
+        <p style="margin-top:0.5rem;"><code style="background:var(--bg);padding:2px 6px;border-radius:3px;font-size:0.85rem;">dotnet run -c Release --project ExcelConsole.csproj -- homelab.csv --desktop</code></p>
+      </div>
+    </li>
+    <li>
+      <span class="num">4</span>
+      <div class="content">
+        <strong>Add to startup</strong>
+        <p>See <a href="https://github.com/cemheren/QuickSheet/blob/main/docs/install-startup.md">docs/install-startup.md</a> — add QuickSheet to XDG autostart (Linux) or Task Scheduler (Windows) so your dashboard is always there.</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<section>
+  <h2>Why QuickSheet for <span>Homelab Monitoring</span>?</h2>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="icon">👁️</div>
+      <h4>Always Visible</h4>
+      <p>Lives behind your windows as the wallpaper. Minimize anything and your dashboard is there. No tab to find, no window to arrange.</p>
+    </div>
+    <div class="why-card">
+      <div class="icon">⚡</div>
+      <h4>Zero Overhead</h4>
+      <p>No Docker container, no web server, no database. Just a single binary reading a CSV. Uses ~15 MB RAM.</p>
+    </div>
+    <div class="why-card">
+      <div class="icon">🔧</div>
+      <h4>Hackable</h4>
+      <p>Every cell is a potential data source. If you can curl it, pipe it, or grep it — it can live in a cell. No plugin API to learn for basic stuff.</p>
+    </div>
+    <div class="why-card">
+      <div class="icon">🔒</div>
+      <h4>Zero Dependencies</h4>
+      <p>No npm, no NuGet packages, no supply chain risk. Clone → build → run. The code is auditable in an afternoon.</p>
+    </div>
+    <div class="why-card">
+      <div class="icon">🐧</div>
+      <h4>Runs on Headless Too</h4>
+      <p>Export your dashboard as Markdown with <code style="font-size:0.8rem;">--export-md</code> and pipe it into notifications, cron reports, or status pages.</p>
+    </div>
+    <div class="why-card">
+      <div class="icon">🧩</div>
+      <h4>69+ Extensions</h4>
+      <p>Weather, stocks, sysmon, Docker, Git status, and more. Or write your own — it's just JSON lines over stdin/stdout.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Relevant <span>Extensions</span></h2>
+  <p class="section-desc">These extensions are particularly useful for homelab setups:</p>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">🐳</div>
+      <h3>quicksheet-docker</h3>
+      <p>Monitor container status, CPU/memory, restart counts. Live updates every 5 seconds.</p>
+      <code><a href="https://github.com/cemheren/quicksheet-docker">github.com/cemheren/quicksheet-docker</a></code>
+    </div>
+    <div class="card">
+      <div class="icon">📊</div>
+      <h3>quicksheet-sysmon</h3>
+      <p>CPU, RAM, disk, and uptime in cells. Visual progress bars and color-coded thresholds.</p>
+      <code><a href="https://github.com/cemheren/quicksheet-sysmon">github.com/cemheren/quicksheet-sysmon</a></code>
+    </div>
+    <div class="card">
+      <div class="icon">🌤️</div>
+      <h3>quicksheet-weather</h3>
+      <p>Local forecast in a cell. Useful for homelab rooms — know when it's hot outside (cooling load!).</p>
+      <code><a href="https://github.com/cemheren/quicksheet-weather">github.com/cemheren/quicksheet-weather</a></code>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>QuickSheet is MIT-licensed and free forever. Built by <a href="https://github.com/cemheren">@cemheren</a>.</p>
+  <p style="margin-top:0.5rem;">Zero NuGet dependencies · .NET 9 · Windows &amp; Linux · <a href="https://github.com/cemheren/QuickSheet">View on GitHub</a></p>
+</footer>
+
+</body>
+</html>
