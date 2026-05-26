@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuickSheet Alternatives &amp; Comparison — Terminal Spreadsheet Tools Compared</title>
+  <meta name="description" content="Compare QuickSheet to VisiData, sc-im, and other terminal spreadsheet tools. See which fits your workflow: desktop wallpaper mode, live extensions, CSV editing, and more.">
+  <meta name="keywords" content="visidata alternative, sc-im alternative, terminal spreadsheet comparison, tui spreadsheet linux, desktop spreadsheet wallpaper, csv editor terminal alternative, visidata vs quicksheet, sc-im vs quicksheet, best terminal spreadsheet 2026">
+  <link rel="canonical" href="https://cemheren.github.io/QuickSheet/alternatives/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Terminal Spreadsheet Comparison — QuickSheet vs VisiData vs sc-im">
+  <meta property="og:description" content="Side-by-side comparison of terminal spreadsheet tools. Find the right one for your workflow.">
+  <meta property="og:url" content="https://cemheren.github.io/QuickSheet/alternatives/">
+  <meta property="og:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Terminal Spreadsheet Comparison — QuickSheet vs VisiData vs sc-im">
+  <meta name="twitter:description" content="Side-by-side comparison of terminal spreadsheet tools.">
+  <meta name="twitter:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --purple: #bc8cff;
+      --max-w: 960px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      flex-wrap: wrap;
+    }
+    nav .logo { font-weight: 700; font-size: 1.1rem; }
+    nav a { color: var(--muted); font-size: 0.9rem; }
+    nav a:hover { color: var(--text); text-decoration: none; }
+    nav a.active { color: var(--accent); }
+
+    .page-header {
+      text-align: center;
+      padding: 4rem 1.5rem 2rem;
+      background: linear-gradient(180deg, #161b22 0%, var(--bg) 100%);
+    }
+    .page-header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .page-header h1 span { color: var(--accent); }
+    .page-header .subtitle {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    section { padding: 3rem 1.5rem; max-width: var(--max-w); margin: 0 auto; }
+    section h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+    section h2 span { color: var(--accent); }
+    section h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 2rem 0 0.75rem;
+      color: var(--accent2);
+    }
+    section p, section li {
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    section ul { padding-left: 1.5rem; }
+
+    /* Comparison table */
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      font-size: 0.9rem;
+    }
+    .comp-table th, .comp-table td {
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      vertical-align: top;
+    }
+    .comp-table th {
+      background: var(--surface);
+      font-weight: 600;
+      color: var(--text);
+    }
+    .comp-table td:first-child {
+      text-align: left;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .comp-table .yes { color: var(--accent2); font-weight: 600; }
+    .comp-table .no { color: var(--muted); }
+    .comp-table .partial { color: #d29922; }
+    .comp-table .highlight {
+      background: rgba(88, 166, 255, 0.05);
+    }
+
+    /* Tool cards */
+    .tool-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    .tool-card h3 {
+      margin-top: 0;
+      color: var(--text);
+      font-size: 1.3rem;
+    }
+    .tool-card .meta {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      flex-wrap: wrap;
+    }
+    .tool-card .pros, .tool-card .cons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    @media (max-width: 600px) {
+      .tool-card .pros, .tool-card .cons { grid-template-columns: 1fr; }
+    }
+    .tool-card .pros-list, .tool-card .cons-list { list-style: none; padding: 0; }
+    .tool-card .pros-list li::before { content: "✓ "; color: var(--accent2); font-weight: 700; }
+    .tool-card .cons-list li::before { content: "✗ "; color: #f85149; font-weight: 700; }
+    .tool-card .pros-list li, .tool-card .cons-list li {
+      margin-bottom: 0.5rem;
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+
+    .verdict {
+      background: rgba(88, 166, 255, 0.08);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .verdict h3 { color: var(--accent); margin-top: 0; }
+
+    .cta-box {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      background: var(--surface);
+      border-radius: 12px;
+      margin: 2rem 0;
+    }
+    .cta-box h2 { margin-bottom: 0.5rem; }
+    .cta-box p { color: var(--muted); margin-bottom: 1.5rem; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: opacity 0.15s;
+    }
+    .btn:hover { opacity: 0.85; text-decoration: none; }
+    .btn-primary { background: var(--accent); color: #fff; }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <span class="logo">⚡ QuickSheet</span>
+    <a href="../">Home</a>
+    <a href="../features/">Features</a>
+    <a href="../extensions/">Extensions</a>
+    <a href="../shortcuts/">Shortcuts</a>
+    <a href="../for-sre/">For SREs</a>
+    <a href="../for-students/">For Students</a>
+    <a href="./" class="active">Alternatives</a>
+    <a href="https://github.com/cemheren/QuickSheet">GitHub</a>
+  </nav>
+
+  <header class="page-header">
+    <h1>Terminal Spreadsheet <span>Alternatives</span></h1>
+    <p class="subtitle">An honest comparison of QuickSheet, VisiData, sc-im, and other tools — so you can pick the right one for your workflow.</p>
+  </header>
+
+  <!-- Quick comparison table -->
+  <section>
+    <h2>Feature <span>Comparison</span></h2>
+    <p>Each tool serves a different primary use case. Here's how they stack up:</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th class="highlight">QuickSheet</th>
+          <th>VisiData</th>
+          <th>sc-im</th>
+          <th>Tad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Desktop wallpaper mode</td>
+          <td class="yes highlight">✓</td>
+          <td class="no">—</td>
+          <td class="no">—</td>
+          <td class="no">—</td>
+        </tr>
+        <tr>
+          <td>Always-visible (no window to open)</td>
+          <td class="yes highlight">✓</td>
+          <td class="no">—</td>
+          <td class="no">—</td>
+          <td class="no">—</td>
+        </tr>
+        <tr>
+          <td>Extension/plugin system</td>
+          <td class="yes highlight">✓ (70+ extensions)</td>
+          <td class="partial">Partial (custom loaders)</td>
+          <td class="no">—</td>
+          <td class="no">—</td>
+        </tr>
+        <tr>
+          <td>Live subprocess output in cells</td>
+          <td class="yes highlight">✓ (i: prefix)</td>
+          <td class="no">—</td>
+          <td class="no">—</td>
+          <td class="no">—</td>
+        </tr>
+        <tr>
+          <td>Runnable commands from cells</td>
+          <td class="yes highlight">✓ (r: prefix)</td>
+          <td class="no">—</td>
+          <td class="no">—</td>
+          <td class="no">—</td>
+        </tr>
+        <tr>
+          <td>Cell formulas (SUM, etc.)</td>
+          <td class="yes highlight">✓ (Σ columns, Π rows)</td>
+          <td class="yes">✓ (Python expressions)</td>
+          <td class="yes">✓ (full formulas)</td>
+          <td class="no">—</td>
+        </tr>
+        <tr>
+          <td>Undo/Redo</td>
+          <td class="yes highlight">✓ (200 steps)</td>
+          <td class="yes">✓</td>
+          <td class="yes">✓</td>
+          <td class="no">—</td>
+        </tr>
+        <tr>
+          <td>Theme presets</td>
+          <td class="yes highlight">✓ (5 built-in, config: cell)</td>
+          <td class="partial">Partial (color schemes)</td>
+          <td class="partial">Partial</td>
+          <td class="no">—</td>
+        </tr>
+        <tr>
+          <td>Sparkline rendering</td>
+          <td class="yes highlight">✓ (s: prefix)</td>
+          <td class="no">—</td>
+          <td class="no">—</td>
+          <td class="no">—</td>
+        </tr>
+        <tr>
+          <td>Auto-fit column widths</td>
+          <td class="yes highlight">✓ (Ctrl+W)</td>
+          <td class="yes">✓</td>
+          <td class="partial">Manual only</td>
+          <td class="yes">✓</td>
+        </tr>
+        <tr>
+          <td>Large dataset analysis (millions of rows)</td>
+          <td class="no highlight">—</td>
+          <td class="yes">✓ (streaming)</td>
+          <td class="no">—</td>
+          <td class="yes">✓ (columnar)</td>
+        </tr>
+        <tr>
+          <td>Multi-format import (JSON, SQLite, HDF5…)</td>
+          <td class="no highlight">CSV only</td>
+          <td class="yes">✓ (dozens of formats)</td>
+          <td class="partial">CSV, xlsx</td>
+          <td class="yes">✓ (Parquet, CSV, SQLite)</td>
+        </tr>
+        <tr>
+          <td>Cross-platform (Windows + Linux)</td>
+          <td class="yes highlight">✓</td>
+          <td class="yes">✓ (Python)</td>
+          <td class="yes">✓ (ncurses)</td>
+          <td class="yes">✓ (Electron)</td>
+        </tr>
+        <tr>
+          <td>Zero external dependencies</td>
+          <td class="yes highlight">✓ (only .NET 9 SDK)</td>
+          <td class="no">Python + packages</td>
+          <td class="yes">✓ (C + ncurses)</td>
+          <td class="no">Electron + Node</td>
+        </tr>
+        <tr>
+          <td>Export to Markdown/HTML/JSON</td>
+          <td class="yes highlight">✓ (--export-md, --export-html, --export-json)</td>
+          <td class="yes">✓</td>
+          <td class="partial">Limited</td>
+          <td class="no">—</td>
+        </tr>
+        <tr>
+          <td>Vim keybindings</td>
+          <td class="no highlight">—</td>
+          <td class="partial">Partial</td>
+          <td class="yes">✓ (native vi-like)</td>
+          <td class="no">—</td>
+        </tr>
+        <tr>
+          <td>Go-to-cell (Ctrl+G)</td>
+          <td class="yes highlight">✓</td>
+          <td class="yes">✓</td>
+          <td class="yes">✓</td>
+          <td class="no">—</td>
+        </tr>
+        <tr>
+          <td>Row duplication</td>
+          <td class="yes highlight">✓ (Ctrl+K)</td>
+          <td class="no">—</td>
+          <td class="partial">Copy/paste</td>
+          <td class="no">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Individual tool breakdowns -->
+  <section>
+    <h2>Tool <span>Breakdowns</span></h2>
+
+    <div class="tool-card">
+      <h3>VisiData</h3>
+      <div class="meta">
+        <span>Language: Python</span>
+        <span>Stars: 8,000+</span>
+        <span>Best for: Data exploration & analysis</span>
+      </div>
+      <p>VisiData is a powerful data exploration tool built for analysts working with large, complex datasets. It excels at slicing through millions of rows across dozens of file formats.</p>
+      <div class="pros">
+        <div>
+          <h4 style="color: var(--accent2); margin-bottom: 0.5rem;">Strengths</h4>
+          <ul class="pros-list">
+            <li>Handles huge datasets efficiently</li>
+            <li>Supports 30+ file formats</li>
+            <li>Python expressions for transforms</li>
+            <li>Frequency tables, histograms, pivot</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="color: #f85149; margin-bottom: 0.5rem;">Limitations</h4>
+          <ul class="cons-list">
+            <li>Steep learning curve</li>
+            <li>No always-on desktop mode</li>
+            <li>No live subprocess integration</li>
+            <li>Requires Python + pip packages</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-card">
+      <h3>sc-im</h3>
+      <div class="meta">
+        <span>Language: C</span>
+        <span>Stars: 4,500+</span>
+        <span>Best for: Traditional spreadsheet in terminal</span>
+      </div>
+      <p>sc-im is a spiritual successor to the classic Unix "sc" spreadsheet. It provides a traditional cell-based spreadsheet with formulas, macros, and vim-like keybindings.</p>
+      <div class="pros">
+        <div>
+          <h4 style="color: var(--accent2); margin-bottom: 0.5rem;">Strengths</h4>
+          <ul class="pros-list">
+            <li>Full formula engine (Excel-like)</li>
+            <li>Vim-native keybindings</li>
+            <li>Lightweight C binary</li>
+            <li>Cell references and ranges</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="color: #f85149; margin-bottom: 0.5rem;">Limitations</h4>
+          <ul class="cons-list">
+            <li>No plugin/extension system</li>
+            <li>No desktop wallpaper mode</li>
+            <li>No live data integration</li>
+            <li>Development is sporadic</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-card">
+      <h3>Tad</h3>
+      <div class="meta">
+        <span>Language: TypeScript (Electron)</span>
+        <span>Stars: 3,000+</span>
+        <span>Best for: Fast CSV/Parquet viewing</span>
+      </div>
+      <p>Tad is a desktop viewer for tabular data, optimized for fast viewing of large CSV and Parquet files using DuckDB under the hood.</p>
+      <div class="pros">
+        <div>
+          <h4 style="color: var(--accent2); margin-bottom: 0.5rem;">Strengths</h4>
+          <ul class="pros-list">
+            <li>Handles very large files (Parquet/CSV)</li>
+            <li>Fast columnar queries via DuckDB</li>
+            <li>Pivot tables and aggregations</li>
+            <li>Polished GUI interface</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="color: #f85149; margin-bottom: 0.5rem;">Limitations</h4>
+          <ul class="cons-list">
+            <li>Electron-based (heavy)</li>
+            <li>Read-only (no editing)</li>
+            <li>No terminal/SSH mode</li>
+            <li>No extension ecosystem</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- When to use QuickSheet -->
+  <section>
+    <h2>When to Choose <span>QuickSheet</span></h2>
+
+    <div class="verdict">
+      <h3>QuickSheet is the right choice when you want:</h3>
+      <ul>
+        <li><strong>An always-visible desktop dashboard</strong> — QuickSheet replaces your wallpaper. No window to open, no Alt+Tab. Your data is always there.</li>
+        <li><strong>Live data from system commands</strong> — Use <code>i: top -b -n1</code> or <code>ext: sysmon</code> to pipe live process output directly into cells.</li>
+        <li><strong>A quick-launch panel</strong> — Put <code>r: code .</code> or <code>r: firefox</code> in cells to launch apps with a keypress.</li>
+        <li><strong>An extensible platform</strong> — 70+ community extensions for stocks, weather, Git status, Docker, Kubernetes, and more.</li>
+        <li><strong>Minimal footprint</strong> — Zero NuGet dependencies. Just the .NET 9 runtime. No Python, no Node, no Electron.</li>
+        <li><strong>Notes that persist without a window</strong> — Jot things on your desktop. They autosave to CSV every 5 seconds.</li>
+      </ul>
+    </div>
+
+    <h3>When to choose something else</h3>
+    <ul>
+      <li><strong>Analyzing millions of rows?</strong> → Use <a href="https://visidata.org">VisiData</a>. It's built for data exploration at scale.</li>
+      <li><strong>Need Excel-like formulas?</strong> → Use <a href="https://github.com/andmarti1424/sc-im">sc-im</a>. It has a full formula engine.</li>
+      <li><strong>Viewing Parquet files?</strong> → Use <a href="https://github.com/antonycourtney/tad">Tad</a>. It's optimized for columnar data.</li>
+      <li><strong>Want vim keybindings?</strong> → sc-im is vim-native. QuickSheet uses Ctrl-based shortcuts.</li>
+    </ul>
+  </section>
+
+  <!-- Use cases -->
+  <section>
+    <h2>Popular <span>Use Cases</span></h2>
+    <h3>Developer Desktop Dashboard</h3>
+    <p>Pin Git status, CI build results, and Docker container health to your wallpaper. Launch your IDE, terminal, and browser from cells. See system metrics without opening htop.</p>
+
+    <h3>SRE/DevOps Monitoring Wall</h3>
+    <p>Use extensions for Kubernetes pod status, Docker containers, SSL cert expiry, DNS lookups, and HTTP endpoint monitoring — all visible at a glance on your desktop.</p>
+
+    <h3>Student Note-Taking</h3>
+    <p>Take quick notes during lectures without leaving your desktop. Organize by topic in columns. Search with Ctrl+F. Export to Markdown for your notes repo.</p>
+
+    <h3>Personal Finance Tracker</h3>
+    <p>Track expenses in columns with auto-sum. Use the stocks extension for portfolio monitoring. Budget extension for monthly tracking.</p>
+
+    <h3>App Launcher / Command Palette</h3>
+    <p>Replace your dock or app drawer with <code>r:</code> cells. One row per workflow: <code>r: code ~/projects/myapp</code>, <code>r: firefox https://github.com</code>, <code>r: spotify</code>.</p>
+  </section>
+
+  <!-- CTA -->
+  <section>
+    <div class="cta-box">
+      <h2>Try QuickSheet</h2>
+      <p>Clone and run in 30 seconds. No package managers, no containers, just .NET 9.</p>
+      <a href="https://github.com/cemheren/QuickSheet" class="btn btn-primary">⭐ View on GitHub</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>QuickSheet is open-source (MIT). Comparison data last updated May 2026.</p>
+    <p style="margin-top: 0.5rem;">
+      <a href="../">Home</a> · <a href="../features/">Features</a> · <a href="../extensions/">Extensions</a> · <a href="../shortcuts/">Shortcuts</a> · <a href="https://github.com/cemheren/QuickSheet">GitHub</a>
+    </p>
+  </footer>
+</body>
+</html>
