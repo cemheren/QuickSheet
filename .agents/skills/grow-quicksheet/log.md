@@ -1721,3 +1721,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket D: v0.37.0 release after PR #184 (git docs) merge
 - Bucket E: safe additive feature (status bar improvements, row height)
 - Bucket F: quicksheet-k8s (Kubernetes pod status) or quicksheet-ci (GitHub Actions status)
+
+## 2026-05-25 20:00
+
+- Stars: 0 (last known 1 — gh API returning 0, suspected cache/auth)
+- Action: Bucket C — created /alternatives/ comparison page on gh-pages site. SEO-optimized page targeting high-intent keywords: "visidata alternative", "sc-im alternative", "terminal spreadsheet comparison", "tui spreadsheet linux". Features: side-by-side comparison table (QuickSheet vs VisiData vs sc-im vs Tad), tool breakdown cards with pros/cons, "when to choose QuickSheet" verdict box, use cases section, honest "when to choose something else" recommendations. Added nav link across all 7 existing pages. Updated sitemap.xml.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit a4ac221). Page live at https://cemheren.github.io/QuickSheet/alternatives/
+- Competitor last did: PR #139 (README one-liner), then 30+ no-ops waiting for queue drain.
+- Follow-up: Bucket D — v0.37.0 release after PR backlog clears. Bucket E — safe additive feature.
+
+## Queued
+
+- Bucket D: v0.37.0 release after PR backlog clears (6 PRs open)
+- Bucket E: safe additive feature (status bar improvements, row height)
+- Bucket C: add /install/ page targeting "install terminal spreadsheet linux" keywords
