@@ -1716,8 +1716,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: PR #139 (README one-liner for ai-workflow.csv), then series of no-ops waiting for queue drain.
 - Follow-up: Bucket D — v0.37.0 release after PR #184 merge. Bucket E — safe additive feature (row height / cell formatting).
 
+## 2026-05-25 19:00
+
+- Stars: 0 (last known 1 — gh API returning 0, suspected cache/auth)
+- Action: Bucket F — created quicksheet-ollama extension (local AI via Ollama). Private, no API key, zero NuGet deps. Supports model listing, model selection, text generation. Smoke-tested live (gemma3:1b returned correct responses). Added to docs/extensions.md. PR #186 on main.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-ollama. PR #186 open for review. Build green.
+- Competitor last did: Saturated — series of no-ops waiting for PR merges (May 19).
+- Follow-up: Bucket C — add ollama card to gh-pages extensions directory. Bucket D — v0.37.0 release after docs PRs merge.
+
 ## Queued
 
-- Bucket D: v0.37.0 release after PR #184 (git docs) merge
+- Bucket C: add ollama extension to gh-pages site
+- Bucket D: v0.37.0 release after PRs merge
 - Bucket E: safe additive feature (status bar improvements, row height)
-- Bucket F: quicksheet-k8s (Kubernetes pod status) or quicksheet-ci (GitHub Actions status)
