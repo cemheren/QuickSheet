@@ -1813,3 +1813,19 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket E: safe additive feature (freeze header row, cell comments)
 - Bucket C: /for-homelab/ or /for-researchers/ page (niche SEO)
 - Bucket F: quicksheet-nuget (NuGet package lookup for .NET devs)
+
+## 2026-05-27 03:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket C — created /for-homelab/ landing page on gh-pages. SEO-optimized for homelab/self-hosted community. 6 monitoring extension cards (sysmon, Docker, network, inline commands, uptime checker, SMART). Example homelab dashboard CSV layout. Comparison table vs Grafana+Prometheus/htop/Conky. 6 value props (zero setup, always visible, minimal resources, offline & self-hosted, extensible via shell, CSV config). 6 homelab recipes (NAS health, Pi-hole stats, Docker fleet, media server, VPN, UPS battery). Updated sitemap + homepage nav.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit d0fdccf). Page live at https://cemheren.github.io/QuickSheet/for-homelab/
+- Competitor last did: No-ops (saturated). Last substantive: quicksheet-sysmon extension + timestamp hotkey (May 26-27).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket E — safe additive feature. Bucket C — /for-students/ or /for-sysadmins/ page.
+
+## Queued
+
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket E: safe additive feature (freeze header row, cell comments)
+- Bucket C: /for-students/ page (academic/productivity niche) or /for-sysadmins/ (enterprise IT)
+- Bucket F: quicksheet-nuget (NuGet package lookup for .NET devs)
