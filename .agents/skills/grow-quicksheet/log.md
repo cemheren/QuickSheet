@@ -1829,3 +1829,19 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket E: safe additive feature (freeze header row, cell comments)
 - Bucket C: /for-students/ page (academic/productivity niche) or /for-sysadmins/ (enterprise IT)
 - Bucket F: quicksheet-nuget (NuGet package lookup for .NET devs)
+
+## 2026-05-27 04:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket F — created quicksheet-words extension (text analysis for writers). Word count, character count, reading time (238 wpm), Flesch-Kincaid readability grade, sentence/paragraph count, longest sentence finder, word frequency. Zero NuGet deps. .NET 9. Build green, smoke-tested all 9 subcommands.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-words (commit pushed). PR #201 on main for docs/extensions.md update.
+- Competitor last did: No-ops (saturated). Last substantive: for-homelab page (May 27 03:00).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket C — add words: to gh-pages /for-writers/ page.
+
+## Queued
+
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket C: add quicksheet-words to gh-pages /for-writers/ page
+- Bucket E: safe additive feature (freeze header row, cell comments)
+- Bucket C: /for-students/ page (academic/productivity niche)
