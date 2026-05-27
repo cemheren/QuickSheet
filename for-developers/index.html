@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuickSheet for Developers — Dev Dashboard on Your Desktop Wallpaper</title>
+  <meta name="description" content="Developers: put GitHub PR status, CI/CD pipelines, git logs, cron schedules, JWT decoders, base64 tools, and project notes directly on your desktop wallpaper. Always visible. Zero context switching.">
+  <meta name="keywords" content="developer dashboard terminal, dev tools desktop wallpaper, github status wallpaper, ci cd dashboard terminal, git log desktop, developer productivity terminal, terminal spreadsheet developer, coding dashboard linux, dev workflow wallpaper, github actions status desktop, pull request dashboard terminal, jwt decoder terminal, base64 terminal tool, cron expression terminal, developer tools linux desktop, programming dashboard wallpaper, software engineer terminal tools, devex terminal, coding productivity tools open source, developer wallpaper linux, ci pipeline desktop monitor, github notifications desktop">
+  <link rel="canonical" href="https://cemheren.github.io/QuickSheet/for-developers/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="QuickSheet for Developers — Dev Dashboard on Your Wallpaper">
+  <meta property="og:description" content="GitHub PRs, CI pipelines, git logs, JWT decoders, and project notes on your desktop wallpaper. The dev dashboard that's always there.">
+  <meta property="og:url" content="https://cemheren.github.io/QuickSheet/for-developers/">
+  <meta property="og:site_name" content="QuickSheet">
+  <meta property="og:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QuickSheet for Developers — Dev Dashboard on Desktop">
+  <meta name="twitter:description" content="GitHub PRs, CI/CD, git logs, and dev tools — always visible on your wallpaper. Free &amp; open-source.">
+  <meta name="twitter:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "QuickSheet for Developers",
+    "description": "Use QuickSheet as a developer dashboard on your desktop wallpaper — GitHub PR status, CI/CD pipelines, git logs, JWT decoders, cron parsers, and project notes always visible while you code.",
+    "url": "https://cemheren.github.io/QuickSheet/for-developers/",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "QuickSheet",
+      "url": "https://cemheren.github.io/QuickSheet/"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --purple: #bc8cff;
+      --orange: #d29922;
+      --red: #f85149;
+      --max-w: 960px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+    nav .logo { font-weight: 700; font-size: 1.1rem; }
+    nav a { color: var(--muted); font-size: 0.9rem; }
+    nav a:hover { color: var(--text); text-decoration: none; }
+    nav a.active { color: var(--accent); }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      background: linear-gradient(180deg, #161b22 0%, var(--bg) 100%);
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(88,166,255,0.1);
+      border: 1px solid rgba(88,166,255,0.3);
+      color: var(--accent);
+      padding: 0.3em 0.9em;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero .tagline {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto 2rem;
+    }
+
+    .install-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      display: inline-block;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: var(--accent2);
+      margin-bottom: 1rem;
+    }
+    .install-box .comment { color: var(--muted); }
+
+    section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+    section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    section h2 .emoji { font-style: normal; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .card code {
+      display: inline-block;
+      background: rgba(88,166,255,0.1);
+      color: var(--accent);
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+    .card p { color: var(--muted); font-size: 0.95rem; }
+    .card .indicator { font-size: 1.3rem; margin-bottom: 0.5rem; }
+
+    .csv-example {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      overflow-x: auto;
+      margin: 2rem 0;
+    }
+    .csv-example h3 {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+    .csv-example table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.82rem;
+    }
+    .csv-example th, .csv-example td {
+      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+    .csv-example th {
+      background: rgba(88,166,255,0.08);
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .csv-example td { color: var(--text); }
+    .csv-example .green { color: var(--accent2); }
+    .csv-example .red { color: var(--red); }
+    .csv-example .orange { color: var(--orange); }
+    .csv-example .muted { color: var(--muted); }
+
+    .value-props {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.25rem;
+      margin: 2rem 0;
+    }
+    .value-props li {
+      list-style: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem;
+    }
+    .value-props li strong { display: block; margin-bottom: 0.3rem; }
+    .value-props li p { color: var(--muted); font-size: 0.9rem; margin: 0; }
+
+    .steps {
+      counter-reset: step;
+      max-width: 640px;
+      margin: 2rem auto;
+    }
+    .steps li {
+      list-style: none;
+      counter-increment: step;
+      padding: 1rem 1rem 1rem 3.5rem;
+      position: relative;
+      margin-bottom: 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 1.2rem;
+      top: 1rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .steps li strong { display: block; margin-bottom: 0.2rem; }
+    .steps li code {
+      background: rgba(88,166,255,0.1);
+      color: var(--accent);
+      padding: 0.1em 0.4em;
+      border-radius: 3px;
+      font-size: 0.85rem;
+    }
+
+    .comparison {
+      overflow-x: auto;
+      margin: 2rem 0;
+    }
+    .comparison table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .comparison th, .comparison td {
+      padding: 0.7rem 1rem;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    .comparison th {
+      background: var(--surface);
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .comparison td:first-child { text-align: left; font-weight: 500; }
+    .comparison .yes { color: var(--accent2); }
+    .comparison .no { color: var(--red); }
+    .comparison .partial { color: var(--orange); }
+
+    .cta {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      background: linear-gradient(180deg, var(--bg) 0%, #161b22 100%);
+    }
+    .cta h2 { margin-bottom: 1rem; }
+    .cta p { color: var(--muted); margin-bottom: 1.5rem; }
+    .cta a.btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: opacity 0.2s;
+    }
+    .cta a.btn:hover { opacity: 0.85; text-decoration: none; }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">💻 QuickSheet</span>
+  <a href="../">Home</a>
+  <a href="../features/">Features</a>
+  <a href="../extensions/">Extensions</a>
+  <a href="../for-homelab/">Homelab</a>
+  <a href="../for-traders/">Traders</a>
+  <a href="../for-gamemasters/">Game Masters</a>
+  <a href="./" class="active">Developers</a>
+</nav>
+
+<div class="hero">
+  <div class="badge">⌨️ For Software Engineers</div>
+  <h1>Your Dev Dashboard Lives on Your <span>Wallpaper</span></h1>
+  <p class="tagline">
+    GitHub PR status, CI/CD pipelines, git logs, JWT decoders, cron parsers, and project scratch notes —
+    always visible behind VS Code. Zero context switching. Zero subscriptions.
+  </p>
+  <div class="install-box">
+    <span class="comment"># Your dev dashboard, always behind your IDE</span><br>
+    dotnet run -- dev-dashboard.csv --desktop
+  </div>
+</div>
+
+<section>
+  <h2><span class="emoji">🔧</span> Dev Tools on Your Desktop</h2>
+  <div class="grid">
+
+    <div class="card">
+      <div class="indicator">🔀</div>
+      <h3>GitHub PR Status</h3>
+      <code>ext: ghpr owner/repo</code>
+      <p>See open pull requests, review status, CI checks, and merge readiness for your repos. Live updates without opening a browser.</p>
+    </div>
+
+    <div class="card">
+      <div class="indicator">✅</div>
+      <h3>GitHub Actions Monitor</h3>
+      <code>ext: gha owner/repo</code>
+      <p>Live CI/CD pipeline status — ✅❌🔄 for every workflow run. Branch, duration, and age at a glance. Never miss a failed build.</p>
+    </div>
+
+    <div class="card">
+      <div class="indicator">📜</div>
+      <h3>Git Log</h3>
+      <code>ext: gitlog /path/to/repo</code>
+      <p>Recent commits with hash, author, relative time, and message. Track what your team pushed without leaving your editor.</p>
+    </div>
+
+    <div class="card">
+      <div class="indicator">🔑</div>
+      <h3>JWT Decoder</h3>
+      <code>ext: jwtdec eyJhbG...</code>
+      <p>Paste a JWT and see header, payload, claims, and expiry decoded in cells. No more pasting into jwt.io during debugging.</p>
+    </div>
+
+    <div class="card">
+      <div class="indicator">🔐</div>
+      <h3>Base64 Codec</h3>
+      <code>ext: b64 SGVsbG8...</code>
+      <p>Encode or decode base64 strings inline. Auto-detects direction. Multi-line output for large payloads. Always at your fingertips.</p>
+    </div>
+
+    <div class="card">
+      <div class="indicator">⏰</div>
+      <h3>Cron Expression Parser</h3>
+      <code>ext: cronck */5 * * * *</code>
+      <p>Human-readable cron explanations. "Every 5 minutes" instead of staring at <code>*/5 * * * *</code>. Validates syntax too.</p>
+    </div>
+
+    <div class="card">
+      <div class="indicator">🌐</div>
+      <h3>URL Encoder/Decoder</h3>
+      <code>ext: urlenc hello%20world</code>
+      <p>Encode or decode URL strings. Component mode, path mode, full-URI mode. UTF-8 aware. No more searching "url decode online".</p>
+    </div>
+
+    <div class="card">
+      <div class="indicator">🐳</div>
+      <h3>Docker Container Status</h3>
+      <code>ext: docker</code>
+      <p>Running containers, CPU/memory usage, port mappings, uptime. Your local Docker environment at a glance on your wallpaper.</p>
+    </div>
+
+    <div class="card">
+      <div class="indicator">📦</div>
+      <h3>Package Lookups</h3>
+      <code>ext: npm express</code>
+      <p>Check latest versions, download counts, and metadata for npm, NuGet, PyPI, crates.io, or RubyGems packages without leaving your flow.</p>
+    </div>
+
+    <div class="card">
+      <div class="indicator">🔥</div>
+      <h3>GitHub Streak Tracker</h3>
+      <code>ext: ghstreak username</code>
+      <p>Your contribution streak, today's commits, and longest streak. Motivational data on your wallpaper to keep the green squares going.</p>
+    </div>
+
+    <div class="card">
+      <div class="indicator">🧪</div>
+      <h3>Regex Explainer</h3>
+      <code>ext: regex ^[a-z]+\d{2,}$</code>
+      <p>Paste a regex, get a human-readable breakdown of every token — anchors, classes, quantifiers, groups. Debug patterns visually.</p>
+    </div>
+
+    <div class="card">
+      <div class="indicator">🖥️</div>
+      <h3>System Monitor</h3>
+      <code>ext: sysmon</code>
+      <p>CPU, RAM, disk, and uptime with visual progress bars. Know when your dev machine is thrashing before your build hangs.</p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2><span class="emoji">📋</span> Example: Developer Dashboard Layout</h2>
+  <div class="csv-example">
+    <h3>dev-dashboard.csv — Behind your IDE all day</h3>
+    <table>
+      <tr>
+        <th>A</th><th>B</th><th>C</th><th>D</th><th>E</th>
+      </tr>
+      <tr>
+        <td style="color:var(--accent)">🔀 MY PRs</td>
+        <td style="color:var(--accent)">Status</td>
+        <td></td>
+        <td style="color:var(--accent)">🔧 QUICK TOOLS</td>
+        <td style="color:var(--accent)">Output</td>
+      </tr>
+      <tr>
+        <td>#142 Add auth middleware</td>
+        <td class="green">✅ approved</td>
+        <td></td>
+        <td>ext: jwtdec eyJhbG...</td>
+        <td class="muted">exp: 2026-06-01</td>
+      </tr>
+      <tr>
+        <td>#139 Fix race condition</td>
+        <td class="orange">🔄 CI running</td>
+        <td></td>
+        <td>ext: b64 decode</td>
+        <td class="muted">→ {"user":"dev"}</td>
+      </tr>
+      <tr>
+        <td>#135 Update deps</td>
+        <td class="red">❌ checks failed</td>
+        <td></td>
+        <td>ext: cronck 0 9 * * 1-5</td>
+        <td class="muted">Mon-Fri 9:00 AM</td>
+      </tr>
+      <tr>
+        <td class="muted">────────</td>
+        <td class="muted">────</td>
+        <td></td>
+        <td class="muted">───────────</td>
+        <td class="muted">────</td>
+      </tr>
+      <tr>
+        <td style="color:var(--accent)">📜 RECENT COMMITS</td>
+        <td style="color:var(--accent)">When</td>
+        <td></td>
+        <td style="color:var(--accent)">📝 SCRATCH PAD</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>abc1234 fix: null check</td>
+        <td class="muted">2 min ago</td>
+        <td></td>
+        <td>TODO: review PR #142</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>def5678 feat: add cache</td>
+        <td class="muted">1 hr ago</td>
+        <td></td>
+        <td>Bug: flaky test in auth</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>ghi9012 docs: update API</td>
+        <td class="muted">3 hr ago</td>
+        <td></td>
+        <td>r: docker ps --format "table"</td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2><span class="emoji">💡</span> Why Developers Love This</h2>
+  <ul class="value-props">
+    <li>
+      <strong>👁️ Zero Context Switching</strong>
+      <p>PR status and CI results are on your wallpaper. No more opening GitHub in a browser tab 50 times a day. Just glance at your desktop.</p>
+    </li>
+    <li>
+      <strong>⚡ Instant Dev Utilities</strong>
+      <p>JWT decode, base64, URL encode, regex explain — all in cells. Stop googling "base64 decode online" and use your wallpaper instead.</p>
+    </li>
+    <li>
+      <strong>🧠 Ambient Awareness</strong>
+      <p>See your git log, Docker status, and system load without running commands. The information is just... there, behind your IDE.</p>
+    </li>
+    <li>
+      <strong>📝 Persistent Scratch Pad</strong>
+      <p>Quick notes, TODOs, debugging breadcrumbs. Autosaves every 5 seconds to CSV. Survives reboots. No separate notes app needed.</p>
+    </li>
+    <li>
+      <strong>🐧 Terminal-Native</strong>
+      <p>Built for developers who live in the terminal. Linux X11 + Windows native. Keyboard-driven. No Electron. No browser. No bloat.</p>
+    </li>
+    <li>
+      <strong>🔌 50+ Extensions &amp; Growing</strong>
+      <p>npm, PyPI, crates.io lookups. Kubernetes pod status. TLS cert expiry. DNS lookups. Or write your own in any language — stdin/stdout protocol.</p>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="emoji">⚖️</span> QuickSheet vs. Other Dev Dashboards</h2>
+  <div class="comparison">
+    <table>
+      <tr>
+        <th>Feature</th>
+        <th>QuickSheet</th>
+        <th>GitHub Desktop/Web</th>
+        <th>Waybar/Polybar</th>
+        <th>Notion/Obsidian</th>
+      </tr>
+      <tr>
+        <td>Always visible (wallpaper-level)</td>
+        <td class="yes">✓ behind all windows</td>
+        <td class="no">✗ separate app/tab</td>
+        <td class="partial">~ bar only (1 line)</td>
+        <td class="no">✗ separate window</td>
+      </tr>
+      <tr>
+        <td>Live CI/CD &amp; PR status</td>
+        <td class="yes">✓ extensions</td>
+        <td class="yes">✓</td>
+        <td class="partial">~ custom scripts</td>
+        <td class="no">✗</td>
+      </tr>
+      <tr>
+        <td>Dev utilities (JWT, b64, regex)</td>
+        <td class="yes">✓ built-in extensions</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+      </tr>
+      <tr>
+        <td>Scratch notes + autosave</td>
+        <td class="yes">✓ CSV autosave</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="yes">✓</td>
+      </tr>
+      <tr>
+        <td>Scriptable / extensible</td>
+        <td class="yes">✓ any language</td>
+        <td class="no">✗</td>
+        <td class="yes">✓ shell scripts</td>
+        <td class="partial">~ plugins</td>
+      </tr>
+      <tr>
+        <td>Zero dependencies / offline</td>
+        <td class="yes">✓</td>
+        <td class="no">✗ needs internet</td>
+        <td class="yes">✓</td>
+        <td class="partial">~ sync optional</td>
+      </tr>
+      <tr>
+        <td>Grid layout (multi-column data)</td>
+        <td class="yes">✓ spreadsheet</td>
+        <td class="no">✗</td>
+        <td class="no">✗ single bar</td>
+        <td class="partial">~ tables exist</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2><span class="emoji">🚀</span> Get Started in 3 Minutes</h2>
+  <ol class="steps">
+    <li>
+      <strong>Clone &amp; build</strong>
+      <code>git clone https://github.com/cemheren/QuickSheet && cd QuickSheet && dotnet build</code>
+    </li>
+    <li>
+      <strong>Create your dev dashboard CSV</strong>
+      Use the example above or start blank. Add PR extensions, dev tools, scratch notes — whatever fits your workflow.
+    </li>
+    <li>
+      <strong>Launch as wallpaper</strong>
+      <code>dotnet run -- dev-dashboard.csv --desktop</code>
+      <br>Your dashboard now lives behind VS Code, your terminal, everything. Click the desktop or Alt+Tab to peek.
+    </li>
+    <li>
+      <strong>Code with ambient awareness</strong>
+      CI fails? You'll see ❌ on your wallpaper. PR approved? ✅ appears. No notifications needed — just glance down.
+    </li>
+  </ol>
+</section>
+
+<div class="cta">
+  <h2>Ship Faster with Ambient Dev Intel 🚀</h2>
+  <p>Your dev environment just got an always-on dashboard — for free.</p>
+  <a href="https://github.com/cemheren/QuickSheet" class="btn">⭐ Star on GitHub</a>
+</div>
+
+<footer>
+  QuickSheet — the zero-dependency .NET spreadsheet that lives on your desktop wallpaper.<br>
+  <a href="https://github.com/cemheren/QuickSheet">GitHub</a> ·
+  <a href="../extensions/">50+ Extensions</a> ·
+  <a href="../for-homelab/">For Homelab</a> ·
+  <a href="../for-traders/">For Traders</a> ·
+  <a href="../for-gamemasters/">Game Masters</a>
+</footer>
+
+</body>
+</html>
