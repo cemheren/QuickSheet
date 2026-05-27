@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuickSheet for Freelancers — Desktop Wallpaper Dashboard for Projects, Time &amp; Invoices</title>
+  <meta name="description" content="Freelancers: track billable hours, project deadlines, client status, and invoice reminders on your desktop wallpaper. Always visible. Zero apps to open. Free and open source.">
+  <meta name="keywords" content="freelance dashboard desktop, time tracking wallpaper, freelancer productivity tool, billable hours desktop, project tracker wallpaper, invoice reminder desktop, client management desktop, freelance time tracker linux, freelance project dashboard, desktop wallpaper productivity, freelance workflow tool, hourly rate calculator, freelance deadline tracker, contractor dashboard desktop, solopreneur tools linux, freelance billing desktop, project status wallpaper, client tracker terminal, freelance invoice reminder, always visible project tracker, freelance time logging, self-employed dashboard, gig worker tools desktop, rate calculator terminal, project hours tracker">
+  <link rel="canonical" href="https://cemheren.github.io/QuickSheet/for-freelancers/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="QuickSheet for Freelancers — Your Desktop as a Freelance Command Center">
+  <meta property="og:description" content="Billable hours, project deadlines, and client status permanently on your desktop wallpaper. Always visible. Zero apps to open.">
+  <meta property="og:url" content="https://cemheren.github.io/QuickSheet/for-freelancers/">
+  <meta property="og:site_name" content="QuickSheet">
+  <meta property="og:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QuickSheet for Freelancers — Desktop Freelance Dashboard">
+  <meta name="twitter:description" content="Track hours, deadlines, and clients always visible on your desktop wallpaper. No app switching.">
+  <meta name="twitter:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "QuickSheet for Freelancers",
+    "description": "Use QuickSheet as a persistent freelance command center on your desktop wallpaper — billable hours, project deadlines, client status, invoice reminders, and rate calculations always visible at a glance.",
+    "url": "https://cemheren.github.io/QuickSheet/for-freelancers/",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "QuickSheet",
+      "url": "https://cemheren.github.io/QuickSheet/"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --purple: #bc8cff;
+      --orange: #f0883e;
+      --max-w: 960px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Nav */
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      font-size: 0.9rem;
+    }
+    .nav-logo { font-weight: 700; font-size: 1rem; }
+    .nav a { color: var(--muted); }
+    .nav a:hover { color: var(--text); text-decoration: none; }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      background: linear-gradient(180deg, #161b22 0%, var(--bg) 100%);
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .hero h1 span { color: var(--orange); }
+    .hero .tagline {
+      font-size: 1.2rem;
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto 2rem;
+    }
+
+    /* Sections */
+    .section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+    .section h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .section h2 span { color: var(--accent); }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+    .card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .card p { color: var(--muted); font-size: 0.95rem; }
+    .card .emoji { font-size: 1.3rem; }
+
+    /* Workflow */
+    .workflow {
+      margin-top: 1.5rem;
+      display: grid;
+      gap: 1rem;
+    }
+    .workflow-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+    }
+    .workflow-item h4 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      color: var(--accent2);
+    }
+    .workflow-item p { color: var(--muted); font-size: 0.9rem; }
+    .workflow-item code {
+      background: var(--bg);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: var(--text);
+    }
+
+    /* Comparison */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+    }
+    .compare-table th, .compare-table td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .compare-table th {
+      background: var(--surface);
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .compare-table td:first-child { font-weight: 600; }
+    .check { color: var(--accent2); }
+    .cross { color: #f85149; }
+
+    /* CTA */
+    .cta {
+      text-align: center;
+      padding: 4rem 1.5rem;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+    .cta h2 { font-size: 1.75rem; margin-bottom: 0.75rem; }
+    .cta p { color: var(--muted); margin-bottom: 1.5rem; max-width: 540px; margin-left: auto; margin-right: auto; }
+    .cta-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.75rem 2rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .cta-btn:hover { background: #79c0ff; text-decoration: none; }
+
+    /* Install */
+    .install-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+      font-size: 0.9rem;
+      margin: 1.5rem auto;
+      max-width: 600px;
+      text-align: left;
+      overflow-x: auto;
+    }
+    .install-box .comment { color: var(--muted); }
+    .install-box .cmd { color: var(--accent2); }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.75rem; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../" class="nav-logo">QuickSheet</a>
+  <a href="../features/">Features</a>
+  <a href="../extensions/">Extensions</a>
+  <a href="../shortcuts/">Shortcuts</a>
+  <a href="https://github.com/cemheren/QuickSheet">GitHub</a>
+</nav>
+
+<header class="hero">
+  <h1>QuickSheet for <span>Freelancers</span></h1>
+  <p class="tagline">Your desktop wallpaper becomes a freelance command center — billable hours, project deadlines, client status, and rate calculations always visible without opening a single app.</p>
+</header>
+
+<section class="section">
+  <h2>Why freelancers <span>love</span> it</h2>
+  <div class="grid">
+    <div class="card">
+      <h3><span class="emoji">⏱️</span> Billable Hours at a Glance</h3>
+      <p>Log hours per client directly in cells. Column sums (Σ) auto-calculate totals. Know your weekly billable count without checking Toggl or Harvest.</p>
+    </div>
+    <div class="card">
+      <h3><span class="emoji">📅</span> Deadline Countdown</h3>
+      <p>Track project milestones and due dates on your wallpaper. Never miss a deliverable — it's always staring at you.</p>
+    </div>
+    <div class="card">
+      <h3><span class="emoji">💰</span> Rate Calculator</h3>
+      <p>Keep your hourly rate, hours worked, and earnings in a row. Row products (Π) and column sums give you instant monthly projections.</p>
+    </div>
+    <div class="card">
+      <h3><span class="emoji">📊</span> Project Status Board</h3>
+      <p>Color-code cells by client. Use progress bars (<code>p: 75</code>) to show project completion. One glance shows what needs attention.</p>
+    </div>
+    <div class="card">
+      <h3><span class="emoji">🔗</span> Quick Links</h3>
+      <p>Paste client portals, invoice URLs, contract links directly into cells — they open in your browser with one click. No more bookmark hunting.</p>
+    </div>
+    <div class="card">
+      <h3><span class="emoji">🚀</span> Launch Commands</h3>
+      <p>Use <code>r: </code> prefix to launch project folders, dev servers, or invoicing tools from your desktop grid. Your most-used commands, one keystroke away.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Freelance <span>workflows</span></h2>
+  <div class="workflow">
+    <div class="workflow-item">
+      <h4>Weekly Time Sheet</h4>
+      <p>Create a row per client: <code>Acme Corp | 3.5 | 2.0 | 4.0 | 1.5 | 0 | Σ</code>. Column sums auto-total. Export to CSV for invoice attachment with <code>--export-md</code> for formatted reports.</p>
+    </div>
+    <div class="workflow-item">
+      <h4>Invoice Reminder Pipeline</h4>
+      <p>Track invoices: <code>INV-042 | Acme | $2,400 | Sent May 15 | Due Jun 14</code>. Color overdue rows red. Use bookmarks (Ctrl+Shift+1) to jump to your billing section instantly.</p>
+    </div>
+    <div class="workflow-item">
+      <h4>Client Retainer Dashboard</h4>
+      <p>One row per retainer: <code>ClientX | 20h/mo | p: 14/20 used | $150/hr | $2,100 remaining</code>. Progress bars visualize burn rate. You'll never over-deliver accidentally again.</p>
+    </div>
+    <div class="workflow-item">
+      <h4>Annual Revenue Tracker</h4>
+      <p>Month columns with revenue per client. Column sums for monthly total, row sums for client YTD. Sparklines (<code>s: B2:M2</code>) show revenue trend across the year.</p>
+    </div>
+    <div class="workflow-item">
+      <h4>Project Scope Quick-Ref</h4>
+      <p>Paste SOW highlights, hourly caps, and deliverable checklists. Section headers (<code>h: Web Redesign</code>) organize by project. It's your scope cheat-sheet, always visible behind your IDE.</p>
+    </div>
+    <div class="workflow-item">
+      <h4>Expense Logging</h4>
+      <p>Quick expense rows: <code>2026-05-27 | Software | Figma | $15</code>. Ctrl+; inserts today's date. Column sum tracks monthly spend. Export CSV at tax time.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>vs. other <span>freelance tools</span></h2>
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>QuickSheet</th>
+        <th>Toggl/Harvest</th>
+        <th>Notion</th>
+        <th>Google Sheets</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Always visible (no app switch)</td>
+        <td class="check">✓</td>
+        <td class="cross">✗</td>
+        <td class="cross">✗</td>
+        <td class="cross">✗</td>
+      </tr>
+      <tr>
+        <td>Works offline</td>
+        <td class="check">✓</td>
+        <td class="cross">✗</td>
+        <td class="cross">✗</td>
+        <td class="cross">✗</td>
+      </tr>
+      <tr>
+        <td>Zero subscription cost</td>
+        <td class="check">✓</td>
+        <td class="cross">✗ ($10+/mo)</td>
+        <td class="cross">✗ ($8+/mo)</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>Launch apps/commands</td>
+        <td class="check">✓</td>
+        <td class="cross">✗</td>
+        <td class="cross">✗</td>
+        <td class="cross">✗</td>
+      </tr>
+      <tr>
+        <td>Auto-save (crash-safe)</td>
+        <td class="check">✓ (every 5s)</td>
+        <td class="check">✓</td>
+        <td class="check">✓</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>CSV export for accounting</td>
+        <td class="check">✓ (native format)</td>
+        <td class="check">✓</td>
+        <td class="cross">✗</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>Extensions (weather, stocks, etc.)</td>
+        <td class="check">✓ (20+ extensions)</td>
+        <td class="cross">✗</td>
+        <td class="check">✓ (integrations)</td>
+        <td class="check">✓ (add-ons)</td>
+      </tr>
+      <tr>
+        <td>Privacy (data stays local)</td>
+        <td class="check">✓</td>
+        <td class="cross">✗ (cloud)</td>
+        <td class="cross">✗ (cloud)</td>
+        <td class="cross">✗ (cloud)</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="section">
+  <h2>Get started in <span>60 seconds</span></h2>
+  <div class="install-box">
+    <span class="comment"># Clone and run</span><br>
+    <span class="cmd">git clone https://github.com/cemheren/QuickSheet.git</span><br>
+    <span class="cmd">cd QuickSheet</span><br>
+    <span class="cmd">dotnet run -c Release --project ExcelConsole.csproj -- freelance.csv</span><br><br>
+    <span class="comment"># Or use an example CSV with freelance layout</span><br>
+    <span class="cmd">dotnet run -c Release --project ExcelConsole.csproj -- examples/freelance-dashboard.csv</span>
+  </div>
+  <p style="text-align:center;color:var(--muted);font-size:0.9rem;margin-top:1rem;">Requires .NET 9 SDK. Windows &amp; Linux. No NuGet packages, no internet needed at runtime.</p>
+</section>
+
+<div class="cta">
+  <h2>Stop paying for tools that hide behind tabs</h2>
+  <p>Your time tracker, project board, and rate calculator — always visible on your desktop. No subscriptions. No cloud. No distractions.</p>
+  <a href="https://github.com/cemheren/QuickSheet" class="cta-btn">Get QuickSheet →</a>
+</div>
+
+<footer>
+  <p>QuickSheet is free, open-source software (MIT). <a href="https://github.com/cemheren/QuickSheet">Star on GitHub</a> · <a href="../">Home</a> · <a href="../for-writers/">For Writers</a> · <a href="../for-researchers/">For Researchers</a> · <a href="../for-ai-engineers/">For AI Engineers</a></p>
+</footer>
+
+</body>
+</html>
