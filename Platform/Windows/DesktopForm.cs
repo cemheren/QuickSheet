@@ -840,6 +840,7 @@ internal class DesktopForm : DesktopFormBase
                 "  ║  Ctrl+Z         Undo                     ║",
                 "  ║  Ctrl+Y         Redo                     ║",
                 "  ║  Ctrl+T         Cycle theme               ║",
+                "  ║  Ctrl+;         Insert timestamp           ║",
                 "  ║  Ctrl+H         Show this help            ║",
                 "  ║  Ctrl+Q         Quit                     ║",
                 "  ║                                          ║",
@@ -1221,6 +1222,9 @@ internal class DesktopForm : DesktopFormBase
                     break;
                 case Keys.H:
                     _showHelp = !_showHelp;
+                    break;
+                case Keys.OemSemicolon:
+                    _grid.SetSelectedCellValue(DateTime.Now.ToString("yyyy-MM-dd HH:mm"));
                     break;
                 default: handled2 = false; break;
             }

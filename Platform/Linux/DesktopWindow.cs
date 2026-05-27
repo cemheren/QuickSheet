@@ -1397,6 +1397,9 @@ internal class DesktopWindow : IDisposable
                     _grid.DuplicateRow(_selectedRow);
                     if (_selectedRow < _grid.RowCount - 1) _selectedRow++;
                     return;
+                case XK_semicolon:
+                    _grid.SetCellValue(_selectedRow, _selectedCol, DateTime.Now.ToString("yyyy-MM-dd HH:mm"));
+                    return;
             }
         }
 
