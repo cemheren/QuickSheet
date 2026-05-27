@@ -1735,8 +1735,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: No-ops (saturated). Last substantive: quicksheet-ollama + quicksheet-git extensions (May 25).
 - Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket E — cell timestamp hotkey. Bucket C — /for-gamemasters/ page (TTRPG niche).
 
+## 2026-05-26 20:00
+
+- Stars: 0 (gh API returning 0, likely 1 actual)
+- Action: Bucket C — created /for-gamemasters/ landing page on gh-pages. SEO-optimized for TTRPG/D&D/Pathfinder community. 9 use-case cards (initiative tracker, HP & conditions, spell slots, NPC notes, loot tables, random tables, session log, countdown timers, encounter builder). Example combat tracker CSV table. Comparison vs D&D Beyond, Notion, paper DM screen. 6 value props. Getting started guide. Keywords: dnd campaign tracker, ttrpg desktop tool, initiative tracker terminal, dungeon master tools open source, pathfinder combat tracker. Updated sitemap + homepage nav.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit 524474b). Page live at https://cemheren.github.io/QuickSheet/for-gamemasters/
+- Competitor last did: Saturated, doing no-ops. Last substantive: quicksheet-ollama + quicksheet-git extensions (May 25).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket E — cell timestamp hotkey (Ctrl+;). Bucket C — /for-academics/ page (research/thesis niche).
+
 ## Queued
 
 - Bucket D: v0.37.0 release after pending PRs merge
 - Bucket E: cell timestamp hotkey (Ctrl+;) or freeze header row
-- Bucket C: /for-gamemasters/ page (TTRPG vertical — dice, initiative, campaign notes)
+- Bucket C: /for-academics/ page (research data, thesis tracking, citation notes)
