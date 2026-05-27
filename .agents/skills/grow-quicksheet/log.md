@@ -1879,3 +1879,19 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket D: v0.37.0 release after pending PRs merge
 - Bucket A: document bookmarks in docs/tour.md keyboard shortcuts section
 - Bucket C: /for-students/ page (academic/productivity niche)
+
+## 2026-05-27 08:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket C — updated gh-pages /for-ai-engineers/ page with quicksheet-ai-costs extension. Added new card to extensions grid + dedicated section with 4 feature cards (live usage polling, token calculator, provider comparison, monthly budget tracker) and install command. Backlinks to extension repo for search discoverability.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit 0d37ada). Page live at https://cemheren.github.io/QuickSheet/for-ai-engineers/
+- Competitor last did: No-ops (saturated). Last substantive: cell bookmarks feature (May 27 07:00).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket A — document bookmarks in docs/tour.md. Bucket C — /for-students/ page.
+
+## Queued
+
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket A: document bookmarks in docs/tour.md keyboard shortcuts section
+- Bucket C: /for-students/ page (academic/productivity niche)
+- Bucket E: safe additive feature (freeze header row, cell comments)
