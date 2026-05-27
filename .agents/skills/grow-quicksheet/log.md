@@ -1726,8 +1726,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Saturated, doing no-ops. Last substantive: quicksheet-ollama extension + quicksheet-git extension (May 25).
 - Follow-up: Bucket C — /for-traders/ page for finance vertical SEO. Bucket D — v0.37.0 release after PRs merge.
 
+## 2026-05-26 19:00
+
+- Stars: 0 (gh API returning 0, likely 1 actual)
+- Action: Bucket C — created /for-traders/ landing page on gh-pages. SEO-optimized for finance/trading community. 6 extension cards (stocks, crypto, FX, sparklines, web fetch, world clock). Example watchlist CSV table. Comparison vs Bloomberg/Ticker/browser tabs. 6 value props. 3-min getting started. Keywords: stock ticker terminal, crypto price terminal, portfolio tracker terminal, trading dashboard desktop, bloomberg alternative free. Updated sitemap + homepage nav.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit d87e173). Page live at https://cemheren.github.io/QuickSheet/for-traders/
+- Competitor last did: No-ops (saturated). Last substantive: quicksheet-ollama + quicksheet-git extensions (May 25).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket E — cell timestamp hotkey. Bucket C — /for-gamemasters/ page (TTRPG niche).
+
 ## Queued
 
-- Bucket C: /for-traders/ page (finance vertical — P/L, watchlist, FX, crypto)
 - Bucket D: v0.37.0 release after pending PRs merge
 - Bucket E: cell timestamp hotkey (Ctrl+;) or freeze header row
+- Bucket C: /for-gamemasters/ page (TTRPG vertical — dice, initiative, campaign notes)
