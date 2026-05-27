@@ -805,8 +805,37 @@ internal class DesktopForm : DesktopFormBase
             string searchDisplay = _searchTerm != null
                 ? $"  \U0001f50d\"{_searchTerm}\" {(_searchMatches.Count > 0 ? $"{_searchMatchIndex + 1}/{_searchMatches.Count}" : "no matches")}"
                 : "";
+
+            // Selection aggregate stats (Count, Sum, Average) when multiple cells selected
+            string selStatsDisplay = "";
+            if (_selection.Count > 1)
+            {
+                int numCount = 0;
+                double numSum = 0;
+                foreach (var (sr, sc) in _selection)
+                {
+                    string cv = _grid.GetCellValue(sr, sc);
+                    if (double.TryParse(cv, System.Globalization.NumberStyles.Any,
+                        System.Globalization.CultureInfo.InvariantCulture, out double nv))
+                    {
+                        numCount++;
+                        numSum += nv;
+                    }
+                }
+                int totalCount = _selection.Count;
+                if (numCount > 0)
+                {
+                    double avg = numSum / numCount;
+                    selStatsDisplay = $"  Sel: {totalCount} cells | \u03a3={numSum:G6} | Avg={avg:G6}";
+                }
+                else
+                {
+                    selStatsDisplay = $"  Sel: {totalCount} cells";
+                }
+            }
+
             string f1Label = _showResolved ? "F1: Raw" : "F1: Resolve";
-            status = $" {cellRef}{valueDisplay}{resolvedDisplay}{sumDisplay}{productDisplay}{searchDisplay}  |  {f1Label}  F2: Edit  Ctrl+S: Save  Ctrl+Q: Quit";
+            status = $" {cellRef}{valueDisplay}{resolvedDisplay}{sumDisplay}{productDisplay}{selStatsDisplay}{searchDisplay}  |  {f1Label}  F2: Edit  Ctrl+S: Save  Ctrl+Q: Quit";
         }
         status = status.PadRight(maxChars);
         using var statusBrush = new SolidBrush(themeStatusBg);
