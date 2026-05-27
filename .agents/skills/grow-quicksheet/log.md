@@ -1961,3 +1961,19 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket E: safe additive feature (freeze header row, cell comments)
 - Bucket C: /for-musicians/ or /for-content-creators/ page
 - Bucket F: quicksheet-hashgen (hash generator: md5, sha1, sha256, crc32)
+
+## 2026-05-27 14:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket E — added zebra-stripe alternating row backgrounds. New `ZebraStripeBgRgb` theme property with tuned values for all 11 presets. Even rows get a subtle bg tint in both Linux (X11) and Windows (WinForms) renderers. Purely additive — respects all existing cell-type highlights.
+- Bucket: E
+- Outcome: PR #215 opened (commit cc1321a on grow/zebra-striping). Build green.
+- Competitor last did: No-ops (saturated). Last substantive: quicksheet-unitconv (May 27 13:00).
+- Follow-up: Bucket C — /for-musicians/ page. Bucket F — quicksheet-hashgen. Bucket D — release when PRs merge.
+
+## Queued
+
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket C: /for-musicians/ or /for-content-creators/ page
+- Bucket F: quicksheet-hashgen (hash generator: md5, sha1, sha256, crc32)
+- Bucket E: cell comments or freeze header row
