@@ -1914,9 +1914,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: No-ops (saturated). Last substantive: progress bar prefix PR #208 (May 27 09:00).
 - Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket E — safe additive feature (freeze header row). Bucket C — /for-freelancers/ page.
 
+## 2026-05-27 11:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket F — published quicksheet-health-ext as live repo under cemheren/. HTTP service health grid for homelab dashboards (Plex, Pi-hole, Nextcloud, *arr-stack). Supports inline name=url specs or services.csv file. HEAD-first probing, GET fallback, 8s timeout, latency display. Build verified green. Updated README link via PR #210.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-health-ext. PR #210 for README link update.
+- Competitor last did: No-ops (saturated). Last substantive: /for-researchers/ page (May 27 10:00).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket F — roll/dice extension next.
+
 ## Queued
 
 - Bucket D: v0.37.0 release after pending PRs merge
+- Bucket F: quicksheet-roll-ext (dice roller for TTRPG GMs)
 - Bucket E: safe additive feature (freeze header row, cell comments)
 - Bucket C: /for-freelancers/ page (time tracking, invoicing niche)
-- Bucket A: document bookmarks in docs/tour.md keyboard shortcuts section
