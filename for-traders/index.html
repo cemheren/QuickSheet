@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuickSheet for Traders — Live Stock Tickers &amp; Portfolio on Your Desktop Wallpaper</title>
+  <meta name="description" content="Traders: put live stock quotes, crypto prices, FX rates, portfolio P/L, and sparkline charts directly on your desktop wallpaper. Always visible. No browser tabs. Zero cost.">
+  <meta name="keywords" content="stock ticker terminal, stock ticker desktop wallpaper, live stock quotes terminal, crypto price terminal, portfolio tracker terminal, trading dashboard desktop, stock monitoring command line, finance terminal open source, stock wallpaper linux, bloomberg terminal alternative free, stock sparkline terminal, forex rates desktop, day trading terminal tool, stock cli, market data wallpaper, real-time stock desktop, portfolio P/L desktop, yahoo finance terminal, stock watcher terminal, crypto dashboard wallpaper, stock position tracker desktop, terminal stock charting, live ticker wallpaper, stock alerts desktop, finviz alternative terminal">
+  <link rel="canonical" href="https://cemheren.github.io/QuickSheet/for-traders/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="QuickSheet for Traders — Live Market Data on Your Wallpaper">
+  <meta property="og:description" content="Stock quotes, crypto prices, FX rates, and sparkline charts embedded in your desktop wallpaper. Always visible, zero cost.">
+  <meta property="og:url" content="https://cemheren.github.io/QuickSheet/for-traders/">
+  <meta property="og:site_name" content="QuickSheet">
+  <meta property="og:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QuickSheet for Traders — Market Data on Your Desktop">
+  <meta name="twitter:description" content="Live stock tickers, crypto prices, and portfolio tracking on your desktop wallpaper. No browser tabs.">
+  <meta name="twitter:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "QuickSheet for Traders",
+    "description": "Use QuickSheet as an ambient trading dashboard on your desktop wallpaper — live stock quotes, crypto prices, FX rates, sparkline charts, and portfolio tracking at a glance.",
+    "url": "https://cemheren.github.io/QuickSheet/for-traders/",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "QuickSheet",
+      "url": "https://cemheren.github.io/QuickSheet/"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --purple: #bc8cff;
+      --orange: #d29922;
+      --red: #f85149;
+      --max-w: 960px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+    nav .logo { font-weight: 700; font-size: 1.1rem; }
+    nav a { color: var(--muted); font-size: 0.9rem; }
+    nav a:hover { color: var(--text); text-decoration: none; }
+    nav a.active { color: var(--accent); }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      background: linear-gradient(180deg, #161b22 0%, var(--bg) 100%);
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(63,185,80,0.1);
+      border: 1px solid rgba(63,185,80,0.3);
+      color: var(--accent2);
+      padding: 0.3em 0.9em;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--accent2); }
+    .hero .tagline {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 620px;
+      margin: 0 auto 2rem;
+    }
+
+    .install-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      display: inline-block;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: var(--accent2);
+      margin-bottom: 1rem;
+    }
+    .install-box .comment { color: var(--muted); }
+
+    section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+    section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    section h2 .emoji { font-style: normal; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .card code {
+      display: inline-block;
+      background: rgba(88,166,255,0.1);
+      color: var(--accent);
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+    .card p { color: var(--muted); font-size: 0.95rem; }
+    .card .indicator { font-size: 1.3rem; margin-bottom: 0.5rem; }
+
+    .csv-example {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      overflow-x: auto;
+      margin: 2rem 0;
+    }
+    .csv-example h3 {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+    .csv-example table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.82rem;
+    }
+    .csv-example th, .csv-example td {
+      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+    .csv-example th {
+      background: rgba(88,166,255,0.08);
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .csv-example td { color: var(--text); }
+    .csv-example .green { color: var(--accent2); }
+    .csv-example .red { color: var(--red); }
+    .csv-example .muted { color: var(--muted); }
+
+    .value-props {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.25rem;
+      margin: 2rem 0;
+    }
+    .value-props li {
+      list-style: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem;
+    }
+    .value-props li strong { display: block; margin-bottom: 0.3rem; }
+    .value-props li p { color: var(--muted); font-size: 0.9rem; margin: 0; }
+
+    .steps {
+      counter-reset: step;
+      max-width: 640px;
+      margin: 2rem auto;
+    }
+    .steps li {
+      list-style: none;
+      counter-increment: step;
+      padding: 1rem 1rem 1rem 3.5rem;
+      position: relative;
+      border-left: 2px solid var(--border);
+      margin-bottom: 0.5rem;
+    }
+    .steps li:last-child { border-left-color: transparent; }
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: -0.75rem;
+      top: 1rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .steps li strong { display: block; margin-bottom: 0.25rem; }
+    .steps li code {
+      background: var(--surface);
+      padding: 0.2em 0.5em;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    .cta {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+    .cta h2 { margin-bottom: 1rem; }
+    .cta a.btn {
+      display: inline-block;
+      background: var(--accent2);
+      color: #fff;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: opacity 0.2s;
+    }
+    .cta a.btn:hover { opacity: 0.85; text-decoration: none; }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8rem; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">📊 QuickSheet</span>
+  <a href="https://cemheren.github.io/QuickSheet/">Home</a>
+  <a href="https://cemheren.github.io/QuickSheet/features/">Features</a>
+  <a href="https://cemheren.github.io/QuickSheet/extensions/">Extensions</a>
+  <a href="https://cemheren.github.io/QuickSheet/for-homelab/">Homelab</a>
+  <a href="https://cemheren.github.io/QuickSheet/for-sre/">SRE</a>
+  <a class="active" href="https://cemheren.github.io/QuickSheet/for-traders/">Traders</a>
+</nav>
+
+<header class="hero">
+  <div class="badge">📈 Finance &amp; Trading</div>
+  <h1>Your <span>Trading Dashboard</span><br>Lives on Your Wallpaper</h1>
+  <p class="tagline">
+    Live stock quotes, crypto prices, FX rates, and sparkline charts — always visible on your desktop.
+    No browser tabs. No subscription fees. Just glance at your wallpaper.
+  </p>
+  <div class="install-box">
+    <span class="comment"># Install &amp; launch with a watchlist</span><br>
+    dotnet run --project ExcelConsole.csproj -- watchlist.csv --desktop
+  </div>
+</header>
+
+<section>
+  <h2><span class="emoji">💹</span> Market Data Extensions</h2>
+  <p style="text-align:center; color:var(--muted); margin-bottom:2rem;">Install extensions to pull live data directly into cells. No API keys needed for most.</p>
+
+  <div class="grid">
+    <div class="card">
+      <div class="indicator">📊</div>
+      <h3>Stock Quotes</h3>
+      <code>stocks: AAPL</code>
+      <p>Live price, daily change (▲▼), 52-week range, volume via Yahoo Finance. Batch mode: <code>stocks: AAPL, MSFT, GOOGL</code> for comparison tables. Auto-refreshes every 60s.</p>
+    </div>
+
+    <div class="card">
+      <div class="indicator">₿</div>
+      <h3>Crypto Prices</h3>
+      <code>price: bitcoin</code>
+      <p>Real-time crypto prices from CoinGecko. Supports 10,000+ coins. Shows USD price, 24h change, market cap. No API key required.</p>
+    </div>
+
+    <div class="card">
+      <div class="indicator">💱</div>
+      <h3>FX Rates</h3>
+      <code>fx: USD/EUR</code>
+      <p>Live foreign exchange rates. Track currency pairs relevant to your positions. Auto-refresh keeps you current without switching windows.</p>
+    </div>
+
+    <div class="card">
+      <div class="indicator">📉</div>
+      <h3>Sparkline Charts</h3>
+      <code>s: 142,145,143,148,152</code>
+      <p>Unicode block-bar charts in a single cell. Visualize price trends, volume patterns, or P/L history. Compact and always visible.</p>
+    </div>
+
+    <div class="card">
+      <div class="indicator">🌐</div>
+      <h3>Live Web Fetch</h3>
+      <code>w: https://api.example.com/quote</code>
+      <p>Pull any JSON endpoint into a cell. Build custom feeds from your broker's API, economic calendars, or earnings data.</p>
+    </div>
+
+    <div class="card">
+      <div class="indicator">⏰</div>
+      <h3>Market Hours Clock</h3>
+      <code>ext: worldtm NY,London,Tokyo</code>
+      <p>Multiple time zones with business-hours indicators (🟢 open / 🔴 closed). Know when NYSE, LSE, and TSE are trading at a glance.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="emoji">🖥️</span> Example: Trader's Watchlist</h2>
+  <p style="text-align:center; color:var(--muted); margin-bottom:1.5rem;">Here's what a QuickSheet trading dashboard looks like in your CSV:</p>
+
+  <div class="csv-example">
+    <h3>watchlist.csv</h3>
+    <table>
+      <tr>
+        <th>A</th>
+        <th>B</th>
+        <th>C</th>
+        <th>D</th>
+      </tr>
+      <tr>
+        <td class="muted">── Portfolio ──</td>
+        <td></td>
+        <td class="muted">── Watchlist ──</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>stocks: AAPL</td>
+        <td class="green">▲ +1.82%</td>
+        <td>stocks: NVDA</td>
+        <td class="green">▲ +3.14%</td>
+      </tr>
+      <tr>
+        <td>stocks: MSFT</td>
+        <td class="red">▼ -0.45%</td>
+        <td>stocks: AMD</td>
+        <td class="green">▲ +1.27%</td>
+      </tr>
+      <tr>
+        <td>stocks: GOOGL</td>
+        <td class="green">▲ +0.91%</td>
+        <td>price: bitcoin</td>
+        <td class="green">▲ +2.8%</td>
+      </tr>
+      <tr>
+        <td>stocks: TSLA</td>
+        <td class="red">▼ -2.11%</td>
+        <td>price: ethereum</td>
+        <td class="red">▼ -0.4%</td>
+      </tr>
+      <tr>
+        <td class="muted">── FX ──</td>
+        <td></td>
+        <td class="muted">── Sparklines ──</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>fx: USD/EUR</td>
+        <td>0.9215</td>
+        <td>s: 142,145,143,148,152,149</td>
+        <td class="muted">AAPL 5d</td>
+      </tr>
+      <tr>
+        <td>fx: USD/JPY</td>
+        <td>154.32</td>
+        <td>s: 890,920,915,945,960,982</td>
+        <td class="muted">NVDA 5d</td>
+      </tr>
+      <tr>
+        <td class="muted">── Market Hours ──</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>ext: worldtm NY</td>
+        <td>🟢 Open</td>
+        <td>ext: worldtm London</td>
+        <td>🔴 Closed</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2><span class="emoji">✅</span> Why Traders Choose QuickSheet</h2>
+  <ul class="value-props">
+    <li>
+      <strong>🔒 Zero Subscription Fees</strong>
+      <p>No Bloomberg terminal costs. No monthly SaaS. Free and open-source forever. Uses free public APIs (Yahoo Finance, CoinGecko).</p>
+    </li>
+    <li>
+      <strong>👁️ Always Visible</strong>
+      <p>Your positions live on your wallpaper. No need to switch windows, open browser tabs, or check your phone. Glance at your desktop — done.</p>
+    </li>
+    <li>
+      <strong>⚡ Lightweight &amp; Fast</strong>
+      <p>Uses ~30MB RAM. No Electron bloat. No web browser overhead. Starts instantly. Runs silently in the background while you focus on execution.</p>
+    </li>
+    <li>
+      <strong>🔌 Extensible</strong>
+      <p>Build your own data feeds. The extension protocol is JSON-lines over stdin/stdout — plug in any API, any language. Custom alerts, custom formulas, custom views.</p>
+    </li>
+    <li>
+      <strong>📊 Sparklines in Cells</strong>
+      <p>Compact unicode charts show price trends at a glance. No need for full charting software to spot momentum or reversals. One cell, one trend.</p>
+    </li>
+    <li>
+      <strong>🖥️ Cross-Platform</strong>
+      <p>Works on Windows (WinForms) and Linux (X11). Same CSV, same extensions, same workflow. Your watchlist travels with you.</p>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="emoji">🚀</span> Get Started in 3 Minutes</h2>
+  <ol class="steps">
+    <li>
+      <strong>Clone &amp; Build</strong>
+      <code>git clone https://github.com/cemheren/QuickSheet && cd QuickSheet && dotnet build</code>
+    </li>
+    <li>
+      <strong>Install Extensions</strong>
+      Launch QuickSheet, then type in any cell: <code>ext: github:cemheren/quicksheet-stocks</code> — it installs automatically. Repeat for <code>quicksheet-fx</code> and <code>quicksheet-price</code>.
+    </li>
+    <li>
+      <strong>Build Your Watchlist</strong>
+      Type <code>stocks: AAPL</code> in cell A1, <code>price: bitcoin</code> in A2, <code>fx: USD/EUR</code> in A3. Data flows in automatically.
+    </li>
+    <li>
+      <strong>Launch as Desktop</strong>
+      <code>dotnet run -c Release --project ExcelConsole.csproj -- --desktop</code><br>
+      Your watchlist is now your wallpaper. Always on. Always current.
+    </li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="emoji">🔄</span> Compared to Alternatives</h2>
+  <div class="csv-example">
+    <table>
+      <tr>
+        <th>Feature</th>
+        <th>QuickSheet</th>
+        <th>Bloomberg</th>
+        <th>Ticker (CLI)</th>
+        <th>Browser Tabs</th>
+      </tr>
+      <tr>
+        <td>Cost</td>
+        <td class="green">Free</td>
+        <td class="red">$24,000/yr</td>
+        <td class="green">Free</td>
+        <td class="green">Free</td>
+      </tr>
+      <tr>
+        <td>Always visible</td>
+        <td class="green">✓ Wallpaper</td>
+        <td>✓ Dedicated screen</td>
+        <td class="red">✗ Terminal only</td>
+        <td class="red">✗ Behind windows</td>
+      </tr>
+      <tr>
+        <td>Custom data sources</td>
+        <td class="green">✓ Extensions</td>
+        <td>✓ BQL</td>
+        <td class="red">✗ Yahoo only</td>
+        <td>Varies</td>
+      </tr>
+      <tr>
+        <td>Sparklines</td>
+        <td class="green">✓ In-cell</td>
+        <td>✓</td>
+        <td class="red">✗</td>
+        <td>✓</td>
+      </tr>
+      <tr>
+        <td>FX + Crypto + Stocks</td>
+        <td class="green">✓ All three</td>
+        <td>✓</td>
+        <td>Stocks only</td>
+        <td>Multiple sites</td>
+      </tr>
+      <tr>
+        <td>RAM usage</td>
+        <td class="green">~30 MB</td>
+        <td class="red">~2 GB</td>
+        <td class="green">~15 MB</td>
+        <td class="red">~500+ MB</td>
+      </tr>
+      <tr>
+        <td>Cross-platform</td>
+        <td class="green">Win + Linux</td>
+        <td>Win only</td>
+        <td class="green">All</td>
+        <td class="green">All</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<div class="cta">
+  <h2>Start Tracking Your Portfolio</h2>
+  <p style="color:var(--muted); margin-bottom:1.5rem;">Open-source. Zero cost. Your market data, your wallpaper.</p>
+  <a class="btn" href="https://github.com/cemheren/QuickSheet">⭐ Star on GitHub</a>
+</div>
+
+<footer>
+  <p>QuickSheet is open-source software. <a href="https://github.com/cemheren/QuickSheet">GitHub</a> · <a href="https://cemheren.github.io/QuickSheet/">Home</a></p>
+</footer>
+
+</body>
+</html>
