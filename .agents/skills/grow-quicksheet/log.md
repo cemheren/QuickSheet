@@ -1855,9 +1855,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: No-ops (saturated). Last substantive: for-homelab page (May 27 03:00).
 - Follow-up: Bucket F — quicksheet-ai-costs extension (token cost tracker). Bucket D — v0.37.0 release when PRs merge. Bucket E — safe additive feature.
 
+## 2026-05-27 06:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket F — created quicksheet-ai-costs extension (AI API cost tracker). Live OpenAI usage via /v1/usage, built-in pricing for 15 models (GPT-4o, Claude, Gemini, DeepSeek), cost calculator with token shorthand (10k/1M), monthly budget tracker with progress bar, provider comparison table, local CSV spend log. 9 subcommands. Zero NuGet deps. Build green, smoke-tested models/calc/compare commands.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-ai-costs (commit 1715d15). PR #204 on main for docs/extensions.md update.
+- Competitor last did: No-ops (saturated). Last substantive: for-ai-engineers page (May 27 05:00).
+- Follow-up: Bucket C — update gh-pages /for-ai-engineers/ page with quicksheet-ai-costs link. Bucket D — v0.37.0 release when PRs merge.
+
 ## Queued
 
-- Bucket F: quicksheet-ai-costs (live token cost tracker for AI engineers — polls provider APIs)
+- Bucket C: update gh-pages /for-ai-engineers/ page with ai: extension link + install command
 - Bucket D: v0.37.0 release after pending PRs merge
 - Bucket E: safe additive feature (cell comments, freeze columns)
-- Bucket C: update /for-ai-engineers/ with quicksheet-ai-costs once it ships
+- Bucket C: /for-students/ page (academic/productivity niche)
