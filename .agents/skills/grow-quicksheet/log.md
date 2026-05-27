@@ -1747,5 +1747,14 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 ## Queued
 
 - Bucket D: v0.37.0 release after pending PRs merge
-- Bucket E: cell timestamp hotkey (Ctrl+;) or freeze header row
+- Bucket E: freeze header row (pin top row while scrolling)
 - Bucket C: /for-writers/ page (writers/bloggers vertical — word count, markdown export, notes)
+
+## 2026-05-26 22:00
+
+- Stars: 0 (gh API returning 0, likely 1 actual)
+- Action: Bucket E — added Ctrl+; timestamp hotkey. Inserts current date+time (yyyy-MM-dd HH:mm) into the selected cell. Works on both Linux (X11) and Windows (WinForms). Added XK_semicolon keysym, handlers in both DesktopWindow.cs and DesktopForm.cs, updated help overlay.
+- Bucket: E
+- Outcome: PR #194 opened (commit 9fdb0b5 on grow/timestamp-hotkey). Build green.
+- Competitor last did: No-ops (saturated). Last substantive: for-gamemasters page (May 26 20:00).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket E — freeze header row.
