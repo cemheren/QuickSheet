@@ -659,6 +659,89 @@ public class GridManager
                 .Replace("\n", "\\n").Replace("\r", "\\r").Replace("\t", "\\t");
     }
 
+    public void SaveToSql(string path, string tableName)
+    {
+        using var writer = new StreamWriter(path);
+        WriteSqlTo(writer, tableName);
+    }
+
+    /// <summary>
+    /// Writes the grid as SQL INSERT statements (first row = column names).
+    /// Used by `--export-sql -` to write to stdout for piping.
+    /// </summary>
+    public void WriteSqlTo(TextWriter writer, string tableName)
+    {
+        int lastRow = -1, lastCol = -1;
+        for (int r = 0; r < RowCount; r++)
+            for (int c = 0; c < ColumnCount; c++)
+                if (!string.IsNullOrEmpty(_data[r, c]) && !_isFile[r, c])
+                {
+                    if (r > lastRow) lastRow = r;
+                    if (c > lastCol) lastCol = c;
+                }
+        if (lastRow < 1 || lastCol < 0) { writer.WriteLine("-- Empty table, no data to export."); return; }
+
+        // First row = column names
+        var columns = new string[lastCol + 1];
+        for (int c = 0; c <= lastCol; c++)
+        {
+            string v = _isFile[0, c] ? "" : (_data[0, c] ?? "");
+            columns[c] = SqlIdentifier(v.Length > 0 ? v : $"col{c}");
+        }
+
+        // CREATE TABLE
+        writer.WriteLine($"CREATE TABLE IF NOT EXISTS {SqlIdentifier(tableName)} (");
+        for (int c = 0; c <= lastCol; c++)
+        {
+            writer.Write($"  {columns[c]} TEXT");
+            if (c < lastCol) writer.WriteLine(",");
+            else writer.WriteLine();
+        }
+        writer.WriteLine(");");
+        writer.WriteLine();
+
+        // INSERT statements
+        for (int r = 1; r <= lastRow; r++)
+        {
+            bool allEmpty = true;
+            for (int c = 0; c <= lastCol; c++)
+            {
+                string v = _isFile[r, c] ? "" : (_data[r, c] ?? "");
+                if (v.Length > 0) { allEmpty = false; break; }
+            }
+            if (allEmpty) continue;
+
+            writer.Write($"INSERT INTO {SqlIdentifier(tableName)} ({string.Join(", ", columns)}) VALUES (");
+            for (int c = 0; c <= lastCol; c++)
+            {
+                string v = _isFile[r, c] ? "" : (_data[r, c] ?? "");
+                if (v.Length == 0)
+                    writer.Write("NULL");
+                else if (double.TryParse(v, System.Globalization.NumberStyles.Any,
+                    System.Globalization.CultureInfo.InvariantCulture, out double _))
+                    writer.Write(v);
+                else
+                    writer.Write($"'{SqlEscape(v)}'");
+                if (c < lastCol) writer.Write(", ");
+            }
+            writer.WriteLine(");");
+        }
+    }
+
+    private static string SqlEscape(string s) => s.Replace("'", "''");
+
+    private static string SqlIdentifier(string s)
+    {
+        // Strip non-alphanumeric/underscore, wrap in double quotes for safety
+        var clean = new System.Text.StringBuilder();
+        foreach (char ch in s)
+        {
+            if (char.IsLetterOrDigit(ch) || ch == '_') clean.Append(ch);
+            else clean.Append('_');
+        }
+        return $"\"{clean}\"";
+    }
+
     public void LoadFromCsv(string path)
     {
         if (!File.Exists(path)) return;
