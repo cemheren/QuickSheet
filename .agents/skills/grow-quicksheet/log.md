@@ -1904,3 +1904,19 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket A: document bookmarks in docs/tour.md keyboard shortcuts section
 - Bucket C: /for-students/ page (academic/productivity niche)
 - Bucket F: quicksheet-nuget (NuGet package lookup for .NET devs)
+
+## 2026-05-27 10:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket C — created /for-researchers/ landing page on gh-pages. SEO-optimized for academic researchers: paper deadline tracking, experiment logging, citation monitoring, grant milestones, GPU cluster status (SLURM). Comparison table vs Notion/Google Sheets/terminal. 6 workflow recipes (deadline countdown, hyperparameter grid, citation monitor, GPU cluster, reading list, grant budget). 4 extension cards (arxiv, words, sysmon, ai-costs). Updated sitemap + homepage nav.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit 0e93c04). Page live at https://cemheren.github.io/QuickSheet/for-researchers/
+- Competitor last did: No-ops (saturated). Last substantive: progress bar prefix PR #208 (May 27 09:00).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket E — safe additive feature (freeze header row). Bucket C — /for-freelancers/ page.
+
+## Queued
+
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket E: safe additive feature (freeze header row, cell comments)
+- Bucket C: /for-freelancers/ page (time tracking, invoicing niche)
+- Bucket A: document bookmarks in docs/tour.md keyboard shortcuts section
