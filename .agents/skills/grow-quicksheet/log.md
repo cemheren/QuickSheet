@@ -1781,3 +1781,19 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket D: v0.37.0 release after pending PRs merge
 - Bucket E: safe additive feature (freeze header row)
 - Bucket F: quicksheet-nuget (NuGet package lookup for C#/.NET devs)
+
+## 2026-05-27 01:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket E — added `--export-sql` headless export. Converts CSV to SQL CREATE TABLE + INSERT statements. Numeric values unquoted, empty cells as NULL, identifiers safely double-quoted, strings escaped. Supports stdout via `-` for Unix piping. Table name from filename.
+- Bucket: E
+- Outcome: PR #199 opened (commit 1791ca3 on grow/export-sql). Build green.
+- Competitor last did: No-ops (saturated). Last substantive: timestamp hotkey PR #194 (May 26).
+- Follow-up: Bucket C — update gh-pages /features/ page with export-sql. Bucket D — v0.37.0 release when PRs merge.
+
+## Queued
+
+- Bucket C: update gh-pages features page with --export-sql
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket E: safe additive feature (freeze header row, cell comments)
+- Bucket F: quicksheet-nuget (NuGet package lookup for .NET devs)
