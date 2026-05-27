@@ -40,6 +40,7 @@ internal class DesktopWindow : IDisposable
     private readonly InlineProcessManager _inlineProcesses = new();
     private readonly Extensions.ExtensionManager _extensionManager;
     private readonly LoopManager _loopManager;
+    private readonly CellBookmarks _bookmarks = new();
 
     private IntPtr _display;
     private IntPtr _window;
@@ -201,6 +202,7 @@ internal class DesktopWindow : IDisposable
             _grid.LoadFromCsv(AutoSavePath);
         }
         ConfigCell.LoadAndApply(_grid);
+        _bookmarks.LoadFrom(_grid);
 
         PopulateDesktopFiles();
 
@@ -1044,6 +1046,7 @@ internal class DesktopWindow : IDisposable
         else if (File.Exists(AutoSavePath))
             _grid.LoadFromCsv(AutoSavePath);
         ConfigCell.LoadAndApply(_grid);
+        _bookmarks.LoadFrom(_grid);
 
         PopulateDesktopFiles();
 
@@ -1396,6 +1399,24 @@ internal class DesktopWindow : IDisposable
                 case XK_k:
                     _grid.DuplicateRow(_selectedRow);
                     if (_selectedRow < _grid.RowCount - 1) _selectedRow++;
+                    return;
+                // Cell bookmarks: Ctrl+Shift+1-5 sets, Ctrl+1-5 jumps
+                case XK_1: case XK_2: case XK_3: case XK_4: case XK_5:
+                    int slot = (int)(keysym - XK_1);
+                    if (shift)
+                    {
+                        _bookmarks.Set(slot, _selectedRow, _selectedCol);
+                        _bookmarks.PersistTo(_grid);
+                    }
+                    else
+                    {
+                        var target = _bookmarks.Get(slot);
+                        if (target is var (bRow, bCol))
+                        {
+                            _selectedRow = Math.Clamp(bRow, 0, _grid.RowCount - 1);
+                            _selectedCol = Math.Clamp(bCol, 0, _grid.ColumnCount - 1);
+                        }
+                    }
                     return;
             }
         }

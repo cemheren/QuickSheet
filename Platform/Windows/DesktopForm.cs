@@ -72,6 +72,7 @@ internal class DesktopForm : DesktopFormBase
     private readonly Extensions.ExtensionManager _extensionManager;
     private System.Threading.Timer? _inlineRefreshTimer;
     private readonly LoopManager _loopManager;
+    private readonly CellBookmarks _bookmarks = new();
 
     private static readonly string AutoSavePath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "autosave.csv");
@@ -116,6 +117,7 @@ internal class DesktopForm : DesktopFormBase
             _grid.LoadFromCsv(AutoSavePath);
         }
         ConfigCell.LoadAndApply(_grid);
+        _bookmarks.LoadFrom(_grid);
 
         PopulateDesktopFiles();
 
@@ -267,6 +269,7 @@ internal class DesktopForm : DesktopFormBase
         else if (File.Exists(AutoSavePath))
             _grid.LoadFromCsv(AutoSavePath);
         ConfigCell.LoadAndApply(_grid);
+        _bookmarks.LoadFrom(_grid);
 
         PopulateDesktopFiles();
 
@@ -843,6 +846,9 @@ internal class DesktopForm : DesktopFormBase
                 "  ║  Ctrl+H         Show this help            ║",
                 "  ║  Ctrl+Q         Quit                     ║",
                 "  ║                                          ║",
+                "  ║  Ctrl+Shift+1-5 Set bookmark 1-5         ║",
+                "  ║  Ctrl+1-5       Jump to bookmark 1-5     ║",
+                "  ║                                          ║",
                 "  ║  c:COLOR: text  Colored cell background  ║",
                 "  ║  r: cmd         Runnable command         ║",
                 "  ║  s: 1,2,3       Sparkline chart          ║",
@@ -1221,6 +1227,22 @@ internal class DesktopForm : DesktopFormBase
                     break;
                 case Keys.H:
                     _showHelp = !_showHelp;
+                    break;
+                // Cell bookmarks: Ctrl+Shift+1-5 sets, Ctrl+1-5 jumps
+                case Keys.D1: case Keys.D2: case Keys.D3: case Keys.D4: case Keys.D5:
+                    int bmSlot = e.KeyCode - Keys.D1;
+                    if (e.Shift)
+                    {
+                        var cur = _grid.GetCurrentCell();
+                        _bookmarks.Set(bmSlot, cur.row, cur.col);
+                        _bookmarks.PersistTo(_grid);
+                    }
+                    else
+                    {
+                        var target = _bookmarks.Get(bmSlot);
+                        if (target is var (bRow, bCol))
+                            _grid.SelectCell(bRow, bCol);
+                    }
                     break;
                 default: handled2 = false; break;
             }
