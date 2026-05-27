@@ -1716,3 +1716,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket F: quicksheet-nuget (NuGet package lookup for C#/.NET devs)
 - Bucket E: safe additive feature (row height / column formatting)
 
+
+## 2026-05-26 18:00
+
+- Stars: 0 (gh API returning 0, likely 1 actual)
+- Action: Bucket E — added selection aggregate stats to status bar. When multiple cells are selected, shows Count, Sum (Σ), and Average in the status bar (like Excel/Google Sheets bottom-right). Works on both Linux (X11) and Windows (WinForms).
+- Bucket: E
+- Outcome: PR #189 opened (commit d2d4367 on grow/selection-stats). Build green.
+- Competitor last did: Saturated, doing no-ops. Last substantive: quicksheet-ollama extension + quicksheet-git extension (May 25).
+- Follow-up: Bucket C — /for-traders/ page for finance vertical SEO. Bucket D — v0.37.0 release after PRs merge.
+
+## Queued
+
+- Bucket C: /for-traders/ page (finance vertical — P/L, watchlist, FX, crypto)
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket E: cell timestamp hotkey (Ctrl+;) or freeze header row
