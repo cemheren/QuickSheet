@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuickSheet for Game Masters — TTRPG Campaign Tracker on Your Desktop Wallpaper</title>
+  <meta name="description" content="Game Masters: track initiative, HP, spell slots, NPCs, loot tables, and campaign notes directly on your desktop wallpaper. Always visible during sessions. Zero cost.">
+  <meta name="keywords" content="dnd campaign tracker, ttrpg desktop tool, initiative tracker terminal, dnd wallpaper dashboard, pathfinder session manager, tabletop rpg tools linux, dnd dm screen desktop, campaign notes terminal, initiative order tracker, dnd encounter manager, ttrpg encounter tracker, dungeon master tools open source, dnd spreadsheet, pathfinder combat tracker, ttrpg session notes desktop, rpg character tracker terminal, dnd npc tracker, game master dashboard, dnd desktop overlay, tabletop campaign manager, roll20 alternative desktop, foundry vtt alternative, ttrpg tools terminal, dnd spell slot tracker, campaign planner desktop">
+  <link rel="canonical" href="https://cemheren.github.io/QuickSheet/for-gamemasters/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="QuickSheet for Game Masters — TTRPG Dashboard on Your Wallpaper">
+  <meta property="og:description" content="Track initiative, HP, spell slots, and campaign notes on your desktop wallpaper. Always visible during sessions, zero cost.">
+  <meta property="og:url" content="https://cemheren.github.io/QuickSheet/for-gamemasters/">
+  <meta property="og:site_name" content="QuickSheet">
+  <meta property="og:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QuickSheet for Game Masters — TTRPG on Your Desktop">
+  <meta name="twitter:description" content="Initiative tracking, HP bars, spell slots, and campaign notes on your desktop wallpaper. No browser tabs needed.">
+  <meta name="twitter:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "QuickSheet for Game Masters",
+    "description": "Use QuickSheet as a Game Master screen on your desktop wallpaper — track initiative order, HP, spell slots, NPCs, loot tables, and campaign notes at a glance during TTRPG sessions.",
+    "url": "https://cemheren.github.io/QuickSheet/for-gamemasters/",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "QuickSheet",
+      "url": "https://cemheren.github.io/QuickSheet/"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --purple: #bc8cff;
+      --orange: #d29922;
+      --red: #f85149;
+      --max-w: 960px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+    nav .logo { font-weight: 700; font-size: 1.1rem; }
+    nav a { color: var(--muted); font-size: 0.9rem; }
+    nav a:hover { color: var(--text); text-decoration: none; }
+    nav a.active { color: var(--accent); }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      background: linear-gradient(180deg, #161b22 0%, var(--bg) 100%);
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(188,140,255,0.1);
+      border: 1px solid rgba(188,140,255,0.3);
+      color: var(--purple);
+      padding: 0.3em 0.9em;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--purple); }
+    .hero .tagline {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto 2rem;
+    }
+
+    .install-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      display: inline-block;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: var(--accent2);
+      margin-bottom: 1rem;
+    }
+    .install-box .comment { color: var(--muted); }
+
+    section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+    section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    section h2 span { color: var(--purple); }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--purple); }
+    .card .icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .card h3 { font-size: 1.05rem; margin-bottom: 0.4rem; }
+    .card p { color: var(--muted); font-size: 0.9rem; }
+    .card code {
+      display: block;
+      margin-top: 0.6rem;
+      background: var(--bg);
+      padding: 0.4rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+
+    .csv-example {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      overflow-x: auto;
+      margin-top: 1.5rem;
+    }
+    .csv-example h3 {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+    .csv-example table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.8rem;
+    }
+    .csv-example th {
+      text-align: left;
+      color: var(--purple);
+      padding: 0.4rem 0.8rem;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .csv-example td {
+      padding: 0.4rem 0.8rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      white-space: nowrap;
+    }
+    .csv-example tr:last-child td { border-bottom: none; }
+
+    .comparison {
+      margin-top: 2rem;
+    }
+    .comparison table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .comparison th, .comparison td {
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+    .comparison th { color: var(--muted); font-weight: 600; }
+    .comparison td:first-child { font-weight: 600; }
+    .check { color: var(--accent2); }
+    .cross { color: var(--red); }
+
+    .value-props {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .value-prop {
+      display: flex;
+      gap: 0.8rem;
+      align-items: flex-start;
+    }
+    .value-prop .icon { font-size: 1.4rem; flex-shrink: 0; }
+    .value-prop h4 { font-size: 0.95rem; margin-bottom: 0.2rem; }
+    .value-prop p { color: var(--muted); font-size: 0.85rem; }
+
+    .getting-started {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      margin-top: 1.5rem;
+    }
+    .getting-started ol {
+      list-style: none;
+      counter-reset: steps;
+    }
+    .getting-started li {
+      counter-increment: steps;
+      margin-bottom: 1.2rem;
+      padding-left: 2.5rem;
+      position: relative;
+    }
+    .getting-started li::before {
+      content: counter(steps);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1.8rem;
+      height: 1.8rem;
+      background: rgba(188,140,255,0.1);
+      border: 1px solid rgba(188,140,255,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--purple);
+    }
+    .getting-started li strong { color: var(--text); }
+    .getting-started li code {
+      background: var(--bg);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: var(--accent);
+    }
+
+    .cta {
+      text-align: center;
+      padding: 3rem 1.5rem;
+    }
+    .cta a {
+      display: inline-block;
+      background: var(--purple);
+      color: #fff;
+      padding: 0.8rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: opacity 0.2s;
+    }
+    .cta a:hover { opacity: 0.85; text-decoration: none; }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8rem; }
+      .cards { grid-template-columns: 1fr; }
+      .value-props { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="https://cemheren.github.io/QuickSheet/" class="logo">⚡ QuickSheet</a>
+  <a href="https://cemheren.github.io/QuickSheet/">Home</a>
+  <a href="https://cemheren.github.io/QuickSheet/features/">Features</a>
+  <a href="https://cemheren.github.io/QuickSheet/extensions/">Extensions</a>
+  <a href="https://cemheren.github.io/QuickSheet/for-homelab/">Homelab</a>
+  <a href="https://cemheren.github.io/QuickSheet/for-traders/">Traders</a>
+  <a href="https://cemheren.github.io/QuickSheet/for-sre/">SRE</a>
+  <a href="https://cemheren.github.io/QuickSheet/for-gamemasters/" class="active">Game Masters</a>
+</nav>
+
+<div class="hero">
+  <div class="badge">🎲 For Game Masters &amp; TTRPG Players</div>
+  <h1>Your <span>DM Screen</span> on the Desktop</h1>
+  <p class="tagline">Track initiative order, HP, spell slots, NPCs, loot, and session notes — always visible on your wallpaper. No alt-tabbing mid-combat. No browser tabs. Just your campaign, at a glance.</p>
+  <div class="install-box">
+    <span class="comment"># Launch with your campaign sheet</span><br>
+    dotnet run -- campaign.csv --desktop
+  </div>
+</div>
+
+<section>
+  <h2>What You Can <span>Track</span></h2>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">⚔️</div>
+      <h3>Initiative Tracker</h3>
+      <p>Column of initiative rolls sorted by value. Highlight the current turn. Move down the list as combat progresses.</p>
+      <code>Init | Name | HP | AC | Status</code>
+    </div>
+    <div class="card">
+      <div class="icon">❤️</div>
+      <h3>HP &amp; Conditions</h3>
+      <p>Track hit points for every PC and NPC. Mark conditions (poisoned, prone, concentrating) in adjacent cells.</p>
+      <code>Goblin A | 7/7 | — | Active</code>
+    </div>
+    <div class="card">
+      <div class="icon">✨</div>
+      <h3>Spell Slot Tracker</h3>
+      <p>Row per caster with slot levels as columns. Decrement as they cast. Visual at-a-glance resource management.</p>
+      <code>Wizard | L1:●●●○ | L2:●●○ | L3:●○</code>
+    </div>
+    <div class="card">
+      <div class="icon">🗺️</div>
+      <h3>NPC &amp; Location Notes</h3>
+      <p>Quick-reference grid of NPC names, motivations, locations, and quest hooks. Search with Ctrl+F mid-session.</p>
+      <code>Barkeep Mira | Waterdeep | Owes party a favor</code>
+    </div>
+    <div class="card">
+      <div class="icon">🎁</div>
+      <h3>Loot &amp; Inventory</h3>
+      <p>Party loot table with item names, quantities, values, and who's carrying what. Column sums for total gold.</p>
+      <code>Potion of Healing | 3 | 50gp | Rogue</code>
+    </div>
+    <div class="card">
+      <div class="icon">🎲</div>
+      <h3>Random Tables</h3>
+      <p>Store d100 encounter tables, name generators, and random events. Copy-paste results into session notes.</p>
+      <code>01-20: Wolves | 21-40: Bandits | ...</code>
+    </div>
+    <div class="card">
+      <div class="icon">📅</div>
+      <h3>Session Log</h3>
+      <p>Running log of session summaries, key decisions, and plot threads. Never forget what happened last week.</p>
+      <code>S12: Party cleared Tomb of Horrors</code>
+    </div>
+    <div class="card">
+      <div class="icon">⏱️</div>
+      <h3>Countdown &amp; Timers</h3>
+      <p>Track spell durations (10 rounds), torch life, long rest timers, or real-world session time remaining.</p>
+      <code>Bless: 8 rounds | Torch: 55 min</code>
+    </div>
+    <div class="card">
+      <div class="icon">🗡️</div>
+      <h3>Encounter Builder</h3>
+      <p>Pre-build encounters with monster stats, XP budgets, and difficulty ratings. Copy into initiative when combat starts.</p>
+      <code>CR 3 | Owlbear | HP 59 | AC 13</code>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Example: <span>Combat Tracker</span> Layout</h2>
+  <div class="csv-example">
+    <h3>campaign.csv — Initiative &amp; Combat Panel</h3>
+    <table>
+      <tr><th>Init</th><th>Name</th><th>HP</th><th>AC</th><th>Conditions</th><th>Notes</th></tr>
+      <tr><td>21</td><td>Lyra (Rogue)</td><td>38/38</td><td>16</td><td>—</td><td>Sneak Attack used</td></tr>
+      <tr><td>18</td><td>Kael (Wizard)</td><td>22/28</td><td>13</td><td>Concentrating</td><td>Web active</td></tr>
+      <tr><td>15</td><td>Thorne (Paladin)</td><td>45/52</td><td>18</td><td>—</td><td>Smite ready</td></tr>
+      <tr><td>12</td><td>Goblin Boss</td><td>21/21</td><td>17</td><td>—</td><td>Redirect Attack</td></tr>
+      <tr><td>9</td><td>Goblin x3</td><td>7/7</td><td>15</td><td>Webbed (2)</td><td>DC 12 STR to escape</td></tr>
+      <tr><td>5</td><td>Nyx (Cleric)</td><td>33/40</td><td>16</td><td>—</td><td>Channel Divinity: 1/1</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Why QuickSheet for <span>TTRPGs</span>?</h2>
+  <div class="value-props">
+    <div class="value-prop">
+      <div class="icon">👁️</div>
+      <div>
+        <h4>Always Visible</h4>
+        <p>Lives on your wallpaper — no alt-tabbing away from your VTT or video call. Glance down anytime.</p>
+      </div>
+    </div>
+    <div class="value-prop">
+      <div class="icon">⚡</div>
+      <div>
+        <h4>Instant Edits</h4>
+        <p>Click a cell, type the new HP, done. No page loads, no lag, no form fields. Combat stays fast.</p>
+      </div>
+    </div>
+    <div class="value-prop">
+      <div class="icon">🔍</div>
+      <div>
+        <h4>Search Everything</h4>
+        <p>Ctrl+F to find any NPC, item, or note across your entire campaign sheet in milliseconds.</p>
+      </div>
+    </div>
+    <div class="value-prop">
+      <div class="icon">💾</div>
+      <div>
+        <h4>Plain CSV Files</h4>
+        <p>Your campaign data is a CSV — edit in any text editor, version with git, share with players via GitHub.</p>
+      </div>
+    </div>
+    <div class="value-prop">
+      <div class="icon">🖥️</div>
+      <div>
+        <h4>Zero Resources</h4>
+        <p>No Electron app eating 500MB RAM. No subscription. No account. Just a lightweight .NET process.</p>
+      </div>
+    </div>
+    <div class="value-prop">
+      <div class="icon">🐧</div>
+      <div>
+        <h4>Linux &amp; Windows</h4>
+        <p>Works on both platforms natively. X11 on Linux, WinForms on Windows. Same CSV, same workflow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span>Comparison</span> with Alternatives</h2>
+  <div class="comparison">
+    <table>
+      <tr><th>Feature</th><th>QuickSheet</th><th>D&amp;D Beyond</th><th>Notion/Sheets</th><th>Paper DM Screen</th></tr>
+      <tr><td>Always visible (no alt-tab)</td><td class="check">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="check">✓</td></tr>
+      <tr><td>Editable mid-combat</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+      <tr><td>Searchable</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="cross">✗</td></tr>
+      <tr><td>Free (no subscription)</td><td class="check">✓</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td></tr>
+      <tr><td>Offline &amp; local data</td><td class="check">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="check">✓</td></tr>
+      <tr><td>Git-versionable</td><td class="check">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+      <tr><td>Keyboard-driven</td><td class="check">✓</td><td class="cross">✗</td><td class="cross">✗</td><td>N/A</td></tr>
+      <tr><td>Under 10MB RAM</td><td class="check">✓</td><td class="cross">✗</td><td class="cross">✗</td><td>N/A</td></tr>
+      <tr><td>Extensible (plugins)</td><td class="check">✓</td><td class="cross">✗</td><td class="check">✓</td><td class="cross">✗</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Get Started in <span>3 Minutes</span></h2>
+  <div class="getting-started">
+    <ol>
+      <li><strong>Install .NET 9 SDK</strong> — <a href="https://dotnet.microsoft.com/download">dotnet.microsoft.com/download</a></li>
+      <li><strong>Clone QuickSheet</strong> — <code>git clone https://github.com/cemheren/QuickSheet &amp;&amp; cd QuickSheet</code></li>
+      <li><strong>Create your campaign CSV</strong> — start with the example above or an empty sheet. Columns: Init, Name, HP, AC, Conditions, Notes.</li>
+      <li><strong>Launch on your desktop</strong> — <code>dotnet run -- campaign.csv --desktop</code></li>
+      <li><strong>Play!</strong> — Edit cells live during sessions. Data auto-saves every 5 seconds. Ctrl+F to search. Arrow keys to navigate.</li>
+    </ol>
+  </div>
+</section>
+
+<div class="cta">
+  <a href="https://github.com/cemheren/QuickSheet">⭐ Star on GitHub</a>
+</div>
+
+<footer>
+  <p>QuickSheet is open-source software. <a href="https://github.com/cemheren/QuickSheet">GitHub</a> · <a href="https://cemheren.github.io/QuickSheet/">Home</a></p>
+</footer>
+
+</body>
+</html>
