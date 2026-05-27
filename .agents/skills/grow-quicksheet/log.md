@@ -1797,3 +1797,19 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket D: v0.37.0 release after pending PRs merge
 - Bucket E: safe additive feature (freeze header row, cell comments)
 - Bucket F: quicksheet-nuget (NuGet package lookup for .NET devs)
+
+## 2026-05-27 02:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket C — updated gh-pages site with --export-sql feature. Added SQL export to features page export list, homepage "CSV Everywhere" card, comparison table (now "Multi-format export: MD, HTML, JSON, SQL"), and SEO keywords ("export sql csv, csv to sql cli"). Updated sitemap dates.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit 15a9243). Site rebuilding at cemheren.github.io/QuickSheet/.
+- Competitor last did: No-ops (saturated). Last substantive: quicksheet-sysmon extension + timestamp hotkey (May 26-27).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket E — safe additive feature (freeze header row).
+
+## Queued
+
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket E: safe additive feature (freeze header row, cell comments)
+- Bucket C: /for-homelab/ or /for-researchers/ page (niche SEO)
+- Bucket F: quicksheet-nuget (NuGet package lookup for .NET devs)
