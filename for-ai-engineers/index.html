@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuickSheet for AI Engineers — LLM Cost Tracker & Agent Dashboard on Your Desktop</title>
+  <meta name="description" content="AI engineers: track token costs, agent run status, model comparisons, and prompt experiments directly on your desktop wallpaper. Always visible. No browser tabs. Zero dependencies.">
+  <meta name="keywords" content="ai engineer dashboard desktop, llm cost tracker terminal, token usage monitor wallpaper, ai agent dashboard linux, claude code cost tracker, openai api costs desktop, deepseek token monitor, ai workflow dashboard, prompt engineering desktop, model comparison dashboard, ai development tools terminal, llm monitor wallpaper, api cost tracker desktop, ai agent status monitor, coding agent dashboard, terminal ai tools, ai engineer productivity, token budget tracker, llm api dashboard linux, ai ops monitoring desktop, copilot usage tracker, anthropic api costs, ai development workflow, prompt testing dashboard, agent orchestration monitor, ai cost optimization tool, developer ai dashboard, llm benchmark desktop, ai engineering terminal tools, machine learning dashboard wallpaper">
+  <link rel="canonical" href="https://cemheren.github.io/QuickSheet/for-ai-engineers/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="QuickSheet for AI Engineers — LLM Costs & Agent Status on Your Wallpaper">
+  <meta property="og:description" content="Track AI token costs, agent run status, and model benchmarks on your desktop wallpaper. Always visible, zero dependencies.">
+  <meta property="og:url" content="https://cemheren.github.io/QuickSheet/for-ai-engineers/">
+  <meta property="og:site_name" content="QuickSheet">
+  <meta property="og:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QuickSheet for AI Engineers — LLM Dashboard on Your Desktop">
+  <meta name="twitter:description" content="Token costs, agent status, model comparisons — all on your desktop wallpaper. No browser tabs needed.">
+  <meta name="twitter:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "QuickSheet for AI Engineers",
+    "description": "Use QuickSheet as an ambient AI engineering dashboard on your desktop wallpaper — track token costs, agent run status, model comparisons, and prompt experiments at a glance.",
+    "url": "https://cemheren.github.io/QuickSheet/for-ai-engineers/",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "QuickSheet",
+      "url": "https://cemheren.github.io/QuickSheet/"
+    }
+  }
+  </script>
+  <style>
+    :root{--bg:#0d1117;--surface:#161b22;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--accent:#58a6ff;--accent2:#3fb950;--purple:#bc8cff;--orange:#d29922;--red:#f85149;--max-w:960px}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+    nav{background:var(--surface);border-bottom:1px solid var(--border);padding:1rem 1.5rem;display:flex;align-items:center;gap:1.5rem;max-width:var(--max-w);margin:0 auto;flex-wrap:wrap}
+    nav .logo{font-weight:700;font-size:1.1rem}nav a{color:var(--muted);font-size:0.9rem}nav a:hover{color:var(--text);text-decoration:none}nav a.active{color:var(--accent)}
+    .hero{text-align:center;padding:4rem 1.5rem 3rem;background:linear-gradient(180deg,#161b22 0%,var(--bg) 100%)}
+    .hero h1{font-size:2.2rem;margin-bottom:1rem}.hero h1 span{color:var(--accent2)}
+    .hero p{color:var(--muted);font-size:1.15rem;max-width:640px;margin:0 auto 2rem}
+    .section{max-width:var(--max-w);margin:0 auto;padding:3rem 1.5rem}
+    .section h2{font-size:1.5rem;margin-bottom:1.5rem;border-bottom:1px solid var(--border);padding-bottom:0.5rem}.section h2 span{color:var(--accent)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.25rem}
+    .card h3{font-size:1rem;margin-bottom:0.5rem}.card p{color:var(--muted);font-size:0.9rem}
+    .card code{display:block;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:0.5rem 0.75rem;margin-top:0.75rem;font-size:0.8rem;color:var(--accent2);white-space:nowrap;overflow-x:auto}
+    .card .prefix{color:var(--purple);font-weight:600}
+    .card .tag{display:inline-block;font-size:0.7rem;padding:0.15rem 0.5rem;border-radius:10px;background:rgba(88,166,255,0.15);color:var(--accent);margin-bottom:0.5rem}
+    .card .tag.green{background:rgba(63,185,80,0.15);color:var(--accent2)}.card .tag.orange{background:rgba(210,153,34,0.15);color:var(--orange)}.card .tag.purple{background:rgba(188,140,255,0.15);color:var(--purple)}
+    .csv-example{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.5rem;overflow-x:auto;margin:1.5rem 0}
+    .csv-example table{width:100%;border-collapse:collapse;font-size:0.8rem;font-family:'SF Mono',Consolas,monospace}
+    .csv-example th{text-align:left;padding:0.4rem 0.75rem;border-bottom:2px solid var(--border);color:var(--muted);font-weight:600}
+    .csv-example td{padding:0.4rem 0.75rem;border-bottom:1px solid var(--border)}
+    .csv-example .prefix-cell{color:var(--purple)}.csv-example .value-cell{color:var(--accent2)}.csv-example .label-cell{color:var(--text)}
+    .comparison{overflow-x:auto;margin:1.5rem 0}.comparison table{width:100%;border-collapse:collapse;font-size:0.85rem}
+    .comparison th,.comparison td{text-align:left;padding:0.6rem 1rem;border-bottom:1px solid var(--border)}
+    .comparison th{color:var(--muted);font-weight:600}.comparison .yes{color:var(--accent2)}.comparison .no{color:var(--red)}.comparison .partial{color:var(--orange)}
+    .values{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.25rem;margin:1.5rem 0}
+    .value-item{padding:1rem;border-left:3px solid var(--accent)}.value-item h4{font-size:0.95rem;margin-bottom:0.3rem}.value-item p{color:var(--muted);font-size:0.85rem}
+    .recipes{margin:1.5rem 0}
+    .recipe{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.25rem;margin-bottom:1rem}
+    .recipe h4{font-size:0.95rem;margin-bottom:0.5rem;color:var(--accent)}
+    .recipe p{color:var(--muted);font-size:0.85rem;margin-bottom:0.5rem}
+    .recipe code{display:block;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:0.5rem 0.75rem;font-size:0.8rem;color:var(--accent2);white-space:pre;overflow-x:auto}
+    .install{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:2rem 1.5rem;text-align:center;margin:2rem 0}
+    .install h3{margin-bottom:1rem}
+    .install pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:1rem 1.5rem;display:inline-block;text-align:left;font-size:0.85rem;color:var(--accent2);max-width:100%;overflow-x:auto}
+    .install p{color:var(--muted);font-size:0.9rem;margin-top:1rem}
+    .cta{text-align:center;padding:3rem 1.5rem;border-top:1px solid var(--border)}.cta h2{margin-bottom:1rem;border:none;padding:0}.cta p{color:var(--muted);margin-bottom:1.5rem}
+    .btn{display:inline-block;background:var(--accent2);color:var(--bg);padding:0.75rem 2rem;border-radius:6px;font-weight:600;font-size:1rem;margin:0 0.5rem}
+    .btn:hover{text-decoration:none;opacity:0.9}.btn.secondary{background:var(--surface);color:var(--text);border:1px solid var(--border)}
+    footer{text-align:center;padding:2rem 1.5rem;color:var(--muted);font-size:0.8rem;border-top:1px solid var(--border)}
+    @media(max-width:600px){.hero h1{font-size:1.6rem}.grid{grid-template-columns:1fr}.values{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="https://cemheren.github.io/QuickSheet/" class="logo">QuickSheet</a>
+  <a href="https://cemheren.github.io/QuickSheet/features/">Features</a>
+  <a href="https://cemheren.github.io/QuickSheet/extensions/">Extensions</a>
+  <a href="https://cemheren.github.io/QuickSheet/for-developers/">Developers</a>
+  <a href="https://cemheren.github.io/QuickSheet/for-homelab/">Homelab</a>
+  <a href="https://cemheren.github.io/QuickSheet/for-ai-engineers/" class="active">AI Engineers</a>
+  <a href="https://github.com/cemheren/QuickSheet">GitHub ↗</a>
+</nav>
+
+<section class="hero">
+  <h1>Your AI Costs & Agent Status —<br><span>Always On Your Desktop</span></h1>
+  <p>Track LLM token spending, coding agent runs, model benchmarks, and prompt experiments on your desktop wallpaper. No dashboards to open. No tabs to remember. Glance down and know your AI budget.</p>
+</section>
+
+<section class="section">
+  <h2>🤖 Why AI Engineers Use <span>QuickSheet</span></h2>
+  <div class="values">
+    <div class="value-item">
+      <h4>Token Budget at a Glance</h4>
+      <p>See daily/weekly API spend without opening billing dashboards. Inline commands poll your provider's usage API and display costs in real-time cells.</p>
+    </div>
+    <div class="value-item">
+      <h4>Agent Run Monitoring</h4>
+      <p>Watch Claude Code, DeepSeek-TUI, or custom agents complete tasks. Inline process cells show live stdout from your agent orchestrators.</p>
+    </div>
+    <div class="value-item">
+      <h4>Model Comparison Grid</h4>
+      <p>Keep a persistent comparison table — latency, cost/1K tokens, quality scores — visible while you code. Update it as you benchmark new models.</p>
+    </div>
+    <div class="value-item">
+      <h4>Prompt Lab Scratchpad</h4>
+      <p>Draft prompts in cells, run them with <code>r:</code> prefix commands, see results in adjacent cells. Iterate without context-switching.</p>
+    </div>
+    <div class="value-item">
+      <h4>Zero Dependencies</h4>
+      <p>No Python, no Node, no Docker. A single .NET binary. No supply chain to audit. Runs on the same Linux box as your GPU cluster.</p>
+    </div>
+    <div class="value-item">
+      <h4>CSV-Native Data</h4>
+      <p>All data stored as CSV — pipe it, grep it, git-diff it, feed it back to your LLMs. No proprietary formats. Export to SQL, Markdown, HTML, or JSON.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>📊 Example: AI Engineering <span>Dashboard</span></h2>
+  <p style="color:var(--muted);margin-bottom:1rem">A typical QuickSheet layout for an AI engineer working with multiple LLM providers:</p>
+  <div class="csv-example">
+    <table>
+      <tr>
+        <th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th>
+      </tr>
+      <tr>
+        <td class="label-cell">0</td>
+        <td class="label-cell"><strong>🤖 AI Ops</strong></td>
+        <td class="label-cell"><strong>Provider</strong></td>
+        <td class="label-cell"><strong>Today $</strong></td>
+        <td class="label-cell"><strong>MTD $</strong></td>
+        <td class="label-cell"><strong>Budget %</strong></td>
+      </tr>
+      <tr>
+        <td class="label-cell">1</td>
+        <td class="prefix-cell">i: curl -s $ANTHROPIC_URL/usage</td>
+        <td class="value-cell">Anthropic</td>
+        <td class="value-cell">$4.82</td>
+        <td class="value-cell">$127.40</td>
+        <td class="value-cell">63%</td>
+      </tr>
+      <tr>
+        <td class="label-cell">2</td>
+        <td class="prefix-cell">i: curl -s $OPENAI_URL/usage</td>
+        <td class="value-cell">OpenAI</td>
+        <td class="value-cell">$1.20</td>
+        <td class="value-cell">$34.50</td>
+        <td class="value-cell">17%</td>
+      </tr>
+      <tr>
+        <td class="label-cell">3</td>
+        <td class="prefix-cell">i: ./check-deepseek-balance.sh</td>
+        <td class="value-cell">DeepSeek</td>
+        <td class="value-cell">$0.31</td>
+        <td class="value-cell">$8.90</td>
+        <td class="value-cell">4%</td>
+      </tr>
+      <tr>
+        <td class="label-cell">4</td>
+        <td class="label-cell"></td>
+        <td class="label-cell"><strong>Total</strong></td>
+        <td class="value-cell"><strong>Σ</strong></td>
+        <td class="value-cell"><strong>Σ</strong></td>
+        <td class="label-cell"></td>
+      </tr>
+      <tr>
+        <td class="label-cell">5</td>
+        <td class="label-cell"></td>
+        <td class="label-cell"></td>
+        <td class="label-cell"></td>
+        <td class="label-cell"></td>
+        <td class="label-cell"></td>
+      </tr>
+      <tr>
+        <td class="label-cell">6</td>
+        <td class="label-cell"><strong>🏃 Agent Runs</strong></td>
+        <td class="label-cell"><strong>Agent</strong></td>
+        <td class="label-cell"><strong>Status</strong></td>
+        <td class="label-cell"><strong>Tokens</strong></td>
+        <td class="label-cell"><strong>Duration</strong></td>
+      </tr>
+      <tr>
+        <td class="label-cell">7</td>
+        <td class="prefix-cell">i: gh run list --limit 1</td>
+        <td class="value-cell">Claude Code</td>
+        <td class="value-cell">✅ Done</td>
+        <td class="value-cell">48,230</td>
+        <td class="value-cell">3m 42s</td>
+      </tr>
+      <tr>
+        <td class="label-cell">8</td>
+        <td class="prefix-cell">i: ./agent-status.sh deepseek</td>
+        <td class="value-cell">DeepSeek-TUI</td>
+        <td class="value-cell">🔄 Running</td>
+        <td class="value-cell">12,891</td>
+        <td class="value-cell">1m 15s</td>
+      </tr>
+      <tr>
+        <td class="label-cell">9</td>
+        <td class="prefix-cell">i: ./agent-status.sh local</td>
+        <td class="value-cell">Ollama Local</td>
+        <td class="value-cell">⏸ Idle</td>
+        <td class="value-cell">—</td>
+        <td class="value-cell">—</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🧩 AI-Relevant <span>Extensions</span></h2>
+  <div class="grid">
+    <div class="card">
+      <span class="tag purple">Extension</span>
+      <h3>quicksheet-ollama</h3>
+      <p>Query local Ollama models directly from cells. Summarize text, generate code, translate — results appear in adjacent cells. Zero cloud dependency.</p>
+      <code><span class="prefix">ext:</span> ollama ask "Explain this error"</code>
+    </div>
+    <div class="card">
+      <span class="tag green">Built-in</span>
+      <h3>Inline Commands (i: prefix)</h3>
+      <p>Run any shell command and display live output. Poll APIs, tail logs, check agent status — output refreshes automatically in the cell.</p>
+      <code><span class="prefix">i:</span> curl -s api.anthropic.com/v1/usage | jq .today</code>
+    </div>
+    <div class="card">
+      <span class="tag green">Built-in</span>
+      <h3>Runnable Cells (r: prefix)</h3>
+      <p>One-shot commands triggered on demand. Run benchmarks, restart agents, deploy models — all from a cell click.</p>
+      <code><span class="prefix">r:</span> python bench.py --model gpt-4o-mini</code>
+    </div>
+    <div class="card">
+      <span class="tag orange">Built-in</span>
+      <h3>Column Sums (Σ)</h3>
+      <p>Automatic sum of numeric columns. Perfect for totaling daily token costs across providers or aggregating benchmark scores.</p>
+      <code>Row 4: Σ → auto-sums API costs above</code>
+    </div>
+    <div class="card">
+      <span class="tag purple">Extension</span>
+      <h3>quicksheet-copilot</h3>
+      <p>GitHub Copilot integration. Ask questions, get code suggestions, summarize PRs — all from within your wallpaper spreadsheet.</p>
+      <code><span class="prefix">ext:</span> copilot "review this diff"</code>
+    </div>
+    <div class="card">
+      <span class="tag green">Built-in</span>
+      <h3>Multi-Format Export</h3>
+      <p>Export your cost tracking data to Markdown, HTML, JSON, or SQL. Feed structured data back into your AI pipelines or documentation.</p>
+      <code>dotnet run -- costs.csv --export-sql costs.sql</code>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 AI Workflow <span>Recipes</span></h2>
+  <div class="recipes">
+    <div class="recipe">
+      <h4>📈 Daily Token Cost Tracker</h4>
+      <p>Poll each provider's usage API every 5 minutes. Column sums give you real-time daily totals. Cells turn red when approaching budget limits.</p>
+      <code>i: curl -sH "Authorization: Bearer $KEY" https://api.anthropic.com/v1/usage/daily | jq '.cost_usd'</code>
+    </div>
+    <div class="recipe">
+      <h4>🔄 Agent Orchestration Status</h4>
+      <p>Monitor multiple concurrent coding agents. See which are running, idle, or failed. Live token counts and durations update in real-time.</p>
+      <code>i: gh run list --repo my/project --workflow agent.yml --limit 3 --json status,conclusion -q '.[0].status'</code>
+    </div>
+    <div class="recipe">
+      <h4>🧪 Prompt A/B Testing Log</h4>
+      <p>Keep a grid of prompt variants with quality scores. Run each prompt via <code>r:</code> prefix, paste results, score them. CSV export feeds your evaluation pipeline.</p>
+      <code>r: echo "Prompt v3" | python eval_prompt.py --model claude-sonnet --metric coherence</code>
+    </div>
+    <div class="recipe">
+      <h4>🏋️ Model Benchmark Dashboard</h4>
+      <p>Persistent comparison of models you're evaluating. Latency, cost, quality, context window — all visible while you code.</p>
+      <code>i: python benchmark.py --models "gpt-4o,claude-sonnet,deepseek-v4" --format csv | tail -1</code>
+    </div>
+    <div class="recipe">
+      <h4>🚨 Cost Alert Watchdog</h4>
+      <p>Inline command checks if daily spend exceeds threshold. Combine with <code>r:</code> to auto-pause expensive agents when budget is blown.</p>
+      <code>i: [ $(curl -s $USAGE_API | jq .today_usd) -gt 50 ] && echo "⚠️ OVER BUDGET" || echo "✅ $32.40"</code>
+    </div>
+    <div class="recipe">
+      <h4>📋 Fine-Tuning Job Monitor</h4>
+      <p>Track fine-tuning jobs across providers. See training loss, completion percentage, and ETA without leaving your IDE.</p>
+      <code>i: openai api fine_tuning.jobs.list --limit 1 | jq '{status,trained_tokens,model}'</code>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>⚖️ vs. Other AI Monitoring <span>Approaches</span></h2>
+  <div class="comparison">
+    <table>
+      <tr>
+        <th>Feature</th>
+        <th>QuickSheet</th>
+        <th>LangSmith / Helicone</th>
+        <th>Custom Grafana</th>
+        <th>Browser Tabs</th>
+      </tr>
+      <tr>
+        <td>Always visible (no switching)</td>
+        <td class="yes">✓ Desktop wallpaper</td>
+        <td class="no">✗ Browser tab</td>
+        <td class="no">✗ Browser tab</td>
+        <td class="no">✗ Must switch</td>
+      </tr>
+      <tr>
+        <td>Zero setup / dependencies</td>
+        <td class="yes">✓ Single binary</td>
+        <td class="no">✗ SaaS signup</td>
+        <td class="no">✗ Docker + config</td>
+        <td class="yes">✓ Just open</td>
+      </tr>
+      <tr>
+        <td>Custom scripts / commands</td>
+        <td class="yes">✓ i: and r: prefix</td>
+        <td class="no">✗ Fixed UI</td>
+        <td class="partial">~ Plugins needed</td>
+        <td class="no">✗ Manual copy</td>
+      </tr>
+      <tr>
+        <td>Multi-provider view</td>
+        <td class="yes">✓ Any API via curl</td>
+        <td class="partial">~ Provider-specific</td>
+        <td class="yes">✓ With datasources</td>
+        <td class="no">✗ Multiple logins</td>
+      </tr>
+      <tr>
+        <td>Data export (CSV/SQL/JSON)</td>
+        <td class="yes">✓ Built-in</td>
+        <td class="partial">~ API only</td>
+        <td class="partial">~ CSV plugin</td>
+        <td class="no">✗ Manual</td>
+      </tr>
+      <tr>
+        <td>Offline / air-gapped</td>
+        <td class="yes">✓ Local-first</td>
+        <td class="no">✗ Cloud required</td>
+        <td class="yes">✓ Self-hosted</td>
+        <td class="no">✗ Online only</td>
+      </tr>
+      <tr>
+        <td>Cost</td>
+        <td class="yes">Free &amp; open source</td>
+        <td class="partial">~ Free tier limited</td>
+        <td class="yes">Free (self-host)</td>
+        <td class="yes">Free</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<section class="section">
+  <div class="install">
+    <h3>Start Tracking AI Costs in 30 Seconds</h3>
+    <pre>
+# Clone and run
+git clone https://github.com/cemheren/QuickSheet
+cd QuickSheet
+dotnet run -- examples/ai-workflow.csv --desktop
+
+# Or use a pre-built release
+gh release download --repo cemheren/QuickSheet -p '*.zip'</pre>
+    <p>Requires .NET 9 SDK. Linux (X11) and Windows supported. Zero NuGet dependencies.</p>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Your AI Budget Deserves to Be Visible</h2>
+  <p>Stop switching tabs to check token costs. Put your AI engineering dashboard where you'll actually see it — on your desktop.</p>
+  <a href="https://github.com/cemheren/QuickSheet" class="btn">⭐ Star on GitHub</a>
+  <a href="https://cemheren.github.io/QuickSheet/extensions/" class="btn secondary">Browse Extensions</a>
+</section>
+
+<footer>
+  <p>QuickSheet — a zero-dependency .NET spreadsheet for your desktop wallpaper. <a href="https://github.com/cemheren/QuickSheet">GitHub</a> · <a href="https://cemheren.github.io/QuickSheet/">Home</a></p>
+</footer>
+
+</body>
+</html>
