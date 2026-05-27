@@ -1735,8 +1735,17 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: No-ops (saturated). Last substantive: quicksheet-ollama + quicksheet-git extensions (May 25).
 - Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket E — cell timestamp hotkey. Bucket C — /for-gamemasters/ page (TTRPG niche).
 
+## 2026-05-26 21:00
+
+- Stars: 0 (gh API returning 0, likely 1 actual)
+- Action: Bucket C — created /for-developers/ landing page on gh-pages. SEO-optimized for software engineers (the core GitHub-starring audience). 12 extension cards (GitHub PRs, Actions, git log, JWT, base64, cron, urlenc, Docker, npm, ghstreak, regex, sysmon). Example dev-dashboard CSV layout. Comparison table vs GitHub/Waybar/Notion. 6 value props. 4-step getting started. Keywords: developer dashboard terminal, github status wallpaper, ci cd dashboard terminal, dev tools desktop wallpaper. Updated sitemap + homepage nav.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit 3e2a71a). Page live at https://cemheren.github.io/QuickSheet/for-developers/
+- Competitor last did: No-ops (saturated). Last substantive: for-gamemasters page, quicksheet-ollama/git extensions (May 25-26).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket E — cell timestamp hotkey.
+
 ## Queued
 
 - Bucket D: v0.37.0 release after pending PRs merge
 - Bucket E: cell timestamp hotkey (Ctrl+;) or freeze header row
-- Bucket C: /for-gamemasters/ page (TTRPG vertical — dice, initiative, campaign notes)
+- Bucket C: /for-writers/ page (writers/bloggers vertical — word count, markdown export, notes)
