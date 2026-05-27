@@ -118,6 +118,77 @@ public static class CellPrefix
         return sb.ToString();
     }
 
+    // ── Progress bar prefix ─────────────────────────────────────────
+
+    /// <summary>
+    /// Returns true when a cell starts with "p: " (progress bar).
+    /// Format: "p: 75" or "p: 3/10" or "p: 75 label text"
+    /// </summary>
+    public static bool IsProgressBar(string value) =>
+        value.StartsWith("p: ", StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// Renders a "p: 75" or "p: 3/10" or "p: 75 done" cell as a unicode progress bar.
+    /// Returns (rendered string, percentage 0-100) or null if parsing fails.
+    /// </summary>
+    public static (string display, int percent)? RenderProgressBar(string value, int availableWidth = 20)
+    {
+        if (!IsProgressBar(value)) return null;
+        string rest = value[3..].Trim();
+        if (rest.Length == 0) return null;
+
+        double percent;
+        string label = "";
+
+        // Try fraction form: "3/10"
+        int slashIdx = rest.IndexOf('/');
+        if (slashIdx > 0)
+        {
+            string numPart = rest[..slashIdx].Trim();
+            // Find end of denominator (next space or end)
+            int spaceAfter = rest.IndexOf(' ', slashIdx + 1);
+            string denPart = spaceAfter > 0 ? rest[(slashIdx + 1)..spaceAfter].Trim() : rest[(slashIdx + 1)..].Trim();
+            if (spaceAfter > 0) label = rest[(spaceAfter + 1)..].Trim();
+
+            if (!double.TryParse(numPart, System.Globalization.NumberStyles.Float,
+                    System.Globalization.CultureInfo.InvariantCulture, out double num)) return null;
+            if (!double.TryParse(denPart, System.Globalization.NumberStyles.Float,
+                    System.Globalization.CultureInfo.InvariantCulture, out double den)) return null;
+            if (den == 0) return null;
+            percent = (num / den) * 100.0;
+        }
+        else
+        {
+            // Try "75 label" or just "75"
+            int spaceIdx = rest.IndexOf(' ');
+            string numStr = spaceIdx > 0 ? rest[..spaceIdx] : rest;
+            if (spaceIdx > 0) label = rest[(spaceIdx + 1)..].Trim();
+
+            if (!double.TryParse(numStr, System.Globalization.NumberStyles.Float,
+                    System.Globalization.CultureInfo.InvariantCulture, out percent)) return null;
+        }
+
+        int pct = (int)Math.Clamp(percent, 0, 100);
+
+        // Build bar: [████░░░░] 75%  or  [████░░░░] 75% label
+        int barWidth = Math.Max(5, availableWidth - 7 - (label.Length > 0 ? label.Length + 1 : 0));
+        if (barWidth > 20) barWidth = 20;
+        int filled = (int)Math.Round(barWidth * pct / 100.0);
+        if (filled > barWidth) filled = barWidth;
+
+        var sb = new System.Text.StringBuilder();
+        sb.Append('[');
+        sb.Append('█', filled);
+        sb.Append('░', barWidth - filled);
+        sb.Append(']');
+        sb.Append(' ');
+        sb.Append(pct);
+        sb.Append('%');
+        if (label.Length > 0) { sb.Append(' '); sb.Append(label); }
+
+        return (sb.ToString(), pct);
+    }
+
     // ── Color prefix ───────────────────────────────────────────────
 
     private static readonly Dictionary<string, ConsoleColor> ColorMap = new(StringComparer.OrdinalIgnoreCase)

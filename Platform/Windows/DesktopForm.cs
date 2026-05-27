@@ -595,7 +595,14 @@ internal class DesktopForm : DesktopFormBase
                     if (spark != null) displayVal = spark;
                 }
 
-                var colorParsed = !isSparkline ? CellPrefix.ParseColor(cellVal) : null;
+                bool isProgressBar = !isSparkline && CellPrefix.IsProgressBar(cellVal);
+                if (isProgressBar)
+                {
+                    var bar = CellPrefix.RenderProgressBar(cellVal, w);
+                    if (bar != null) displayVal = bar.Value.display;
+                }
+
+                var colorParsed = (!isSparkline && !isProgressBar) ? CellPrefix.ParseColor(cellVal) : null;
                 if (colorParsed != null)
                     displayVal = colorParsed.Value.text;
 
@@ -633,6 +640,7 @@ internal class DesktopForm : DesktopFormBase
                          : isCmd      ? Color.FromArgb(40, 40, 0)
                          : isLoop     ? Color.FromArgb(0, 40, 40)
                          : isSparkline ? Color.FromArgb(20, 30, 50)
+                         : isProgressBar ? Color.FromArgb(15, 35, 15)
                          : headerParsed != null ? (headerParsed.Value.level == 1 ? Color.FromArgb(35, 28, 5) : Color.FromArgb(5, 28, 35))
                          : extStatus == Extensions.ExtensionCellStatus.Error ? Color.FromArgb(50, 10, 10)
                          : extStatus == Extensions.ExtensionCellStatus.Running ? Color.FromArgb(10, 40, 10)
@@ -646,6 +654,7 @@ internal class DesktopForm : DesktopFormBase
                          : isCmd  ? Color.FromArgb(255, 220, 100)
                          : isLoop ? Color.FromArgb(100, 220, 200)
                          : isSparkline ? Color.FromArgb(100, 180, 255)
+                         : isProgressBar ? Color.FromArgb(80, 220, 80)
                          : headerParsed != null ? (headerParsed.Value.level == 1 ? Color.FromArgb(255, 220, 80) : Color.FromArgb(80, 220, 255))
                          : boldText != null ? Color.White
                          : extStatus == Extensions.ExtensionCellStatus.Error ? Color.FromArgb(255, 80, 80)
@@ -846,6 +855,7 @@ internal class DesktopForm : DesktopFormBase
                 "  ║  c:COLOR: text  Colored cell background  ║",
                 "  ║  r: cmd         Runnable command         ║",
                 "  ║  s: 1,2,3       Sparkline chart          ║",
+                "  ║  p: 75          Progress bar             ║",
                 "  ║                                          ║",
                 "  ╚══════════════════════════════════════════╝",
                 "",

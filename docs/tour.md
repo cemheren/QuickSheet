@@ -18,6 +18,7 @@ Every cell is plain text by default. Add a prefix and the cell *does something*.
 | `r: `               | Runnable command. Press Enter to launch.                          | `r: code .`                        |
 | `i: `               | Inline subprocess. Output streams back into the cell, live.       | `i: ping -c 1 example.com`         |
 | `s: `               | Sparkline. Numbers render as unicode bars (▁▂▃▄▅▆▇█). Range form: `s: A1::A10`. | `s: 4,7,9,3,8,12`                  |
+| `p: `               | Progress bar. Renders `[████░░░░] 75%`. Supports fractions: `p: 3/10 tasks`. | `p: 75`                           |
 | `c:color: `         | Cell color. Highlights background with a named color.             | `c:red: URGENT`                    |
 | `L: `               | Loop a target cell on an interval.                                | `L: A10, 5m`                       |
 | `ext: `             | Install an extension repo. One line.                              | `ext: github:Deskworks/quicksheet-weather` |

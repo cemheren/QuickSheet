@@ -717,8 +717,16 @@ internal class DesktopWindow : IDisposable
                     if (spark != null) displayVal = spark;
                 }
 
+                // Render progress bar cells as unicode bar
+                bool isProgressBar = !isEditingThisCell && !isSparkline && CellPrefix.IsProgressBar(cellVal);
+                if (isProgressBar)
+                {
+                    var bar = CellPrefix.RenderProgressBar(cellVal, w);
+                    if (bar != null) displayVal = bar.Value.display;
+                }
+
                 // Render color-prefixed cells: strip prefix from display
-                var colorParsed = (!isEditingThisCell && !isSparkline) ? CellPrefix.ParseColor(cellVal) : null;
+                var colorParsed = (!isEditingThisCell && !isSparkline && !isProgressBar) ? CellPrefix.ParseColor(cellVal) : null;
                 if (colorParsed != null)
                     displayVal = colorParsed.Value.text;
 
@@ -757,6 +765,7 @@ internal class DesktopWindow : IDisposable
                 else if (isCmd) { bgR = 40; bgG = 40; bgB = 0; }
                 else if (isLoop) { bgR = 0; bgG = 40; bgB = 40; }
                 else if (isSparkline) { bgR = 20; bgG = 30; bgB = 50; }
+                else if (isProgressBar) { bgR = 15; bgG = 35; bgB = 15; }
                 else if (headerParsed != null)
                 {
                     // H1: warm gold tint; H2: cool teal tint
@@ -790,6 +799,7 @@ internal class DesktopWindow : IDisposable
                 else if (isCmd) { fgR = 255; fgG = 220; fgB = 100; }
                 else if (isLoop) { fgR = 100; fgG = 220; fgB = 200; }
                 else if (isSparkline) { fgR = 100; fgG = 180; fgB = 255; }
+                else if (isProgressBar) { fgR = 80; fgG = 220; fgB = 80; }
                 else if (headerParsed != null)
                 {
                     // H1: bright gold; H2: bright cyan
