@@ -19,6 +19,8 @@ public class Theme
     public (int r, int g, int b) SearchSelectedFgRgb { get; init; } = (0, 0, 0);
     public (int r, int g, int b) StatusBarBgRgb { get; init; } = (240, 240, 240);
     public (int r, int g, int b) StatusBarFgRgb { get; init; } = (0, 0, 0);
+    /// <summary>Alternate row background for zebra striping (even rows).</summary>
+    public (int r, int g, int b) ZebraStripeBgRgb { get; init; } = (18, 18, 18);
 
     public static readonly Theme[] Presets =
     [
@@ -36,6 +38,7 @@ public class Theme
             SearchSelectedFgRgb = (  0,   0,   0),
             StatusBarBgRgb      = (240, 240, 240),
             StatusBarFgRgb      = (  0,   0,   0),
+            ZebraStripeBgRgb    = ( 18,  18,  18),
         },
         new Theme
         {
@@ -51,6 +54,7 @@ public class Theme
             SearchSelectedFgRgb = (240, 240, 240),
             StatusBarBgRgb      = (  0,   0, 139),
             StatusBarFgRgb      = (240, 240, 240),
+            ZebraStripeBgRgb    = (225, 225, 225),
         },
         new Theme
         {
@@ -67,6 +71,7 @@ public class Theme
             SearchSelectedFgRgb = ( 46,  52,  64),
             StatusBarBgRgb      = (136, 192, 208),  // nord8  #88c0d0
             StatusBarFgRgb      = ( 46,  52,  64),
+            ZebraStripeBgRgb    = ( 54,  60,  72),  // nord0.5
         },
         new Theme
         {
@@ -83,6 +88,7 @@ public class Theme
             SearchSelectedFgRgb = (253, 246, 227),
             StatusBarBgRgb      = ( 95, 183, 175),  // softened cyan
             StatusBarFgRgb      = (  0,  43,  54),
+            ZebraStripeBgRgb    = (  7,  54,  66),  // base02
         },
         new Theme
         {
@@ -101,6 +107,7 @@ public class Theme
             SearchSelectedFgRgb = (253, 246, 227),  // base3
             StatusBarBgRgb      = (238, 232, 213),  // base2   #eee8d5 (VSCode statusBar bg)
             StatusBarFgRgb      = (101, 123, 131),  // base00  (VSCode statusBar fg)
+            ZebraStripeBgRgb    = (238, 232, 213),  // base2
         },
         new Theme
         {
@@ -116,6 +123,7 @@ public class Theme
             SearchSelectedFgRgb = (  0,   0,   0),
             StatusBarBgRgb      = ( 30,  80,  40),
             StatusBarFgRgb      = (240, 240, 240),
+            ZebraStripeBgRgb    = ( 10,  14,  10),
         },
         new Theme
         {
@@ -132,6 +140,7 @@ public class Theme
             SearchSelectedFgRgb = ( 40,  42,  54),
             StatusBarBgRgb      = (189, 147, 249),  // purple #bd93f9
             StatusBarFgRgb      = ( 40,  42,  54),
+            ZebraStripeBgRgb    = ( 48,  50,  62),  // slightly lighter bg
         },
         new Theme
         {
@@ -148,6 +157,7 @@ public class Theme
             SearchSelectedFgRgb = (  0,   0,   0),
             StatusBarBgRgb      = (220, 130, 200),  // softened magenta
             StatusBarFgRgb      = (  0,   0,   0),
+            ZebraStripeBgRgb    = ( 38,  26,  58),
         },
         new Theme
         {
@@ -164,6 +174,7 @@ public class Theme
             SearchSelectedFgRgb = ( 40,  40,  40),
             StatusBarBgRgb      = (220, 175,  90),
             StatusBarFgRgb      = ( 40,  40,  40),
+            ZebraStripeBgRgb    = ( 50,  48,  47),  // bg0_s
         },
         new Theme
         {
@@ -180,6 +191,7 @@ public class Theme
             SearchSelectedFgRgb = ( 39,  40,  34),
             StatusBarBgRgb      = (235, 110, 150),  // softened pink
             StatusBarFgRgb      = (248, 248, 242),
+            ZebraStripeBgRgb    = ( 47,  48,  42),
         },
         new Theme
         {
@@ -197,6 +209,7 @@ public class Theme
             SearchSelectedFgRgb = (180,  60,  60),
             StatusBarBgRgb      = (250, 230, 170),
             StatusBarFgRgb      = (115,  60,  60),
+            ZebraStripeBgRgb    = (230, 168, 168),
         },
     ];
 

@@ -455,6 +455,7 @@ internal class DesktopForm : DesktopFormBase
         Color themeSearchSelBg = ToColor(theme.SearchSelectedBgRgb);
         Color themeStatusBg = ToColor(theme.StatusBarBgRgb);
         Color themeStatusFg = ToColor(theme.StatusBarFgRgb);
+        Color themeZebraBg = ToColor(theme.ZebraStripeBgRgb);
         g.Clear(themeBg);
         int y = 0;
 
@@ -541,7 +542,7 @@ internal class DesktopForm : DesktopFormBase
         {
             x = 0;
             string rowNum = (r + 1).ToString().PadLeft(RowHeaderWidth - 1) + " ";
-            Color rowBg = r == selRow ? themeSelBg : themeBg;
+            Color rowBg = r == selRow ? themeSelBg : (r % 2 == 0 ? themeZebraBg : themeBg);
             DrawText(g, rowNum, x, y, themeFg, rowBg);
             x = RowHeaderWidth * cw;
             for (int c = 0; c < _grid.ColumnCount; c++)
@@ -636,7 +637,7 @@ internal class DesktopForm : DesktopFormBase
                          : headerParsed != null ? (headerParsed.Value.level == 1 ? Color.FromArgb(35, 28, 5) : Color.FromArgb(5, 28, 35))
                          : extStatus == Extensions.ExtensionCellStatus.Error ? Color.FromArgb(50, 10, 10)
                          : extStatus == Extensions.ExtensionCellStatus.Running ? Color.FromArgb(10, 40, 10)
-                         : themeBg;
+                         : (r % 2 == 0 ? themeZebraBg : themeBg);
                 Color fg = colorParsed != null ? Color.White
                          : isConflict ? Color.FromArgb(255, 180, 180)
                          : isInlineCmd ? Color.FromArgb(100, 255, 150)

@@ -581,6 +581,7 @@ internal class DesktopWindow : IDisposable
         var (tSrchSelFgR, tSrchSelFgG, tSrchSelFgB) = theme.SearchSelectedFgRgb;
         var (tStatBgR, tStatBgG, tStatBgB) = theme.StatusBarBgRgb;
         var (tStatFgR, tStatFgG, tStatFgB) = theme.StatusBarFgRgb;
+        var (tZebraR, tZebraG, tZebraB) = theme.ZebraStripeBgRgb;
 
         // Clear background (semi-transparent if ARGB visual available)
         SetGCColor(tBgR, tBgG, tBgB, _hasArgbVisual ? _bgAlpha : 255);
@@ -669,6 +670,8 @@ internal class DesktopWindow : IDisposable
             string rowNum = (r + 1).ToString().PadLeft(RowHeaderWidth - 1) + " ";
             if (r == _selectedRow)
                 DrawTextWithBg(rowNum, x, y, tSelFgR, tSelFgG, tSelFgB, tSelBgR, tSelBgG, tSelBgB);
+            else if (r % 2 == 0)
+                DrawTextWithBg(rowNum, x, y, tFgR, tFgG, tFgB, tZebraR, tZebraG, tZebraB);
             else
                 DrawTextWithBg(rowNum, x, y, tFgR, tFgG, tFgB, tBgR, tBgG, tBgB);
 
@@ -783,6 +786,7 @@ internal class DesktopWindow : IDisposable
                 else if (boldText != null) { bgR = tBgR; bgG = tBgG; bgB = tBgB; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Error) { bgR = 50; bgG = 10; bgB = 10; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Running) { bgR = 10; bgG = 40; bgB = 10; }
+                else if (r % 2 == 0) { bgR = tZebraR; bgG = tZebraG; bgB = tZebraB; }
                 else { bgR = tBgR; bgG = tBgG; bgB = tBgB; }
 
                 if (isFile) { fgR = 100; fgG = 200; fgB = 255; }
