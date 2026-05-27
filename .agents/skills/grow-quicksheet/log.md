@@ -1945,3 +1945,19 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket F: quicksheet-roll-ext (dice roller for TTRPG GMs)
 - Bucket E: safe additive feature (freeze header row, cell comments)
 - Bucket C: /for-musicians/ or /for-content-creators/ page
+
+## 2026-05-27 13:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket F — created quicksheet-unitconv extension (universal unit converter). 9 categories: length, weight, temperature, data (SI+binary), speed, time, volume, area, pressure. Flexible syntax (100 km to mi, 32 f c, 1024 mb gb). Offline, no API. Build verified green, smoke-tested all categories.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-unitconv (commit on master). PR #213 on main for docs/extensions.md update.
+- Competitor last did: No-ops (saturated). Last substantive: /for-freelancers/ page (May 27 12:00).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket E — safe additive feature (freeze header row). Bucket C — /for-musicians/ page.
+
+## Queued
+
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket E: safe additive feature (freeze header row, cell comments)
+- Bucket C: /for-musicians/ or /for-content-creators/ page
+- Bucket F: quicksheet-hashgen (hash generator: md5, sha1, sha256, crc32)
