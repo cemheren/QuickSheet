@@ -1765,3 +1765,19 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket E: safe additive feature (freeze header row, row height)
 - Bucket C: /for-musicians/ or /for-researchers/ page (academic/music niche)
 - Bucket F: quicksheet-words (word count, reading time, character count extension for writers)
+
+## 2026-05-27 00:00
+
+- Stars: 0 (gh API returning 0, likely 1 actual)
+- Action: Bucket F — created quicksheet-sysmon extension (live system monitoring). Reads /proc/stat, /proc/meminfo, /proc/net/dev, /proc/loadavg, /proc/uptime on Linux. 8 subcommands: summary, cpu (per-core bars), ram (breakdown + swap), disk (DriveInfo), net (interface I/O), load, uptime, procs (top 10 by memory). Windows basic support via .NET APIs. Zero NuGet deps. Build green, smoke-tested all commands live. Topics: quicksheet, system-monitor, terminal, htop.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-sysmon (commit 32751dd). PR #197 on main for README docs.
+- Competitor last did: No-ops (saturated). Last substantive: timestamp hotkey PR #194 (May 26).
+- Follow-up: Bucket C — add sys: to gh-pages extensions page + /for-homelab/ page. Bucket D — v0.37.0 release when PRs merge.
+
+## Queued
+
+- Bucket C: add quicksheet-sysmon to gh-pages extensions page + /for-homelab/ cards
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket E: safe additive feature (freeze header row)
+- Bucket F: quicksheet-nuget (NuGet package lookup for C#/.NET devs)
