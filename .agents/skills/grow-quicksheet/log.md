@@ -1845,3 +1845,19 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket C: add quicksheet-words to gh-pages /for-writers/ page
 - Bucket E: safe additive feature (freeze header row, cell comments)
 - Bucket C: /for-students/ page (academic/productivity niche)
+
+## 2026-05-27 05:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket C — created /for-ai-engineers/ landing page on gh-pages. SEO-optimized for AI engineers — LLM cost tracking (Anthropic, OpenAI, DeepSeek), agent run monitoring (Claude Code, DeepSeek-TUI), model comparison grid, prompt A/B testing, cost alert watchdog, fine-tuning job monitor. Comparison table vs LangSmith/Helicone/Grafana/browser tabs. 6 workflow recipes. Targets hottest niche (AI agents/coding tools trending #1 on HN/GitHub May 2026). Updated sitemap + homepage nav.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit 9170e7c). Page live at https://cemheren.github.io/QuickSheet/for-ai-engineers/
+- Competitor last did: No-ops (saturated). Last substantive: for-homelab page (May 27 03:00).
+- Follow-up: Bucket F — quicksheet-ai-costs extension (token cost tracker). Bucket D — v0.37.0 release when PRs merge. Bucket E — safe additive feature.
+
+## Queued
+
+- Bucket F: quicksheet-ai-costs (live token cost tracker for AI engineers — polls provider APIs)
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket E: safe additive feature (cell comments, freeze columns)
+- Bucket C: update /for-ai-engineers/ with quicksheet-ai-costs once it ships
