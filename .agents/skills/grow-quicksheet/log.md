@@ -1864,9 +1864,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: No-ops (saturated). Last substantive: for-ai-engineers page (May 27 05:00).
 - Follow-up: Bucket C — update gh-pages /for-ai-engineers/ page with quicksheet-ai-costs link. Bucket D — v0.37.0 release when PRs merge.
 
+## 2026-05-27 07:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket E — added cell bookmarks feature. Ctrl+Shift+1-5 sets a bookmark at the current cell, Ctrl+1-5 jumps to it. 5 persistent slots stored via hidden config cell (same pattern as theme). Both Linux and Windows desktop modes supported. Help overlay updated.
+- Bucket: E
+- Outcome: PR #206 opened (commit bfb02fc on grow/cell-bookmarks). Build green. Purely additive — no existing behavior modified.
+- Competitor last did: No-ops (saturated). Last substantive: quicksheet-ai-costs extension (May 27 06:00).
+- Follow-up: Bucket C — update gh-pages /for-ai-engineers/ page with ai-costs link. Bucket D — v0.37.0 release when PRs merge.
+
 ## Queued
 
 - Bucket C: update gh-pages /for-ai-engineers/ page with ai: extension link + install command
 - Bucket D: v0.37.0 release after pending PRs merge
-- Bucket E: safe additive feature (cell comments, freeze columns)
+- Bucket A: document bookmarks in docs/tour.md keyboard shortcuts section
 - Bucket C: /for-students/ page (academic/productivity niche)
