@@ -249,6 +249,12 @@
       <code><span class="prefix">ext:</span> copilot "review this diff"</code>
     </div>
     <div class="card">
+      <span class="tag purple">Extension</span>
+      <h3>quicksheet-ai-costs</h3>
+      <p>Dedicated AI cost tracker. Built-in pricing for 15 models (GPT-4o, Claude, Gemini, DeepSeek). Budget alerts, provider comparison, monthly spend log — all in your wallpaper.</p>
+      <code><span class="prefix">ext:</span> ai-costs usage --provider openai --days 7</code>
+    </div>
+    <div class="card">
       <span class="tag green">Built-in</span>
       <h3>Multi-Format Export</h3>
       <p>Export your cost tracking data to Markdown, HTML, JSON, or SQL. Feed structured data back into your AI pipelines or documentation.</p>
@@ -290,6 +296,41 @@
       <p>Track fine-tuning jobs across providers. See training loss, completion percentage, and ETA without leaving your IDE.</p>
       <code>i: openai api fine_tuning.jobs.list --limit 1 | jq '{status,trained_tokens,model}'</code>
     </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💰 Dedicated Cost Tracking: <span>quicksheet-ai-costs</span></h2>
+  <p style="color:var(--muted);margin-bottom:1.5rem">A purpose-built extension for AI API spend. Built-in pricing for 15 models. No browser dashboards, no SaaS — just your wallpaper showing exactly where your money goes.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>📡 Live Usage Polling</h3>
+      <p>Connects to OpenAI /v1/usage API. Shows daily spend, request count, and token breakdown by model — refreshing on your wallpaper.</p>
+      <code><span class="prefix">ext:</span> ai-costs usage --provider openai --days 7</code>
+    </div>
+    <div class="card">
+      <h3>🧮 Token Cost Calculator</h3>
+      <p>Instant cost estimates with shorthand notation. Supports input/output token splits. Covers GPT-4o, Claude Sonnet/Opus, Gemini Pro, DeepSeek V3.</p>
+      <code><span class="prefix">ext:</span> ai-costs calc gpt-4o 100k 5k</code>
+    </div>
+    <div class="card">
+      <h3>📊 Provider Comparison</h3>
+      <p>Side-by-side pricing table for all 15 models. Sort by input cost, output cost, or total. Find the cheapest model for your workload.</p>
+      <code><span class="prefix">ext:</span> ai-costs compare --sort total</code>
+    </div>
+    <div class="card">
+      <h3>📅 Monthly Budget Tracker</h3>
+      <p>Set monthly limits per provider. See progress bars, projected end-of-month spend, and ⚠️ alerts when approaching budget caps.</p>
+      <code><span class="prefix">ext:</span> ai-costs budget --limit 200 --provider anthropic</code>
+    </div>
+  </div>
+  <div class="install" style="margin-top:2rem">
+    <h3>Install quicksheet-ai-costs</h3>
+    <pre>
+gh repo clone cemheren/quicksheet-ai-costs
+cd quicksheet-ai-costs
+dotnet build -c Release</pre>
+    <p><a href="https://github.com/cemheren/quicksheet-ai-costs">View on GitHub →</a></p>
   </div>
 </section>
 
