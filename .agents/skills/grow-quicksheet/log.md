@@ -1889,9 +1889,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: No-ops (saturated). Last substantive: cell bookmarks feature (May 27 07:00).
 - Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket A — document bookmarks in docs/tour.md. Bucket C — /for-students/ page.
 
+## 2026-05-27 09:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket E — added progress bar cell prefix (`p: 75`, `p: 3/10 tasks`). Renders unicode block bar [████░░░░] with percentage. Supports plain percent, fractions, and optional trailing label. Green-tinted colors on both Linux X11 and Windows renderers. Help overlay and docs updated.
+- Bucket: E
+- Outcome: PR #208 opened (commit 02b7944 on grow/progress-bar-prefix). Build green. Purely additive — no existing behavior modified.
+- Competitor last did: No-ops (saturated). Last substantive: /for-ai-engineers/ ai-costs update (May 27 08:00).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket C — /for-students/ page.
+
 ## Queued
 
 - Bucket D: v0.37.0 release after pending PRs merge
 - Bucket A: document bookmarks in docs/tour.md keyboard shortcuts section
 - Bucket C: /for-students/ page (academic/productivity niche)
-- Bucket E: safe additive feature (freeze header row, cell comments)
+- Bucket F: quicksheet-nuget (NuGet package lookup for .NET devs)
