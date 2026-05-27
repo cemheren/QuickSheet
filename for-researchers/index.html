@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuickSheet for Researchers — Papers, Experiments &amp; Grants on Your Desktop</title>
+  <meta name="description" content="Academic researchers: track paper deadlines, experiment results, citation counts, grant milestones, and conference dates — all on your desktop wallpaper. Zero cloud, works over SSH.">
+  <meta name="keywords" content="research paper tracker terminal, academic dashboard desktop, experiment log terminal, arxiv tracker desktop, citation tracker terminal, grant deadline tracker, conference deadline tracker, phd productivity tool, academic spreadsheet terminal, research workflow terminal, lab notebook terminal, tui spreadsheet researcher, csv experiment data, ssh remote desktop tool">
+  <link rel="canonical" href="https://cemheren.github.io/QuickSheet/for-researchers/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="QuickSheet for Researchers — Papers, Experiments &amp; Grants on Your Desktop">
+  <meta property="og:description" content="Track paper deadlines, experiment results, citation counts, and grant milestones on your desktop wallpaper. Zero cloud, works over SSH.">
+  <meta property="og:url" content="https://cemheren.github.io/QuickSheet/for-researchers/">
+  <meta property="og:site_name" content="QuickSheet">
+  <meta property="og:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QuickSheet for Researchers">
+  <meta name="twitter:description" content="Papers, experiments, grants — all on your desktop wallpaper. Zero cloud, works over SSH.">
+  <meta name="twitter:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --green: #3fb950;
+      --purple: #bc8cff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    nav { display: flex; align-items: center; gap: 1.5rem; padding: 1rem 2rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+    nav .logo { font-weight: 700; font-size: 1.1rem; }
+    nav a { color: var(--muted); font-size: 0.9rem; }
+    nav a:hover { color: var(--text); text-decoration: none; }
+    nav a.active { color: var(--accent); }
+    .container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+    .hero { text-align: center; padding: 4rem 1rem 3rem; }
+    .hero h1 { font-size: 2.4rem; margin-bottom: 1rem; line-height: 1.2; }
+    .hero p { font-size: 1.2rem; color: var(--muted); max-width: 700px; margin: 0 auto 2rem; }
+    .install-cmd { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 0.95rem; display: inline-block; margin: 1rem 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+    .card h3 { margin-bottom: 0.5rem; font-size: 1.1rem; }
+    .card p { color: var(--muted); font-size: 0.9rem; }
+    .card .icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    section { margin: 4rem 0; }
+    section h2 { font-size: 1.8rem; margin-bottom: 1rem; }
+    section > p { color: var(--muted); margin-bottom: 1.5rem; max-width: 700px; }
+    .csv-example { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 0.85rem; overflow-x: auto; white-space: pre; line-height: 1.8; margin: 1.5rem 0; }
+    .comparison { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+    .comparison th, .comparison td { padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left; font-size: 0.9rem; }
+    .comparison th { background: var(--surface); font-weight: 600; }
+    .comparison .yes { color: var(--green); }
+    .comparison .no { color: var(--muted); }
+    .recipes { counter-reset: recipe; }
+    .recipe { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin: 1rem 0; }
+    .recipe h4 { font-size: 1rem; margin-bottom: 0.5rem; }
+    .recipe p { color: var(--muted); font-size: 0.9rem; }
+    .recipe code { background: var(--bg); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .cta { text-align: center; padding: 3rem 1rem; margin-top: 3rem; border-top: 1px solid var(--border); }
+    .cta h2 { margin-bottom: 1rem; }
+    .btn { display: inline-block; background: var(--accent); color: var(--bg); padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; margin: 0.5rem; }
+    .btn:hover { opacity: 0.9; text-decoration: none; }
+    footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../" class="logo">QuickSheet</a>
+    <a href="../features/">Features</a>
+    <a href="../extensions/">Extensions</a>
+    <a href="../shortcuts/">Shortcuts</a>
+    <a href="../alternatives/">Alternatives</a>
+    <a href="../for-researchers/" class="active">For Researchers</a>
+    <a href="../for-ai-engineers/">For AI Engineers</a>
+    <a href="../for-developers/">For Developers</a>
+    <a href="../for-homelab/">For Homelab</a>
+  </nav>
+
+  <div class="container">
+    <div class="hero">
+      <h1>Your Desktop Is Your<br>Research Dashboard</h1>
+      <p>Track paper deadlines, monitor experiment runs, log citation counts, and manage grant milestones — all pinned to your wallpaper. Works over SSH. Zero cloud dependency.</p>
+      <div class="install-cmd">dotnet run -- research-dashboard.csv --desktop</div>
+    </div>
+
+    <section>
+      <h2>Built for Academic Workflows</h2>
+      <p>Researchers juggle papers, experiments, grants, teaching, and conferences. QuickSheet keeps it all visible without opening yet another app or browser tab.</p>
+      <div class="grid">
+        <div class="card">
+          <div class="icon">📄</div>
+          <h3>Paper Deadline Tracker</h3>
+          <p>Conference submission deadlines (ICML, NeurIPS, CVPR, CHI) always visible. Color-code by urgency. Never miss a deadline again.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🧪</div>
+          <h3>Experiment Log</h3>
+          <p>Log hyperparameters, metrics, and status for each run directly in cells. CSV format means easy import into pandas or R later.</p>
+        </div>
+        <div class="card">
+          <div class="icon">📊</div>
+          <h3>Live ArXiv Lookups</h3>
+          <p>Use the <code>ext: arxiv 2301.07041</code> prefix to pull paper titles, authors, and abstracts directly into cells.</p>
+        </div>
+        <div class="card">
+          <div class="icon">💰</div>
+          <h3>Grant Milestone Tracker</h3>
+          <p>Track deliverables, reporting dates, and budget spend across multiple grants. Progress bars show completion at a glance.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🖥️</div>
+          <h3>SSH-Friendly</h3>
+          <p>Running on a headless server or HPC cluster? QuickSheet's CSV files sync trivially via rsync, git, or shared filesystems.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🔒</div>
+          <h3>Zero Cloud, Full Privacy</h3>
+          <p>No SaaS account, no data leaves your machine. Perfect for sensitive research data, IRB-protected datasets, or air-gapped labs.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Example: Research Dashboard Layout</h2>
+      <p>Here's how a typical PhD student or postdoc might lay out their desktop:</p>
+      <div class="csv-example">Paper,Venue,Deadline,Status,Days Left
+"Attention Is Still All You Need",NeurIPS 2026,2026-06-15,Writing,19
+"Graph Transformers for Materials",ICML 2026,2026-07-01,Experiments,35
+"Privacy-Preserving FL Survey",TPAMI,Rolling,Revision,—
+
+Grant,Funder,Next Report,Budget Remaining
+NSF CAREER #2345678,NSF,2026-09-01,$142k / $500k
+NIH R01 (Year 2),NIH,2026-12-15,$380k / $1.2M
+
+ext: arxiv 2405.04434
+i: curl -s "https://api.semanticscholar.org/graph/v1/paper/CorpusID:123456?fields=citationCount" | jq .citationCount
+
+Experiment,Model,LR,Epochs,Val Acc,Status
+exp-041,ViT-L/14,3e-4,100,87.2%,✓ Done
+exp-042,ViT-L/14,1e-4,100,—,i: tail -1 ~/runs/exp042/progress.log
+exp-043,DINO-v2,5e-4,200,—,Running (GPU 3)</div>
+    </section>
+
+    <section>
+      <h2>Why Researchers Choose QuickSheet</h2>
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Need</th>
+            <th>QuickSheet</th>
+            <th>Notion / Obsidian</th>
+            <th>Google Sheets</th>
+            <th>Terminal (htop/tmux)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Always visible (no window switching)</td>
+            <td class="yes">✓ Desktop wallpaper</td>
+            <td class="no">— (window)</td>
+            <td class="no">— (browser tab)</td>
+            <td class="no">— (terminal window)</td>
+          </tr>
+          <tr>
+            <td>Works offline / air-gapped</td>
+            <td class="yes">✓ Fully local</td>
+            <td class="yes">✓ Local mode</td>
+            <td class="no">— Needs internet</td>
+            <td class="yes">✓</td>
+          </tr>
+          <tr>
+            <td>CSV-native (pandas/R compatible)</td>
+            <td class="yes">✓ Native format</td>
+            <td class="no">— Export only</td>
+            <td class="yes">✓ Download as CSV</td>
+            <td class="no">—</td>
+          </tr>
+          <tr>
+            <td>Live command output in cells</td>
+            <td class="yes">✓ <code>i:</code> prefix</td>
+            <td class="no">—</td>
+            <td class="no">—</td>
+            <td class="yes">✓ But no grid layout</td>
+          </tr>
+          <tr>
+            <td>Zero setup / zero account</td>
+            <td class="yes">✓ One binary</td>
+            <td class="no">— Account needed</td>
+            <td class="no">— Google account</td>
+            <td class="yes">✓</td>
+          </tr>
+          <tr>
+            <td>Extensible (ArXiv, weather, stocks)</td>
+            <td class="yes">✓ 25+ extensions</td>
+            <td class="yes">✓ Plugins</td>
+            <td class="yes">✓ Add-ons</td>
+            <td class="no">—</td>
+          </tr>
+          <tr>
+            <td>Works over SSH / on HPC</td>
+            <td class="yes">✓ CSV + rsync</td>
+            <td class="no">—</td>
+            <td class="no">—</td>
+            <td class="yes">✓</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Research Workflow Recipes</h2>
+      <div class="recipes">
+        <div class="recipe">
+          <h4>📅 Conference Deadline Countdown</h4>
+          <p>Track all upcoming paper deadlines. Use <code>i: echo $(( ($(date -d '2026-06-15' +%s) - $(date +%s)) / 86400 )) days</code> for live countdowns. Color cells red when &lt;7 days remain.</p>
+        </div>
+        <div class="recipe">
+          <h4>🧬 Experiment Hyperparameter Grid</h4>
+          <p>Log every experiment run with model, learning rate, batch size, and metrics. CSV format lets you <code>import pandas as pd; df = pd.read_csv("dashboard.csv")</code> for analysis.</p>
+        </div>
+        <div class="recipe">
+          <h4>📈 Citation Monitor</h4>
+          <p>Use inline commands to poll Semantic Scholar API: <code>i: curl -s "api.semanticscholar.org/..." | jq .citationCount</code>. Watch your h-index grow from your wallpaper.</p>
+        </div>
+        <div class="recipe">
+          <h4>🖥️ GPU Cluster Status</h4>
+          <p>Monitor your SLURM jobs: <code>i: squeue -u $USER --format="%.8i %.9P %.30j %.2t" | head -5</code>. See which jobs are running without opening a terminal.</p>
+        </div>
+        <div class="recipe">
+          <h4>📚 Reading List + Notes</h4>
+          <p>Keep a living reading list with paper titles, venues, key takeaways, and "read ✓/✗" status. Use <code>ext: arxiv &lt;id&gt;</code> to auto-fill metadata.</p>
+        </div>
+        <div class="recipe">
+          <h4>💵 Grant Budget Tracker</h4>
+          <p>Track spending across personnel, equipment, travel, and indirect costs. Column sums (Σ) show totals. Progress bar cells (<code>p: 28</code>) visualize burn rate.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Relevant Extensions</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="icon">📄</div>
+          <h3>quicksheet-arxiv</h3>
+          <p>Look up arXiv papers by ID. Returns title, authors, abstract, and publication date directly in your cells.</p>
+        </div>
+        <div class="card">
+          <div class="icon">📝</div>
+          <h3>quicksheet-words</h3>
+          <p>Word count, reading time, Flesch-Kincaid readability score. Perfect for checking paper abstracts and grant proposals.</p>
+        </div>
+        <div class="card">
+          <div class="icon">💻</div>
+          <h3>quicksheet-sysmon</h3>
+          <p>CPU, RAM, disk, and uptime monitoring. Keep an eye on your local workstation or lab server resources.</p>
+        </div>
+        <div class="card">
+          <div class="icon">💰</div>
+          <h3>quicksheet-ai-costs</h3>
+          <p>Track API costs for OpenAI, Anthropic, and other LLM providers. Essential if your research uses large language models.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta">
+      <h2>Start Your Research Dashboard</h2>
+      <p style="color: var(--muted); margin-bottom: 1.5rem;">One command. No account. No cloud. Your data stays on your machine.</p>
+      <a href="https://github.com/cemheren/QuickSheet" class="btn">View on GitHub</a>
+      <a href="../features/" class="btn" style="background: var(--surface); color: var(--text); border: 1px solid var(--border);">See All Features</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>QuickSheet is open-source (MIT). Made for researchers who live in the terminal.</p>
+    <p style="margin-top: 0.5rem;"><a href="https://github.com/cemheren/QuickSheet">GitHub</a> · <a href="../extensions/">Extensions</a> · <a href="../shortcuts/">Keyboard Shortcuts</a></p>
+  </footer>
+</body>
+</html>
