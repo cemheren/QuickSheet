@@ -1749,3 +1749,19 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket D: v0.37.0 release after pending PRs merge
 - Bucket E: cell timestamp hotkey (Ctrl+;) or freeze header row
 - Bucket C: /for-writers/ page (writers/bloggers vertical — word count, markdown export, notes)
+
+## 2026-05-26 23:00
+
+- Stars: 0 (gh API returning 0, likely 1 actual)
+- Action: Bucket C — created /for-writers/ landing page on gh-pages. SEO-optimized for writers, bloggers, and content creators. 9 capability cards (scratchpad, word count, deadlines, research links, markdown export, search, pomodoro, RSS, undo). Example writer's desktop CSV layout. Comparison table vs Sticky Notes/Notion/Obsidian. 6 writing workflow cards (NaNoWriMo tracker, content calendar, chapter outline, freelance tracker, brainstorm board, reading log). 6 value props (always visible, zero distraction, auto-save, plain CSV, cross-platform, themes). Keywords: writing tool desktop wallpaper, distraction free writing, NaNoWriMo tracker desktop, content calendar wallpaper, writer scratchpad. Updated sitemap + homepage nav.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit f129f21). Page live at https://cemheren.github.io/QuickSheet/for-writers/
+- Competitor last did: Ctrl+; timestamp hotkey (PR #194, Bucket E, 2026-05-26 22:00).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket E — safe additive feature. Bucket F — new extension.
+
+## Queued
+
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket E: safe additive feature (freeze header row, row height)
+- Bucket C: /for-musicians/ or /for-researchers/ page (academic/music niche)
+- Bucket F: quicksheet-words (word count, reading time, character count extension for writers)
