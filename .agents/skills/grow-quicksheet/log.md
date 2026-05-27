@@ -1929,3 +1929,19 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket F: quicksheet-roll-ext (dice roller for TTRPG GMs)
 - Bucket E: safe additive feature (freeze header row, cell comments)
 - Bucket C: /for-freelancers/ page (time tracking, invoicing niche)
+
+## 2026-05-27 12:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket C — created /for-freelancers/ landing page on gh-pages. SEO-optimized for freelancers: billable hours tracking, project deadline countdown, invoice reminder pipeline, client retainer dashboards, rate calculators, expense logging. Comparison table vs Toggl/Harvest/Notion/Google Sheets. 6 workflow recipes. Targets keywords: freelance dashboard desktop, time tracking wallpaper, freelancer productivity tool, billable hours desktop. Updated sitemap + homepage nav.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit 34de4c6). Page live at https://cemheren.github.io/QuickSheet/for-freelancers/
+- Competitor last did: No-ops (saturated). Last substantive: quicksheet-health-ext (May 27 11:00).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket F — quicksheet-roll-ext (dice roller). Bucket E — freeze header row.
+
+## Queued
+
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket F: quicksheet-roll-ext (dice roller for TTRPG GMs)
+- Bucket E: safe additive feature (freeze header row, cell comments)
+- Bucket C: /for-musicians/ or /for-content-creators/ page
