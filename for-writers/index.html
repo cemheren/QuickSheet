@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuickSheet for Writers — Desktop Wallpaper Scratchpad for Notes, Ideas &amp; Drafts</title>
+  <meta name="description" content="Writers: keep notes, word counts, deadlines, and ideas permanently visible on your desktop wallpaper. Distraction-free. Always there when you look up. Zero apps to open.">
+  <meta name="keywords" content="writing tool desktop wallpaper, distraction free writing tool, writer scratchpad desktop, desktop notes always visible, writer productivity tool, writing dashboard desktop, word count desktop, manuscript tracker wallpaper, writing goals desktop, notes on desktop wallpaper linux, persistent desktop notes, writer daily word count tracker, NaNoWriMo tracker desktop, blog post planner desktop, content calendar wallpaper, markdown export writing, writer distraction free desktop, ambient writing dashboard, sticky notes alternative desktop, always visible notes linux, writing scratchpad terminal, writer outline desktop, chapter tracker desktop, deadline tracker wallpaper, freelance writing dashboard">
+  <link rel="canonical" href="https://cemheren.github.io/QuickSheet/for-writers/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="QuickSheet for Writers — Your Desktop as a Writing Dashboard">
+  <meta property="og:description" content="Notes, word counts, deadlines, and ideas permanently on your desktop wallpaper. Always visible. Zero apps to open.">
+  <meta property="og:url" content="https://cemheren.github.io/QuickSheet/for-writers/">
+  <meta property="og:site_name" content="QuickSheet">
+  <meta property="og:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QuickSheet for Writers — Desktop Writing Dashboard">
+  <meta name="twitter:description" content="Keep notes, word counts, and deadlines always visible on your desktop wallpaper. No app switching.">
+  <meta name="twitter:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "QuickSheet for Writers",
+    "description": "Use QuickSheet as a persistent writing dashboard on your desktop wallpaper — notes, word counts, deadlines, content calendars, and chapter outlines always visible at a glance.",
+    "url": "https://cemheren.github.io/QuickSheet/for-writers/",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "QuickSheet",
+      "url": "https://cemheren.github.io/QuickSheet/"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --purple: #bc8cff;
+      --orange: #d29922;
+      --red: #f85149;
+      --max-w: 960px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+    nav .logo { font-weight: 700; font-size: 1.1rem; }
+    nav a { color: var(--muted); font-size: 0.9rem; }
+    nav a:hover { color: var(--text); text-decoration: none; }
+    nav a.active { color: var(--accent); }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      background: linear-gradient(180deg, #161b22 0%, var(--bg) 100%);
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(188,140,255,0.1);
+      border: 1px solid rgba(188,140,255,0.3);
+      color: var(--purple);
+      padding: 0.3em 0.9em;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--purple); }
+    .hero .tagline {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 620px;
+      margin: 0 auto 2rem;
+    }
+
+    .install-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      display: inline-block;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: var(--accent2);
+      margin-bottom: 1rem;
+    }
+    .install-box .comment { color: var(--muted); }
+
+    section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+    section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    section h2 .emoji { font-style: normal; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .card code {
+      display: inline-block;
+      background: rgba(88,166,255,0.1);
+      color: var(--accent);
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+    .card p { color: var(--muted); font-size: 0.95rem; }
+    .card .indicator { font-size: 1.3rem; margin-bottom: 0.5rem; }
+
+    .csv-example {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      overflow-x: auto;
+      margin: 2rem 0;
+    }
+    .csv-example pre {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.82rem;
+      color: var(--text);
+      line-height: 1.7;
+      white-space: pre;
+    }
+    .csv-example .header { color: var(--accent); font-weight: 600; }
+    .csv-example .prefix { color: var(--accent2); }
+    .csv-example .value { color: var(--orange); }
+    .csv-example .dim { color: var(--muted); }
+
+    .comparison {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+    .comparison th, .comparison td {
+      border: 1px solid var(--border);
+      padding: 0.75rem 1rem;
+      text-align: left;
+    }
+    .comparison th {
+      background: var(--surface);
+      font-weight: 600;
+    }
+    .comparison td:first-child { font-weight: 500; }
+    .comparison .yes { color: var(--accent2); }
+    .comparison .no { color: var(--red); }
+    .comparison .partial { color: var(--orange); }
+
+    .value-props {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .value-prop {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .value-prop .icon { font-size: 1.5rem; flex-shrink: 0; }
+    .value-prop h4 { font-size: 1rem; margin-bottom: 0.25rem; }
+    .value-prop p { color: var(--muted); font-size: 0.9rem; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .step {
+      text-align: center;
+      padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .step .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      background: rgba(188,140,255,0.15);
+      color: var(--purple);
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+    .step h4 { font-size: 0.95rem; margin-bottom: 0.4rem; }
+    .step p { color: var(--muted); font-size: 0.85rem; }
+
+    .cta {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+    .cta h2 { margin-bottom: 1rem; }
+    .cta p { color: var(--muted); max-width: 500px; margin: 0 auto 1.5rem; }
+    .cta a.btn {
+      display: inline-block;
+      background: var(--purple);
+      color: #fff;
+      padding: 0.75rem 2rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .cta a.btn:hover { opacity: 0.9; text-decoration: none; }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">📋 QuickSheet</span>
+  <a href="https://cemheren.github.io/QuickSheet/">Home</a>
+  <a href="https://cemheren.github.io/QuickSheet/features/">Features</a>
+  <a href="https://cemheren.github.io/QuickSheet/extensions/">Extensions</a>
+  <a href="https://cemheren.github.io/QuickSheet/shortcuts/">Shortcuts</a>
+  <a href="https://cemheren.github.io/QuickSheet/for-writers/" class="active">For Writers</a>
+</nav>
+
+<div class="hero">
+  <div class="badge">✍️ For Writers &amp; Bloggers</div>
+  <h1>Your Desktop as a <span>Writing Dashboard</span></h1>
+  <p class="tagline">
+    Notes, outlines, word count goals, and deadlines — always visible on your wallpaper.
+    No app to open. No context switch. Just look up and your writing world is there.
+  </p>
+  <div class="install-box">
+    <span class="comment"># Start writing on your wallpaper</span><br>
+    dotnet run -- writing-dashboard.csv --desktop
+  </div>
+</div>
+
+<section>
+  <h2><span class="emoji">📝</span> Built for the Writing Workflow</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="indicator">📓</div>
+      <h3>Persistent Scratchpad</h3>
+      <p>Jot ideas, snippets, and quick notes directly into cells. They persist across reboots — always there when inspiration strikes.</p>
+    </div>
+    <div class="card">
+      <div class="indicator">📊</div>
+      <h3>Word Count Tracking</h3>
+      <code>Σ column sums</code>
+      <p>Use column sums to track daily word counts. Set a NaNoWriMo goal of 1,667/day and watch your progress accumulate.</p>
+    </div>
+    <div class="card">
+      <div class="indicator">📅</div>
+      <h3>Deadline &amp; Calendar View</h3>
+      <p>Lay out your content calendar as a grid — articles across columns, due dates in rows. See your entire publishing schedule at a glance.</p>
+    </div>
+    <div class="card">
+      <div class="indicator">🔗</div>
+      <h3>Research Links</h3>
+      <code>https://source-url.com</code>
+      <p>Paste URLs into cells — they become clickable hyperlinks. Keep research sources next to your outline.</p>
+    </div>
+    <div class="card">
+      <div class="indicator">📤</div>
+      <h3>Markdown Export</h3>
+      <code>--export-md outline.md</code>
+      <p>Export your grid to Markdown for pasting into blog platforms, CMS editors, or sharing with editors.</p>
+    </div>
+    <div class="card">
+      <div class="indicator">🔍</div>
+      <h3>Full-Text Search</h3>
+      <code>Ctrl+F</code>
+      <p>Search across all your notes instantly. Find that character name, plot point, or article idea you jotted down last month.</p>
+    </div>
+    <div class="card">
+      <div class="indicator">⏱️</div>
+      <h3>Pomodoro Timer</h3>
+      <code>ext: quicksheet-pomodoro</code>
+      <p>Built-in focus timer on your desktop. 25-minute writing sprints with break reminders — no separate app needed.</p>
+    </div>
+    <div class="card">
+      <div class="indicator">📰</div>
+      <h3>RSS Feed Headlines</h3>
+      <code>ext: quicksheet-news</code>
+      <p>Pull blog headlines and industry news into cells. Stay inspired without opening a browser or doomscrolling.</p>
+    </div>
+    <div class="card">
+      <div class="indicator">🔄</div>
+      <h3>Undo/Redo</h3>
+      <code>Ctrl+Z / Ctrl+Y</code>
+      <p>Accidentally delete a note? 200-step undo history means your brainstorms are never lost.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="emoji">💡</span> Example: Writer's Desktop Layout</h2>
+  <div class="csv-example">
+    <pre><span class="header">A                    B                    C                    D</span>
+<span class="prefix">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+<span class="value">📕 Novel Progress</span>    <span class="dim">Ch.1: 3,200w ✅</span>       <span class="dim">Ch.2: 2,800w ✅</span>       <span class="dim">Ch.3: 1,400w 🔄</span>
+<span class="value">Daily Goal: 1,667</span>   <span class="dim">Today: 843</span>           <span class="dim">Remaining: 824</span>       <span class="dim">Streak: 12 days</span>
+<span class="prefix">─────────────────────────────────────────────────────────────────────────────────</span>
+<span class="value">📝 Blog Queue</span>        <span class="dim">Due Date</span>             <span class="dim">Status</span>               <span class="dim">Words</span>
+<span class="dim">React hooks deep-dive</span> <span class="value">May 28</span>              <span class="value">Draft done</span>           <span class="dim">2,400</span>
+<span class="dim">Terminal tools review</span> <span class="value">Jun 2</span>               <span class="value">Researching</span>          <span class="dim">600</span>
+<span class="dim">Interview: Jane Doe</span>  <span class="value">Jun 5</span>               <span class="value">Scheduled</span>            <span class="dim">—</span>
+<span class="prefix">─────────────────────────────────────────────────────────────────────────────────</span>
+<span class="value">🔗 Research</span>          <span class="dim">https://source1.com</span>  <span class="dim">https://source2.com</span>  <span class="dim">https://ref3.com</span>
+<span class="prefix">─────────────────────────────────────────────────────────────────────────────────</span>
+<span class="value">💭 Ideas Backlog</span>     <span class="dim">Newsletter about...</span>  <span class="dim">Short story: the...</span>  <span class="dim">Pitch to editor re:</span>
+<span class="dim">Series on Rust+WASM</span>  <span class="dim">Personal essay: ...</span>  <span class="dim">"Why I quit social"</span>  <span class="dim">Listicle: 10 CLI...</span>
+<span class="prefix">─────────────────────────────────────────────────────────────────────────────────</span>
+<span class="prefix">ext: quicksheet-pomodoro</span>  <span class="dim">🍅 Focus: 14:32</span>  <span class="dim">Sessions today: 4</span></pre>
+  </div>
+</section>
+
+<section>
+  <h2><span class="emoji">⚡</span> Why Writers Choose QuickSheet</h2>
+  <div class="value-props">
+    <div class="value-prop">
+      <div class="icon">👁️</div>
+      <div>
+        <h4>Always Visible</h4>
+        <p>Your notes live on the wallpaper — visible between windows, during breaks, whenever you glance at the desktop. No app to find or open.</p>
+      </div>
+    </div>
+    <div class="value-prop">
+      <div class="icon">🚫</div>
+      <div>
+        <h4>Zero Distractions</h4>
+        <p>No notifications, no social feeds, no plugin marketplace. Just your words on a clean grid. The ultimate distraction-free tool.</p>
+      </div>
+    </div>
+    <div class="value-prop">
+      <div class="icon">💾</div>
+      <div>
+        <h4>Auto-Saves Every 5s</h4>
+        <p>Never lose a thought. QuickSheet autosaves to CSV every 5 seconds. Your scratchpad survives crashes, reboots, and power cuts.</p>
+      </div>
+    </div>
+    <div class="value-prop">
+      <div class="icon">📂</div>
+      <div>
+        <h4>Plain CSV Files</h4>
+        <p>No proprietary format. Your data is CSV — open it in any spreadsheet, version it with Git, search it with grep. You own your notes forever.</p>
+      </div>
+    </div>
+    <div class="value-prop">
+      <div class="icon">🖥️</div>
+      <div>
+        <h4>Cross-Platform</h4>
+        <p>Works on Linux (X11) and Windows. Same CSV, same layout. Switch machines and your writing dashboard comes with you.</p>
+      </div>
+    </div>
+    <div class="value-prop">
+      <div class="icon">🎨</div>
+      <div>
+        <h4>Theme It Your Way</h4>
+        <p>Dark, light, Nord, Solarized, Matrix — pick a theme that matches your writing mood. Cycle with Ctrl+T.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="emoji">🆚</span> QuickSheet vs. Other Writing Tools</h2>
+  <table class="comparison">
+    <tr>
+      <th>Feature</th>
+      <th>QuickSheet</th>
+      <th>Sticky Notes</th>
+      <th>Notion</th>
+      <th>Obsidian</th>
+    </tr>
+    <tr>
+      <td>Always visible (no window)</td>
+      <td class="yes">✓ Wallpaper</td>
+      <td class="partial">~ Covers content</td>
+      <td class="no">✗ Must open</td>
+      <td class="no">✗ Must open</td>
+    </tr>
+    <tr>
+      <td>Zero distraction</td>
+      <td class="yes">✓ Grid only</td>
+      <td class="yes">✓ Minimal</td>
+      <td class="no">✗ Social, AI, plugins</td>
+      <td class="partial">~ Plugins tempt</td>
+    </tr>
+    <tr>
+      <td>Auto-save</td>
+      <td class="yes">✓ Every 5s</td>
+      <td class="yes">✓</td>
+      <td class="yes">✓ Cloud</td>
+      <td class="yes">✓ Local</td>
+    </tr>
+    <tr>
+      <td>Plain text / portable</td>
+      <td class="yes">✓ CSV</td>
+      <td class="no">✗ Proprietary</td>
+      <td class="no">✗ Cloud-locked</td>
+      <td class="yes">✓ Markdown</td>
+    </tr>
+    <tr>
+      <td>Grid layout (calendar view)</td>
+      <td class="yes">✓ Native</td>
+      <td class="no">✗</td>
+      <td class="yes">✓ Database views</td>
+      <td class="partial">~ With plugins</td>
+    </tr>
+    <tr>
+      <td>Markdown export</td>
+      <td class="yes">✓ Built-in</td>
+      <td class="no">✗</td>
+      <td class="yes">✓</td>
+      <td class="yes">✓ Native</td>
+    </tr>
+    <tr>
+      <td>Works offline</td>
+      <td class="yes">✓ Always</td>
+      <td class="yes">✓</td>
+      <td class="no">✗ Needs internet</td>
+      <td class="yes">✓</td>
+    </tr>
+    <tr>
+      <td>Free &amp; open source</td>
+      <td class="yes">✓ MIT</td>
+      <td class="partial">~ Freemium</td>
+      <td class="no">✗ Freemium</td>
+      <td class="partial">~ Core free</td>
+    </tr>
+    <tr>
+      <td>Zero dependencies</td>
+      <td class="yes">✓ Just .NET</td>
+      <td class="yes">✓ Built-in</td>
+      <td class="no">✗ Electron</td>
+      <td class="no">✗ Electron</td>
+    </tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="emoji">🚀</span> Get Started in 3 Minutes</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="num">1</div>
+      <h4>Clone &amp; Build</h4>
+      <p>git clone https://github.com/cemheren/QuickSheet<br>cd QuickSheet<br>dotnet build</p>
+    </div>
+    <div class="step">
+      <div class="num">2</div>
+      <h4>Create Your Layout</h4>
+      <p>Open a CSV and add your notes, goals, deadlines, and ideas in a grid layout.</p>
+    </div>
+    <div class="step">
+      <div class="num">3</div>
+      <h4>Launch on Desktop</h4>
+      <p>dotnet run -- your-notes.csv --desktop</p>
+    </div>
+    <div class="step">
+      <div class="num">4</div>
+      <h4>Write &amp; Glance</h4>
+      <p>Your writing dashboard is now your wallpaper. Edit cells directly. Auto-saves in the background.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="emoji">✨</span> Writing Workflows That Shine</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>📖 NaNoWriMo Tracker</h3>
+      <p>Track daily word counts across the 30-day challenge. Column sums show cumulative progress. See at a glance if you're on track for 50,000 words.</p>
+    </div>
+    <div class="card">
+      <h3>📰 Content Calendar</h3>
+      <p>Plan your blog posts, newsletters, and social content in a grid. Columns = weeks, rows = platforms. Move ideas through Draft → Review → Published.</p>
+    </div>
+    <div class="card">
+      <h3>🗂️ Chapter Outline</h3>
+      <p>One row per chapter. Columns for: title, POV character, word count, status, notes. Reorder with Ctrl+K (duplicate) and delete.</p>
+    </div>
+    <div class="card">
+      <h3>💰 Freelance Tracker</h3>
+      <p>Track pitches, assignments, rates, deadlines, and payment status. Use row products for invoice totals. Export to Markdown for invoicing.</p>
+    </div>
+    <div class="card">
+      <h3>🧠 Brainstorm Board</h3>
+      <p>Random ideas, character names, plot twists, headline options — toss them into cells. Search later with Ctrl+F when you need them.</p>
+    </div>
+    <div class="card">
+      <h3>📚 Reading &amp; Research Log</h3>
+      <p>Log books read, articles saved, quotes collected. Clickable URLs link to sources. Build a personal reference library on your desktop.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cta">
+  <h2>Start Writing on Your Wallpaper</h2>
+  <p>Your best ideas shouldn't be buried in an app you forget to open. Put them where you'll always see them.</p>
+  <a href="https://github.com/cemheren/QuickSheet" class="btn">Get QuickSheet on GitHub →</a>
+</div>
+
+<footer>
+  <p>QuickSheet is open source (MIT). Built with zero dependencies. Your data stays in plain CSV — no cloud, no lock-in.</p>
+  <p style="margin-top: 0.5rem;">
+    <a href="https://cemheren.github.io/QuickSheet/">Home</a> ·
+    <a href="https://cemheren.github.io/QuickSheet/features/">Features</a> ·
+    <a href="https://cemheren.github.io/QuickSheet/extensions/">Extensions</a> ·
+    <a href="https://github.com/cemheren/QuickSheet">GitHub</a>
+  </p>
+</footer>
+
+</body>
+</html>
