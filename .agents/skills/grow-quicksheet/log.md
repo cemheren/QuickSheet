@@ -1971,9 +1971,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Bucket E — zebra striping (PR #215, May 27 14:00).
 - Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket C — /for-content-creators/ page. Bucket E — freeze header row.
 
+## 2026-05-27 17:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket E — added countdown/date cell prefix (`d: YYYY-MM-DD label`). Renders days remaining (⏳ 5d Release), today marker (★ TODAY), or days elapsed (✓ 3d ago). Amber-tinted colors on both Linux X11 and Windows renderers. Help overlay and docs/tour.md updated.
+- Bucket: E
+- Outcome: PR #220 opened (commit 0eeac41 on grow/countdown-prefix). Build green. Purely additive — no existing behavior modified.
+- Competitor last did: Bucket C — /for-content-creators/ page (May 27 16:00).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket C — /for-musicians/ page.
+
 ## Queued
 
 - Bucket D: v0.37.0 release after pending PRs merge
-- Bucket E: safe additive feature (freeze header row, cell comments)
-- Bucket C: /for-content-creators/ page (YouTubers, streamers, social media)
+- Bucket C: /for-musicians/ or /for-gamers/ page
 - Bucket F: quicksheet-base64 (base64 encode/decode)
+- Bucket A: document countdown prefix in keyboard-shortcuts.md
