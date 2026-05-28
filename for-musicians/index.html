@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuickSheet for Musicians — Desktop Wallpaper Setlist, Practice &amp; BPM Tracker</title>
+  <meta name="description" content="Musicians: manage setlists, track practice sessions, log BPM targets, and organize gig schedules on your desktop wallpaper. Always visible. Zero apps to open. Free and open source.">
+  <meta name="keywords" content="musician desktop dashboard, setlist manager desktop, practice tracker wallpaper, BPM tracker terminal, gig schedule wallpaper, music practice log, setlist desktop wallpaper, musician productivity tool, band setlist organizer, practice session tracker, music practice desktop, song list manager terminal, BPM reference desktop, rehearsal planner wallpaper, musician workflow tool, guitar practice tracker, drum practice log, piano practice desktop, band management tool, gig planner desktop, music production tracker, song key reference, tempo tracker desktop, repertoire manager terminal, always visible setlist">
+  <link rel="canonical" href="https://cemheren.github.io/QuickSheet/for-musicians/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="QuickSheet for Musicians — Your Desktop as a Music Command Center">
+  <meta property="og:description" content="Setlists, practice logs, BPM targets, and gig schedules permanently on your desktop wallpaper. Always visible. Zero apps to open.">
+  <meta property="og:url" content="https://cemheren.github.io/QuickSheet/for-musicians/">
+  <meta property="og:site_name" content="QuickSheet">
+  <meta property="og:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QuickSheet for Musicians — Desktop Music Dashboard">
+  <meta name="twitter:description" content="Track setlists, practice sessions, and tempos always visible on your desktop wallpaper. No app switching.">
+  <meta name="twitter:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "QuickSheet for Musicians",
+    "description": "Use QuickSheet as a persistent music command center on your desktop wallpaper — setlists, practice logs, BPM targets, gig schedules, and repertoire management always visible at a glance.",
+    "url": "https://cemheren.github.io/QuickSheet/for-musicians/",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "QuickSheet",
+      "url": "https://cemheren.github.io/QuickSheet/"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --purple: #bc8cff;
+      --orange: #f0883e;
+      --max-w: 960px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Nav */
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      font-size: 0.9rem;
+    }
+    .nav-logo { font-weight: 700; font-size: 1rem; }
+    .nav a { color: var(--muted); }
+    .nav a:hover { color: var(--text); text-decoration: none; }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      background: linear-gradient(180deg, #161b22 0%, var(--bg) 100%);
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .hero h1 span { color: var(--purple); }
+    .hero .tagline {
+      font-size: 1.2rem;
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto 2rem;
+    }
+
+    /* Sections */
+    .section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+    .section h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .section h2 span { color: var(--accent); }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+    .card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .card p { color: var(--muted); font-size: 0.95rem; }
+    .card .emoji { font-size: 1.3rem; }
+
+    /* Workflow */
+    .workflow {
+      margin-top: 1.5rem;
+      display: grid;
+      gap: 1rem;
+    }
+    .workflow-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+    }
+    .workflow-item h4 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      color: var(--accent2);
+    }
+    .workflow-item p { color: var(--muted); font-size: 0.9rem; }
+    .workflow-item code {
+      background: var(--bg);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: var(--text);
+    }
+
+    /* Comparison */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+    }
+    .compare-table th, .compare-table td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .compare-table th {
+      background: var(--surface);
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .compare-table td:first-child { font-weight: 600; }
+    .check { color: var(--accent2); }
+    .cross { color: #f85149; }
+
+    /* CTA */
+    .cta {
+      text-align: center;
+      padding: 4rem 1.5rem;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+    .cta h2 { font-size: 1.75rem; margin-bottom: 0.75rem; }
+    .cta p { color: var(--muted); margin-bottom: 1.5rem; max-width: 540px; margin-left: auto; margin-right: auto; }
+    .cta-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.75rem 2rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .cta-btn:hover { background: #79c0ff; text-decoration: none; }
+
+    /* Install */
+    .install-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+      font-size: 0.9rem;
+      margin: 1.5rem auto;
+      max-width: 600px;
+      text-align: left;
+      overflow-x: auto;
+    }
+    .install-box .comment { color: var(--muted); }
+    .install-box .cmd { color: var(--accent2); }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.75rem; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../" class="nav-logo">QuickSheet</a>
+  <a href="../features/">Features</a>
+  <a href="../extensions/">Extensions</a>
+  <a href="../shortcuts/">Shortcuts</a>
+  <a href="https://github.com/cemheren/QuickSheet">GitHub</a>
+</nav>
+
+<header class="hero">
+  <h1>QuickSheet for <span>Musicians</span></h1>
+  <p class="tagline">Your desktop wallpaper becomes a music command center — setlists, practice logs, BPM targets, and gig schedules always visible without opening a single app.</p>
+</header>
+
+<section class="section">
+  <h2>Why musicians <span>love</span> it</h2>
+  <div class="grid">
+    <div class="card">
+      <h3><span class="emoji">🎵</span> Setlist Management</h3>
+      <p>Organize songs with keys, tempos, and notes right on your desktop. Reorder for gigs by editing cells. Column headers keep song title, key, BPM, and duration neatly aligned.</p>
+    </div>
+    <div class="card">
+      <h3><span class="emoji">🥁</span> Practice Session Tracker</h3>
+      <p>Log daily practice — instrument, exercise, duration, BPM achieved. Column sums (Σ) auto-total your weekly hours so you can see exactly how much time you've put in.</p>
+    </div>
+    <div class="card">
+      <h3><span class="emoji">🎸</span> BPM Reference Board</h3>
+      <p>Keep target tempos for every piece visible while you practice. No switching to a metronome app to remember your goal BPM — it's right there on your wallpaper.</p>
+    </div>
+    <div class="card">
+      <h3><span class="emoji">📅</span> Gig &amp; Rehearsal Calendar</h3>
+      <p>Track upcoming gigs, rehearsals, and recording sessions with the <code>d:</code> countdown prefix. See "⏳ 3d Friday Gig" counting down on your desktop every time you glance at it.</p>
+    </div>
+    <div class="card">
+      <h3><span class="emoji">🎹</span> Key &amp; Chord Reference</h3>
+      <p>Pin chord progressions, scale patterns, or transposition notes in cells. Always visible while you're composing or arranging — no tab-switching to a reference sheet.</p>
+    </div>
+    <div class="card">
+      <h3><span class="emoji">🔗</span> Quick-Launch Resources</h3>
+      <p>Use <code>r:</code> cells to launch backing tracks, DAW projects, or tutorial links with a keystroke. Put <code>r: open ~/Music/Projects/new-song.als</code> and hit Enter to jump straight in.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Musician <span>workflows</span></h2>
+  <div class="workflow">
+    <div class="workflow-item">
+      <h4>1. Build Your Setlist</h4>
+      <p>Create a CSV with columns for song name, key, BPM, duration, and notes. Load it with <code>dotnet run -- setlist.csv --desktop</code>. Edit on the fly — additions save automatically every 5 seconds.</p>
+    </div>
+    <div class="workflow-item">
+      <h4>2. Track Practice Progress</h4>
+      <p>Dedicate a row per practice session: date, piece, technique focus, minutes spent, current BPM. Use column sums to see total practice time. Watch your tempo targets inch up week over week.</p>
+    </div>
+    <div class="workflow-item">
+      <h4>3. Countdown to Gigs</h4>
+      <p>Add <code>d: 2026-06-15 Summer Festival</code> cells for upcoming shows. The countdown updates every refresh — "⏳ 12d Summer Festival" becomes "★ TODAY Summer Festival" when showtime arrives.</p>
+    </div>
+    <div class="workflow-item">
+      <h4>4. Launch Your DAW Instantly</h4>
+      <p>Put <code>r: open ~/Music/current-project.als</code> in a cell. Select it and press Enter — your DAW opens to the right project. No digging through file managers or recent files.</p>
+    </div>
+    <div class="workflow-item">
+      <h4>5. Export for Bandmates</h4>
+      <p>Share your setlist as Markdown: <code>dotnet run -- setlist.csv --export-md setlist.md</code>. Paste into Discord, email, or print for the music stand. Everyone sees the same song order, keys, and notes.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Sample <span>layout</span></h2>
+  <div class="install-box" style="max-width: 780px; line-height: 1.4;">
+    <span class="comment"># Example: setlist.csv</span><br>
+    <span class="cmd">Song</span>,<span class="cmd">Key</span>,<span class="cmd">BPM</span>,<span class="cmd">Duration</span>,<span class="cmd">Notes</span><br>
+    Blackbird,G,92,2:18,Fingerpicking intro<br>
+    Come Together,Dm,82,4:20,Bass riff — practice slides<br>
+    Superstition,Eb,100,3:48,Clavinet groove<br>
+    Take Five,Ebm,174,5:24,5/4 time — count carefully<br>
+    d: 2026-06-15 Summer Gig,,,,⏳ countdown<br>
+    r: open ~/Music/rehearsal-notes.md,,,,Quick-launch
+  </div>
+</section>
+
+<section class="section">
+  <h2>QuickSheet vs. <span>alternatives</span></h2>
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>QuickSheet</th>
+        <th>Google Sheets</th>
+        <th>Notion</th>
+        <th>Paper Setlist</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Always visible on desktop</td>
+        <td class="check">✓</td>
+        <td class="cross">✗</td>
+        <td class="cross">✗</td>
+        <td class="cross">✗</td>
+      </tr>
+      <tr>
+        <td>No internet required</td>
+        <td class="check">✓</td>
+        <td class="cross">✗</td>
+        <td class="cross">✗</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>Launch DAW / files from cells</td>
+        <td class="check">✓</td>
+        <td class="cross">✗</td>
+        <td class="cross">✗</td>
+        <td class="cross">✗</td>
+      </tr>
+      <tr>
+        <td>Auto-sum practice hours</td>
+        <td class="check">✓</td>
+        <td class="check">✓</td>
+        <td class="check">✓</td>
+        <td class="cross">✗</td>
+      </tr>
+      <tr>
+        <td>Gig countdown timer</td>
+        <td class="check">✓</td>
+        <td class="cross">✗</td>
+        <td class="cross">✗</td>
+        <td class="cross">✗</td>
+      </tr>
+      <tr>
+        <td>Export to Markdown / share</td>
+        <td class="check">✓</td>
+        <td class="check">✓</td>
+        <td class="check">✓</td>
+        <td class="cross">✗</td>
+      </tr>
+      <tr>
+        <td>Zero account / login</td>
+        <td class="check">✓</td>
+        <td class="cross">✗</td>
+        <td class="cross">✗</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>Keyboard-only operation</td>
+        <td class="check">✓</td>
+        <td class="cross">✗</td>
+        <td class="cross">✗</td>
+        <td class="cross">✗</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="section">
+  <h2>Get <span>started</span></h2>
+  <div class="install-box">
+    <span class="comment"># Clone and run</span><br>
+    <span class="cmd">git clone https://github.com/cemheren/QuickSheet.git</span><br>
+    <span class="cmd">cd QuickSheet</span><br>
+    <span class="cmd">dotnet run -- setlist.csv --desktop</span><br><br>
+    <span class="comment"># Or export your setlist as Markdown</span><br>
+    <span class="cmd">dotnet run -- setlist.csv --export-md setlist.md</span>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Your desktop, your music hub</h2>
+  <p>Stop switching between apps to check your setlist, practice log, or gig schedule. QuickSheet puts it all on your wallpaper — always visible, always ready.</p>
+  <a href="https://github.com/cemheren/QuickSheet" class="cta-btn">★ Star on GitHub</a>
+</section>
+
+<footer>
+  <p>QuickSheet is free and open source. <a href="https://github.com/cemheren/QuickSheet">View on GitHub</a> · <a href="../">Home</a></p>
+</footer>
+
+</body>
+</html>
