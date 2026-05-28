@@ -19,6 +19,7 @@ Every cell is plain text by default. Add a prefix and the cell *does something*.
 | `i: `               | Inline subprocess. Output streams back into the cell, live.       | `i: ping -c 1 example.com`         |
 | `s: `               | Sparkline. Numbers render as unicode bars (▁▂▃▄▅▆▇█). Range form: `s: A1::A10`. | `s: 4,7,9,3,8,12`                  |
 | `c:color: `         | Cell color. Highlights background with a named color.             | `c:red: URGENT`                    |
+| `d: `               | Countdown to date. Shows days remaining/elapsed with label.       | `d: 2025-12-31 Release day`        |
 | `L: `               | Loop a target cell on an interval.                                | `L: A10, 5m`                       |
 | `ext: `             | Install an extension repo. One line.                              | `ext: github:Deskworks/quicksheet-weather` |
 | `config: `          | Persistent settings (currently `theme=…`). Auto-created when you press `Ctrl+T`; survives restart via the CSV itself — no sidecar file. | `config: theme=Nord`               |

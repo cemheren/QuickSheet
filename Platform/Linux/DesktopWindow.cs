@@ -734,6 +734,14 @@ internal class DesktopWindow : IDisposable
                 if (boldText != null)
                     displayVal = boldText;
 
+                // Render countdown/date cells (d: YYYY-MM-DD label)
+                bool isCountdown = !isEditingThisCell && CellPrefix.IsCountdown(cellVal);
+                if (isCountdown)
+                {
+                    string? countdown = CellPrefix.RenderCountdown(cellVal);
+                    if (countdown != null) displayVal = countdown;
+                }
+
                 string display = isEditingThisCell
                     ? _editMode.GetCellDisplay(w)
                     : (displayVal.Length >= w ? displayVal[..w] : displayVal.PadRight(w));
@@ -781,6 +789,7 @@ internal class DesktopWindow : IDisposable
                     };
                 }
                 else if (boldText != null) { bgR = tBgR; bgG = tBgG; bgB = tBgB; }
+                else if (isCountdown) { bgR = 30; bgG = 25; bgB = 5; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Error) { bgR = 50; bgG = 10; bgB = 10; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Running) { bgR = 10; bgG = 40; bgB = 10; }
                 else { bgR = tBgR; bgG = tBgG; bgB = tBgB; }
@@ -798,6 +807,7 @@ internal class DesktopWindow : IDisposable
                         : (80, 220, 255);
                 }
                 else if (boldText != null) { fgR = 255; fgG = 255; fgB = 255; }
+                else if (isCountdown) { fgR = 255; fgG = 200; fgB = 80; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Error) { fgR = 255; fgG = 80; fgB = 80; }
                 else if (extStatus == Extensions.ExtensionCellStatus.Running) { fgR = 80; fgG = 255; fgB = 80; }
                 else { fgR = tFgR; fgG = tFgG; fgB = tFgB; }

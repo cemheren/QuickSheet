@@ -174,6 +174,52 @@ public static class CellPrefix
         return value[3..];
     }
 
+    // ── Countdown/date prefix ───────────────────────────────────────
+
+    /// <summary>
+    /// Returns true when a cell starts with "d: " (countdown/date).
+    /// Format: "d: YYYY-MM-DD" or "d: YYYY-MM-DD label text"
+    /// </summary>
+    public static bool IsCountdown(string value) =>
+        value.StartsWith("d: ", StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// Renders a countdown cell. Returns display string like "⏳ 5d Release" or "✓ 3d ago".
+    /// Returns null if parsing fails.
+    /// </summary>
+    public static string? RenderCountdown(string value)
+    {
+        if (!IsCountdown(value)) return null;
+        string rest = value[3..].Trim();
+        if (rest.Length < 10) return null;
+
+        string datePart = rest[..10];
+        string label = rest.Length > 10 ? rest[10..].Trim() : "";
+
+        if (!DateTime.TryParseExact(datePart, "yyyy-MM-dd",
+            System.Globalization.CultureInfo.InvariantCulture,
+            System.Globalization.DateTimeStyles.None, out var target))
+            return null;
+
+        int days = (int)(target.Date - DateTime.Today).TotalDays;
+
+        if (days > 0)
+        {
+            string suffix = label.Length > 0 ? $" {label}" : "";
+            return $"\u23f3 {days}d{suffix}";
+        }
+        else if (days == 0)
+        {
+            string suffix = label.Length > 0 ? $" {label}" : "TODAY";
+            return $"\u2605 {suffix}";
+        }
+        else
+        {
+            string suffix = label.Length > 0 ? $" {label}" : "";
+            return $"\u2713 {-days}d ago{suffix}";
+        }
+    }
+
     // ── Header prefix ───────────────────────────────────────────────
 
     /// <summary>

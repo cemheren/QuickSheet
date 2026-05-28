@@ -609,6 +609,14 @@ internal class DesktopForm : DesktopFormBase
                 if (boldText != null)
                     displayVal = boldText;
 
+                // Render countdown/date cells (d: YYYY-MM-DD label)
+                bool isCountdown = CellPrefix.IsCountdown(cellVal);
+                if (isCountdown)
+                {
+                    string? countdown = CellPrefix.RenderCountdown(cellVal);
+                    if (countdown != null) displayVal = countdown;
+                }
+
                 string display = displayVal.Length >= w ? displayVal[..w] : displayVal.PadRight(w);
                 bool isCursor = r == selRow && c == selCol;
                 bool isMultiSel = _selection.Contains((r, c));
@@ -634,6 +642,7 @@ internal class DesktopForm : DesktopFormBase
                          : isLoop     ? Color.FromArgb(0, 40, 40)
                          : isSparkline ? Color.FromArgb(20, 30, 50)
                          : headerParsed != null ? (headerParsed.Value.level == 1 ? Color.FromArgb(35, 28, 5) : Color.FromArgb(5, 28, 35))
+                         : isCountdown ? Color.FromArgb(30, 25, 5)
                          : extStatus == Extensions.ExtensionCellStatus.Error ? Color.FromArgb(50, 10, 10)
                          : extStatus == Extensions.ExtensionCellStatus.Running ? Color.FromArgb(10, 40, 10)
                          : themeBg;
@@ -648,6 +657,7 @@ internal class DesktopForm : DesktopFormBase
                          : isSparkline ? Color.FromArgb(100, 180, 255)
                          : headerParsed != null ? (headerParsed.Value.level == 1 ? Color.FromArgb(255, 220, 80) : Color.FromArgb(80, 220, 255))
                          : boldText != null ? Color.White
+                         : isCountdown ? Color.FromArgb(255, 200, 80)
                          : extStatus == Extensions.ExtensionCellStatus.Error ? Color.FromArgb(255, 80, 80)
                          : extStatus == Extensions.ExtensionCellStatus.Running ? Color.FromArgb(80, 255, 80)
                          : themeFg;
@@ -846,6 +856,7 @@ internal class DesktopForm : DesktopFormBase
                 "  ║  c:COLOR: text  Colored cell background  ║",
                 "  ║  r: cmd         Runnable command         ║",
                 "  ║  s: 1,2,3       Sparkline chart          ║",
+                "  ║  d: YYYY-MM-DD  Countdown to date        ║",
                 "  ║                                          ║",
                 "  ╚══════════════════════════════════════════╝",
                 "",
