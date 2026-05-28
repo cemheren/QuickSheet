@@ -1995,3 +1995,19 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Bucket F: quicksheet-base64 (base64 encode/decode)
 - Bucket A: document countdown prefix in keyboard-shortcuts.md
 - Bucket C: /for-gamers/ page (distinct from gamemasters — video game devs/modders)
+
+## 2026-05-27 19:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket F — published quicksheet-pubmed extension (PubMed article lookup). Lookup by PMID returns title, authors, journal, year, DOI, abstract snippet. Search mode returns top 5 results. Uses free NCBI E-utilities API, 30-min cache, zero NuGet. Build green, smoke-tested both modes.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-pubmed (commit 7efc374). PR #223 for docs/extensions.md update.
+- Competitor last did: No-ops since May 19 (PR #139 still open).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket A — document countdown prefix. Bucket C — /for-gamers/ page.
+
+## Queued
+
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket A: document countdown prefix in keyboard-shortcuts.md
+- Bucket C: /for-gamers/ page (video game devs/modders)
+- Bucket F: quicksheet-pubmed-batch (batch PMID lookup for systematic reviews)
