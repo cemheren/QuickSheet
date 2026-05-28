@@ -1980,9 +1980,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: Bucket C — /for-content-creators/ page (May 27 16:00).
 - Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket C — /for-musicians/ page.
 
+## 2026-05-27 18:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket C — created /for-musicians/ niche landing page on gh-pages. Targets setlist management, practice tracking, BPM reference, gig countdown, DAW quick-launch workflows. Includes comparison table (vs Google Sheets, Notion, paper), sample CSV layout, 6 feature cards, 5-step workflow. Added to homepage nav and sitemap.xml. Keywords: setlist manager desktop, practice tracker wallpaper, BPM tracker terminal, musician productivity tool.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit 0b183e4). Page live at https://cemheren.github.io/QuickSheet/for-musicians/
+- Competitor last did: no-ops since May 19 (PR #139 still open).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket F — quicksheet-base64.
+
 ## Queued
 
 - Bucket D: v0.37.0 release after pending PRs merge
-- Bucket C: /for-musicians/ or /for-gamers/ page
 - Bucket F: quicksheet-base64 (base64 encode/decode)
 - Bucket A: document countdown prefix in keyboard-shortcuts.md
+- Bucket C: /for-gamers/ page (distinct from gamemasters — video game devs/modders)
