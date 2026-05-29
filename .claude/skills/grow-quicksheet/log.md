@@ -1,3 +1,11 @@
+## 2026-05-29 (ext: publish quicksheet-tls-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Published `cemheren/quicksheet-tls-ext` — TLS cert expiry checker for SRE/homelab persona. Shows days-to-expiry, issuer, CN on desktop wallpaper. Built from existing draft, verified green build, pushed repo. Cross-link PR updates 6 docs files.
+- Bucket: F (vertical extension).
+- Outcome: Repo → https://github.com/cemheren/quicksheet-tls-ext. Cross-link PR #237.
+- Follow-up: Publish `quicksheet-ping-ext` next (completes SRE trio: health + tls + ping).
+
 ## 2026-05-29 (ci: release workflow for binaries)
 
 - Stars: 0 (Δ 0).
