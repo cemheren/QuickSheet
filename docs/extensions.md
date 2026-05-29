@@ -51,6 +51,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `health`  | HTTP health check | Probe multiple HTTP endpoints in parallel — 🟢/🔴 status with latency, self-signed cert support | [`quicksheet-health`](https://github.com/Deskworks/quicksheet-health) |
 | `env`     | Env var inspector | Lookup, filter, PATH exploder — auto-masks secrets (API keys, tokens) | [`quicksheet-envck`](https://github.com/Deskworks/quicksheet-envck) |
 | `roll`    | Dice roller       | Roll any dice notation — 2d6+3, d20, 4d6kh3, Fudge dice, crit/fumble detection | [`quicksheet-dice`](https://github.com/Deskworks/quicksheet-dice) |
+| `init`    | Initiative tracker | Combat initiative — sort combatants by roll, cycle turns, track rounds (TTRPG GMs) | [`quicksheet-init-ext`](https://github.com/cemheren/quicksheet-init-ext) |
 | `lc`      | LeetCode tracker  | Daily challenge, problem lookup by number/slug, user solve stats (Easy/Medium/Hard, rank) | [`quicksheet-leetcode`](https://github.com/Deskworks/quicksheet-leetcode) |
 | `ghst`    | GitHub streak     | Current streak 🔥, longest streak, total contributions, 14-day sparkline. No auth needed. | [`quicksheet-ghstreak`](https://github.com/Deskworks/quicksheet-ghstreak) |
 | `iss`     | ISS tracker       | Live ISS position (lat/lon/region/altitude/speed) + all people currently in space, grouped by spacecraft | [`quicksheet-iss`](https://github.com/Deskworks/quicksheet-iss) |

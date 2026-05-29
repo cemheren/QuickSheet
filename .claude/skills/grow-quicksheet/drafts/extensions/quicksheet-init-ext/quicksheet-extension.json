@@ -1,0 +1,8 @@
+{
+  "name": "init",
+  "version": "1.0.0",
+  "prefix": "init",
+  "description": "Combat initiative tracker for QuickSheet — sort and cycle through turn order (TTRPG GMs)",
+  "entry": "dotnet run --project InitExtension.csproj",
+  "minProtocolVersion": 1
+}

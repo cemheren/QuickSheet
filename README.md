@@ -210,6 +210,7 @@ tls: github.com, 1, 4
 | `health:` | HTTP endpoint health checker | `ext: github:Deskworks/quicksheet-health` |
 | `env:` | Env var inspector (lookup/filter/PATH, auto-masks secrets) | `ext: github:Deskworks/quicksheet-envck` |
 | `roll:` | Dice roller — 2d6+3, d20, 4d6kh3, Fudge, critical detection | `ext: github:Deskworks/quicksheet-dice` |
+| `init:` | Combat initiative tracker — sort combatants, cycle turns, track rounds (TTRPG GMs) | `ext: github:cemheren/quicksheet-init-ext` |
 | `lc:` | LeetCode — daily challenge, problem lookup, user stats | `ext: github:Deskworks/quicksheet-leetcode` |
 | `ghst:` | GitHub contribution streak — current streak, longest, sparkline | `ext: github:Deskworks/quicksheet-ghstreak` |
 | `iss:` | Live ISS position + people in space — lat/lon, region, crew by craft | `ext: github:Deskworks/quicksheet-iss` |
