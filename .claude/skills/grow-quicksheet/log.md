@@ -1,3 +1,11 @@
+## 2026-05-29 (feat: --stats CSV summary)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--stats` headless flag — prints file size, row/column count, headers, and cell fill percentage. Makes QuickSheet discoverable as a CLI CSV inspection tool.
+- Bucket: E (QoL feature).
+- Outcome: PR #238.
+- Follow-up: Next run variety → Bucket F (roll: dice extension) or Bucket D.
+
 ## 2026-05-29 (ci: release workflow for binaries)
 
 - Stars: 0 (Δ 0).
