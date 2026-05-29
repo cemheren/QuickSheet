@@ -1,0 +1,8 @@
+{
+  "name": "pubmed",
+  "version": "1.0.0",
+  "prefix": "pubmed",
+  "description": "PubMed article lookup — title, authors, journal, DOI for QuickSheet",
+  "entry": "dotnet run --project PubMedExtension.csproj",
+  "minProtocolVersion": 1
+}
