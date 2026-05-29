@@ -1,3 +1,12 @@
+## 2026-05-29 (research: adjacent-project teardown)
+
+- Stars: 0 (Δ 0).
+- Action: Compared QuickSheet's README/positioning to VisiData (9k★), Harlequin (7k★), and Lazygit (78k★). Analyzed README structure, hero visuals, install friction, HN launch strategy, and social-proof signals.
+- Bucket: R (research).
+- Outcome: Brief saved at `research/adjacent-project-teardown.md`.
+- Key findings: (1) Every comparable leads with animated GIF — QuickSheet has static PNG. (2) All have one-command install — QS requires clone+build. (3) Lazygit's star popup credited as biggest growth hack. (4) HN launch should wait until binary releases + GIF exist.
+- Follow-up: Queue "self-contained binary releases" as Bucket E action; queue "first-run star nudge" as small Bucket E; note GIF capture needs human.
+
 ## 2026-05-29 (docs: tabletop GM audience page)
 
 - Stars: 0 (Δ 0).
@@ -1086,7 +1095,9 @@
 
 - **Live backlog (re-ranked after the c?:/timer revert):**
   Pre-flight rule for any item below: if you can't explain in one sentence *why this specific persona will install QuickSheet because of this* (not "it could be useful for everyone"), skip and pick something else.
-  1. **Bucket F: `health:` HTTP-probe extension.** Reads `services.csv` (name,url,expected_status); fills a row of green/red dots. Homelab persona; writes its own r/selfhosted screenshot. New extension repo on user's account.
+  1. **Bucket E: First-run star nudge.** ~15 lines. On first launch (no autosave exists), show one-time "If useful, ⭐ github.com/cemheren/QuickSheet". Lazygit credits this as biggest growth hack. Converts users → stargazers.
+  2. **Bucket E: Self-contained binary releases.** `dotnet publish --self-contained -r linux-x64` + `win-x64`. Attach to GitHub Release. Unlocks one-command install, awesome-list acceptance, HN launch readiness.
+  3. **Bucket F: `health:` HTTP-probe extension.** Reads `services.csv` (name,url,expected_status); fills a row of green/red dots. Homelab persona; writes its own r/selfhosted screenshot. New extension repo on user's account.
   2. **Bucket F: `leetcode:` + `gh:` user-streak combo.** Students persona; "CS-student flex bundle." Free APIs, lowest auth.
   3. **Bucket F: `roll:` dice roller + `init:` initiative tracker.** TTRPG GM bundle. r/unixporn-rice candidate. `roll:` is genuinely novel because it's not a timer — it's a dice + table-lookup primitive.
   4. **Bucket F: `gha:` GitHub Actions status row.** SRE persona; pairs with already-shipped `tls`/`docker`/`k8s`.
