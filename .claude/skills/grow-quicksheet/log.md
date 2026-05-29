@@ -1,3 +1,11 @@
+## 2026-05-29 (draft: r/selfhosted post)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted r/selfhosted submission — "Homepage/Dashy alternative" angle featuring `health-ext`, `tls`, `docker`, `ping`, `sysmon` extensions. Includes posting notes, timing strategy, and a prepared first comment with extension table.
+- Bucket: C (content draft).
+- Outcome: Draft saved at `drafts/reddit-selfhosted.md`, commit 0f37a65.
+- Follow-up: Next run variety → Bucket F (push `roll-ext` draft) or Bucket E.
+
 ## 2026-05-29 (feat: quicksheet-salestax-ext)
 
 - Stars: 0 (Δ 0).
