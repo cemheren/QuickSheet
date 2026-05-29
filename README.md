@@ -194,6 +194,7 @@ tls: github.com, 1, 4
 | `k8s:` | Kubernetes pod status | `ext: github:Deskworks/quicksheet-k8s` |
 | `cntdn:` | Countdown timers | `ext: github:Deskworks/quicksheet-cntdn` |
 | `1099:` | US self-employment tax | `ext: github:Deskworks/quicksheet-1099-ext` |
+| `tax:` | US state sales tax rates — state + combined, amount calc | `ext: github:cemheren/quicksheet-salestax-ext` |
 | `mileage:` | IRS mileage deduction | `ext: github:Deskworks/quicksheet-mileage-ext` |
 | `budget:` | Budget envelopes | `ext: github:Deskworks/quicksheet-budget` |
 | `worldtm:` | World clock / timezones | `ext: github:Deskworks/quicksheet-worldtm` |

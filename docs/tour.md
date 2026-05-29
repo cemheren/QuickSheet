@@ -73,6 +73,7 @@ Currently public:
 - [`quicksheet-thes-ext`](https://github.com/Deskworks/quicksheet-thes-ext) — thesaurus (Datamuse).
 - [`quicksheet-stock-ext`](https://github.com/Deskworks/quicksheet-stock-ext) — stock ticker quotes (Stooq).
 - [`quicksheet-1099-ext`](https://github.com/Deskworks/quicksheet-1099-ext) — US self-employment tax estimate.
+- [`quicksheet-salestax-ext`](https://github.com/cemheren/quicksheet-salestax-ext) — US state sales tax rates (all 50 states + DC, amount calc).
 - [`quicksheet-mileage-ext`](https://github.com/Deskworks/quicksheet-mileage-ext) — IRS standard-mileage deduction calculator.
 - [`quicksheet-margin-ext`](https://github.com/Deskworks/quicksheet-margin-ext) — break-even point + contribution margin.
 - [`quicksheet-depr-ext`](https://github.com/Deskworks/quicksheet-depr-ext) — straight-line + MACRS depreciation schedules.

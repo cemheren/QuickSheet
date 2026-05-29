@@ -1,0 +1,8 @@
+{
+  "name": "salestax",
+  "version": "1.0.0",
+  "prefix": "tax",
+  "description": "US state sales tax rate lookup for QuickSheet",
+  "entry": "dotnet run --project SalesTaxExtension.csproj",
+  "minProtocolVersion": 1
+}
