@@ -1,3 +1,11 @@
+## 2026-05-29 (feat: quicksheet-salestax-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Created `cemheren/quicksheet-salestax-ext` — US state sales tax rate lookup for all 50 states + DC. Supports abbreviations, full names, and dollar amount calc. Tax Foundation 2024 data. Zero NuGet deps.
+- Bucket: F (vertical extension).
+- Outcome: Repo pushed → https://github.com/cemheren/quicksheet-salestax-ext. Cross-link PR #239.
+- Follow-up: Next run variety → Bucket D (awesome-list draft) or Bucket A.
+
 ## 2026-05-29 (feat: --stats CSV summary)
 
 - Stars: 0 (Δ 0).
