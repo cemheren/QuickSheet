@@ -1,3 +1,11 @@
+## 2026-05-28 (docs: add 18 missing extensions to README + directory)
+
+- Stars: 0 (Δ 0).
+- Action: Audited all Deskworks/ and cemheren/ quicksheet-* repos against README and docs/extensions.md. Found 18 published extensions not listed. Added them all: apistatus, b64, dict, gitlog, hntop, news, rate, sys, pomo, stocks, ai, hash, mvn, nuget, ollama, pubmed, unit, words.
+- Bucket: A (docs polish — discoverability).
+- Outcome: PR #228.
+- Follow-up: none — catalog now reflects all known public extension repos.
+
 ## 2026-05-28 (feat: --theme and --list-themes CLI flags)
 
 - Stars: 0 (Δ 0).
