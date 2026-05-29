@@ -186,7 +186,7 @@ tls: github.com, 1, 4
 | `todo:` | Task management | `ext: github:Deskworks/quicksheet-todo` |
 | `ping:` | HTTP status & latency | `ext: github:Deskworks/quicksheet-ping-ext` |
 | `fx:` | Currency conversion | `ext: github:Deskworks/quicksheet-fx` |
-| `gha:` | GitHub Actions status | `ext: github:Deskworks/quicksheet-gha` |
+| `gha:` | GitHub Actions status | `ext: github:cemheren/quicksheet-gha-ext` |
 | `ghpr:` | GitHub PR dashboard | `ext: github:Deskworks/quicksheet-ghpr` |
 | `docker:` | Container health | `ext: github:Deskworks/quicksheet-docker` |
 | `gitst:` | Git repo status | `ext: github:Deskworks/quicksheet-gitst` |
