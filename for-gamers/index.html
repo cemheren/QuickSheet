@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuickSheet for Gamers — Game Notes &amp; Trackers on Your Desktop Wallpaper</title>
+  <meta name="description" content="Gamers: track loot tables, quest objectives, keybinds, mod lists, boss strategies, and speedrun splits directly on your desktop wallpaper. Always visible between alt-tabs. Zero bloat.">
+  <meta name="keywords" content="game notes desktop wallpaper, game tracker wallpaper, loot table tracker, quest tracker desktop, keybind reference wallpaper, mod list manager desktop, speedrun splits desktop, boss strategy notes, gaming productivity, game dev tracker, game spreadsheet desktop, gaming notes tool, MMO tracker desktop, RPG quest log desktop, game wiki notes wallpaper, gaming overlay alternative, game progress tracker, achievement tracker desktop, game backlog manager, gaming dashboard wallpaper">
+  <link rel="canonical" href="https://cemheren.github.io/QuickSheet/for-gamers/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="QuickSheet for Gamers — Game Notes on Your Wallpaper">
+  <meta property="og:description" content="Loot tables, quest logs, keybind refs, mod lists, and speedrun splits on your desktop wallpaper. Always visible when you alt-tab. Free &amp; open-source.">
+  <meta property="og:url" content="https://cemheren.github.io/QuickSheet/for-gamers/">
+  <meta property="og:site_name" content="QuickSheet">
+  <meta property="og:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QuickSheet for Gamers — Desktop Wallpaper Game Tracker">
+  <meta name="twitter:description" content="Loot tables, quest logs, keybinds, and mod lists — always on your wallpaper. Alt-tab and it's right there.">
+  <meta name="twitter:image" content="https://cemheren.github.io/QuickSheet/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "QuickSheet for Gamers",
+    "description": "Use QuickSheet as a gaming dashboard on your desktop wallpaper — loot tables, quest objectives, keybind references, mod lists, boss strategies, and speedrun splits always visible between alt-tabs.",
+    "url": "https://cemheren.github.io/QuickSheet/for-gamers/",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "QuickSheet",
+      "url": "https://cemheren.github.io/QuickSheet/"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --purple: #bc8cff;
+      --orange: #d29922;
+      --red: #f85149;
+      --max-w: 960px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+    nav .logo { font-weight: 700; font-size: 1.1rem; }
+    nav a { color: var(--muted); font-size: 0.9rem; }
+    nav a:hover { color: var(--text); text-decoration: none; }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      background: linear-gradient(180deg, #161b22 0%, var(--bg) 100%);
+    }
+    .hero h1 { font-size: 2.2rem; margin-bottom: 1rem; line-height: 1.2; }
+    .hero h1 .highlight { color: var(--accent); }
+    .hero p { color: var(--muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem; }
+
+    .section { max-width: var(--max-w); margin: 0 auto; padding: 3rem 1.5rem; }
+    .section h2 { font-size: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+    .section h3 { font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--accent2); }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+    .feature-card .icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+    .feature-card h3 { color: var(--text); margin-bottom: 0.5rem; }
+    .feature-card p { color: var(--muted); font-size: 0.9rem; }
+
+    .csv-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+    .csv-block pre {
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .csv-block .label {
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .workflow {
+      counter-reset: step;
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+    .workflow li {
+      counter-increment: step;
+      padding: 1rem 1rem 1rem 3.5rem;
+      position: relative;
+      border-left: 2px solid var(--border);
+      margin-bottom: 0.5rem;
+    }
+    .workflow li::before {
+      content: counter(step);
+      position: absolute;
+      left: -0.75rem;
+      top: 1rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: var(--accent);
+      color: var(--bg);
+      border-radius: 50%;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .workflow li strong { color: var(--text); }
+    .workflow li p { color: var(--muted); font-size: 0.9rem; margin-top: 0.25rem; }
+
+    .comparison {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+    .comparison th, .comparison td {
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+    .comparison th { background: var(--surface); color: var(--muted); font-weight: 600; }
+    .comparison td { color: var(--text); }
+    .comparison .yes { color: var(--accent2); }
+    .comparison .no { color: var(--red); }
+    .comparison .partial { color: var(--orange); }
+
+    .cta-box {
+      background: var(--surface);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      margin: 3rem 0;
+    }
+    .cta-box h3 { font-size: 1.3rem; margin-bottom: 0.75rem; }
+    .cta-box p { color: var(--muted); margin-bottom: 1.5rem; }
+    .cta-box code {
+      display: inline-block;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.95rem;
+      color: var(--accent2);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.6rem; }
+      .features { grid-template-columns: 1fr; }
+      .comparison { font-size: 0.8rem; }
+      .comparison th, .comparison td { padding: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">⚡ QuickSheet</span>
+  <a href="/">Home</a>
+  <a href="/QuickSheet/features/">Features</a>
+  <a href="/QuickSheet/extensions/">Extensions</a>
+  <a href="/QuickSheet/shortcuts/">Shortcuts</a>
+</nav>
+
+<section class="hero">
+  <h1>QuickSheet <span class="highlight">for Gamers</span></h1>
+  <p>Loot tables, quest logs, keybind references, mod lists, and speedrun splits — pinned to your desktop wallpaper. Alt-tab and it's right there. No overlays. No extra windows. No performance hit.</p>
+</section>
+
+<section class="section">
+  <h2>🎮 Why Gamers Use QuickSheet</h2>
+  <p>Every gamer has notes — boss weaknesses, crafting recipes, keybinds, mod load orders. Most people use Notepad, a second monitor, or their phone. QuickSheet puts all of it directly on your wallpaper so it's visible the instant you alt-tab or Win+D. It uses near-zero resources and never interferes with your game.</p>
+
+  <div class="features">
+    <div class="feature-card">
+      <div class="icon">🗡️</div>
+      <h3>Loot &amp; Drop Tables</h3>
+      <p>Track drop rates, farming locations, and material requirements. Auto-sum columns show total materials needed. Always visible between farming runs.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">📋</div>
+      <h3>Quest &amp; Achievement Logs</h3>
+      <p>List active quests, objectives, NPC locations. Check off completions in-place. Never alt-tab to a wiki mid-quest again.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">⌨️</div>
+      <h3>Keybind Reference</h3>
+      <p>New game, new keybinds. Lay out your custom bindings in a grid so you can glance at them while building muscle memory.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🔧</div>
+      <h3>Mod Load Orders</h3>
+      <p>Track mod names, versions, compatibility notes, and load priority. Know at a glance which mods conflict when troubleshooting crashes.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">⏱️</div>
+      <h3>Speedrun Splits</h3>
+      <p>Record PB splits, gold splits, and segment notes. Use countdown cells for time-based challenges. Review after each run without switching apps.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">📊</div>
+      <h3>Game Backlog Tracker</h3>
+      <p>Track your pile of shame — game name, platform, status (playing/backlog/completed/dropped), hours played. Column sums show total hours invested.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>📄 Sample Layout: RPG Companion Sheet</h2>
+  <div class="csv-block">
+    <div class="label">gaming-notes.csv — loaded with: dotnet run -- gaming-notes.csv --desktop</div>
+    <pre>
+┌──────────────┬───────────────┬──────────────┬──────────────────┬─────────────┐
+│ BOSS         │ WEAKNESS      │ DROPS        │ STRATEGY         │ STATUS      │
+├──────────────┼───────────────┼──────────────┼──────────────────┼─────────────┤
+│ Malenia      │ Frost/Bleed   │ Hand of M.   │ Dodge flurry →   │ ✓ Defeated  │
+│ Radahn       │ Scarlet Rot   │ Starscourge  │ Summon NPCs →    │ ✓ Defeated  │
+│ Mohg         │ Shackle+Bleed │ Sacred Spear │ Purifying tear   │ ⬜ Attempt 3│
+├──────────────┼───────────────┼──────────────┼──────────────────┼─────────────┤
+│ KEYBIND      │ ACTION        │ NOTES        │                  │             │
+├──────────────┼───────────────┼──────────────┤                  │             │
+│ Q            │ Quick slot 1  │ Flask        │ r: steam://run/  │             │
+│ E            │ Interact      │              │ 1245620          │             │
+│ R            │ Skill (Ash)   │ Hold for FP  │                  │             │
+├──────────────┼───────────────┼──────────────┼──────────────────┼─────────────┤
+│ BACKLOG      │ PLATFORM      │ HOURS        │ STATUS           │ RATING      │
+├──────────────┼───────────────┼──────────────┼──────────────────┼─────────────┤
+│ Hades II     │ PC            │ 45           │ Playing          │ ★★★★★       │
+│ Balatro      │ Steam Deck    │ 80           │ Completed        │ ★★★★★       │
+│ Celeste      │ Switch        │ 12           │ Backlog          │             │
+│              │               │ Σ 137        │                  │             │
+└──────────────┴───────────────┴──────────────┴──────────────────┴─────────────┘</pre>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🚀 Get Started in 60 Seconds</h2>
+  <ol class="workflow">
+    <li>
+      <strong>Install .NET 9 SDK</strong>
+      <p>One-time setup. Grab it from <a href="https://dotnet.microsoft.com/download">dotnet.microsoft.com</a>.</p>
+    </li>
+    <li>
+      <strong>Clone QuickSheet</strong>
+      <p><code>git clone https://github.com/cemheren/QuickSheet && cd QuickSheet</code></p>
+    </li>
+    <li>
+      <strong>Create your gaming CSV</strong>
+      <p>Start with a blank sheet or copy the sample layout above into <code>gaming-notes.csv</code>.</p>
+    </li>
+    <li>
+      <strong>Launch on your wallpaper</strong>
+      <p><code>dotnet run -c Release -- gaming-notes.csv --desktop</code></p>
+    </li>
+    <li>
+      <strong>Play your game — alt-tab to see your notes</strong>
+      <p>QuickSheet sits behind your desktop icons. Press Win+D or alt-tab to desktop to view/edit. Near-zero CPU usage while idle.</p>
+    </li>
+  </ol>
+</section>
+
+<section class="section">
+  <h2>⚔️ QuickSheet vs. Alternatives</h2>
+  <table class="comparison">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>QuickSheet</th>
+        <th>Notepad / Text File</th>
+        <th>Game Overlay (Steam/Discord)</th>
+        <th>Second Monitor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Always visible on desktop</td>
+        <td class="yes">✓ Wallpaper-embedded</td>
+        <td class="no">✗ Covered by game</td>
+        <td class="partial">~ In-game only</td>
+        <td class="yes">✓ Extra hardware</td>
+      </tr>
+      <tr>
+        <td>Zero performance impact</td>
+        <td class="yes">✓ &lt;1% CPU idle</td>
+        <td class="yes">✓</td>
+        <td class="partial">~ Slight FPS hit</td>
+        <td class="yes">✓ GPU cost</td>
+      </tr>
+      <tr>
+        <td>Structured data (rows/cols)</td>
+        <td class="yes">✓ Full grid</td>
+        <td class="no">✗ Plain text</td>
+        <td class="no">✗ Notes only</td>
+        <td class="partial">~ If using spreadsheet</td>
+      </tr>
+      <tr>
+        <td>Auto-sum / formulas</td>
+        <td class="yes">✓ Σ columns, Π rows</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="partial">~ If using Excel</td>
+      </tr>
+      <tr>
+        <td>Launch games from cells</td>
+        <td class="yes">✓ r: prefix</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+        <td class="no">✗</td>
+      </tr>
+      <tr>
+        <td>Works in fullscreen games</td>
+        <td class="partial">~ Alt-tab/Win+D</td>
+        <td class="no">✗ Covered</td>
+        <td class="yes">✓ Overlay</td>
+        <td class="yes">✓ Borderless</td>
+      </tr>
+      <tr>
+        <td>Free &amp; open-source</td>
+        <td class="yes">✓ MIT</td>
+        <td class="yes">✓</td>
+        <td class="partial">~ Freemium</td>
+        <td class="no">✗ Hardware cost</td>
+      </tr>
+      <tr>
+        <td>No account required</td>
+        <td class="yes">✓ Local CSV</td>
+        <td class="yes">✓</td>
+        <td class="no">✗ Login needed</td>
+        <td class="yes">✓</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="section">
+  <h2>💡 Pro Tips for Gaming Use</h2>
+  <div class="features">
+    <div class="feature-card">
+      <div class="icon">🚀</div>
+      <h3>Game Launchers</h3>
+      <p>Use <code>r: steam://rungameid/1245620</code> cells to launch Steam games directly from your wallpaper. Works with any Steam app ID.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🔍</div>
+      <h3>Quick Search</h3>
+      <p>Press <code>Ctrl+F</code> to search across all your notes. Find that crafting recipe or boss weakness instantly.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🌐</div>
+      <h3>Wiki Links</h3>
+      <p>Paste wiki URLs directly in cells — they become clickable hyperlinks. One click opens the wiki page in your browser.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🎨</div>
+      <h3>Theme to Match</h3>
+      <p>Use <code>config: theme nord</code> or <code>config: theme matrix</code> cells to match your gaming aesthetic. 5 built-in themes.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section">
+  <div class="cta-box">
+    <h3>Ready to Level Up Your Desktop?</h3>
+    <p>QuickSheet is free, open-source, and installs in under a minute. Your game notes deserve better than a minimized Notepad.</p>
+    <code>git clone https://github.com/cemheren/QuickSheet && cd QuickSheet && dotnet run -c Release -- --desktop</code>
+  </div>
+</div>
+
+<footer>
+  <p>QuickSheet — a zero-dependency .NET spreadsheet that lives on your desktop wallpaper.</p>
+  <p style="margin-top:0.5rem"><a href="https://github.com/cemheren/QuickSheet">GitHub</a> · <a href="/QuickSheet/">Home</a> · <a href="/QuickSheet/features/">Features</a> · <a href="/QuickSheet/extensions/">Extensions</a></p>
+</footer>
+
+</body>
+</html>
