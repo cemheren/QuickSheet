@@ -163,6 +163,52 @@ public class Program
             return;
         }
 
+        if (args.Contains("--stats"))
+        {
+            if (csvPath == null || !File.Exists(csvPath))
+            {
+                Console.Error.WriteLine(csvPath == null
+                    ? "Usage: ExcelConsole <input.csv> --stats"
+                    : $"Input CSV not found: {csvPath}");
+                Environment.Exit(csvPath == null ? 2 : 1);
+                return;
+            }
+
+            var lines = File.ReadAllLines(csvPath);
+            int rowCount = lines.Length;
+            int colCount = 0;
+            int nonEmpty = 0;
+            int totalCells = 0;
+            string[] headers = Array.Empty<string>();
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                var fields = ParseCsvLine(lines[i]);
+                if (fields.Length > colCount) colCount = fields.Length;
+                if (i == 0) headers = fields;
+                foreach (var f in fields)
+                {
+                    totalCells++;
+                    if (!string.IsNullOrWhiteSpace(f)) nonEmpty++;
+                }
+            }
+
+            var fi = new FileInfo(csvPath);
+            Console.WriteLine($"File:     {fi.Name}");
+            Console.WriteLine($"Size:     {FormatSize(fi.Length)}");
+            Console.WriteLine($"Rows:     {rowCount}");
+            Console.WriteLine($"Columns:  {colCount}");
+            if (headers.Length > 0)
+            {
+                string headerList = string.Join(", ", headers.Where(h => !string.IsNullOrWhiteSpace(h)));
+                if (headerList.Length > 80) headerList = headerList[..77] + "...";
+                Console.WriteLine($"Headers:  {headerList}");
+            }
+            double pct = totalCells > 0 ? (double)nonEmpty / totalCells * 100 : 0;
+            Console.WriteLine($"Filled:   {nonEmpty}/{totalCells} ({pct:F1}%)");
+            return;
+        }
+
 #if PLATFORM_WINDOWS
         HideConsoleWindow();
         using var host = new ExcelConsole.Platform.Windows.WindowsDesktopHost();
@@ -255,6 +301,7 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv> --stats                    Headless: print CSV summary (rows, columns, fill%)");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
@@ -270,6 +317,28 @@ public class Program
         Console.WriteLine();
         Console.WriteLine("Range references work inside text: {A1::C10}");
         Console.WriteLine("Tour: docs/tour.md · Issues: github.com/cemheren/QuickSheet/issues");
+    }
+
+    private static string[] ParseCsvLine(string line)
+    {
+        var fields = new List<string>();
+        bool inQuotes = false;
+        var current = new System.Text.StringBuilder();
+        foreach (char ch in line)
+        {
+            if (ch == '"') { inQuotes = !inQuotes; continue; }
+            if (ch == ',' && !inQuotes) { fields.Add(current.ToString()); current.Clear(); continue; }
+            current.Append(ch);
+        }
+        fields.Add(current.ToString());
+        return fields.ToArray();
+    }
+
+    private static string FormatSize(long bytes)
+    {
+        if (bytes < 1024) return $"{bytes} B";
+        if (bytes < 1024 * 1024) return $"{bytes / 1024.0:F1} KB";
+        return $"{bytes / (1024.0 * 1024.0):F1} MB";
     }
 
 #if PLATFORM_WINDOWS
