@@ -1,3 +1,11 @@
+## 2026-05-29 (feat: pubmed extension — academic persona)
+
+- Stars: 0 (Δ 0).
+- Action: Created `cemheren/quicksheet-pubmed-ext` — PubMed article lookup via NCBI E-utilities (free, no key). Supports PMID fetch and keyword search. Pairs with `cite:` and `arxiv:` for a full academic research dashboard on the desktop.
+- Bucket: F (vertical extension).
+- Outcome: Repo pushed → https://github.com/cemheren/quicksheet-pubmed-ext. Cross-link PR #230.
+- Follow-up: none — academic trio (arxiv + cite + pubmed) now complete.
+
 ## 2026-05-29 (docs: Wayland support investigation)
 
 - Stars: 0 (Δ 0).
