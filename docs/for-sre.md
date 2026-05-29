@@ -29,7 +29,7 @@ situational-awareness layer is there every boot.
 | **Container health**   | Running/stopped/restarting per Docker container name    | [`docker`](https://github.com/Deskworks/quicksheet-docker)                   |
 | **Pod status**         | Kubernetes pod state by namespace                       | [`k8s`](https://github.com/Deskworks/quicksheet-k8s)                        |
 | **Port probe**         | TCP open/closed for well-known local ports              | [`portck`](https://github.com/Deskworks/quicksheet-portck)                  |
-| **TLS expiry**         | Days remaining on each certificate                      | [`tls`](https://github.com/Deskworks/quicksheet-tls-ext)                    |
+| **TLS expiry**         | Days remaining on each certificate                      | [`tls`](https://github.com/cemheren/quicksheet-tls-ext)                    |
 | **Recent commits**     | Last N git commits: hash, author, relative time         | [`gitlog`](https://github.com/Deskworks/quicksheet-gitlog)                  |
 | **Open PRs**           | PR count + titles per repo                              | [`ghpr`](https://github.com/Deskworks/quicksheet-ghpr)                      |
 | **System metrics**     | CPU / RAM / disk / uptime of the host                   | [`sysmon`](https://github.com/Deskworks/quicksheet-sysmon)                  |

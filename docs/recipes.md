@@ -31,7 +31,7 @@ Now the status column refreshes every minute. TLS only changes daily — point a
 L: D2, 720m
 ```
 
-Extensions used: [ping](https://github.com/Deskworks/quicksheet-ping-ext), [tls](https://github.com/Deskworks/quicksheet-tls-ext), [mxck](https://github.com/Deskworks/quicksheet-mxck-ext).
+Extensions used: [ping](https://github.com/Deskworks/quicksheet-ping-ext), [tls](https://github.com/cemheren/quicksheet-tls-ext), [mxck](https://github.com/Deskworks/quicksheet-mxck-ext).
 
 ---
 

@@ -27,7 +27,7 @@ place. The columns:
 | Column      | What it shows                                                      | Extension used                          |
 |-------------|--------------------------------------------------------------------|-----------------------------------------|
 | **Status**  | Per-service health — green dot if up, red if down                  | [`k8s`](https://github.com/Deskworks/quicksheet-k8s) / [`docker`](https://github.com/Deskworks/quicksheet-docker) |
-| **Cert expiry** | Days remaining on each Let's Encrypt cert                       | [`tls`](https://github.com/Deskworks/quicksheet-tls-ext) |
+| **Cert expiry** | Days remaining on each Let's Encrypt cert                       | [`tls`](https://github.com/cemheren/quicksheet-tls-ext) |
 | **Network** | Latency to upstreams + open TCP ports                              | [`ping`](https://github.com/Deskworks/quicksheet-ping-ext) / [`portck`](https://github.com/Deskworks/quicksheet-portck) |
 | **System**  | CPU / RAM / disk / uptime of the box running QuickSheet            | [`sysmon`](https://github.com/Deskworks/quicksheet-sysmon) |
 | **DNS**     | MX records — useful when your selfhosted mail goes weird           | [`mxck`](https://github.com/Deskworks/quicksheet-mxck-ext) |

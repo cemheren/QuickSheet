@@ -62,7 +62,7 @@ r: kubectl describe pod {A2::A2}
 Currently public:
 - [`quicksheet-copilot-ext`](https://github.com/Deskworks/quicksheet-copilot-ext) — AI in a cell.
 - [`quicksheet-weather`](https://github.com/Deskworks/quicksheet-weather) — 7-day forecast.
-- [`quicksheet-tls-ext`](https://github.com/Deskworks/quicksheet-tls-ext) — TLS certificate checker.
+- [`quicksheet-tls-ext`](https://github.com/cemheren/quicksheet-tls-ext) — TLS certificate checker.
 - [`quicksheet-pomodoro`](https://github.com/Deskworks/quicksheet-pomodoro) — focus timer.
 - [`quicksheet-price-ext`](https://github.com/Deskworks/quicksheet-price-ext) — crypto price quotes (CoinGecko).
 - [`quicksheet-define-ext`](https://github.com/Deskworks/quicksheet-define-ext) — inline dictionary lookups.

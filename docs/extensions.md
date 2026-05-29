@@ -6,7 +6,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 |-----------|-------------------|----------------------------------------------------|------|
 | `copilot` | Copilot           | AI in a cell. Q&A, range summarization, generation | [`quicksheet-copilot-ext`](https://github.com/Deskworks/quicksheet-copilot-ext) |
 | `wthr`    | Weather forecast  | 7-day forecast for a location                      | [`quicksheet-weather`](https://github.com/Deskworks/quicksheet-weather) |
-| `tls`     | TLS cert checker  | Cert expiry, issuer, CN for a host                 | [`quicksheet-tls-ext`](https://github.com/Deskworks/quicksheet-tls-ext) |
+| `tls`     | TLS cert checker  | Cert expiry, issuer, CN for a host                 | [`quicksheet-tls-ext`](https://github.com/cemheren/quicksheet-tls-ext) |
 | `price`   | Crypto price      | Last trade + 24h change (CoinGecko)                | [`quicksheet-price-ext`](https://github.com/Deskworks/quicksheet-price-ext) |
 | `def`     | Dictionary        | Inline definitions (dictionaryapi.dev)             | [`quicksheet-define-ext`](https://github.com/Deskworks/quicksheet-define-ext) |
 | `mort`    | Mortgage calc     | Monthly payment, total interest, total cost        | [`quicksheet-mortgage-ext`](https://github.com/Deskworks/quicksheet-mortgage-ext) |

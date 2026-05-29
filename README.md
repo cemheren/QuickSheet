@@ -167,10 +167,10 @@ wthr: Seattle, 2, 7
 
 ### Example: TLS certificate checker
 
-The [quicksheet-tls-ext](https://github.com/Deskworks/quicksheet-tls-ext) extension shows TLS cert expiry and issuer — useful as an ambient SRE dashboard:
+The [quicksheet-tls-ext](https://github.com/cemheren/quicksheet-tls-ext) extension shows TLS cert expiry and issuer — useful as an ambient SRE dashboard:
 
 ```
-ext: github:Deskworks/quicksheet-tls-ext
+ext: github:cemheren/quicksheet-tls-ext
 tls: github.com, 1, 4
 ```
 
