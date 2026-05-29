@@ -1,3 +1,11 @@
+## 2026-05-29 (docs: Wayland support investigation)
+
+- Stars: 0 (Δ 0).
+- Action: Researched Wayland layer-shell feasibility for desktop mode. Documented compositor compatibility (wlroots ✅, GNOME ❌), P/Invoke approach, phased implementation plan, and effort estimates. Addresses issue #3.
+- Bucket: R (research) addressing open issue.
+- Outcome: PR #229.
+- Follow-up: Needs a contributor with Sway/Hyprland to implement Phase 2. Issue #3 stays open until code lands.
+
 ## 2026-05-28 (docs: add 18 missing extensions to README + directory)
 
 - Stars: 0 (Δ 0).
