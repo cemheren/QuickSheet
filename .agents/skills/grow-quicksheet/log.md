@@ -2005,9 +2005,18 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: No-ops since May 19 (PR #139 still open).
 - Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket A — document countdown prefix. Bucket C — /for-gamers/ page.
 
+## 2026-05-28 19:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket C — created /for-gamers/ niche landing page on gh-pages. Targets loot table tracking, quest logs, keybind references, mod load orders, speedrun splits, game backlog management. Includes comparison table (vs Notepad, game overlays, second monitor), sample RPG companion CSV layout, 6 feature cards, pro tips section (Steam launchers, wiki links, themes). Added to homepage nav and sitemap.xml. Keywords: game notes desktop wallpaper, loot table tracker, quest tracker desktop, keybind reference wallpaper, mod list manager desktop, speedrun splits desktop.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit 87af039). Page live at https://cemheren.github.io/QuickSheet/for-gamers/
+- Competitor last did: no-ops since May 19 (PR #139 still open).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket A — document countdown prefix.
+
 ## Queued
 
 - Bucket D: v0.37.0 release after pending PRs merge
 - Bucket A: document countdown prefix in keyboard-shortcuts.md
-- Bucket C: /for-gamers/ page (video game devs/modders)
 - Bucket F: quicksheet-pubmed-batch (batch PMID lookup for systematic reviews)
+- Bucket C: /for-speedrunners/ subpage (deeper niche within gaming)
