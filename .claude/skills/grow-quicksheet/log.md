@@ -1,3 +1,11 @@
+## 2026-05-29 (feat: --import-json CLI converter)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--import-json <input.json> <output.csv>` headless converter. Reads a JSON array of objects, emits CSV with first row as headers. Round-trip compatible with `--export-json`. ~60 lines in GridManager + ~35 in Program.cs.
+- Bucket: E (QoL feature).
+- Outcome: PR #233.
+- Follow-up: none.
+
 ## 2026-05-29 (docs: tabletop GM audience page)
 
 - Stars: 0 (Δ 0).
