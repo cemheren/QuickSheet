@@ -72,6 +72,17 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `caniuse` | Browser Compat    | Can I Use browser compatibility lookup via caniuse-db. Shows support status for CSS/HTML/JS features across Chrome, Firefox, Safari, Edge, Opera, Samsung, iOS Safari. Usage: `caniuse: css-grid` · `caniuse: flexbox` · `caniuse: webassembly`. Usage %, spec link, notes. 1h cache, no API key. | [`quicksheet-caniuse`](https://github.com/Deskworks/quicksheet-caniuse) |
 | `gem`     | Ruby Gem Lookup   | Ruby gem info and search via rubygems.org. Version, total downloads, authors, license, Ruby requirement, homepage, description. `gem: rails` (detail), `gem: search json parser` (top 5). No API key, 30-min cache, zero NuGet. | [`quicksheet-rubygems`](https://github.com/Deskworks/quicksheet-rubygems) |
 | `hackage` | Haskell Packages  | Haskell package lookup from Hackage. `hackage: aeson` shows latest version, synopsis, author, category, license, and homepage. `hackage: search json` lists top matching packages. No API key, 30-min cache, zero NuGet. | [`quicksheet-hackage`](https://github.com/Deskworks/quicksheet-hackage) |
+| `dict`    | Dictionary        | Full English dictionary — definitions, phonetics, part of speech, synonyms, antonyms. Via dictionaryapi.dev, no API key. | [`quicksheet-dict`](https://github.com/Deskworks/quicksheet-dict) |
+| `gitlog`  | Git Log           | Recent git commits in your spreadsheet — see repo activity at a glance. Usage: `gitlog: /path/to/repo` | [`quicksheet-gitlog`](https://github.com/Deskworks/quicksheet-gitlog) |
+| `stocks`  | Stock Ticker      | Live stock & crypto ticker via Yahoo Finance. Real-time price, change, volume. No API key. | [`quicksheet-stocks`](https://github.com/Deskworks/quicksheet-stocks) |
+| `ai:`     | AI Cost Tracker   | Monitor AI API token usage, costs, and budget for OpenAI, Anthropic, Gemini, DeepSeek on your desktop. | [`quicksheet-ai-costs`](https://github.com/cemheren/quicksheet-ai-costs) |
+| `hash:`   | Hash Generator    | Generate MD5, SHA1, SHA256, SHA512, CRC32 hashes from cell text or file paths. Instant checksums. | [`quicksheet-hashgen`](https://github.com/cemheren/quicksheet-hashgen) |
+| `mvn`     | Maven Lookup      | Maven Central package lookup — version, downloads, license, description. `mvn: com.google.guava:guava` | [`quicksheet-maven`](https://github.com/cemheren/quicksheet-maven) |
+| `nuget`   | NuGet Lookup      | NuGet package lookup — version, total downloads, license, dotnet CLI install command. `nuget: Newtonsoft.Json` | [`quicksheet-nuget`](https://github.com/cemheren/quicksheet-nuget) |
+| `ollama`  | Local AI (Ollama) | Private AI queries via local Ollama — ask questions, summarize, translate from cells. No API key, no network. | [`quicksheet-ollama`](https://github.com/cemheren/quicksheet-ollama) |
+| `pubmed:` | PubMed Lookup     | PubMed article lookup by PMID or keyword search — title, authors, journal, year, DOI. No API key. | [`quicksheet-pubmed`](https://github.com/cemheren/quicksheet-pubmed) |
+| `unit:`   | Unit Converter    | Universal unit converter — length, weight, temp, data, speed, time, volume, area, pressure. Offline, no API key. | [`quicksheet-unitconv`](https://github.com/cemheren/quicksheet-unitconv) |
+| `words:`  | Text Analysis     | Text analysis for writers — word count, reading time, Flesch-Kincaid readability grade, sentence/paragraph count. | [`quicksheet-words`](https://github.com/cemheren/quicksheet-words) |
 
 ## Install
 

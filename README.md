@@ -231,6 +231,24 @@ tls: github.com, 1, 4
 | `caniuse:` | Browser compat lookup via caniuse-db — `caniuse: css-grid` · `caniuse: flexbox` · `caniuse: webassembly`. Shows support across Chrome/Firefox/Safari/Edge + usage %. No API key. | `ext: github:Deskworks/quicksheet-caniuse` |
 | `gem:` | Ruby gem lookup via rubygems.org — version, total downloads, authors, license, homepage, description. `gem: rails` (detail) · `gem: search json parser` (top 5). No API key. | `ext: github:Deskworks/quicksheet-rubygems` |
 | `hackage:` | Haskell package lookup from Hackage — `hackage: aeson` (version, synopsis, author, category, license, homepage) · `hackage: search json` (top results). No API key. | `ext: github:Deskworks/quicksheet-hackage` |
+| `apistatus:` | Service status aggregator — GitHub, Cloudflare, npm, Discord + 14 more. No API key. | `ext: github:Deskworks/quicksheet-apistatus` |
+| `b64:` | Base64 encode/decode — auto-detect, explicit modes, multi-line output | `ext: github:Deskworks/quicksheet-b64` |
+| `dict:` | English dictionary — definitions, phonetics, synonyms, antonyms | `ext: github:Deskworks/quicksheet-dict` |
+| `gitlog:` | Recent git commits in your spreadsheet — repo activity at a glance | `ext: github:Deskworks/quicksheet-gitlog` |
+| `hntop:` | Top Hacker News stories — scores, comments, no browser needed | `ext: github:Deskworks/quicksheet-hntop` |
+| `news:` | RSS/Atom feed headlines — HN, Reddit, dev.to, or any custom RSS feed | `ext: github:Deskworks/quicksheet-news` |
+| `rate:` | Freelance hourly rate calculator — know your minimum viable rate | `ext: github:Deskworks/quicksheet-rate` |
+| `sys:` | Live CPU, RAM, disk usage & uptime in your cells | `ext: github:Deskworks/quicksheet-sysmon` |
+| `pomo:` | Pomodoro timer — live work/break countdown on your desktop | `ext: github:Deskworks/quicksheet-pomodoro` |
+| `stocks:` | Live stock & crypto ticker via Yahoo Finance — no API key | `ext: github:Deskworks/quicksheet-stocks` |
+| `ai:` | AI API cost tracker — token usage, costs, budget for OpenAI, Anthropic, Gemini, DeepSeek | `ext: github:cemheren/quicksheet-ai-costs` |
+| `hash:` | Hash generator — MD5, SHA1, SHA256, SHA512, CRC32 from text or file paths | `ext: github:cemheren/quicksheet-hashgen` |
+| `mvn:` | Maven Central package lookup — version, downloads, license, description | `ext: github:cemheren/quicksheet-maven` |
+| `nuget:` | NuGet package lookup — version, downloads, license, dotnet CLI install command | `ext: github:cemheren/quicksheet-nuget` |
+| `ollama:` | Local AI via Ollama — private queries, summarize, translate from cells. No API key. | `ext: github:cemheren/quicksheet-ollama` |
+| `pubmed:` | PubMed article lookup — title, authors, journal, year, DOI by PMID or keyword | `ext: github:cemheren/quicksheet-pubmed` |
+| `unit:` | Universal unit converter — length, weight, temp, data, speed, time, volume, area, pressure. Offline. | `ext: github:cemheren/quicksheet-unitconv` |
+| `words:` | Text analysis for writers — word count, reading time, readability grade | `ext: github:cemheren/quicksheet-words` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
