@@ -1,3 +1,11 @@
+## 2026-05-29 (docs: tabletop GM audience page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` targeting D&D / Pathfinder / TTRPG game masters. Covers dice rolling (quicksheet-dice), initiative tracking, NPC stat blocks, quick-reference rules, session-tool launchers, and theme picks. Added `examples/dm-screen.csv` starter layout and README cross-link.
+- Bucket: A (docs polish — audience landing page).
+- Outcome: PR #231.
+- Follow-up: none — five audience pages now live (homelab, traders, SRE, students, DMs).
+
 ## 2026-05-29 (feat: pubmed extension — academic persona)
 
 - Stars: 0 (Δ 0).
