@@ -1,3 +1,11 @@
+## 2026-05-28 (feat: --theme and --list-themes CLI flags)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--theme <name>` flag to start QuickSheet with a specific color theme, and `--list-themes` to enumerate available presets. Also fixed arg parsing so flag values don't get mistaken for the CSV path.
+- Bucket: E (QoL feature).
+- Outcome: PR #227.
+- Follow-up: none.
+
 ## 2026-05-28 (docs: ghst + lc in for-students.md)
 
 - Stars: 0 (Δ 0).
