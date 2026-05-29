@@ -1,3 +1,11 @@
+## 2026-05-29 (docs: for-artists page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-artists.md` audience landing page + `examples/artist-dashboard.csv`. Targets illustrators, writers, musicians, animators. Pairs with `words`, `ollama`, `unitconv` extensions.
+- Bucket: A (product polish).
+- Outcome: PR #242.
+- Follow-up: Next run variety → Bucket D or E. Consider `for-dms.md` PR #231 already open.
+
 ## 2026-05-29 (feat: quicksheet-init-ext)
 
 - Stars: 0 (Δ 0).
