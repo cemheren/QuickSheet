@@ -659,6 +659,65 @@ public class GridManager
                 .Replace("\n", "\\n").Replace("\r", "\\r").Replace("\t", "\\t");
     }
 
+    /// <summary>
+    /// Loads a JSON array of objects into the grid (first row = keys, subsequent rows = values).
+    /// Used by `--import-json` to convert JSON → CSV.
+    /// </summary>
+    public void LoadFromJsonFile(string path)
+    {
+        if (!File.Exists(path)) return;
+        string json = File.ReadAllText(path);
+        LoadFromJsonString(json);
+    }
+
+    public void LoadFromJsonString(string json)
+    {
+        using var doc = System.Text.Json.JsonDocument.Parse(json);
+        if (doc.RootElement.ValueKind != System.Text.Json.JsonValueKind.Array) return;
+
+        // Collect all unique keys in order of appearance
+        var keys = new List<string>();
+        var keySet = new HashSet<string>();
+        foreach (var item in doc.RootElement.EnumerateArray())
+        {
+            if (item.ValueKind != System.Text.Json.JsonValueKind.Object) continue;
+            foreach (var prop in item.EnumerateObject())
+            {
+                if (keySet.Add(prop.Name))
+                    keys.Add(prop.Name);
+            }
+        }
+        if (keys.Count == 0) return;
+
+        // Row 0 = headers
+        for (int c = 0; c < Math.Min(keys.Count, ColumnCount); c++)
+            _data[0, c] = keys[c];
+
+        // Subsequent rows = values
+        int row = 1;
+        foreach (var item in doc.RootElement.EnumerateArray())
+        {
+            if (row >= RowCount) break;
+            if (item.ValueKind != System.Text.Json.JsonValueKind.Object) continue;
+            for (int c = 0; c < Math.Min(keys.Count, ColumnCount); c++)
+            {
+                if (item.TryGetProperty(keys[c], out var val))
+                {
+                    _data[row, c] = val.ValueKind switch
+                    {
+                        System.Text.Json.JsonValueKind.String => val.GetString() ?? "",
+                        System.Text.Json.JsonValueKind.Number => val.GetRawText(),
+                        System.Text.Json.JsonValueKind.True => "true",
+                        System.Text.Json.JsonValueKind.False => "false",
+                        System.Text.Json.JsonValueKind.Null => "",
+                        _ => val.GetRawText()
+                    };
+                }
+            }
+            row++;
+        }
+    }
+
     public void LoadFromCsv(string path)
     {
         if (!File.Exists(path)) return;

@@ -163,6 +163,43 @@ public class Program
             return;
         }
 
+        int importJsonIdx = Array.IndexOf(args, "--import-json");
+        if (importJsonIdx >= 0)
+        {
+            string? jsonInput = args.FirstOrDefault(a => !a.StartsWith("--") && a.EndsWith(".json", StringComparison.OrdinalIgnoreCase));
+            string? csvOutput = args.FirstOrDefault(a => !a.StartsWith("--") && a.EndsWith(".csv", StringComparison.OrdinalIgnoreCase));
+            if (jsonInput == null || csvOutput == null)
+            {
+                Console.Error.WriteLine("Usage: ExcelConsole --import-json <input.json> <output.csv>");
+                Environment.Exit(2);
+                return;
+            }
+            if (!File.Exists(jsonInput))
+            {
+                Console.Error.WriteLine($"Input JSON not found: {jsonInput}");
+                Environment.Exit(1);
+                return;
+            }
+
+            string json = File.ReadAllText(jsonInput);
+            using var doc = System.Text.Json.JsonDocument.Parse(json);
+            int itemCount = 0;
+            int maxProps = 0;
+            foreach (var item in doc.RootElement.EnumerateArray())
+            {
+                itemCount++;
+                int props = 0;
+                foreach (var _ in item.EnumerateObject()) props++;
+                if (props > maxProps) maxProps = props;
+            }
+
+            var grid = new GridManager(availableWidth: maxProps * 20 + 4, availableHeight: itemCount + 1);
+            grid.LoadFromJsonString(json);
+            grid.SaveToCsv(csvOutput);
+            Console.WriteLine($"Imported {itemCount} records ({maxProps} columns) → {csvOutput}");
+            return;
+        }
+
 #if PLATFORM_WINDOWS
         HideConsoleWindow();
         using var host = new ExcelConsole.Platform.Windows.WindowsDesktopHost();
@@ -255,6 +292,7 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole --import-json <in.json> <out.csv>     Headless: JSON array → CSV");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
