@@ -24,7 +24,30 @@ public class Program
             return;
         }
 
-        string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
+        if (args.Contains("--list-themes"))
+        {
+            Console.WriteLine("Available themes (set with --theme <name>):");
+            foreach (var t in Theme.Presets)
+                Console.WriteLine($"  {t.Name}");
+            return;
+        }
+
+        int themeIdx = Array.IndexOf(args, "--theme");
+        if (themeIdx >= 0 && themeIdx + 1 < args.Length)
+        {
+            Theme.SetByName(args[themeIdx + 1]);
+        }
+
+        // Skip args that are values of preceding flags (--theme <name>, --export-* <path>).
+        var flagsWithValue = new HashSet<int>();
+        for (int i = 0; i < args.Length - 1; i++)
+        {
+            if (args[i] == "--theme" || args[i] == "--export-md" || args[i] == "--export-html" || args[i] == "--export-json")
+                flagsWithValue.Add(i + 1);
+        }
+        string? csvPath = args
+            .Where((a, i) => !a.StartsWith("--") && !flagsWithValue.Contains(i))
+            .FirstOrDefault();
 
         int exportIdx = Array.IndexOf(args, "--export-md");
         if (exportIdx >= 0)
@@ -258,6 +281,8 @@ public class Program
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
+        Console.WriteLine("  ExcelConsole --list-themes                         List available color themes");
+        Console.WriteLine("  ExcelConsole [<file.csv>] --theme <name>           Start with a specific theme");
         Console.WriteLine();
         Console.WriteLine("Cell prefixes:");
         Console.WriteLine("  r: <cmd>          Runnable command. Press Enter to launch.");
