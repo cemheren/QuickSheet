@@ -1,3 +1,12 @@
+## 2026-05-28 (docs: ghst + lc in for-students.md)
+
+- Stars: 0 (Δ 0).
+- Action: Added `ghst:` (GitHub streak) and `lc:` (LeetCode daily) extensions to `docs/for-students.md`. Both extensions exist under Deskworks/ but the student audience page didn't mention them. Added a zone-table row + dedicated "GitHub streak + LeetCode daily" section.
+- Bucket: A (docs polish).
+- Outcome: PR #226.
+- Note: Also attempted to create `cemheren/quicksheet-ghstreak-ext` before realizing `Deskworks/quicksheet-ghstreak` already exists. Couldn't delete (no `delete_repo` scope). User should delete the duplicate `cemheren/quicksheet-ghstreak-ext` repo.
+- Follow-up: none — all backlog Bucket F items already exist under Deskworks/.
+
 ## 2026-05-19 (no-op #31 — #139 still open, hold)
 
 - Stars: 0 (Δ 0). PR #139 still open, no other action items. Hold.
