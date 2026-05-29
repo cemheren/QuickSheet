@@ -1,3 +1,11 @@
+## 2026-05-29 (feat: quicksheet-init-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Created `cemheren/quicksheet-init-ext` — combat initiative tracker for TTRPG GMs. Sort combatants by initiative roll, cycle turns, track rounds. Pairs with `quicksheet-dice` for a DM-screen bundle. Zero NuGet deps.
+- Bucket: F (vertical extension).
+- Outcome: Repo pushed → https://github.com/cemheren/quicksheet-init-ext. Cross-link PR #241.
+- Follow-up: Next run variety → Bucket A (audience landing page) or Bucket D (awesome-list draft).
+
 ## 2026-05-29 (draft: r/selfhosted post)
 
 - Stars: 0 (Δ 0).
