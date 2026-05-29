@@ -1,0 +1,24 @@
+=== DM SCREEN ===,,,=== DICE ===,,=== QUICK REF ===
+,,,,,
+Initiative,AC,HP,roll: d20,,Conditions
+,,,,,Prone: disadvantage melee atk / advantage ranged >5ft
+1.,,,,,Grappled: speed 0
+2.,,,,,Stunned: auto-fail STR/DEX saves
+3.,,,,,Frightened: can't move closer / disadv on checks
+4.,,,,,Blinded: auto-fail sight checks / atk disadv
+5.,,,,,Paralyzed: auto-fail STR/DEX / melee crit in 5ft
+6.,,,,,
+,,,,,Cover
+=== NPCs ===,,,,,"Half: +2 AC, +2 DEX saves"
+NPC,AC,HP,Attack,Notes,"Three-quarters: +5 AC, +5 DEX saves"
+,,,,,"Full: can't be targeted"
+,,,,,
+,,,,,DCs
+,,,,,Easy: 10
+,,,,,Medium: 15
+=== SESSION NOTES ===,,,,,Hard: 20
+,,,,,Very Hard: 25
+,,,,,Nearly Impossible: 30
+,,,,,
+=== LAUNCHERS ===,,,,,
+r: echo Open your PDF/VTT here,,,ext: github:Deskworks/quicksheet-dice,,
