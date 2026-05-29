@@ -1,3 +1,11 @@
+## 2026-05-29 (research: package manager distribution)
+
+- Stars: 0 (Δ 0).
+- Action: Researched package manager distribution strategy (winget, Scoop, AUR, Homebrew, Nix). Found zero binary releases exist — no CI, no artifacts on any release tag. Documented requirements, manifest sketches, and a 5-run roadmap from zero to three package managers.
+- Bucket: R (research).
+- Outcome: `research/package-manager-distribution.md` committed.
+- Follow-up: Next action = create `.github/workflows/release.yml` (Bucket E, ~40 lines YAML). This unblocks all package manager submissions.
+
 ## 2026-05-29 (feat: --import-json CLI converter)
 
 - Stars: 0 (Δ 0).
@@ -1093,6 +1101,8 @@
   - **Generic-primitive justifications are not enough.** "Hits N/M personas" alone is not a green light — persona-shaped specifics are required.
 
 - **Live backlog (re-ranked after the c?:/timer revert):**
+  Pre-flight: see standing rules above.
+  0. **Bucket E: `.github/workflows/release.yml`** — publish self-contained win-x64 + linux-x64 binaries on tag push. Unblocks Scoop/winget/AUR submissions. ~40 lines YAML, 1 file. See `research/package-manager-distribution.md`.
   Pre-flight rule for any item below: if you can't explain in one sentence *why this specific persona will install QuickSheet because of this* (not "it could be useful for everyone"), skip and pick something else.
   1. **Bucket F: `health:` HTTP-probe extension.** Reads `services.csv` (name,url,expected_status); fills a row of green/red dots. Homelab persona; writes its own r/selfhosted screenshot. New extension repo on user's account.
   2. **Bucket F: `leetcode:` + `gh:` user-streak combo.** Students persona; "CS-student flex bundle." Free APIs, lowest auth.
