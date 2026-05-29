@@ -30,6 +30,7 @@ swap out:
 | **Budget**        | Spend vs budget per category, colour-coded progress bars   | [`budget`](https://github.com/Deskworks/quicksheet-budget)  |
 | **Tech tools**    | JWT decoder, regex explainer, base64, URL encoder in-cell  | [`jwtdec`](https://github.com/Deskworks/quicksheet-jwtdec) · [`regex`](https://github.com/Deskworks/quicksheet-regex) · [`b64`](https://github.com/Deskworks/quicksheet-b64) · [`urlenc`](https://github.com/Deskworks/quicksheet-urlenc) |
 | **News & GitHub** | HN top 5, your GitHub commit log                           | [`hntop`](https://github.com/Deskworks/quicksheet-hntop) · [`gitlog`](https://github.com/Deskworks/quicksheet-gitlog) |
+| **Grind tracker** | GitHub streak + LeetCode daily challenge on your wallpaper  | [`ghst`](https://github.com/Deskworks/quicksheet-ghstreak) · [`lc`](https://github.com/Deskworks/quicksheet-leetcode) |
 
 All extensions install with a single `ext: github:Deskworks/quicksheet-<name>` cell —
 QuickSheet clones the repo and the prefix is live instantly.
@@ -112,6 +113,23 @@ See your own recent commits without running `git log`:
 ext: github:Deskworks/quicksheet-gitlog
 gitlog: /path/to/your/project, 8
 ```
+
+## GitHub streak + LeetCode daily
+
+Show your contribution streak and today's LeetCode challenge side by side — the
+"I'm shipping code" flex that doesn't require opening a browser:
+
+```
+ext: github:Deskworks/quicksheet-ghstreak
+ext: github:Deskworks/quicksheet-leetcode
+---
+ghst: your-github-username
+lc: daily
+```
+
+`ghst:` shows commits today, current streak (days), and 90-day total from the public
+events API — no token needed.  `lc:` shows the daily challenge title, difficulty, and
+acceptance rate.
 
 ## Hackathon mode
 
