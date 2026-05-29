@@ -1,3 +1,11 @@
+## 2026-05-29 (feat: quicksheet-gha-ext — GitHub Actions status)
+
+- Stars: 0 (Δ 0).
+- Action: Created `cemheren/quicksheet-gha-ext` — shows recent CI/CD workflow runs (✓/✗/⚠/⟳) with name, branch, conclusion, elapsed time. Uses GitHub REST API; supports GITHUB_TOKEN for private repos. Pairs with tls/health/docker for SRE dashboard persona.
+- Bucket: F (vertical extension).
+- Outcome: Repo pushed → https://github.com/cemheren/quicksheet-gha-ext. Cross-link PR #236.
+- Follow-up: none — SRE extension suite now covers tls, health, docker, gha, ping, k8s.
+
 ## 2026-05-29 (ci: release workflow for binaries)
 
 - Stars: 0 (Δ 0).
