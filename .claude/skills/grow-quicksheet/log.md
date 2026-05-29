@@ -1,3 +1,11 @@
+## 2026-05-29 (ci: release workflow for binaries)
+
+- Stars: 0 (Δ 0).
+- Action: Created `.github/workflows/release.yml` — builds self-contained, trimmed, single-file binaries (win-x64 .zip + linux-x64 .tar.gz) on every `v*` tag push. Uses `softprops/action-gh-release` to attach artifacts to GitHub Releases.
+- Bucket: E (QoL feature / infra).
+- Outcome: PR #235.
+- Follow-up: After merge + first tagged release, draft Scoop manifest submission.
+
 ## 2026-05-29 (research: package manager distribution)
 
 - Stars: 0 (Δ 0).
