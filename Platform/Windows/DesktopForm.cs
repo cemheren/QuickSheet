@@ -595,6 +595,14 @@ internal class DesktopForm : DesktopFormBase
                     if (spark != null) displayVal = spark;
                 }
 
+                // Render progress bar cells (p: 75 → ███████░░░ 75%)
+                bool isProgressBar = !isSparkline && CellPrefix.IsProgressBar(cellVal);
+                if (isProgressBar)
+                {
+                    string? bar = CellPrefix.RenderProgressBar(cellVal);
+                    if (bar != null) displayVal = bar;
+                }
+
                 var colorParsed = !isSparkline ? CellPrefix.ParseColor(cellVal) : null;
                 if (colorParsed != null)
                     displayVal = colorParsed.Value.text;

@@ -717,6 +717,14 @@ internal class DesktopWindow : IDisposable
                     if (spark != null) displayVal = spark;
                 }
 
+                // Render progress bar cells (p: 75 → ███████░░░ 75%)
+                bool isProgressBar = !isEditingThisCell && !isSparkline && CellPrefix.IsProgressBar(cellVal);
+                if (isProgressBar)
+                {
+                    string? bar = CellPrefix.RenderProgressBar(cellVal);
+                    if (bar != null) displayVal = bar;
+                }
+
                 // Render color-prefixed cells: strip prefix from display
                 var colorParsed = (!isEditingThisCell && !isSparkline) ? CellPrefix.ParseColor(cellVal) : null;
                 if (colorParsed != null)

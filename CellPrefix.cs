@@ -118,6 +118,36 @@ public static class CellPrefix
         return sb.ToString();
     }
 
+    // ── Progress bar prefix ─────────────────────────────────────────
+
+    private static readonly char ProgressFilled = '█';
+    private static readonly char ProgressEmpty = '░';
+    private const int ProgressBarWidth = 10;
+
+    /// <summary>
+    /// Returns true when a cell starts with "p: " (progress bar).
+    /// </summary>
+    public static bool IsProgressBar(string value) =>
+        value.StartsWith("p: ", StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// Renders a "p: 75" cell as "███████░░░ 75%".
+    /// Accepts values 0–100. Returns null if not a progress cell or value is invalid.
+    /// </summary>
+    public static string? RenderProgressBar(string value)
+    {
+        if (!IsProgressBar(value)) return null;
+        string rest = value[3..].Trim();
+        if (!double.TryParse(rest, System.Globalization.NumberStyles.Float,
+            System.Globalization.CultureInfo.InvariantCulture, out double pct))
+            return null;
+        pct = Math.Clamp(pct, 0, 100);
+        int filled = (int)Math.Round(pct / 100.0 * ProgressBarWidth);
+        return new string(ProgressFilled, filled)
+             + new string(ProgressEmpty, ProgressBarWidth - filled)
+             + $" {pct:0}%";
+    }
+
     // ── Color prefix ───────────────────────────────────────────────
 
     private static readonly Dictionary<string, ConsoleColor> ColorMap = new(StringComparer.OrdinalIgnoreCase)
