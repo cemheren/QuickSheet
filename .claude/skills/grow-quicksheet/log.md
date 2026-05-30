@@ -1,3 +1,11 @@
+## 2026-05-30 (draft: r/linux post)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted r/linux submission post. Leads with `_NET_WM_WINDOW_TYPE_DESKTOP` technical angle, covers Wayland caveat, zero-deps story, Conky comparison. Targets 2M+ member sub with X11 power-user overlap.
+- Bucket: C (content draft).
+- Outcome: commit 0b50848, draft at `drafts/reddit-linux.md`.
+- Follow-up: User posts when ready. Next run variety → Bucket A or E.
+
 ## 2026-05-30 (ci: release workflow)
 
 - Stars: 0 (Δ 0).
