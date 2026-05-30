@@ -1,3 +1,11 @@
+## 2026-05-30 (duplicate: quicksheet-arxiv-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Attempted Bucket F — scaffolded `quicksheet-arxiv-ext` (arXiv paper lookup). Built successfully, pushed to `cemheren/quicksheet-arxiv-ext`. Then discovered `Deskworks/quicksheet-arxiv` already covers the same `arxiv:` prefix and is listed in README line 208.
+- Bucket: F (vertical extension) — **wasted run**.
+- Outcome: Duplicate repo pushed. Cannot delete (missing `delete_repo` scope). Marked draft README as SUPERSEDED. No cross-link PR opened.
+- Follow-up: User should delete `cemheren/quicksheet-arxiv-ext` (duplicate). Next run should sweep for new issues or no-op if saturation still applies. 15+ PRs still awaiting merge.
+
 ## 2026-05-29 (docs: for-artists page)
 
 - Stars: 0 (Δ 0).
