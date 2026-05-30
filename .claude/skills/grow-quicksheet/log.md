@@ -1,3 +1,11 @@
+## 2026-05-30 (ci: release workflow)
+
+- Stars: 0 (Δ 0).
+- Action: Created `.github/workflows/release.yml` — builds self-contained single-file binaries (win-x64 .zip + linux-x64 .tar.gz) on `v*` tag push and attaches them to a GitHub Release.
+- Bucket: E (quality-of-life / infrastructure).
+- Outcome: PR #247.
+- Follow-up: After merge + first tag, draft Scoop manifest. Next run variety → Bucket C or F.
+
 ## 2026-05-30 (feat: p: progress bar prefix)
 
 - Stars: 0 (Δ 0).
