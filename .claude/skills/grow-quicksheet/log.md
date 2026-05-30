@@ -1,3 +1,11 @@
+## 2026-05-30 (feat: --get cell value extraction)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--get <CellRef>` headless flag — extracts a single cell value from CSV by Excel-style reference. Makes QuickSheet composable in shell scripts (`balance=$(QuickSheet budget.csv --get C5)`).
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #245.
+- Follow-up: Next run variety → Bucket C or D. Consider drafting a "shell scripting with QuickSheet" blog snippet showing --get + --export-md pipeline.
+
 ## 2026-05-30 (docs: virtual tabs design spec)
 
 - Stars: 0 (Δ 0).
