@@ -1,3 +1,11 @@
+## 2026-05-30 (draft: r/linux post)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted r/linux submission — leads with X11 P/Invoke technical angle, honest about Wayland limitation, positions as Linux-native open-source tool not a Windows port. Distinct from r/commandline (use-case) and r/unixporn (screenshot).
+- Bucket: C (content draft).
+- Outcome: Draft saved at `drafts/reddit-linux.md`.
+- Follow-up: User publishes when ready. Next run variety → Bucket A or E if issues appear.
+
 ## 2026-05-30 (ci: release workflow)
 
 - Stars: 0 (Δ 0).
