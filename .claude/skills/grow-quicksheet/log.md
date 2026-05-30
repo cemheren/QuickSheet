@@ -1,3 +1,11 @@
+## 2026-05-30 (docs: for-dms landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` audience landing page for TTRPG game masters + `examples/dm-dashboard.csv` starter sheet. Highlights `init:`, `roll:`, `cntdn:` extensions for combat tracking, dice rolling, session pacing.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #250.
+- Follow-up: Variety next run → Bucket F (health: or roll: extension). Consider cross-linking for-dms.md from main README's "Who is this for" section after merge.
+
 ## 2026-05-30 (ext: quicksheet-mileage-ext)
 
 - Stars: 0 (Δ 0).
