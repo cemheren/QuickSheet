@@ -1,3 +1,11 @@
+## 2026-05-30 (docs: virtual tabs design spec)
+
+- Stars: 0 (Δ 0).
+- Action: Wrote design specification for virtual tabs / weekly aging feature (issue #158). Covers data model, CSV format with backward-compatible `---TAB:name---` separators, aging logic with pinned-cell rules, UX, and four implementation phases.
+- Bucket: A (product polish — addressing owner's feature request).
+- Outcome: PR #244.
+- Follow-up: User reviews design, provides answers to open questions. Implementation can follow in phased PRs once spec is approved.
+
 ## 2026-05-30 (duplicate: quicksheet-arxiv-ext)
 
 - Stars: 0 (Δ 0).
