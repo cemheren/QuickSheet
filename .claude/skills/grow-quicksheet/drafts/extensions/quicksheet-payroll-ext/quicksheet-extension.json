@@ -1,0 +1,5 @@
+{
+  "name": "quicksheet-payroll-ext",
+  "version": "1.0.0",
+  "entry": "dotnet run --project QuickSheetPayroll.csproj"
+}

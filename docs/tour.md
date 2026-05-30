@@ -76,6 +76,7 @@ Currently public:
 - [`quicksheet-mileage-ext`](https://github.com/Deskworks/quicksheet-mileage-ext) — IRS standard-mileage deduction calculator.
 - [`quicksheet-margin-ext`](https://github.com/Deskworks/quicksheet-margin-ext) — break-even point + contribution margin.
 - [`quicksheet-depr-ext`](https://github.com/Deskworks/quicksheet-depr-ext) — straight-line + MACRS depreciation schedules.
+- [`quicksheet-payroll-ext`](https://github.com/cemheren/quicksheet-payroll-ext) — payroll withholding estimator (federal tax + FICA).
 - [`quicksheet-grav-ext`](https://github.com/Deskworks/quicksheet-grav-ext) — Gravatar profile + avatar URL.
 - [`quicksheet-sysmon`](https://github.com/Deskworks/quicksheet-sysmon) — live CPU/RAM/disk/uptime monitor.
 - [`quicksheet-todo`](https://github.com/Deskworks/quicksheet-todo) — task management with priorities + due dates.

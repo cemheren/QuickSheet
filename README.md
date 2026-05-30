@@ -199,6 +199,7 @@ tls: github.com, 1, 4
 | `worldtm:` | World clock / timezones | `ext: github:Deskworks/quicksheet-worldtm` |
 | `margin:` | Break-even & margin calc | `ext: github:Deskworks/quicksheet-margin-ext` |
 | `depr:` | Depreciation schedules | `ext: github:Deskworks/quicksheet-depr-ext` |
+| `payroll:` | Payroll withholding estimator | `ext: github:cemheren/quicksheet-payroll-ext` |
 | `jwtdec:` | JWT token decoder | `ext: github:Deskworks/quicksheet-jwtdec` |
 | `cronck:` | Cron expression parser | `ext: github:Deskworks/quicksheet-cronck` |
 | `guid:` | GUID/UUID generator | `ext: github:Deskworks/quicksheet-guid` |

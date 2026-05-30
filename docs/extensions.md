@@ -38,6 +38,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `margin`  | Margin Calculator | Break-even point & contribution margin from price/cost/fixed     | [`quicksheet-margin-ext`](https://github.com/Deskworks/quicksheet-margin-ext) |
 | `mileage` | IRS mileage       | Standard-mileage deduction (business/medical/charity, 2021-2025) | [`quicksheet-mileage-ext`](https://github.com/Deskworks/quicksheet-mileage-ext) |
 | `depr`    | Depreciation      | Straight-line + MACRS half-year schedules (IRS Pub 946)          | [`quicksheet-depr-ext`](https://github.com/Deskworks/quicksheet-depr-ext) |
+| `payroll` | Payroll estimator | Federal tax + FICA withholding per pay period (2025 IRS brackets) | [`quicksheet-payroll-ext`](https://github.com/cemheren/quicksheet-payroll-ext) |
 | `jwtdec`  | JWT decoder       | Decode JWT tokens locally — header, claims, expiry. Tokens never leave your machine. | [`quicksheet-jwtdec`](https://github.com/Deskworks/quicksheet-jwtdec) |
 | `cronck`  | Cron parser       | Convert 5-field cron expressions to human-readable descriptions. Ranges, steps, named days/months. | [`quicksheet-cronck`](https://github.com/Deskworks/quicksheet-cronck) |
 | `news`    | RSS feed reader   | Headlines from HN, Reddit, dev.to, BBC, TechCrunch, or any RSS/Atom URL | [`quicksheet-news`](https://github.com/Deskworks/quicksheet-news) |
