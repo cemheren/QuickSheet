@@ -163,6 +163,65 @@ public class Program
             return;
         }
 
+        int getIdx = Array.IndexOf(args, "--get");
+        if (getIdx >= 0)
+        {
+            if (csvPath == null || getIdx + 1 >= args.Length)
+            {
+                Console.Error.WriteLine("Usage: ExcelConsole <input.csv> --get <CellRef>");
+                Console.Error.WriteLine("  Example: ExcelConsole data.csv --get B3");
+                Environment.Exit(2);
+                return;
+            }
+            string cellArg = args[getIdx + 1];
+            if (!File.Exists(csvPath))
+            {
+                Console.Error.WriteLine($"Input CSV not found: {csvPath}");
+                Environment.Exit(1);
+                return;
+            }
+
+            var parsed = ExcelConsole.CellPrefix.ParseCellRef(cellArg);
+            if (parsed == null)
+            {
+                Console.Error.WriteLine($"Invalid cell reference: {cellArg}");
+                Console.Error.WriteLine("  Use Excel-style refs like A1, B3, AA10");
+                Environment.Exit(2);
+                return;
+            }
+
+            var (row, col) = parsed.Value;
+            var lines = File.ReadAllLines(csvPath);
+            int rows = Math.Max(1, lines.Length);
+            int cols = 1;
+            foreach (var line in lines)
+            {
+                int n = 1;
+                bool inQuotes = false;
+                foreach (char ch in line)
+                {
+                    if (ch == '"') inQuotes = !inQuotes;
+                    else if (ch == ',' && !inQuotes) n++;
+                }
+                if (n > cols) cols = n;
+            }
+            var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
+            grid.LoadFromCsv(csvPath);
+
+            if (row >= rows || col >= cols)
+            {
+                Console.Error.WriteLine($"Cell {cellArg} is out of range (grid is {cols} cols × {rows} rows)");
+                Environment.Exit(1);
+                return;
+            }
+
+            string value = grid.GetCellValue(row, col) ?? "";
+            Console.Write(value);
+            if (Console.IsOutputRedirected || value.Length > 0)
+                Console.WriteLine();
+            return;
+        }
+
 #if PLATFORM_WINDOWS
         HideConsoleWindow();
         using var host = new ExcelConsole.Platform.Windows.WindowsDesktopHost();
@@ -255,6 +314,7 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv> --get <CellRef>            Headless: print a single cell value (e.g. B3)");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
