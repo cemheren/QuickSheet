@@ -1,3 +1,11 @@
+## 2026-05-30 (ext: quicksheet-mileage-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Pushed `quicksheet-mileage-ext` — IRS standard-mileage deduction calculator (business/medical/charity, 2021–2025 rates). Built, verified green, created repo at cemheren/quicksheet-mileage-ext. Already cross-linked in README line 197 and docs/extensions.md.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-mileage-ext. Topics set.
+- Follow-up: Next accounting ext from queue: `quicksheet-margin-ext`. Variety next run → Bucket C or D.
+
 ## 2026-05-30 (draft: r/linux post)
 
 - Stars: 0 (Δ 0).
