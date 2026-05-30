@@ -1,3 +1,11 @@
+## 2026-05-30 (feat: p: progress bar prefix)
+
+- Stars: 0 (Δ 0).
+- Action: Added `p:` cell prefix — renders a Unicode progress bar (███████░░░ 75%) for values 0–100. Same rendering-layer pattern as sparklines, hooked in both Linux and Windows desktop forms.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #246.
+- Follow-up: Next run variety → Bucket C or D. 21 open PRs awaiting merge.
+
 ## 2026-05-30 (feat: --get cell value extraction)
 
 - Stars: 0 (Δ 0).
