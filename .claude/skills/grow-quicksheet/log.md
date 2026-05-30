@@ -1,3 +1,11 @@
+## 2026-05-30 (ext: quicksheet-payroll-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Created `quicksheet-payroll-ext` — US payroll withholding estimator (federal income tax 2025 brackets + Social Security 6.2% + Medicare 1.45%). Supports weekly/biweekly/semimonthly/monthly/annual frequencies, single/married filing status. Built green, pushed to cemheren/quicksheet-payroll-ext, cross-linked in README + docs/extensions.md + docs/tour.md.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-payroll-ext. Cross-link PR #251.
+- Follow-up: Completes the accountant persona suite (1099, mileage, margin, depr, salestax, payroll). Next variety → Bucket C or D.
+
 ## 2026-05-30 (docs: for-dms landing page)
 
 - Stars: 0 (Δ 0).
