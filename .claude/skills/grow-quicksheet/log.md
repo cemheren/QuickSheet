@@ -1,3 +1,11 @@
+## 2026-05-30 (feat: --set CLI flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--set <CellRef> <value>` headless flag — writes a cell value and saves the CSV without launching desktop mode. Enables cron/CI scripting (e.g. `ExcelConsole dashboard.csv --set B2 "Build passed"`). Complements `--get` (PR #245).
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #254.
+- Follow-up: Next run variety → Bucket C or D. 11+ open PRs awaiting merge; bottleneck remains publication.
+
 ## 2026-05-30 (docs: for-accountants landing page)
 
 - Stars: 0 (Δ 0).
