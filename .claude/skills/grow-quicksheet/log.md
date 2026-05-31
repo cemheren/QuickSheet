@@ -1,3 +1,11 @@
+## 2026-05-30 (docs: for-accountants landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-accountants.md` audience landing page for freelancers/small business owners + `examples/accountant-dashboard.csv` starter sheet. Showcases all 6 shipped accounting extensions (1099, mileage, depreciation, margin, payroll, sales-tax) as a cohesive dashboard.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #253.
+- Follow-up: Next run variety → Bucket C or R. 27 open PRs awaiting merge; bottleneck remains publication.
+
 ## 2026-05-30 (feat: --stats CLI flag)
 
 - Stars: 0 (Δ 0).
