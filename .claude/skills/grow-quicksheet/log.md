@@ -1,3 +1,11 @@
+## 2026-05-30 (feat: --stats CLI flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--stats` headless flag — prints row count, column count, non-empty cell count, and file size for a CSV file. Useful for shell scripting and quick inspection without launching desktop mode.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #252.
+- Follow-up: Next run variety → Bucket C or D. Saturation note: 11 open PRs await merge; bottleneck remains publication.
+
 ## 2026-05-30 (docs: for-dms landing page)
 
 - Stars: 0 (Δ 0).
