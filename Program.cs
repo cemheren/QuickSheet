@@ -26,6 +26,12 @@ public class Program
 
         string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
 
+        if (args.Contains("--stats"))
+        {
+            PrintStats(csvPath);
+            return;
+        }
+
         int exportIdx = Array.IndexOf(args, "--export-md");
         if (exportIdx >= 0)
         {
@@ -233,6 +239,66 @@ public class Program
         }
     }
 
+    private static void PrintStats(string? csvPath)
+    {
+        if (csvPath == null || !File.Exists(csvPath))
+        {
+            Console.Error.WriteLine(csvPath == null
+                ? "Usage: ExcelConsole <file.csv> --stats"
+                : $"File not found: {csvPath}");
+            Environment.Exit(1);
+            return;
+        }
+
+        var lines = File.ReadAllLines(csvPath);
+        int rowCount = lines.Length;
+        int colCount = 0;
+        int nonEmpty = 0;
+        foreach (var line in lines)
+        {
+            int cols = 1;
+            bool inQuotes = false;
+            foreach (char ch in line)
+            {
+                if (ch == '"') inQuotes = !inQuotes;
+                else if (ch == ',' && !inQuotes) cols++;
+            }
+            if (cols > colCount) colCount = cols;
+
+            // Count non-empty cells in this row
+            int start = 0;
+            inQuotes = false;
+            for (int i = 0; i <= line.Length; i++)
+            {
+                bool atEnd = i == line.Length;
+                char ch = atEnd ? ',' : line[i];
+                if (ch == '"') { inQuotes = !inQuotes; continue; }
+                if ((ch == ',' && !inQuotes) || atEnd)
+                {
+                    string cell = line[start..i].Trim().Trim('"');
+                    if (cell.Length > 0) nonEmpty++;
+                    start = i + 1;
+                }
+            }
+        }
+
+        long fileSize = new FileInfo(csvPath).Length;
+        int totalCells = rowCount * colCount;
+
+        Console.WriteLine($"File:       {csvPath}");
+        Console.WriteLine($"Size:       {FormatSize(fileSize)}");
+        Console.WriteLine($"Rows:       {rowCount}");
+        Console.WriteLine($"Columns:    {colCount}");
+        Console.WriteLine($"Cells:      {totalCells} ({nonEmpty} non-empty)");
+    }
+
+    private static string FormatSize(long bytes)
+    {
+        if (bytes < 1024) return $"{bytes} B";
+        if (bytes < 1024 * 1024) return $"{bytes / 1024.0:F1} KB";
+        return $"{bytes / (1024.0 * 1024.0):F1} MB";
+    }
+
     private static void PrintVersion()
     {
         string platform =
@@ -258,6 +324,7 @@ public class Program
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
+        Console.WriteLine("  ExcelConsole <file.csv> --stats                    Show CSV file statistics");
         Console.WriteLine();
         Console.WriteLine("Cell prefixes:");
         Console.WriteLine("  r: <cmd>          Runnable command. Press Enter to launch.");
