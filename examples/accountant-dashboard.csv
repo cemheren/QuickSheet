@@ -1,0 +1,13 @@
+Accounting Dashboard,,,,
+,,,,
+Income & Tax,,Deductions,,Assets
+ext: github:cemheren/quicksheet-1099-ext,,ext: github:cemheren/quicksheet-mileage-ext,,ext: github:cemheren/quicksheet-depr-ext
+1099: 95000,CA,,mileage: 4800,business,,depr: 2400,5,straight
+,,,,
+Payroll,,Sales Tax,,Margins
+ext: github:cemheren/quicksheet-payroll-ext,,ext: github:cemheren/quicksheet-salestax-ext,,ext: github:cemheren/quicksheet-margin-ext
+payroll: 72000,CA,,salestax: 149.99,CA,Oakland,,margin: 95000,62000
+,,,,
+Notes,,,,
+Q2 estimated payment due Jun 15,,,,
+Update mileage after each client visit,,,,
