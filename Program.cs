@@ -118,6 +118,54 @@ public class Program
             return;
         }
 
+        int setIdx = Array.IndexOf(args, "--set");
+        if (setIdx >= 0)
+        {
+            // Usage: ExcelConsole <file.csv> --set <CellRef> <value>
+            if (csvPath == null || setIdx + 2 >= args.Length)
+            {
+                Console.Error.WriteLine("Usage: ExcelConsole <input.csv> --set <CellRef> <value>");
+                Environment.Exit(2);
+                return;
+            }
+            string cellRefStr = args[setIdx + 1];
+            string newValue = args[setIdx + 2];
+            if (!File.Exists(csvPath))
+            {
+                Console.Error.WriteLine($"Input CSV not found: {csvPath}");
+                Environment.Exit(1);
+                return;
+            }
+            var parsed = ExcelConsole.CellPrefix.ParseCellRef(cellRefStr);
+            if (parsed == null)
+            {
+                Console.Error.WriteLine($"Invalid cell reference: {cellRefStr}");
+                Environment.Exit(2);
+                return;
+            }
+            var (row, col) = parsed.Value;
+            var lines = File.ReadAllLines(csvPath);
+            int rowCount = Math.Max(row + 1, lines.Length);
+            int colCount = col + 1;
+            foreach (var line in lines)
+            {
+                int n = 1;
+                bool inQuotes = false;
+                foreach (char ch in line)
+                {
+                    if (ch == '"') inQuotes = !inQuotes;
+                    else if (ch == ',' && !inQuotes) n++;
+                }
+                if (n > colCount) colCount = n;
+            }
+            var grid = new GridManager(availableWidth: colCount * 20 + 4, availableHeight: rowCount);
+            grid.LoadFromCsv(csvPath);
+            grid.SetCellValue(row, col, newValue);
+            grid.SaveToCsv(csvPath);
+            Console.WriteLine($"{cellRefStr} = {newValue}");
+            return;
+        }
+
         int jsonIdx = Array.IndexOf(args, "--export-json");
         if (jsonIdx >= 0)
         {
@@ -255,6 +303,7 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv> --set <CellRef> <value>    Headless: write a value into a cell and save");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
