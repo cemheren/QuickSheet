@@ -1,3 +1,11 @@
+## 2026-06-01 (ext: quicksheet-ping-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Published `cemheren/quicksheet-ping-ext` — HTTP HEAD/GET probe showing status code + latency in ms. Zero NuGet deps, .NET 9. Updated all cross-links from `Deskworks/` to `cemheren/` in README + 5 docs files.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-ping-ext. PR #261 for cross-link fixes.
+- Follow-up: Next unpushed ext drafts: `quicksheet-cite-ext`, `quicksheet-thes-ext`. Variety next run → Bucket C or R. The r/selfhosted draft now has all its referenced repos live (health, tls, ping, docker, sysmon).
+
 ## 2026-06-01 (ext: quicksheet-define-ext)
 
 - Stars: 0 (Δ 0).
