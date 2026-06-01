@@ -1,3 +1,11 @@
+## 2026-06-01 (ext: quicksheet-cite-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Published `cemheren/quicksheet-cite-ext` — DOI → formatted citation via Crossref (authors, year, title, venue). Zero NuGet deps, .NET 9. Fixed org cross-links in README + docs.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-cite-ext. PR #262 for cross-link addition.
+- Follow-up: Next unpushed ext draft: `quicksheet-thes-ext`. Variety next run → Bucket C or D.
+
 ## 2026-06-01 (docs: for-DMs landing page)
 
 - Stars: 0 (Δ 0).
