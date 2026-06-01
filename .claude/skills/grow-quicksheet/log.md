@@ -1,3 +1,11 @@
+## 2026-05-31 (research: TUI launch case studies)
+
+- Stars: 0 (Δ 0).
+- Action: Researched how TUI projects crossed star milestones — lazygit, btop, Preevy, Open Interface, cell. Distilled arXiv paper on HN launch-day star diffusion (121 avg stars/24h). Key finding: lazygit's "first-launch star nudge" popup is the single highest-ROI tactic (converts installers to stargazers). Optimal HN posting: Tue/Wed 14:00 UTC.
+- Bucket: R (deep research).
+- Outcome: Brief saved at `research/tui-launch-case-studies.md`.
+- Follow-up: Queue Bucket E "first-launch star nudge" feature (20 lines, high ROI). Animated GIF remains #1 blocker for publication — needs human.
+
 ## 2026-05-30 (feat: --set CLI flag)
 
 - Stars: 0 (Δ 0).
@@ -1238,7 +1246,8 @@
 
 - **Live backlog (re-ranked after the c?:/timer revert):**
   Pre-flight: see standing rules above.
-  0. **Bucket E: `.github/workflows/release.yml`** — publish self-contained win-x64 + linux-x64 binaries on tag push. Unblocks Scoop/winget/AUR submissions. ~40 lines YAML, 1 file. See `research/package-manager-distribution.md`.
+  0. **Bucket E: first-launch star nudge** — on first run (no autosave exists), display one-time message "⭐ If QuickSheet helps, star it: https://github.com/cemheren/QuickSheet". Store flag so it only shows once. ~20 lines. Lazygit credits this as a major growth factor. See `research/tui-launch-case-studies.md`.
+  0b. **Bucket E: `.github/workflows/release.yml`** — publish self-contained win-x64 + linux-x64 binaries on tag push. Unblocks Scoop/winget/AUR submissions. ~40 lines YAML, 1 file. See `research/package-manager-distribution.md`.
   Pre-flight rule for any item below: if you can't explain in one sentence *why this specific persona will install QuickSheet because of this* (not "it could be useful for everyone"), skip and pick something else.
   1. **Bucket F: `health:` HTTP-probe extension.** Reads `services.csv` (name,url,expected_status); fills a row of green/red dots. Homelab persona; writes its own r/selfhosted screenshot. New extension repo on user's account.
   2. **Bucket F: `leetcode:` + `gh:` user-streak combo.** Students persona; "CS-student flex bundle." Free APIs, lowest auth.
