@@ -207,7 +207,7 @@ tls: github.com, 1, 4
 | `curl:` | HTTP client (Postman-in-a-cell) | `ext: github:Deskworks/quicksheet-curl` |
 | `arxiv:` | arXiv paper lookup | `ext: github:Deskworks/quicksheet-arxiv` |
 | `pihole:` | Pi-hole DNS stats | `ext: github:Deskworks/quicksheet-pihole` |
-| `health:` | HTTP endpoint health checker | `ext: github:Deskworks/quicksheet-health` |
+| `health:` | HTTP endpoint health checker | `ext: github:cemheren/quicksheet-health-ext` |
 | `env:` | Env var inspector (lookup/filter/PATH, auto-masks secrets) | `ext: github:Deskworks/quicksheet-envck` |
 | `roll:` | Dice roller — 2d6+3, d20, 4d6kh3, Fudge, critical detection | `ext: github:Deskworks/quicksheet-dice` |
 | `lc:` | LeetCode — daily challenge, problem lookup, user stats | `ext: github:Deskworks/quicksheet-leetcode` |

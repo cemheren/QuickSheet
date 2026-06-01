@@ -48,7 +48,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `curl`    | HTTP client       | cURL-style HTTP client — GET/POST/PUT/DELETE from cells with headers, JSON bodies, pretty-print | [`quicksheet-curl`](https://github.com/Deskworks/quicksheet-curl) |
 | `arxiv`   | arXiv paper lookup | Look up papers by ID or keyword search — title, authors, year, abstract. No API key. | [`quicksheet-arxiv`](https://github.com/Deskworks/quicksheet-arxiv) |
 | `pihole`  | Pi-hole stats     | DNS blocking stats from Pi-hole — status, block %, query counts, domains blocked | [`quicksheet-pihole`](https://github.com/Deskworks/quicksheet-pihole) |
-| `health`  | HTTP health check | Probe multiple HTTP endpoints in parallel — 🟢/🔴 status with latency, self-signed cert support | [`quicksheet-health`](https://github.com/Deskworks/quicksheet-health) |
+| `health`  | HTTP health check | Probe multiple HTTP endpoints in parallel — 🟢/🔴 status with latency, self-signed cert support | [`quicksheet-health-ext`](https://github.com/cemheren/quicksheet-health-ext) |
 | `env`     | Env var inspector | Lookup, filter, PATH exploder — auto-masks secrets (API keys, tokens) | [`quicksheet-envck`](https://github.com/Deskworks/quicksheet-envck) |
 | `roll`    | Dice roller       | Roll any dice notation — 2d6+3, d20, 4d6kh3, Fudge dice, crit/fumble detection | [`quicksheet-dice`](https://github.com/Deskworks/quicksheet-dice) |
 | `lc`      | LeetCode tracker  | Daily challenge, problem lookup by number/slug, user solve stats (Easy/Medium/Hard, rank) | [`quicksheet-leetcode`](https://github.com/Deskworks/quicksheet-leetcode) |

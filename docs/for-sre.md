@@ -24,7 +24,7 @@ situational-awareness layer is there every boot.
 
 | Row/column             | What it shows                                           | Extension                                                                   |
 |------------------------|---------------------------------------------------------|-----------------------------------------------------------------------------|
-| **Service health**     | HTTP ✓/✗ + latency for each endpoint in `services.csv` | [`health`](https://github.com/Deskworks/quicksheet-health)                   |
+| **Service health**     | HTTP ✓/✗ + latency for each endpoint in `services.csv` | [`health`](https://github.com/cemheren/quicksheet-health-ext)                   |
 | **Vendor status**      | GitHub / Cloudflare / npm / Vercel / Discord live pages | [`apistatus`](https://github.com/Deskworks/quicksheet-apistatus)             |
 | **Container health**   | Running/stopped/restarting per Docker container name    | [`docker`](https://github.com/Deskworks/quicksheet-docker)                   |
 | **Pod status**         | Kubernetes pod state by namespace                       | [`k8s`](https://github.com/Deskworks/quicksheet-k8s)                        |

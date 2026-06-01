@@ -119,7 +119,7 @@ The day of a hackathon, swap the coursework zone for a task list and the budget 
 a service-health strip:
 
 ```
-ext: github:Deskworks/quicksheet-health
+ext: github:cemheren/quicksheet-health-ext
 health: http://localhost:3000
 health: http://localhost:8080/api/health
 health: https://api.github.com
