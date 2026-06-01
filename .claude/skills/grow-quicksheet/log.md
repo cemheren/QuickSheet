@@ -1,3 +1,11 @@
+## 2026-06-01 (docs: for-writers landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-writers.md` audience landing page for fiction writers, academics, technical writers, journalists + `examples/writer-dashboard.csv` starter sheet. Added 4 missing extensions (thes, cite, pubmed, words) to README table. Cross-linked from README audience guides line.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #257.
+- Follow-up: Variety next run → Bucket E or F. Consider `for-artists.md` if matching extensions land. 28 open PRs awaiting merge; bottleneck remains publication.
+
 ## 2026-06-01 (ext: quicksheet-mortgage-ext)
 
 - Stars: 0 (Δ 0).
