@@ -98,7 +98,7 @@ eponymous,"def: eponymous, 1, 2",
 
 Wrap the column in a `L:` if you want them to refresh, though definitions don't change.
 
-Extensions used: [define](https://github.com/Deskworks/quicksheet-define-ext).
+Extensions used: [define](https://github.com/cemheren/quicksheet-define-ext).
 
 ---
 
@@ -147,7 +147,7 @@ DOI,Citation,Term,Definition
 
 Citations are cached forever in the extension subprocess (DOIs don't change), so loading is fast on repeat views.
 
-Extensions used: [cite](https://github.com/Deskworks/quicksheet-cite-ext), [define](https://github.com/Deskworks/quicksheet-define-ext).
+Extensions used: [cite](https://github.com/Deskworks/quicksheet-cite-ext), [define](https://github.com/cemheren/quicksheet-define-ext).
 
 ---
 
