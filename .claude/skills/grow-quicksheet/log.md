@@ -1,3 +1,11 @@
+## 2026-06-01 (docs: for-DMs landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` audience landing page for TTRPG dungeon masters/game masters + `examples/dm-dashboard.csv` starter sheet. References live extensions: `quicksheet-init-ext` (initiative) and `quicksheet-dice` (dice roller). Added cross-link in README audience guides line.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #250 (force-pushed with new content).
+- Follow-up: Variety next run → Bucket D or R. Consider `for-artists.md` if matching extensions land. Bottleneck remains merge throughput.
+
 ## 2026-06-01 (ext: quicksheet-ping-ext)
 
 - Stars: 0 (Δ 0).
