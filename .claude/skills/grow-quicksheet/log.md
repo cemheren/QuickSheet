@@ -1,3 +1,11 @@
+## 2026-06-01 (fix: broken health extension link)
+
+- Stars: 0 (Δ 0).
+- Action: Audited all `ext: github:` references in README and docs for 404s. Found `Deskworks/quicksheet-health` is a dead link — actual repo is `cemheren/quicksheet-health-ext`. Fixed in README.md, docs/extensions.md, docs/for-sre.md, docs/for-students.md.
+- Bucket: A (product polish — broken link fix).
+- Outcome: PR #258.
+- Follow-up: Variety next run → Bucket C or R. 29 open PRs; saturation continues. No new issues on any extension repo.
+
 ## 2026-06-01 (docs: for-writers landing page)
 
 - Stars: 0 (Δ 0).
