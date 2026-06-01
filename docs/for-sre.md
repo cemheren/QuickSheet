@@ -33,7 +33,7 @@ situational-awareness layer is there every boot.
 | **Recent commits**     | Last N git commits: hash, author, relative time         | [`gitlog`](https://github.com/Deskworks/quicksheet-gitlog)                  |
 | **Open PRs**           | PR count + titles per repo                              | [`ghpr`](https://github.com/Deskworks/quicksheet-ghpr)                      |
 | **System metrics**     | CPU / RAM / disk / uptime of the host                   | [`sysmon`](https://github.com/Deskworks/quicksheet-sysmon)                  |
-| **Latency**            | Round-trip to upstreams and DNS resolvers               | [`ping`](https://github.com/Deskworks/quicksheet-ping-ext)                  |
+| **Latency**            | Round-trip to upstreams and DNS resolvers               | [`ping`](https://github.com/cemheren/quicksheet-ping-ext)                  |
 
 All extensions install with a single cell: `ext: github:Deskworks/quicksheet-<name>`. No
 package manager. No daemon config. QuickSheet clones the repo, starts the subprocess, and

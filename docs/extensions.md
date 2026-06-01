@@ -13,7 +13,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `pomo`    | Pomodoro timer    | Live countdown with progress bar                   | [`quicksheet-pomodoro`](https://github.com/Deskworks/quicksheet-pomodoro) |
 | `sys`     | System monitor    | Live CPU, RAM, disk usage with visual bars         | [`quicksheet-sysmon`](https://github.com/Deskworks/quicksheet-sysmon) |
 | `mxck`    | MX record check   | MX records for a domain (DNS-over-HTTPS)           | [`quicksheet-mxck-ext`](https://github.com/Deskworks/quicksheet-mxck-ext) |
-| `ping`    | HTTP ping         | Status code + latency for a URL                    | [`quicksheet-ping-ext`](https://github.com/Deskworks/quicksheet-ping-ext) |
+| `ping`    | HTTP ping         | Status code + latency for a URL                    | [`quicksheet-ping-ext`](https://github.com/cemheren/quicksheet-ping-ext) |
 | `cite`    | DOI citation      | Authors / year / title / venue from Crossref       | [`quicksheet-cite-ext`](https://github.com/Deskworks/quicksheet-cite-ext) |
 | `thes`    | Thesaurus         | Synonyms for a word (Datamuse)                     | [`quicksheet-thes-ext`](https://github.com/Deskworks/quicksheet-thes-ext) |
 | `stock`   | Stock quote       | Last close + intra-day change (Stooq)              | [`quicksheet-stock-ext`](https://github.com/Deskworks/quicksheet-stock-ext) |

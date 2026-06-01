@@ -184,7 +184,7 @@ tls: github.com, 1, 4
 | `stock:` | Stock quotes (Stooq) | `ext: github:Deskworks/quicksheet-stock-ext` |
 | `cal:` | Calendar events (.ics) | `ext: github:Deskworks/quicksheet-cal` |
 | `todo:` | Task management | `ext: github:Deskworks/quicksheet-todo` |
-| `ping:` | HTTP status & latency | `ext: github:Deskworks/quicksheet-ping-ext` |
+| `ping:` | HTTP status & latency | `ext: github:cemheren/quicksheet-ping-ext` |
 | `fx:` | Currency conversion | `ext: github:Deskworks/quicksheet-fx` |
 | `gha:` | GitHub Actions status | `ext: github:Deskworks/quicksheet-gha` |
 | `ghpr:` | GitHub PR dashboard | `ext: github:Deskworks/quicksheet-ghpr` |

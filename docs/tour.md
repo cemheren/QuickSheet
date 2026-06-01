@@ -68,7 +68,7 @@ Currently public:
 - [`quicksheet-define-ext`](https://github.com/Deskworks/quicksheet-define-ext) — inline dictionary lookups.
 - [`quicksheet-mortgage-ext`](https://github.com/Deskworks/quicksheet-mortgage-ext) — mortgage payment calculator.
 - [`quicksheet-mxck-ext`](https://github.com/Deskworks/quicksheet-mxck-ext) — MX record check (DNS-over-HTTPS).
-- [`quicksheet-ping-ext`](https://github.com/Deskworks/quicksheet-ping-ext) — HTTP status code + latency probe.
+- [`quicksheet-ping-ext`](https://github.com/cemheren/quicksheet-ping-ext) — HTTP status code + latency probe.
 - [`quicksheet-cite-ext`](https://github.com/Deskworks/quicksheet-cite-ext) — DOI → citation (Crossref).
 - [`quicksheet-thes-ext`](https://github.com/Deskworks/quicksheet-thes-ext) — thesaurus (Datamuse).
 - [`quicksheet-stock-ext`](https://github.com/Deskworks/quicksheet-stock-ext) — stock ticker quotes (Stooq).

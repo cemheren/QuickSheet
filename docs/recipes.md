@@ -31,7 +31,7 @@ Now the status column refreshes every minute. TLS only changes daily — point a
 L: D2, 720m
 ```
 
-Extensions used: [ping](https://github.com/Deskworks/quicksheet-ping-ext), [tls](https://github.com/Deskworks/quicksheet-tls-ext), [mxck](https://github.com/Deskworks/quicksheet-mxck-ext).
+Extensions used: [ping](https://github.com/cemheren/quicksheet-ping-ext), [tls](https://github.com/Deskworks/quicksheet-tls-ext), [mxck](https://github.com/Deskworks/quicksheet-mxck-ext).
 
 ---
 
@@ -165,7 +165,7 @@ top story,,"i: curl -s 'https://hacker-news.firebaseio.com/v0/topstories.json' |
 
 Multi-select column B, hit Enter to open all four in your browser. Add `L: <cell>, 30m` on the status column for a passive uptime indicator.
 
-Extensions used: [ping](https://github.com/Deskworks/quicksheet-ping-ext). The `i:` cell is built-in.
+Extensions used: [ping](https://github.com/cemheren/quicksheet-ping-ext). The `i:` cell is built-in.
 
 ---
 
