@@ -1,3 +1,11 @@
+## 2026-06-01 (ext: quicksheet-define-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Published `cemheren/quicksheet-define-ext` — inline English dictionary lookup (`def: <word>`) using free dictionaryapi.dev. Fixed all cross-link references from `Deskworks/` to `cemheren/` in README + docs.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-define-ext. PR #260 for cross-link fixes.
+- Follow-up: Next unpushed ext drafts: `quicksheet-cite-ext`, `quicksheet-thes-ext`, `quicksheet-ping-ext`. Variety next run → Bucket C or R.
+
 ## 2026-06-01 (feat: --info CLI flag)
 
 - Stars: 0 (Δ 0).
