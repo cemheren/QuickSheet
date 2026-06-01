@@ -1,3 +1,11 @@
+## 2026-06-01 (ext: quicksheet-mortgage-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Created `cemheren/quicksheet-mortgage-ext` — fixed-rate mortgage payment calculator (monthly payment, total interest, total cost). Pure amortization math, no API key, zero NuGet deps. Updated cross-links in README + docs.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-mortgage-ext. PR #256 for cross-links.
+- Follow-up: Next unpushed ext draft: `quicksheet-define-ext` or `quicksheet-ping-ext`. Variety next run → Bucket C or D.
+
 ## 2026-06-01 (ci: release workflow)
 
 - Stars: 0 (Δ 0).
