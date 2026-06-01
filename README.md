@@ -206,6 +206,7 @@ tls: github.com, 1, 4
 | `urlenc:` | URL encode/decode | `ext: github:Deskworks/quicksheet-urlenc` |
 | `curl:` | HTTP client (Postman-in-a-cell) | `ext: github:Deskworks/quicksheet-curl` |
 | `arxiv:` | arXiv paper lookup | `ext: github:Deskworks/quicksheet-arxiv` |
+| `cite:` | DOI → formatted citation (Crossref) | `ext: github:cemheren/quicksheet-cite-ext` |
 | `pihole:` | Pi-hole DNS stats | `ext: github:Deskworks/quicksheet-pihole` |
 | `health:` | HTTP endpoint health checker | `ext: github:Deskworks/quicksheet-health` |
 | `env:` | Env var inspector (lookup/filter/PATH, auto-masks secrets) | `ext: github:Deskworks/quicksheet-envck` |
