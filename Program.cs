@@ -26,6 +26,12 @@ public class Program
 
         string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
 
+        if (args.Contains("--info"))
+        {
+            PrintInfo(csvPath);
+            return;
+        }
+
         int exportIdx = Array.IndexOf(args, "--export-md");
         if (exportIdx >= 0)
         {
@@ -233,6 +239,73 @@ public class Program
         }
     }
 
+    private static void PrintInfo(string? csvPath)
+    {
+        if (csvPath == null || !File.Exists(csvPath))
+        {
+            Console.Error.WriteLine(csvPath == null
+                ? "Usage: ExcelConsole <file.csv> --info"
+                : $"File not found: {csvPath}");
+            Environment.Exit(csvPath == null ? 2 : 1);
+            return;
+        }
+
+        var lines = File.ReadAllLines(csvPath);
+        int rowCount = lines.Length;
+        int colCount = 0;
+        foreach (var line in lines)
+        {
+            int n = 1;
+            bool inQuotes = false;
+            foreach (char ch in line)
+            {
+                if (ch == '"') inQuotes = !inQuotes;
+                else if (ch == ',' && !inQuotes) n++;
+            }
+            if (n > colCount) colCount = n;
+        }
+
+        // Load into GridManager to get cell values
+        var grid = new GridManager(availableWidth: colCount * 20 + 4, availableHeight: Math.Max(1, rowCount));
+        grid.LoadFromCsv(csvPath);
+
+        int nonEmpty = 0, runnables = 0, inlines = 0, extensions = 0, links = 0, sparklines = 0;
+        var headers = new List<string>();
+
+        for (int r = 0; r < rowCount; r++)
+        {
+            for (int c = 0; c < colCount; c++)
+            {
+                string val = grid.GetCellValue(r, c) ?? "";
+                if (string.IsNullOrWhiteSpace(val)) continue;
+                nonEmpty++;
+                if (r == 0) headers.Add(val);
+
+                if (val.StartsWith("r: ", StringComparison.Ordinal)) runnables++;
+                else if (val.StartsWith("i: ", StringComparison.Ordinal)) inlines++;
+                else if (val.StartsWith("ext: ", StringComparison.Ordinal)) extensions++;
+                else if (val.StartsWith("s: ", StringComparison.Ordinal)) sparklines++;
+                else if (val.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
+                      || val.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) links++;
+            }
+        }
+
+        Console.WriteLine($"File:       {Path.GetFullPath(csvPath)}");
+        Console.WriteLine($"Dimensions: {rowCount} rows × {colCount} columns");
+        Console.WriteLine($"Cells:      {nonEmpty} non-empty / {rowCount * colCount} total");
+        if (headers.Count > 0)
+            Console.WriteLine($"Headers:    {string.Join(" | ", headers)}");
+
+        var types = new List<string>();
+        if (runnables > 0) types.Add($"{runnables} runnable (r:)");
+        if (inlines > 0) types.Add($"{inlines} inline (i:)");
+        if (extensions > 0) types.Add($"{extensions} extension (ext:)");
+        if (sparklines > 0) types.Add($"{sparklines} sparkline (s:)");
+        if (links > 0) types.Add($"{links} hyperlink");
+        if (types.Count > 0)
+            Console.WriteLine($"Special:    {string.Join(", ", types)}");
+    }
+
     private static void PrintVersion()
     {
         string platform =
@@ -255,6 +328,7 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv> --info                     Show CSV metadata (dimensions, headers, cell types)");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
