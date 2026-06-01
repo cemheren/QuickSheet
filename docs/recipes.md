@@ -131,7 +131,7 @@ Globex,3800,"1099: 45600, 1, 5","mort: 380000, 6.5, 30, 1, 4",this month
 
 Pair with a sparkline of monthly gross in column F (`s: B2::B13`) for an at-a-glance income curve.
 
-Extensions used: [1099](https://github.com/Deskworks/quicksheet-1099-ext), [mortgage](https://github.com/Deskworks/quicksheet-mortgage-ext).
+Extensions used: [1099](https://github.com/Deskworks/quicksheet-1099-ext), [mortgage](https://github.com/cemheren/quicksheet-mortgage-ext).
 
 ---
 
