@@ -1,3 +1,11 @@
+## 2026-06-01 (ci: release workflow)
+
+- Stars: 0 (Δ 0).
+- Action: Created `.github/workflows/release.yml` — publishes self-contained win-x64 (.zip) and linux-x64 (.tar.gz) binaries on tag push. Single-file, no .NET SDK required to run. Uses `softprops/action-gh-release` for the GitHub Release page.
+- Bucket: E (quality-of-life / infra).
+- Outcome: PR #247 (force-pushed with clean workflow; replaces earlier draft).
+- Follow-up: After merge, push a `v0.37.0` tag to test. Then draft Scoop manifest. Variety next → Bucket C or D.
+
 ## 2026-05-30 (feat: --set CLI flag)
 
 - Stars: 0 (Δ 0).
