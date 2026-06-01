@@ -1,3 +1,11 @@
+## 2026-06-01 (feat: --info CLI flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--info` headless flag — prints CSV metadata (path, dimensions, headers, non-empty cell count, special cell breakdown by type). Single-file change to Program.cs, ~65 lines.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #259.
+- Follow-up: Variety next run → Bucket C or D. 30 open PRs awaiting merge.
+
 ## 2026-06-01 (fix: broken health extension link)
 
 - Stars: 0 (Δ 0).
