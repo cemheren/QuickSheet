@@ -180,6 +180,7 @@ tls: github.com, 1, 4
 |--------|-------------|---------|
 | `price:` | Crypto prices (CoinGecko) | `ext: github:Deskworks/quicksheet-price-ext` |
 | `def:` | Dictionary lookups | `ext: github:Deskworks/quicksheet-define-ext` |
+| `thes:` | Thesaurus / synonyms (Datamuse) | `ext: github:cemheren/quicksheet-thes-ext` |
 | `mort:` | Mortgage calculator | `ext: github:Deskworks/quicksheet-mortgage-ext` |
 | `stock:` | Stock quotes (Stooq) | `ext: github:Deskworks/quicksheet-stock-ext` |
 | `cal:` | Calendar events (.ics) | `ext: github:Deskworks/quicksheet-cal` |

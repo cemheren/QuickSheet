@@ -5,7 +5,7 @@ Inline thesaurus for [QuickSheet](https://github.com/cemheren/QuickSheet). Uses 
 ## Install
 
 ```
-ext: github:Deskworks/quicksheet-thes-ext
+ext: github:cemheren/quicksheet-thes-ext
 ```
 
 ## Use
@@ -29,7 +29,7 @@ Up to 8 synonyms (truncated to fit `gridRows`).
 
 ## Why
 
-Pairs nicely with [quicksheet-define-ext](https://github.com/Deskworks/quicksheet-define-ext) — definition in one column, synonyms in the next. Writers, editors, anyone with a word-on-the-tip-of-their-tongue gets a wallpaper-level reference panel without opening a browser.
+Pairs nicely with [quicksheet-define-ext](https://github.com/cemheren/quicksheet-define-ext) — definition in one column, synonyms in the next. Writers, editors, anyone with a word-on-the-tip-of-their-tongue gets a wallpaper-level reference panel without opening a browser.
 
 ## Build
 

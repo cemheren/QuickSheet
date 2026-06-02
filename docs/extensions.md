@@ -9,6 +9,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `tls`     | TLS cert checker  | Cert expiry, issuer, CN for a host                 | [`quicksheet-tls-ext`](https://github.com/Deskworks/quicksheet-tls-ext) |
 | `price`   | Crypto price      | Last trade + 24h change (CoinGecko)                | [`quicksheet-price-ext`](https://github.com/Deskworks/quicksheet-price-ext) |
 | `def`     | Dictionary        | Inline definitions (dictionaryapi.dev)             | [`quicksheet-define-ext`](https://github.com/Deskworks/quicksheet-define-ext) |
+| `thes`    | Thesaurus         | Synonyms via Datamuse API (no key)                 | [`quicksheet-thes-ext`](https://github.com/cemheren/quicksheet-thes-ext) |
 | `mort`    | Mortgage calc     | Monthly payment, total interest, total cost        | [`quicksheet-mortgage-ext`](https://github.com/Deskworks/quicksheet-mortgage-ext) |
 | `pomo`    | Pomodoro timer    | Live countdown with progress bar                   | [`quicksheet-pomodoro`](https://github.com/Deskworks/quicksheet-pomodoro) |
 | `sys`     | System monitor    | Live CPU, RAM, disk usage with visual bars         | [`quicksheet-sysmon`](https://github.com/Deskworks/quicksheet-sysmon) |
