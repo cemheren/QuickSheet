@@ -653,6 +653,46 @@ public class GridManager
         writer.WriteLine("]");
     }
 
+    /// <summary>
+    /// Writes the grid as a TSV (tab-separated values) file to <paramref name="path"/>.
+    /// Tabs and newlines within cell values are replaced with spaces.
+    /// </summary>
+    public void SaveToTsv(string path)
+    {
+        using var writer = new StreamWriter(path);
+        WriteTsvTo(writer);
+    }
+
+    /// <summary>
+    /// Writes the grid as TSV (tab-separated values) to an arbitrary <see cref="TextWriter"/>.
+    /// Used by `--export-tsv -` to write to stdout for piping into Unix tools.
+    /// </summary>
+    public void WriteTsvTo(TextWriter writer)
+    {
+        int lastRow = -1, lastCol = -1;
+        for (int r = 0; r < RowCount; r++)
+            for (int c = 0; c < ColumnCount; c++)
+                if (!string.IsNullOrEmpty(_data[r, c]) && !_isFile[r, c])
+                {
+                    if (r > lastRow) lastRow = r;
+                    if (c > lastCol) lastCol = c;
+                }
+        if (lastRow < 0 || lastCol < 0) return;
+
+        for (int r = 0; r <= lastRow; r++)
+        {
+            for (int c = 0; c <= lastCol; c++)
+            {
+                string v = _isFile[r, c] ? "" : (_data[r, c] ?? "");
+                // TSV does not support embedded tabs or newlines; sanitize.
+                v = v.Replace('\t', ' ').Replace('\r', ' ').Replace('\n', ' ');
+                if (c > 0) writer.Write('\t');
+                writer.Write(v);
+            }
+            writer.WriteLine();
+        }
+    }
+
     private static string JsonEscape(string s)
     {
         return s.Replace("\\", "\\\\").Replace("\"", "\\\"")
