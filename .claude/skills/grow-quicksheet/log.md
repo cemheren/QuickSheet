@@ -1,3 +1,11 @@
+## 2026-06-02 (ext: quicksheet-stock-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Published `cemheren/quicksheet-stock-ext` — stock ticker quotes via Stooq (free, no API key). Fetches daily close + intra-day change for any ticker. US tickers default to `.us` suffix; international markets via explicit suffix. 5-min cache.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-stock-ext. PR #275 for cross-link update (Deskworks → cemheren in README/extensions.md/tour.md).
+- Follow-up: Remaining unpushed draft: `quicksheet-1099-ext`. Variety next run → different bucket.
+
 ## 2026-06-02 (docs: for-artists landing page)
 
 - Stars: 0 (Δ 0).
