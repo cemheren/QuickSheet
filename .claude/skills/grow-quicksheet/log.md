@@ -1,3 +1,11 @@
+## 2026-06-02 (draft: awesome-ricing submission)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted PR submission for `fosslife/awesome-ricing` (4.3k ★). QuickSheet fits in the "Background setting utilities and generators" section — its `--desktop` mode is literally a desktop wallpaper tool but interactive. Draft saved with diff line, PR title, and body.
+- Bucket: D (network effects — awesome-list draft).
+- Outcome: Draft saved at `drafts/awesome-ricing.md`.
+- Follow-up: User submits PR to fosslife/awesome-ricing. Follow-up: draft for `avtzis/awesome-linux-ricing` (1k ★) as a second submission.
+
 ## 2026-06-02 (feat: --sort headless flag)
 
 - Stars: 0 (Δ 0).
