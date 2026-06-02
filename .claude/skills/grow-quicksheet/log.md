@@ -1,3 +1,11 @@
+## 2026-06-02 (research: terminal-tool signal-boosters)
+
+- Stars: 0 (Δ 0).
+- Action: Researched top 10 accounts/platforms that amplify TUI/CLI projects. Identified submission paths for TerminalTrove, Console.dev, awesome-tuis, plus individual signal-boosters (Will McGugan, Charm team, Jesse Duffield, ThePrimeagen) and editorial sites (LinuxLinks, LibHunt).
+- Bucket: R (deep research).
+- Outcome: Research brief saved at `research/terminal-tool-signal-boosters.md`.
+- Follow-up: Queue Bucket B action to verify/add GitHub topics (tui, terminal, spreadsheet, csv, desktop, wallpaper, dotnet, linux, windows, cli). TerminalTrove + Console.dev submissions blocked on human providing a GIF/screenshot.
+
 ## 2026-06-01 (docs: for-writers landing page)
 
 - Stars: 0 (Δ 0).
