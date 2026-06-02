@@ -1,3 +1,11 @@
+## 2026-06-02 (draft: awesome-dotnet submission)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted awesome-dotnet (quozd/awesome-dotnet, 19k★) submission. Entry goes in CLI section alongside Gui.cs and spectre.console. Differentiator: it's an application, not a library; zero NuGet deps; wallpaper mode.
+- Bucket: D (discoverability — awesome-list draft).
+- Outcome: Draft saved at `drafts/awesome-dotnet.md`.
+- Follow-up: User submits PR to quozd/awesome-dotnet. Variety next run → Bucket E or F.
+
 ## 2026-06-02 (feat: --sort headless flag)
 
 - Stars: 0 (Δ 0).
