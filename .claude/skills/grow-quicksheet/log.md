@@ -1,3 +1,11 @@
+## 2026-06-01 (ext: quicksheet-thes-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Published `cemheren/quicksheet-thes-ext` — inline thesaurus (synonyms via free Datamuse API, no key). `thes: <word>` fills rows with synonyms. Pairs with `quicksheet-define-ext`. Fixed org cross-links.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-thes-ext. PR #265 for cross-link addition.
+- Follow-up: Remaining unpushed drafts: `quicksheet-grav-ext`, `quicksheet-mxck-ext`, `quicksheet-price-ext`, `quicksheet-stock-ext`, `quicksheet-1099-ext`. Variety next run → Bucket C, D, or R.
+
 ## 2026-06-01 (feat: --export-tsv)
 
 - Stars: 0 (Δ 0).
