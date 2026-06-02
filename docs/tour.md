@@ -71,7 +71,7 @@ Currently public:
 - [`quicksheet-ping-ext`](https://github.com/Deskworks/quicksheet-ping-ext) — HTTP status code + latency probe.
 - [`quicksheet-cite-ext`](https://github.com/Deskworks/quicksheet-cite-ext) — DOI → citation (Crossref).
 - [`quicksheet-thes-ext`](https://github.com/Deskworks/quicksheet-thes-ext) — thesaurus (Datamuse).
-- [`quicksheet-stock-ext`](https://github.com/Deskworks/quicksheet-stock-ext) — stock ticker quotes (Stooq).
+- [`quicksheet-stock-ext`](https://github.com/cemheren/quicksheet-stock-ext) — stock ticker quotes (Stooq).
 - [`quicksheet-1099-ext`](https://github.com/Deskworks/quicksheet-1099-ext) — US self-employment tax estimate.
 - [`quicksheet-mileage-ext`](https://github.com/Deskworks/quicksheet-mileage-ext) — IRS standard-mileage deduction calculator.
 - [`quicksheet-margin-ext`](https://github.com/Deskworks/quicksheet-margin-ext) — break-even point + contribution margin.

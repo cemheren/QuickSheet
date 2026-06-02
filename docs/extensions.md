@@ -16,7 +16,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `ping`    | HTTP ping         | Status code + latency for a URL                    | [`quicksheet-ping-ext`](https://github.com/Deskworks/quicksheet-ping-ext) |
 | `cite`    | DOI citation      | Authors / year / title / venue from Crossref       | [`quicksheet-cite-ext`](https://github.com/Deskworks/quicksheet-cite-ext) |
 | `thes`    | Thesaurus         | Synonyms for a word (Datamuse)                     | [`quicksheet-thes-ext`](https://github.com/Deskworks/quicksheet-thes-ext) |
-| `stock`   | Stock quote       | Last close + intra-day change (Stooq)              | [`quicksheet-stock-ext`](https://github.com/Deskworks/quicksheet-stock-ext) |
+| `stock`   | Stock quote       | Last close + intra-day change (Stooq)              | [`quicksheet-stock-ext`](https://github.com/cemheren/quicksheet-stock-ext) |
 | `1099`    | SE tax estimate   | US self-employment tax + quarterly estimate        | [`quicksheet-1099-ext`](https://github.com/Deskworks/quicksheet-1099-ext) |
 | `qtr`     | Tax countdown     | Next IRS estimated tax deadline + days remaining   | [`quicksheet-qtr`](https://github.com/Deskworks/quicksheet-qtr) |
 | `fx`      | Currency convert  | Live ECB rates, 200+ currencies, no API key        | [`quicksheet-fx`](https://github.com/Deskworks/quicksheet-fx) |

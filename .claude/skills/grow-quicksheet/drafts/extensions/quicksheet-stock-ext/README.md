@@ -5,7 +5,7 @@ Stock ticker quotes (Stooq) for [QuickSheet](https://github.com/cemheren/QuickSh
 ## Install
 
 ```
-ext: github:Deskworks/quicksheet-stock-ext
+ext: github:cemheren/quicksheet-stock-ext
 ```
 
 ## Use
