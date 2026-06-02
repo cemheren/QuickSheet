@@ -1,3 +1,11 @@
+## 2026-06-02 (ext: quicksheet-mxck-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Published `cemheren/quicksheet-mxck-ext` — inline MX record lookup via Google DNS-over-HTTPS. `mxck: example.com` fills rows with mail servers sorted by priority. Zero deps, .NET 9, 1-hour cache. Fixed cross-links in README/extensions.md/tour.md (Deskworks → cemheren).
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-mxck-ext. PR #271 for cross-link.
+- Follow-up: Remaining unpushed drafts: `quicksheet-stock-ext`, `quicksheet-1099-ext`. Variety next run → different bucket.
+
 ## 2026-06-02 (no-op: saturated)
 
 - Stars: 0 (Δ 0).
