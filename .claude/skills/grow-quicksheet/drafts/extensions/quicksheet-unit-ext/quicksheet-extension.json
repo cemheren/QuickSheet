@@ -1,0 +1,8 @@
+{
+  "name": "unit",
+  "version": "1.0.0",
+  "prefix": "unit",
+  "description": "Unit conversion for QuickSheet — length, mass, temperature, volume, speed, data",
+  "entry": "dotnet run --project UnitExtension.csproj",
+  "minProtocolVersion": 1
+}
