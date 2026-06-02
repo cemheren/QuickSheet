@@ -1,3 +1,11 @@
+## 2026-06-02 (ext: quicksheet-grav-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Published `cemheren/quicksheet-grav-ext` — Gravatar profile + avatar URL lookup. Given an email, returns MD5 hash, display name, location, and avatar URL. 24h cache, zero NuGet deps, .NET 9. Added cross-link to README + docs/extensions.md.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-grav-ext. PR #270 for cross-link addition.
+- Follow-up: Remaining unpushed drafts: `quicksheet-mxck-ext`, `quicksheet-stock-ext`, `quicksheet-1099-ext`. Variety next run → Bucket C, D, or R.
+
 ## 2026-06-02 (no-op: saturated)
 
 - Stars: 0 (Δ 0).
