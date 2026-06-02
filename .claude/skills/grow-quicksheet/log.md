@@ -1,3 +1,11 @@
+## 2026-06-01 (feat: --export-tsv)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--export-tsv` headless CLI flag — converts CSV to tab-separated output (file or stdout). Sanitizes embedded tabs/newlines. Useful for Unix pipe workflows and pasting into spreadsheet apps.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #264.
+- Follow-up: Variety next run → Bucket C, D, or R. ~30 open PRs awaiting merge.
+
 ## 2026-06-01 (ext: quicksheet-unit-ext)
 
 - Stars: 0 (Δ 0).
