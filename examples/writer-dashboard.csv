@@ -1,0 +1,20 @@
+Chapter,Status,Word count,Notes
+1 – The hook,🟢 Done,3200,Needs tighter opening line
+2 – Backstory,🟡 Revising,4100,Cut flashback to 2 pages
+3 – Inciting incident,🟡 Revising,2800,
+4 – Rising action,⬜ Draft,1900,Merge with ch 5?
+5 – Midpoint,⬜ Not started,,
+,,,,
+Research queue,Source,Status,
+What year was X discovered?,,TODO,
+How does Y relate to Z?,Jones 2019,Reading,
+Sample size question,Supplemental S3,TODO,
+,,,,
+Tools,,,
+ext: github:Deskworks/quicksheet-define-ext,,,
+ext: github:cemheren/quicksheet-thes-ext,,,
+ext: github:cemheren/quicksheet-cite-ext,,,
+,,,,
+Quick launchers,,,
+r: code ~/manuscripts/thesis/,,,
+r: wc -w ~/manuscripts/thesis/chapter*.md,,,
