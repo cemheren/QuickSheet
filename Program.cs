@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using System.Linq;
 using ExcelConsole;
 
 public class Program
@@ -115,6 +116,68 @@ public class Program
                 grid.SaveToHtml(htmlOut);
                 Console.WriteLine($"Wrote HTML: {htmlOut}");
             }
+            return;
+        }
+
+        int sortIdx = Array.IndexOf(args, "--sort");
+        if (sortIdx >= 0)
+        {
+            if (csvPath == null || sortIdx + 1 >= args.Length)
+            {
+                Console.Error.WriteLine("Usage: ExcelConsole <input.csv> --sort <column> [--desc] [--header]");
+                Environment.Exit(2);
+                return;
+            }
+            string sortCol = args[sortIdx + 1];
+            bool descending = args.Contains("--desc");
+            bool hasHeader = args.Contains("--header");
+            if (!File.Exists(csvPath))
+            {
+                Console.Error.WriteLine($"Input CSV not found: {csvPath}");
+                Environment.Exit(1);
+                return;
+            }
+
+            int colIndex = ParseColumnLetter(sortCol);
+            if (colIndex < 0)
+            {
+                Console.Error.WriteLine($"Invalid column: {sortCol} (use A, B, C, ... or AA, AB, ...)");
+                Environment.Exit(2);
+                return;
+            }
+
+            var rawLines = File.ReadAllLines(csvPath);
+            var rows = new List<List<string>>(rawLines.Length);
+            foreach (var line in rawLines)
+                rows.Add(ParseCsvLineStatic(line));
+
+            int startRow = hasHeader ? 1 : 0;
+            var dataRows = rows.GetRange(startRow, rows.Count - startRow);
+
+            dataRows.Sort((a, b) =>
+            {
+                string va = colIndex < a.Count ? a[colIndex] : "";
+                string vb = colIndex < b.Count ? b[colIndex] : "";
+                int cmp;
+                if (double.TryParse(va, System.Globalization.NumberStyles.Any,
+                        System.Globalization.CultureInfo.InvariantCulture, out double da)
+                    && double.TryParse(vb, System.Globalization.NumberStyles.Any,
+                        System.Globalization.CultureInfo.InvariantCulture, out double db))
+                {
+                    cmp = da.CompareTo(db);
+                }
+                else
+                {
+                    cmp = string.Compare(va, vb, StringComparison.OrdinalIgnoreCase);
+                }
+                return descending ? -cmp : cmp;
+            });
+
+            using var writer = new StreamWriter(Console.OpenStandardOutput());
+            if (hasHeader && rows.Count > 0)
+                writer.WriteLine(string.Join(",", TrimTrailingEmpty(rows[0]).Select(EscapeCsvFieldStatic)));
+            foreach (var row in dataRows)
+                writer.WriteLine(string.Join(",", TrimTrailingEmpty(row).Select(EscapeCsvFieldStatic)));
             return;
         }
 
@@ -255,6 +318,8 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv> --sort <col> [--desc] [--header]");
+        Console.WriteLine("                                                     Headless: sort CSV by column (A,B,...) to stdout");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
@@ -270,6 +335,66 @@ public class Program
         Console.WriteLine();
         Console.WriteLine("Range references work inside text: {A1::C10}");
         Console.WriteLine("Tour: docs/tour.md · Issues: github.com/cemheren/QuickSheet/issues");
+    }
+
+    private static List<string> TrimTrailingEmpty(List<string> fields)
+    {
+        int last = fields.Count;
+        while (last > 0 && string.IsNullOrEmpty(fields[last - 1]))
+            last--;
+        return last == fields.Count ? fields : fields.GetRange(0, last);
+    }
+
+    private static int ParseColumnLetter(string col)
+    {
+        col = col.ToUpperInvariant();
+        if (col.Length == 0 || !col.All(c => c >= 'A' && c <= 'Z'))
+            return -1;
+        int index = 0;
+        foreach (char c in col)
+            index = index * 26 + (c - 'A' + 1);
+        return index - 1; // zero-based
+    }
+
+    private static List<string> ParseCsvLineStatic(string line)
+    {
+        var fields = new List<string>();
+        int i = 0;
+        while (i <= line.Length)
+        {
+            if (i == line.Length) { fields.Add(""); break; }
+            if (line[i] == '"')
+            {
+                i++;
+                var field = new System.Text.StringBuilder();
+                while (i < line.Length)
+                {
+                    if (line[i] == '"')
+                    {
+                        if (i + 1 < line.Length && line[i + 1] == '"') { field.Append('"'); i += 2; }
+                        else { i++; break; }
+                    }
+                    else { field.Append(line[i]); i++; }
+                }
+                fields.Add(field.ToString());
+                if (i < line.Length && line[i] == ',') i++;
+            }
+            else
+            {
+                int start = i;
+                while (i < line.Length && line[i] != ',') i++;
+                fields.Add(line[start..i]);
+                if (i < line.Length) i++;
+            }
+        }
+        return fields;
+    }
+
+    private static string EscapeCsvFieldStatic(string field)
+    {
+        if (field.Contains(',') || field.Contains('"') || field.Contains('\n'))
+            return "\"" + field.Replace("\"", "\"\"") + "\"";
+        return field;
     }
 
 #if PLATFORM_WINDOWS
