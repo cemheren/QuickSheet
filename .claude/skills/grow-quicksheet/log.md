@@ -1,3 +1,11 @@
+## 2026-06-02 (feat: --sort headless flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--sort <column>` headless CLI flag. Sorts a CSV by specified column (numeric-aware) and outputs to stdout. Supports `--desc` and `--header` flags. Pipe-friendly for shell workflows.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #276.
+- Follow-up: Variety next run → Bucket C or D. ~49 open PRs awaiting merge.
+
 ## 2026-06-02 (ext: quicksheet-stock-ext)
 
 - Stars: 0 (Δ 0).
