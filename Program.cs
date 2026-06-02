@@ -24,7 +24,26 @@ public class Program
             return;
         }
 
-        string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
+        if (args.Contains("--list-themes"))
+        {
+            PrintThemes();
+            return;
+        }
+
+        // Determine CSV path: skip --flag values by filtering out known flag arguments.
+        var flagsWithValues = new HashSet<string> { "--export-md", "--export-html", "--export-json", "--export-tsv", "--theme", "--set", "--get", "--info", "--stats" };
+        string? csvPath = null;
+        for (int i = 0; i < args.Length; i++)
+        {
+            if (args[i].StartsWith("--"))
+            {
+                if (flagsWithValues.Contains(args[i]))
+                    i++; // skip the value too
+                continue;
+            }
+            csvPath = args[i];
+            break;
+        }
 
         int exportIdx = Array.IndexOf(args, "--export-md");
         if (exportIdx >= 0)
@@ -163,6 +182,21 @@ public class Program
             return;
         }
 
+        // Apply --theme override before launching the host.
+        int themeIdx = Array.IndexOf(args, "--theme");
+        if (themeIdx >= 0 && themeIdx + 1 < args.Length)
+        {
+            string themeName = args[themeIdx + 1];
+            Theme.SetByName(themeName);
+            if (!Theme.Current.Name.Equals(themeName, StringComparison.OrdinalIgnoreCase))
+            {
+                Console.Error.WriteLine($"Unknown theme: {themeName}");
+                Console.Error.WriteLine($"Available: {string.Join(", ", Theme.Presets.Select(t => t.Name))}");
+                Environment.Exit(2);
+                return;
+            }
+        }
+
 #if PLATFORM_WINDOWS
         HideConsoleWindow();
         using var host = new ExcelConsole.Platform.Windows.WindowsDesktopHost();
@@ -233,6 +267,16 @@ public class Program
         }
     }
 
+    private static void PrintThemes()
+    {
+        Console.WriteLine("Available themes (use with --theme <name> or config: theme=<name>):");
+        foreach (var t in Theme.Presets)
+        {
+            string marker = t.Name == Theme.Current.Name ? " (default)" : "";
+            Console.WriteLine($"  {t.Name}{marker}");
+        }
+    }
+
     private static void PrintVersion()
     {
         string platform =
@@ -251,10 +295,11 @@ public class Program
         Console.WriteLine("QuickSheet — interactive spreadsheet as your desktop wallpaper");
         Console.WriteLine();
         Console.WriteLine("Usage:");
-        Console.WriteLine("  ExcelConsole [<file.csv>]                          Run as desktop wallpaper");
+        Console.WriteLine("  ExcelConsole [<file.csv>] [--theme <name>]          Run as desktop wallpaper");
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole --list-themes                         List available color themes");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
