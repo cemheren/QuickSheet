@@ -1,3 +1,11 @@
+## 2026-06-02 (docs: pull request template)
+
+- Stars: 0 (Δ 0).
+- Action: Added `.github/pull_request_template.md` — lightweight checklist encoding project hard constraints (build pass, no NuGet, no behavior breaks, CSV format stable). Also cleaned up accidental duplicate `cemheren/quicksheet-price-ext` repo (archived + marked as duplicate of Deskworks).
+- Bucket: B (discoverability / alive signal).
+- Outcome: PR #267.
+- Follow-up: Project in saturation. ~30 PRs await user merge. Bottleneck is publication. Next run: no-op unless new issue filed.
+
 ## 2026-06-01 (docs: for-writers landing page)
 
 - Stars: 0 (Δ 0).
