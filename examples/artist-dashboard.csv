@@ -1,0 +1,12 @@
+Commission Queue,,,,Income Tracker,,Palette
+Client,Piece,Status,Due,Month,Amount,Swatch
+@user_a,Character portrait,Done,2026-06-10,Jan,1200,"c:#2D3142: #2D3142"
+@user_b,Scene illustration,WIP,2026-06-18,Feb,950,"c:#4F5D75: #4F5D75"
+@user_c,Logo redesign,Queued,2026-07-01,Mar,1800,"c:#BFC0C0: #BFC0C0"
+@user_d,Book cover,Queued,2026-07-15,Apr,2200,"c:#EF8354: #EF8354"
+,,,,,,"c:#FFFFFF: #FFFFFF"
+,,,,,,
+Quick Launch,,,,Reference Links,,
+r: krita,,,,https://www.artstation.com,,
+r: blender,,,,https://dribbble.com,,
+r: obs --startrecording,,,,https://pinterest.com,,
