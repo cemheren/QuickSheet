@@ -1,3 +1,11 @@
+## 2026-06-01 (research: Wayland support)
+
+- Stars: 0 (Δ 0).
+- Action: Deep research on Wayland desktop mode (issue #3). Investigated wlr-layer-shell protocol, compositor support matrix, C# interop options. Documented recommended approach (thin C shim) with architecture proposal and phased rollout. Commented on issue with summary.
+- Bucket: R (deep research).
+- Outcome: Committed `research/wayland-support.md` (356765e). Commented on issue #3.
+- Follow-up: Queue Bucket E Phase 1 implementation (C shim + WaylandDesktopHost skeleton) when dotnet available. Queue Bucket A README update ("Wayland support coming") after Phase 1 merges. Queue Bucket C r/swaywm draft after Phase 2.
+
 ## 2026-06-01 (docs: for-writers landing page)
 
 - Stars: 0 (Δ 0).
