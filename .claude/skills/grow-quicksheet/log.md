@@ -1,3 +1,11 @@
+## 2026-06-02 (docs: for-dms landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` audience landing page for TTRPG dungeon masters + `examples/dm-dashboard.csv` starter sheet. Covers initiative tracking (init-ext), dice rolling (roll-ext), session notes, encounter tables, quick-ref strips, campaign log, themes. Added README cross-link.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #250 updated (force-pushed fresh content to existing branch).
+- Follow-up: Remaining landing pages: `for-artists.md`. Variety next run → Bucket C, D, or E.
+
 ## 2026-06-02 (feat: --theme CLI flag)
 
 - Stars: 0 (Δ 0).
