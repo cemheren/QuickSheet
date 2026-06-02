@@ -1,3 +1,11 @@
+## 2026-06-01 (ci: release workflow)
+
+- Stars: 0 (Δ 0).
+- Action: Refreshed `.github/workflows/release.yml` — builds self-contained single-file binaries (win-x64 + linux-x64) on `v*` tag push, creates GitHub Release with auto release notes and both assets.
+- Bucket: E (quality-of-life / infra).
+- Outcome: PR #247 updated (force-pushed clean workflow to existing branch).
+- Follow-up: Once merged, push `v1.0.0` tag to trigger first release. Then Scoop/winget/AUR submissions become unblocked. Variety next run → Bucket C or D.
+
 ## 2026-06-01 (ext: quicksheet-thes-ext)
 
 - Stars: 0 (Δ 0).
