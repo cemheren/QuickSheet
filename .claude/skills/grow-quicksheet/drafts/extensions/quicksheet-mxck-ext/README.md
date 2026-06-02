@@ -7,7 +7,7 @@ Inline MX record lookup for [QuickSheet](https://github.com/cemheren/QuickSheet)
 Type into any cell:
 
 ```
-ext: github:Deskworks/quicksheet-mxck-ext
+ext: github:cemheren/quicksheet-mxck-ext
 ```
 
 ## Use

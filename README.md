@@ -221,6 +221,7 @@ tls: github.com, 1, 4
 | `weather:` | Live weather via Open-Meteo — temperature, conditions, wind, humidity, pressure (free, no API key) | `ext: github:Deskworks/quicksheet-openmeteo` |
 | `ip:` | IP geolocation — ISP, org, ASN, timezone, hostname, coords for any IP or your own | `ext: github:Deskworks/quicksheet-ipinfo` |
 | `dns:` | DNS record lookup — A, AAAA, MX, TXT, NS, CNAME, PTR. `dns: MX gmail.com` · `dns: PTR 8.8.8.8` | `ext: github:Deskworks/quicksheet-dns` |
+| `mxck:` | MX record lookup — mail servers sorted by priority via DNS-over-HTTPS. `mxck: example.com` | `ext: github:cemheren/quicksheet-mxck-ext` |
 | `ssl:` | SSL certificate expiry checker — status 🟢/🟡/🔴, days left, issuer. `ssl: github.com` · `ssl: api.internal:8443` | `ext: github:Deskworks/quicksheet-ssl` |
 | `whois:` | WHOIS domain/IP lookup — registrar, status, expiry urgency 🟡🔴, nameservers. `whois: github.com` · `whois: 8.8.8.8` | `ext: github:Deskworks/quicksheet-whois` |
 | `tracert:` | Network traceroute — each hop with RTT and reverse-DNS hostname. `tracert: github.com` · `tracert: 8.8.8.8` | `ext: github:cemheren/quicksheet-tracert` |
