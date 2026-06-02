@@ -1,3 +1,11 @@
+## 2026-06-01 (ext: quicksheet-unit-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Published `cemheren/quicksheet-unit-ext` — instant unit conversion (length, mass, temperature, volume, speed, data, area, time). `unit: 5 km to miles`. Zero NuGet deps, .NET 9, pure computation.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-unit-ext. PR #263 for cross-link addition.
+- Follow-up: All drafted extensions now published or superseded. Next run variety → Bucket C, D, or R.
+
 ## 2026-06-01 (ext: quicksheet-cite-ext)
 
 - Stars: 0 (Δ 0).
