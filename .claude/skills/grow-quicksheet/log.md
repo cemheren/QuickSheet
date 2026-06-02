@@ -1,3 +1,11 @@
+## 2026-06-01 (drafts: terminal-directories)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted submission forms for TerminalTrove (terminaltrove.com/post/) and Console.dev (console.dev/submit/). Researched exact form fields, editorial voice, timing strategy.
+- Bucket: D (network effects — terminal-tool directories).
+- Outcome: Draft saved at `drafts/terminal-directories.md`.
+- Follow-up: Submit TerminalTrove after first binary release. Submit Console.dev 1–2 weeks after v1.0.0 tag. Variety next run → Bucket A or E.
+
 ## 2026-06-01 (ci: release workflow)
 
 - Stars: 0 (Δ 0).
