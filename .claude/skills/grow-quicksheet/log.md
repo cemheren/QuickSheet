@@ -1,3 +1,11 @@
+## 2026-06-02 (feat: --theme CLI flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--theme <name>` and `--list-themes` CLI flags. Users can launch with a specific theme (e.g. `ExcelConsole data.csv --theme Nord`) without needing a `config:` cell. Also hardened csvPath detection to skip flag values.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #272.
+- Follow-up: Variety next run → Bucket C, D, or R. ~31 open PRs awaiting merge.
+
 ## 2026-06-02 (ext: quicksheet-mxck-ext)
 
 - Stars: 0 (Δ 0).
