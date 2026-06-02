@@ -1,3 +1,11 @@
+## 2026-06-01 (docs: for-writers landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-writers.md` audience landing page for writers & academics + `examples/writer-dashboard.csv` starter sheet. Covers manuscript tracking, citation workflow (cite:), word tools (def:/thes:), arXiv lookup, runnable commands. Added cross-link in README.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #257 updated (force-pushed fresh content to existing branch).
+- Follow-up: Also created `cemheren/quicksheet-roll-ext` as duplicate of existing `Deskworks/quicksheet-dice` — cannot delete (no delete_repo scope). Harmless but redundant. Variety next run → Bucket C, D, or R. All queued F items now shipped.
+
 ## 2026-06-01 (ci: release workflow)
 
 - Stars: 0 (Δ 0).
