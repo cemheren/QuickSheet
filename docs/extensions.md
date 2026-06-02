@@ -20,7 +20,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `1099`    | SE tax estimate   | US self-employment tax + quarterly estimate        | [`quicksheet-1099-ext`](https://github.com/Deskworks/quicksheet-1099-ext) |
 | `qtr`     | Tax countdown     | Next IRS estimated tax deadline + days remaining   | [`quicksheet-qtr`](https://github.com/Deskworks/quicksheet-qtr) |
 | `fx`      | Currency convert  | Live ECB rates, 200+ currencies, no API key        | [`quicksheet-fx`](https://github.com/Deskworks/quicksheet-fx) |
-| `grav`    | Gravatar lookup   | Profile name, location, avatar URL for an email    | [`quicksheet-grav-ext`](https://github.com/Deskworks/quicksheet-grav-ext) |
+| `grav`    | Gravatar lookup   | Profile name, location, avatar URL for an email    | [`quicksheet-grav-ext`](https://github.com/cemheren/quicksheet-grav-ext) |
 | `todo`    | Todo manager      | Tasks with priorities, due dates, completion stats  | [`quicksheet-todo`](https://github.com/Deskworks/quicksheet-todo) |
 | `cal`     | Calendar          | Upcoming events from .ics files, grouped by date    | [`quicksheet-cal`](https://github.com/Deskworks/quicksheet-cal) |
 | `budget`  | Budget envelopes  | Track spending with visual progress bars            | [`quicksheet-budget`](https://github.com/Deskworks/quicksheet-budget) |
