@@ -1,3 +1,11 @@
+## 2026-06-02 (docs: for-artists landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-artists.md` audience landing page for artists, illustrators, and designers + `examples/artist-dashboard.csv` starter sheet. Covers commission pipeline, hex palette strip, deadline countdowns, income sparklines, stream launchers. Added README cross-link.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #274.
+- Follow-up: All audience landing pages now complete (homelab, traders, SRE, students, writers, DMs, artists). Variety next run → Bucket C, D, or E. ~43 open PRs awaiting merge.
+
 ## 2026-06-02 (docs: for-dms landing page)
 
 - Stars: 0 (Δ 0).
