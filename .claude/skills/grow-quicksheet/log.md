@@ -1,3 +1,11 @@
+## 2026-06-02 (no-op: still saturated)
+
+- Stars: 0 (Δ 0).
+- Action: Re-swept issues (main: #158 too large, #3 needs platform; 0 ext-repo issues). 47 open PRs, 32 extension repos live. No new qualifying work that isn't already in a PR or shipped repo.
+- Bucket: —
+- Outcome: No-op. Bottleneck remains user merge queue (47 PRs). No new production warranted until queue drains.
+- Follow-up: Next run should re-sweep issues. If PRs begin merging, new variety actions become worthwhile again.
+
 ## 2026-06-02 (docs: for-dms landing page)
 
 - Stars: 0 (Δ 0).
