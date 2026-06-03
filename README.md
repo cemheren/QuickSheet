@@ -66,7 +66,7 @@ For quick notes, todos. Everything autosaves every 5 seconds. You can point and 
 ### Launcher
 <!-- ![Launcher example](docs/screenshots/use-case-launcher.png) -->
 Prefix any cell with `r: ` to make it a runnable command — e.g. `r: code .` or `r: firefox`.
-You can open or launch multiple repos with a single operation. Multi select cells, and hit enter to run. 
+You can open or launch multiple repos with a single operation. Multi-select cells, and hit enter to run. 
 
 I've used it to start the repos I want to work on for the day, and launch copilot with some saved prompts like summarize emails. Not sure how others solve this problem, but this to me is simpler than running startup scripts. 
 
@@ -75,7 +75,7 @@ I've used it to start the repos I want to work on for the day, and launch copilo
 ### Hyper-Link Dashboard
 <!-- ![Links example](docs/screenshots/use-case-links.png) -->
 Paste URLs into cells. They're highlighted and open in your browser on Enter/double-click.
-Similar to the launcher funcitonality you can open and run multiple by selecting multiple cells. I was going for a emacs buffer type of feel to save and run multiple cells. 
+Similar to the launcher functionality you can open and run multiple by selecting multiple cells. I was going for an Emacs-buffer type of feel to save and run multiple cells. 
 
 ![Hyperlink dashboard — clickable URLs organized in a grid](hyperlink-dashboard.png)
 
