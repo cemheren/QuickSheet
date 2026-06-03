@@ -1,3 +1,11 @@
+## 2026-06-03 (feat: --head/--tail flags)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--head N` and `--tail N` headless CLI flags. CSV-aware row slicing that preserves multi-line quoted fields. Complements the headless pipeline (--export-md/html/json, --filter, --sort, --select, --info, --transpose).
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #295.
+- Follow-up: Variety next run → Bucket C, D, or R. ~33 open PRs awaiting merge.
+
 ## 2026-06-03 (feat: --transpose flag)
 
 - Stars: 0 (Δ 0).
