@@ -1,3 +1,11 @@
+## 2026-06-03 (draft: terminal-apps.dev submission)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted terminal-apps.dev submission (GitHub issue format). Researched their submission mechanism — simple issue with name + URL on scmmishra/terminal-apps.dev. Prepared timing notes (submit after release + screenshot).
+- Bucket: D (network effects / directory submission).
+- Outcome: Draft saved at `drafts/terminal-apps-dev.md`.
+- Follow-up: Submit after tagged release exists. Next run → variety (Bucket A or E). All queued Bucket D items now have drafts.
+
 ## 2026-06-03 (research: terminal influencers)
 
 - Stars: 0 (Δ 0).
