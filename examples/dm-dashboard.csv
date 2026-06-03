@@ -1,0 +1,26 @@
+Initiative,,,,Encounter Tables,,,,Session Notes
+ext: github:cemheren/quicksheet-init-ext,,,,ext: github:cemheren/quicksheet-roll-ext,,,,Campaign: Curse of the Hollow King
+init: add Ranger 18,,,,roll: 1d20+5,,,,Session 14 — The Sunken Vault
+init: add Goblin 15,,,,roll: 2d6+3,,,,
+init: add Wizard 12,,,,roll: 1d100,,,,Party Level: 5
+init: add Fighter 20,,,,roll: 4d6kh3,,,,Location: Ruins of Kelthane
+init: show,,,,,,,,
+,,,,,,,,Quest: Find the Silver Chalice
+,,,,,,,,Reward: 800 gp + patron favour
+,,,,,,,,
+NPC Tracker,,,,Loot Table,,,,Quick References
+Name,HP,AC,Status,Item,Value,Rarity,,DC Easy: 10
+Goblin Chief,45,16,Alive,Potion of Healing,50 gp,Common,,DC Medium: 15
+Shadow Drake,38,14,Bloodied,+1 Shortsword,500 gp,Uncommon,,DC Hard: 20
+Merchant Aldo,8,10,Friendly,Cloak of Elvenkind,1200 gp,Uncommon,,DC Very Hard: 25
+Guard Captain,52,18,Hostile,Bag of Holding,2000 gp,Rare,,DC Nearly Impossible: 30
+Innkeeper Mara,6,10,Friendly,Ring of Protection,3500 gp,Rare,,
+,,,,Flame Tongue,5000 gp,Rare,,XP Thresholds (Party of 4 Lvl 5)
+,,,,,,,,Easy: 1000
+,,,,,,,,Medium: 2000
+Conditions,,,,,,,,Hard: 3000
+Name,Effect,Duration,,,,,,,Deadly: 4400
+Poisoned,Disadvantage on attacks/ability checks,1 minute,,,,,,
+Frightened,Disadvantage on checks; can't move closer,Until end of next turn,,,,,,
+Grappled,Speed is 0,Until escape (Athletics/Acrobatics),,,,,,
+Prone,Disadvantage on attacks; melee within 5ft has advantage,Until stand (half movement),,,,,,
