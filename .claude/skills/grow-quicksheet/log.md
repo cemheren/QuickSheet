@@ -1,3 +1,11 @@
+## 2026-06-03 (docs: artist/creative landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-artists.md` landing page + `examples/artist-dashboard.csv` starter sheet. Targets illustrators, painters, photographers, freelance creatives. Highlights commission tracking, colour palette lookup (color ext), word bank (thes ext), deadline countdowns (cal ext), and freelance income/tax cluster.
+- Bucket: A (product polish / audience landing page).
+- Outcome: PR #296.
+- Follow-up: Variety next run → Bucket C, D, or E. All planned `for-*.md` pages now complete (homelab, students, sre, traders, dms, artists).
+
 ## 2026-06-03 (feat: --head/--tail flags)
 
 - Stars: 0 (Δ 0).
