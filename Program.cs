@@ -26,6 +26,29 @@ public class Program
 
         string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
 
+        if (args.Contains("--count"))
+        {
+            if (csvPath == null || !File.Exists(csvPath))
+            {
+                Console.Error.WriteLine(csvPath == null
+                    ? "Usage: ExcelConsole <input.csv> --count"
+                    : $"Input CSV not found: {csvPath}");
+                Environment.Exit(csvPath == null ? 2 : 1);
+                return;
+            }
+            string text = File.ReadAllText(csvPath);
+            int dataRows = 0;
+            bool inQuotes = false;
+            foreach (char ch in text)
+            {
+                if (ch == '"') inQuotes = !inQuotes;
+                else if (ch == '\n' && !inQuotes) dataRows++;
+            }
+            if (text.Length > 0 && text[^1] != '\n') dataRows++;
+            Console.WriteLine(dataRows);
+            return;
+        }
+
         int exportIdx = Array.IndexOf(args, "--export-md");
         if (exportIdx >= 0)
         {
@@ -255,6 +278,7 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv> --count                    Headless: print number of rows");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
