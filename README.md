@@ -197,7 +197,7 @@ tls: github.com, 1, 4
 | `mileage:` | IRS mileage deduction | `ext: github:Deskworks/quicksheet-mileage-ext` |
 | `budget:` | Budget envelopes | `ext: github:Deskworks/quicksheet-budget` |
 | `worldtm:` | World clock / timezones | `ext: github:Deskworks/quicksheet-worldtm` |
-| `margin:` | Break-even & margin calc | `ext: github:Deskworks/quicksheet-margin-ext` |
+| `margin:` | Break-even & margin calc | `ext: github:cemheren/quicksheet-margin-ext` |
 | `depr:` | Depreciation schedules | `ext: github:Deskworks/quicksheet-depr-ext` |
 | `jwtdec:` | JWT token decoder | `ext: github:Deskworks/quicksheet-jwtdec` |
 | `cronck:` | Cron expression parser | `ext: github:Deskworks/quicksheet-cronck` |
