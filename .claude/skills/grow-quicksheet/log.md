@@ -1,3 +1,11 @@
+## 2026-06-03 (docs: TTRPG DM landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` audience landing page for TTRPG dungeon masters + `examples/dm-dashboard.csv` starter sheet. Updated README audience guides line. Pairs with existing `roll` and `init` extensions.
+- Bucket: A (product polish / audience page).
+- Outcome: PR #250 updated (force-pushed clean content).
+- Follow-up: Variety next run → Bucket C or D. Consider `for-artists.md` as next audience page after merge backlog clears.
+
 ## 2026-06-03 (ci: release workflow)
 
 - Stars: 0 (Δ 0).
