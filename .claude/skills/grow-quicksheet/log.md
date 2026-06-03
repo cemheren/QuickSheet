@@ -1,3 +1,27 @@
+## 2026-06-03 (draft: awesome-cli-apps)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted awesome-cli-apps submission (agarrharr/awesome-cli-apps, ~19.7k★). Entry targets "Data Manipulation" section alongside visidata and sc-im. Blocked on 20-star minimum requirement.
+- Bucket: D (network effects / awesome-list draft).
+- Outcome: Draft saved at `drafts/awesome-cli-apps.md`, commit 892dc2c.
+- Follow-up: Cannot submit until repo hits 20 stars. Next run: variety — Bucket E or F.
+
+## 2026-06-03 (research: terminal influencers)
+
+- Stars: 0 (Δ 0).
+- Action: Researched top 10 terminal-tool signal-boosting accounts/channels. Identified 5 submission channels (3 new: terminal-apps.dev form, awesome-cli-apps PR, social hashtag timing). Wrote brief at `research/terminal-influencers.md`.
+- Bucket: R (deep research).
+- Outcome: `research/terminal-influencers.md` committed.
+- Follow-up: Queue two new drafts: `drafts/terminal-apps-dev.md` (web form entry) and `drafts/awesome-cli-apps.md` (sindresorhus list — 57k★, highest-reach target found). Next run → Bucket D (one of these two drafts).
+
+## 2026-06-03 (docs: TTRPG DM landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` audience landing page for TTRPG dungeon masters + `examples/dm-dashboard.csv` starter sheet. Updated README audience guides line. Pairs with existing `roll` and `init` extensions.
+- Bucket: A (product polish / audience page).
+- Outcome: PR #250 updated (force-pushed clean content).
+- Follow-up: Variety next run → Bucket C or D. Consider `for-artists.md` as next audience page after merge backlog clears.
+
 ## 2026-06-03 (ci: release workflow)
 
 - Stars: 0 (Δ 0).
@@ -1481,6 +1505,8 @@
   7. **Bucket A: more audience landing pages**, in `docs/for-*.md` + matching `examples/*.csv`. Already shipped: `for-homelab.md` (PR #100). Next candidates that don't depend on timer/value-colour: `for-students.md`, `for-dms.md`, `for-traders.md`, `for-artists.md`. Skip `for-lawyers.md` and `for-accountants.md` until a non-timer billing/accounting angle is found.
   8. **Bucket D: awesome-list submissions.** awesome-selfhosted DROPPED (wrong fit — server software). Use the queue in `research/awesome-list-fit.md`: Awesome-Linux-Software draft now done (`drafts/awesome-linux-software.md`); next draft Awesome-Windows; then identify canonical `awesome-csv`. Skip awesome-tuis tone-rewrite until a wallpaper screenshot lands.
   9. **Bucket C: r/unixporn DM-screen and student-rice posts.** Drafts only, save when matching extensions land. r/selfhosted "Homepage.io-alternative" post after `health:` ships.
+  10. **Bucket D: `drafts/awesome-cli-apps.md`** — sindresorhus/awesome-cli-apps (57k★). Highest-reach awesome-list target found. One-line entry under "Productivity" or "Spreadsheet". See `research/terminal-influencers.md`.
+  11. **Bucket D: `drafts/terminal-apps-dev.md`** — terminal-apps.dev submission (web form). Name + one-liner + repo URL + category. Zero friction, curated by @scmmishra.
 
 - **EXPLICITLY DROPPED from backlog (do not revive without user nod):**
   - Trinity feature programme (value-colour / ticking timer / progress bar).
