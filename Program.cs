@@ -163,6 +163,102 @@ public class Program
             return;
         }
 
+        int filterIdx = Array.IndexOf(args, "--filter");
+        if (filterIdx >= 0)
+        {
+            if (csvPath == null || filterIdx + 1 >= args.Length)
+            {
+                Console.Error.WriteLine("Usage: ExcelConsole <input.csv> --filter <column>=<value>");
+                Console.Error.WriteLine("  Operators: = != > < >= <= ~ (contains)");
+                Environment.Exit(2);
+                return;
+            }
+            string expr = args[filterIdx + 1];
+            if (!File.Exists(csvPath))
+            {
+                Console.Error.WriteLine($"Input CSV not found: {csvPath}");
+                Environment.Exit(1);
+                return;
+            }
+
+            var allLines = File.ReadAllLines(csvPath);
+            if (allLines.Length == 0)
+            {
+                Environment.Exit(0);
+                return;
+            }
+
+            // Parse operator from expression
+            string[] operators = { "!=", ">=", "<=", "~", "=", ">", "<" };
+            string? op = null;
+            string colName = "";
+            string filterValue = "";
+            foreach (var candidate in operators)
+            {
+                int pos = expr.IndexOf(candidate);
+                if (pos > 0)
+                {
+                    op = candidate;
+                    colName = expr.Substring(0, pos).Trim();
+                    filterValue = expr.Substring(pos + candidate.Length).Trim();
+                    break;
+                }
+            }
+            if (op == null || colName.Length == 0)
+            {
+                Console.Error.WriteLine("Invalid filter expression. Use: column=value, column!=value, column>value, column~value");
+                Environment.Exit(2);
+                return;
+            }
+
+            // Parse header to find column index
+            var headerFields = ParseCsvLine(allLines[0]);
+            int colIdx = -1;
+            for (int i = 0; i < headerFields.Count; i++)
+            {
+                if (headerFields[i].Equals(colName, StringComparison.OrdinalIgnoreCase))
+                {
+                    colIdx = i;
+                    break;
+                }
+            }
+            if (colIdx < 0 && int.TryParse(colName, out int numIdx))
+            {
+                colIdx = numIdx;
+            }
+            if (colIdx < 0)
+            {
+                Console.Error.WriteLine($"Column not found: {colName}");
+                Environment.Exit(1);
+                return;
+            }
+
+            // Output header
+            Console.WriteLine(allLines[0]);
+
+            // Filter and output matching rows
+            for (int i = 1; i < allLines.Length; i++)
+            {
+                var fields = ParseCsvLine(allLines[i]);
+                if (colIdx >= fields.Count) continue;
+                string cellVal = fields[colIdx];
+
+                bool match = op switch
+                {
+                    "=" => cellVal.Equals(filterValue, StringComparison.OrdinalIgnoreCase),
+                    "!=" => !cellVal.Equals(filterValue, StringComparison.OrdinalIgnoreCase),
+                    "~" => cellVal.Contains(filterValue, StringComparison.OrdinalIgnoreCase),
+                    ">" => double.TryParse(cellVal, out var a) && double.TryParse(filterValue, out var b) && a > b,
+                    "<" => double.TryParse(cellVal, out var c) && double.TryParse(filterValue, out var d) && c < d,
+                    ">=" => double.TryParse(cellVal, out var e) && double.TryParse(filterValue, out var f) && e >= f,
+                    "<=" => double.TryParse(cellVal, out var g) && double.TryParse(filterValue, out var h) && g <= h,
+                    _ => false
+                };
+                if (match) Console.WriteLine(allLines[i]);
+            }
+            return;
+        }
+
 #if PLATFORM_WINDOWS
         HideConsoleWindow();
         using var host = new ExcelConsole.Platform.Windows.WindowsDesktopHost();
@@ -255,6 +351,8 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv> --filter <col>=<val>       Headless: output rows where column matches value");
+        Console.WriteLine("                                                     Operators: = != > < >= <= ~ (contains)");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
@@ -287,4 +385,38 @@ public class Program
     [DllImport("user32.dll")]
     private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 #endif
+
+    private static List<string> ParseCsvLine(string line)
+    {
+        var fields = new List<string>();
+        bool inQuotes = false;
+        var current = new System.Text.StringBuilder();
+        for (int i = 0; i < line.Length; i++)
+        {
+            char ch = line[i];
+            if (ch == '"')
+            {
+                if (inQuotes && i + 1 < line.Length && line[i + 1] == '"')
+                {
+                    current.Append('"');
+                    i++;
+                }
+                else
+                {
+                    inQuotes = !inQuotes;
+                }
+            }
+            else if (ch == ',' && !inQuotes)
+            {
+                fields.Add(current.ToString());
+                current.Clear();
+            }
+            else
+            {
+                current.Append(ch);
+            }
+        }
+        fields.Add(current.ToString());
+        return fields;
+    }
 }
