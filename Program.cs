@@ -118,6 +118,62 @@ public class Program
             return;
         }
 
+        int transposeIdx = Array.IndexOf(args, "--transpose");
+        if (transposeIdx >= 0)
+        {
+            if (csvPath == null)
+            {
+                Console.Error.WriteLine("Usage: ExcelConsole <input.csv> --transpose [<output.csv>]");
+                Environment.Exit(2);
+                return;
+            }
+            if (!File.Exists(csvPath))
+            {
+                Console.Error.WriteLine($"Input CSV not found: {csvPath}");
+                Environment.Exit(1);
+                return;
+            }
+            string? transposeOut = (transposeIdx + 1 < args.Length && !args[transposeIdx + 1].StartsWith("--"))
+                ? args[transposeIdx + 1]
+                : null;
+
+            var csvLines = File.ReadAllLines(csvPath);
+            var parsed = new List<List<string>>();
+            int maxCols = 0;
+            foreach (var line in csvLines)
+            {
+                var fields = ParseCsvLine(line);
+                parsed.Add(fields);
+                if (fields.Count > maxCols) maxCols = fields.Count;
+            }
+
+            var writer = (transposeOut == null || transposeOut == "-")
+                ? Console.Out
+                : new StreamWriter(transposeOut);
+
+            for (int c = 0; c < maxCols; c++)
+            {
+                for (int r = 0; r < parsed.Count; r++)
+                {
+                    if (r > 0) writer.Write(',');
+                    string val = c < parsed[r].Count ? parsed[r][c] : "";
+                    if (val.Contains(',') || val.Contains('"') || val.Contains('\n'))
+                        writer.Write('"' + val.Replace("\"", "\"\"") + '"');
+                    else
+                        writer.Write(val);
+                }
+                writer.WriteLine();
+            }
+
+            if (writer != Console.Out)
+            {
+                writer.Flush();
+                ((StreamWriter)writer).Dispose();
+                Console.WriteLine($"Wrote transposed CSV: {transposeOut}");
+            }
+            return;
+        }
+
         int jsonIdx = Array.IndexOf(args, "--export-json");
         if (jsonIdx >= 0)
         {
@@ -255,6 +311,7 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv> --transpose [<out.csv>]    Headless: transpose rows↔columns (default: stdout)");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
@@ -287,4 +344,40 @@ public class Program
     [DllImport("user32.dll")]
     private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 #endif
+
+    private static List<string> ParseCsvLine(string line)
+    {
+        var fields = new List<string>();
+        int i = 0;
+        while (i <= line.Length)
+        {
+            if (i == line.Length) { fields.Add(""); break; }
+            if (line[i] == '"')
+            {
+                i++;
+                var sb = new System.Text.StringBuilder();
+                while (i < line.Length)
+                {
+                    if (line[i] == '"')
+                    {
+                        if (i + 1 < line.Length && line[i + 1] == '"') { sb.Append('"'); i += 2; }
+                        else { i++; break; }
+                    }
+                    else { sb.Append(line[i]); i++; }
+                }
+                fields.Add(sb.ToString());
+                if (i < line.Length && line[i] == ',') i++;
+                else break;
+            }
+            else
+            {
+                int start = i;
+                while (i < line.Length && line[i] != ',') i++;
+                fields.Add(line[start..i]);
+                if (i < line.Length) i++;
+                else break;
+            }
+        }
+        return fields;
+    }
 }
