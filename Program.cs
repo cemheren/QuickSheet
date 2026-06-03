@@ -163,6 +163,65 @@ public class Program
             return;
         }
 
+        int headIdx = Array.IndexOf(args, "--head");
+        if (headIdx >= 0)
+        {
+            if (csvPath == null || headIdx + 1 >= args.Length || !int.TryParse(args[headIdx + 1], out int headN) || headN < 0)
+            {
+                Console.Error.WriteLine("Usage: ExcelConsole <input.csv> --head <N>");
+                Console.Error.WriteLine("Outputs the first N rows of the CSV (CSV-aware, preserves quoting).");
+                Environment.Exit(2);
+                return;
+            }
+            if (!File.Exists(csvPath))
+            {
+                Console.Error.WriteLine($"Input CSV not found: {csvPath}");
+                Environment.Exit(1);
+                return;
+            }
+
+            using var reader = new StreamReader(csvPath);
+            int rowsWritten = 0;
+            while (rowsWritten < headN)
+            {
+                string? csvLine = ReadCsvRow(reader);
+                if (csvLine == null) break;
+                Console.WriteLine(csvLine);
+                rowsWritten++;
+            }
+            return;
+        }
+
+        int tailIdx = Array.IndexOf(args, "--tail");
+        if (tailIdx >= 0)
+        {
+            if (csvPath == null || tailIdx + 1 >= args.Length || !int.TryParse(args[tailIdx + 1], out int tailN) || tailN < 0)
+            {
+                Console.Error.WriteLine("Usage: ExcelConsole <input.csv> --tail <N>");
+                Console.Error.WriteLine("Outputs the last N rows of the CSV (CSV-aware, preserves quoting).");
+                Environment.Exit(2);
+                return;
+            }
+            if (!File.Exists(csvPath))
+            {
+                Console.Error.WriteLine($"Input CSV not found: {csvPath}");
+                Environment.Exit(1);
+                return;
+            }
+
+            var allRows = new List<string>();
+            using (var reader = new StreamReader(csvPath))
+            {
+                string? csvLine;
+                while ((csvLine = ReadCsvRow(reader)) != null)
+                    allRows.Add(csvLine);
+            }
+            int startIdx = Math.Max(0, allRows.Count - tailN);
+            for (int i = startIdx; i < allRows.Count; i++)
+                Console.WriteLine(allRows[i]);
+            return;
+        }
+
 #if PLATFORM_WINDOWS
         HideConsoleWindow();
         using var host = new ExcelConsole.Platform.Windows.WindowsDesktopHost();
@@ -255,6 +314,8 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv> --head <N>                 Output first N rows (CSV-aware)");
+        Console.WriteLine("  ExcelConsole <file.csv> --tail <N>                 Output last N rows (CSV-aware)");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
@@ -287,4 +348,36 @@ public class Program
     [DllImport("user32.dll")]
     private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 #endif
+
+    /// <summary>
+    /// Reads one logical CSV row from the stream, handling multi-line quoted fields.
+    /// Returns null at end-of-stream.
+    /// </summary>
+    private static string? ReadCsvRow(StreamReader reader)
+    {
+        string? first = reader.ReadLine();
+        if (first == null) return null;
+
+        // If the line has balanced quotes, it's a complete row.
+        int quoteCount = 0;
+        foreach (char ch in first)
+        {
+            if (ch == '"') quoteCount++;
+        }
+        if (quoteCount % 2 == 0) return first;
+
+        // Unbalanced quotes — keep reading lines until balanced.
+        var sb = new System.Text.StringBuilder(first);
+        while (quoteCount % 2 != 0)
+        {
+            string? next = reader.ReadLine();
+            if (next == null) break;
+            sb.Append('\n').Append(next);
+            foreach (char ch in next)
+            {
+                if (ch == '"') quoteCount++;
+            }
+        }
+        return sb.ToString();
+    }
 }
