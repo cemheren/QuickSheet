@@ -1,3 +1,11 @@
+## 2026-06-02 (feat: --filter flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--filter <column><op><value>` headless CLI flag. Selects rows where column matches condition. Supports = != > < >= <= ~ (contains). Numeric-aware comparisons. Pipe-friendly CSV output to stdout.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #283.
+- Follow-up: Variety next run → Bucket C or D. ~51 open PRs awaiting merge.
+
 ## 2026-06-02 (ext: quicksheet-depr-ext)
 
 - Stars: 0 (Δ 0).
