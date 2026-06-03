@@ -1,3 +1,11 @@
+## 2026-06-03 (feat: --count flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--count` headless CLI flag. Prints CSV row count (quote-aware — embedded newlines in quoted fields don't inflate the count). Useful in shell pipelines for pre-flight checks.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #298.
+- Follow-up: Variety next run → Bucket C or D. ~34 open PRs awaiting merge.
+
 ## 2026-06-03 (docs: artist/creative landing page)
 
 - Stars: 0 (Δ 0).
