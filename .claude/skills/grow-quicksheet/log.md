@@ -1,3 +1,11 @@
+## 2026-06-03 (draft: reddit-dnd)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted r/DnD / r/DMAcademy post targeting TTRPG Dungeon Masters. Showcases `quicksheet-dice` + `quicksheet-init-ext` as a desktop DM screen. Includes example CSV template and posting strategy.
+- Bucket: C (content draft).
+- Outcome: Draft saved at `.claude/skills/grow-quicksheet/drafts/reddit-dnd.md`.
+- Follow-up: Post after a screenshot is available. Pair with `docs/for-dms.md` landing page (Bucket A, future run).
+
 ## 2026-06-03 (ci: release workflow)
 
 - Stars: 0 (Δ 0).
