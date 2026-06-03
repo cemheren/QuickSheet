@@ -231,6 +231,17 @@ tls: github.com, 1, 4
 | `caniuse:` | Browser compat lookup via caniuse-db — `caniuse: css-grid` · `caniuse: flexbox` · `caniuse: webassembly`. Shows support across Chrome/Firefox/Safari/Edge + usage %. No API key. | `ext: github:Deskworks/quicksheet-caniuse` |
 | `gem:` | Ruby gem lookup via rubygems.org — version, total downloads, authors, license, homepage, description. `gem: rails` (detail) · `gem: search json parser` (top 5). No API key. | `ext: github:Deskworks/quicksheet-rubygems` |
 | `hackage:` | Haskell package lookup from Hackage — `hackage: aeson` (version, synopsis, author, category, license, homepage) · `hackage: search json` (top results). No API key. | `ext: github:Deskworks/quicksheet-hackage` |
+| `nuget:` | NuGet package lookup — version, downloads, license, dotnet CLI install command | `ext: github:cemheren/quicksheet-nuget` |
+| `mvn:` | Maven Central package lookup — version, downloads, license, description | `ext: github:cemheren/quicksheet-maven` |
+| `payroll:` | US payroll withholding — federal tax, Social Security, Medicare, net pay per period (2025 IRS brackets) | `ext: github:cemheren/quicksheet-payroll-ext` |
+| `tax:` | US state sales tax rate — instant rates for all 50 states + DC | `ext: github:cemheren/quicksheet-salestax-ext` |
+| `init:` | Combat initiative tracker — sort combatants, cycle turns, track rounds (TTRPG GMs) | `ext: github:cemheren/quicksheet-init-ext` |
+| `ollama:` | Local AI queries via Ollama — private, fast, no API key. Ask questions, summarize, translate | `ext: github:cemheren/quicksheet-ollama` |
+| `ai:` | AI API cost tracker — monitor token usage and budget for OpenAI, Anthropic, Gemini, DeepSeek | `ext: github:cemheren/quicksheet-ai-costs` |
+| `words:` | Text analysis — word count, reading time, readability grade, character count | `ext: github:cemheren/quicksheet-words` |
+| `hash:` | Hash generator — MD5, SHA1, SHA256, SHA512, CRC32 from text or file paths | `ext: github:cemheren/quicksheet-hashgen` |
+| `unit:` | Unit conversion — length, mass, temperature, volume, speed, data, area, time | `ext: github:cemheren/quicksheet-unit-ext` |
+| `pubmed:` | PubMed article lookup — search papers, fetch metadata by PMID | `ext: github:cemheren/quicksheet-pubmed-ext` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
