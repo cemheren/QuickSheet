@@ -1,3 +1,11 @@
+## 2026-06-03 (docs: README typo fix)
+
+- Stars: 0 (Δ 0).
+- Action: Fixed three typos/grammar issues in README.md — "funcitonality" → "functionality", "a emacs" → "an Emacs", "Multi select" → "Multi-select". Small but genuine first-impression polish.
+- Bucket: A (product polish).
+- Outcome: PR #286.
+- Follow-up: Project remains saturated (~60 PRs awaiting merge). Next run: no-op unless new issues appear or user merges a batch.
+
 ## 2026-06-02 (feat: --select flag)
 
 - Stars: 0 (Δ 0).
