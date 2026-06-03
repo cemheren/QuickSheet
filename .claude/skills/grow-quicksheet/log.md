@@ -1,3 +1,11 @@
+## 2026-06-03 (feat: --transpose flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--transpose` headless CLI flag. Reads CSV, swaps rows↔columns, outputs transposed CSV to stdout or file. Proper CSV parsing (quoted fields, escaped quotes, ragged rows). Completes the headless pipeline alongside --filter, --select, --sort.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #294.
+- Follow-up: Variety next run → Bucket C or D. ~32 open PRs awaiting merge.
+
 ## 2026-06-03 (meta: bulk topic tagging across extension repos)
 
 - Stars: 0 (Δ 0).
