@@ -1,3 +1,11 @@
+## 2026-06-03 (fix: quicksheet-todo UX simplification)
+
+- Stars: 0 (Δ 0).
+- Action: Simplified Deskworks/quicksheet-todo extension UX per issue #2 ("too cumbersome"). Added bare-number toggle (e.g., `todo: 3` toggles done/undone), bare-text add (no `add` keyword needed), empty-params list. Reduces cell edits from 3 to 2 for common workflows.
+- Bucket: Issue fix (extension repo).
+- Outcome: PR Deskworks/quicksheet-todo#3.
+- Follow-up: Variety next run → Bucket C, D, or R. Main repo issue #158 (tabs/aging) remains but exceeds single-run complexity threshold.
+
 ## 2026-06-03 (docs: artist/creative landing page)
 
 - Stars: 0 (Δ 0).
