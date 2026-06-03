@@ -1,3 +1,11 @@
+## 2026-06-02 (ext: quicksheet-margin-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Published `cemheren/quicksheet-margin-ext` — break-even & contribution-margin calculator. Computes contribution margin/unit, break-even units, break-even revenue, margin ratio. Optional `units=N` for profit at target volume. Pure math, zero network, zero deps.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-margin-ext. PR #280 for cross-link update in README/extensions.md/tour.md.
+- Follow-up: Remaining from accounting queue: `quicksheet-depr-ext` (depreciation schedules). Variety next run → different bucket.
+
 ## 2026-06-02 (docs: add 11 unlisted extensions to directory)
 
 - Stars: 0 (Δ 0).
