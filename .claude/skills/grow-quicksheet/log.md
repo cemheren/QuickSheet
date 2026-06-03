@@ -1,3 +1,11 @@
+## 2026-06-02 (feat: --select flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--select <col1,col2,...>` headless CLI flag. Selects columns by header name or 1-based index. Outputs projected CSV to stdout. CSV-aware quoting. Clear error with available-columns hint on mismatch.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #285.
+- Follow-up: Variety next run → Bucket C or D. ~60 open PRs awaiting merge. The headless pipeline (--select + --filter + --sort) is now feature-complete for basic CSV wrangling.
+
 ## 2026-06-02 (feat: --filter flag)
 
 - Stars: 0 (Δ 0).
