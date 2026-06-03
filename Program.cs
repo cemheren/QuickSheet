@@ -163,6 +163,67 @@ public class Program
             return;
         }
 
+        int selectIdx = Array.IndexOf(args, "--select");
+        if (selectIdx >= 0)
+        {
+            if (csvPath == null || selectIdx + 1 >= args.Length)
+            {
+                Console.Error.WriteLine("Usage: ExcelConsole <input.csv> --select <col1,col2,...>");
+                Console.Error.WriteLine("Select columns by header name or 1-based index.");
+                Environment.Exit(2);
+                return;
+            }
+            string selectArg = args[selectIdx + 1];
+            if (!File.Exists(csvPath))
+            {
+                Console.Error.WriteLine($"Input CSV not found: {csvPath}");
+                Environment.Exit(1);
+                return;
+            }
+
+            var allLines = File.ReadAllLines(csvPath);
+            if (allLines.Length == 0)
+            {
+                return;
+            }
+
+            var headerFields = ParseCsvLine(allLines[0]);
+            var selectors = selectArg.Split(',', StringSplitOptions.RemoveEmptyEntries);
+            var indices = new List<int>();
+
+            foreach (var sel in selectors)
+            {
+                string s = sel.Trim();
+                if (int.TryParse(s, out int idx) && idx >= 1 && idx <= headerFields.Count)
+                {
+                    indices.Add(idx - 1);
+                }
+                else
+                {
+                    int found = headerFields.FindIndex(h => h.Equals(s, StringComparison.OrdinalIgnoreCase));
+                    if (found >= 0)
+                        indices.Add(found);
+                    else
+                    {
+                        Console.Error.WriteLine($"Column not found: {s}");
+                        Console.Error.WriteLine($"Available columns: {string.Join(", ", headerFields)}");
+                        Environment.Exit(1);
+                        return;
+                    }
+                }
+            }
+
+            foreach (var line in allLines)
+            {
+                var fields = ParseCsvLine(line);
+                var selected = new List<string>();
+                foreach (int i in indices)
+                    selected.Add(i < fields.Count ? CsvEscape(fields[i]) : "");
+                Console.WriteLine(string.Join(",", selected));
+            }
+            return;
+        }
+
 #if PLATFORM_WINDOWS
         HideConsoleWindow();
         using var host = new ExcelConsole.Platform.Windows.WindowsDesktopHost();
@@ -255,6 +316,7 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv> --select <col1,col2,...>   Headless: output only named/indexed columns as CSV");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
@@ -287,4 +349,51 @@ public class Program
     [DllImport("user32.dll")]
     private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 #endif
+
+    private static List<string> ParseCsvLine(string line)
+    {
+        var fields = new List<string>();
+        bool inQuotes = false;
+        var current = new System.Text.StringBuilder();
+        for (int i = 0; i < line.Length; i++)
+        {
+            char ch = line[i];
+            if (inQuotes)
+            {
+                if (ch == '"')
+                {
+                    if (i + 1 < line.Length && line[i + 1] == '"')
+                    {
+                        current.Append('"');
+                        i++;
+                    }
+                    else
+                        inQuotes = false;
+                }
+                else
+                    current.Append(ch);
+            }
+            else
+            {
+                if (ch == '"')
+                    inQuotes = true;
+                else if (ch == ',')
+                {
+                    fields.Add(current.ToString());
+                    current.Clear();
+                }
+                else
+                    current.Append(ch);
+            }
+        }
+        fields.Add(current.ToString());
+        return fields;
+    }
+
+    private static string CsvEscape(string field)
+    {
+        if (field.Contains(',') || field.Contains('"') || field.Contains('\n'))
+            return "\"" + field.Replace("\"", "\"\"") + "\"";
+        return field;
+    }
 }
