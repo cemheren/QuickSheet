@@ -1,3 +1,11 @@
+## 2026-06-03 (docs: DM landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` landing page for tabletop RPG Game Masters + `examples/dm-dashboard.csv` starter sheet with initiative, dice, NPC tracker, loot, and session notes zones. Pairs with existing `quicksheet-init-ext` and `quicksheet-roll-ext`.
+- Bucket: A (product polish / audience landing page).
+- Outcome: PR #292.
+- Follow-up: Variety next run → Bucket C, D, or F. Remaining landing page candidates: `for-artists.md`.
+
 ## 2026-06-03 (feat: --info flag)
 
 - Stars: 0 (Δ 0).
