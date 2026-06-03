@@ -1,3 +1,11 @@
+## 2026-06-03 (meta: bulk topic tagging across extension repos)
+
+- Stars: 0 (Δ 0).
+- Action: Added GitHub topics (`quicksheet`, `quicksheet-extension`, `dotnet`, `csharp`, plus domain-specific tags) to 51 extension repos across cemheren/ and Deskworks/ orgs. Previously these repos had zero topics, making them invisible in GitHub topic search.
+- Bucket: B (discoverability / metadata).
+- Outcome: Direct `gh repo edit` — no PR needed (metadata only, no code). All repos now surface when users browse `github.com/topics/quicksheet-extension`.
+- Follow-up: Variety next run → Bucket A, C, or E. Note: `cemheren/quicksheet-weather-ext` was accidentally created (duplicate of `Deskworks/quicksheet-weather`) — user should delete it (`gh auth refresh -h github.com -s delete_repo && gh repo delete cemheren/quicksheet-weather-ext --yes`).
+
 ## 2026-06-03 (docs: DM landing page)
 
 - Stars: 0 (Δ 0).
