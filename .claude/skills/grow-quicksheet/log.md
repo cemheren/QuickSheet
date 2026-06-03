@@ -1,3 +1,11 @@
+## 2026-06-02 (ext: quicksheet-depr-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Published `cemheren/quicksheet-depr-ext` — straight-line + MACRS (IRS Pub 946 half-year convention) depreciation schedule calculator. Supports 3/5/7/10/15/20-year MACRS tables + optional salvage value for straight-line. Pure math, zero network, zero deps.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-depr-ext. PR #282 for cross-link update in README/extensions.md/tour.md.
+- Follow-up: Accounting queue complete (mileage ✓, margin ✓, depr ✓). Variety next run → different bucket.
+
 ## 2026-06-02 (no-op: saturated)
 
 - Stars: 0 (Δ 0).
