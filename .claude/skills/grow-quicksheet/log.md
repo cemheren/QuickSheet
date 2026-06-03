@@ -1,3 +1,11 @@
+## 2026-06-03 (feat: --info flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--info` headless CLI flag. Prints CSV summary: file name, row count, column count, per-column header/inferred-type/non-empty-count. Proper CSV parsing (quoted fields, escaped quotes). Useful for quick data inspection.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #291.
+- Follow-up: Variety next run → Bucket C or D. ~31 open PRs awaiting merge.
+
 ## 2026-06-03 (ci: release workflow)
 
 - Stars: 0 (Δ 0).
