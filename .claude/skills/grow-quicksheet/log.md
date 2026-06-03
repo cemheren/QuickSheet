@@ -1,3 +1,11 @@
+## 2026-06-03 (ci: release workflow)
+
+- Stars: 0 (Δ 0).
+- Action: Created `.github/workflows/release.yml` — publishes self-contained win-x64 (.zip) and linux-x64 (.tar.gz) single-file binaries as GitHub Release assets on `v*` tag push. Uses matrix strategy with OS-native runners. Unblocks Scoop/winget/AUR submissions.
+- Bucket: E (quality-of-life / infrastructure).
+- Outcome: PR #247 updated (force-pushed clean workflow).
+- Follow-up: After merge + next tag push, draft Scoop manifest. Variety next run → Bucket C or D.
+
 ## 2026-06-03 (docs: README typo fix)
 
 - Stars: 0 (Δ 0).
