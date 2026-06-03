@@ -118,6 +118,57 @@ public class Program
             return;
         }
 
+        if (args.Contains("--info"))
+        {
+            if (csvPath == null || !File.Exists(csvPath))
+            {
+                Console.Error.WriteLine(csvPath == null
+                    ? "Usage: ExcelConsole <input.csv> --info"
+                    : $"Input CSV not found: {csvPath}");
+                Environment.Exit(csvPath == null ? 2 : 1);
+                return;
+            }
+
+            var infoLines = File.ReadAllLines(csvPath);
+            if (infoLines.Length == 0)
+            {
+                Console.WriteLine("(empty file)");
+                return;
+            }
+
+            var headers = ParseCsvRow(infoLines[0]);
+            int dataRows = infoLines.Length - 1;
+            Console.WriteLine($"File:    {Path.GetFileName(csvPath)}");
+            Console.WriteLine($"Rows:    {dataRows}");
+            Console.WriteLine($"Columns: {headers.Count}");
+            Console.WriteLine();
+            Console.WriteLine($"  {"#",-4} {"Column",-24} {"Type",-10} {"Non-empty",10}");
+            Console.WriteLine($"  {"─",-4} {"─",-24} {"─",-10} {"─",10}");
+
+            for (int ci = 0; ci < headers.Count; ci++)
+            {
+                int nonEmpty = 0;
+                bool allNumeric = true;
+                bool hasAny = false;
+                for (int ri = 1; ri < infoLines.Length; ri++)
+                {
+                    var row = ParseCsvRow(infoLines[ri]);
+                    string val = ci < row.Count ? row[ci].Trim() : "";
+                    if (val.Length > 0)
+                    {
+                        nonEmpty++;
+                        hasAny = true;
+                        if (allNumeric && !double.TryParse(val, System.Globalization.NumberStyles.Any,
+                            System.Globalization.CultureInfo.InvariantCulture, out _))
+                            allNumeric = false;
+                    }
+                }
+                string type = !hasAny ? "empty" : (allNumeric ? "number" : "text");
+                Console.WriteLine($"  {ci + 1,-4} {headers[ci],-24} {type,-10} {nonEmpty,10}");
+            }
+            return;
+        }
+
         int jsonIdx = Array.IndexOf(args, "--export-json");
         if (jsonIdx >= 0)
         {
@@ -255,6 +306,7 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv> --info                     Show CSV summary (columns, types, row count)");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
@@ -270,6 +322,40 @@ public class Program
         Console.WriteLine();
         Console.WriteLine("Range references work inside text: {A1::C10}");
         Console.WriteLine("Tour: docs/tour.md · Issues: github.com/cemheren/QuickSheet/issues");
+    }
+
+    private static List<string> ParseCsvRow(string line)
+    {
+        var fields = new List<string>();
+        bool inQuotes = false;
+        var current = new System.Text.StringBuilder();
+        for (int i = 0; i < line.Length; i++)
+        {
+            char ch = line[i];
+            if (ch == '"')
+            {
+                if (inQuotes && i + 1 < line.Length && line[i + 1] == '"')
+                {
+                    current.Append('"');
+                    i++;
+                }
+                else
+                {
+                    inQuotes = !inQuotes;
+                }
+            }
+            else if (ch == ',' && !inQuotes)
+            {
+                fields.Add(current.ToString());
+                current.Clear();
+            }
+            else
+            {
+                current.Append(ch);
+            }
+        }
+        fields.Add(current.ToString());
+        return fields;
     }
 
 #if PLATFORM_WINDOWS
