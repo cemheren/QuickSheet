@@ -1,3 +1,11 @@
+## 2026-06-03 (ci: release workflow)
+
+- Stars: 0 (Δ 0).
+- Action: Added `.github/workflows/release.yml` — on `v*` tag push, builds self-contained single-file binaries (win-x64 .zip, linux-x64 .tar.gz) and creates a GitHub Release with assets attached. Uses .NET 9, PublishSingleFile, IncludeNativeLibrariesForSelfExtract.
+- Bucket: E (quality-of-life / infrastructure).
+- Outcome: PR #247 (force-pushed updated workflow to existing branch).
+- Follow-up: Once merged + first tag pushed, draft Scoop manifest and AUR PKGBUILD. Variety next run → Bucket C or D.
+
 ## 2026-06-03 (feat: --count flag)
 
 - Stars: 0 (Δ 0).
