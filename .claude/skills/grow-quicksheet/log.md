@@ -1,3 +1,11 @@
+## 2026-06-02 (docs: add 11 unlisted extensions to directory)
+
+- Stars: 0 (Δ 0).
+- Action: Added 11 published `cemheren/` extension repos to README.md and `docs/extensions.md` that were live but missing from the docs: nuget, maven, payroll, salestax, init, ollama, ai-costs, words, hashgen, unit-ext, pubmed-ext. Ecosystem now shows 85+ extensions in the directory.
+- Bucket: A (product polish — documentation).
+- Outcome: PR #279.
+- Follow-up: Variety next run → Bucket E (release.yml is still #0 priority and hasn't merged). ~50 open PRs awaiting merge.
+
 ## 2026-06-02 (feat: --sort headless flag)
 
 - Stars: 0 (Δ 0).
