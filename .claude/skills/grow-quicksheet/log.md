@@ -1,3 +1,11 @@
+## 2026-06-03 (docs: awesome-dotnet + awesome-cli-apps drafts)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted submission PRs for awesome-dotnet (21k ★, CLI section) and awesome-cli-apps (19k ★, Spreadsheet section). Both are high-traffic curated lists with permanent backlink value. Includes entry text, PR body, and submission strategy.
+- Bucket: D (network effects / directory submissions).
+- Outcome: Draft saved at `drafts/awesome-dotnet-and-cli-apps.md`.
+- Follow-up: User submits awesome-cli-apps first, then awesome-dotnet 1–2 weeks later. Variety next run → Bucket E or R.
+
 ## 2026-06-03 (ci: release workflow)
 
 - Stars: 0 (Δ 0).
