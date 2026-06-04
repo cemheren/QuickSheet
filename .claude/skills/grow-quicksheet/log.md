@@ -1,3 +1,11 @@
+## 2026-06-03 (research: terminal-tool influencers)
+
+- Stars: 0 (Δ 0).
+- Action: Researched top 10 terminal-tool influencers and signal-boosting channels. Identified newsletters (Terminal Trove, Console.dev), key individuals (Charm team, ThePrimeagen, Hanselman, rothgar), and submission processes.
+- Bucket: R (deep research).
+- Outcome: Research brief saved at `research/terminal-tool-influencers.md`.
+- Follow-up: (1) User captures screenshot → submit to Terminal Trove. (2) Draft Console.dev submission description (no image needed). (3) Queue awesome-tuis PR after screenshot. Variety next run → Bucket A, C, or E.
+
 ## 2026-06-03 (ci: release workflow)
 
 - Stars: 0 (Δ 0).
