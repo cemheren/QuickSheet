@@ -1,3 +1,11 @@
+## 2026-06-03 (draft: Console.dev submission)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted Console.dev newsletter submission (30k+ subscriber dev-tool newsletter). Includes short description for form, expanded editorial pitch, category tags, and install snippet. No image required by their process.
+- Bucket: D (network effects / discoverability).
+- Outcome: Draft saved at `drafts/consoledev-submission.md`, commit 6b5fdda.
+- Follow-up: User submits at https://console.dev/submit after next release with binary assets. Variety next run → Bucket E or A.
+
 ## 2026-06-03 (research: terminal-tool influencers)
 
 - Stars: 0 (Δ 0).
