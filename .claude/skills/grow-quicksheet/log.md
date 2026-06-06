@@ -1,3 +1,11 @@
+## 2026-06-05 (docs: for-dms landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` audience landing page for TTRPG DMs/GMs + `examples/dm-screen.csv`. Cross-links `roll` and `init` extensions. Updated README audience guide line.
+- Bucket: A (product polish).
+- Outcome: PR #306.
+- Follow-up: Variety next run → Bucket D or C. r/dnd + r/rpg draft angle now has a landing page to link to.
+
 ## 2026-06-05 (feat: quicksheet-books-ext)
 
 - Stars: 0 (Δ 0).
