@@ -1,0 +1,7 @@
+PALETTE,CONVERT,CLIENTS,DEADLINE,STATUS,LAUNCHERS
+c:cyan: Brand Colors,,c:yellow: Project,c:yellow: Due,c:yellow: Status,c:yellow: Tools
+color: #1a1a2e,unit: 8.5in to cm,Logo redesign – Acme,2026-06-15,c:green: delivered,r: gimp
+color: #16213e,unit: 11in to cm,Album art – Nova,2026-06-22,c:red: in progress,r: blender
+color: #0f3460,unit: 300dpi,UI kit – StartupCo,2026-07-01,pending,r: inkscape
+color: #e94560,unit: 210mm to in,Poster – GalleryX,2026-07-10,c:yellow: sketching,r: code ~/Projects
+color: palette #e94560,,,,, https://www.figma.com
