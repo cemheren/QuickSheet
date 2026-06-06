@@ -1,3 +1,11 @@
+## 2026-06-06 (docs: DM audience landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` audience landing page targeting TTRPG dungeon masters, plus `examples/dm-dashboard.csv` starter sheet. Updated README audience-guides line to include the new link.
+- Bucket: A (product polish / audience landing page).
+- Outcome: PR #306 updated (commit 732ea8c).
+- Follow-up: Variety next → Bucket C or D. Remaining audience page: `for-artists.md`. Consider drafting r/unixporn TTRPG-rice post (Bucket C) once roll:/init: are featured.
+
 ## 2026-06-06 (feat: --info flag with file stats)
 
 - Stars: 0 (Δ 0).
