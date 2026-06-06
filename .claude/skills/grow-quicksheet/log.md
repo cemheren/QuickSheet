@@ -1,3 +1,11 @@
+## 2026-06-06 (docs: star CTA in README)
+
+- Stars: 0 (Δ 0).
+- Action: Added a subtle blockquote CTA after the audience-specific guides section encouraging visitors to star the repo. Placed after value prop + Quick Start so it appears once the reader already understands the project.
+- Bucket: A (product polish).
+- Outcome: PR #327.
+- Follow-up: Variety next → Bucket F (health: or roll: extension) or Bucket D (awesome-list draft). #321 still blocked on #311 merge.
+
 ## 2026-06-06 (feat: stdin pipe support)
 
 - Stars: 0 (Δ 0).
