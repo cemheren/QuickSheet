@@ -14,7 +14,7 @@ The data is a CSV file. Cells can run shell commands. Same file on Windows or Li
 ![Linux](https://img.shields.io/badge/platform-Linux-FCC624?logo=linux&logoColor=black)
 ![GitHub release](https://img.shields.io/github/v/release/cemheren/QuickSheet?color=green)
 ![Zero Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)
-![Extensions](https://img.shields.io/badge/extensions-69%2B-orange)
+![Extensions](https://img.shields.io/badge/extensions-70%2B-orange)
 ![Cell prefixes](https://img.shields.io/badge/cell_prefixes-9-blue)
 
 ## Why this exists
@@ -24,7 +24,7 @@ Most developers have a second monitor — or at least a desktop — that shows a
 - **Always-on scratchpad.** Click anywhere on the desktop to jot a note. No window to find, no app to open. Autosaves every 5 seconds.
 - **App launcher.** Prefix a cell with `r: code .` and hit Enter. Multi-select cells to launch your whole morning stack in one keystroke.
 - **Link dashboard.** Paste URLs into cells. They're highlighted and open on Enter — a personal start page that lives behind your windows.
-- **Live data.** Column sums, sparklines, inline subprocesses (`i: top`), and 69+ extensions for weather, stocks, RSS, system monitoring, and more.
+- **Live data.** Column sums, sparklines, inline subprocesses (`i: top`), and 70+ extensions for weather, stocks, RSS, system monitoring, and more.
 - **Zero dependencies.** Clone → `dotnet build` → run. No NuGet packages, no npm, no Docker. The entire supply chain is the .NET SDK.
 
 If you spend your day in a terminal or IDE and want your desktop to *do* something, QuickSheet is for you.
@@ -231,6 +231,7 @@ tls: github.com, 1, 4
 | `caniuse:` | Browser compat lookup via caniuse-db — `caniuse: css-grid` · `caniuse: flexbox` · `caniuse: webassembly`. Shows support across Chrome/Firefox/Safari/Edge + usage %. No API key. | `ext: github:Deskworks/quicksheet-caniuse` |
 | `gem:` | Ruby gem lookup via rubygems.org — version, total downloads, authors, license, homepage, description. `gem: rails` (detail) · `gem: search json parser` (top 5). No API key. | `ext: github:Deskworks/quicksheet-rubygems` |
 | `hackage:` | Haskell package lookup from Hackage — `hackage: aeson` (version, synopsis, author, category, license, homepage) · `hackage: search json` (top results). No API key. | `ext: github:Deskworks/quicksheet-hackage` |
+| `books:` | Book lookup via Open Library — title, author, year, publisher, pages. `books: Dune` (detail) · `books: search Tolkien` (table) · `books: 978-0-13-468599-1` (ISBN). Free, no API key. | `ext: github:cemheren/quicksheet-books-ext` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 

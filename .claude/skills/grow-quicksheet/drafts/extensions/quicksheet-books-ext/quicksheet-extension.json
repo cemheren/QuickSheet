@@ -1,0 +1,8 @@
+{
+  "name": "books",
+  "version": "1.0.0",
+  "prefix": "books",
+  "description": "Book lookup via Open Library — title, author, year, publisher, pages. Free API, no key needed.",
+  "entry": "dotnet run --project BooksExtension.csproj",
+  "minProtocolVersion": 1
+}
