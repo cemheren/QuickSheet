@@ -1,3 +1,11 @@
+## 2026-06-05 (drafts: Console.dev submission)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted Console.dev newsletter submission (30k+ dev subscribers). Includes tool name, URL, short/long descriptions, key features, category tags, and submitter notes. No screenshot required for this channel.
+- Bucket: D (network effects / directory submissions).
+- Outcome: Draft saved at `drafts/console-dev-submission.md`, committed directly to main (skill-only file).
+- Follow-up: User submits at https://console.dev/submit. Variety next run → Bucket E or F. Terminal Trove submission still blocked on screenshot.
+
 ## 2026-06-05 (feat: --sample N flag)
 
 - Stars: 0 (Δ 0).
