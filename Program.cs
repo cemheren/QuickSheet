@@ -118,6 +118,63 @@ public class Program
             return;
         }
 
+        int sampleIdx = Array.IndexOf(args, "--sample");
+        if (sampleIdx >= 0)
+        {
+            if (csvPath == null || sampleIdx + 1 >= args.Length)
+            {
+                Console.Error.WriteLine("Usage: ExcelConsole <input.csv> --sample <N>");
+                Environment.Exit(2);
+                return;
+            }
+            if (!int.TryParse(args[sampleIdx + 1], out int sampleN) || sampleN < 1)
+            {
+                Console.Error.WriteLine("--sample requires a positive integer.");
+                Environment.Exit(2);
+                return;
+            }
+            if (!File.Exists(csvPath))
+            {
+                Console.Error.WriteLine($"Input CSV not found: {csvPath}");
+                Environment.Exit(1);
+                return;
+            }
+
+            // Quote-aware CSV row splitting (handles embedded newlines in quoted fields).
+            var allRows = ParseCsvRows(File.ReadAllText(csvPath));
+            if (allRows.Count == 0)
+            {
+                return;
+            }
+
+            // First row is header; rest are data.
+            Console.WriteLine(allRows[0]);
+            if (allRows.Count <= 1)
+            {
+                return;
+            }
+
+            var dataRows = allRows.GetRange(1, allRows.Count - 1);
+            if (sampleN >= dataRows.Count)
+            {
+                foreach (var row in dataRows)
+                    Console.WriteLine(row);
+            }
+            else
+            {
+                // Fisher-Yates partial shuffle to pick N random rows.
+                var rng = new Random();
+                for (int i = 0; i < sampleN; i++)
+                {
+                    int j = rng.Next(i, dataRows.Count);
+                    (dataRows[i], dataRows[j]) = (dataRows[j], dataRows[i]);
+                }
+                for (int i = 0; i < sampleN; i++)
+                    Console.WriteLine(dataRows[i]);
+            }
+            return;
+        }
+
         int jsonIdx = Array.IndexOf(args, "--export-json");
         if (jsonIdx >= 0)
         {
@@ -255,6 +312,7 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv> --sample <N>               Headless: output header + N random rows");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
@@ -270,6 +328,42 @@ public class Program
         Console.WriteLine();
         Console.WriteLine("Range references work inside text: {A1::C10}");
         Console.WriteLine("Tour: docs/tour.md · Issues: github.com/cemheren/QuickSheet/issues");
+    }
+
+    /// <summary>
+    /// Splits CSV text into logical rows, respecting quoted fields with embedded newlines.
+    /// </summary>
+    private static List<string> ParseCsvRows(string text)
+    {
+        var rows = new List<string>();
+        int start = 0;
+        bool inQuotes = false;
+        for (int i = 0; i < text.Length; i++)
+        {
+            char ch = text[i];
+            if (ch == '"')
+            {
+                inQuotes = !inQuotes;
+            }
+            else if (!inQuotes && (ch == '\n' || ch == '\r'))
+            {
+                string row = text[start..i];
+                if (row.Length > 0)
+                    rows.Add(row);
+                // Skip \r\n pair.
+                if (ch == '\r' && i + 1 < text.Length && text[i + 1] == '\n')
+                    i++;
+                start = i + 1;
+            }
+        }
+        // Trailing row without final newline.
+        if (start < text.Length)
+        {
+            string row = text[start..];
+            if (row.Length > 0)
+                rows.Add(row);
+        }
+        return rows;
     }
 
 #if PLATFORM_WINDOWS
