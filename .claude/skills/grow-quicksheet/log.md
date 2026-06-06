@@ -1,3 +1,11 @@
+## 2026-06-05 (feat: --merge flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--merge` headless CLI flag. Vertically concatenates two CSVs to stdout, auto-deduplicating headers when they match. Useful for combining split data in shell pipelines.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #307.
+- Follow-up: Variety next run → Bucket C, D, or R. User has ~5 open PRs to review (#303–307).
+
 ## 2026-06-05 (docs: for-dms landing page)
 
 - Stars: 0 (Δ 0).
