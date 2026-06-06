@@ -1,3 +1,11 @@
+## 2026-06-05 (feat: --sample N flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--sample N` headless CLI flag. Outputs CSV header + N random data rows using Fisher-Yates partial shuffle. Quote-aware (handles embedded newlines in quoted fields). Useful for quick data exploration in shell pipelines.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #304.
+- Follow-up: Variety next run → Bucket C, D, or R. User has ~2 open PRs to review (#303, #304).
+
 ## 2026-06-03 (feat: quicksheet-rss-ext)
 
 - Stars: 0 (Δ 0).
