@@ -1,3 +1,11 @@
+## 2026-06-03 (feat: quicksheet-rss-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Created `quicksheet-rss-ext` — RSS/Atom feed reader extension. Parses RSS 2.0 + Atom via built-in System.Xml, supports multi-feed aggregation via file, sorts by date. Makes the existing README "RSS" claim truthful. Cross-linked in README, tour.md, extensions.md.
+- Bucket: F (vertical extension).
+- Outcome: Repo created at `cemheren/quicksheet-rss-ext`. PR #303 for cross-links.
+- Follow-up: Variety next run → Bucket C or E. Consider r/selfhosted draft mentioning RSS for homelab dashboard angle.
+
 ## 2026-06-03 (research: terminal-tool influencers)
 
 - Stars: 0 (Δ 0).
