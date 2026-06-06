@@ -1,3 +1,11 @@
+## 2026-06-06 (feat: quicksheet-tz-ext timezone converter)
+
+- Stars: 0 (Δ 0).
+- Action: Scaffolded and published `cemheren/quicksheet-tz-ext` — timezone converter for distributed teams. Converts input time (e.g. `tz: 3pm EST`) to UTC/London/Berlin/Tokyo/Sydney. Added to `docs/extensions.md`.
+- Bucket: F (vertical extension).
+- Outcome: Repo created at https://github.com/cemheren/quicksheet-tz-ext. Cross-link PR #330.
+- Follow-up: Variety next → Bucket C or D. Consider r/unixporn post draft featuring time-related extensions (worldtm + tz combo).
+
 ## 2026-06-06 (docs: DM audience landing page)
 
 - Stars: 0 (Δ 0).
