@@ -1,3 +1,11 @@
+## 2026-06-06 (research: launch sequencing)
+
+- Stars: 0 (Δ 0).
+- Action: Researched GitHub Trending algorithm mechanics, star velocity thresholds, optimal HN/Reddit posting times, and multi-platform launch coordination. Distilled into a concrete launch-day playbook with timeline.
+- Bucket: R (deep research).
+- Outcome: Research brief saved at `research/launch-sequencing.md`.
+- Follow-up: Key blocker identified — demo GIF/screenshot needed before any launch day. User should: (1) merge 13 pending PRs, (2) capture a demo GIF, (3) pick a Tuesday for coordinated launch. C# trending threshold is very achievable (~15 stars/day).
+
 ## 2026-06-06 (docs: for-artists landing page)
 
 - Stars: 0 (Δ 0).
