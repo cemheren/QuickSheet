@@ -1,3 +1,11 @@
+## 2026-06-06 (docs: for-writers landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-writers.md` audience landing page for writers, novelists, academics, and researchers. Showcases define, thes, cite, arxiv extensions as a writing toolkit. Added `examples/writer-dashboard.csv` starter sheet + README cross-link.
+- Bucket: A (product polish).
+- Outcome: PR #313.
+- Follow-up: Variety next run → Bucket F or E. All queued backlog items are shipped; consider new extension verticals (legal: case/stat, or yield: dividend) or tackling issue #158 if user wants to scope it smaller.
+
 ## 2026-06-06 (feat: --info flag)
 
 - Stars: 0 (Δ 0).
