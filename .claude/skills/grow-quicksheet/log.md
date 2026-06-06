@@ -1,3 +1,11 @@
+## 2026-06-06 (docs: for-artists landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-artists.md` audience landing page for freelance illustrators, graphic designers, 3D artists, UI/UX designers, and photographers. Showcases color extension (palette/conversion), unit extension (print measurements), color-coded client tracking, and quick-launch cells. Added `examples/artist-dashboard.csv` starter sheet + README cross-link.
+- Bucket: A (product polish).
+- Outcome: PR #315.
+- Follow-up: Variety next run → Bucket C, D, or F. All queued audience landing pages (homelab, traders, sre, students, dms, writers, artists) now shipped. Consider new extension vertical or Bucket R research.
+
 ## 2026-06-06 (feat: --sort flag)
 
 - Stars: 0 (Δ 0).
