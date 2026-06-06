@@ -1,3 +1,11 @@
+## 2026-06-06 (feat: --info flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--info` headless CLI flag. Prints CSV metadata (row count, column count, headers, non-empty cell percentage). Proper CSV parsing with quote handling.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #311.
+- Follow-up: Variety next run → Bucket C, D, or R. User has ~9 open PRs (#303–311).
+
 ## 2026-06-06 (feat: quicksheet-pw-ext)
 
 - Stars: 0 (Δ 0).
