@@ -1,3 +1,11 @@
+## 2026-06-06 (feat: quicksheet-pw-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Created `quicksheet-pw-ext` — secure password/PIN/hex/passphrase generator. CSPRNG-backed, entropy indicator, zero network. Cross-linked in README + extensions.md.
+- Bucket: F (vertical extension).
+- Outcome: Repo created at `cemheren/quicksheet-pw-ext`. PR #310 for cross-links. (Also created `cemheren/quicksheet-ip-ext` but discovered `Deskworks/quicksheet-ipinfo` already covers that slot — ip-ext is orphaned, couldn't delete due to token scope.)
+- Follow-up: Variety next run → Bucket A, C, or D. User has 8 open PRs (#303–310) to review.
+
 ## 2026-06-06 (ci: release workflow)
 
 - Stars: 0 (Δ 0).
