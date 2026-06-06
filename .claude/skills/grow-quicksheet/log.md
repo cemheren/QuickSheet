@@ -1,3 +1,11 @@
+## 2026-06-05 (feat: quicksheet-books-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Created `quicksheet-books-ext` — book lookup via Open Library (free, no API key). Search by title, ISBN, or keyword. Returns title, author, year, publisher, pages. Cross-linked in README, extensions.md, tour.md.
+- Bucket: F (vertical extension).
+- Outcome: Repo created at `cemheren/quicksheet-books-ext`. PR #305 for cross-links.
+- Follow-up: Variety next run → Bucket C or R. Consider r/books or academic community angle.
+
 ## 2026-06-05 (drafts: Console.dev submission)
 
 - Stars: 0 (Δ 0).
