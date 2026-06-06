@@ -163,6 +163,79 @@ public class Program
             return;
         }
 
+        int sortIdx = Array.IndexOf(args, "--sort");
+        if (sortIdx >= 0)
+        {
+            if (csvPath == null || sortIdx + 1 >= args.Length)
+            {
+                Console.Error.WriteLine("Usage: ExcelConsole <input.csv> --sort <column> [--desc]");
+                Console.Error.WriteLine("  <column> is a 0-based index or a header name.");
+                Environment.Exit(2);
+                return;
+            }
+            string sortCol = args[sortIdx + 1];
+            bool descending = args.Contains("--desc");
+            if (!File.Exists(csvPath))
+            {
+                Console.Error.WriteLine($"Input CSV not found: {csvPath}");
+                Environment.Exit(1);
+                return;
+            }
+
+            var allLines = File.ReadAllLines(csvPath);
+            if (allLines.Length == 0)
+            {
+                return;
+            }
+
+            var parsed = allLines.Select(line => ParseCsvLine(line)).ToList();
+            int colIdx;
+            if (int.TryParse(sortCol, out int parsedIdx))
+            {
+                colIdx = parsedIdx;
+            }
+            else
+            {
+                // Match by header name (first row)
+                colIdx = -1;
+                for (int i = 0; i < parsed[0].Length; i++)
+                {
+                    if (string.Equals(parsed[0][i], sortCol, StringComparison.OrdinalIgnoreCase))
+                    {
+                        colIdx = i;
+                        break;
+                    }
+                }
+                if (colIdx < 0)
+                {
+                    Console.Error.WriteLine($"Column not found: {sortCol}");
+                    Console.Error.WriteLine($"Available columns: {string.Join(", ", parsed[0])}");
+                    Environment.Exit(1);
+                    return;
+                }
+            }
+
+            // Output header row as-is, sort data rows
+            Console.WriteLine(allLines[0]);
+            var dataRows = allLines.Skip(1).Zip(parsed.Skip(1), (raw, fields) => (raw, fields));
+            var sorted = dataRows.OrderBy(r =>
+            {
+                string val = colIdx < r.fields.Length ? r.fields[colIdx] : "";
+                if (double.TryParse(val, System.Globalization.NumberStyles.Any,
+                    System.Globalization.CultureInfo.InvariantCulture, out double num))
+                    return (object)num;
+                return val;
+            }, new MixedComparer());
+            var result = descending
+                ? (System.Collections.Generic.IEnumerable<(string raw, string[] fields)>)sorted.Reverse()
+                : sorted;
+            foreach (var row in result)
+            {
+                Console.WriteLine(row.raw);
+            }
+            return;
+        }
+
 #if PLATFORM_WINDOWS
         HideConsoleWindow();
         using var host = new ExcelConsole.Platform.Windows.WindowsDesktopHost();
@@ -255,6 +328,7 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv> --sort <col> [--desc]      Headless: sort CSV by column (index or name)");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
@@ -287,4 +361,53 @@ public class Program
     [DllImport("user32.dll")]
     private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 #endif
+
+    private static string[] ParseCsvLine(string line)
+    {
+        var fields = new List<string>();
+        var current = new System.Text.StringBuilder();
+        bool inQuotes = false;
+        for (int i = 0; i < line.Length; i++)
+        {
+            char ch = line[i];
+            if (ch == '"')
+            {
+                if (inQuotes && i + 1 < line.Length && line[i + 1] == '"')
+                {
+                    current.Append('"');
+                    i++;
+                }
+                else
+                {
+                    inQuotes = !inQuotes;
+                }
+            }
+            else if (ch == ',' && !inQuotes)
+            {
+                fields.Add(current.ToString());
+                current.Clear();
+            }
+            else
+            {
+                current.Append(ch);
+            }
+        }
+        fields.Add(current.ToString());
+        return fields.ToArray();
+    }
+
+    private class MixedComparer : System.Collections.Generic.IComparer<object>
+    {
+        public int Compare(object? x, object? y)
+        {
+            if (x is double dx && y is double dy)
+                return dx.CompareTo(dy);
+            if (x is double && y is string)
+                return -1; // numbers before strings
+            if (x is string && y is double)
+                return 1;
+            return string.Compare(x?.ToString() ?? "", y?.ToString() ?? "",
+                StringComparison.OrdinalIgnoreCase);
+        }
+    }
 }
