@@ -163,6 +163,49 @@ public class Program
             return;
         }
 
+        int mergeIdx = Array.IndexOf(args, "--merge");
+        if (mergeIdx >= 0)
+        {
+            if (csvPath == null || mergeIdx + 1 >= args.Length)
+            {
+                Console.Error.WriteLine("Usage: ExcelConsole <file1.csv> --merge <file2.csv>");
+                Environment.Exit(2);
+                return;
+            }
+            string secondPath = args[mergeIdx + 1];
+            if (!File.Exists(csvPath))
+            {
+                Console.Error.WriteLine($"Input CSV not found: {csvPath}");
+                Environment.Exit(1);
+                return;
+            }
+            if (!File.Exists(secondPath))
+            {
+                Console.Error.WriteLine($"Second CSV not found: {secondPath}");
+                Environment.Exit(1);
+                return;
+            }
+
+            var firstLines = File.ReadAllLines(csvPath);
+            var secondLines = File.ReadAllLines(secondPath);
+
+            // Output all lines from the first file.
+            foreach (var line in firstLines)
+                Console.WriteLine(line);
+
+            // Skip the header of the second file if it matches the first file's header.
+            int startIdx = 0;
+            if (firstLines.Length > 0 && secondLines.Length > 0
+                && firstLines[0] == secondLines[0])
+            {
+                startIdx = 1;
+            }
+            for (int i = startIdx; i < secondLines.Length; i++)
+                Console.WriteLine(secondLines[i]);
+
+            return;
+        }
+
 #if PLATFORM_WINDOWS
         HideConsoleWindow();
         using var host = new ExcelConsole.Platform.Windows.WindowsDesktopHost();
@@ -255,6 +298,7 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file1.csv> --merge <file2.csv>       Headless: vertically concatenate two CSVs (stdout)");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
