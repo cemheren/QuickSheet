@@ -1,3 +1,11 @@
+## 2026-06-06 (feat: --info flag with file stats)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--info` headless flag showing file size, last-modified, rows, columns, headers, non-empty cell %. Combines issues #311 and #321 into one PR. Made `ParseCsvLine` internal for reuse.
+- Bucket: E (quality-of-life feature, issue-driven).
+- Outcome: PR #329.
+- Follow-up: User merges. Variety next → Bucket C or D.
+
 ## 2026-06-06 (docs: extensions directory update)
 
 - Stars: 0 (Δ 0).
