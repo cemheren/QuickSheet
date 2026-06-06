@@ -26,6 +26,27 @@ public class Program
 
         string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
 
+        // Support reading CSV from stdin via "-" as the file argument.
+        string? stdinTempPath = null;
+        if (csvPath == "-")
+        {
+            if (Console.IsInputRedirected)
+            {
+                stdinTempPath = Path.GetTempFileName();
+                File.WriteAllText(stdinTempPath, Console.In.ReadToEnd());
+                csvPath = stdinTempPath;
+            }
+            else
+            {
+                Console.Error.WriteLine("Error: '-' specified but no input piped to stdin.");
+                Environment.Exit(2);
+                return;
+            }
+        }
+
+        try
+        {
+
         int exportIdx = Array.IndexOf(args, "--export-md");
         if (exportIdx >= 0)
         {
@@ -163,6 +184,14 @@ public class Program
             return;
         }
 
+        // Stdin pipe ("-") is only supported for headless export modes.
+        if (stdinTempPath != null)
+        {
+            Console.Error.WriteLine("Error: stdin pipe ('-') is only supported with --export-md, --export-html, or --export-json.");
+            Environment.Exit(2);
+            return;
+        }
+
 #if PLATFORM_WINDOWS
         HideConsoleWindow();
         using var host = new ExcelConsole.Platform.Windows.WindowsDesktopHost();
@@ -183,6 +212,13 @@ public class Program
 #else
         Console.Error.WriteLine("QuickSheet is only supported on Windows and Linux (X11).");
 #endif
+
+        } // end try
+        finally
+        {
+            if (stdinTempPath != null && File.Exists(stdinTempPath))
+                File.Delete(stdinTempPath);
+        }
     }
 
     private const string Version = "0.36.0";
@@ -258,6 +294,10 @@ public class Program
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
+        Console.WriteLine();
+        Console.WriteLine("Use '-' as the input file to read CSV from stdin (headless modes only):");
+        Console.WriteLine("  cat data.csv | ExcelConsole - --export-md -");
+        Console.WriteLine("  curl https://example.com/data.csv | ExcelConsole - --export-json output.json");
         Console.WriteLine();
         Console.WriteLine("Cell prefixes:");
         Console.WriteLine("  r: <cmd>          Runnable command. Press Enter to launch.");
