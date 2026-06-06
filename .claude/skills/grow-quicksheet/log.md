@@ -1,3 +1,11 @@
+## 2026-06-06 (feat: stdin pipe support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `-` as file argument to read CSV from stdin (issue #320). Reads stdin into temp file, cleanup via finally block. Works with all headless export modes. Updated help text with examples.
+- Bucket: E (quality-of-life feature, issue-driven).
+- Outcome: PR #325.
+- Follow-up: #321 (file size in --info) blocked on #311 merge. Variety next: Bucket C, D, or F.
+
 ## 2026-06-06 (feat: --delimiter flag)
 
 - Stars: 0 (Δ 0).
