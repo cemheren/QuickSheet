@@ -26,6 +26,12 @@ public class Program
 
         string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
 
+        if (args.Contains("--info"))
+        {
+            PrintInfo(csvPath);
+            return;
+        }
+
         int exportIdx = Array.IndexOf(args, "--export-md");
         if (exportIdx >= 0)
         {
@@ -246,6 +252,73 @@ public class Program
         Console.WriteLine($"QuickSheet {Version} ({platform}, .NET {Environment.Version})");
     }
 
+    private static void PrintInfo(string? csvPath)
+    {
+        if (csvPath == null || !File.Exists(csvPath))
+        {
+            Console.Error.WriteLine(csvPath == null
+                ? "Usage: ExcelConsole <file.csv> --info"
+                : $"File not found: {csvPath}");
+            Environment.Exit(1);
+            return;
+        }
+
+        var fileInfo = new FileInfo(csvPath);
+        long bytes = fileInfo.Length;
+        string size = bytes switch
+        {
+            < 1024 => $"{bytes} B",
+            < 1024 * 1024 => $"{bytes / 1024.0:F1} KB",
+            _ => $"{bytes / (1024.0 * 1024.0):F1} MB"
+        };
+
+        var lines = File.ReadAllLines(csvPath);
+        int rowCount = lines.Length;
+        int colCount = 0;
+        int nonEmpty = 0;
+
+        foreach (var line in lines)
+        {
+            int n = 1;
+            bool inQuotes = false;
+            foreach (char ch in line)
+            {
+                if (ch == '"') inQuotes = !inQuotes;
+                else if (ch == ',' && !inQuotes) n++;
+            }
+            if (n > colCount) colCount = n;
+        }
+
+        // Count non-empty cells
+        foreach (var line in lines)
+        {
+            var fields = GridManager.ParseCsvLine(line);
+            foreach (var f in fields)
+                if (!string.IsNullOrWhiteSpace(f)) nonEmpty++;
+        }
+
+        int totalCells = rowCount * colCount;
+        int pct = totalCells > 0 ? (int)Math.Round(100.0 * nonEmpty / totalCells) : 0;
+
+        // Extract headers from first row
+        string headers = "(empty)";
+        if (lines.Length > 0)
+        {
+            var firstRow = GridManager.ParseCsvLine(lines[0]);
+            var nonEmptyHeaders = firstRow.Where(h => !string.IsNullOrWhiteSpace(h)).ToList();
+            if (nonEmptyHeaders.Count > 0)
+                headers = string.Join(", ", nonEmptyHeaders);
+        }
+
+        Console.WriteLine($"File:       {csvPath}");
+        Console.WriteLine($"Size:       {size}");
+        Console.WriteLine($"Modified:   {fileInfo.LastWriteTime:yyyy-MM-dd HH:mm:ss}");
+        Console.WriteLine($"Rows:       {rowCount}");
+        Console.WriteLine($"Columns:    {colCount}");
+        Console.WriteLine($"Headers:    {headers}");
+        Console.WriteLine($"Non-empty:  {nonEmpty} / {totalCells} ({pct}%)");
+    }
+
     private static void PrintHelp()
     {
         Console.WriteLine("QuickSheet — interactive spreadsheet as your desktop wallpaper");
@@ -255,6 +328,7 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv> --info                     Show CSV file metadata and statistics");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");

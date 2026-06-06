@@ -718,7 +718,7 @@ public class GridManager
         return field;
     }
 
-    private static List<string> ParseCsvLine(string line)
+    internal static List<string> ParseCsvLine(string line)
     {
         var fields = new List<string>();
         int i = 0;
