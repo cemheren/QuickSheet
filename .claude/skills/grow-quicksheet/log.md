@@ -1,3 +1,11 @@
+## 2026-06-06 (docs: extensions directory update)
+
+- Stars: 0 (Δ 0).
+- Action: Added 13 missing cemheren/ extension repos to docs/extensions.md (pw, books, ollama, payroll, init, salestax, hashgen, ai-costs, words, nuget, maven, unitconv). Updated badge from 69+ to 80+.
+- Bucket: A (product polish).
+- Outcome: PR #328.
+- Follow-up: Variety next → Bucket C or R. All extension repos now cross-linked. Publication remains bottleneck.
+
 ## 2026-06-06 (docs: star CTA in README)
 
 - Stars: 0 (Δ 0).
