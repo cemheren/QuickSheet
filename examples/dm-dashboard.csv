@@ -1,0 +1,20 @@
+Initiative,Name,AC,HP,Max HP,Status,Attack Roll
+init: add Fighter 18 Wizard 15 Rogue 20 Goblin 12 Goblin 9 Ogre 7,,,,,roll: 1d20+5,
+,Fighter,18,45,45,,roll: 1d8+4
+,Rogue,15,32,32,,roll: 1d6+3
+,Wizard,14,22,22,,roll: 1d20+7
+,Goblin A,13,7,7,,roll: 1d6+2
+,Goblin B,13,7,7,,roll: 1d6+2
+,Ogre,11,59,59,,roll: 2d8+4
+,,,,,,
+Session Notes,,,,,,
+Location: Cavern beneath the old mill,,,,,,
+Quest: Retrieve the stolen amulet,,,,,,
+NPC: Thalia (merchant who hired party),,,,,,
+Loot: 120 gp + potion of healing,,,,,,
+,,,,,,
+Quick Rolls,,,,,,
+Ability check,roll: 1d20,,,,,
+Damage (greatsword),roll: 2d6+4,,,,,
+Percentile,roll: 1d100,,,,,
+Wild magic,roll: 1d100,,,,,
