@@ -72,6 +72,18 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `caniuse` | Browser Compat    | Can I Use browser compatibility lookup via caniuse-db. Shows support status for CSS/HTML/JS features across Chrome, Firefox, Safari, Edge, Opera, Samsung, iOS Safari. Usage: `caniuse: css-grid` · `caniuse: flexbox` · `caniuse: webassembly`. Usage %, spec link, notes. 1h cache, no API key. | [`quicksheet-caniuse`](https://github.com/Deskworks/quicksheet-caniuse) |
 | `gem`     | Ruby Gem Lookup   | Ruby gem info and search via rubygems.org. Version, total downloads, authors, license, Ruby requirement, homepage, description. `gem: rails` (detail), `gem: search json parser` (top 5). No API key, 30-min cache, zero NuGet. | [`quicksheet-rubygems`](https://github.com/Deskworks/quicksheet-rubygems) |
 | `hackage` | Haskell Packages  | Haskell package lookup from Hackage. `hackage: aeson` shows latest version, synopsis, author, category, license, and homepage. `hackage: search json` lists top matching packages. No API key, 30-min cache, zero NuGet. | [`quicksheet-hackage`](https://github.com/Deskworks/quicksheet-hackage) |
+| `pw`      | Password Generator | Secure password/PIN/passphrase generation — CSPRNG, configurable length, multiple formats (alpha, hex, passphrase). Zero network. | [`quicksheet-pw-ext`](https://github.com/cemheren/quicksheet-pw-ext) |
+| `books`   | Book Lookup       | Search books by title or ISBN via Open Library — author, year, pages, subjects. No API key. | [`quicksheet-books-ext`](https://github.com/cemheren/quicksheet-books-ext) |
+| `ollama`  | Local AI (Ollama) | Private AI queries via local Ollama — ask questions, summarize, translate from cells. No API key, no network egress. | [`quicksheet-ollama`](https://github.com/cemheren/quicksheet-ollama) |
+| `payroll` | Payroll Estimator | US payroll withholding — federal tax, Social Security, Medicare per pay period (2025 IRS brackets) | [`quicksheet-payroll-ext`](https://github.com/cemheren/quicksheet-payroll-ext) |
+| `init`    | Initiative Tracker | TTRPG combat initiative — sort combatants, cycle turns, track rounds. Pairs with `roll:` for a full GM toolkit. | [`quicksheet-init-ext`](https://github.com/cemheren/quicksheet-init-ext) |
+| `tax`     | State Sales Tax   | US state sales tax rates for all 50 states + DC — instant lookup on your desktop | [`quicksheet-salestax-ext`](https://github.com/cemheren/quicksheet-salestax-ext) |
+| `hash`    | Hash Generator    | Generate MD5, SHA1, SHA256, SHA512, CRC32 checksums from text or file paths. Offline, instant. | [`quicksheet-hashgen`](https://github.com/cemheren/quicksheet-hashgen) |
+| `ai`      | AI Cost Tracker   | Monitor AI API token usage and costs — OpenAI, Anthropic, Gemini, DeepSeek budget tracking on your wallpaper | [`quicksheet-ai-costs`](https://github.com/cemheren/quicksheet-ai-costs) |
+| `words`   | Text Analysis     | Word count, reading time, readability grade, character count for writers | [`quicksheet-words`](https://github.com/cemheren/quicksheet-words) |
+| `nuget`   | NuGet Lookup      | .NET package info — version, downloads, license, dotnet CLI install command | [`quicksheet-nuget`](https://github.com/cemheren/quicksheet-nuget) |
+| `mvn`     | Maven Lookup      | Maven Central package info — version, downloads, license, description | [`quicksheet-maven`](https://github.com/cemheren/quicksheet-maven) |
+| `unit`    | Unit Converter    | Universal unit conversion — length, weight, temp, data, speed, time, volume, area, pressure. Offline, no API key. | [`quicksheet-unitconv`](https://github.com/cemheren/quicksheet-unitconv) |
 
 ## Install
 
