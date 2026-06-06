@@ -1,3 +1,11 @@
+## 2026-06-06 (ci: release workflow)
+
+- Stars: 0 (Δ 0).
+- Action: Created `.github/workflows/release.yml` — publishes self-contained win-x64 + linux-x64 binaries on `v*` tag push. Single-file, no .NET SDK required to run. Matrix build, softprops/action-gh-release with auto release notes.
+- Bucket: E (quality-of-life / infrastructure).
+- Outcome: PR #308.
+- Follow-up: Once merged, user can `git tag v1.0.0 && git push origin v1.0.0` to cut first release. Unblocks Scoop/winget/AUR submissions. Variety next run → Bucket C, D, or F.
+
 ## 2026-06-05 (feat: --merge flag)
 
 - Stars: 0 (Δ 0).
@@ -1590,7 +1598,7 @@
 
 - **Live backlog (re-ranked after the c?:/timer revert):**
   Pre-flight: see standing rules above.
-  0. **Bucket E: `.github/workflows/release.yml`** — publish self-contained win-x64 + linux-x64 binaries on tag push. Unblocks Scoop/winget/AUR submissions. ~40 lines YAML, 1 file. See `research/package-manager-distribution.md`.
+  0. ~~**Bucket E: `.github/workflows/release.yml`**~~ — DONE (PR #308, 2026-06-06).
   Pre-flight rule for any item below: if you can't explain in one sentence *why this specific persona will install QuickSheet because of this* (not "it could be useful for everyone"), skip and pick something else.
   1. **Bucket F: `health:` HTTP-probe extension.** Reads `services.csv` (name,url,expected_status); fills a row of green/red dots. Homelab persona; writes its own r/selfhosted screenshot. New extension repo on user's account.
   2. **Bucket F: `leetcode:` + `gh:` user-streak combo.** Students persona; "CS-student flex bundle." Free APIs, lowest auth.
