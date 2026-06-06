@@ -1,0 +1,10 @@
+Chapter,Status,Words,Notes,,Language,,Research
+1 - The Arrival,🟢 Done,4200,Hook established,,def: ephemeral,,cite: 10.1145/3359591.3359737
+2 - The Market,🟡 Drafting,2800,Needs sensory detail,,def: liminal,,cite: 10.1038/s41586-020-2649-2
+3 - The Letter,⬜ Outline,0,Plot twist reveal,,thes: beautiful,,arxiv: attention is all you need
+4 - The Return,⬜ Not started,0,Mirror ch 1,,thes: said,,
+,,,,,,
+Characters,Role,Trait,First Appearance,,Quick Refs,
+Maren,Protagonist,Left-handed; scar,Ch 1,,ext: github:Deskworks/quicksheet-define-ext,
+Isa,Mentor,Speaks in questions,Ch 3,,ext: github:Deskworks/quicksheet-thes-ext,
+The Compact,Organization,Seven members,Ch 2,,ext: github:Deskworks/quicksheet-cite-ext,
