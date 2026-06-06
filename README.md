@@ -55,6 +55,8 @@ Using Claude Code, Copilot CLI, or Aider? `dotnet run --project ExcelConsole.csp
 
 Audience-specific guides: [for homelabbers](docs/for-homelab.md) (Plex / Pi-hole / *arr / Home Assistant) · [for traders](docs/for-traders.md) (P/L, watchlist, FX, news strip) · [for SREs & DevOps](docs/for-sre.md) (service health, k8s pods, TLS expiry) · [for students](docs/for-students.md) (coursework, budget, developer tools).
 
+> **Like what you see?** Give the repo a ⭐ — it helps others discover QuickSheet and lets us know the project is useful.
+
 ## A note on the code
 
 This is a side project, and a lot of it was written with AI assistance. The hard rule the project keeps is **zero NuGet dependencies** — all native interop (X11, WinForms, ConPTY) is hand-written P/Invoke. That keeps the supply-chain surface area minimal: clone, build, run.
