@@ -1,0 +1,8 @@
+{
+  "name": "pw",
+  "version": "1.0.0",
+  "prefix": "pw",
+  "description": "Secure password generator for QuickSheet",
+  "entry": "dotnet run --project PwExtension.csproj",
+  "minProtocolVersion": 1
+}

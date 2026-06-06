@@ -1,0 +1,8 @@
+{
+  "name": "ip",
+  "version": "1.0.0",
+  "prefix": "ip",
+  "description": "IP geolocation lookup (country, city, ISP) for QuickSheet",
+  "entry": "dotnet run --project IpExtension.csproj",
+  "minProtocolVersion": 1
+}

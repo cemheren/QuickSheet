@@ -231,6 +231,7 @@ tls: github.com, 1, 4
 | `caniuse:` | Browser compat lookup via caniuse-db — `caniuse: css-grid` · `caniuse: flexbox` · `caniuse: webassembly`. Shows support across Chrome/Firefox/Safari/Edge + usage %. No API key. | `ext: github:Deskworks/quicksheet-caniuse` |
 | `gem:` | Ruby gem lookup via rubygems.org — version, total downloads, authors, license, homepage, description. `gem: rails` (detail) · `gem: search json parser` (top 5). No API key. | `ext: github:Deskworks/quicksheet-rubygems` |
 | `hackage:` | Haskell package lookup from Hackage — `hackage: aeson` (version, synopsis, author, category, license, homepage) · `hackage: search json` (top results). No API key. | `ext: github:Deskworks/quicksheet-hackage` |
+| `pw:` | Password generator — secure passwords, PINs, hex, passphrases. CSPRNG, entropy indicator. Zero network. | `ext: github:cemheren/quicksheet-pw-ext` |
 
 See [docs/extensions.md](docs/extensions.md) for the full directory with descriptions and protocol docs.
 
