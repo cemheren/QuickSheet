@@ -1,3 +1,11 @@
+## 2026-06-06 (discoverability: good first issues)
+
+- Stars: 0 (Δ 0).
+- Action: Created 4 "good first issue" labeled issues (#318–#321) to get the repo indexed by goodfirstissue.dev, CodeTriage, and Up For Grabs. Issues: NO_COLOR env var support, --delimiter flag for TSV, stdin pipe support, --info file size/date.
+- Bucket: B (discoverability).
+- Outcome: Issues created — #318, #319, #320, #321.
+- Follow-up: Variety next run → Bucket C, D, or F. Consider "Add subtle star CTA in README" (queued item 1) or a new extension vertical.
+
 ## 2026-06-06 (research: cold-start launch playbook)
 
 - Stars: 0 (Δ 0).
@@ -1645,7 +1653,7 @@
   - **Generic-primitive justifications are not enough.** "Hits N/M personas" alone is not a green light — persona-shaped specifics are required.
 
 - **Launch-readiness actions (from cold-start research 2026-06-06):**
-  0. **Bucket B: Add 3–5 "good first issue" labels** — gets repo indexed by goodfirstissue.dev, CodeTriage, Up For Grabs. Skill can do autonomously.
+  0. ~~**Bucket B: Add 3–5 "good first issue" labels**~~ — DONE (issues #318–#321, 2026-06-06).
   1. **Bucket A: Add subtle star CTA in README** near Quick Start. Small PR.
   2. **HUMAN BLOCKER: Capture demo GIF** — skill cannot do this. Required before launch day.
   3. **HUMAN BLOCKER: Merge PR #308 + tag v1.0.0** — release workflow.
