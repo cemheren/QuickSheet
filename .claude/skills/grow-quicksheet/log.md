@@ -1,3 +1,11 @@
+## 2026-06-06 (feat: --delimiter flag)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--delimiter` / `-d` flag for headless modes (issue #319). Supports single-char delimiters, `\t`, and `tab`. Added delimiter param to `ParseCsvLine`/`LoadFromCsv`, extracted `CountMaxColumns` helper, improved positional arg parsing.
+- Bucket: E (quality-of-life feature, issue-driven).
+- Outcome: PR #324.
+- Follow-up: Tackle #320 (stdin pipe) or #321 (file size in --info, depends on #311 merge) next. Variety: consider Bucket C/D/F after.
+
 ## 2026-06-06 (feat: NO_COLOR support)
 
 - Stars: 0 (Δ 0).
