@@ -1,3 +1,11 @@
+## 2026-06-06 (feat: NO_COLOR support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented NO_COLOR environment variable support (issue #318). Added `TermOutput.cs` static helper class that checks NO_COLOR + stdout redirect. Applied color to `--version` (bold) and `--list-extensions` (green prefixes, dim versions) to give the feature teeth.
+- Bucket: E (quality-of-life feature, issue-driven).
+- Outcome: PR #323.
+- Follow-up: Tackle #321 (file size in --info) or #319 (--delimiter flag) next. Variety: consider Bucket C/D after.
+
 ## 2026-06-06 (research: cold-start launch playbook)
 
 - Stars: 0 (Δ 0).
