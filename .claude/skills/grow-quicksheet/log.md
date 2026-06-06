@@ -1,3 +1,11 @@
+## 2026-06-06 (feat: --sort flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--sort <column>` headless CLI flag. Sorts CSV rows by column name or 0-based index, with `--desc` for descending. Smart numeric/text comparison.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #314.
+- Follow-up: Variety next run → Bucket C, D, or F. Consider a new extension vertical (legal: case/stat) or audience landing page (for-students).
+
 ## 2026-06-06 (docs: for-writers landing page)
 
 - Stars: 0 (Δ 0).
