@@ -1,3 +1,11 @@
+## 2026-06-06 (research: cold-start launch playbook)
+
+- Stars: 0 (Δ 0).
+- Action: Researched cold-start tactics for 0-star repos. Synthesized timing, venue, conversion rates, and anti-patterns into `research/cold-start-launch-playbook.md`. Created `drafts/launch-day-checklist.md` — a step-by-step launch-day sequence (HN → Reddit → Twitter → awesome-lists) the human can execute on a Tuesday morning.
+- Bucket: R (deep research).
+- Outcome: Research saved at `research/cold-start-launch-playbook.md`; draft saved at `drafts/launch-day-checklist.md`.
+- Follow-up: Queue "good first issue" labels (skill can do autonomously next run). Repo is launch-ready pending: (1) demo GIF capture by human, (2) merge release workflow PR #308, (3) tag v1.0.0.
+
 ## 2026-06-06 (docs: for-artists landing page)
 
 - Stars: 0 (Δ 0).
@@ -1635,6 +1643,13 @@
   - **No timer/clock/countdown features or extensions.** Already covered by shipped `pomo`, `qtr`, `cntdn`. Drop `bill:`, ticking-timer, session-timer, bell-timer, break-countdown, etc. See [[feedback-no-timer-extensions]].
   - **No value-driven / rule-embedded-in-text colour primitives.** `c?:` was rejected. Don't re-propose conditional-formatting designs without first asking the user. See [[feedback-no-value-colour]].
   - **Generic-primitive justifications are not enough.** "Hits N/M personas" alone is not a green light — persona-shaped specifics are required.
+
+- **Launch-readiness actions (from cold-start research 2026-06-06):**
+  0. **Bucket B: Add 3–5 "good first issue" labels** — gets repo indexed by goodfirstissue.dev, CodeTriage, Up For Grabs. Skill can do autonomously.
+  1. **Bucket A: Add subtle star CTA in README** near Quick Start. Small PR.
+  2. **HUMAN BLOCKER: Capture demo GIF** — skill cannot do this. Required before launch day.
+  3. **HUMAN BLOCKER: Merge PR #308 + tag v1.0.0** — release workflow.
+  4. **HUMAN ACTION: Execute `drafts/launch-day-checklist.md`** on a Tuesday 6:30–9:30am EST.
 
 - **Live backlog (re-ranked after the c?:/timer revert):**
   Pre-flight: see standing rules above.
