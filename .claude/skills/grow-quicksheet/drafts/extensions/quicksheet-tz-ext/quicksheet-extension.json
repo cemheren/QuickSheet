@@ -1,0 +1,8 @@
+{
+  "name": "tz",
+  "version": "1.0.0",
+  "prefix": "tz",
+  "description": "Timezone converter for QuickSheet — see any time across multiple zones",
+  "entry": "dotnet run --project TzExtension.csproj",
+  "minProtocolVersion": 1
+}
