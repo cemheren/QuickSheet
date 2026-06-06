@@ -1,0 +1,8 @@
+{
+  "name": "rss",
+  "version": "1.0.0",
+  "prefix": "rss",
+  "description": "RSS/Atom feed reader for QuickSheet — live headlines on your desktop wallpaper",
+  "entry": "dotnet run --project RssExtension.csproj",
+  "minProtocolVersion": 1
+}
