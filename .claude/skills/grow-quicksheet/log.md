@@ -1,3 +1,11 @@
+## 2026-06-06 (feat: --delimiter flag)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--delimiter` / `-d` flag for headless export modes. Supports single chars, `\t`, and `tab`. Updated `GridManager.ParseCsvLine` and `LoadFromCsv` with delimiter parameter. Updated `--help`.
+- Bucket: E (issue-driven feature, closes #319).
+- Outcome: PR #324 updated (commit bf69edc).
+- Follow-up: Remaining open issues: #158 (usage pattern), #3 (Wayland). Variety next → Bucket C or D.
+
 ## 2026-06-06 (feat: stdin pipe support)
 
 - Stars: 0 (Δ 0).
