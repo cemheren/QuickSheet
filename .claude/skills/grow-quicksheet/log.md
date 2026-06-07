@@ -1,3 +1,11 @@
+## 2026-06-07 (feat: --info flag)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--info` flag showing file size (human-readable B/KB/MB), last-modified timestamp, row count, and column count for a given CSV file. Updated `--help` output.
+- Bucket: E (issue-driven feature, closes #321).
+- Outcome: PR #311 updated (commit 00d0f38).
+- Follow-up: Remaining open issues: #320 (stdin), #319 (--delimiter), #318 (NO_COLOR), #158 (usage pattern), #3 (Wayland). Variety next → Bucket C or D.
+
 ## 2026-06-07 (docs: Wayland investigation)
 
 - Stars: 0 (Δ 0).
