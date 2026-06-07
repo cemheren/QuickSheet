@@ -26,6 +26,27 @@ public class Program
 
         string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
 
+        // Support "-" as stdin placeholder for headless modes.
+        string? stdinTempFile = null;
+        if (csvPath == "-")
+        {
+            if (Console.IsInputRedirected)
+            {
+                stdinTempFile = Path.GetTempFileName();
+                File.WriteAllText(stdinTempFile, Console.In.ReadToEnd());
+                csvPath = stdinTempFile;
+            }
+            else
+            {
+                Console.Error.WriteLine("Error: stdin (-) specified but no input is piped.");
+                Environment.Exit(2);
+                return;
+            }
+        }
+
+        try
+        {
+
         int exportIdx = Array.IndexOf(args, "--export-md");
         if (exportIdx >= 0)
         {
@@ -163,6 +184,13 @@ public class Program
             return;
         }
 
+        } // end try
+        finally
+        {
+            if (stdinTempFile != null && File.Exists(stdinTempFile))
+                File.Delete(stdinTempFile);
+        }
+
 #if PLATFORM_WINDOWS
         HideConsoleWindow();
         using var host = new ExcelConsole.Platform.Windows.WindowsDesktopHost();
@@ -255,6 +283,9 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine();
+        Console.WriteLine("  Use - as <file.csv> to read CSV from stdin:");
+        Console.WriteLine("    cat data.csv | ExcelConsole - --export-md output.md");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
