@@ -1,3 +1,11 @@
+## 2026-06-07 (docs: Wayland investigation)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/wayland-investigation.md` addressing issue #3 — comprehensive analysis of Wayland compositor wallpaper protocols, implementation options (native P/Invoke vs C shim vs XWayland fallback), compositor support matrix, and phased roadmap.
+- Bucket: A (product polish / documentation, addresses oldest open issue).
+- Outcome: PR #339 (commit 213eea1).
+- Follow-up: Phase 1 implementation (runtime Wayland detection + user-facing message) could be a future Bucket E action. Variety next → Bucket C or D.
+
 ## 2026-06-06 (feat: --delimiter flag)
 
 - Stars: 0 (Δ 0).
