@@ -1,0 +1,8 @@
+{
+  "name": "jwt",
+  "version": "1.0.0",
+  "prefix": "jwt",
+  "description": "Decode JWT tokens — display header and payload claims inline",
+  "entry": "dotnet run --project JwtExtension.csproj",
+  "minProtocolVersion": 1
+}

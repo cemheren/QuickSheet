@@ -1,0 +1,8 @@
+{
+  "name": "tldr",
+  "version": "1.0.0",
+  "prefix": "tldr",
+  "description": "Show tldr command cheatsheets on your desktop grid",
+  "entry": "dotnet run --project TldrExtension.csproj",
+  "minProtocolVersion": 1
+}
