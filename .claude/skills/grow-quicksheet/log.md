@@ -1,3 +1,11 @@
+## 2026-06-06 (docs: add PR template)
+
+- Stars: 0 (Δ 0).
+- Action: Added `.github/PULL_REQUEST_TEMPLATE.md` — lightweight checklist covering zero-NuGet-deps, cross-platform build, CSV format stability, backward-compatible keybindings.
+- Bucket: B (discoverability / community health).
+- Outcome: PR #331.
+- Follow-up: Saturation continues. 20+ PRs awaiting user merge. No new issues to fix. Next run: no-op unless new issue appears or user merges backlog.
+
 ## 2026-06-06 (docs: DM audience landing page)
 
 - Stars: 0 (Δ 0).
