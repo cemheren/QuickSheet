@@ -1,3 +1,11 @@
+## 2026-06-07 (feat: quicksheet-epoch-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Scaffolded and published `quicksheet-epoch-ext` — Unix epoch ↔ human date converter. Supports `now`, numeric timestamps (auto-detects ms vs s), ISO date strings, and relative offsets (+30d, -7d, +2h, -30m). Targets SRE/devops persona for debugging API timestamps without leaving desktop.
+- Bucket: F (vertical extension).
+- Outcome: Repo created at https://github.com/cemheren/quicksheet-epoch-ext. Draft scaffold in `drafts/extensions/quicksheet-epoch-ext/`.
+- Follow-up: Cross-link in README (separate PR after user reviews). Variety next → Bucket A, C, or D.
+
 ## 2026-06-07 (docs: Wayland investigation)
 
 - Stars: 0 (Δ 0).

@@ -1,0 +1,8 @@
+{
+  "name": "epoch",
+  "version": "1.0.0",
+  "prefix": "epoch",
+  "description": "Unix epoch ↔ human date converter for QuickSheet",
+  "entry": "dotnet run --project EpochExtension.csproj",
+  "minProtocolVersion": 1
+}
