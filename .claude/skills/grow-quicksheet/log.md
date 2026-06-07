@@ -1,3 +1,11 @@
+## 2026-06-07 (docs: troubleshooting guide)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/troubleshooting.md` — covers build errors, X11/Wayland setup, Windows WorkerW conflicts, extension debugging, CSV encoding, headless export argument order, and autosave locations. Added link from README Quick Start section.
+- Bucket: A (product polish / documentation).
+- Outcome: PR #342 (commit 8402256).
+- Follow-up: Variety next → Bucket C, D, or R. System remains saturated with 30+ PRs awaiting merge.
+
 ## 2026-06-07 (no-op: saturated, awaiting merge)
 
 - Stars: 0 (Δ 0).
