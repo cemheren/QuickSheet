@@ -1,3 +1,11 @@
+## 2026-06-06 (docs: artist audience landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-artists.md` audience landing page for freelance illustrators and creative studios, plus `examples/artist-dashboard.csv` starter sheet with commission tracker, color palette zone, and social posting schedule. Updated README audience-guides line.
+- Bucket: A (product polish / audience landing page).
+- Outcome: PR #333.
+- Follow-up: All audience pages now complete (homelab, sre, students, traders, DMs, artists). Next variety → Bucket C, D, or R.
+
 ## 2026-06-06 (docs: add PR template)
 
 - Stars: 0 (Δ 0).
