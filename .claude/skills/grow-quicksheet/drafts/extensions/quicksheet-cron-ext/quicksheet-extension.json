@@ -1,0 +1,8 @@
+{
+  "name": "cron",
+  "version": "1.0.0",
+  "prefix": "cron",
+  "description": "Cron expression parser — human-readable schedule descriptions for QuickSheet",
+  "entry": "dotnet run --project CronExtension.csproj",
+  "minProtocolVersion": 1
+}

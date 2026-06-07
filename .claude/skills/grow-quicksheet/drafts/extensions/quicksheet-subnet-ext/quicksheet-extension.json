@@ -1,0 +1,8 @@
+{
+  "name": "subnet",
+  "version": "1.0.0",
+  "prefix": "subnet",
+  "description": "CIDR/subnet calculator for QuickSheet — network ranges at a glance",
+  "entry": "dotnet run --project SubnetExtension.csproj",
+  "minProtocolVersion": 1
+}

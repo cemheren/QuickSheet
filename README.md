@@ -223,6 +223,7 @@ tls: github.com, 1, 4
 | `dns:` | DNS record lookup — A, AAAA, MX, TXT, NS, CNAME, PTR. `dns: MX gmail.com` · `dns: PTR 8.8.8.8` | `ext: github:Deskworks/quicksheet-dns` |
 | `ssl:` | SSL certificate expiry checker — status 🟢/🟡/🔴, days left, issuer. `ssl: github.com` · `ssl: api.internal:8443` | `ext: github:Deskworks/quicksheet-ssl` |
 | `whois:` | WHOIS domain/IP lookup — registrar, status, expiry urgency 🟡🔴, nameservers. `whois: github.com` · `whois: 8.8.8.8` | `ext: github:Deskworks/quicksheet-whois` |
+| `subnet:` | CIDR/subnet calculator — network, broadcast, host range, count, netmask. `subnet: 10.0.0.0/24` · `subnet: 172.16.0.0/12` | `ext: github:cemheren/quicksheet-subnet-ext` |
 | `tracert:` | Network traceroute — each hop with RTT and reverse-DNS hostname. `tracert: github.com` · `tracert: 8.8.8.8` | `ext: github:cemheren/quicksheet-tracert` |
 | `mtr:` | Route tracer with per-hop RTT stats and packet loss. `mtr: google.com` (full route) · `mtr: ping 8.8.8.8` (ping stats: min/avg/max, loss%). | `ext: github:Deskworks/quicksheet-mtr` |
 | `speed:` | Network speed test — download Mbps from CDN endpoints + HTTP latency to Cloudflare/Google/GitHub. `speed:` · `speed: download` · `speed: latency` | `ext: github:Deskworks/quicksheet-speedtest` |
