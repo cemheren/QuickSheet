@@ -1,3 +1,12 @@
+## 2026-06-07 (feat: quicksheet-tldr-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Scaffolded and pushed `cemheren/quicksheet-tldr-ext` — fetches tldr-pages from GitHub, renders formatted CLI command cheatsheets inline on the desktop grid. Zero NuGet deps, 30-min cache. Cross-linked in docs/extensions.md and docs/tour.md.
+- Bucket: F (vertical extension).
+- Outcome: PR #338, repo https://github.com/cemheren/quicksheet-tldr-ext.
+- Note: Also inadvertently created `cemheren/quicksheet-jwt-ext` (duplicate of existing Deskworks/quicksheet-jwtdec). Cannot delete (no delete_repo scope). User can clean up.
+- Follow-up: 30+ PRs awaiting merge. Variety next → Bucket C or R.
+
 ## 2026-06-06 (feat: --delimiter flag)
 
 - Stars: 0 (Δ 0).
