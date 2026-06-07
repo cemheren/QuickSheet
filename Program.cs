@@ -24,7 +24,23 @@ public class Program
             return;
         }
 
-        string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
+        // Parse --head N (limit output to first N data rows in headless exports)
+        int headLimit = -1;
+        int headIdx = Array.IndexOf(args, "--head");
+        if (headIdx >= 0 && headIdx + 1 < args.Length && int.TryParse(args[headIdx + 1], out int hn) && hn > 0)
+            headLimit = hn;
+
+        // Find CSV path: skip flag arguments and their values
+        var skipNext = new HashSet<int>();
+        for (int i = 0; i < args.Length; i++)
+        {
+            if (args[i] == "--export-md" || args[i] == "--export-html" || args[i] == "--export-json" || args[i] == "--head")
+            {
+                skipNext.Add(i);
+                if (i + 1 < args.Length) skipNext.Add(i + 1);
+            }
+        }
+        string? csvPath = args.Where((a, i) => !a.StartsWith("--") && !skipNext.Contains(i)).FirstOrDefault();
 
         int exportIdx = Array.IndexOf(args, "--export-md");
         if (exportIdx >= 0)
@@ -45,6 +61,8 @@ public class Program
 
             // Probe CSV for dimensions so the headless GridManager is big enough.
             var lines = File.ReadAllLines(csvPath);
+            if (headLimit > 0 && lines.Length > headLimit + 1)
+                lines = lines[..(headLimit + 1)]; // header + N data rows
             int rows = Math.Max(1, lines.Length);
             int cols = 1;
             foreach (var line in lines)
@@ -91,6 +109,8 @@ public class Program
             }
 
             var lines = File.ReadAllLines(csvPath);
+            if (headLimit > 0 && lines.Length > headLimit + 1)
+                lines = lines[..(headLimit + 1)];
             int rows = Math.Max(1, lines.Length);
             int cols = 1;
             foreach (var line in lines)
@@ -136,6 +156,8 @@ public class Program
             }
 
             var lines = File.ReadAllLines(csvPath);
+            if (headLimit > 0 && lines.Length > headLimit + 1)
+                lines = lines[..(headLimit + 1)];
             int rows = Math.Max(1, lines.Length);
             int cols = 1;
             foreach (var line in lines)
@@ -258,6 +280,9 @@ public class Program
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
+        Console.WriteLine();
+        Console.WriteLine("Export options:");
+        Console.WriteLine("  --head N          Limit export to the first N data rows");
         Console.WriteLine();
         Console.WriteLine("Cell prefixes:");
         Console.WriteLine("  r: <cmd>          Runnable command. Press Enter to launch.");
