@@ -1,3 +1,11 @@
+## 2026-06-06 (draft: awesome-cli-apps submission)
+
+- Stars: 0 (Δ 0).
+- Action: Created standalone polished draft for awesome-cli-apps submission (20k★ list). Researched contributing guidelines — discovered >20 star requirement gate. Draft includes correct section (Data Manipulation, alongside visidata/sc-im), proper format, PR body, and submitter notes. Also confirmed AwesomeCSV and Awesome-Linux-Software have NO star requirement (submittable now).
+- Bucket: D (awesome-list submission draft).
+- Outcome: Draft saved at `drafts/awesome-cli-apps.md`.
+- Follow-up: User can submit to AwesomeCSV + Awesome-Linux-Software immediately (no star gate). awesome-cli-apps gated until >20 stars.
+
 ## 2026-06-06 (feat: --delimiter flag)
 
 - Stars: 0 (Δ 0).
