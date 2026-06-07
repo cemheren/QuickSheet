@@ -1,3 +1,11 @@
+## 2026-06-06 (feat: NO_COLOR environment variable support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented NO_COLOR standard (https://no-color.org/) — added `TerminalStyle.cs` with ANSI SGR helpers that auto-suppress when `NO_COLOR` is set. Colorized `--help`, `--version`, `--list-extensions` output with bold/cyan/green accents, all suppressed by `NO_COLOR=1`.
+- Bucket: E (issue-driven feature, closes #318).
+- Outcome: PR #323 updated (commit 68556f0).
+- Follow-up: Remaining open issues: #319 (--delimiter), #158 (usage pattern), #3 (Wayland). Variety next → Bucket C or D.
+
 ## 2026-06-06 (docs: artist audience landing page)
 
 - Stars: 0 (Δ 0).
