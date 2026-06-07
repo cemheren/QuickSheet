@@ -1,3 +1,11 @@
+## 2026-06-06 (feat: stdin pipe support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `-` as stdin placeholder for headless export modes (`--export-md`, `--export-html`, `--export-json`). Reads piped CSV via temp file, cleans up after export. Updated `--help` with usage example.
+- Bucket: E (issue-driven feature, closes #320).
+- Outcome: PR #334 (commit 04d0c8f).
+- Follow-up: Remaining open issues: #319 (--delimiter), #158 (usage pattern), #3 (Wayland). Variety next → Bucket C or D.
+
 ## 2026-06-06 (feat: NO_COLOR environment variable support)
 
 - Stars: 0 (Δ 0).
