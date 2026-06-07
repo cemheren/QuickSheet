@@ -1,3 +1,11 @@
+## 2026-06-07 (docs: DM/GM audience landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` targeting tabletop RPG game masters — initiative tracking, dice rolling, NPC HP management, session notes. Added `examples/dm-dashboard.csv` starter sheet. Linked from README.
+- Bucket: A (product polish / audience page).
+- Outcome: PR #343 (commit 8b59385).
+- Follow-up: Variety next → Bucket C or D. 37 PRs now open awaiting merge.
+
 ## 2026-06-07 (no-op: saturated, awaiting merge — run 2)
 
 - Stars: 0 (Δ 0).
