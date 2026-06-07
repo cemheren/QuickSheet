@@ -1,3 +1,11 @@
+## 2026-06-07 (feat: quicksheet-subnet-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Created `quicksheet-subnet-ext` — CIDR/subnet calculator (network, broadcast, host range, count, netmask). Also accidentally created `quicksheet-cron-ext` (duplicate of existing `cronck:`; cannot delete without `delete_repo` scope). Added `subnet:` row to README extension directory.
+- Bucket: F (new extension repo).
+- Outcome: Repo https://github.com/cemheren/quicksheet-subnet-ext pushed. PR #336 for README cross-link.
+- Follow-up: User should archive/delete `cemheren/quicksheet-cron-ext` (duplicate). 20+ PRs still awaiting merge. Variety next → Bucket C or R.
+
 ## 2026-06-06 (feat: --delimiter flag)
 
 - Stars: 0 (Δ 0).
