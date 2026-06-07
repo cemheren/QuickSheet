@@ -1,3 +1,11 @@
+## 2026-06-07 (feat: --head flag)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--head N` CLI flag for headless export modes (`--export-md`, `--export-html`, `--export-json`). Limits output to first N data rows while preserving header. Updated `--help`.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #337 (commit c88350c).
+- Follow-up: 21+ PRs awaiting merge. All issues covered. Variety next → Bucket C or D.
+
 ## 2026-06-06 (feat: --delimiter flag)
 
 - Stars: 0 (Δ 0).
