@@ -49,7 +49,7 @@ dotnet run --project ExcelConsole.csproj -- mydata.csv --export-md mydata.md
 
 Use `--export-md -` to write to stdout — handy in csvkit / Miller / qsv pipelines. See [docs/csvkit-comparison.md](docs/csvkit-comparison.md) for the drop-in pipeline notes.
 
-New here? The 60-second tour is in [docs/tour.md](docs/tour.md). Or jump straight to [docs/recipes.md](docs/recipes.md) for ready-to-paste dashboard layouts. All keyboard shortcuts are in [docs/keyboard-shortcuts.md](docs/keyboard-shortcuts.md). Common questions: [docs/faq.md](docs/faq.md).
+New here? The 60-second tour is in [docs/tour.md](docs/tour.md). Or jump straight to [docs/recipes.md](docs/recipes.md) for ready-to-paste dashboard layouts. All keyboard shortcuts are in [docs/keyboard-shortcuts.md](docs/keyboard-shortcuts.md). Common questions: [docs/faq.md](docs/faq.md). Something not working? [docs/troubleshooting.md](docs/troubleshooting.md).
 
 Using Claude Code, Copilot CLI, or Aider? `dotnet run --project ExcelConsole.csproj -- examples/ai-workflow.csv --desktop` opens a pre-seeded panel of the top AI-CLI launchers (`claude --continue`, `gh copilot suggest`, `aider --ask`), a `/cost` token sparkline, and the copilot-in-a-cell extension hook.
 
