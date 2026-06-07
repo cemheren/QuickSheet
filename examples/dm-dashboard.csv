@@ -1,0 +1,8 @@
+Initiative,Dice,NPC,HP,Status,Notes
+init: Rogue 19; Fighter 14; Goblin1 12; Goblin2 8,roll: 1d20,Goblin Archer,15/15,Active,Perched on ledge
+,,Goblin Shaman,22/22,Active,Concentrating on Fog Cloud
+,,Wolf,11/11,Active,Flanking with Goblin1
+,,Bandit Captain,45/45,Active,Behind barricade
+,roll: 2d6+3,,,,
+,roll: 1d100,,,,
+,,,,Σ,Session 12 — Cragmaw Hideout
