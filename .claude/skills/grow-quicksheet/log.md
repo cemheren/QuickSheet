@@ -1,3 +1,11 @@
+## 2026-06-07 (docs: awesome-dotnet draft)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted awesome-dotnet submission (quozd/awesome-dotnet, ~19k stars). Targets CLI category. Includes PR title, body, diff line, alternative Office category option, and submission notes.
+- Bucket: D (network effects / awesome-list draft).
+- Outcome: Draft saved at `drafts/awesome-dotnet.md`. Pushed to main (skill-only).
+- Follow-up: User submits when ready. Next variety → Bucket E or C. Note: "Tests" quality criterion is a soft risk — mitigated by project stability and docs.
+
 ## 2026-06-07 (feat: --info flag)
 
 - Stars: 0 (Δ 0).
