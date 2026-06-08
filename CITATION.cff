@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "QuickSheet"
+abstract: >-
+  A terminal spreadsheet that doubles as your desktop wallpaper.
+  Cell prefixes for runnable commands, live subprocess output,
+  hyperlinks, and sparklines. Zero external dependencies.
+authors:
+  - family-names: Heren
+    given-names: Cem
+    alias: cemheren
+repository-code: "https://github.com/cemheren/QuickSheet"
+license: MIT
+keywords:
+  - spreadsheet
+  - terminal
+  - desktop-wallpaper
+  - tui
+  - csv
+  - dotnet
+  - linux
+  - windows
