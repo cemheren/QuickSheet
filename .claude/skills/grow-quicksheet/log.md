@@ -1,3 +1,11 @@
+## 2026-06-08 (docs: CITATION.cff)
+
+- Stars: 0 (Δ 0).
+- Action: Added `CITATION.cff` enabling GitHub's "Cite this repository" sidebar widget. Targets academic persona (arxiv/pubmed/cite extension users).
+- Bucket: B (metadata/discoverability).
+- Outcome: PR #354 (commit 4a63ee1).
+- Follow-up: System remains saturated (35 PRs open). Next variety pick: Bucket C/D or no-op if nothing new.
+
 ## 2026-06-08 (docs: star CTA in README)
 
 - Stars: 0 (Δ 0).
