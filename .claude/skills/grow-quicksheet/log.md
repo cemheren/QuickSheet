@@ -1,3 +1,11 @@
+## 2026-06-08 (draft: ProductHunt launch page)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted ProductHunt launch page — tagline, full description, maker comment, gallery descriptions, timing strategy, and prep checklist. High-value discovery channel not previously covered.
+- Bucket: C (content draft).
+- Outcome: Draft saved at `drafts/producthunt.md`.
+- Follow-up: Human captures screenshots/GIF, merges open PRs, then executes launch-day checklist (PH + HN + Reddit coordinated).
+
 ## 2026-06-08 (docs: star CTA in README)
 
 - Stars: 0 (Δ 0).
