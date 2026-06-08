@@ -1,3 +1,11 @@
+## 2026-06-08 (research: GitHub Trending mechanics)
+
+- Stars: 0 (Δ 0).
+- Action: Researched GitHub Trending algorithm mechanics — star velocity thresholds, language normalization, metadata SEO factors, optimal launch timing, and case studies. Key finding: C# repos only need ~10–50 stars/day to trend (vs 100–1000+ for JS/Python). Wrote research brief with 5 concrete implications for QuickSheet's launch strategy.
+- Bucket: R (deep research).
+- Outcome: Research saved at `research/github-trending-mechanics.md`.
+- Follow-up: Queue Bucket B action — verify/optimize repo description and topics before launch day. Ensure launch-day checklist sequences posts within same 2–3 hour window for star velocity concentration.
+
 ## 2026-06-08 (docs: star CTA in README)
 
 - Stars: 0 (Δ 0).
@@ -1826,6 +1834,7 @@
   2. **HUMAN BLOCKER: Capture demo GIF** — skill cannot do this. Required before launch day.
   3. **HUMAN BLOCKER: Merge PR #308 + tag v1.0.0** — release workflow.
   4. **HUMAN ACTION: Execute `drafts/launch-day-checklist.md`** on a Tuesday 6:30–9:30am EST.
+  5. **Bucket B: Verify/optimize repo description + topics for Trending SEO** — ensure description is keyword-rich and topics include `csharp`, `dotnet`, `spreadsheet`, `desktop-wallpaper`, `terminal`, `csv`, `linux`, `windows`. Per `research/github-trending-mechanics.md`, C# only needs ~10–50 stars/day to trend. Metadata SEO is free leverage.
 
 - **Live backlog (re-ranked after the c?:/timer revert):**
   Pre-flight: see standing rules above.
