@@ -1,3 +1,11 @@
+## 2026-06-08 (docs: star CTA in README)
+
+- Stars: 0 (Δ 0).
+- Action: Added subtle star CTA blockquote in README after Quick Start section. One-line `> **Like what you see?** A ⭐ on GitHub helps others discover the project.`
+- Bucket: A/B (product polish + discoverability).
+- Outcome: PR #350 (commit c35caf0).
+- Follow-up: Launch-readiness item 0 (good first issue labels) already done (4 exist). Next: variety — Bucket F extension or Bucket C/D draft.
+
 ## 2026-06-08 (no-op: saturated, awaiting merge — run 5)
 
 - Stars: 0 (Δ 0).
@@ -1814,7 +1822,7 @@
 
 - **Launch-readiness actions (from cold-start research 2026-06-06):**
   0. **Bucket B: Add 3–5 "good first issue" labels** — gets repo indexed by goodfirstissue.dev, CodeTriage, Up For Grabs. Skill can do autonomously.
-  1. **Bucket A: Add subtle star CTA in README** near Quick Start. Small PR.
+  1. ~~**Bucket A: Add subtle star CTA in README**~~ — DONE (PR #350, 2026-06-08).
   2. **HUMAN BLOCKER: Capture demo GIF** — skill cannot do this. Required before launch day.
   3. **HUMAN BLOCKER: Merge PR #308 + tag v1.0.0** — release workflow.
   4. **HUMAN ACTION: Execute `drafts/launch-day-checklist.md`** on a Tuesday 6:30–9:30am EST.
