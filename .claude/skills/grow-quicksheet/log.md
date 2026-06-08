@@ -1,3 +1,11 @@
+## 2026-06-07 (ci: build workflow)
+
+- Stars: 0 (Δ 0).
+- Action: Added `.github/workflows/build.yml` — runs `dotnet build` on both ubuntu-latest and windows-latest for pushes to main and PRs. Matrix strategy, .NET 9, Release config.
+- Bucket: B (discoverability / project health signal).
+- Outcome: PR #345 (commit 2ecf18d).
+- Follow-up: Variety next. 31 PRs now open awaiting merge. System remains saturated on publication side.
+
 ## 2026-06-07 (docs: DM/GM audience landing page)
 
 - Stars: 0 (Δ 0).
