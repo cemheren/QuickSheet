@@ -1,3 +1,11 @@
+## 2026-06-08 (metadata: extension repo topics)
+
+- Stars: 0 (Δ 0).
+- Action: Added GitHub topics to 6 extension repos that had none: `quicksheet-epoch-ext`, `quicksheet-tldr-ext`, `quicksheet-jwt-ext`, `quicksheet-tz-ext`, `quicksheet-books-ext`, `quicksheet-weather-ext`. Each got `quicksheet-extension`, `quicksheet`, `dotnet`, plus 4 vertical-specific tags. Improves discoverability via GitHub topic search.
+- Bucket: B (metadata / discoverability).
+- Outcome: Applied directly via `gh repo edit --add-topic`. No PR needed (repo settings, not code).
+- Follow-up: Check remaining extension repos for missing homepageUrl (should point to main QuickSheet). System remains saturated with 30 PRs awaiting user merge.
+
 ## 2026-06-08 (no-op: saturated, awaiting merge — run 5)
 
 - Stars: 0 (Δ 0).
