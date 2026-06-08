@@ -1,3 +1,11 @@
+## 2026-06-08 (feat: --delimiter flag)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--delimiter` / `-d` flag for headless export modes. Supports tab, semicolon, any single char. Closes #319.
+- Bucket: E (quality-of-life feature) / Issue fix.
+- Outcome: PR #324 updated (commit f95b10b).
+- Follow-up: #318 (NO_COLOR) is next smallest open issue.
+
 ## 2026-06-08 (docs: CITATION.cff)
 
 - Stars: 0 (Δ 0).
