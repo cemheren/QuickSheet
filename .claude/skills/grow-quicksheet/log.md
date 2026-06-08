@@ -1,3 +1,11 @@
+## 2026-06-08 (feat: NO_COLOR support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented NO_COLOR environment variable support (https://no-color.org/). Added `AppEnvironment.NoColor` static property and documented in --help. Closes #318.
+- Bucket: E (quality-of-life feature) / Issue fix.
+- Outcome: PR #323 updated (commit 3332145).
+- Follow-up: #158 (Usage pattern) or #3 (Wayland investigation) are remaining open issues without PRs.
+
 ## 2026-06-08 (feat: --delimiter flag)
 
 - Stars: 0 (Δ 0).
