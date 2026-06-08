@@ -1,3 +1,11 @@
+## 2026-06-08 (draft: TerminalTrove submission)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted TerminalTrove submission (email pitch + form fields). Fills a gap in Bucket D drafts — research identified TT as a zero-friction "email and forget" listing with high fit for desktop TUI tools.
+- Bucket: D (network effects / directory submission draft).
+- Outcome: Draft saved at `drafts/terminaltrove.md`.
+- Follow-up: User submits after demo GIF lands in README. System remains saturated (30 PRs open).
+
 ## 2026-06-08 (no-op: saturated, awaiting merge — run 5)
 
 - Stars: 0 (Δ 0).
