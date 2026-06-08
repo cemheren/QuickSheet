@@ -1,3 +1,11 @@
+## 2026-06-08 (feat: --info flag)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--info` flag showing file path, human-readable size, last-modified timestamp, row/column count, and detected headers. Closes #321.
+- Bucket: E (quality-of-life feature) / Issue fix.
+- Outcome: PR #357 (commit 5fc4b05).
+- Follow-up: #320 (stdin pipe support) is next smallest open issue.
+
 ## 2026-06-08 (feat: NO_COLOR support)
 
 - Stars: 0 (Δ 0).
