@@ -1,3 +1,11 @@
+## 2026-06-07 (draft: Terminal Trove submission)
+
+- Stars: 0 (Δ 0).
+- Action: Created Terminal Trove submission draft with all required fields (name, tagline, description, standout features, install instructions, positioning). Noted image requirement as human blocker.
+- Bucket: D (network effects / directory submission).
+- Outcome: Draft saved at `drafts/terminaltrove-submission.md` (commit d78ac11).
+- Follow-up: User captures screenshot/GIF and submits at terminaltrove.com/post/. 30+ PRs still open awaiting merge.
+
 ## 2026-06-07 (ci: build workflow)
 
 - Stars: 0 (Δ 0).
