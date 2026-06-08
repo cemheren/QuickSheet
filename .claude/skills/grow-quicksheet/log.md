@@ -1,3 +1,11 @@
+## 2026-06-08 (docs: Code of Conduct)
+
+- Stars: 0 (Δ 0).
+- Action: Added CODE_OF_CONDUCT.md (Contributor Covenant v2.1) to complete GitHub Community Profile. Signals welcoming project; indexed by contributor-matching platforms.
+- Bucket: B (discoverability / project health signal).
+- Outcome: PR #353 (commit b1f7c8f).
+- Follow-up: Community Profile should now show CoC as present. Next: variety — Bucket C/E or re-sweep issues after merges.
+
 ## 2026-06-08 (docs: star CTA in README)
 
 - Stars: 0 (Δ 0).
