@@ -1,3 +1,11 @@
+## 2026-06-08 (docs: DM/TTRPG landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` audience landing page for tabletop RPG dungeon masters + `examples/dm-screen.csv` starter layout. Showcases `roll` and `init` extensions.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #359 (commit 27aa05e).
+- Follow-up: `for-artists.md` is the remaining landing page candidate. Or Bucket C/D for variety.
+
 ## 2026-06-08 (feat: --info flag)
 
 - Stars: 0 (Δ 0).
