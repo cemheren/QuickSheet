@@ -1,3 +1,11 @@
+## 2026-06-08 (feat: stdin pipe support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `-` as stdin file argument for headless export modes (--export-md, --export-html, --export-json). Buffers stdin to temp file, cleans up after. Updated --help. Closes #320.
+- Bucket: E (quality-of-life feature) / Issue fix.
+- Outcome: PR #360 (commit 21b14a5).
+- Follow-up: #158 (Usage pattern) or #3 (Wayland investigation) are remaining open issues.
+
 ## 2026-06-08 (docs: DM/TTRPG landing page)
 
 - Stars: 0 (Δ 0).
