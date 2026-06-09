@@ -1,3 +1,11 @@
+## 2026-06-08 (feat: --head/--tail flags)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--head N` and `--tail N` flags for header-aware CSV row slicing in pipelines. Both preserve header row and output raw CSV to stdout.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #361 (commit 5e84fd9).
+- Follow-up: #158 (Usage pattern / virtual tabs) remains as the next big feature. System remains saturated with 5 open PRs.
+
 ## 2026-06-08 (feat: stdin pipe support)
 
 - Stars: 0 (Δ 0).
