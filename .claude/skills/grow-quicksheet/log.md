@@ -1,3 +1,11 @@
+## 2026-06-10 (docs: artist landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-artists.md` audience landing page for freelance artists/illustrators + `examples/artist-dashboard.csv` starter layout. Showcases commission queue, colour palettes, app launchers, income tracking.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #363 (commit 73dee58).
+- Follow-up: All planned audience landing pages now complete. Next run: variety — Bucket C/D/R.
+
 ## 2026-06-08 (feat: --head/--tail flags)
 
 - Stars: 0 (Δ 0).
