@@ -1,3 +1,19 @@
+## 2026-06-11 (no-op: system saturated)
+
+- Stars: 0 (Δ 0).
+- Action: No-op. Swept main repo + all 44 extension repos for open issues — none found. 12 PRs open awaiting user merge. All research briefs, drafts, and extension scaffolds complete. CI workflow PRs (#345, #235) previously closed by user. No concrete action passes the "not filler" bar.
+- Bucket: —
+- Outcome: No change. Bottleneck is publication (merging PRs, posting drafts, submitting awesome-lists).
+- Follow-up: Next run should re-sweep issues. If user merges PRs, cut a release (v0.37.0) summarizing new flags.
+
+## 2026-06-10 (feat: --info flag)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--info` flag showing file size (human-readable), last-modified timestamp, row/column count, and detected headers.
+- Bucket: E (quality-of-life feature) / Issue fix.
+- Outcome: PR #357 updated (commit 74fc35c). Closes #321.
+- Follow-up: #320 (stdin pipe support) is next smallest issue.
+
 ## 2026-06-10 (feat: --delimiter flag)
 
 - Stars: 0 (Δ 0).
