@@ -1,3 +1,11 @@
+## 2026-06-11 (docs: help examples)
+
+- Stars: 0 (Δ 0).
+- Action: Added usage examples section to `--help` output showing 5 common workflows (desktop launch, Markdown/HTML/JSON export, list extensions). Single-method string change.
+- Bucket: E (issue fix) — Closes #374.
+- Outcome: PR #379 (commit eb1a345).
+- Follow-up: #375 (Makefile), #373 (stdout `-`), #372 (shell completions) remain as open good-first-issues.
+
 ## 2026-06-11 (docs: Wayland design document)
 
 - Stars: 0 (Δ 0).
