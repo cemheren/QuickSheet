@@ -1,3 +1,11 @@
+## 2026-06-11 (docs: Makefile)
+
+- Stars: 0 (Δ 0).
+- Action: Added Makefile with build/run/release/desktop/clean targets. Lowers contributor onboarding friction.
+- Bucket: A (product polish) / Issue fix #375.
+- Outcome: PR #381 (commit 6b337a8). Closes #375.
+- Follow-up: #373 (stdout `-`) and #372 (shell completions) remain as open good-first-issues.
+
 ## 2026-06-11 (fix: simplify quicksheet-todo UX)
 
 - Stars: 0 (Δ 0).
