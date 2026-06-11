@@ -1,0 +1,8 @@
+{
+  "name": "arxiv",
+  "version": "1.0.0",
+  "prefix": "arxiv",
+  "description": "arXiv paper lookup — title, authors, abstract for QuickSheet",
+  "entry": "dotnet run --project ArxivExtension.csproj",
+  "minProtocolVersion": 1
+}
