@@ -1,3 +1,11 @@
+## 2026-06-10 (feat: NO_COLOR support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented NO_COLOR environment variable support (https://no-color.org/). Added CliColors utility, colored --version and --list-extensions output, documented in --help.
+- Bucket: E (quality-of-life feature) / Issue fix.
+- Outcome: PR #367 (commit 6994a8e). Closes #318.
+- Follow-up: #321 (--info flag) and #319 (--delimiter) are next smallest issues.
+
 ## 2026-06-10 (ext: mcal month calendar)
 
 - Stars: 0 (Δ 0).
