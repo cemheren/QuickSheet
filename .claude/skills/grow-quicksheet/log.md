@@ -1,3 +1,11 @@
+## 2026-06-11 (docs: DM landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` audience landing page for TTRPG Dungeon Masters + `examples/dm-screen.csv` starter sheet with initiative tracker, dice rolls, NPC stat blocks.
+- Bucket: A (product polish) — queued item 7.
+- Outcome: PR #359 updated (commit 1b24733).
+- Follow-up: `for-artists.md` is next unwritten persona page. Also note: #373 is already implemented in main — issue can be closed.
+
 ## 2026-06-11 (feat: shell completions)
 
 - Stars: 0 (Δ 0).
