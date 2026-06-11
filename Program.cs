@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using ExcelConsole;
 
 public class Program
@@ -24,7 +25,18 @@ public class Program
             return;
         }
 
-        string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
+        // Indices of arguments that are values for known flags (skip them when looking for CSV path).
+        var flagValueIndices = new HashSet<int>();
+        string[] valuedFlags = { "--export-md", "--export-html", "--export-json", "--grep" };
+        foreach (var flag in valuedFlags)
+        {
+            int idx = Array.IndexOf(args, flag);
+            if (idx >= 0 && idx + 1 < args.Length)
+                flagValueIndices.Add(idx + 1);
+        }
+        string? csvPath = args
+            .Where((a, i) => !a.StartsWith("--") && !flagValueIndices.Contains(i))
+            .FirstOrDefault();
 
         int exportIdx = Array.IndexOf(args, "--export-md");
         if (exportIdx >= 0)
@@ -44,7 +56,7 @@ public class Program
             }
 
             // Probe CSV for dimensions so the headless GridManager is big enough.
-            var lines = File.ReadAllLines(csvPath);
+            var lines = ApplyGrepFilter(File.ReadAllLines(csvPath), args);
             int rows = Math.Max(1, lines.Length);
             int cols = 1;
             foreach (var line in lines)
@@ -60,7 +72,7 @@ public class Program
             }
             // Constructor derives ColumnCount from (availableWidth - 4) / columnWidth (default 20).
             var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
-            grid.LoadFromCsv(csvPath);
+            grid.LoadFromCsvLines(lines);
             if (outPath == "-")
             {
                 grid.WriteMarkdownTo(Console.Out);
@@ -90,7 +102,7 @@ public class Program
                 return;
             }
 
-            var lines = File.ReadAllLines(csvPath);
+            var lines = ApplyGrepFilter(File.ReadAllLines(csvPath), args);
             int rows = Math.Max(1, lines.Length);
             int cols = 1;
             foreach (var line in lines)
@@ -105,7 +117,7 @@ public class Program
                 if (n > cols) cols = n;
             }
             var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
-            grid.LoadFromCsv(csvPath);
+            grid.LoadFromCsvLines(lines);
             if (htmlOut == "-")
             {
                 grid.WriteHtmlTo(Console.Out);
@@ -135,7 +147,7 @@ public class Program
                 return;
             }
 
-            var lines = File.ReadAllLines(csvPath);
+            var lines = ApplyGrepFilter(File.ReadAllLines(csvPath), args);
             int rows = Math.Max(1, lines.Length);
             int cols = 1;
             foreach (var line in lines)
@@ -150,7 +162,7 @@ public class Program
                 if (n > cols) cols = n;
             }
             var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
-            grid.LoadFromCsv(csvPath);
+            grid.LoadFromCsvLines(lines);
             if (jsonOut == "-")
             {
                 grid.WriteJsonTo(Console.Out);
@@ -255,6 +267,7 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv> --grep <pattern> --export-md -  Filter rows by regex before export");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
@@ -270,6 +283,39 @@ public class Program
         Console.WriteLine();
         Console.WriteLine("Range references work inside text: {A1::C10}");
         Console.WriteLine("Tour: docs/tour.md · Issues: github.com/cemheren/QuickSheet/issues");
+    }
+
+    private static string[] ApplyGrepFilter(string[] lines, string[] args)
+    {
+        int grepIdx = Array.IndexOf(args, "--grep");
+        if (grepIdx < 0 || grepIdx + 1 >= args.Length)
+            return lines;
+
+        string pattern = args[grepIdx + 1];
+        Regex regex;
+        try
+        {
+            regex = new Regex(pattern, RegexOptions.IgnoreCase);
+        }
+        catch (RegexParseException)
+        {
+            Console.Error.WriteLine($"Invalid regex pattern: {pattern}");
+            Environment.Exit(2);
+            return lines;
+        }
+
+        var result = new List<string>();
+        // Always keep the header row (first line).
+        if (lines.Length > 0)
+            result.Add(lines[0]);
+
+        for (int i = 1; i < lines.Length; i++)
+        {
+            if (regex.IsMatch(lines[i]))
+                result.Add(lines[i]);
+        }
+
+        return result.ToArray();
     }
 
 #if PLATFORM_WINDOWS
