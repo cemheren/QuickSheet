@@ -26,6 +26,35 @@ public class Program
 
         string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
 
+        // Parse --sort / --rsort modifier (applies to any export command).
+        int sortCol = -1;
+        bool sortDescending = false;
+        int sortIdx = Array.IndexOf(args, "--sort");
+        int rsortIdx = Array.IndexOf(args, "--rsort");
+        if (sortIdx >= 0 && sortIdx + 1 < args.Length)
+        {
+            if (int.TryParse(args[sortIdx + 1], out int sc) && sc >= 1)
+                sortCol = sc - 1; // convert to 0-indexed
+            else
+            {
+                Console.Error.WriteLine("--sort requires a positive column number (1-indexed).");
+                Environment.Exit(2);
+                return;
+            }
+        }
+        else if (rsortIdx >= 0 && rsortIdx + 1 < args.Length)
+        {
+            sortDescending = true;
+            if (int.TryParse(args[rsortIdx + 1], out int sc) && sc >= 1)
+                sortCol = sc - 1;
+            else
+            {
+                Console.Error.WriteLine("--rsort requires a positive column number (1-indexed).");
+                Environment.Exit(2);
+                return;
+            }
+        }
+
         int exportIdx = Array.IndexOf(args, "--export-md");
         if (exportIdx >= 0)
         {
@@ -61,6 +90,8 @@ public class Program
             // Constructor derives ColumnCount from (availableWidth - 4) / columnWidth (default 20).
             var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
             grid.LoadFromCsv(csvPath);
+            if (sortCol >= 0)
+                SortGrid(grid, sortCol, sortDescending);
             if (outPath == "-")
             {
                 grid.WriteMarkdownTo(Console.Out);
@@ -106,6 +137,8 @@ public class Program
             }
             var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
             grid.LoadFromCsv(csvPath);
+            if (sortCol >= 0)
+                SortGrid(grid, sortCol, sortDescending);
             if (htmlOut == "-")
             {
                 grid.WriteHtmlTo(Console.Out);
@@ -151,6 +184,8 @@ public class Program
             }
             var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
             grid.LoadFromCsv(csvPath);
+            if (sortCol >= 0)
+                SortGrid(grid, sortCol, sortDescending);
             if (jsonOut == "-")
             {
                 grid.WriteJsonTo(Console.Out);
@@ -269,7 +304,61 @@ public class Program
         Console.WriteLine("  http(s)://...     Hyperlink. Highlighted, opens in browser on Enter.");
         Console.WriteLine();
         Console.WriteLine("Range references work inside text: {A1::C10}");
+        Console.WriteLine();
+        Console.WriteLine("Export modifiers:");
+        Console.WriteLine("  --sort <col>      Sort rows ascending by column number (1-indexed)");
+        Console.WriteLine("  --rsort <col>     Sort rows descending by column number (1-indexed)");
+        Console.WriteLine();
         Console.WriteLine("Tour: docs/tour.md · Issues: github.com/cemheren/QuickSheet/issues");
+    }
+
+    private static void SortGrid(GridManager grid, int col, bool descending)
+    {
+        int rowCount = grid.RowCount;
+        int colCount = grid.ColumnCount;
+
+        // Find last non-empty row to avoid sorting trailing blank rows.
+        int lastRow = -1;
+        for (int r = 0; r < rowCount; r++)
+            for (int c = 0; c < colCount; c++)
+                if (!string.IsNullOrEmpty(grid.GetCellValue(r, c)))
+                    { lastRow = r; break; }
+
+        // Need at least 2 data rows (row 0 is header).
+        if (lastRow < 1) return;
+
+        // Extract data rows (skip header at row 0).
+        var rows = new List<string[]>();
+        for (int r = 1; r <= lastRow; r++)
+        {
+            var row = new string[colCount];
+            for (int c = 0; c < colCount; c++)
+                row[c] = grid.GetCellValue(r, c);
+            rows.Add(row);
+        }
+
+        // Sort: numeric-aware comparison on the target column.
+        int safeCol = Math.Min(col, colCount - 1);
+        rows.Sort((a, b) =>
+        {
+            string va = a[safeCol];
+            string vb = b[safeCol];
+            bool aNum = double.TryParse(va, System.Globalization.NumberStyles.Any,
+                System.Globalization.CultureInfo.InvariantCulture, out double da);
+            bool bNum = double.TryParse(vb, System.Globalization.NumberStyles.Any,
+                System.Globalization.CultureInfo.InvariantCulture, out double db);
+            int cmp;
+            if (aNum && bNum)
+                cmp = da.CompareTo(db);
+            else
+                cmp = string.Compare(va, vb, StringComparison.OrdinalIgnoreCase);
+            return descending ? -cmp : cmp;
+        });
+
+        // Write sorted rows back into the grid.
+        for (int r = 0; r < rows.Count; r++)
+            for (int c = 0; c < colCount; c++)
+                grid.SetCellValue(r + 1, c, rows[r][c]);
     }
 
 #if PLATFORM_WINDOWS
