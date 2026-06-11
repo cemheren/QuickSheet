@@ -1,3 +1,11 @@
+## 2026-06-11 (chore: good first issue labels)
+
+- Stars: 0 (Δ 0).
+- Action: Created 4 well-scoped "good first issue" issues (#372–#375) to get the repo indexed by goodfirstissue.dev, CodeTriage, and Up For Grabs. Issues: shell completions, stdout export with `-`, help examples, Makefile.
+- Bucket: B (discoverability / community health).
+- Outcome: Issues #372, #373, #374, #375 created with "good first issue" + appropriate secondary labels.
+- Follow-up: Variety next run → Bucket F or C. Monitor if goodfirstissue.dev picks up the issues (usually within 24h).
+
 ## 2026-06-11 (docs: Wayland design document)
 
 - Stars: 0 (Δ 0).
@@ -1949,7 +1957,7 @@
   - **Generic-primitive justifications are not enough.** "Hits N/M personas" alone is not a green light — persona-shaped specifics are required.
 
 - **Launch-readiness actions (from cold-start research 2026-06-06):**
-  0. **Bucket B: Add 3–5 "good first issue" labels** — gets repo indexed by goodfirstissue.dev, CodeTriage, Up For Grabs. Skill can do autonomously.
+  0. ~~**Bucket B: Add 3–5 "good first issue" labels**~~ — DONE (issues #372–#375, 2026-06-11).
   1. ~~**Bucket A: Add subtle star CTA in README**~~ — DONE (PR #350, 2026-06-08).
   2. **HUMAN BLOCKER: Capture demo GIF** — skill cannot do this. Required before launch day.
   3. **HUMAN BLOCKER: Merge PR #308 + tag v1.0.0** — release workflow.
