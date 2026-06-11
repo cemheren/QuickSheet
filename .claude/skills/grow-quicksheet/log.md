@@ -1,3 +1,11 @@
+## 2026-06-10 (feat: --columns flag)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--columns` / `-c` flag for column selection in all headless export modes (--export-md, --export-html, --export-json). Supports column letters (A,B,C) and header name matching.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #365 (commit 1c5eb5e).
+- Follow-up: #158 (Usage pattern / virtual tabs) remains. System saturated with open PRs awaiting merge.
+
 ## 2026-06-10 (docs: freelancer landing page)
 
 - Stars: 0 (Δ 0).
