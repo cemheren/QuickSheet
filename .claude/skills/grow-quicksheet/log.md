@@ -1,3 +1,11 @@
+## 2026-06-11 (feat: stdin pipe support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `-` as input file argument to read CSV from stdin in all headless export modes (--export-md, --export-html, --export-json). Added `LoadFromCsvLines` overload and refactored shared helpers.
+- Bucket: E (quality-of-life feature) / Issue fix.
+- Outcome: PR #360 updated (commit db11dde). Closes #320.
+- Follow-up: #158 (Usage pattern) and #3 (Wayland investigation) remain as open issues.
+
 ## 2026-06-11 (feat: --info flag)
 
 - Stars: 0 (Δ 0).
