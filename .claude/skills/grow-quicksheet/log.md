@@ -1,3 +1,11 @@
+## 2026-06-10 (feat: --delimiter flag)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--delimiter` / `-d` flag for custom field separators (tab, semicolon, etc.) in all headless export modes. Supports `\t`, `tab` keyword, or any single char.
+- Bucket: E (quality-of-life feature) / Issue fix.
+- Outcome: PR #368 (commit b5c5ca4). Closes #319.
+- Follow-up: #321 (--info flag) is next smallest issue.
+
 ## 2026-06-10 (feat: NO_COLOR support)
 
 - Stars: 0 (Δ 0).
