@@ -1,3 +1,11 @@
+## 2026-06-11 (feat: --info flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--info` flag showing file size (human-readable), last-modified timestamp, and row/column dimensions.
+- Bucket: E (issue fix) — Closes #321.
+- Outcome: PR #357 updated (commit 80668a8).
+- Follow-up: #320 (stdin pipe), #319 (--delimiter) remain as open good-first-issues.
+
 ## 2026-06-11 (feat: NO_COLOR support)
 
 - Stars: 0 (Δ 0).
