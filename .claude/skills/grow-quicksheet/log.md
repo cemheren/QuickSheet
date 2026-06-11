@@ -1,3 +1,19 @@
+## 2026-06-11 (draft: Product Hunt submission)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted Product Hunt submission — tagline, description, maker's comment, gallery guidance, timing strategy, amplification plan. Also added topics to `cemheren/quicksheet-cal-ext` (was the only extension repo missing them).
+- Bucket: D (network effects — draft only).
+- Outcome: Draft saved at `drafts/producthunt.md`. Topics added to cal-ext.
+- Follow-up: Human needs demo GIF + v1.0.0 release before PH launch is viable. Next run: pick Bucket E small feature or another open issue if PRs get merged.
+
+## 2026-06-11 (feat: --info flag)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--info` flag showing file size (human-readable), last-modified timestamp, row/column counts, and header line.
+- Bucket: E (quality-of-life feature) / Issue fix.
+- Outcome: PR #357 updated (commit a7127b7). Closes #321.
+- Follow-up: #320 (stdin pipe support) is next smallest issue.
+
 ## 2026-06-10 (feat: --delimiter flag)
 
 - Stars: 0 (Δ 0).
