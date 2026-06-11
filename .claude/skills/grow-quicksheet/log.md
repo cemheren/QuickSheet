@@ -1,3 +1,11 @@
+## 2026-06-10 (ext: mcal month calendar)
+
+- Stars: 0 (Δ 0).
+- Action: Created `quicksheet-cal-ext` extension repo — mini text month-view calendar with today highlighted. `mcal:` prefix. Zero network, zero NuGet. Published to `cemheren/quicksheet-cal-ext`, cross-linked in README + extensions.md.
+- Bucket: F (vertical extension).
+- Outcome: Repo https://github.com/cemheren/quicksheet-cal-ext created. PR #366 for cross-link.
+- Follow-up: System saturated with open PRs. Next run: variety (Bucket C/D/R).
+
 ## 2026-06-10 (feat: --columns flag)
 
 - Stars: 0 (Δ 0).
