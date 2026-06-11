@@ -1,3 +1,11 @@
+## 2026-06-11 (feat: --info flag)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--info` flag showing file size (human-readable), last-modified timestamp, row/column counts, and header names. Closes #321.
+- Bucket: E (quality-of-life feature) / Issue fix.
+- Outcome: PR #357 updated (commit e109cbd). Closes #321.
+- Follow-up: #320 (stdin pipe support) is next smallest issue.
+
 ## 2026-06-10 (feat: --delimiter flag)
 
 - Stars: 0 (Δ 0).
