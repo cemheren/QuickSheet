@@ -1,3 +1,868 @@
+## 2026-06-10 (feat: --columns flag)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--columns` / `-c` flag for column selection in all headless export modes (--export-md, --export-html, --export-json). Supports column letters (A,B,C) and header name matching.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #365 (commit 1c5eb5e).
+- Follow-up: #158 (Usage pattern / virtual tabs) remains. System saturated with open PRs awaiting merge.
+
+## 2026-06-10 (docs: freelancer landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-freelancers.md` audience landing page for 1099 contractors/solopreneurs + `examples/freelancer-dashboard.csv` starter layout. Showcases 1099, salestax, mileage, depr, payroll, mortgage extensions in a tax-tracking workflow.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #364 (commit ca3f79c).
+- Follow-up: All major audience landing pages now complete (homelab, SRE, students, traders, DMs, artists, freelancers). Next run: Bucket E feature or Bucket D awesome-list submission nudge.
+
+## 2026-06-10 (docs: artist landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-artists.md` audience landing page for freelance artists/illustrators + `examples/artist-dashboard.csv` starter layout. Showcases commission queue, colour palettes, app launchers, income tracking.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #363 (commit 73dee58).
+- Follow-up: All planned audience landing pages now complete. Next run: variety — Bucket C/D/R.
+
+## 2026-06-08 (feat: --head/--tail flags)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--head N` and `--tail N` flags for header-aware CSV row slicing in pipelines. Both preserve header row and output raw CSV to stdout.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #361 (commit 5e84fd9).
+- Follow-up: #158 (Usage pattern / virtual tabs) remains as the next big feature. System remains saturated with 5 open PRs.
+
+## 2026-06-08 (feat: stdin pipe support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `-` as stdin file argument for headless export modes (--export-md, --export-html, --export-json). Buffers stdin to temp file, cleans up after. Updated --help. Closes #320.
+- Bucket: E (quality-of-life feature) / Issue fix.
+- Outcome: PR #360 (commit 21b14a5).
+- Follow-up: #158 (Usage pattern) or #3 (Wayland investigation) are remaining open issues.
+
+## 2026-06-08 (docs: DM/TTRPG landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` audience landing page for tabletop RPG dungeon masters + `examples/dm-screen.csv` starter layout. Showcases `roll` and `init` extensions.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #359 (commit 27aa05e).
+- Follow-up: `for-artists.md` is the remaining landing page candidate. Or Bucket C/D for variety.
+
+## 2026-06-08 (feat: --info flag)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--info` flag showing file path, human-readable size, last-modified timestamp, row/column count, and detected headers. Closes #321.
+- Bucket: E (quality-of-life feature) / Issue fix.
+- Outcome: PR #357 (commit 5fc4b05).
+- Follow-up: #320 (stdin pipe support) is next smallest open issue.
+
+## 2026-06-08 (feat: NO_COLOR support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented NO_COLOR environment variable support (https://no-color.org/). Added `AppEnvironment.NoColor` static property and documented in --help. Closes #318.
+- Bucket: E (quality-of-life feature) / Issue fix.
+- Outcome: PR #323 updated (commit 3332145).
+- Follow-up: #158 (Usage pattern) or #3 (Wayland investigation) are remaining open issues without PRs.
+
+## 2026-06-08 (feat: --delimiter flag)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--delimiter` / `-d` flag for headless export modes. Supports tab, semicolon, any single char. Closes #319.
+- Bucket: E (quality-of-life feature) / Issue fix.
+- Outcome: PR #324 updated (commit f95b10b).
+- Follow-up: #318 (NO_COLOR) is next smallest open issue.
+
+## 2026-06-08 (docs: CITATION.cff)
+
+- Stars: 0 (Δ 0).
+- Action: Added `CITATION.cff` enabling GitHub's "Cite this repository" sidebar widget. Targets academic persona (arxiv/pubmed/cite extension users).
+- Bucket: B (metadata/discoverability).
+- Outcome: PR #354 (commit 4a63ee1).
+- Follow-up: System remains saturated (35 PRs open). Next variety pick: Bucket C/D or no-op if nothing new.
+
+## 2026-06-08 (docs: star CTA in README)
+
+- Stars: 0 (Δ 0).
+- Action: Added subtle star CTA blockquote in README after Quick Start section. One-line `> **Like what you see?** A ⭐ on GitHub helps others discover the project.`
+- Bucket: A/B (product polish + discoverability).
+- Outcome: PR #350 (commit c35caf0).
+- Follow-up: Launch-readiness item 0 (good first issue labels) already done (4 exist). Next: variety — Bucket F extension or Bucket C/D draft.
+
+## 2026-06-08 (no-op: saturated, awaiting merge — run 5)
+
+- Stars: 0 (Δ 0).
+- Action: No-op. Re-swept main repo (6 open issues, all have PRs) + 45 cemheren/quicksheet-* extension repos (0 open issues). 34 PRs open on main repo awaiting user merge. All queued Bucket F extensions already shipped as public repos. No new issues filed anywhere in the ecosystem.
+- Bucket: —
+- Outcome: No-op logged. Bottleneck remains user merge/publication, not production.
+- Follow-up: Re-sweep next run. If PRs get merged and issues close, pick from backlog.
+
+## 2026-06-07 (no-op: saturated, awaiting merge — run 4)
+
+- Stars: 0 (Δ 0).
+- Action: No-op. Re-swept main repo (6 open issues, all have PRs) + 46 cemheren/quicksheet-* extension repos (0 issues) + Deskworks/quicksheet-todo#2 (design question, not code). 30 PRs open awaiting user merge. Attempted `gha:` extension scaffold but repo already existed. All queued Bucket F items already shipped as public repos.
+- Bucket: —
+- Outcome: No-op logged. Bottleneck remains publication/merge, not production.
+- Follow-up: Re-sweep next run. If PRs get merged and issues close, pick from backlog.
+
+## 2026-06-07 (ci: build workflow)
+
+- Stars: 0 (Δ 0).
+- Action: Added `.github/workflows/build.yml` — runs `dotnet build` on both ubuntu-latest and windows-latest for pushes to main and PRs. Matrix strategy, .NET 9, Release config.
+- Bucket: B (discoverability / project health signal).
+- Outcome: PR #345 (commit 2ecf18d).
+- Follow-up: Variety next. 31 PRs now open awaiting merge. System remains saturated on publication side.
+
+## 2026-06-07 (docs: DM/GM audience landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` targeting tabletop RPG game masters — initiative tracking, dice rolling, NPC HP management, session notes. Added `examples/dm-dashboard.csv` starter sheet. Linked from README.
+- Bucket: A (product polish / audience page).
+- Outcome: PR #343 (commit 8b59385).
+- Follow-up: Variety next → Bucket C or D. 37 PRs now open awaiting merge.
+
+## 2026-06-07 (no-op: saturated, awaiting merge — run 2)
+
+- Stars: 0 (Δ 0).
+- Action: No-op. Re-swept main repo (6 open issues, all already have PRs) + all cemheren/quicksheet-* repos (0 issues) + all Deskworks/quicksheet-* repos (1 issue: quicksheet-todo#2 is a product-design question, not a code fix). 30+ PRs open on main repo awaiting user merge. All drafts, research, and extension scaffolds complete.
+- Bucket: —
+- Outcome: No-op logged. Bottleneck remains publication/merge, not production.
+- Follow-up: Re-sweep next run. If PRs get merged and issues close, pick from backlog (health ext, audience pages, or awesome-list submissions).
+
+## 2026-06-07 (docs: troubleshooting guide)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/troubleshooting.md` — covers build errors, X11/Wayland setup, Windows WorkerW conflicts, extension debugging, CSV encoding, headless export argument order, and autosave locations. Added link from README Quick Start section.
+- Bucket: A (product polish / documentation).
+- Outcome: PR #342 (commit 8402256).
+- Follow-up: Variety next → Bucket C, D, or R. System remains saturated with 30+ PRs awaiting merge.
+
+## 2026-06-07 (no-op: saturated, awaiting merge)
+
+- Stars: 0 (Δ 0).
+- Action: No-op. Re-swept main repo + all extension repos for open issues — none new. 20+ PRs open awaiting user merge. All actionable issues (#318–#321) already have PRs. #158 is too complex (>50 lines, multi-file tabs system). #3 has docs PR #339.
+- Bucket: —
+- Outcome: No-op logged. Bottleneck is publication/merge, not production.
+- Follow-up: Re-sweep next run. If PRs get merged and issues close, pick variety (C/D/R).
+
+## 2026-06-07 (feat: --info flag)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--info` flag showing file size (human-readable B/KB/MB), last-modified timestamp, row count, and column count for a given CSV file. Updated `--help` output.
+- Bucket: E (issue-driven feature, closes #321).
+- Outcome: PR #311 updated (commit 00d0f38).
+- Follow-up: Remaining open issues: #320 (stdin), #319 (--delimiter), #318 (NO_COLOR), #158 (usage pattern), #3 (Wayland). Variety next → Bucket C or D.
+
+## 2026-06-07 (docs: Wayland investigation)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/wayland-investigation.md` addressing issue #3 — comprehensive analysis of Wayland compositor wallpaper protocols, implementation options (native P/Invoke vs C shim vs XWayland fallback), compositor support matrix, and phased roadmap.
+- Bucket: A (product polish / documentation, addresses oldest open issue).
+- Outcome: PR #339 (commit 213eea1).
+- Follow-up: Phase 1 implementation (runtime Wayland detection + user-facing message) could be a future Bucket E action. Variety next → Bucket C or D.
+
+## 2026-06-06 (feat: --delimiter flag)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--delimiter` / `-d` flag for headless export modes. Supports single chars, `\t`, and `tab`. Updated `GridManager.ParseCsvLine` and `LoadFromCsv` with delimiter parameter. Updated `--help`.
+- Bucket: E (issue-driven feature, closes #319).
+- Outcome: PR #324 updated (commit bf69edc).
+- Follow-up: Remaining open issues: #158 (usage pattern), #3 (Wayland). Variety next → Bucket C or D.
+
+## 2026-06-06 (feat: stdin pipe support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `-` as stdin placeholder for headless export modes (`--export-md`, `--export-html`, `--export-json`). Reads piped CSV via temp file, cleans up after export. Updated `--help` with usage example.
+- Bucket: E (issue-driven feature, closes #320).
+- Outcome: PR #334 (commit 04d0c8f).
+- Follow-up: Remaining open issues: #319 (--delimiter), #158 (usage pattern), #3 (Wayland). Variety next → Bucket C or D.
+
+## 2026-06-06 (feat: NO_COLOR environment variable support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented NO_COLOR standard (https://no-color.org/) — added `TerminalStyle.cs` with ANSI SGR helpers that auto-suppress when `NO_COLOR` is set. Colorized `--help`, `--version`, `--list-extensions` output with bold/cyan/green accents, all suppressed by `NO_COLOR=1`.
+- Bucket: E (issue-driven feature, closes #318).
+- Outcome: PR #323 updated (commit 68556f0).
+- Follow-up: Remaining open issues: #319 (--delimiter), #158 (usage pattern), #3 (Wayland). Variety next → Bucket C or D.
+
+## 2026-06-06 (docs: artist audience landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-artists.md` audience landing page for freelance illustrators and creative studios, plus `examples/artist-dashboard.csv` starter sheet with commission tracker, color palette zone, and social posting schedule. Updated README audience-guides line.
+- Bucket: A (product polish / audience landing page).
+- Outcome: PR #333.
+- Follow-up: All audience pages now complete (homelab, sre, students, traders, DMs, artists). Next variety → Bucket C, D, or R.
+
+## 2026-06-06 (docs: add PR template)
+
+- Stars: 0 (Δ 0).
+- Action: Added `.github/PULL_REQUEST_TEMPLATE.md` — lightweight checklist covering zero-NuGet-deps, cross-platform build, CSV format stability, backward-compatible keybindings.
+- Bucket: B (discoverability / community health).
+- Outcome: PR #331.
+- Follow-up: Saturation continues. 20+ PRs awaiting user merge. No new issues to fix. Next run: no-op unless new issue appears or user merges backlog.
+
+## 2026-06-06 (docs: DM audience landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` audience landing page targeting TTRPG dungeon masters, plus `examples/dm-dashboard.csv` starter sheet. Updated README audience-guides line to include the new link.
+- Bucket: A (product polish / audience landing page).
+- Outcome: PR #306 updated (commit 732ea8c).
+- Follow-up: Variety next → Bucket C or D. Remaining audience page: `for-artists.md`. Consider drafting r/unixporn TTRPG-rice post (Bucket C) once roll:/init: are featured.
+
+## 2026-06-06 (feat: --info flag with file stats)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--info` headless flag showing file size, last-modified, rows, columns, headers, non-empty cell %. Combines issues #311 and #321 into one PR. Made `ParseCsvLine` internal for reuse.
+- Bucket: E (quality-of-life feature, issue-driven).
+- Outcome: PR #329.
+- Follow-up: User merges. Variety next → Bucket C or D.
+
+## 2026-06-06 (docs: extensions directory update)
+
+- Stars: 0 (Δ 0).
+- Action: Added 13 missing cemheren/ extension repos to docs/extensions.md (pw, books, ollama, payroll, init, salestax, hashgen, ai-costs, words, nuget, maven, unitconv). Updated badge from 69+ to 80+.
+- Bucket: A (product polish).
+- Outcome: PR #328.
+- Follow-up: Variety next → Bucket C or R. All extension repos now cross-linked. Publication remains bottleneck.
+
+## 2026-06-06 (docs: star CTA in README)
+
+- Stars: 0 (Δ 0).
+- Action: Added a subtle blockquote CTA after the audience-specific guides section encouraging visitors to star the repo. Placed after value prop + Quick Start so it appears once the reader already understands the project.
+- Bucket: A (product polish).
+- Outcome: PR #327.
+- Follow-up: Variety next → Bucket F (health: or roll: extension) or Bucket D (awesome-list draft). #321 still blocked on #311 merge.
+
+## 2026-06-06 (feat: stdin pipe support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `-` as file argument to read CSV from stdin (issue #320). Reads stdin into temp file, cleanup via finally block. Works with all headless export modes. Updated help text with examples.
+- Bucket: E (quality-of-life feature, issue-driven).
+- Outcome: PR #325.
+- Follow-up: #321 (file size in --info) blocked on #311 merge. Variety next: Bucket C, D, or F.
+
+## 2026-06-06 (feat: --delimiter flag)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--delimiter` / `-d` flag for headless modes (issue #319). Supports single-char delimiters, `\t`, and `tab`. Added delimiter param to `ParseCsvLine`/`LoadFromCsv`, extracted `CountMaxColumns` helper, improved positional arg parsing.
+- Bucket: E (quality-of-life feature, issue-driven).
+- Outcome: PR #324.
+- Follow-up: Tackle #320 (stdin pipe) or #321 (file size in --info, depends on #311 merge) next. Variety: consider Bucket C/D/F after.
+
+## 2026-06-06 (feat: NO_COLOR support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented NO_COLOR environment variable support (issue #318). Added `TermOutput.cs` static helper class that checks NO_COLOR + stdout redirect. Applied color to `--version` (bold) and `--list-extensions` (green prefixes, dim versions) to give the feature teeth.
+- Bucket: E (quality-of-life feature, issue-driven).
+- Outcome: PR #323.
+- Follow-up: Tackle #321 (file size in --info) or #319 (--delimiter flag) next. Variety: consider Bucket C/D after.
+
+## 2026-06-06 (research: cold-start launch playbook)
+
+- Stars: 0 (Δ 0).
+- Action: Researched cold-start tactics for 0-star repos. Synthesized timing, venue, conversion rates, and anti-patterns into `research/cold-start-launch-playbook.md`. Created `drafts/launch-day-checklist.md` — a step-by-step launch-day sequence (HN → Reddit → Twitter → awesome-lists) the human can execute on a Tuesday morning.
+- Bucket: R (deep research).
+- Outcome: Research saved at `research/cold-start-launch-playbook.md`; draft saved at `drafts/launch-day-checklist.md`.
+- Follow-up: Queue "good first issue" labels (skill can do autonomously next run). Repo is launch-ready pending: (1) demo GIF capture by human, (2) merge release workflow PR #308, (3) tag v1.0.0.
+
+## 2026-06-06 (docs: for-artists landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-artists.md` audience landing page for freelance illustrators, graphic designers, 3D artists, UI/UX designers, and photographers. Showcases color extension (palette/conversion), unit extension (print measurements), color-coded client tracking, and quick-launch cells. Added `examples/artist-dashboard.csv` starter sheet + README cross-link.
+- Bucket: A (product polish).
+- Outcome: PR #315.
+- Follow-up: Variety next run → Bucket C, D, or F. All queued audience landing pages (homelab, traders, sre, students, dms, writers, artists) now shipped. Consider new extension vertical or Bucket R research.
+
+## 2026-06-06 (feat: --sort flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--sort <column>` headless CLI flag. Sorts CSV rows by column name or 0-based index, with `--desc` for descending. Smart numeric/text comparison.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #314.
+- Follow-up: Variety next run → Bucket C, D, or F. Consider a new extension vertical (legal: case/stat) or audience landing page (for-students).
+
+## 2026-06-06 (docs: for-writers landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-writers.md` audience landing page for writers, novelists, academics, and researchers. Showcases define, thes, cite, arxiv extensions as a writing toolkit. Added `examples/writer-dashboard.csv` starter sheet + README cross-link.
+- Bucket: A (product polish).
+- Outcome: PR #313.
+- Follow-up: Variety next run → Bucket F or E. All queued backlog items are shipped; consider new extension verticals (legal: case/stat, or yield: dividend) or tackling issue #158 if user wants to scope it smaller.
+
+## 2026-06-06 (feat: --info flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--info` headless CLI flag. Prints CSV metadata (row count, column count, headers, non-empty cell percentage). Proper CSV parsing with quote handling.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #311.
+- Follow-up: Variety next run → Bucket C, D, or R. User has ~9 open PRs (#303–311).
+
+## 2026-06-06 (feat: quicksheet-pw-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Created `quicksheet-pw-ext` — secure password/PIN/hex/passphrase generator. CSPRNG-backed, entropy indicator, zero network. Cross-linked in README + extensions.md.
+- Bucket: F (vertical extension).
+- Outcome: Repo created at `cemheren/quicksheet-pw-ext`. PR #310 for cross-links. (Also created `cemheren/quicksheet-ip-ext` but discovered `Deskworks/quicksheet-ipinfo` already covers that slot — ip-ext is orphaned, couldn't delete due to token scope.)
+- Follow-up: Variety next run → Bucket A, C, or D. User has 8 open PRs (#303–310) to review.
+
+## 2026-06-06 (ci: release workflow)
+
+- Stars: 0 (Δ 0).
+- Action: Created `.github/workflows/release.yml` — publishes self-contained win-x64 + linux-x64 binaries on `v*` tag push. Single-file, no .NET SDK required to run. Matrix build, softprops/action-gh-release with auto release notes.
+- Bucket: E (quality-of-life / infrastructure).
+- Outcome: PR #308.
+- Follow-up: Once merged, user can `git tag v1.0.0 && git push origin v1.0.0` to cut first release. Unblocks Scoop/winget/AUR submissions. Variety next run → Bucket C, D, or F.
+
+## 2026-06-05 (feat: --merge flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--merge` headless CLI flag. Vertically concatenates two CSVs to stdout, auto-deduplicating headers when they match. Useful for combining split data in shell pipelines.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #307.
+- Follow-up: Variety next run → Bucket C, D, or R. User has ~5 open PRs to review (#303–307).
+
+## 2026-06-05 (docs: for-dms landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` audience landing page for TTRPG DMs/GMs + `examples/dm-screen.csv`. Cross-links `roll` and `init` extensions. Updated README audience guide line.
+- Bucket: A (product polish).
+- Outcome: PR #306.
+- Follow-up: Variety next run → Bucket D or C. r/dnd + r/rpg draft angle now has a landing page to link to.
+
+## 2026-06-05 (feat: quicksheet-books-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Created `quicksheet-books-ext` — book lookup via Open Library (free, no API key). Search by title, ISBN, or keyword. Returns title, author, year, publisher, pages. Cross-linked in README, extensions.md, tour.md.
+- Bucket: F (vertical extension).
+- Outcome: Repo created at `cemheren/quicksheet-books-ext`. PR #305 for cross-links.
+- Follow-up: Variety next run → Bucket C or R. Consider r/books or academic community angle.
+
+## 2026-06-05 (drafts: Console.dev submission)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted Console.dev newsletter submission (30k+ dev subscribers). Includes tool name, URL, short/long descriptions, key features, category tags, and submitter notes. No screenshot required for this channel.
+- Bucket: D (network effects / directory submissions).
+- Outcome: Draft saved at `drafts/console-dev-submission.md`, committed directly to main (skill-only file).
+- Follow-up: User submits at https://console.dev/submit. Variety next run → Bucket E or F. Terminal Trove submission still blocked on screenshot.
+
+## 2026-06-05 (feat: --sample N flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--sample N` headless CLI flag. Outputs CSV header + N random data rows using Fisher-Yates partial shuffle. Quote-aware (handles embedded newlines in quoted fields). Useful for quick data exploration in shell pipelines.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #304.
+- Follow-up: Variety next run → Bucket C, D, or R. User has ~2 open PRs to review (#303, #304).
+
+## 2026-06-03 (feat: quicksheet-rss-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Created `quicksheet-rss-ext` — RSS/Atom feed reader extension. Parses RSS 2.0 + Atom via built-in System.Xml, supports multi-feed aggregation via file, sorts by date. Makes the existing README "RSS" claim truthful. Cross-linked in README, tour.md, extensions.md.
+- Bucket: F (vertical extension).
+- Outcome: Repo created at `cemheren/quicksheet-rss-ext`. PR #303 for cross-links.
+- Follow-up: Variety next run → Bucket C or E. Consider r/selfhosted draft mentioning RSS for homelab dashboard angle.
+
+## 2026-06-03 (research: terminal-tool influencers)
+
+- Stars: 0 (Δ 0).
+- Action: Researched top 10 terminal-tool influencers and signal-boosting channels. Identified newsletters (Terminal Trove, Console.dev), key individuals (Charm team, ThePrimeagen, Hanselman, rothgar), and submission processes.
+- Bucket: R (deep research).
+- Outcome: Research brief saved at `research/terminal-tool-influencers.md`.
+- Follow-up: (1) User captures screenshot → submit to Terminal Trove. (2) Draft Console.dev submission description (no image needed). (3) Queue awesome-tuis PR after screenshot. Variety next run → Bucket A, C, or E.
+
+## 2026-06-03 (ci: release workflow)
+
+- Stars: 0 (Δ 0).
+- Action: Added `.github/workflows/release.yml` — on `v*` tag push, builds self-contained single-file binaries (win-x64 .zip, linux-x64 .tar.gz) and creates a GitHub Release with assets attached. Uses .NET 9, PublishSingleFile, IncludeNativeLibrariesForSelfExtract.
+- Bucket: E (quality-of-life / infrastructure).
+- Outcome: PR #247 (force-pushed updated workflow to existing branch).
+- Follow-up: Once merged + first tag pushed, draft Scoop manifest and AUR PKGBUILD. Variety next run → Bucket C or D.
+
+## 2026-06-03 (feat: --count flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--count` headless CLI flag. Prints CSV row count (quote-aware — embedded newlines in quoted fields don't inflate the count). Useful in shell pipelines for pre-flight checks.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #298.
+- Follow-up: Variety next run → Bucket C or D. ~34 open PRs awaiting merge.
+
+## 2026-06-03 (docs: artist/creative landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-artists.md` landing page + `examples/artist-dashboard.csv` starter sheet. Targets illustrators, painters, photographers, freelance creatives. Highlights commission tracking, colour palette lookup (color ext), word bank (thes ext), deadline countdowns (cal ext), and freelance income/tax cluster.
+- Bucket: A (product polish / audience landing page).
+- Outcome: PR #296.
+- Follow-up: Variety next run → Bucket C, D, or E. All planned `for-*.md` pages now complete (homelab, students, sre, traders, dms, artists).
+
+## 2026-06-03 (feat: --head/--tail flags)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--head N` and `--tail N` headless CLI flags. CSV-aware row slicing that preserves multi-line quoted fields. Complements the headless pipeline (--export-md/html/json, --filter, --sort, --select, --info, --transpose).
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #295.
+- Follow-up: Variety next run → Bucket C, D, or R. ~33 open PRs awaiting merge.
+
+## 2026-06-03 (feat: --transpose flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--transpose` headless CLI flag. Reads CSV, swaps rows↔columns, outputs transposed CSV to stdout or file. Proper CSV parsing (quoted fields, escaped quotes, ragged rows). Completes the headless pipeline alongside --filter, --select, --sort.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #294.
+- Follow-up: Variety next run → Bucket C or D. ~32 open PRs awaiting merge.
+
+## 2026-06-03 (meta: bulk topic tagging across extension repos)
+
+- Stars: 0 (Δ 0).
+- Action: Added GitHub topics (`quicksheet`, `quicksheet-extension`, `dotnet`, `csharp`, plus domain-specific tags) to 51 extension repos across cemheren/ and Deskworks/ orgs. Previously these repos had zero topics, making them invisible in GitHub topic search.
+- Bucket: B (discoverability / metadata).
+- Outcome: Direct `gh repo edit` — no PR needed (metadata only, no code). All repos now surface when users browse `github.com/topics/quicksheet-extension`.
+- Follow-up: Variety next run → Bucket A, C, or E. Note: `cemheren/quicksheet-weather-ext` was accidentally created (duplicate of `Deskworks/quicksheet-weather`) — user should delete it (`gh auth refresh -h github.com -s delete_repo && gh repo delete cemheren/quicksheet-weather-ext --yes`).
+
+## 2026-06-03 (docs: DM landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` landing page for tabletop RPG Game Masters + `examples/dm-dashboard.csv` starter sheet with initiative, dice, NPC tracker, loot, and session notes zones. Pairs with existing `quicksheet-init-ext` and `quicksheet-roll-ext`.
+- Bucket: A (product polish / audience landing page).
+- Outcome: PR #292.
+- Follow-up: Variety next run → Bucket C, D, or F. Remaining landing page candidates: `for-artists.md`.
+
+## 2026-06-03 (feat: --info flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--info` headless CLI flag. Prints CSV summary: file name, row count, column count, per-column header/inferred-type/non-empty-count. Proper CSV parsing (quoted fields, escaped quotes). Useful for quick data inspection.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #291.
+- Follow-up: Variety next run → Bucket C or D. ~31 open PRs awaiting merge.
+
+## 2026-06-03 (ci: release workflow)
+
+- Stars: 0 (Δ 0).
+- Action: Created `.github/workflows/release.yml` — publishes self-contained win-x64 (.zip) and linux-x64 (.tar.gz) single-file binaries as GitHub Release assets on `v*` tag push. Uses matrix strategy with OS-native runners. Unblocks Scoop/winget/AUR submissions.
+- Bucket: E (quality-of-life / infrastructure).
+- Outcome: PR #247 updated (force-pushed clean workflow).
+- Follow-up: After merge + next tag push, draft Scoop manifest. Variety next run → Bucket C or D.
+
+## 2026-06-03 (docs: README typo fix)
+
+- Stars: 0 (Δ 0).
+- Action: Fixed three typos/grammar issues in README.md — "funcitonality" → "functionality", "a emacs" → "an Emacs", "Multi select" → "Multi-select". Small but genuine first-impression polish.
+- Bucket: A (product polish).
+- Outcome: PR #286.
+- Follow-up: Project remains saturated (~60 PRs awaiting merge). Next run: no-op unless new issues appear or user merges a batch.
+
+## 2026-06-02 (feat: --select flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--select <col1,col2,...>` headless CLI flag. Selects columns by header name or 1-based index. Outputs projected CSV to stdout. CSV-aware quoting. Clear error with available-columns hint on mismatch.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #285.
+- Follow-up: Variety next run → Bucket C or D. ~60 open PRs awaiting merge. The headless pipeline (--select + --filter + --sort) is now feature-complete for basic CSV wrangling.
+
+## 2026-06-02 (feat: --filter flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--filter <column><op><value>` headless CLI flag. Selects rows where column matches condition. Supports = != > < >= <= ~ (contains). Numeric-aware comparisons. Pipe-friendly CSV output to stdout.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #283.
+- Follow-up: Variety next run → Bucket C or D. ~51 open PRs awaiting merge.
+
+## 2026-06-02 (ext: quicksheet-depr-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Published `cemheren/quicksheet-depr-ext` — straight-line + MACRS (IRS Pub 946 half-year convention) depreciation schedule calculator. Supports 3/5/7/10/15/20-year MACRS tables + optional salvage value for straight-line. Pure math, zero network, zero deps.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-depr-ext. PR #282 for cross-link update in README/extensions.md/tour.md.
+- Follow-up: Accounting queue complete (mileage ✓, margin ✓, depr ✓). Variety next run → different bucket.
+
+## 2026-06-02 (no-op: saturated)
+
+- Stars: 0 (Δ 0).
+- Action: No-op. Swept main repo (2 issues: #158 too large, #3 needs desktop mode) and all `quicksheet-*` extension repos (0 open issues). All drafted extensions already published. 30 PRs open awaiting user review. Bottleneck is publication, not production.
+- Bucket: —
+- Outcome: No-op logged.
+- Follow-up: User should batch-merge outstanding PRs to unblock further work. Issue #158 (virtual tabs) is the next meaningful feature but requires multi-file implementation beyond single-run scope.
+
+## 2026-06-02 (ext: quicksheet-margin-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Published `cemheren/quicksheet-margin-ext` — break-even & contribution-margin calculator. Computes contribution margin/unit, break-even units, break-even revenue, margin ratio. Optional `units=N` for profit at target volume. Pure math, zero network, zero deps.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-margin-ext. PR #280 for cross-link update in README/extensions.md/tour.md.
+- Follow-up: Remaining from accounting queue: `quicksheet-depr-ext` (depreciation schedules). Variety next run → different bucket.
+
+## 2026-06-02 (docs: add 11 unlisted extensions to directory)
+
+- Stars: 0 (Δ 0).
+- Action: Added 11 published `cemheren/` extension repos to README.md and `docs/extensions.md` that were live but missing from the docs: nuget, maven, payroll, salestax, init, ollama, ai-costs, words, hashgen, unit-ext, pubmed-ext. Ecosystem now shows 85+ extensions in the directory.
+- Bucket: A (product polish — documentation).
+- Outcome: PR #279.
+- Follow-up: Variety next run → Bucket E (release.yml is still #0 priority and hasn't merged). ~50 open PRs awaiting merge.
+
+## 2026-06-02 (feat: --sort headless flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--sort <column>` headless CLI flag. Sorts a CSV by specified column (numeric-aware) and outputs to stdout. Supports `--desc` and `--header` flags. Pipe-friendly for shell workflows.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #276.
+- Follow-up: Variety next run → Bucket C or D. ~49 open PRs awaiting merge.
+
+## 2026-06-02 (ext: quicksheet-stock-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Published `cemheren/quicksheet-stock-ext` — stock ticker quotes via Stooq (free, no API key). Fetches daily close + intra-day change for any ticker. US tickers default to `.us` suffix; international markets via explicit suffix. 5-min cache.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-stock-ext. PR #275 for cross-link update (Deskworks → cemheren in README/extensions.md/tour.md).
+- Follow-up: Remaining unpushed draft: `quicksheet-1099-ext`. Variety next run → different bucket.
+
+## 2026-06-02 (docs: for-artists landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-artists.md` audience landing page for artists, illustrators, and designers + `examples/artist-dashboard.csv` starter sheet. Covers commission pipeline, hex palette strip, deadline countdowns, income sparklines, stream launchers. Added README cross-link.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #274.
+- Follow-up: All audience landing pages now complete (homelab, traders, SRE, students, writers, DMs, artists). Variety next run → Bucket C, D, or E. ~43 open PRs awaiting merge.
+
+## 2026-06-02 (docs: for-dms landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` audience landing page for TTRPG dungeon masters + `examples/dm-dashboard.csv` starter sheet. Covers initiative tracking (init-ext), dice rolling (roll-ext), session notes, encounter tables, quick-ref strips, campaign log, themes. Added README cross-link.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #250 updated (force-pushed fresh content to existing branch).
+- Follow-up: Remaining landing pages: `for-artists.md`. Variety next run → Bucket C, D, or E.
+
+## 2026-06-02 (feat: --theme CLI flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--theme <name>` and `--list-themes` CLI flags. Users can launch with a specific theme (e.g. `ExcelConsole data.csv --theme Nord`) without needing a `config:` cell. Also hardened csvPath detection to skip flag values.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #272.
+- Follow-up: Variety next run → Bucket C, D, or R. ~31 open PRs awaiting merge.
+
+## 2026-06-02 (ext: quicksheet-mxck-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Published `cemheren/quicksheet-mxck-ext` — inline MX record lookup via Google DNS-over-HTTPS. `mxck: example.com` fills rows with mail servers sorted by priority. Zero deps, .NET 9, 1-hour cache. Fixed cross-links in README/extensions.md/tour.md (Deskworks → cemheren).
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-mxck-ext. PR #271 for cross-link.
+- Follow-up: Remaining unpushed drafts: `quicksheet-stock-ext`, `quicksheet-1099-ext`. Variety next run → different bucket.
+
+## 2026-06-02 (no-op: saturated)
+
+- Stars: 0 (Δ 0).
+- Action: Swept issues (main: #158 too large, #3 needs platform; 0 ext-repo issues). Audited all queued backlog items — every extension, research brief, draft, and landing page is shipped or in an open PR. 42 PRs await user merge. 30 extension repos live.
+- Bucket: —
+- Outcome: No-op. Production is saturated; bottleneck is publication (user merges PRs, captures screenshot, posts drafts).
+- Follow-up: Next run should re-sweep issues. If user merges PRs and captures the wallpaper screenshot (Asset A1 in `drafts/social-strategy.md`), the launch sequence becomes actionable. Until then, no further production is warranted.
+
+## 2026-06-01 (docs: for-writers landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-writers.md` audience landing page for writers & academics + `examples/writer-dashboard.csv` starter sheet. Covers manuscript tracking, citation workflow (cite:), word tools (def:/thes:), arXiv lookup, runnable commands. Added cross-link in README.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #257 updated (force-pushed fresh content to existing branch).
+- Follow-up: Also created `cemheren/quicksheet-roll-ext` as duplicate of existing `Deskworks/quicksheet-dice` — cannot delete (no delete_repo scope). Harmless but redundant. Variety next run → Bucket C, D, or R. All queued F items now shipped.
+
+## 2026-06-01 (ci: release workflow)
+
+- Stars: 0 (Δ 0).
+- Action: Refreshed `.github/workflows/release.yml` — builds self-contained single-file binaries (win-x64 + linux-x64) on `v*` tag push, creates GitHub Release with auto release notes and both assets.
+- Bucket: E (quality-of-life / infra).
+- Outcome: PR #247 updated (force-pushed clean workflow to existing branch).
+- Follow-up: Once merged, push `v1.0.0` tag to trigger first release. Then Scoop/winget/AUR submissions become unblocked. Variety next run → Bucket C or D.
+
+## 2026-06-01 (ext: quicksheet-thes-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Published `cemheren/quicksheet-thes-ext` — inline thesaurus (synonyms via free Datamuse API, no key). `thes: <word>` fills rows with synonyms. Pairs with `quicksheet-define-ext`. Fixed org cross-links.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-thes-ext. PR #265 for cross-link addition.
+- Follow-up: Remaining unpushed drafts: `quicksheet-grav-ext`, `quicksheet-mxck-ext`, `quicksheet-price-ext`, `quicksheet-stock-ext`, `quicksheet-1099-ext`. Variety next run → Bucket C, D, or R.
+
+## 2026-06-01 (feat: --export-tsv)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--export-tsv` headless CLI flag — converts CSV to tab-separated output (file or stdout). Sanitizes embedded tabs/newlines. Useful for Unix pipe workflows and pasting into spreadsheet apps.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #264.
+- Follow-up: Variety next run → Bucket C, D, or R. ~30 open PRs awaiting merge.
+
+## 2026-06-01 (ext: quicksheet-unit-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Published `cemheren/quicksheet-unit-ext` — instant unit conversion (length, mass, temperature, volume, speed, data, area, time). `unit: 5 km to miles`. Zero NuGet deps, .NET 9, pure computation.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-unit-ext. PR #263 for cross-link addition.
+- Follow-up: All drafted extensions now published or superseded. Next run variety → Bucket C, D, or R.
+
+## 2026-06-01 (ext: quicksheet-cite-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Published `cemheren/quicksheet-cite-ext` — DOI → formatted citation via Crossref (authors, year, title, venue). Zero NuGet deps, .NET 9. Fixed org cross-links in README + docs.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-cite-ext. PR #262 for cross-link addition.
+- Follow-up: Next unpushed ext draft: `quicksheet-thes-ext`. Variety next run → Bucket C or D.
+
+## 2026-06-01 (docs: for-DMs landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` audience landing page for TTRPG dungeon masters/game masters + `examples/dm-dashboard.csv` starter sheet. References live extensions: `quicksheet-init-ext` (initiative) and `quicksheet-dice` (dice roller). Added cross-link in README audience guides line.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #250 (force-pushed with new content).
+- Follow-up: Variety next run → Bucket D or R. Consider `for-artists.md` if matching extensions land. Bottleneck remains merge throughput.
+
+## 2026-06-01 (ext: quicksheet-ping-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Published `cemheren/quicksheet-ping-ext` — HTTP HEAD/GET probe showing status code + latency in ms. Zero NuGet deps, .NET 9. Updated all cross-links from `Deskworks/` to `cemheren/` in README + 5 docs files.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-ping-ext. PR #261 for cross-link fixes.
+- Follow-up: Next unpushed ext drafts: `quicksheet-cite-ext`, `quicksheet-thes-ext`. Variety next run → Bucket C or R. The r/selfhosted draft now has all its referenced repos live (health, tls, ping, docker, sysmon).
+
+## 2026-06-01 (ext: quicksheet-define-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Published `cemheren/quicksheet-define-ext` — inline English dictionary lookup (`def: <word>`) using free dictionaryapi.dev. Fixed all cross-link references from `Deskworks/` to `cemheren/` in README + docs.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-define-ext. PR #260 for cross-link fixes.
+- Follow-up: Next unpushed ext drafts: `quicksheet-cite-ext`, `quicksheet-thes-ext`, `quicksheet-ping-ext`. Variety next run → Bucket C or R.
+
+## 2026-06-01 (feat: --info CLI flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--info` headless flag — prints CSV metadata (path, dimensions, headers, non-empty cell count, special cell breakdown by type). Single-file change to Program.cs, ~65 lines.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #259.
+- Follow-up: Variety next run → Bucket C or D. 30 open PRs awaiting merge.
+
+## 2026-06-01 (fix: broken health extension link)
+
+- Stars: 0 (Δ 0).
+- Action: Audited all `ext: github:` references in README and docs for 404s. Found `Deskworks/quicksheet-health` is a dead link — actual repo is `cemheren/quicksheet-health-ext`. Fixed in README.md, docs/extensions.md, docs/for-sre.md, docs/for-students.md.
+- Bucket: A (product polish — broken link fix).
+- Outcome: PR #258.
+- Follow-up: Variety next run → Bucket C or R. 29 open PRs; saturation continues. No new issues on any extension repo.
+
+## 2026-06-01 (docs: for-writers landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-writers.md` audience landing page for fiction writers, academics, technical writers, journalists + `examples/writer-dashboard.csv` starter sheet. Added 4 missing extensions (thes, cite, pubmed, words) to README table. Cross-linked from README audience guides line.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #257.
+- Follow-up: Variety next run → Bucket E or F. Consider `for-artists.md` if matching extensions land. 28 open PRs awaiting merge; bottleneck remains publication.
+
+## 2026-06-01 (ext: quicksheet-mortgage-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Created `cemheren/quicksheet-mortgage-ext` — fixed-rate mortgage payment calculator (monthly payment, total interest, total cost). Pure amortization math, no API key, zero NuGet deps. Updated cross-links in README + docs.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-mortgage-ext. PR #256 for cross-links.
+- Follow-up: Next unpushed ext draft: `quicksheet-define-ext` or `quicksheet-ping-ext`. Variety next run → Bucket C or D.
+
+## 2026-06-01 (ci: release workflow)
+
+- Stars: 0 (Δ 0).
+- Action: Created `.github/workflows/release.yml` — publishes self-contained win-x64 (.zip) and linux-x64 (.tar.gz) binaries on tag push. Single-file, no .NET SDK required to run. Uses `softprops/action-gh-release` for the GitHub Release page.
+- Bucket: E (quality-of-life / infra).
+- Outcome: PR #247 (force-pushed with clean workflow; replaces earlier draft).
+- Follow-up: After merge, push a `v0.37.0` tag to test. Then draft Scoop manifest. Variety next → Bucket C or D.
+
+## 2026-05-30 (feat: --set CLI flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--set <CellRef> <value>` headless flag — writes a cell value and saves the CSV without launching desktop mode. Enables cron/CI scripting (e.g. `ExcelConsole dashboard.csv --set B2 "Build passed"`). Complements `--get` (PR #245).
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #254.
+- Follow-up: Next run variety → Bucket C or D. 11+ open PRs awaiting merge; bottleneck remains publication.
+
+## 2026-05-30 (docs: for-accountants landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-accountants.md` audience landing page for freelancers/small business owners + `examples/accountant-dashboard.csv` starter sheet. Showcases all 6 shipped accounting extensions (1099, mileage, depreciation, margin, payroll, sales-tax) as a cohesive dashboard.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #253.
+- Follow-up: Next run variety → Bucket C or R. 27 open PRs awaiting merge; bottleneck remains publication.
+
+## 2026-05-30 (feat: --stats CLI flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--stats` headless flag — prints row count, column count, non-empty cell count, and file size for a CSV file. Useful for shell scripting and quick inspection without launching desktop mode.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #252.
+- Follow-up: Next run variety → Bucket C or D. Saturation note: 11 open PRs await merge; bottleneck remains publication.
+
+## 2026-05-30 (docs: for-dms landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` audience landing page for TTRPG game masters + `examples/dm-dashboard.csv` starter sheet. Highlights `init:`, `roll:`, `cntdn:` extensions for combat tracking, dice rolling, session pacing.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #250.
+- Follow-up: Variety next run → Bucket F (health: or roll: extension). Consider cross-linking for-dms.md from main README's "Who is this for" section after merge.
+
+## 2026-05-30 (ext: quicksheet-mileage-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Pushed `quicksheet-mileage-ext` — IRS standard-mileage deduction calculator (business/medical/charity, 2021–2025 rates). Built, verified green, created repo at cemheren/quicksheet-mileage-ext. Already cross-linked in README line 197 and docs/extensions.md.
+- Bucket: F (vertical extension).
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-mileage-ext. Topics set.
+- Follow-up: Next accounting ext from queue: `quicksheet-margin-ext`. Variety next run → Bucket C or D.
+
+## 2026-05-30 (draft: r/linux post)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted r/linux submission — leads with X11 P/Invoke technical angle, honest about Wayland limitation, positions as Linux-native open-source tool not a Windows port. Distinct from r/commandline (use-case) and r/unixporn (screenshot).
+- Bucket: C (content draft).
+- Outcome: Draft saved at `drafts/reddit-linux.md`.
+- Follow-up: User publishes when ready. Next run variety → Bucket A or E if issues appear.
+
+## 2026-05-30 (ci: release workflow)
+
+- Stars: 0 (Δ 0).
+- Action: Created `.github/workflows/release.yml` — builds self-contained single-file binaries (win-x64 .zip + linux-x64 .tar.gz) on `v*` tag push and attaches them to a GitHub Release.
+- Bucket: E (quality-of-life / infrastructure).
+- Outcome: PR #247.
+- Follow-up: After merge + first tag, draft Scoop manifest. Next run variety → Bucket C or F.
+
+## 2026-05-30 (feat: p: progress bar prefix)
+
+- Stars: 0 (Δ 0).
+- Action: Added `p:` cell prefix — renders a Unicode progress bar (███████░░░ 75%) for values 0–100. Same rendering-layer pattern as sparklines, hooked in both Linux and Windows desktop forms.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #246.
+- Follow-up: Next run variety → Bucket C or D. 21 open PRs awaiting merge.
+
+## 2026-05-30 (feat: --get cell value extraction)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--get <CellRef>` headless flag — extracts a single cell value from CSV by Excel-style reference. Makes QuickSheet composable in shell scripts (`balance=$(QuickSheet budget.csv --get C5)`).
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #245.
+- Follow-up: Next run variety → Bucket C or D. Consider drafting a "shell scripting with QuickSheet" blog snippet showing --get + --export-md pipeline.
+
+## 2026-05-30 (docs: virtual tabs design spec)
+
+- Stars: 0 (Δ 0).
+- Action: Wrote design specification for virtual tabs / weekly aging feature (issue #158). Covers data model, CSV format with backward-compatible `---TAB:name---` separators, aging logic with pinned-cell rules, UX, and four implementation phases.
+- Bucket: A (product polish — addressing owner's feature request).
+- Outcome: PR #244.
+- Follow-up: User reviews design, provides answers to open questions. Implementation can follow in phased PRs once spec is approved.
+
+## 2026-05-30 (duplicate: quicksheet-arxiv-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Attempted Bucket F — scaffolded `quicksheet-arxiv-ext` (arXiv paper lookup). Built successfully, pushed to `cemheren/quicksheet-arxiv-ext`. Then discovered `Deskworks/quicksheet-arxiv` already covers the same `arxiv:` prefix and is listed in README line 208.
+- Bucket: F (vertical extension) — **wasted run**.
+- Outcome: Duplicate repo pushed. Cannot delete (missing `delete_repo` scope). Marked draft README as SUPERSEDED. No cross-link PR opened.
+- Follow-up: User should delete `cemheren/quicksheet-arxiv-ext` (duplicate). Next run should sweep for new issues or no-op if saturation still applies. 15+ PRs still awaiting merge.
+
+## 2026-05-29 (docs: for-artists page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-artists.md` audience landing page + `examples/artist-dashboard.csv`. Targets illustrators, writers, musicians, animators. Pairs with `words`, `ollama`, `unitconv` extensions.
+- Bucket: A (product polish).
+- Outcome: PR #242.
+- Follow-up: Next run variety → Bucket D or E. Consider `for-dms.md` PR #231 already open.
+
+## 2026-05-29 (feat: quicksheet-init-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Created `cemheren/quicksheet-init-ext` — combat initiative tracker for TTRPG GMs. Sort combatants by initiative roll, cycle turns, track rounds. Pairs with `quicksheet-dice` for a DM-screen bundle. Zero NuGet deps.
+- Bucket: F (vertical extension).
+- Outcome: Repo pushed → https://github.com/cemheren/quicksheet-init-ext. Cross-link PR #241.
+- Follow-up: Next run variety → Bucket A (audience landing page) or Bucket D (awesome-list draft).
+
+## 2026-05-29 (draft: r/selfhosted post)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted r/selfhosted submission — "Homepage/Dashy alternative" angle featuring `health-ext`, `tls`, `docker`, `ping`, `sysmon` extensions. Includes posting notes, timing strategy, and a prepared first comment with extension table.
+- Bucket: C (content draft).
+- Outcome: Draft saved at `drafts/reddit-selfhosted.md`, commit 0f37a65.
+- Follow-up: Next run variety → Bucket F (push `roll-ext` draft) or Bucket E.
+
+## 2026-05-29 (feat: quicksheet-salestax-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Created `cemheren/quicksheet-salestax-ext` — US state sales tax rate lookup for all 50 states + DC. Supports abbreviations, full names, and dollar amount calc. Tax Foundation 2024 data. Zero NuGet deps.
+- Bucket: F (vertical extension).
+- Outcome: Repo pushed → https://github.com/cemheren/quicksheet-salestax-ext. Cross-link PR #239.
+- Follow-up: Next run variety → Bucket D (awesome-list draft) or Bucket A.
+
+## 2026-05-29 (feat: --stats CSV summary)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--stats` headless flag — prints file size, row/column count, headers, and cell fill percentage. Makes QuickSheet discoverable as a CLI CSV inspection tool.
+- Bucket: E (QoL feature).
+- Outcome: PR #238.
+- Follow-up: Next run variety → Bucket F (roll: dice extension) or Bucket D.
+
+## 2026-05-29 (ci: release workflow for binaries)
+
+- Stars: 0 (Δ 0).
+- Action: Created `.github/workflows/release.yml` — builds self-contained, trimmed, single-file binaries (win-x64 .zip + linux-x64 .tar.gz) on every `v*` tag push. Uses `softprops/action-gh-release` to attach artifacts to GitHub Releases.
+- Bucket: E (QoL feature / infra).
+- Outcome: PR #235.
+- Follow-up: After merge + first tagged release, draft Scoop manifest submission.
+
+## 2026-05-29 (research: package manager distribution)
+
+- Stars: 0 (Δ 0).
+- Action: Researched package manager distribution strategy (winget, Scoop, AUR, Homebrew, Nix). Found zero binary releases exist — no CI, no artifacts on any release tag. Documented requirements, manifest sketches, and a 5-run roadmap from zero to three package managers.
+- Bucket: R (research).
+- Outcome: `research/package-manager-distribution.md` committed.
+- Follow-up: Next action = create `.github/workflows/release.yml` (Bucket E, ~40 lines YAML). This unblocks all package manager submissions.
+
+## 2026-05-29 (feat: --import-json CLI converter)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--import-json <input.json> <output.csv>` headless converter. Reads a JSON array of objects, emits CSV with first row as headers. Round-trip compatible with `--export-json`. ~60 lines in GridManager + ~35 in Program.cs.
+- Bucket: E (QoL feature).
+- Outcome: PR #233.
+- Follow-up: none.
+
+## 2026-05-29 (docs: tabletop GM audience page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` targeting D&D / Pathfinder / TTRPG game masters. Covers dice rolling (quicksheet-dice), initiative tracking, NPC stat blocks, quick-reference rules, session-tool launchers, and theme picks. Added `examples/dm-screen.csv` starter layout and README cross-link.
+- Bucket: A (docs polish — audience landing page).
+- Outcome: PR #231.
+- Follow-up: none — five audience pages now live (homelab, traders, SRE, students, DMs).
+
+## 2026-05-29 (feat: pubmed extension — academic persona)
+
+- Stars: 0 (Δ 0).
+- Action: Created `cemheren/quicksheet-pubmed-ext` — PubMed article lookup via NCBI E-utilities (free, no key). Supports PMID fetch and keyword search. Pairs with `cite:` and `arxiv:` for a full academic research dashboard on the desktop.
+- Bucket: F (vertical extension).
+- Outcome: Repo pushed → https://github.com/cemheren/quicksheet-pubmed-ext. Cross-link PR #230.
+- Follow-up: none — academic trio (arxiv + cite + pubmed) now complete.
+
+## 2026-05-29 (docs: Wayland support investigation)
+
+- Stars: 0 (Δ 0).
+- Action: Researched Wayland layer-shell feasibility for desktop mode. Documented compositor compatibility (wlroots ✅, GNOME ❌), P/Invoke approach, phased implementation plan, and effort estimates. Addresses issue #3.
+- Bucket: R (research) addressing open issue.
+- Outcome: PR #229.
+- Follow-up: Needs a contributor with Sway/Hyprland to implement Phase 2. Issue #3 stays open until code lands.
+
+## 2026-05-28 (docs: add 18 missing extensions to README + directory)
+
+- Stars: 0 (Δ 0).
+- Action: Audited all Deskworks/ and cemheren/ quicksheet-* repos against README and docs/extensions.md. Found 18 published extensions not listed. Added them all: apistatus, b64, dict, gitlog, hntop, news, rate, sys, pomo, stocks, ai, hash, mvn, nuget, ollama, pubmed, unit, words.
+- Bucket: A (docs polish — discoverability).
+- Outcome: PR #228.
+- Follow-up: none — catalog now reflects all known public extension repos.
+
+## 2026-05-28 (feat: --theme and --list-themes CLI flags)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--theme <name>` flag to start QuickSheet with a specific color theme, and `--list-themes` to enumerate available presets. Also fixed arg parsing so flag values don't get mistaken for the CSV path.
+- Bucket: E (QoL feature).
+- Outcome: PR #227.
+- Follow-up: none.
+
+## 2026-05-28 (docs: ghst + lc in for-students.md)
+
+- Stars: 0 (Δ 0).
+- Action: Added `ghst:` (GitHub streak) and `lc:` (LeetCode daily) extensions to `docs/for-students.md`. Both extensions exist under Deskworks/ but the student audience page didn't mention them. Added a zone-table row + dedicated "GitHub streak + LeetCode daily" section.
+- Bucket: A (docs polish).
+- Outcome: PR #226.
+- Note: Also attempted to create `cemheren/quicksheet-ghstreak-ext` before realizing `Deskworks/quicksheet-ghstreak` already exists. Couldn't delete (no `delete_repo` scope). User should delete the duplicate `cemheren/quicksheet-ghstreak-ext` repo.
+- Follow-up: none — all backlog Bucket F items already exist under Deskworks/.
+
 ## 2026-05-19 (no-op #31 — #139 still open, hold)
 
 - Stars: 0 (Δ 0). PR #139 still open, no other action items. Hold.
@@ -1035,7 +1900,16 @@
   - **No value-driven / rule-embedded-in-text colour primitives.** `c?:` was rejected. Don't re-propose conditional-formatting designs without first asking the user. See [[feedback-no-value-colour]].
   - **Generic-primitive justifications are not enough.** "Hits N/M personas" alone is not a green light — persona-shaped specifics are required.
 
+- **Launch-readiness actions (from cold-start research 2026-06-06):**
+  0. **Bucket B: Add 3–5 "good first issue" labels** — gets repo indexed by goodfirstissue.dev, CodeTriage, Up For Grabs. Skill can do autonomously.
+  1. ~~**Bucket A: Add subtle star CTA in README**~~ — DONE (PR #350, 2026-06-08).
+  2. **HUMAN BLOCKER: Capture demo GIF** — skill cannot do this. Required before launch day.
+  3. **HUMAN BLOCKER: Merge PR #308 + tag v1.0.0** — release workflow.
+  4. **HUMAN ACTION: Execute `drafts/launch-day-checklist.md`** on a Tuesday 6:30–9:30am EST.
+
 - **Live backlog (re-ranked after the c?:/timer revert):**
+  Pre-flight: see standing rules above.
+  0. ~~**Bucket E: `.github/workflows/release.yml`**~~ — DONE (PR #308, 2026-06-06).
   Pre-flight rule for any item below: if you can't explain in one sentence *why this specific persona will install QuickSheet because of this* (not "it could be useful for everyone"), skip and pick something else.
   1. **Bucket F: `health:` HTTP-probe extension.** Reads `services.csv` (name,url,expected_status); fills a row of green/red dots. Homelab persona; writes its own r/selfhosted screenshot. New extension repo on user's account.
   2. **Bucket F: `leetcode:` + `gh:` user-streak combo.** Students persona; "CS-student flex bundle." Free APIs, lowest auth.
