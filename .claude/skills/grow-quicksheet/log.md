@@ -1,3 +1,11 @@
+## 2026-06-11 (feat: --grep filter)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--grep <pattern>` flag for regex row filtering in headless exports. Header always preserved. Works with --export-md, --export-html, --export-json. Also closed #373 (already implemented).
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #384 (commit 76afe47).
+- Follow-up: Composes well with --sort, --head, --columns (once all merged) for full Unix pipeline story.
+
 ## 2026-06-11 (docs: help examples)
 
 - Stars: 0 (Δ 0).
