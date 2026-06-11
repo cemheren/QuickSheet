@@ -55,6 +55,20 @@ Using Claude Code, Copilot CLI, or Aider? `dotnet run --project ExcelConsole.csp
 
 Audience-specific guides: [for homelabbers](docs/for-homelab.md) (Plex / Pi-hole / *arr / Home Assistant) · [for traders](docs/for-traders.md) (P/L, watchlist, FX, news strip) · [for SREs & DevOps](docs/for-sre.md) (service health, k8s pods, TLS expiry) · [for students](docs/for-students.md) (coursework, budget, developer tools).
 
+## Shell Completions
+
+Tab-completion scripts for bash and zsh live in `completions/`:
+
+```bash
+# Bash — add to ~/.bashrc
+source /path/to/QuickSheet/completions/quicksheet.bash
+
+# Zsh — symlink into your fpath
+mkdir -p ~/.zsh/completions
+ln -s /path/to/QuickSheet/completions/_quicksheet.zsh ~/.zsh/completions/_quicksheet
+# then add to ~/.zshrc (before compinit): fpath=(~/.zsh/completions $fpath)
+```
+
 ## A note on the code
 
 This is a side project, and a lot of it was written with AI assistance. The hard rule the project keeps is **zero NuGet dependencies** — all native interop (X11, WinForms, ConPTY) is hand-written P/Invoke. That keeps the supply-chain surface area minimal: clone, build, run.
