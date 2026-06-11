@@ -1,3 +1,11 @@
+## 2026-06-11 (feat: shell completions)
+
+- Stars: 0 (Δ 0).
+- Action: Added bash and zsh tab-completion scripts in `completions/`. Covers all CLI flags with context-aware file-type suggestions.
+- Bucket: E (issue fix) — Closes #372.
+- Outcome: PR #383 (commit 56a6448).
+- Follow-up: #321 (file size in --info), #319 (--delimiter), #318 (NO_COLOR) remain as open good-first-issues.
+
 ## 2026-06-11 (feat: --sort flag)
 
 - Stars: 0 (Δ 0).
