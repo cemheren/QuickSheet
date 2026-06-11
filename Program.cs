@@ -24,7 +24,29 @@ public class Program
             return;
         }
 
-        string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
+        string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--") && !a.StartsWith("-d"));
+
+        // Parse --delimiter / -d flag
+        char delimiter = ',';
+        int delimIdx = Array.IndexOf(args, "--delimiter");
+        if (delimIdx < 0) delimIdx = Array.IndexOf(args, "-d");
+        if (delimIdx >= 0 && delimIdx + 1 < args.Length)
+        {
+            string delimArg = args[delimIdx + 1];
+            if (delimArg == "\\t" || delimArg.Equals("tab", StringComparison.OrdinalIgnoreCase))
+                delimiter = '\t';
+            else if (delimArg.Length == 1)
+                delimiter = delimArg[0];
+            else
+            {
+                Console.Error.WriteLine($"Invalid delimiter: '{delimArg}' (must be a single character, '\\t', or 'tab')");
+                Environment.Exit(2);
+                return;
+            }
+            // Exclude delimiter args from csvPath detection
+            csvPath = args.Where((a, idx) => idx != delimIdx && idx != delimIdx + 1
+                && !a.StartsWith("--") && a != "-d").FirstOrDefault();
+        }
 
         int exportIdx = Array.IndexOf(args, "--export-md");
         if (exportIdx >= 0)
@@ -54,13 +76,13 @@ public class Program
                 foreach (char ch in line)
                 {
                     if (ch == '"') inQuotes = !inQuotes;
-                    else if (ch == ',' && !inQuotes) n++;
+                    else if (ch == delimiter && !inQuotes) n++;
                 }
                 if (n > cols) cols = n;
             }
             // Constructor derives ColumnCount from (availableWidth - 4) / columnWidth (default 20).
             var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
-            grid.LoadFromCsv(csvPath);
+            grid.LoadFromCsv(csvPath, delimiter);
             if (outPath == "-")
             {
                 grid.WriteMarkdownTo(Console.Out);
@@ -100,12 +122,12 @@ public class Program
                 foreach (char ch in line)
                 {
                     if (ch == '"') inQuotes = !inQuotes;
-                    else if (ch == ',' && !inQuotes) n++;
+                    else if (ch == delimiter && !inQuotes) n++;
                 }
                 if (n > cols) cols = n;
             }
             var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
-            grid.LoadFromCsv(csvPath);
+            grid.LoadFromCsv(csvPath, delimiter);
             if (htmlOut == "-")
             {
                 grid.WriteHtmlTo(Console.Out);
@@ -145,12 +167,12 @@ public class Program
                 foreach (char ch in line)
                 {
                     if (ch == '"') inQuotes = !inQuotes;
-                    else if (ch == ',' && !inQuotes) n++;
+                    else if (ch == delimiter && !inQuotes) n++;
                 }
                 if (n > cols) cols = n;
             }
             var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
-            grid.LoadFromCsv(csvPath);
+            grid.LoadFromCsv(csvPath, delimiter);
             if (jsonOut == "-")
             {
                 grid.WriteJsonTo(Console.Out);
@@ -255,9 +277,13 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.tsv> --export-md - -d '\\t'     Use tab delimiter for TSV input");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
+        Console.WriteLine();
+        Console.WriteLine("Options:");
+        Console.WriteLine("  --delimiter, -d <char>  Field separator for input (default: comma). Use '\\t' or 'tab' for TSV.");
         Console.WriteLine();
         Console.WriteLine("Cell prefixes:");
         Console.WriteLine("  r: <cmd>          Runnable command. Press Enter to launch.");
