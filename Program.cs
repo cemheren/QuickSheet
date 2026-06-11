@@ -259,6 +259,12 @@ public class Program
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
         Console.WriteLine();
+        Console.WriteLine("Examples:");
+        Console.WriteLine("  ExcelConsole examples/copilot-dashboard.csv        Launch a prebuilt desktop dashboard");
+        Console.WriteLine("  ExcelConsole examples/ai-workflow.csv --export-md - Stream CSV as Markdown to stdout");
+        Console.WriteLine("  ExcelConsole examples/trader-dashboard.csv --export-html out.html  Export CSV to HTML");
+        Console.WriteLine("  ExcelConsole --list-extensions                     See installed extensions");
+        Console.WriteLine();
         Console.WriteLine("Cell prefixes:");
         Console.WriteLine("  r: <cmd>          Runnable command. Press Enter to launch.");
         Console.WriteLine("  i: <cmd>          Inline subprocess. Output streams back into the cell.");
