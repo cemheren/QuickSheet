@@ -1,3 +1,11 @@
+## 2026-06-11 (fix: simplify quicksheet-todo UX)
+
+- Stars: 0 (Δ 0).
+- Action: Simplified `Deskworks/quicksheet-todo` UX — added bare-number toggle (`todo: 3` toggles done), dash-remove (`todo: -3` removes), updated README with Quick Start section. Addresses issue #2 "too cumbersome to use."
+- Bucket: Issue fix (extension repo).
+- Outcome: PR Deskworks/quicksheet-todo#4 (commit 3bebc36).
+- Follow-up: None queued. Note: `cemheren/quicksheet-dns-ext` was accidentally created as duplicate of existing `Deskworks/quicksheet-dns` — user should delete it.
+
 ## 2026-06-11 (docs: help examples)
 
 - Stars: 0 (Δ 0).
