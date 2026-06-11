@@ -1,3 +1,11 @@
+## 2026-06-11 (docs: help examples)
+
+- Stars: 0 (Δ 0).
+- Action: Added usage examples section to `--help` output (5 common workflows).
+- Bucket: A (product polish) — Closes #374.
+- Outcome: PR #379 updated (commit 88b61f7).
+- Follow-up: #320 (stdin pipe), #319 (--delimiter) remain as open good-first-issues.
+
 ## 2026-06-11 (feat: --info flag)
 
 - Stars: 0 (Δ 0).
@@ -5,8 +13,6 @@
 - Bucket: E (issue fix) — Closes #321.
 - Outcome: PR #357 updated (commit 80668a8).
 - Follow-up: #320 (stdin pipe), #319 (--delimiter) remain as open good-first-issues.
-
-## 2026-06-11 (feat: NO_COLOR support)
 
 - Stars: 0 (Δ 0).
 - Action: Added `NO_COLOR` environment variable support per no-color.org. Static `Program.NoColor` property + documented in `--help`.
