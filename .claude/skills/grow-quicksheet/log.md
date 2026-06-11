@@ -1,3 +1,11 @@
+## 2026-06-10 (docs: freelancer landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-freelancers.md` audience landing page for 1099 contractors/solopreneurs + `examples/freelancer-dashboard.csv` starter layout. Showcases 1099, salestax, mileage, depr, payroll, mortgage extensions in a tax-tracking workflow.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #364 (commit ca3f79c).
+- Follow-up: All major audience landing pages now complete (homelab, SRE, students, traders, DMs, artists, freelancers). Next run: Bucket E feature or Bucket D awesome-list submission nudge.
+
 ## 2026-06-10 (docs: artist landing page)
 
 - Stars: 0 (Δ 0).
