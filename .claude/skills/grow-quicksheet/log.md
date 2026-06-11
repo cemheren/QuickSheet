@@ -1,3 +1,11 @@
+## 2026-06-11 (feat: NO_COLOR support)
+
+- Stars: 0 (Δ 0).
+- Action: Added `NO_COLOR` environment variable support per no-color.org. Static `Program.NoColor` property + documented in `--help`.
+- Bucket: E (issue fix) — Closes #318.
+- Outcome: PR #367 updated (commit 0d13318).
+- Follow-up: #321 (file size in --info), #320 (stdin pipe), #319 (--delimiter) remain as open good-first-issues.
+
 ## 2026-06-11 (docs: DM landing page)
 
 - Stars: 0 (Δ 0).
