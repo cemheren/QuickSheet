@@ -1,3 +1,11 @@
+## 2026-06-11 (docs: Wayland design document)
+
+- Stars: 0 (Δ 0).
+- Action: Wrote comprehensive Wayland support design document (docs/wayland-design.md) addressing issue #3. Covers wlr-layer-shell protocol, compositor support matrix, P/Invoke architecture, phased implementation plan, rendering strategy (SHM + FreeType), and open questions.
+- Bucket: A (product polish) + addresses open issue #3.
+- Outcome: PR #371 (commit 565d05a).
+- Follow-up: Phase 1 PoC implementation (WaylandMethods.cs + runtime detection) once design is approved. #158 remains as the other open issue (too complex for single run).
+
 ## 2026-06-11 (feat: stdin pipe support)
 
 - Stars: 0 (Δ 0).
