@@ -24,7 +24,8 @@ public class Program
             return;
         }
 
-        string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
+        string? csvPath = FindPositionalArg(args);
+        string? columnsSpec = ParseColumnsArg(args);
 
         int exportIdx = Array.IndexOf(args, "--export-md");
         if (exportIdx >= 0)
@@ -61,13 +62,15 @@ public class Program
             // Constructor derives ColumnCount from (availableWidth - 4) / columnWidth (default 20).
             var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
             grid.LoadFromCsv(csvPath);
+            int[]? columnFilter = ResolveColumnsFilter(grid, columnsSpec);
             if (outPath == "-")
             {
-                grid.WriteMarkdownTo(Console.Out);
+                grid.WriteMarkdownTo(Console.Out, columnFilter);
             }
             else
             {
-                grid.SaveToMarkdown(outPath);
+                using var writer = new StreamWriter(outPath);
+                grid.WriteMarkdownTo(writer, columnFilter);
                 Console.WriteLine($"Wrote markdown: {outPath}");
             }
             return;
@@ -106,13 +109,15 @@ public class Program
             }
             var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
             grid.LoadFromCsv(csvPath);
+            int[]? columnFilter = ResolveColumnsFilter(grid, columnsSpec);
             if (htmlOut == "-")
             {
-                grid.WriteHtmlTo(Console.Out);
+                grid.WriteHtmlTo(Console.Out, columnFilter);
             }
             else
             {
-                grid.SaveToHtml(htmlOut);
+                using var writer = new StreamWriter(htmlOut);
+                grid.WriteHtmlTo(writer, columnFilter);
                 Console.WriteLine($"Wrote HTML: {htmlOut}");
             }
             return;
@@ -151,13 +156,15 @@ public class Program
             }
             var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
             grid.LoadFromCsv(csvPath);
+            int[]? columnFilter = ResolveColumnsFilter(grid, columnsSpec);
             if (jsonOut == "-")
             {
-                grid.WriteJsonTo(Console.Out);
+                grid.WriteJsonTo(Console.Out, columnFilter);
             }
             else
             {
-                grid.SaveToJson(jsonOut);
+                using var writer = new StreamWriter(jsonOut);
+                grid.WriteJsonTo(writer, columnFilter);
                 Console.WriteLine($"Wrote JSON: {jsonOut}");
             }
             return;
@@ -259,6 +266,10 @@ public class Program
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
         Console.WriteLine();
+        Console.WriteLine("Export options:");
+        Console.WriteLine("  --columns A,B,D      Select columns by letter (A=first). Also: --columns Name,Age");
+        Console.WriteLine("  -c A,B,D             Short form of --columns");
+        Console.WriteLine();
         Console.WriteLine("Cell prefixes:");
         Console.WriteLine("  r: <cmd>          Runnable command. Press Enter to launch.");
         Console.WriteLine("  i: <cmd>          Inline subprocess. Output streams back into the cell.");
@@ -270,6 +281,54 @@ public class Program
         Console.WriteLine();
         Console.WriteLine("Range references work inside text: {A1::C10}");
         Console.WriteLine("Tour: docs/tour.md · Issues: github.com/cemheren/QuickSheet/issues");
+    }
+
+    private static string? ParseColumnsArg(string[] args)
+    {
+        int idx = Array.IndexOf(args, "--columns");
+        if (idx >= 0 && idx + 1 < args.Length)
+            return args[idx + 1];
+
+        // Short form: -c VALUE (but not --columns which is already handled)
+        for (int i = 0; i < args.Length; i++)
+        {
+            if (args[i] == "-c" && i + 1 < args.Length)
+                return args[i + 1];
+        }
+        return null;
+    }
+
+    private static int[]? ResolveColumnsFilter(ExcelConsole.GridManager grid, string? spec)
+    {
+        if (spec == null) return null;
+        int[]? result = grid.ResolveColumns(spec);
+        if (result == null)
+        {
+            Console.Error.WriteLine($"Error: unrecognized column in --columns \"{spec}\"");
+            Console.Error.WriteLine("Use column letters (A,B,C) or header names from the first row.");
+            Environment.Exit(2);
+        }
+        return result;
+    }
+
+    private static string? FindPositionalArg(string[] args)
+    {
+        // Known flags that consume the next argument as a value
+        var flagsWithValue = new HashSet<string>
+        {
+            "--export-md", "--export-html", "--export-json", "--columns", "-c"
+        };
+        for (int i = 0; i < args.Length; i++)
+        {
+            if (flagsWithValue.Contains(args[i]))
+            {
+                i++; // skip the value
+                continue;
+            }
+            if (args[i].StartsWith("-")) continue;
+            return args[i];
+        }
+        return null;
     }
 
 #if PLATFORM_WINDOWS

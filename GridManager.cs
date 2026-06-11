@@ -488,7 +488,7 @@ public class GridManager
     /// Writes the grid as a GitHub-flavored Markdown table to an arbitrary <see cref="TextWriter"/>.
     /// Used by `--export-md -` to write to stdout for piping.
     /// </summary>
-    public void WriteMarkdownTo(TextWriter writer)
+    public void WriteMarkdownTo(TextWriter writer, int[]? columns = null)
     {
         // Find the bottom-most non-empty row and right-most non-empty column.
         int lastRow = -1, lastCol = -1;
@@ -501,11 +501,14 @@ public class GridManager
                 }
         if (lastRow < 0 || lastCol < 0) return;
 
+        int[] cols = columns ?? Enumerable.Range(0, lastCol + 1).ToArray();
+
         for (int r = 0; r <= lastRow; r++)
         {
             writer.Write('|');
-            for (int c = 0; c <= lastCol; c++)
+            foreach (int c in cols)
             {
+                if (c > lastCol) { writer.Write("  |"); continue; }
                 string v = _isFile[r, c] ? "" : (_data[r, c] ?? "");
                 v = v.Replace("|", "\\|").Replace("\r", " ").Replace("\n", " ");
                 writer.Write(' ');
@@ -516,7 +519,7 @@ public class GridManager
             if (r == 0)
             {
                 writer.Write('|');
-                for (int c = 0; c <= lastCol; c++) writer.Write("---|");
+                foreach (int _ in cols) writer.Write("---|");
                 writer.WriteLine();
             }
         }
@@ -532,7 +535,7 @@ public class GridManager
     /// Writes the grid as a self-contained HTML table with inline styling.
     /// Used by `--export-html -` to write to stdout for piping.
     /// </summary>
-    public void WriteHtmlTo(TextWriter writer)
+    public void WriteHtmlTo(TextWriter writer, int[]? columns = null)
     {
         int lastRow = -1, lastCol = -1;
         for (int r = 0; r < RowCount; r++)
@@ -543,6 +546,8 @@ public class GridManager
                     if (c > lastCol) lastCol = c;
                 }
         if (lastRow < 0 || lastCol < 0) return;
+
+        int[] cols = columns ?? Enumerable.Range(0, lastCol + 1).ToArray();
 
         writer.WriteLine("<!DOCTYPE html>");
         writer.WriteLine("<html lang=\"en\"><head><meta charset=\"utf-8\">");
@@ -563,20 +568,18 @@ public class GridManager
         {
             string tag = r == 0 ? "th" : "td";
             writer.Write("<tr>");
-            for (int c = 0; c <= lastCol; c++)
+            foreach (int c in cols)
             {
-                string v = _isFile[r, c] ? "" : (_data[r, c] ?? "");
+                string v = (c > lastCol || _isFile[r, c]) ? "" : (_data[r, c] ?? "");
                 string escaped = System.Net.WebUtility.HtmlEncode(v);
                 string cls = "";
 
-                // Auto-detect URLs and make them clickable
                 if (v.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
                     v.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
                 {
                     escaped = $"<a href=\"{System.Net.WebUtility.HtmlEncode(v)}\">{escaped}</a>";
                 }
 
-                // Detect numeric cells for right-alignment
                 if (r > 0 && double.TryParse(v, System.Globalization.NumberStyles.Any,
                     System.Globalization.CultureInfo.InvariantCulture, out _))
                 {
@@ -603,7 +606,7 @@ public class GridManager
     /// Writes the grid as a JSON array of objects (first row = keys).
     /// Used by `--export-json -` to write to stdout for piping.
     /// </summary>
-    public void WriteJsonTo(TextWriter writer)
+    public void WriteJsonTo(TextWriter writer, int[]? columns = null)
     {
         int lastRow = -1, lastCol = -1;
         for (int r = 0; r < RowCount; r++)
@@ -614,6 +617,8 @@ public class GridManager
                     if (c > lastCol) lastCol = c;
                 }
         if (lastRow < 0 || lastCol < 0) { writer.WriteLine("[]"); return; }
+
+        int[] cols = columns ?? Enumerable.Range(0, lastCol + 1).ToArray();
 
         // First row = column headers (keys)
         var keys = new string[lastCol + 1];
@@ -627,13 +632,13 @@ public class GridManager
         for (int r = 1; r <= lastRow; r++)
         {
             writer.Write("  {");
-            for (int c = 0; c <= lastCol; c++)
+            for (int i = 0; i < cols.Length; i++)
             {
-                string v = _isFile[r, c] ? "" : (_data[r, c] ?? "");
-                string key = JsonEscape(keys[c]);
+                int c = cols[i];
+                string v = (c > lastCol || _isFile[r, c]) ? "" : (_data[r, c] ?? "");
+                string key = JsonEscape(c <= lastCol ? keys[c] : $"col{c}");
                 string val = JsonEscape(v);
 
-                // Try to output numbers without quotes
                 if (double.TryParse(v, System.Globalization.NumberStyles.Any,
                     System.Globalization.CultureInfo.InvariantCulture, out double num))
                 {
@@ -644,7 +649,7 @@ public class GridManager
                     writer.Write($"\"{key}\":\"{val}\"");
                 }
 
-                if (c < lastCol) writer.Write(",");
+                if (i < cols.Length - 1) writer.Write(",");
             }
             writer.Write("}");
             if (r < lastRow) writer.Write(",");
@@ -657,6 +662,57 @@ public class GridManager
     {
         return s.Replace("\\", "\\\\").Replace("\"", "\\\"")
                 .Replace("\n", "\\n").Replace("\r", "\\r").Replace("\t", "\\t");
+    }
+
+    /// <summary>
+    /// Resolves a comma-separated column specifier (letters like "A,C,E" or header names)
+    /// into 0-based column indices. Letters A-Z map to 0-25; AA-AZ to 26-51.
+    /// Anything that isn't a valid column letter is matched against the first row (headers).
+    /// </summary>
+    public int[]? ResolveColumns(string spec)
+    {
+        var parts = spec.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        if (parts.Length == 0) return null;
+
+        var indices = new List<int>();
+        foreach (var part in parts)
+        {
+            int idx = TryParseColumnLetter(part);
+            if (idx >= 0)
+            {
+                indices.Add(idx);
+            }
+            else
+            {
+                // Match against header row (row 0)
+                int found = -1;
+                for (int c = 0; c < ColumnCount; c++)
+                {
+                    string header = _data[0, c] ?? "";
+                    if (header.Equals(part, StringComparison.OrdinalIgnoreCase))
+                    {
+                        found = c;
+                        break;
+                    }
+                }
+                if (found >= 0) indices.Add(found);
+                else return null; // unrecognized column
+            }
+        }
+        return indices.ToArray();
+    }
+
+    private static int TryParseColumnLetter(string s)
+    {
+        if (string.IsNullOrEmpty(s) || s.Length > 3) return -1;
+        string upper = s.ToUpperInvariant();
+        foreach (char ch in upper)
+            if (ch < 'A' || ch > 'Z') return -1;
+
+        int result = 0;
+        foreach (char ch in upper)
+            result = result * 26 + (ch - 'A' + 1);
+        return result - 1; // 0-based: A=0, B=1, Z=25, AA=26
     }
 
     public void LoadFromCsv(string path)
