@@ -1,3 +1,11 @@
+## 2026-06-11 (feat: --sort flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--sort <col>` and `--rsort <col>` flags for headless exports. Numeric-aware sorting, works with all three export formats.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #382 (commit 18ba040).
+- Follow-up: None immediate. Pipeline persona: sort + stdin + stdout now work together for full Unix composability.
+
 ## 2026-06-11 (docs: Makefile)
 
 - Stars: 0 (Δ 0).
