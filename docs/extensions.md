@@ -72,6 +72,22 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `caniuse` | Browser Compat    | Can I Use browser compatibility lookup via caniuse-db. Shows support status for CSS/HTML/JS features across Chrome, Firefox, Safari, Edge, Opera, Samsung, iOS Safari. Usage: `caniuse: css-grid` · `caniuse: flexbox` · `caniuse: webassembly`. Usage %, spec link, notes. 1h cache, no API key. | [`quicksheet-caniuse`](https://github.com/Deskworks/quicksheet-caniuse) |
 | `gem`     | Ruby Gem Lookup   | Ruby gem info and search via rubygems.org. Version, total downloads, authors, license, Ruby requirement, homepage, description. `gem: rails` (detail), `gem: search json parser` (top 5). No API key, 30-min cache, zero NuGet. | [`quicksheet-rubygems`](https://github.com/Deskworks/quicksheet-rubygems) |
 | `hackage` | Haskell Packages  | Haskell package lookup from Hackage. `hackage: aeson` shows latest version, synopsis, author, category, license, and homepage. `hackage: search json` lists top matching packages. No API key, 30-min cache, zero NuGet. | [`quicksheet-hackage`](https://github.com/Deskworks/quicksheet-hackage) |
+| `ai:`     | AI Cost Tracker   | Monitor token usage and costs for OpenAI, Anthropic, Gemini, DeepSeek — budget tracking on your wallpaper | [`quicksheet-ai-costs`](https://github.com/cemheren/quicksheet-ai-costs) |
+| `books`   | Book Lookup       | Search by title or ISBN via Open Library — author, year, subjects, cover. No API key. | [`quicksheet-books-ext`](https://github.com/cemheren/quicksheet-books-ext) |
+| `hash:`   | Hash Generator    | Generate MD5, SHA1, SHA256, SHA512, CRC32 hashes from cell text or file paths. Instant checksums. | [`quicksheet-hashgen`](https://github.com/cemheren/quicksheet-hashgen) |
+| `init`    | Initiative Tracker | TTRPG combat initiative — sort combatants, cycle turns, track rounds. D&D/Pathfinder ready. | [`quicksheet-init-ext`](https://github.com/cemheren/quicksheet-init-ext) |
+| `mvn`     | Maven Lookup      | Maven Central package info — version, downloads, license, description. `mvn: com.google.guava:guava` | [`quicksheet-maven`](https://github.com/cemheren/quicksheet-maven) |
+| `nuget`   | NuGet Lookup      | NuGet package info — version, total downloads, license, dotnet CLI install command | [`quicksheet-nuget`](https://github.com/cemheren/quicksheet-nuget) |
+| `ollama`  | Local AI (Ollama) | Private local AI queries via Ollama — ask questions, summarize, translate. No API key, no network. | [`quicksheet-ollama`](https://github.com/cemheren/quicksheet-ollama) |
+| `payroll` | Payroll Estimator | US payroll withholding — federal tax, Social Security, Medicare per pay period (2025 IRS brackets) | [`quicksheet-payroll-ext`](https://github.com/cemheren/quicksheet-payroll-ext) |
+| `pubmed:` | PubMed Lookup     | PubMed article lookup by PMID or keyword — title, authors, journal, year, DOI. No API key. | [`quicksheet-pubmed`](https://github.com/cemheren/quicksheet-pubmed) |
+| `pw`      | Password Generator | Secure passwords, PINs, hex, passphrases — CSPRNG, zero network, fully offline | [`quicksheet-pw-ext`](https://github.com/cemheren/quicksheet-pw-ext) |
+| `tax`     | Sales Tax Rates   | US state sales tax rates — instant lookup for all 50 states + DC | [`quicksheet-salestax-ext`](https://github.com/cemheren/quicksheet-salestax-ext) |
+| `subnet`  | Subnet Calculator | CIDR/subnet calculator — network ranges, host counts, netmask, broadcast address | [`quicksheet-subnet-ext`](https://github.com/cemheren/quicksheet-subnet-ext) |
+| `tldr`    | tldr-pages        | Command cheatsheets on your desktop — instant CLI reference from tldr-pages | [`quicksheet-tldr-ext`](https://github.com/cemheren/quicksheet-tldr-ext) |
+| `tz`      | Timezone Converter | Convert times across world zones — business hours, meeting planning, offset display | [`quicksheet-tz-ext`](https://github.com/cemheren/quicksheet-tz-ext) |
+| `unit:`   | Unit Converter    | Universal converter — length, weight, temp, data, speed, time, volume, area, pressure. Offline. | [`quicksheet-unitconv`](https://github.com/cemheren/quicksheet-unitconv) |
+| `words:`  | Text Analysis     | Word count, reading time, readability grade, character count — writer's toolkit | [`quicksheet-words`](https://github.com/cemheren/quicksheet-words) |
 
 ## Install
 
