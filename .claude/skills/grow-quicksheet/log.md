@@ -1,3 +1,11 @@
+## 2026-06-11 (docs: add Makefile)
+
+- Stars: 0 (Δ 0).
+- Action: Added Makefile with build/run/desktop/release/clean/export targets. Closes #375.
+- Bucket: A (product polish — issue fix).
+- Outcome: PR #381 updated (commit 652120f).
+- Follow-up: #320 (stdin pipe), #319 (--delimiter) remain as open good-first-issues.
+
 ## 2026-06-11 (docs: add 17 missing extensions to directory)
 
 - Stars: 0 (Δ 0).
