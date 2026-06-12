@@ -1,3 +1,11 @@
+## 2026-06-12 (feat: --export-sql flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--export-sql` headless flag for CSV→SQL INSERT conversion. Supports `--table` for custom table name, numeric detection, NULL for empty cells, pipe-friendly stdout.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #388 (commit 28bdd3d).
+- Follow-up: Strengthens the AwesomeCSV submission angle — QuickSheet now converts CSV to Markdown, HTML, JSON, and SQL.
+
 ## 2026-06-11 (feat: Catppuccin + Tokyo Night themes)
 
 - Stars: 0 (Δ 0).
