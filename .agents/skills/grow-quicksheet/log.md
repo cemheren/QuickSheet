@@ -1700,9 +1700,323 @@ Persistent memory across runs. Append-only (except the Queued section at bottom)
 - Competitor last did: v0.35.0 + Ctrl+K row duplication (previous run May 24 13:00).
 - Follow-up: Bucket F — quicksheet-nuget (NuGet package lookup) or quicksheet-pypi2. Bucket D — v0.37.0 release after PR #181 merge.
 
+## 2026-05-25 21:00
+
+- Stars: 0 (gh API still returning 0, likely 1 actual)
+- Action: Bucket C — created /for-homelab/ landing page on gh-pages. SEO-optimized for homelab/selfhosted community (r/homelab, r/selfhosted audiences). 9 monitoring cards (Docker, Plex/Jellyfin, Pi-hole, disk, sysmon, network, *arr stack, Home Assistant, Proxmox). Example CSV layout. 3-min getting started. 6 value props. Keywords: homelab dashboard terminal, self-hosted monitoring desktop, plex status wallpaper, pihole stats terminal, docker monitoring wallpaper. Updated sitemap + homepage nav.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit 91c4227). Page live at https://cemheren.github.io/QuickSheet/for-homelab/
+- Competitor last did: Alternatives page on gh-pages (2026-05-25 20:00), quicksheet-ollama extension, quicksheet-git extension.
+- Follow-up: Bucket C — add /for-traders/ page next (finance vertical, another engaged community). Bucket D — v0.37.0 release when PRs merge.
+
 ## Queued
 
-- Bucket D: v0.37.0 release after PR #181 (maven docs) merge
-- Bucket F: quicksheet-nuget (NuGet package lookup for C#/.NET devs) — natural follow-on
+- Bucket C: /for-traders/ page (finance vertical — P/L, watchlist, FX, crypto)
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket F: quicksheet-nuget (NuGet package lookup for C#/.NET devs)
 - Bucket E: safe additive feature (row height / column formatting)
 
+
+## 2026-05-26 18:00
+
+- Stars: 0 (gh API returning 0, likely 1 actual)
+- Action: Bucket E — added selection aggregate stats to status bar. When multiple cells are selected, shows Count, Sum (Σ), and Average in the status bar (like Excel/Google Sheets bottom-right). Works on both Linux (X11) and Windows (WinForms).
+- Bucket: E
+- Outcome: PR #189 opened (commit d2d4367 on grow/selection-stats). Build green.
+- Competitor last did: Saturated, doing no-ops. Last substantive: quicksheet-ollama extension + quicksheet-git extension (May 25).
+- Follow-up: Bucket C — /for-traders/ page for finance vertical SEO. Bucket D — v0.37.0 release after PRs merge.
+
+## 2026-05-26 19:00
+
+- Stars: 0 (gh API returning 0, likely 1 actual)
+- Action: Bucket C — created /for-traders/ landing page on gh-pages. SEO-optimized for finance/trading community. 6 extension cards (stocks, crypto, FX, sparklines, web fetch, world clock). Example watchlist CSV table. Comparison vs Bloomberg/Ticker/browser tabs. 6 value props. 3-min getting started. Keywords: stock ticker terminal, crypto price terminal, portfolio tracker terminal, trading dashboard desktop, bloomberg alternative free. Updated sitemap + homepage nav.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit d87e173). Page live at https://cemheren.github.io/QuickSheet/for-traders/
+- Competitor last did: No-ops (saturated). Last substantive: quicksheet-ollama + quicksheet-git extensions (May 25).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket E — cell timestamp hotkey. Bucket C — /for-gamemasters/ page (TTRPG niche).
+
+## 2026-05-26 21:00
+
+- Stars: 0 (gh API returning 0, likely 1 actual)
+- Action: Bucket C — created /for-developers/ landing page on gh-pages. SEO-optimized for software engineers (the core GitHub-starring audience). 12 extension cards (GitHub PRs, Actions, git log, JWT, base64, cron, urlenc, Docker, npm, ghstreak, regex, sysmon). Example dev-dashboard CSV layout. Comparison table vs GitHub/Waybar/Notion. 6 value props. 4-step getting started. Keywords: developer dashboard terminal, github status wallpaper, ci cd dashboard terminal, dev tools desktop wallpaper. Updated sitemap + homepage nav.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit 3e2a71a). Page live at https://cemheren.github.io/QuickSheet/for-developers/
+- Competitor last did: No-ops (saturated). Last substantive: for-gamemasters page, quicksheet-ollama/git extensions (May 25-26).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket E — cell timestamp hotkey.
+
+## Queued
+
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket E: cell timestamp hotkey (Ctrl+;) or freeze header row
+- Bucket C: /for-writers/ page (writers/bloggers vertical — word count, markdown export, notes)
+
+## 2026-05-26 23:00
+
+- Stars: 0 (gh API returning 0, likely 1 actual)
+- Action: Bucket C — created /for-writers/ landing page on gh-pages. SEO-optimized for writers, bloggers, and content creators. 9 capability cards (scratchpad, word count, deadlines, research links, markdown export, search, pomodoro, RSS, undo). Example writer's desktop CSV layout. Comparison table vs Sticky Notes/Notion/Obsidian. 6 writing workflow cards (NaNoWriMo tracker, content calendar, chapter outline, freelance tracker, brainstorm board, reading log). 6 value props (always visible, zero distraction, auto-save, plain CSV, cross-platform, themes). Keywords: writing tool desktop wallpaper, distraction free writing, NaNoWriMo tracker desktop, content calendar wallpaper, writer scratchpad. Updated sitemap + homepage nav.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit f129f21). Page live at https://cemheren.github.io/QuickSheet/for-writers/
+- Competitor last did: Ctrl+; timestamp hotkey (PR #194, Bucket E, 2026-05-26 22:00).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket E — safe additive feature. Bucket F — new extension.
+
+## Queued
+
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket E: safe additive feature (freeze header row, row height)
+- Bucket C: /for-musicians/ or /for-researchers/ page (academic/music niche)
+- Bucket F: quicksheet-words (word count, reading time, character count extension for writers)
+
+## 2026-05-27 00:00
+
+- Stars: 0 (gh API returning 0, likely 1 actual)
+- Action: Bucket F — created quicksheet-sysmon extension (live system monitoring). Reads /proc/stat, /proc/meminfo, /proc/net/dev, /proc/loadavg, /proc/uptime on Linux. 8 subcommands: summary, cpu (per-core bars), ram (breakdown + swap), disk (DriveInfo), net (interface I/O), load, uptime, procs (top 10 by memory). Windows basic support via .NET APIs. Zero NuGet deps. Build green, smoke-tested all commands live. Topics: quicksheet, system-monitor, terminal, htop.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-sysmon (commit 32751dd). PR #197 on main for README docs.
+- Competitor last did: No-ops (saturated). Last substantive: timestamp hotkey PR #194 (May 26).
+- Follow-up: Bucket C — add sys: to gh-pages extensions page + /for-homelab/ page. Bucket D — v0.37.0 release when PRs merge.
+
+## Queued
+
+- Bucket C: add quicksheet-sysmon to gh-pages extensions page + /for-homelab/ cards
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket E: safe additive feature (freeze header row)
+- Bucket F: quicksheet-nuget (NuGet package lookup for C#/.NET devs)
+
+## 2026-05-27 01:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket E — added `--export-sql` headless export. Converts CSV to SQL CREATE TABLE + INSERT statements. Numeric values unquoted, empty cells as NULL, identifiers safely double-quoted, strings escaped. Supports stdout via `-` for Unix piping. Table name from filename.
+- Bucket: E
+- Outcome: PR #199 opened (commit 1791ca3 on grow/export-sql). Build green.
+- Competitor last did: No-ops (saturated). Last substantive: timestamp hotkey PR #194 (May 26).
+- Follow-up: Bucket C — update gh-pages /features/ page with export-sql. Bucket D — v0.37.0 release when PRs merge.
+
+## Queued
+
+- Bucket C: update gh-pages features page with --export-sql
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket E: safe additive feature (freeze header row, cell comments)
+- Bucket F: quicksheet-nuget (NuGet package lookup for .NET devs)
+
+## 2026-05-27 02:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket C — updated gh-pages site with --export-sql feature. Added SQL export to features page export list, homepage "CSV Everywhere" card, comparison table (now "Multi-format export: MD, HTML, JSON, SQL"), and SEO keywords ("export sql csv, csv to sql cli"). Updated sitemap dates.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit 15a9243). Site rebuilding at cemheren.github.io/QuickSheet/.
+- Competitor last did: No-ops (saturated). Last substantive: quicksheet-sysmon extension + timestamp hotkey (May 26-27).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket E — safe additive feature (freeze header row).
+
+## Queued
+
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket E: safe additive feature (freeze header row, cell comments)
+- Bucket C: /for-homelab/ or /for-researchers/ page (niche SEO)
+- Bucket F: quicksheet-nuget (NuGet package lookup for .NET devs)
+
+## 2026-05-27 03:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket C — created /for-homelab/ landing page on gh-pages. SEO-optimized for homelab/self-hosted community. 6 monitoring extension cards (sysmon, Docker, network, inline commands, uptime checker, SMART). Example homelab dashboard CSV layout. Comparison table vs Grafana+Prometheus/htop/Conky. 6 value props (zero setup, always visible, minimal resources, offline & self-hosted, extensible via shell, CSV config). 6 homelab recipes (NAS health, Pi-hole stats, Docker fleet, media server, VPN, UPS battery). Updated sitemap + homepage nav.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit d0fdccf). Page live at https://cemheren.github.io/QuickSheet/for-homelab/
+- Competitor last did: No-ops (saturated). Last substantive: quicksheet-sysmon extension + timestamp hotkey (May 26-27).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket E — safe additive feature. Bucket C — /for-students/ or /for-sysadmins/ page.
+
+## Queued
+
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket E: safe additive feature (freeze header row, cell comments)
+- Bucket C: /for-students/ page (academic/productivity niche) or /for-sysadmins/ (enterprise IT)
+- Bucket F: quicksheet-nuget (NuGet package lookup for .NET devs)
+
+## 2026-05-27 04:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket F — created quicksheet-words extension (text analysis for writers). Word count, character count, reading time (238 wpm), Flesch-Kincaid readability grade, sentence/paragraph count, longest sentence finder, word frequency. Zero NuGet deps. .NET 9. Build green, smoke-tested all 9 subcommands.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-words (commit pushed). PR #201 on main for docs/extensions.md update.
+- Competitor last did: No-ops (saturated). Last substantive: for-homelab page (May 27 03:00).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket C — add words: to gh-pages /for-writers/ page.
+
+## Queued
+
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket C: add quicksheet-words to gh-pages /for-writers/ page
+- Bucket E: safe additive feature (freeze header row, cell comments)
+- Bucket C: /for-students/ page (academic/productivity niche)
+
+## 2026-05-27 05:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket C — created /for-ai-engineers/ landing page on gh-pages. SEO-optimized for AI engineers — LLM cost tracking (Anthropic, OpenAI, DeepSeek), agent run monitoring (Claude Code, DeepSeek-TUI), model comparison grid, prompt A/B testing, cost alert watchdog, fine-tuning job monitor. Comparison table vs LangSmith/Helicone/Grafana/browser tabs. 6 workflow recipes. Targets hottest niche (AI agents/coding tools trending #1 on HN/GitHub May 2026). Updated sitemap + homepage nav.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit 9170e7c). Page live at https://cemheren.github.io/QuickSheet/for-ai-engineers/
+- Competitor last did: No-ops (saturated). Last substantive: for-homelab page (May 27 03:00).
+- Follow-up: Bucket F — quicksheet-ai-costs extension (token cost tracker). Bucket D — v0.37.0 release when PRs merge. Bucket E — safe additive feature.
+
+## 2026-05-27 06:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket F — created quicksheet-ai-costs extension (AI API cost tracker). Live OpenAI usage via /v1/usage, built-in pricing for 15 models (GPT-4o, Claude, Gemini, DeepSeek), cost calculator with token shorthand (10k/1M), monthly budget tracker with progress bar, provider comparison table, local CSV spend log. 9 subcommands. Zero NuGet deps. Build green, smoke-tested models/calc/compare commands.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-ai-costs (commit 1715d15). PR #204 on main for docs/extensions.md update.
+- Competitor last did: No-ops (saturated). Last substantive: for-ai-engineers page (May 27 05:00).
+- Follow-up: Bucket C — update gh-pages /for-ai-engineers/ page with quicksheet-ai-costs link. Bucket D — v0.37.0 release when PRs merge.
+
+## 2026-05-27 07:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket E — added cell bookmarks feature. Ctrl+Shift+1-5 sets a bookmark at the current cell, Ctrl+1-5 jumps to it. 5 persistent slots stored via hidden config cell (same pattern as theme). Both Linux and Windows desktop modes supported. Help overlay updated.
+- Bucket: E
+- Outcome: PR #206 opened (commit bfb02fc on grow/cell-bookmarks). Build green. Purely additive — no existing behavior modified.
+- Competitor last did: No-ops (saturated). Last substantive: quicksheet-ai-costs extension (May 27 06:00).
+- Follow-up: Bucket C — update gh-pages /for-ai-engineers/ page with ai-costs link. Bucket D — v0.37.0 release when PRs merge.
+
+## Queued
+
+- Bucket C: update gh-pages /for-ai-engineers/ page with ai: extension link + install command
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket A: document bookmarks in docs/tour.md keyboard shortcuts section
+- Bucket C: /for-students/ page (academic/productivity niche)
+
+## 2026-05-27 08:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket C — updated gh-pages /for-ai-engineers/ page with quicksheet-ai-costs extension. Added new card to extensions grid + dedicated section with 4 feature cards (live usage polling, token calculator, provider comparison, monthly budget tracker) and install command. Backlinks to extension repo for search discoverability.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit 0d37ada). Page live at https://cemheren.github.io/QuickSheet/for-ai-engineers/
+- Competitor last did: No-ops (saturated). Last substantive: cell bookmarks feature (May 27 07:00).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket A — document bookmarks in docs/tour.md. Bucket C — /for-students/ page.
+
+## 2026-05-27 09:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket E — added progress bar cell prefix (`p: 75`, `p: 3/10 tasks`). Renders unicode block bar [████░░░░] with percentage. Supports plain percent, fractions, and optional trailing label. Green-tinted colors on both Linux X11 and Windows renderers. Help overlay and docs updated.
+- Bucket: E
+- Outcome: PR #208 opened (commit 02b7944 on grow/progress-bar-prefix). Build green. Purely additive — no existing behavior modified.
+- Competitor last did: No-ops (saturated). Last substantive: /for-ai-engineers/ ai-costs update (May 27 08:00).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket C — /for-students/ page.
+
+## Queued
+
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket A: document bookmarks in docs/tour.md keyboard shortcuts section
+- Bucket C: /for-students/ page (academic/productivity niche)
+- Bucket F: quicksheet-nuget (NuGet package lookup for .NET devs)
+
+## 2026-05-27 10:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket C — created /for-researchers/ landing page on gh-pages. SEO-optimized for academic researchers: paper deadline tracking, experiment logging, citation monitoring, grant milestones, GPU cluster status (SLURM). Comparison table vs Notion/Google Sheets/terminal. 6 workflow recipes (deadline countdown, hyperparameter grid, citation monitor, GPU cluster, reading list, grant budget). 4 extension cards (arxiv, words, sysmon, ai-costs). Updated sitemap + homepage nav.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit 0e93c04). Page live at https://cemheren.github.io/QuickSheet/for-researchers/
+- Competitor last did: No-ops (saturated). Last substantive: progress bar prefix PR #208 (May 27 09:00).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket E — safe additive feature (freeze header row). Bucket C — /for-freelancers/ page.
+
+## 2026-05-27 11:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket F — published quicksheet-health-ext as live repo under cemheren/. HTTP service health grid for homelab dashboards (Plex, Pi-hole, Nextcloud, *arr-stack). Supports inline name=url specs or services.csv file. HEAD-first probing, GET fallback, 8s timeout, latency display. Build verified green. Updated README link via PR #210.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-health-ext. PR #210 for README link update.
+- Competitor last did: No-ops (saturated). Last substantive: /for-researchers/ page (May 27 10:00).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket F — roll/dice extension next.
+
+## Queued
+
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket F: quicksheet-roll-ext (dice roller for TTRPG GMs)
+- Bucket E: safe additive feature (freeze header row, cell comments)
+- Bucket C: /for-freelancers/ page (time tracking, invoicing niche)
+
+## 2026-05-27 12:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket C — created /for-freelancers/ landing page on gh-pages. SEO-optimized for freelancers: billable hours tracking, project deadline countdown, invoice reminder pipeline, client retainer dashboards, rate calculators, expense logging. Comparison table vs Toggl/Harvest/Notion/Google Sheets. 6 workflow recipes. Targets keywords: freelance dashboard desktop, time tracking wallpaper, freelancer productivity tool, billable hours desktop. Updated sitemap + homepage nav.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit 34de4c6). Page live at https://cemheren.github.io/QuickSheet/for-freelancers/
+- Competitor last did: No-ops (saturated). Last substantive: quicksheet-health-ext (May 27 11:00).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket F — quicksheet-roll-ext (dice roller). Bucket E — freeze header row.
+
+## Queued
+
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket F: quicksheet-roll-ext (dice roller for TTRPG GMs)
+- Bucket E: safe additive feature (freeze header row, cell comments)
+- Bucket C: /for-musicians/ or /for-content-creators/ page
+
+## 2026-05-27 13:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket F — created quicksheet-unitconv extension (universal unit converter). 9 categories: length, weight, temperature, data (SI+binary), speed, time, volume, area, pressure. Flexible syntax (100 km to mi, 32 f c, 1024 mb gb). Offline, no API. Build verified green, smoke-tested all categories.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-unitconv (commit on master). PR #213 on main for docs/extensions.md update.
+- Competitor last did: No-ops (saturated). Last substantive: /for-freelancers/ page (May 27 12:00).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket E — safe additive feature (freeze header row). Bucket C — /for-musicians/ page.
+
+## Queued
+
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket E: safe additive feature (freeze header row, cell comments)
+- Bucket C: /for-musicians/ or /for-content-creators/ page
+- Bucket F: quicksheet-hashgen (hash generator: md5, sha1, sha256, crc32)
+
+## 2026-05-27 15:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket F — published quicksheet-hashgen extension (hash/checksum generator). 5 algorithms (MD5, SHA1, SHA256, SHA512, CRC32), hashes raw text or file contents. Build verified green, smoke-tested all algorithms. Added to docs/extensions.md via PR #217.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-hashgen (commit a779122). PR #217 for docs update.
+- Competitor last did: Bucket E — zebra striping (PR #215, May 27 14:00).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket C — /for-content-creators/ page. Bucket E — freeze header row.
+
+## 2026-05-27 17:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket E — added countdown/date cell prefix (`d: YYYY-MM-DD label`). Renders days remaining (⏳ 5d Release), today marker (★ TODAY), or days elapsed (✓ 3d ago). Amber-tinted colors on both Linux X11 and Windows renderers. Help overlay and docs/tour.md updated.
+- Bucket: E
+- Outcome: PR #220 opened (commit 0eeac41 on grow/countdown-prefix). Build green. Purely additive — no existing behavior modified.
+- Competitor last did: Bucket C — /for-content-creators/ page (May 27 16:00).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket C — /for-musicians/ page.
+
+## 2026-05-27 18:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket C — created /for-musicians/ niche landing page on gh-pages. Targets setlist management, practice tracking, BPM reference, gig countdown, DAW quick-launch workflows. Includes comparison table (vs Google Sheets, Notion, paper), sample CSV layout, 6 feature cards, 5-step workflow. Added to homepage nav and sitemap.xml. Keywords: setlist manager desktop, practice tracker wallpaper, BPM tracker terminal, musician productivity tool.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit 0b183e4). Page live at https://cemheren.github.io/QuickSheet/for-musicians/
+- Competitor last did: no-ops since May 19 (PR #139 still open).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket F — quicksheet-base64.
+
+## Queued
+
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket F: quicksheet-base64 (base64 encode/decode)
+- Bucket A: document countdown prefix in keyboard-shortcuts.md
+- Bucket C: /for-gamers/ page (distinct from gamemasters — video game devs/modders)
+
+## 2026-05-27 19:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket F — published quicksheet-pubmed extension (PubMed article lookup). Lookup by PMID returns title, authors, journal, year, DOI, abstract snippet. Search mode returns top 5 results. Uses free NCBI E-utilities API, 30-min cache, zero NuGet. Build green, smoke-tested both modes.
+- Bucket: F
+- Outcome: Repo live at https://github.com/cemheren/quicksheet-pubmed (commit 7efc374). PR #223 for docs/extensions.md update.
+- Competitor last did: No-ops since May 19 (PR #139 still open).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket A — document countdown prefix. Bucket C — /for-gamers/ page.
+
+## 2026-05-28 19:00
+
+- Stars: 0 (Δ +0)
+- Action: Bucket C — created /for-gamers/ niche landing page on gh-pages. Targets loot table tracking, quest logs, keybind references, mod load orders, speedrun splits, game backlog management. Includes comparison table (vs Notepad, game overlays, second monitor), sample RPG companion CSV layout, 6 feature cards, pro tips section (Steam launchers, wiki links, themes). Added to homepage nav and sitemap.xml. Keywords: game notes desktop wallpaper, loot table tracker, quest tracker desktop, keybind reference wallpaper, mod list manager desktop, speedrun splits desktop.
+- Bucket: C
+- Outcome: Pushed to gh-pages (commit 87af039). Page live at https://cemheren.github.io/QuickSheet/for-gamers/
+- Competitor last did: no-ops since May 19 (PR #139 still open).
+- Follow-up: Bucket D — v0.37.0 release when PRs merge. Bucket A — document countdown prefix.
+
+## Queued
+
+- Bucket D: v0.37.0 release after pending PRs merge
+- Bucket A: document countdown prefix in keyboard-shortcuts.md
+- Bucket F: quicksheet-pubmed-batch (batch PMID lookup for systematic reviews)
+- Bucket C: /for-speedrunners/ subpage (deeper niche within gaming)
