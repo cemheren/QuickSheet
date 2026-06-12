@@ -1,3 +1,11 @@
+## 2026-06-12 (docs: security engineer landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-security.md` + `examples/security-dashboard.csv` targeting infosec/pentester audience. Cross-links 10 security extensions (tls, dns, subnet, portck, ping, tracert, ip, jwt, hashgen, pw). Updated README audience guides line.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #390 (commit 3501c22).
+- Follow-up: None — completes the main audience verticals (homelab, SRE, traders, students, security). Freelancer/artist/DM PRs still open.
+
 ## 2026-06-12 (feat: --export-sql flag)
 
 - Stars: 0 (Δ 0).
