@@ -1,3 +1,11 @@
+## 2026-06-11 (docs: add 17 missing extensions to directory)
+
+- Stars: 0 (Δ 0).
+- Action: Added 17 cemheren extension repos missing from docs/extensions.md (ai-costs, books, hashgen, init, maven, nuget, ollama, payroll, pubmed, pw, salestax, subnet, tldr, tz, unitconv, words). Updated README badge from 69+ to 85+.
+- Bucket: A (product polish).
+- Outcome: PR #385 (commit 2ca24d7).
+- Follow-up: None — directory now covers all known repos. If new extension repos appear, add them.
+
 ## 2026-06-11 (feat: --grep filter)
 
 - Stars: 0 (Δ 0).
