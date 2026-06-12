@@ -1,3 +1,11 @@
+## 2026-06-11 (feat: Catppuccin + Tokyo Night themes)
+
+- Stars: 0 (Δ 0).
+- Action: Added Catppuccin Mocha and Tokyo Night as theme presets (13 total). Also created cemheren/quicksheet-npm-ext but it's redundant with Deskworks/quicksheet-npm — could not delete (no delete_repo scope).
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #386 (commit e805a66).
+- Follow-up: None — themes are visual, easy to screenshot when merged. The redundant npm-ext repo can be manually deleted later.
+
 ## 2026-06-11 (docs: add Makefile)
 
 - Stars: 0 (Δ 0).
