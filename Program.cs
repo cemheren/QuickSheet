@@ -3,6 +3,13 @@ using ExcelConsole;
 
 public class Program
 {
+    /// <summary>
+    /// True when the NO_COLOR environment variable is set (any value), per https://no-color.org/.
+    /// All CLI output should check this before emitting ANSI escape sequences.
+    /// </summary>
+    public static bool NoColor { get; } =
+        Environment.GetEnvironmentVariable("NO_COLOR") != null;
+
     [STAThread]
     public static void Main(string[] args)
     {
