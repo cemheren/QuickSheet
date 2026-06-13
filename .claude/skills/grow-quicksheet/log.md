@@ -1,3 +1,11 @@
+## 2026-06-13 (feat: NO_COLOR support)
+
+- Stars: 0 (Δ 0).
+- Action: Added `Program.NoColor` static property that checks `NO_COLOR` env var at startup. Satisfies no-color.org standard. Closes #318.
+- Bucket: E (quality-of-life feature — issue fix).
+- Outcome: PR #391 (commit 19ffbdf).
+- Follow-up: #320 (stdin pipe), #319 (--delimiter) remain as open good-first-issues.
+
 ## 2026-06-12 (docs: security engineer landing page)
 
 - Stars: 0 (Δ 0).
