@@ -1,3 +1,11 @@
+## 2026-06-13 (feat: --info flag)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--info` headless flag showing file size (human-readable), last-modified timestamp, row/column counts, non-empty cell stats, and header preview. Closes #321.
+- Bucket: E (quality-of-life feature — issue fix).
+- Outcome: PR #394 (commit 84af535).
+- Follow-up: #375 (Makefile — PR #381 exists), #320 (stdin pipe), #319 (--delimiter) remain open.
+
 ## 2026-06-13 (docs: help examples)
 
 - Stars: 0 (Δ 0).
