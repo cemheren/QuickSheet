@@ -1,3 +1,11 @@
+## 2026-06-14 (meta: extension topic consistency)
+
+- Stars: 0 (Δ 0).
+- Action: Added `quicksheet-extension` topic to 3 Deskworks repos missing it (speedtest, co2, gha) and `dotnet` topic to cronck. Ensures all extension repos are discoverable via GitHub topic search for `quicksheet-extension`.
+- Bucket: B (discoverability — metadata consistency).
+- Outcome: Topics applied directly via `gh repo edit`. No PR needed.
+- Follow-up: System remains bottlenecked on ~35 open PRs awaiting user merge. No qualifying issues remain.
+
 ## 2026-06-14 (ext: health probe grid)
 
 - Stars: 0 (Δ 0).
