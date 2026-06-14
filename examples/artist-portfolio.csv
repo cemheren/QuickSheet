@@ -1,0 +1,11 @@
+Commission Tracker,,,,Palette,,Client Zones,
+Client,Piece,Status,Due,Hex,Conversion,Zone,Time
+@alice_art,Character design,WIP,ext: cntdn: 2025-07-01,#2E1065,ext: color: #2E1065,US/Pacific,ext: worldtm: America/Los_Angeles
+@bob_studio,Album cover art,Sketch,ext: cntdn: 2025-07-15,#7C3AED,ext: color: #7C3AED,Europe/London,ext: worldtm: Europe/London
+@carol_games,Sprite sheet x24,Done,,#F59E0B,ext: color: #F59E0B,Asia/Tokyo,ext: worldtm: Asia/Tokyo
+@dave_band,Merch illustration,WIP,ext: cntdn: 2025-08-01,#10B981,ext: color: #10B981,US/Eastern,ext: worldtm: America/New_York
+,,,,,,,
+Freelance Admin,,,,,,,
+My Rate,ext: rate: 52000 1900,,,,,,
+Monthly Budget,ext: budget: art-supplies 200 140,,,,,,
+Tax Deadline,ext: qtr:,,,,,,

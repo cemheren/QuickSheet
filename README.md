@@ -53,7 +53,7 @@ New here? The 60-second tour is in [docs/tour.md](docs/tour.md). Or jump straigh
 
 Using Claude Code, Copilot CLI, or Aider? `dotnet run --project ExcelConsole.csproj -- examples/ai-workflow.csv --desktop` opens a pre-seeded panel of the top AI-CLI launchers (`claude --continue`, `gh copilot suggest`, `aider --ask`), a `/cost` token sparkline, and the copilot-in-a-cell extension hook.
 
-Audience-specific guides: [for homelabbers](docs/for-homelab.md) (Plex / Pi-hole / *arr / Home Assistant) · [for traders](docs/for-traders.md) (P/L, watchlist, FX, news strip) · [for SREs & DevOps](docs/for-sre.md) (service health, k8s pods, TLS expiry) · [for students](docs/for-students.md) (coursework, budget, developer tools).
+Audience-specific guides: [for homelabbers](docs/for-homelab.md) (Plex / Pi-hole / *arr / Home Assistant) · [for traders](docs/for-traders.md) (P/L, watchlist, FX, news strip) · [for SREs & DevOps](docs/for-sre.md) (service health, k8s pods, TLS expiry) · [for students](docs/for-students.md) (coursework, budget, developer tools) · [for artists & creatives](docs/for-artists.md) (commissions, palettes, deadlines, rates).
 
 ## A note on the code
 
