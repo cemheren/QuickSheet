@@ -2186,3 +2186,11 @@ worth running when a specific persona-shaped opening appears:
 - Auto-merging PRs on main ([[feedback-no-auto-merge]]).
 - Generic primitives justified by N/M-persona counts alone — persona-shaped
   specifics required ([[feedback-quality-over-quantity]]).
+
+## 2026-06-14 (feat: stdin pipe support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `-` as stdin input for all headless export modes (`--export-md`, `--export-html`, `--export-json`). Refactored repeated CSV probing into shared helpers. Added `GridManager.LoadFromLines()`. Closes #320.
+- Bucket: E (quality-of-life feature — issue fix).
+- Outcome: PR #396 opened (grow/stdin-pipe-320). Build green, tested with piped input.
+- Follow-up: Remaining open issues: #158 (usage pattern), #3 (Wayland). Both are large/investigative — skip unless a concrete smallest-fix emerges.
