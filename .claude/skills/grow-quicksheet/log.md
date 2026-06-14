@@ -1,3 +1,11 @@
+## 2026-06-14 (draft: r/DnD + r/DMAcademy DM-screen post)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted r/DnD and r/DMAcademy submission posts targeting tabletop RPG DMs. Two versions: tutorial-style for r/DMAcademy (practical workflow focus) and show-and-tell for r/DnD (screenshot-led). References quicksheet-dice, quicksheet-init-ext, and the for-dms.md landing page (PR #359).
+- Bucket: C (content draft — niche community post).
+- Outcome: draft saved at `drafts/reddit-dnd-dmacademy.md` (commit 6fc090d, direct to main — skill-only).
+- Follow-up: Gated on wallpaper screenshot showing actual DM grid layout. User posts after capturing image. Consider r/osr and r/PF2e variants if reception is good on first two subs.
+
 ## 2026-06-14 (docs: TTRPG DM landing page)
 
 - Stars: 0 (Δ 0).
