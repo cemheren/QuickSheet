@@ -1,3 +1,11 @@
+## 2026-06-14 (feat: stdin pipe support)
+
+- Stars: 0 (Δ 0).
+- Action: Added `-` as stdin indicator for all headless export modes. Refactored duplicated dimension-probing into shared helpers. Added `GridManager.LoadFromLines`. Closes #320.
+- Bucket: E (quality-of-life feature — issue fix).
+- Outcome: PR #397 (commit 49ed781).
+- Follow-up: #375 (Makefile — PR #381 exists), #319 (--delimiter) remain open.
+
 ## 2026-06-13 (feat: --info flag)
 
 - Stars: 0 (Δ 0).
