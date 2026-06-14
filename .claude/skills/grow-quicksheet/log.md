@@ -1,3 +1,11 @@
+## 2026-06-13 (feat: shell completion scripts)
+
+- Stars: 0 (Δ 0).
+- Action: Added bash and zsh tab-completion scripts for all CLI flags + CSV file arguments. Created `completions/` dir and `docs/shell-completions.md`. Closes #372.
+- Bucket: A (product polish — issue fix).
+- Outcome: PR #393 (commit 9eb58c2).
+- Follow-up: #374 (usage examples in --help), #320 (stdin pipe), #319 (--delimiter) remain open.
+
 ## 2026-06-13 (feat: NO_COLOR support)
 
 - Stars: 0 (Δ 0).
