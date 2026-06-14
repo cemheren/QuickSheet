@@ -1,3 +1,11 @@
+## 2026-06-14 (ext: health probe grid)
+
+- Stars: 0 (Δ 0).
+- Action: Pushed `quicksheet-health-ext` to `Deskworks/quicksheet-health-ext`. HTTP service probe grid for homelab dashboards — checks list of services and displays ✓/⚠/✗ indicators with status code and latency. Builds green, zero NuGet deps. Added topics: quicksheet, homelab, self-hosted, health-check, uptime, monitoring, dotnet.
+- Bucket: F (vertical extension — homelab persona).
+- Outcome: Repo created at https://github.com/Deskworks/quicksheet-health-ext (commit pushed to main).
+- Follow-up: Cross-link from QuickSheet README (PR when system unsaturates). r/selfhosted draft opportunity once extension is established.
+
 ## 2026-06-14 (no-op: system saturated)
 
 - Stars: 0 (Δ 0).
