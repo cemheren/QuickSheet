@@ -1,3 +1,11 @@
+## 2026-06-14 (docs: TTRPG DM landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` landing page + `examples/dm-dashboard.csv` targeting tabletop RPG dungeon masters. Covers combat workflow, random table recipes, extension recommendations (roll, init, cal). Pairs with existing quicksheet-roll-ext and quicksheet-init-ext repos.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #359 updated (commit d42c83d).
+- Follow-up: Draft r/DnD or r/DMAcademy post (Bucket C) once DM page merges. Next landing page candidate: `for-dms` done; consider `for-artists` (PR #400 already open).
+
 ## 2026-06-14 (research: terminal influencers & submission drafts)
 
 - Stars: 0 (Δ 0).
