@@ -1,3 +1,11 @@
+## 2026-06-13 (docs: help examples)
+
+- Stars: 0 (Δ 0).
+- Action: Added Examples section to `--help` output with 6 common workflows (desktop launch, autosave, export-md/html/json, list-extensions). Closes #374.
+- Bucket: A (product polish — issue fix).
+- Outcome: PR #379 updated (commit b85f4b2).
+- Follow-up: #321 (--info file size), #320 (stdin pipe), #319 (--delimiter) remain open.
+
 ## 2026-06-13 (feat: shell completion scripts)
 
 - Stars: 0 (Δ 0).
