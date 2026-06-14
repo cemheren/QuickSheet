@@ -1,3 +1,11 @@
+## 2026-06-14 (feat: --delimiter flag)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--delimiter` / `-d` flag for headless export modes (md, html, json). Supports single chars, `\t`, and `tab` keyword. Added `ParseCsvLine` overload with delimiter param + `LoadFromCsv` overload. Updated `--help`.
+- Bucket: E (issue fix — #319).
+- Outcome: PR #403 (commit 3f2ef50). Closes #319.
+- Follow-up: #375 (Makefile) already has PR #381 open. Next smallest unaddressed issue is #158 (usage pattern) but it's vague. Consider Bucket F next run.
+
 ## 2026-06-14 (research: terminal influencers & submission drafts)
 
 - Stars: 0 (Δ 0).
