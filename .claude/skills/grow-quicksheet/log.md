@@ -1,3 +1,12 @@
+## 2026-06-14 (Bucket F: quicksheet-wiki-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Created `quicksheet-wiki-ext` — Wikipedia article summaries via Wikimedia REST API (free, no auth). Fetches `/page/summary/` and word-wraps extract into grid rows. Built green, pushed to `cemheren/quicksheet-wiki-ext`. Cross-linked in README + `docs/extensions.md`.
+- Bucket: F (vertical extension).
+- Outcome: PR #405 (cross-link). Repo: https://github.com/cemheren/quicksheet-wiki-ext
+- Note: Also accidentally created `cemheren/quicksheet-fx-ext` (duplicate of existing `Deskworks/quicksheet-fx`). Cannot delete without `delete_repo` scope — user can clean up.
+- Follow-up: Add `wiki:` to `for-students.md` recommendations. Draft r/unixporn student-rice post mentioning wiki + define + cite trio.
+
 ## 2026-06-14 (docs: TTRPG DM landing page)
 
 - Stars: 0 (Δ 0).
