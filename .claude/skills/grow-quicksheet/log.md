@@ -1,3 +1,11 @@
+## 2026-06-14 (draft: r/LocalLLaMA + r/MachineLearning AI-cost post)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted r/LocalLLaMA and r/MachineLearning [D] posts positioning QuickSheet as an ambient AI-cost dashboard. Frames the problem as "losing track of API spend across 4 CLIs" and the solution as a wallpaper with live `i:` cells streaming token counts + GPU stats. Includes first-comment technical breakdown and posting strategy notes.
+- Bucket: C (content draft — user posts manually).
+- Outcome: skill-only file `drafts/reddit-localllama.md` pushed to main (090d62e). Gated on wallpaper screenshot asset.
+- Follow-up: Post to r/LocalLLaMA first (more receptive), then r/MachineLearning next day if traction. Don't overlap with r/commandline or r/programming same week.
+
 ## 2026-06-14 (research: terminal influencers & submission drafts)
 
 - Stars: 0 (Δ 0).
