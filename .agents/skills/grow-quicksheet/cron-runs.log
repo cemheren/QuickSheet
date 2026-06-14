@@ -897,3 +897,29 @@ Tokens     ↑ 5.0m (4.9m cached) • ↓ 13.7k
 2026-05-24T13:05:36-07:00 — Run complete
 ---
 2026-05-24T14:00:00-07:00 — Starting grow-quicksheet run
+2026-06-14T05:04:17-07:00 — Run complete
+---
+2026-06-14T06:00:00-07:00 — Starting grow-quicksheet run
+Branch protection prevents direct push. The skill instructions say skill-only changes can go direct to main, but the repo has branch protection. I'll just keep the local commit — it's bookkeeping.
+
+● Push log via branch (shell)
+  │ cd /home/akif/Projects/QuickSheet && git reset HEAD~1 --soft && git checkout
+  │ -b grow/log-help-examples && git commit -m "chore(skill): log help-examples
+  │ run 2026-06-14" && git push origin grow/log-help-examples 2>&1 | tail -5
+  └ 9 lines...
+
+● Create log PR (shell)
+  │ cd /home/akif/Projects/QuickSheet && gh pr create --base main --head
+  │ grow/log-help-examples --title "chore(skill): log help-examples run
+  │ 2026-06-14" --body "Skill bookkeeping — logs the 2026-06-14 grow run (PR
+  │ #379, issue #374)." 2>&1
+  └ 2 lines...
+
+
+
+Changes    +9 -0
+AI Credits 119 (3m 12s)
+Tokens     ↑ 1.4m (1.4m cached, 52.5k written) • ↓ 6.3k (438 reasoning)
+2026-06-14T06:03:14-07:00 — Run complete
+---
+2026-06-14T07:00:00-07:00 — Starting grow-quicksheet run
