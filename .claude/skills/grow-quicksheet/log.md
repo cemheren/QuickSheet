@@ -1,3 +1,11 @@
+## 2026-06-14 (draft: r/linux post)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted r/linux community post (3M+ members). Angle: X11 P/Invoke technical depth, `_NET_WM_WINDOW_TYPE_DESKTOP` embedding, how it differs from Conky, Wayland roadmap honesty. Includes anticipated Q&A for Wayland/Conky/why-.NET questions.
+- Bucket: C (content draft; user posts manually).
+- Outcome: draft saved at `drafts/reddit-linux.md`.
+- Follow-up: user posts after capturing wallpaper screenshot. Space 3+ days from r/commandline or r/unixporn posts.
+
 ## 2026-06-14 (research: terminal influencers & submission drafts)
 
 - Stars: 0 (Δ 0).
