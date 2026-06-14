@@ -31,36 +31,15 @@ public class Program
         {
             if (csvPath == null || exportIdx + 1 >= args.Length)
             {
-                Console.Error.WriteLine("Usage: ExcelConsole <input.csv> --export-md <output.md>");
+                Console.Error.WriteLine("Usage: ExcelConsole <input.csv | -> --export-md <output.md>");
                 Environment.Exit(2);
                 return;
             }
             string outPath = args[exportIdx + 1];
-            if (!File.Exists(csvPath))
-            {
-                Console.Error.WriteLine($"Input CSV not found: {csvPath}");
-                Environment.Exit(1);
-                return;
-            }
+            var lines = ReadCsvInput(csvPath);
+            if (lines == null) return;
 
-            // Probe CSV for dimensions so the headless GridManager is big enough.
-            var lines = File.ReadAllLines(csvPath);
-            int rows = Math.Max(1, lines.Length);
-            int cols = 1;
-            foreach (var line in lines)
-            {
-                int n = 1;
-                bool inQuotes = false;
-                foreach (char ch in line)
-                {
-                    if (ch == '"') inQuotes = !inQuotes;
-                    else if (ch == ',' && !inQuotes) n++;
-                }
-                if (n > cols) cols = n;
-            }
-            // Constructor derives ColumnCount from (availableWidth - 4) / columnWidth (default 20).
-            var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
-            grid.LoadFromCsv(csvPath);
+            var grid = CreateGridFromLines(lines);
             if (outPath == "-")
             {
                 grid.WriteMarkdownTo(Console.Out);
@@ -78,34 +57,15 @@ public class Program
         {
             if (csvPath == null || htmlIdx + 1 >= args.Length)
             {
-                Console.Error.WriteLine("Usage: ExcelConsole <input.csv> --export-html <output.html>");
+                Console.Error.WriteLine("Usage: ExcelConsole <input.csv | -> --export-html <output.html>");
                 Environment.Exit(2);
                 return;
             }
             string htmlOut = args[htmlIdx + 1];
-            if (!File.Exists(csvPath))
-            {
-                Console.Error.WriteLine($"Input CSV not found: {csvPath}");
-                Environment.Exit(1);
-                return;
-            }
+            var lines = ReadCsvInput(csvPath);
+            if (lines == null) return;
 
-            var lines = File.ReadAllLines(csvPath);
-            int rows = Math.Max(1, lines.Length);
-            int cols = 1;
-            foreach (var line in lines)
-            {
-                int n = 1;
-                bool inQuotes = false;
-                foreach (char ch in line)
-                {
-                    if (ch == '"') inQuotes = !inQuotes;
-                    else if (ch == ',' && !inQuotes) n++;
-                }
-                if (n > cols) cols = n;
-            }
-            var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
-            grid.LoadFromCsv(csvPath);
+            var grid = CreateGridFromLines(lines);
             if (htmlOut == "-")
             {
                 grid.WriteHtmlTo(Console.Out);
@@ -123,34 +83,15 @@ public class Program
         {
             if (csvPath == null || jsonIdx + 1 >= args.Length)
             {
-                Console.Error.WriteLine("Usage: ExcelConsole <input.csv> --export-json <output.json>");
+                Console.Error.WriteLine("Usage: ExcelConsole <input.csv | -> --export-json <output.json>");
                 Environment.Exit(2);
                 return;
             }
             string jsonOut = args[jsonIdx + 1];
-            if (!File.Exists(csvPath))
-            {
-                Console.Error.WriteLine($"Input CSV not found: {csvPath}");
-                Environment.Exit(1);
-                return;
-            }
+            var lines = ReadCsvInput(csvPath);
+            if (lines == null) return;
 
-            var lines = File.ReadAllLines(csvPath);
-            int rows = Math.Max(1, lines.Length);
-            int cols = 1;
-            foreach (var line in lines)
-            {
-                int n = 1;
-                bool inQuotes = false;
-                foreach (char ch in line)
-                {
-                    if (ch == '"') inQuotes = !inQuotes;
-                    else if (ch == ',' && !inQuotes) n++;
-                }
-                if (n > cols) cols = n;
-            }
-            var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
-            grid.LoadFromCsv(csvPath);
+            var grid = CreateGridFromLines(lines);
             if (jsonOut == "-")
             {
                 grid.WriteJsonTo(Console.Out);
@@ -252,12 +193,14 @@ public class Program
         Console.WriteLine();
         Console.WriteLine("Usage:");
         Console.WriteLine("  ExcelConsole [<file.csv>]                          Run as desktop wallpaper");
-        Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
-        Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
-        Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv | -> --export-md <out.md>   Headless: CSV → Markdown table (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv | -> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv | -> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
+        Console.WriteLine();
+        Console.WriteLine("Use - as input file to read CSV from stdin (pipe).");
         Console.WriteLine();
         Console.WriteLine("Cell prefixes:");
         Console.WriteLine("  r: <cmd>          Runnable command. Press Enter to launch.");
@@ -270,6 +213,59 @@ public class Program
         Console.WriteLine();
         Console.WriteLine("Range references work inside text: {A1::C10}");
         Console.WriteLine("Tour: docs/tour.md · Issues: github.com/cemheren/QuickSheet/issues");
+    }
+
+    /// <summary>
+    /// Reads CSV lines from a file path or stdin (when path is "-").
+    /// Returns null and prints an error if input cannot be read.
+    /// </summary>
+    private static string[]? ReadCsvInput(string csvPath)
+    {
+        if (csvPath == "-")
+        {
+            var stdinLines = new List<string>();
+            string? line;
+            while ((line = Console.In.ReadLine()) != null)
+                stdinLines.Add(line);
+            if (stdinLines.Count == 0)
+            {
+                Console.Error.WriteLine("No input received on stdin.");
+                Environment.Exit(1);
+                return null;
+            }
+            return stdinLines.ToArray();
+        }
+
+        if (!File.Exists(csvPath))
+        {
+            Console.Error.WriteLine($"Input CSV not found: {csvPath}");
+            Environment.Exit(1);
+            return null;
+        }
+        return File.ReadAllLines(csvPath);
+    }
+
+    /// <summary>
+    /// Creates a GridManager sized to fit the given CSV lines and loads them.
+    /// </summary>
+    private static GridManager CreateGridFromLines(string[] lines)
+    {
+        int rows = Math.Max(1, lines.Length);
+        int cols = 1;
+        foreach (var line in lines)
+        {
+            int n = 1;
+            bool inQuotes = false;
+            foreach (char ch in line)
+            {
+                if (ch == '"') inQuotes = !inQuotes;
+                else if (ch == ',' && !inQuotes) n++;
+            }
+            if (n > cols) cols = n;
+        }
+        var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
+        grid.LoadFromLines(lines);
+        return grid;
     }
 
 #if PLATFORM_WINDOWS
