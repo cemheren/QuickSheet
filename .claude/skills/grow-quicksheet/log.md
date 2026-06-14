@@ -1,3 +1,11 @@
+## 2026-06-14 (docs: DM/GM landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` targeting TTRPG dungeon masters + `examples/dm-screen.csv` starter sheet. Cross-linked from README audience guides. References `quicksheet-dice` (roll:) and `quicksheet-init-ext` (init:).
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #359 updated (commit 2a5278c).
+- Follow-up: `for-artists.md` remains as final audience landing page. All main-repo issues have open PRs pending merge.
+
 ## 2026-06-14 (feat: stdin pipe support)
 
 - Stars: 0 (Δ 0).
