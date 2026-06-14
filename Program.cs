@@ -24,6 +24,13 @@ public class Program
             return;
         }
 
+        if (args.Contains("--info"))
+        {
+            string? infoPath = args.FirstOrDefault(a => !a.StartsWith("--"));
+            PrintInfo(infoPath);
+            return;
+        }
+
         string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
 
         int exportIdx = Array.IndexOf(args, "--export-md");
@@ -233,6 +240,98 @@ public class Program
         }
     }
 
+    private static void PrintInfo(string? csvPath)
+    {
+        if (csvPath == null)
+        {
+            Console.Error.WriteLine("Usage: ExcelConsole <file.csv> --info");
+            Environment.Exit(2);
+            return;
+        }
+        if (!File.Exists(csvPath))
+        {
+            Console.Error.WriteLine($"File not found: {csvPath}");
+            Environment.Exit(1);
+            return;
+        }
+
+        var fileInfo = new FileInfo(csvPath);
+        long bytes = fileInfo.Length;
+        string size = bytes switch
+        {
+            < 1024 => $"{bytes} B",
+            < 1024 * 1024 => $"{bytes / 1024.0:F1} KB",
+            _ => $"{bytes / (1024.0 * 1024.0):F1} MB"
+        };
+
+        var lines = File.ReadAllLines(csvPath);
+        int rowCount = lines.Length;
+        int colCount = 0;
+        foreach (var line in lines)
+        {
+            int n = 1;
+            bool inQuotes = false;
+            foreach (char ch in line)
+            {
+                if (ch == '"') inQuotes = !inQuotes;
+                else if (ch == ',' && !inQuotes) n++;
+            }
+            if (n > colCount) colCount = n;
+        }
+
+        int nonEmptyRows = 0;
+        int nonEmptyCells = 0;
+        foreach (var line in lines)
+        {
+            if (!string.IsNullOrWhiteSpace(line))
+            {
+                nonEmptyRows++;
+                // Count non-empty cells in this row
+                var fields = ParseCsvFields(line);
+                foreach (var f in fields)
+                    if (!string.IsNullOrWhiteSpace(f)) nonEmptyCells++;
+            }
+        }
+
+        string header = rowCount > 0 && !string.IsNullOrWhiteSpace(lines[0])
+            ? string.Join(", ", ParseCsvFields(lines[0]).Where(f => !string.IsNullOrWhiteSpace(f)))
+            : "(empty)";
+        if (header.Length > 80) header = header[..77] + "...";
+
+        Console.WriteLine($"File:          {Path.GetFullPath(csvPath)}");
+        Console.WriteLine($"Size:          {size}");
+        Console.WriteLine($"Last modified: {fileInfo.LastWriteTime:yyyy-MM-dd HH:mm:ss}");
+        Console.WriteLine($"Rows:          {rowCount}");
+        Console.WriteLine($"Columns:       {colCount}");
+        Console.WriteLine($"Non-empty:     {nonEmptyRows} rows, {nonEmptyCells} cells");
+        Console.WriteLine($"Header:        {header}");
+    }
+
+    private static List<string> ParseCsvFields(string line)
+    {
+        var fields = new List<string>();
+        bool inQuotes = false;
+        var current = new System.Text.StringBuilder();
+        foreach (char ch in line)
+        {
+            if (ch == '"')
+            {
+                inQuotes = !inQuotes;
+            }
+            else if (ch == ',' && !inQuotes)
+            {
+                fields.Add(current.ToString());
+                current.Clear();
+            }
+            else
+            {
+                current.Append(ch);
+            }
+        }
+        fields.Add(current.ToString());
+        return fields;
+    }
+
     private static void PrintVersion()
     {
         string platform =
@@ -258,6 +357,7 @@ public class Program
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
+        Console.WriteLine("  ExcelConsole <file.csv> --info                     Show CSV file info (size, modified, rows, columns)");
         Console.WriteLine();
         Console.WriteLine("Cell prefixes:");
         Console.WriteLine("  r: <cmd>          Runnable command. Press Enter to launch.");
