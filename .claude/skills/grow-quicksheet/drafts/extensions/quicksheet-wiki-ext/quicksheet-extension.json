@@ -1,0 +1,8 @@
+{
+  "name": "wiki",
+  "version": "1.0.0",
+  "prefix": "wiki",
+  "description": "Wikipedia article summaries for QuickSheet",
+  "entry": "dotnet run --project WikiExtension.csproj",
+  "minProtocolVersion": 1
+}

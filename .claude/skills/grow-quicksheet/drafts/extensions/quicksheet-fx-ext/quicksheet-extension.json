@@ -1,0 +1,8 @@
+{
+  "name": "fx",
+  "version": "1.0.0",
+  "prefix": "fx",
+  "description": "Live currency exchange rates for QuickSheet (ECB data via frankfurter.app)",
+  "entry": "dotnet run --project FxExtension.csproj",
+  "minProtocolVersion": 1
+}
