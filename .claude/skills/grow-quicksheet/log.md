@@ -1,3 +1,11 @@
+## 2026-06-14 (docs: artist/creative landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-artists.md` targeting freelance illustrators, designers, photographers, musicians. Commission tracker workflow (cntdn), palette reference (color ext), freelance rate/budget. Added `examples/artist-portfolio.csv` starter sheet and cross-linked from README audience guides.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #400 (commit d4fecff).
+- Follow-up: All audience landing pages from queue complete (homelab, traders, SRE, students, DMs, artists). Next queue items: Bucket B good-first-issue labeling or Bucket F extensions.
+
 ## 2026-05-19 (no-op #31 — #139 still open, hold)
 
 - Stars: 0 (Δ 0). PR #139 still open, no other action items. Hold.
