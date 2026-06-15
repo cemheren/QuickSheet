@@ -1,3 +1,11 @@
+## 2026-06-15 (docs: DM/TTRPG landing page + example CSV)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` landing page for tabletop RPG dungeon masters and `examples/dm-screen.csv` with initiative tracker, dice rolls, encounter table, party stats, and session notes. Pairs with shipped `quicksheet-roll-ext`.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #359 updated (commit 5a7c638).
+- Follow-up: `for-artists.md` (PR #400 exists). Next backlog item: Bucket D awesome-list drafts or another qualifying issue.
+
 ## 2026-06-14 (research: terminal influencers & submission drafts)
 
 - Stars: 0 (Δ 0).
