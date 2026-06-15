@@ -1,3 +1,11 @@
+## 2026-06-15 (feat: NO_COLOR support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented NO_COLOR env var support (no-color.org standard). Added `ColorSupport.cs` static helper + documented in `--help`. Also closed stale #375 (Makefile already existed).
+- Bucket: E (code feature — issue fix).
+- Outcome: PR #411 (commit 05741c9). Closes #318.
+- Follow-up: #372 (shell completions) or #321 (--info file metadata) are next smallest qualifying issues.
+
 ## 2026-05-19 (no-op #31 — #139 still open, hold)
 
 - Stars: 0 (Δ 0). PR #139 still open, no other action items. Hold.
