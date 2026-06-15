@@ -1,3 +1,11 @@
+## 2026-06-15 (feat: usage examples in --help)
+
+- Stars: 0 (Δ 0).
+- Action: Added Examples section to `--help` output with 5 practical workflow commands (launch, export-md, pipe html, json stdout, no-file autosave). Single method change in Program.cs.
+- Bucket: E (issue fix — #374).
+- Outcome: PR #413 (commit a460c41). Closes #374.
+- Follow-up: #372 (shell completions) or #321 (--info file metadata) next.
+
 ## 2026-06-15 (feat: NO_COLOR support)
 
 - Stars: 0 (Δ 0).
