@@ -1,0 +1,19 @@
+Initiative,,Party Stats,,,Dice,,,Quick Reference,
+,,,,,,,,
+#,Name / HP / AC / Status,,Name,HP,AC,Passive,,Condition,Effect
+1,,,Thorin,45,18,14,,Blinded,"Can't see, auto-fail sight checks"
+2,,,Elara,32,15,16,,Frightened,Disadvantage while source visible
+3,,,Grimjaw,58,16,12,,Prone,"Disadv ranged, adv melee vs them"
+4,,,Zara,28,13,18,,Stunned,"Incapacitated, auto-fail STR/DEX"
+5,,,Pip,22,14,15,,Grappled,Speed becomes 0
+,,,,,,,,
+,,,,,,,,
+ext: github:cemheren/quicksheet-roll-ext,,,,,,,,
+,,,,,,,,
+Dice Rolls,,,Encounter Table (d6),,,,Session Notes,
+roll: d20,Attack roll,,1,2d4 goblins,,,,
+roll: 2d6+3,Damage,,2,1 owlbear,,,NPC: Aldric the merchant,
+roll: d100,Percentile,,3,Merchant caravan,,,Plot: stolen crown in Thornkeep,
+roll: 4d6,Ability gen,,4,Bandit ambush (3d4),,,Next session: enter the vault,
+roll: d8,Hit die,,5,Nothing,,,,
+roll: d20,Save DC,,6,Young green dragon,,,,
