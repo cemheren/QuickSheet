@@ -1,3 +1,11 @@
+## 2026-06-15 (draft: awesome-ricing submissions)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted PR submissions for fosslife/awesome-ricing (4.3k ⭐) and avtzis/awesome-linux-ricing (1.1k ⭐). QuickSheet fits perfectly in "Background setting utilities" — it literally IS the wallpaper. Includes diff lines, PR titles, PR bodies, and submission strategy.
+- Bucket: D (network effects — awesome-list draft).
+- Outcome: Draft saved at `drafts/awesome-ricing.md`.
+- Follow-up: User submits PRs (gated on wallpaper screenshot). These two lists are the highest-ROI ricing community targets — 5.4k combined stargazers browsing specifically for wallpaper/background tools.
+
 ## 2026-06-15 (docs: DM/TTRPG landing page + example CSV)
 
 - Stars: 0 (Δ 0).
