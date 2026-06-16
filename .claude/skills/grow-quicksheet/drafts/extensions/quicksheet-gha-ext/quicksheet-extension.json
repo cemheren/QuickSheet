@@ -1,0 +1,8 @@
+{
+  "name": "gha",
+  "version": "1.0.0",
+  "prefix": "gha",
+  "description": "GitHub Actions workflow status dashboard for QuickSheet — shows recent CI/CD runs with pass/fail indicators",
+  "entry": "dotnet run --project GhaExtension.csproj",
+  "minProtocolVersion": 1
+}
