@@ -6,6 +6,10 @@ public class Program
     [STAThread]
     public static void Main(string[] args)
     {
+        // Respect NO_COLOR (https://no-color.org/) and --no-color flag.
+        if (args.Contains("--no-color"))
+            ExcelConsole.AppSettings.ForceNoColor();
+
         if (args.Contains("--help") || args.Contains("-h"))
         {
             PrintHelp();
@@ -258,6 +262,9 @@ public class Program
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
+        Console.WriteLine();
+        Console.WriteLine("Options:");
+        Console.WriteLine("  --no-color        Suppress ANSI colors (also: set NO_COLOR env var).");
         Console.WriteLine();
         Console.WriteLine("Cell prefixes:");
         Console.WriteLine("  r: <cmd>          Runnable command. Press Enter to launch.");
