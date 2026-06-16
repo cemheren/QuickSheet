@@ -1,3 +1,35 @@
+## 2026-06-15 (draft: TerminalTrove + Console.dev directory submissions)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted submission forms for TerminalTrove (post form), Console.dev (tool directory), and Charm newsletter pitch. Includes full field values, descriptions, categories, and install instructions ready for user to copy-paste into each form.
+- Bucket: D (network effects — directory submissions).
+- Outcome: draft saved at `drafts/terminal-directories.md`.
+- Follow-up: user submits to each directory. After listing goes live, add "As seen on" badge/link to README.
+
+## 2026-06-15 (docs: DM/TTRPG landing page + example CSV)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` targeting tabletop RPG dungeon masters + `examples/dm-dashboard.csv` with party tracker, dice roller, initiative, loot table, session notes. References existing `roll` and `init` extensions.
+- Bucket: A (audience landing page).
+- Outcome: PR #416 (commit b5216c3).
+- Follow-up: `for-artists.md` still pending merge (#400). Next landing page candidate: `for-writers.md` or `for-freelancers.md`.
+
+## 2026-06-15 (no-op #32 — 30+ PRs open, all issues covered, saturation hold)
+
+- Stars: 0 (Δ 0).
+- Action: Swept main repo (8 open issues) + 53 extension repos (0 open issues). Every qualifying issue already has an open PR (#393 #394 #396 #397 #403 #411 #413). Remaining issues: #158 (virtual tabs — too complex for one run, >50 lines multi-file) and #3 (Wayland — requires interactive desktop mode). 30+ PRs awaiting user merge. No concrete non-duplicate action available.
+- Bucket: — (no-op).
+- Outcome: hold. Bottleneck remains publication (PR merges), not production.
+- Follow-up: next run should re-sweep issues; if user merges PRs, new issues may surface.
+
+## 2026-06-15 (feat: NO_COLOR support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented NO_COLOR env var support (no-color.org standard). Added `ColorSupport.cs` static helper + documented in `--help`. Also closed stale #375 (Makefile already existed).
+- Bucket: E (code feature — issue fix).
+- Outcome: PR #411 (commit 05741c9). Closes #318.
+- Follow-up: #372 (shell completions) or #321 (--info file metadata) are next smallest qualifying issues.
+
 ## 2026-05-19 (no-op #31 — #139 still open, hold)
 
 - Stars: 0 (Δ 0). PR #139 still open, no other action items. Hold.
