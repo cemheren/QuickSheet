@@ -593,6 +593,42 @@ public class GridManager
         writer.WriteLine("</body></html>");
     }
 
+    public void SaveToTsv(string path)
+    {
+        using var writer = new StreamWriter(path);
+        WriteTsvTo(writer);
+    }
+
+    /// <summary>
+    /// Writes the grid as tab-separated values to an arbitrary <see cref="TextWriter"/>.
+    /// Used by `--export-tsv -` to write to stdout for piping.
+    /// </summary>
+    public void WriteTsvTo(TextWriter writer)
+    {
+        int lastRow = -1, lastCol = -1;
+        for (int r = 0; r < RowCount; r++)
+            for (int c = 0; c < ColumnCount; c++)
+                if (!string.IsNullOrEmpty(_data[r, c]) && !_isFile[r, c])
+                {
+                    if (r > lastRow) lastRow = r;
+                    if (c > lastCol) lastCol = c;
+                }
+        if (lastRow < 0 || lastCol < 0) return;
+
+        for (int r = 0; r <= lastRow; r++)
+        {
+            for (int c = 0; c <= lastCol; c++)
+            {
+                if (c > 0) writer.Write('\t');
+                string v = _isFile[r, c] ? "" : (_data[r, c] ?? "");
+                // TSV escaping: replace tabs and newlines with spaces
+                v = v.Replace('\t', ' ').Replace('\r', ' ').Replace('\n', ' ');
+                writer.Write(v);
+            }
+            writer.WriteLine();
+        }
+    }
+
     public void SaveToJson(string path)
     {
         using var writer = new StreamWriter(path);
