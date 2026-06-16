@@ -1,3 +1,11 @@
+## 2026-06-16 (feat: shell completions for bash/zsh/fish)
+
+- Stars: 0 (Δ 0).
+- Action: Rewrote shell completion scripts (bash, zsh, fish) on existing PR #393 branch. Covers all CLI flags + .csv file completion. Added docs/shell-completions.md with install instructions.
+- Bucket: E (issue fix — #372).
+- Outcome: PR #393 updated (force-pushed commit d92d1d5). Closes #372.
+- Follow-up: #319 (--delimiter flag) or #320 (stdin pipe) are next smallest qualifying issues with existing PRs. No new unaddressed issues remain.
+
 ## 2026-05-19 (no-op #31 — #139 still open, hold)
 
 - Stars: 0 (Δ 0). PR #139 still open, no other action items. Hold.
