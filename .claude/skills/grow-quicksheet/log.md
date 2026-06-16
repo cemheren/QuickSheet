@@ -1,3 +1,11 @@
+## 2026-06-16 (research: terminal influencers & amplification channels)
+
+- Stars: 0 (Δ 0).
+- Action: Researched top 10 terminal-tool influencers and submission channels. Profiled Terminal Trove, Console.dev, Bashbunni, Jesse Duffield, Brodie Robertson, DistroTube, rothgar, toolleeo, Charm.sh team, Chris Titus Tech. Distilled 3 concrete next actions.
+- Bucket: R (research).
+- Outcome: research saved at `.claude/skills/grow-quicksheet/research/terminal-influencers.md`.
+- Follow-up: Draft Terminal Trove + Console.dev submission text (Bucket D). Draft toolleeo/awesome-cli-apps-in-a-csv PR body.
+
 ## 2026-06-16 (feat: shell completions for bash/zsh/fish)
 
 - Stars: 0 (Δ 0).
@@ -1054,6 +1062,9 @@
   7. **Bucket A: more audience landing pages**, in `docs/for-*.md` + matching `examples/*.csv`. Already shipped: `for-homelab.md` (PR #100). Next candidates that don't depend on timer/value-colour: `for-students.md`, `for-dms.md`, `for-traders.md`, `for-artists.md`. Skip `for-lawyers.md` and `for-accountants.md` until a non-timer billing/accounting angle is found.
   8. **Bucket D: awesome-list submissions.** awesome-selfhosted DROPPED (wrong fit — server software). Use the queue in `research/awesome-list-fit.md`: Awesome-Linux-Software draft now done (`drafts/awesome-linux-software.md`); next draft Awesome-Windows; then identify canonical `awesome-csv`. Skip awesome-tuis tone-rewrite until a wallpaper screenshot lands.
   9. **Bucket C: r/unixporn DM-screen and student-rice posts.** Drafts only, save when matching extensions land. r/selfhosted "Homepage.io-alternative" post after `health:` ships.
+  10. **Bucket D: Terminal Trove submission** — draft form text for terminaltrove.com/post/ (from research/terminal-influencers.md).
+  11. **Bucket D: Console.dev submission** — draft pitch email for console.dev newsletter feature (from research/terminal-influencers.md).
+  12. **Bucket D: toolleeo/awesome-cli-apps-in-a-csv PR** — draft CSV line + PR body for the CLI-apps-in-a-CSV list (near-certain acceptance).
 
 - **EXPLICITLY DROPPED from backlog (do not revive without user nod):**
   - Trinity feature programme (value-colour / ticking timer / progress bar).
