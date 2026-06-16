@@ -1,3 +1,11 @@
+## 2026-06-16 (feat: --export-tsv headless mode)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--export-tsv` headless export command, matching the pattern of `--export-md`, `--export-html`, `--export-json`. Supports stdout (`-`) for Unix piping.
+- Bucket: E (code feature).
+- Outcome: PR #422 (commit 21d73d5).
+- Follow-up: None specific. All open issues already have PRs. Bottleneck remains merge backlog.
+
 ## 2026-06-15 (docs: freelancer landing page)
 
 - Stars: 0 (Δ 0).
