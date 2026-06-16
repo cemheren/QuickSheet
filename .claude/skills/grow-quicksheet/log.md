@@ -1,3 +1,11 @@
+## 2026-06-15 (docs: DM/TTRPG landing page + example CSV)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` targeting tabletop RPG dungeon masters + `examples/dm-dashboard.csv` with party tracker, dice roller, initiative, loot table, session notes. References existing `roll` and `init` extensions.
+- Bucket: A (audience landing page).
+- Outcome: PR #416 (commit b5216c3).
+- Follow-up: `for-artists.md` still pending merge (#400). Next landing page candidate: `for-writers.md` or `for-freelancers.md`.
+
 ## 2026-06-15 (no-op #32 — 30+ PRs open, all issues covered, saturation hold)
 
 - Stars: 0 (Δ 0).
