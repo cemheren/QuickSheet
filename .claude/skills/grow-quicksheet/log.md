@@ -1,3 +1,11 @@
+## 2026-06-15 (docs: writer & author landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-writers.md` targeting novelists, freelance writers, and researchers + `examples/writer-dashboard.csv` with manuscript tracker, daily word-count sparkline, submission log, and research references using define/thes/cite/wiki extensions.
+- Bucket: A (audience landing page).
+- Outcome: PR #419 (commit 5f18843).
+- Follow-up: `for-freelancers.md` is next candidate. Writer-specific Reddit drafts (r/writing, r/screenwriting) can follow once extensions are live.
+
 ## 2026-06-15 (draft: TerminalTrove + Console.dev directory submissions)
 
 - Stars: 0 (Δ 0).
