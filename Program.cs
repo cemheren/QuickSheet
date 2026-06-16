@@ -26,6 +26,12 @@ public class Program
 
         string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
 
+        if (args.Contains("--info"))
+        {
+            PrintFileInfo(csvPath);
+            return;
+        }
+
         int exportIdx = Array.IndexOf(args, "--export-md");
         if (exportIdx >= 0)
         {
@@ -233,6 +239,48 @@ public class Program
         }
     }
 
+    private static void PrintFileInfo(string? csvPath)
+    {
+        if (csvPath == null || !File.Exists(csvPath))
+        {
+            Console.Error.WriteLine(csvPath == null
+                ? "Usage: ExcelConsole <file.csv> --info"
+                : $"File not found: {csvPath}");
+            Environment.Exit(1);
+            return;
+        }
+
+        var fi = new FileInfo(csvPath);
+        long bytes = fi.Length;
+        string size = bytes switch
+        {
+            < 1024 => $"{bytes} B",
+            < 1024 * 1024 => $"{bytes / 1024.0:F1} KB",
+            _ => $"{bytes / (1024.0 * 1024.0):F1} MB"
+        };
+
+        var lines = File.ReadAllLines(csvPath);
+        int rows = lines.Length;
+        int cols = 0;
+        foreach (var line in lines)
+        {
+            int n = 1;
+            bool inQuotes = false;
+            foreach (char ch in line)
+            {
+                if (ch == '"') inQuotes = !inQuotes;
+                else if (ch == ',' && !inQuotes) n++;
+            }
+            if (n > cols) cols = n;
+        }
+
+        Console.WriteLine($"File:          {fi.FullName}");
+        Console.WriteLine($"Size:          {size}");
+        Console.WriteLine($"Last modified: {fi.LastWriteTime:yyyy-MM-dd HH:mm:ss}");
+        Console.WriteLine($"Rows:          {rows}");
+        Console.WriteLine($"Columns:       {cols}");
+    }
+
     private static void PrintVersion()
     {
         string platform =
@@ -255,6 +303,7 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv> --info                     Show file size, last modified, row/column counts");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
