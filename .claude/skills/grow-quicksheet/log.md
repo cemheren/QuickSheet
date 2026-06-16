@@ -1,3 +1,11 @@
+## 2026-06-15 (docs: freelancer landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Rewrote `docs/for-freelancers.md` targeting solo consultants, freelance devs, and contractors + `examples/freelancer-dashboard.csv` with invoice tracker, weekly hours, quarterly tax countdown, expense sparklines, mileage tracking.
+- Bucket: A (audience landing page).
+- Outcome: PR #364 updated (commit b9721e2).
+- Follow-up: `for-freelancers.md` was the last explicitly queued persona page. Next candidates: niche Reddit drafts (r/freelance, r/consulting) or another Bucket F extension if user merges backlog.
+
 ## 2026-06-15 (draft: TerminalTrove + Console.dev directory submissions)
 
 - Stars: 0 (Δ 0).
