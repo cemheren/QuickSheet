@@ -1,3 +1,11 @@
+## 2026-06-16 (feat: stdin pipe support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `-` as file argument to read CSV from stdin in headless export modes. Reads stdin to temp file, processes, cleans up. Added error for non-headless use. Updated --help.
+- Bucket: E (issue fix — #320).
+- Outcome: PR #396 updated (commit 48f4104). Closes #320.
+- Follow-up: #318 (NO_COLOR) or #158 (usage pattern/tabs) are next open issues.
+
 ## 2026-06-16 (feat: shell completions for bash/zsh/fish)
 
 - Stars: 0 (Δ 0).
