@@ -1,3 +1,11 @@
+## 2026-06-15 (draft: TerminalTrove + Console.dev directory submissions)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted submission forms for TerminalTrove (post form), Console.dev (tool directory), and Charm newsletter pitch. Includes full field values, descriptions, categories, and install instructions ready for user to copy-paste into each form.
+- Bucket: D (network effects — directory submissions).
+- Outcome: draft saved at `drafts/terminal-directories.md`.
+- Follow-up: user submits to each directory. After listing goes live, add "As seen on" badge/link to README.
+
 ## 2026-06-15 (docs: DM/TTRPG landing page + example CSV)
 
 - Stars: 0 (Δ 0).
