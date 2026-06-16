@@ -1,3 +1,11 @@
+## 2026-06-16 (feat: quicksheet-case-ext — US case law)
+
+- Stars: 0 (Δ 0).
+- Action: Created `quicksheet-case-ext` — US case law citation/keyword lookup via CourtListener's free API. Scaffolded, built (0 warnings), pushed to `cemheren/quicksheet-case-ext`. Added README + tour.md cross-links.
+- Bucket: F (vertical extension — legal persona).
+- Outcome: Extension repo https://github.com/cemheren/quicksheet-case-ext + PR #435 for cross-links.
+- Follow-up: Consider `quicksheet-statute-ext` (US Code lookup) as pair extension for the legal vertical.
+
 ## 2026-06-16 (docs: accountant landing page)
 
 - Stars: 0 (Δ 0).
