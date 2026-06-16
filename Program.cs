@@ -26,6 +26,27 @@ public class Program
 
         string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
 
+        // Support reading CSV from stdin via "-" as the file argument.
+        string? stdinTempFile = null;
+        if (csvPath == "-")
+        {
+            if (Console.IsInputRedirected)
+            {
+                stdinTempFile = Path.GetTempFileName();
+                File.WriteAllText(stdinTempFile, Console.In.ReadToEnd());
+                csvPath = stdinTempFile;
+            }
+            else
+            {
+                Console.Error.WriteLine("Error: '-' specified but stdin is not redirected (no pipe detected).");
+                Environment.Exit(2);
+                return;
+            }
+        }
+
+        try
+        {
+
         int exportIdx = Array.IndexOf(args, "--export-md");
         if (exportIdx >= 0)
         {
@@ -163,6 +184,20 @@ public class Program
             return;
         }
 
+        } // try
+        finally
+        {
+            if (stdinTempFile != null && File.Exists(stdinTempFile))
+                File.Delete(stdinTempFile);
+        }
+
+        if (stdinTempFile != null)
+        {
+            Console.Error.WriteLine("Error: stdin pipe ('-') is only supported with headless flags (--export-md, --export-html, --export-json).");
+            Environment.Exit(2);
+            return;
+        }
+
 #if PLATFORM_WINDOWS
         HideConsoleWindow();
         using var host = new ExcelConsole.Platform.Windows.WindowsDesktopHost();
@@ -255,6 +290,7 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  cat data.csv | ExcelConsole - --export-md -        Pipe CSV via stdin (use - as input file)");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
