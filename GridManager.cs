@@ -659,6 +659,64 @@ public class GridManager
                 .Replace("\n", "\\n").Replace("\r", "\\r").Replace("\t", "\\t");
     }
 
+    /// <summary>
+    /// Writes the grid as a pretty-printed ASCII table with box-drawing characters.
+    /// Used by `--print` for quick CLI preview of CSV files.
+    /// </summary>
+    public void WritePrettyTableTo(TextWriter writer, int maxRows = int.MaxValue)
+    {
+        int lastRow = -1, lastCol = -1;
+        for (int r = 0; r < RowCount; r++)
+            for (int c = 0; c < ColumnCount; c++)
+                if (!string.IsNullOrEmpty(_data[r, c]) && !_isFile[r, c])
+                {
+                    if (r > lastRow) lastRow = r;
+                    if (c > lastCol) lastCol = c;
+                }
+        if (lastRow < 0 || lastCol < 0) { writer.WriteLine("(empty)"); return; }
+
+        int displayRows = Math.Min(lastRow, maxRows);
+        const int maxColWidth = 40;
+
+        // Compute column widths
+        var widths = new int[lastCol + 1];
+        for (int c = 0; c <= lastCol; c++)
+        {
+            for (int r = 0; r <= displayRows; r++)
+            {
+                string v = _isFile[r, c] ? "" : (_data[r, c] ?? "");
+                if (v.Length > widths[c]) widths[c] = v.Length;
+            }
+            widths[c] = Math.Min(widths[c], maxColWidth);
+            if (widths[c] < 1) widths[c] = 1;
+        }
+
+        // Build horizontal rules
+        string TopRule()    { return "┌" + string.Join("┬", widths.Select(w => new string('─', w + 2))) + "┐"; }
+        string MidRule()    { return "├" + string.Join("┼", widths.Select(w => new string('─', w + 2))) + "┤"; }
+        string BottomRule() { return "└" + string.Join("┴", widths.Select(w => new string('─', w + 2))) + "┘"; }
+
+        writer.WriteLine(TopRule());
+        for (int r = 0; r <= displayRows; r++)
+        {
+            writer.Write('│');
+            for (int c = 0; c <= lastCol; c++)
+            {
+                string v = _isFile[r, c] ? "" : (_data[r, c] ?? "");
+                if (v.Length > maxColWidth) v = v.Substring(0, maxColWidth - 1) + "…";
+                writer.Write(' ');
+                writer.Write(v.PadRight(widths[c]));
+                writer.Write(" │");
+            }
+            writer.WriteLine();
+            if (r == 0) writer.WriteLine(MidRule());
+        }
+        writer.WriteLine(BottomRule());
+
+        if (lastRow > displayRows)
+            writer.WriteLine($"({lastRow - displayRows} more row{(lastRow - displayRows == 1 ? "" : "s")})");
+    }
+
     public void LoadFromCsv(string path)
     {
         if (!File.Exists(path)) return;
