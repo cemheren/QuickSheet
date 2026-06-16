@@ -1,3 +1,11 @@
+## 2026-06-16 (feat: --info flag)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--info` CLI flag showing file size (human-readable), last-modified timestamp, row count, and column count. Updated --help output.
+- Bucket: E (issue fix — #321).
+- Outcome: PR #426 (commit 2c48bc0). Closes #321.
+- Follow-up: #158 (usage pattern) is next open issue without a PR.
+
 ## 2026-06-16 (feat: shell completions for bash/zsh/fish)
 
 - Stars: 0 (Δ 0).
