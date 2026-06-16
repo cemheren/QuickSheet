@@ -105,6 +105,45 @@ Write docs,Pending,Low,2
 ]
 ```
 
+## YAML (`--export-yaml`)
+
+Convert a CSV file into a YAML sequence of mappings (first row = keys).
+Useful for feeding data into Ansible, Kubernetes manifests, CI/CD configs, or any YAML-native toolchain.
+
+```bash
+# Export to a file
+dotnet run --project ExcelConsole.csproj -- data.csv --export-yaml data.yaml
+
+# Pipe to stdout
+dotnet run --project ExcelConsole.csproj -- data.csv --export-yaml -
+```
+
+**Example input** (`tasks.csv`):
+
+```csv
+Task,Status,Priority,Hours
+Fix login bug,Done,High,3
+Add dark mode,In Progress,Medium,8
+Write docs,Pending,Low,2
+```
+
+**Output**:
+
+```yaml
+- Task: Fix login bug
+  Status: Done
+  Priority: High
+  Hours: 3
+- Task: Add dark mode
+  Status: In Progress
+  Priority: Medium
+  Hours: 8
+- Task: Write docs
+  Status: Pending
+  Priority: Low
+  Hours: 2
+```
+
 ## Piping and composition
 
 All export modes support `-` as the output path, writing to stdout instead of a file.
@@ -121,22 +160,25 @@ dotnet run --project ExcelConsole.csproj -- data.csv --export-json - | jq '.[0]'
 dotnet run --project ExcelConsole.csproj -- data.csv --export-html - > /tmp/report.html
 python3 -m http.server -d /tmp 8080
 
+# CSV → YAML → pipe into yq or kubectl
+dotnet run --project ExcelConsole.csproj -- data.csv --export-yaml - | yq '.[0]'
+
 # Chain with jq, awk, or other tools
 dotnet run --project ExcelConsole.csproj -- data.csv --export-md - | head -5
 ```
 
 ## Format comparison
 
-| Feature | CSV | Markdown | HTML | JSON |
-|---|---|---|---|---|
-| Human readable | ○ | ● | ● | ○ |
-| Machine parseable | ● | ○ | ○ | ● |
-| Styled output | — | — | ● | — |
-| Clickable URLs | — | ● (on GitHub) | ● | — |
-| Numeric alignment | — | — | ● | ● (native) |
-| Embeddable | — | ● (README/wiki) | ● (browser) | ● (APIs/scripts) |
-| Round-trip editable | ● | — | — | — |
-| jq / tool-friendly | — | — | — | ● |
+| Feature | CSV | Markdown | HTML | JSON | YAML |
+|---|---|---|---|---|---|
+| Human readable | ○ | ● | ● | ○ | ● |
+| Machine parseable | ● | ○ | ○ | ● | ● |
+| Styled output | — | — | ● | — | — |
+| Clickable URLs | — | ● (on GitHub) | ● | — | — |
+| Numeric alignment | — | — | ● | ● (native) | ● (native) |
+| Embeddable | — | ● (README/wiki) | ● (browser) | ● (APIs/scripts) | ● (configs/IaC) |
+| Round-trip editable | ● | — | — | — | — |
+| jq / yq friendly | — | — | — | ● | ● |
 
 ---
 
