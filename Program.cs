@@ -163,6 +163,46 @@ public class Program
             return;
         }
 
+        int printIdx = Array.IndexOf(args, "--print");
+        if (printIdx >= 0)
+        {
+            if (csvPath == null)
+            {
+                Console.Error.WriteLine("Usage: ExcelConsole <input.csv> --print [N]");
+                Environment.Exit(2);
+                return;
+            }
+            if (!File.Exists(csvPath))
+            {
+                Console.Error.WriteLine($"Input CSV not found: {csvPath}");
+                Environment.Exit(1);
+                return;
+            }
+
+            int maxRows = int.MaxValue;
+            if (printIdx + 1 < args.Length && int.TryParse(args[printIdx + 1], out int n) && n > 0)
+                maxRows = n;
+
+            var lines = File.ReadAllLines(csvPath);
+            int rows = Math.Max(1, lines.Length);
+            int cols = 1;
+            foreach (var line in lines)
+            {
+                int cnt = 1;
+                bool inQuotes = false;
+                foreach (char ch in line)
+                {
+                    if (ch == '"') inQuotes = !inQuotes;
+                    else if (ch == ',' && !inQuotes) cnt++;
+                }
+                if (cnt > cols) cols = cnt;
+            }
+            var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
+            grid.LoadFromCsv(csvPath);
+            grid.WritePrettyTableTo(Console.Out, maxRows);
+            return;
+        }
+
 #if PLATFORM_WINDOWS
         HideConsoleWindow();
         using var host = new ExcelConsole.Platform.Windows.WindowsDesktopHost();
@@ -255,6 +295,7 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv> --print [N]                Headless: pretty-print CSV as table (N = max rows)");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
