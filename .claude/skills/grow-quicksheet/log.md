@@ -1,3 +1,11 @@
+## 2026-06-16 (research: TUI launch case studies)
+
+- Stars: 0 (Δ 0).
+- Action: Researched 6 breakout TUI projects (lazygit 79k★, btop 24k★, harlequin 6k★, superfile 17k★, yazi 33k★, atuin 30k★) and the arxiv Launch-Day Diffusion paper (n=138 launches). Distilled timing data (Sunday 12 UTC = 15.7% breakout rate), cross-cutting patterns (6/6 had demo GIF + one-liner install + founder in comments), and 5 concrete implications for QuickSheet's launch strategy.
+- Bucket: R (deep research).
+- Outcome: Research brief saved at `.claude/skills/grow-quicksheet/research/tui-launch-case-studies.md`.
+- Follow-up: Queue items from implications: (1) demo GIF capture (human), (2) plan multi-window launch (Show HN core → Show HN extensions → niche subreddits), (3) Sunday 12 UTC posting for all drafts.
+
 ## 2026-06-16 (docs: accountant landing page)
 
 - Stars: 0 (Δ 0).
