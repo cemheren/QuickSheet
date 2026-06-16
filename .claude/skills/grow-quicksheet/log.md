@@ -1,3 +1,11 @@
+## 2026-06-16 (feat: NO_COLOR support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented NO_COLOR environment variable support (https://no-color.org/) and `--no-color` CLI flag. Added `AppSettings.cs` with global `NoColor` property. Updated `--help` output. Desktop rendering unaffected.
+- Bucket: E (issue fix — #318).
+- Outcome: PR #442. Closes #318.
+- Follow-up: #319 (--delimiter flag) or #158 (usage pattern) are next open issues without PRs.
+
 ## 2026-06-16 (docs: accountant landing page)
 
 - Stars: 0 (Δ 0).
