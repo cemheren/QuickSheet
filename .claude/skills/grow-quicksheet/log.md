@@ -1,3 +1,11 @@
+## 2026-06-15 (draft: r/freelance + r/consulting Reddit posts)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted Reddit posts for r/freelance, r/consulting, and r/freelanceWriters — personal-workflow framing ("I replaced my wallpaper with an invoice tracker") rather than project announcements. Pairs with the for-freelancers landing page (PR #364).
+- Bucket: C (content drafts).
+- Outcome: draft saved at `drafts/reddit-freelance.md`.
+- Follow-up: user posts after PR #364 merges and a real screenshot exists. Next niche drafts: r/sysadmin (homelab angle), r/devops (SRE dashboard).
+
 ## 2026-06-15 (docs: freelancer landing page)
 
 - Stars: 0 (Δ 0).
