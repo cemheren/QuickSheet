@@ -1,3 +1,11 @@
+## 2026-06-16 (docs: accountant landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-accountants.md` landing page + `examples/accountant-dashboard.csv` starter sheet. Targets freelance accountants/bookkeepers with 1099, mileage, depreciation, margin, salestax, payroll extensions. Added README cross-link.
+- Bucket: A (audience landing page).
+- Outcome: PR #431.
+- Follow-up: None queued — all backlog landing pages now have PRs (homelab merged, traders/sre/students on main, dms/writers/artists/accountants as open PRs).
+
 ## 2026-06-16 (feat: stdin pipe support)
 
 - Stars: 0 (Δ 0).
