@@ -1,3 +1,11 @@
+## 2026-06-16 (feat: --print pretty table output)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--print [N]` headless flag that outputs a box-drawing ASCII table to stdout. Auto-sizes column widths (capped at 40), treats first row as header, optional N limits data rows. Makes QuickSheet useful as a quick CLI CSV viewer.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #439.
+- Follow-up: None specific. All open issues already have PRs.
+
 ## 2026-06-16 (docs: accountant landing page)
 
 - Stars: 0 (Δ 0).
