@@ -1,3 +1,11 @@
+## 2026-06-16 (feat: --export-yaml)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--export-yaml` headless export mode. Converts CSV to YAML sequence of mappings (first row = keys). Numbers unquoted, YAML-ambiguous values quoted. Supports `-` for stdout piping into yq/kubectl/ansible. Updated docs/export-formats.md with YAML section and comparison table.
+- Bucket: E (feature).
+- Outcome: PR #437.
+- Follow-up: None — all small issues already have PRs. Bottleneck remains user merging open PRs.
+
 ## 2026-06-16 (docs: accountant landing page)
 
 - Stars: 0 (Δ 0).
