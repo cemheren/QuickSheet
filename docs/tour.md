@@ -84,6 +84,7 @@ Currently public:
 - [`quicksheet-qtr`](https://github.com/Deskworks/quicksheet-qtr) — IRS quarterly tax deadline countdown.
 - [`quicksheet-fx`](https://github.com/Deskworks/quicksheet-fx) — live currency conversion (200+ currencies, ECB rates).
 - [`quicksheet-rate`](https://github.com/Deskworks/quicksheet-rate) — freelance hourly rate calculator (taxes, benefits, billable time).
+- [`quicksheet-case-ext`](https://github.com/cemheren/quicksheet-case-ext) — US case law lookup via CourtListener (citation or keyword search).
 
 [Write your own](../README.md#build-your-own) in whatever language you want — the protocol is two message types.
 
