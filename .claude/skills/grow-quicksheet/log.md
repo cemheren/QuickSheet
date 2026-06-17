@@ -1,3 +1,11 @@
+## 2026-06-16 (draft: r/selfhosted post)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted r/selfhosted submission targeting homelab audience (~400k subs). Positions QuickSheet as ambient wallpaper dashboard alternative to Homepage/Dashy/Uptime Kuma. References shipped extensions: health, tls, docker, ping, sysmon. Includes comparison table and posting tips.
+- Bucket: C (content draft).
+- Outcome: Draft saved at `drafts/reddit-selfhosted.md`.
+- Follow-up: User posts when ready. Consider drafting r/i3wm or r/Rainmeter posts for adjacent desktop-customization communities.
+
 ## 2026-06-16 (feat: NO_COLOR support)
 
 - Stars: 0 (Δ 0).
