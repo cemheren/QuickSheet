@@ -1,3 +1,11 @@
+## 2026-06-16 (research: GitHub discoverability levers)
+
+- Stars: 0 (Δ 0).
+- Action: Researched GitHub Trending algorithm mechanics, Explore curated collections, social preview images, and launch day timing. Key finding: GitHub Explore `productivity-tools` collection (github/explore repo) is an untapped channel — anyone can submit a PR to add a repo. QuickSheet fits alongside Terminal, ripgrep, bat, zoxide. C# Trending threshold is ~10-20 stars/day; a coordinated launch pushing 50-100 stars in 24h would likely land it. Drafted submission for `productivity-tools` collection.
+- Bucket: R (deep research).
+- Outcome: research/github-discoverability-levers.md + drafts/github-explore-productivity.md.
+- Follow-up: User submits PR to github/explore. User creates 1280×640px social preview image. Launch day coordination when user is ready to publish social drafts.
+
 ## 2026-06-16 (feat: NO_COLOR support)
 
 - Stars: 0 (Δ 0).
@@ -1094,7 +1102,8 @@
   - More Bucket F verticals: finance (yfinance), real estate (Zillow), email (gravatar/MX).
   - Demo GIF (needs human).
   - Audit screenshot filenames (`image.png`, `image-1.png`).
-  - Set social preview image (openGraphImage).
+  - Set social preview image (openGraphImage) — spec: 1280×640px PNG, dark bg, grid screenshot, "Your desktop is a spreadsheet" tagline.
+  - Submit PR to `github/explore` productivity-tools collection (draft ready: `drafts/github-explore-productivity.md`).
   - Sparkline range refs already shipped.
 - **From #15 accounting research (2026-05-15)** — next 3 Bucket F picks in order:
   1. `quicksheet-mileage-ext` — IRS std-mileage (business/medical/charity).
