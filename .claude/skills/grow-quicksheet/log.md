@@ -1155,3 +1155,11 @@ worth running when a specific persona-shaped opening appears:
 - Auto-merging PRs on main ([[feedback-no-auto-merge]]).
 - Generic primitives justified by N/M-persona counts alone — persona-shaped
   specifics required ([[feedback-quality-over-quantity]]).
+
+## 2026-06-16 (feat: usage examples in --help)
+
+- Stars: 0 (Δ 0).
+- Action: Added Examples section to `--help` output showing 5 common workflows: launch desktop with CSV, export to Markdown/HTML/JSON, show file stats. Single-method change in `Program.cs`, zero warnings/errors.
+- Bucket: E (issue fix — #374).
+- Outcome: PR #379 updated (commit 3729be7). Closes #374.
+- Follow-up: #321 (show file size and last-modified in --info) is next smallest qualifying issue. Other open issues: #158 (usage pattern), #3 (Wayland investigation — needs OS-level research, not a quick fix).
