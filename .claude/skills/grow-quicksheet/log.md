@@ -1,3 +1,11 @@
+## 2026-06-16 (feat: --delimiter flag PR + HTML stdout bugfix)
+
+- Stars: 0 (Δ 0).
+- Action: Created PR for existing --delimiter feature branch (grow/delimiter-319). Found and fixed a bug: `WriteHtmlTo(Console.Out)` was accidentally deleted during the delimiter refactor, leaving `--export-html -` (stdout) broken. Feature adds `--delimiter <char>` / `-d <char>` flag for TSV and custom separators in headless export modes.
+- Bucket: E (issue fix — #319).
+- Outcome: PR #447. Closes #319.
+- Follow-up: #158 (virtual tabs) is the only non-screenshot open issue remaining, but it's a large feature. Consider Bucket A/B/C/D variety next run.
+
 ## 2026-06-16 (research: GitHub discoverability levers)
 
 - Stars: 0 (Δ 0).
