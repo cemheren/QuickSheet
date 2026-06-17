@@ -1,3 +1,11 @@
+## 2026-06-17 (draft: r/selfhosted Reddit post)
+
+- Stars: 0 (Δ 0).
+- Action: Drafted r/selfhosted Reddit post positioning QuickSheet + health extension as a lightweight wallpaper dashboard for homelabbers. Includes three title options, honest "what it's not" section (critical for r/selfhosted tone), first-comment tech details, and posting notes. health: extension now live so this was unblocked.
+- Bucket: C (content draft).
+- Outcome: draft saved at drafts/reddit-selfhosted.md.
+- Follow-up: User posts when ready (needs real wallpaper screenshot first). Next variety pick: Bucket A/B/D/R. Consider r/unixporn rice post (also queued) or a Bucket D awesome-list action.
+
 ## 2026-06-16 (feat: --delimiter flag PR + HTML stdout bugfix)
 
 - Stars: 0 (Δ 0).
