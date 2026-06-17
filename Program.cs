@@ -148,6 +148,7 @@ public class Program
             grid.LoadFromDelimited(csvPath, delimiter);
             if (htmlOut == "-")
             {
+                grid.WriteHtmlTo(Console.Out);
             }
             else
             {
