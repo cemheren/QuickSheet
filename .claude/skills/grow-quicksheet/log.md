@@ -1,3 +1,11 @@
+## 2026-06-16 (feat: --delimiter flag)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `--delimiter <char>` / `-d <char>` flag for headless export modes. Supports tab (`\t`/`tab`), semicolons, and any single-char separator. Rewrote positional arg parsing to correctly handle flag-value pairs. Updated `--help` output.
+- Bucket: E (issue fix — #319).
+- Outcome: PR #403 updated (commit 32478f6). Closes #319.
+- Follow-up: #374 (usage examples in --help) is next smallest qualifying issue without a feature PR.
+
 ## 2026-06-16 (research: GitHub discoverability levers)
 
 - Stars: 0 (Δ 0).
