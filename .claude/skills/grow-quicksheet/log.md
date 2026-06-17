@@ -1,3 +1,11 @@
+## 2026-06-16 (feat: --help usage examples)
+
+- Stars: 0 (Δ 0).
+- Action: Updated PR #413 with usage examples in `--help` output. Added 5 practical workflow examples (desktop launch, Markdown preview, HTML export, JSON conversion, list extensions) in an "Examples:" section at the bottom of `PrintHelp()`.
+- Bucket: E (issue fix — #374).
+- Outcome: PR #413 updated (commit 9d6f219). Closes #374.
+- Follow-up: #319 (--delimiter flag) is next smallest qualifying open issue.
+
 ## 2026-06-16 (feat: NO_COLOR support)
 
 - Stars: 0 (Δ 0).
