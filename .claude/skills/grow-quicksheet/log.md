@@ -1,3 +1,11 @@
+## 2026-06-17 (feat: --export-sql headless mode)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--export-sql` headless export — generates `CREATE TABLE IF NOT EXISTS` + `INSERT` statements from CSV. Supports `--table <name>` for custom table name, stdout via `-`, SQL-standard double-quoted identifiers, proper single-quote escaping, NULL for empty cells, unquoted numerics. Updated `--help`, docs/export-formats.md with SQL section + comparison table.
+- Bucket: E (feature).
+- Outcome: PR #388 (force-pushed updated implementation).
+- Follow-up: Variety pick next — Bucket A/B/D/R. Consider awesome-list draft refreshes or r/unixporn content draft.
+
 ## 2026-06-16 (research: GitHub discoverability levers)
 
 - Stars: 0 (Δ 0).
