@@ -105,6 +105,45 @@ Write docs,Pending,Low,2
 ]
 ```
 
+## SQL (`--export-sql`)
+
+Convert a CSV file into SQL `CREATE TABLE` + `INSERT` statements, compatible with SQLite, PostgreSQL, and MySQL.
+
+```bash
+# Export to a file
+dotnet run --project ExcelConsole.csproj -- data.csv --export-sql schema.sql
+
+# Pipe to stdout
+dotnet run --project ExcelConsole.csproj -- data.csv --export-sql -
+
+# Custom table name (default: "data")
+dotnet run --project ExcelConsole.csproj -- data.csv --export-sql - --table tasks
+
+# Load directly into SQLite
+dotnet run --project ExcelConsole.csproj -- data.csv --export-sql - | sqlite3 mydb.sqlite
+```
+
+**Example input** (`tasks.csv`):
+
+```csv
+Task,Status,Priority,Hours
+Fix login bug,Done,High,3
+Add dark mode,In Progress,Medium,8
+Write docs,Pending,Low,2
+```
+
+**Output** (`--table tasks`):
+
+```sql
+CREATE TABLE IF NOT EXISTS "tasks" ("Task" TEXT, "Status" TEXT, "Priority" TEXT, "Hours" TEXT);
+
+INSERT INTO "tasks" ("Task", "Status", "Priority", "Hours") VALUES ('Fix login bug', 'Done', 'High', 3);
+INSERT INTO "tasks" ("Task", "Status", "Priority", "Hours") VALUES ('Add dark mode', 'In Progress', 'Medium', 8);
+INSERT INTO "tasks" ("Task", "Status", "Priority", "Hours") VALUES ('Write docs', 'Pending', 'Low', 2);
+```
+
+Numeric values are inserted without quotes. Empty cells become `NULL`. Column names with special characters are double-quoted per SQL standard.
+
 ## Piping and composition
 
 All export modes support `-` as the output path, writing to stdout instead of a file.
@@ -117,6 +156,9 @@ dotnet run --project ExcelConsole.csproj -- data.csv --export-md - | pbcopy
 # CSV → JSON → pipe into jq
 dotnet run --project ExcelConsole.csproj -- data.csv --export-json - | jq '.[0]'
 
+# CSV → SQL → load into SQLite
+dotnet run --project ExcelConsole.csproj -- data.csv --export-sql - | sqlite3 mydb.sqlite
+
 # CSV → HTML → serve with Python
 dotnet run --project ExcelConsole.csproj -- data.csv --export-html - > /tmp/report.html
 python3 -m http.server -d /tmp 8080
@@ -127,16 +169,17 @@ dotnet run --project ExcelConsole.csproj -- data.csv --export-md - | head -5
 
 ## Format comparison
 
-| Feature | CSV | Markdown | HTML | JSON |
-|---|---|---|---|---|
-| Human readable | ○ | ● | ● | ○ |
-| Machine parseable | ● | ○ | ○ | ● |
-| Styled output | — | — | ● | — |
-| Clickable URLs | — | ● (on GitHub) | ● | — |
-| Numeric alignment | — | — | ● | ● (native) |
-| Embeddable | — | ● (README/wiki) | ● (browser) | ● (APIs/scripts) |
-| Round-trip editable | ● | — | — | — |
-| jq / tool-friendly | — | — | — | ● |
+| Feature | CSV | Markdown | HTML | JSON | SQL |
+|---|---|---|---|---|---|
+| Human readable | ○ | ● | ● | ○ | ○ |
+| Machine parseable | ● | ○ | ○ | ● | ● |
+| Styled output | — | — | ● | — | — |
+| Clickable URLs | — | ● (on GitHub) | ● | — | — |
+| Numeric alignment | — | — | ● | ● (native) | ● (native) |
+| Embeddable | — | ● (README/wiki) | ● (browser) | ● (APIs/scripts) | ● (databases) |
+| Round-trip editable | ● | — | — | — | — |
+| jq / tool-friendly | — | — | — | ● | — |
+| DB-loadable | — | — | — | — | ● |
 
 ---
 
