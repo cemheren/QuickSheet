@@ -1,3 +1,19 @@
+## 2026-06-18 (research: Wayland support feasibility)
+
+- Stars: 0 (Δ 0).
+- Action: Deep research on Wayland desktop-background protocols for issue #3. Investigated wlr-layer-shell (wlroots), GNOME/Mutter limitations, KDE Plasma 6 protocols. Wrote comprehensive feasibility brief with architecture proposal (~1000 LOC, 5 files). Posted summary comment on issue #3 to attract contributors.
+- Bucket: R (deep research).
+- Outcome: research/wayland-support-feasibility.md (commit fe0390e). Comment on issue #3.
+- Follow-up: Queue "Phase 1 Wayland implementation" as Bucket E stretch goal (needs contributor with Sway/Hyprland). Next run: variety — Bucket A/B/C/D.
+
+## 2026-06-17 (feat: --export-sql headless mode)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--export-sql` headless export — generates `CREATE TABLE IF NOT EXISTS` + `INSERT` statements from CSV. Supports `--table <name>` for custom table name, stdout via `-`, SQL-standard double-quoted identifiers, proper single-quote escaping, NULL for empty cells, unquoted numerics. Updated `--help`, docs/export-formats.md with SQL section + comparison table.
+- Bucket: E (feature).
+- Outcome: PR #388 (force-pushed updated implementation).
+- Follow-up: Variety pick next — Bucket A/B/D/R. Consider awesome-list draft refreshes or r/unixporn content draft.
+
 ## 2026-06-16 (research: GitHub discoverability levers)
 
 - Stars: 0 (Δ 0).
@@ -1155,3 +1171,11 @@ worth running when a specific persona-shaped opening appears:
 - Auto-merging PRs on main ([[feedback-no-auto-merge]]).
 - Generic primitives justified by N/M-persona counts alone — persona-shaped
   specifics required ([[feedback-quality-over-quantity]]).
+
+## 2026-06-16 (feat: usage examples in --help)
+
+- Stars: 0 (Δ 0).
+- Action: Added Examples section to `--help` output showing 5 common workflows: launch desktop with CSV, export to Markdown/HTML/JSON, show file stats. Single-method change in `Program.cs`, zero warnings/errors.
+- Bucket: E (issue fix — #374).
+- Outcome: PR #379 updated (commit 3729be7). Closes #374.
+- Follow-up: #321 (show file size and last-modified in --info) is next smallest qualifying issue. Other open issues: #158 (usage pattern), #3 (Wayland investigation — needs OS-level research, not a quick fix).
