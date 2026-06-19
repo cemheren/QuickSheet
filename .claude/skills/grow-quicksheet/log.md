@@ -1,3 +1,11 @@
+## 2026-06-18 (feat: --sort/--sort-desc flags)
+
+- Stars: 0 (Δ 0).
+- Action: Added `--sort <column>` and `--sort-desc <column>` flags for headless export modes (md, html, json). Numeric-aware sorting (numbers compared as numbers, not strings). Case-insensitive column name matching. Updated `--help` output. Also improved csvPath argument parsing to skip flag values.
+- Bucket: E (quality-of-life feature).
+- Outcome: PR #453.
+- Follow-up: None queued.
+
 ## 2026-06-18 (docs: sync extension directory — 69 → 90)
 
 - Stars: 0 (Δ 0).
