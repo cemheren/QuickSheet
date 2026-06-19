@@ -1,3 +1,11 @@
+## 2026-06-19 (docs: add Ctrl+K to keyboard shortcuts)
+
+- Stars: 0 (Δ 0).
+- Action: Ctrl+K (duplicate row) shipped in v0.36.0 but missing from README.md and docs/keyboard-shortcuts.md. Added it to the Row Operations table in both files.
+- Bucket: A (product polish — docs accuracy).
+- Outcome: PR #457.
+- Follow-up: None. All open issues already have PRs; bottleneck remains user merge queue (30 open PRs).
+
 ## 2026-06-19 (feat: quicksheet-cve-ext — CVE vulnerability lookup)
 
 - Stars: 0 (Δ 0).
