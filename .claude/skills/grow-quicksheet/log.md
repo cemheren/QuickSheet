@@ -1,3 +1,11 @@
+## 2026-06-18 (docs: sync extension directory — 69 → 90)
+
+- Stars: 0 (Δ 0).
+- Action: Audited all quicksheet-* repos across cemheren and Deskworks orgs (108 total repos) against docs/extensions.md (68 listed). Found 22 extensions with valid manifests and GitHub repos that were missing from the directory. Added them all: AI costs, books, case law, dict, gitlog, hash, initiative tracker, Maven, NuGet, Ollama, payroll, PubMed, password gen, RSS, stocks (Yahoo), subnet, sales tax, TLDR, timezone, unit converter, Wikipedia, word counter. Updated README badge and body from 69+ → 90+.
+- Bucket: A (product polish — docs).
+- Outcome: PR #450.
+- Follow-up: None — directory is now in sync with existing repos.
+
 ## 2026-06-16 (research: GitHub discoverability levers)
 
 - Stars: 0 (Δ 0).
