@@ -36,6 +36,7 @@ and **desktop mode** (wallpaper) unless noted otherwise.
 | Key | Action |
 |-----|--------|
 | `Ctrl+D` | Delete current row |
+| `Ctrl+K` | Duplicate current row |
 | `Ctrl+O` | Insert row above (shift down) |
 | `Ctrl+P` | Remove row (shift up) |
 

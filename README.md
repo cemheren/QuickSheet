@@ -302,6 +302,7 @@ Ship a `quicksheet-extension.json` manifest in your repo and you're done. See th
 |----------|--------|
 | Ctrl+S | Save to CSV |
 | Ctrl+D | Delete row |
+| Ctrl+K | Duplicate current row |
 | Ctrl+O | Insert row below |
 | Ctrl+P | Insert row above |
 | Ctrl+H | Show help overlay |
