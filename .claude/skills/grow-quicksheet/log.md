@@ -1,3 +1,11 @@
+## 2026-06-19 (fix: website feature numbering + hero grammar)
+
+- Stars: 0 (Δ 0).
+- Action: Swept all open issues (main repo: 8; ext repos: 0). Every qualifying good-first-issue (#374, #372, #321, #320) already has MULTIPLE open duplicate PRs (e.g. #357/#394/#426 for #321; #396/#397/#360 for #320); #319→#447, #318→#442. Backlog saturated at 30 open PRs — bottleneck is user merge, not production. Adding another good-first-issue PR would be padding. Investigated the homepage instead: confirmed live gh-pages site is healthy (mojibake seen via fetch tools was a rendering artifact; source bytes + charset are correct UTF-8). Found a real bug in the canonical hand-written landing source `website/index.html`: four feature articles numbered ①②③③ (duplicate ③) under a "Three ideas" heading. Renumbered CSV card ③→④, heading "Three"→"Four", fixed hero grammar ("task in a different cell"→"tasks in other cells").
+- Bucket: A (product polish — landing page).
+- Outcome: PR https://github.com/cemheren/QuickSheet/pull/459.
+- Follow-up: `website/index.html` (main) has diverged from the deployed gh-pages site — consider reconciling or documenting that gh-pages is the live source. Publication remains the bottleneck; 30 PRs await user merge.
+
 ## 2026-06-19 (feat: quicksheet-cve-ext — CVE vulnerability lookup)
 
 - Stars: 0 (Δ 0).
