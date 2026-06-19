@@ -1,3 +1,11 @@
+## 2026-06-19 (feat: quicksheet-cve-ext — CVE vulnerability lookup)
+
+- Stars: 0 (Δ 0).
+- Action: Created `quicksheet-cve-ext` extension — CVE vulnerability lookup via NIST NVD 2.0 API. Shows severity (🔴🟠🟡🟢), CVSS score, description, affected products, publish date. 30-min cache, zero NuGet deps. Created GitHub repo, added to extensions.md, tour.md, updated README badge (69+ → 70+).
+- Bucket: F (vertical extension — security/SRE persona).
+- Outcome: Repo https://github.com/cemheren/quicksheet-cve-ext + cross-link PR #455.
+- Follow-up: None — security vertical now has tls/ssl/health/ping/dns/cve coverage.
+
 ## 2026-05-19 (no-op #31 — #139 still open, hold)
 
 - Stars: 0 (Δ 0). PR #139 still open, no other action items. Hold.
