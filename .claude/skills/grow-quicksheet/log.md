@@ -1,3 +1,11 @@
+## 2026-06-18 (feat: usage examples in --help — #374)
+
+- Stars: 0 (Δ 0).
+- Action: Added an "Examples" section to `--help` output in `Program.cs` showing 5 common workflows (launch with CSV, export to Markdown/HTML/JSON, list extensions). Single-method string-output change, no logic changes. Build verified green.
+- Bucket: E (issue fix — #374).
+- Outcome: PR #413 updated (force-pushed commit 1e2565d). Closes #374.
+- Follow-up: #158 (virtual tabs) is too large. #3 (Wayland) needs investigation. Remaining open issues (#318, #319, #320, #321, #372) all have open PRs pending merge.
+
 ## 2026-06-18 (docs: sync extension directory — 69 → 90)
 
 - Stars: 0 (Δ 0).
