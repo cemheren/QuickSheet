@@ -72,6 +72,28 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `caniuse` | Browser Compat    | Can I Use browser compatibility lookup via caniuse-db. Shows support status for CSS/HTML/JS features across Chrome, Firefox, Safari, Edge, Opera, Samsung, iOS Safari. Usage: `caniuse: css-grid` · `caniuse: flexbox` · `caniuse: webassembly`. Usage %, spec link, notes. 1h cache, no API key. | [`quicksheet-caniuse`](https://github.com/Deskworks/quicksheet-caniuse) |
 | `gem`     | Ruby Gem Lookup   | Ruby gem info and search via rubygems.org. Version, total downloads, authors, license, Ruby requirement, homepage, description. `gem: rails` (detail), `gem: search json parser` (top 5). No API key, 30-min cache, zero NuGet. | [`quicksheet-rubygems`](https://github.com/Deskworks/quicksheet-rubygems) |
 | `hackage` | Haskell Packages  | Haskell package lookup from Hackage. `hackage: aeson` shows latest version, synopsis, author, category, license, and homepage. `hackage: search json` lists top matching packages. No API key, 30-min cache, zero NuGet. | [`quicksheet-hackage`](https://github.com/Deskworks/quicksheet-hackage) |
+| `ai:`     | AI Cost Tracker   | Monitor token usage, costs, and budget for OpenAI, Anthropic, Gemini, DeepSeek on your desktop wallpaper | [`quicksheet-ai-costs`](https://github.com/cemheren/quicksheet-ai-costs) |
+| `books`   | Book Lookup       | Search by title or ISBN via Open Library — zero API keys | [`quicksheet-books-ext`](https://github.com/cemheren/quicksheet-books-ext) |
+| `case`    | Case Law Lookup   | US case law citation lookup via CourtListener's free API | [`quicksheet-case-ext`](https://github.com/cemheren/quicksheet-case-ext) |
+| `dict`    | Dictionary        | English dictionary — definitions, phonetics, synonyms, antonyms on your desktop | [`quicksheet-dict`](https://github.com/Deskworks/quicksheet-dict) |
+| `gitlog`  | Git Log           | Recent git commits in your spreadsheet — see repo activity at a glance | [`quicksheet-gitlog`](https://github.com/Deskworks/quicksheet-gitlog) |
+| `hash:`   | Hash Generator    | Generate MD5, SHA1, SHA256, SHA512, CRC32 hashes from cell text or file paths | [`quicksheet-hashgen`](https://github.com/cemheren/quicksheet-hashgen) |
+| `init`    | Initiative Tracker| Combat initiative for TTRPG GMs — sort combatants, cycle turns, track rounds | [`quicksheet-init-ext`](https://github.com/cemheren/quicksheet-init-ext) |
+| `mvn`     | Maven Lookup      | Maven Central package lookup — version, downloads, license, description | [`quicksheet-maven`](https://github.com/cemheren/quicksheet-maven) |
+| `nuget`   | NuGet Lookup      | NuGet package lookup — version, downloads, license, dotnet CLI install command | [`quicksheet-nuget`](https://github.com/cemheren/quicksheet-nuget) |
+| `ollama`  | Local AI (Ollama) | Local AI queries via Ollama — private, fast, no API key. Ask questions, summarize, translate from cells | [`quicksheet-ollama`](https://github.com/cemheren/quicksheet-ollama) |
+| `payroll` | Payroll Withholding | US payroll withholding estimator — federal tax, Social Security, Medicare per pay period (2025 IRS brackets) | [`quicksheet-payroll-ext`](https://github.com/cemheren/quicksheet-payroll-ext) |
+| `pubmed`  | PubMed Lookup     | PubMed article search — PMID or keyword, title, authors, journal, DOI | [`quicksheet-pubmed-ext`](https://github.com/cemheren/quicksheet-pubmed-ext) |
+| `pw`      | Password Generator| Secure passwords, PINs, hex, passphrases. CSPRNG, zero network | [`quicksheet-pw-ext`](https://github.com/cemheren/quicksheet-pw-ext) |
+| `rss`     | RSS Feed Reader   | RSS/Atom feed reader — live headlines on your desktop wallpaper. Zero deps, .NET 9 | [`quicksheet-rss-ext`](https://github.com/cemheren/quicksheet-rss-ext) |
+| `stocks`  | Stock Ticker (Yahoo) | Live stock & crypto ticker using Yahoo Finance. Zero API key, zero NuGet | [`quicksheet-stocks`](https://github.com/Deskworks/quicksheet-stocks) |
+| `subnet`  | Subnet Calculator | CIDR/subnet calculator — network ranges, host counts, netmask on your desktop wallpaper | [`quicksheet-subnet-ext`](https://github.com/cemheren/quicksheet-subnet-ext) |
+| `tax`     | Sales Tax Lookup  | US state sales tax rates — instant rates for all 50 states + DC | [`quicksheet-salestax-ext`](https://github.com/cemheren/quicksheet-salestax-ext) |
+| `tldr`    | TLDR Pages        | Show tldr-pages command cheatsheets — instant CLI reference without leaving your wallpaper | [`quicksheet-tldr-ext`](https://github.com/cemheren/quicksheet-tldr-ext) |
+| `tz`      | Timezone Converter| See any time across multiple world zones on your desktop | [`quicksheet-tz-ext`](https://github.com/cemheren/quicksheet-tz-ext) |
+| `unit:`   | Unit Converter    | Length, weight, temp, data, speed, time, volume, area, pressure. Offline, no API key | [`quicksheet-unitconv`](https://github.com/cemheren/quicksheet-unitconv) |
+| `wiki`    | Wikipedia         | Wikipedia article summaries — `wiki: <topic>` | [`quicksheet-wiki-ext`](https://github.com/cemheren/quicksheet-wiki-ext) |
+| `words:`  | Word Counter      | Text analysis for writers — word count, reading time, readability grade, character count | [`quicksheet-words`](https://github.com/cemheren/quicksheet-words) |
 
 ## Install
 
