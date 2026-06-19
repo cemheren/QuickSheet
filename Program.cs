@@ -24,7 +24,23 @@ public class Program
             return;
         }
 
-        string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
+        // Collect indices of flag arguments that take a value (the next arg is the value, not a file path).
+        var flagValueIndices = new HashSet<int>();
+        string[] flagsWithValues = { "--export-md", "--export-html", "--export-json", "--sort", "--sort-desc" };
+        foreach (var flag in flagsWithValues)
+        {
+            int fi = Array.IndexOf(args, flag);
+            if (fi >= 0 && fi + 1 < args.Length) flagValueIndices.Add(fi + 1);
+        }
+        string? csvPath = null;
+        for (int i = 0; i < args.Length; i++)
+        {
+            if (!args[i].StartsWith("--") && !flagValueIndices.Contains(i))
+            {
+                csvPath = args[i];
+                break;
+            }
+        }
 
         int exportIdx = Array.IndexOf(args, "--export-md");
         if (exportIdx >= 0)
@@ -61,6 +77,7 @@ public class Program
             // Constructor derives ColumnCount from (availableWidth - 4) / columnWidth (default 20).
             var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
             grid.LoadFromCsv(csvPath);
+            ApplySort(grid, args);
             if (outPath == "-")
             {
                 grid.WriteMarkdownTo(Console.Out);
@@ -106,6 +123,7 @@ public class Program
             }
             var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
             grid.LoadFromCsv(csvPath);
+            ApplySort(grid, args);
             if (htmlOut == "-")
             {
                 grid.WriteHtmlTo(Console.Out);
@@ -151,6 +169,7 @@ public class Program
             }
             var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
             grid.LoadFromCsv(csvPath);
+            ApplySort(grid, args);
             if (jsonOut == "-")
             {
                 grid.WriteJsonTo(Console.Out);
@@ -259,6 +278,10 @@ public class Program
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
         Console.WriteLine();
+        Console.WriteLine("Headless options:");
+        Console.WriteLine("  --sort <column>       Sort rows by column header (ascending, numeric-aware)");
+        Console.WriteLine("  --sort-desc <column>  Sort rows by column header (descending)");
+        Console.WriteLine();
         Console.WriteLine("Cell prefixes:");
         Console.WriteLine("  r: <cmd>          Runnable command. Press Enter to launch.");
         Console.WriteLine("  i: <cmd>          Inline subprocess. Output streams back into the cell.");
@@ -270,6 +293,32 @@ public class Program
         Console.WriteLine();
         Console.WriteLine("Range references work inside text: {A1::C10}");
         Console.WriteLine("Tour: docs/tour.md · Issues: github.com/cemheren/QuickSheet/issues");
+    }
+
+    /// <summary>
+    /// Applies --sort/--sort-desc flags to a loaded grid. Returns false if column not found.
+    /// </summary>
+    private static bool ApplySort(GridManager grid, string[] args)
+    {
+        int sortIdx = Array.IndexOf(args, "--sort");
+        int sortDescIdx = Array.IndexOf(args, "--sort-desc");
+        int idx = sortIdx >= 0 ? sortIdx : sortDescIdx;
+        if (idx < 0) return true; // no sort requested
+        bool descending = sortDescIdx >= 0 && (sortIdx < 0 || sortDescIdx < sortIdx);
+        if (idx + 1 >= args.Length)
+        {
+            Console.Error.WriteLine("Error: --sort/--sort-desc requires a column name argument.");
+            Environment.Exit(2);
+            return false;
+        }
+        string colName = args[idx + 1];
+        if (!grid.SortByColumn(colName, descending))
+        {
+            Console.Error.WriteLine($"Error: column '{colName}' not found in first row (header).");
+            Environment.Exit(2);
+            return false;
+        }
+        return true;
     }
 
 #if PLATFORM_WINDOWS
