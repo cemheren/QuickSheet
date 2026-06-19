@@ -1,3 +1,11 @@
+## 2026-06-19 (feat: NO_COLOR env var support — issue #318)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented NO_COLOR standard (https://no-color.org/). Added `Program.NoColor` static property that checks env var at startup. Documented in `--help` output under new "Environment" section. Build green (0 warnings, 0 errors).
+- Bucket: Issue fix (priority #1 — open issue #318).
+- Outcome: PR #367 (updated, force-pushed with clean implementation).
+- Follow-up: None. Next smallest issues: #321 (--info file size), #319 (--delimiter), #374 (--help examples).
+
 ## 2026-06-19 (feat: quicksheet-cve-ext — CVE vulnerability lookup)
 
 - Stars: 0 (Δ 0).
