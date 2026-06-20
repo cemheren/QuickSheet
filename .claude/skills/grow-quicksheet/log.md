@@ -1,3 +1,11 @@
+## 2026-06-19 (no-op #34 — feature space exhausted; --stats already rejected x2)
+
+- Stars: 0 (Δ 0). Forks: 1. Open PRs on main: **30**.
+- Action: Full sweep. Main issues (8): #374/#372/#321/#320/#319/#318 all already have addressing feature PRs; #3 Wayland needs human; **#158 ("virtual tabs"/weekly data aging) is a large feature that changes CSV persistence layout — forbidden by boundaries, skip.** Ext repos: **0 open issues.** Under the relaxed PR regime I started building a Bucket-E `--stats` (csvstat-style per-column summary: type/count/empty/unique/min/max/mean/sum) — implemented `GridManager.WriteStatsTo`, wired the `--stats` headless mode, built green (0 warn/0 err), smoke-tested. **Then discovered `--stats` was already proposed TWICE (PR #252 `grow/stats-flag`, PR #238 `grow/csv-stats`) and BOTH closed unmerged** → user has rejected this feature. Reverted all changes rather than ship rejected work as filler. Audited the wider closed-PR set: **~38 distinct small features already proposed and closed unmerged** (essentially every headless flag + cell prefix imaginable). The small-feature space is exhausted/rejected; metadata (20 topics) maxed; community files present; README/doc internal links all resolve; "69+ extensions" still truthful (71 published on Deskworks). No concrete non-filler action remained → no-op. Net value this run: caught and avoided shipping the twice-rejected `--stats`, and recorded a DO-NOT-RE-PROPOSE blocklist (in `## Queued`) so future runs stop re-attempting closed features.
+- Bucket: none (saturation hold).
+- Outcome: logged; no PR. Skill-only edit pushed to main.
+- Follow-up: Future runs — consult the **DO-NOT-RE-PROPOSE** list in `## Queued` before building any feature. Hold until PRs start merging, a real new issue is filed, or the user gives fresh signal.
+
 ## 2026-06-19 (fix: website feature numbering + hero grammar)
 
 - Stars: 0 (Δ 0).
@@ -1044,6 +1052,26 @@
 - Follow-up: Add docs/tour.md link to the awesome-list submission drafts (one-line entries already done; could mention tour in PR body).
 
 ## Queued
+
+- **DO-NOT-RE-PROPOSE (closed unmerged by user — building these again is filler):**
+  As of 2026-06-19, ~38 small features were each proposed via grow PRs and **closed
+  without merging**. Do NOT re-implement any of these without an explicit fresh user
+  request. Headless flags: `--stats` (#252, #238), `--info` (#311/#291/#259/#329),
+  `--sort` (#314/#276), `--export-tsv` (#264), `--export-sql` (#199), `--import-json`
+  (#233), `--merge` (#307), `--count` (#298), `--select` (#285), `--filter` (#283),
+  `--sample` (#304), `--set` (#254), `--transpose` (#294), `--head`/`--tail`
+  (#337/#295), `--delimiter` (#324), `--theme`/`--list-themes` (#272/#227),
+  `--no-color` (#323), stdin pipe (#334/#325), shell completions (#383), `--get`
+  cell read. Cell prefixes / desktop: `p:` progress bar (#246/#208), `t:` timer
+  (#101), `d:` countdown (#220), `w:` web-fetch (#127), bold-cell prefix, cell
+  bookmarks (#206), zebra striping (#215), selection stats in status bar (#189),
+  per-column width (#144), Ctrl+; timestamp (#194), Ctrl+Z/Y/T desktop shortcuts
+  (#70), save/persist config (#130). **NOTE:** several of the *same* flags ALSO
+  have currently-OPEN PRs (e.g. NO_COLOR #442, --delimiter #447, --sort #453,
+  stdin #397, completions #393) — re-proposing duplicates either set is filler.
+  The small-feature surface is saturated. Prefer Bucket F extensions (new repos),
+  real bug fixes, or genuine new issues over any main-repo feature flag.
+
 
 - **STANDING RULES (2026-05-17):**
   - **Do not auto-merge PRs on cemheren/QuickSheet.** User reviews every merge. No `gh pr merge`, no `--auto`. See [[feedback-no-auto-merge]].
