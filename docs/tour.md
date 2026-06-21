@@ -84,6 +84,7 @@ Currently public:
 - [`quicksheet-qtr`](https://github.com/Deskworks/quicksheet-qtr) — IRS quarterly tax deadline countdown.
 - [`quicksheet-fx`](https://github.com/Deskworks/quicksheet-fx) — live currency conversion (200+ currencies, ECB rates).
 - [`quicksheet-rate`](https://github.com/Deskworks/quicksheet-rate) — freelance hourly rate calculator (taxes, benefits, billable time).
+- [`quicksheet-moon-ext`](https://github.com/Deskworks/quicksheet-moon-ext) — live lunar phase widget (offline, deterministic).
 
 [Write your own](../README.md#build-your-own) in whatever language you want — the protocol is two message types.
 

@@ -1,0 +1,8 @@
+{
+  "name": "moon",
+  "version": "1.0.0",
+  "prefix": "moon",
+  "description": "Live lunar phase widget for QuickSheet — phase name, illumination %, emoji, next new/full moon. Zero network, zero auth, fully deterministic.",
+  "entry": "dotnet run --project MoonExtension.csproj",
+  "minProtocolVersion": 1
+}
