@@ -1115,6 +1115,14 @@ worth running when a specific persona-shaped opening appears:
 - Generic primitives justified by N/M-persona counts alone — persona-shaped
   specifics required ([[feedback-quality-over-quantity]]).
 
+## 2026-06-21 (todo ext ergonomics — fixes real user issue #2)
+
+- Stars: 0 (Δ 0)
+- Action: Picked the one genuinely-actionable open issue in the whole repo family — Deskworks/quicksheet-todo#2 (user cemheren: "too cumbersome to use easily... too many cell edits"). Not a screenshot/TUI issue; a concrete UX complaint. Reduced friction in the todo extension: (1) done/undo/rm now accept a title substring, not just numeric ID — no more list-then-lookup; (2) bare `todo: done` completes top-priority pending, bare `todo: undo` reopens most-recent done; (3) `todo: add a; b; c` multi-adds from one cell; (4) ambiguous title matches list candidate #s. Refactored single-add into `ParseAndCreate` helper + shared `ResolveTask`. Build clean, smoke-tested all new paths over JSON-lines protocol. Zero new deps, CSV format unchanged.
+- Bucket: Priority rule #1 (fix smallest qualifying open issue, in the repo where it lives).
+- Outcome: PR Deskworks/quicksheet-todo#5 (Closes #2) + explanatory comment on issue #2. User gates merge.
+- Follow-up: If user says it's still too heavy after this, keep trimming (e.g. inline checkbox-style toggle is blocked by the one-shot write protocol — would need a protocol change). Otherwise re-sweep ext issues next run; main-repo PR backlog (~30 open) still bottlenecked on user merge — keep no-op'ing there.
+
 ## 2026-06-21 (run, no-op)
 
 - Stars: 0 (Δ 0)
