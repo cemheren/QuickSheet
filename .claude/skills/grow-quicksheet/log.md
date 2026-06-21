@@ -1114,3 +1114,11 @@ worth running when a specific persona-shaped opening appears:
 - Auto-merging PRs on main ([[feedback-no-auto-merge]]).
 - Generic primitives justified by N/M-persona counts alone — persona-shaped
   specifics required ([[feedback-quality-over-quantity]]).
+
+## 2026-06-21 (run, no-op)
+
+- Stars: 0 (Δ 0)
+- Action: Issue sweep across main + ext repos. All 8 open main-repo issues (#374 help-examples, #372 completions, #321 --info, #320 stdin, #319 --delimiter, #318 NO_COLOR, #158 usage-pattern, #3 Wayland) already have one or more OPEN code PRs awaiting user merge. #374 alone has 3 (#376/#379/#413). Only ext issue is Deskworks/quicksheet-todo#2 (meta question, not a code fix). Started a #374 help-examples fix, then found 3 dupes → reverted; opening a 4th would be manufactured filler (boundary violation).
+- Bucket: — (no-op)
+- Outcome: No PR. Confirmed saturation: ~30 open PRs across repo family. Bottleneck is user merge throughput, not production.
+- Follow-up: No-op future runs until backlog drains or a NEW issue/real-user report appears. Re-sweep ext-repo issues first each run per priority rule #1.
