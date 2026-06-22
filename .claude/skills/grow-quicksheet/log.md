@@ -1123,3 +1123,15 @@ worth running when a specific persona-shaped opening appears:
 - Outcome: PR #477 (branch grow/ext-dir-sync-dict-gitlog-stocks).
 - Notes: Issue queue fully saturated — every small good-first-issue (#374,#372,#321,#320,#319,#318) already has an open feature PR. #158 (virtual tabs) is a large save-format feature, out of autonomous bounds. #3 Wayland = help-wanted investigation. Initially duplicated #374 work before discovering PR #470 already covers it — reverted. `quicksheet-console` (no manifest), `quicksheet-moon-ext` (PR #465), `quicksheet-gomod` (PR #475), `quicksheet-health-ext`/`-stocks`-style dupes evaluated and excluded/in-flight.
 - Follow-up: Next run, re-sweep ext-repo issues first; if still saturated, consider verifying remaining Deskworks repos (`quicksheet-console`) for directory inclusion once it has a manifest.
+
+## 2026-06-22 (no-op — full saturation, dup/PR-covered sync candidates)
+
+- Stars: 0 (gh token scope; ignore — Δ n/a)
+- Action: Swept all open issues (main + 56 cemheren + 73 Deskworks ext repos) and re-checked directory sync candidates. No-op: nothing concrete and non-duplicative.
+- Bucket: (none — saturation hold)
+- Outcome: No PR. Findings below.
+- Findings:
+  - Main-repo issues #374,#372,#321,#320,#319,#318,#3 all already have open covering PRs; #158 (virtual tabs) out of autonomous bounds. Every extension repo has 0 open issues.
+  - Directory (`docs/extensions.md`) references the **Deskworks** org, not cemheren. Deskworks repos missing from directory: console (no manifest → skip), dict/gitlog/stocks (already in unmerged PR #477), gomod (unmerged grow/gomod-ext-crosslink), moon-ext (unmerged grow/moon-ext), health-ext (registers prefix `health` — DUPLICATE of directory's existing `quicksheet-health` row; must NOT be added).
+  - ~70 grow PRs already open awaiting user merge. Manufacturing more = filler.
+- Follow-up: Next run, re-sweep ext-repo + main issues first (priority rule #1). If still saturated, no-op again — do not pad. Do not add `quicksheet-health-ext` to directory (prefix collision with `quicksheet-health`).
