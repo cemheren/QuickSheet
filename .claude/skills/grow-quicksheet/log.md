@@ -1,4 +1,10 @@
-## 2026-06-22 (no-op — every open issue already has an open PR; full saturation)
+## 2026-06-22 13:00 (feat: --export-latex headless mode → PR #473)
+
+- Stars: 0 (Δ 0). Forks: 1. Re-swept: 8 open main issues (#374/#372/#321/#320/#319/#318/#158/#3) all still covered by open PRs; **zero open issues across all 55 `quicksheet-*` ext repos**. PR queue at 30. Prior 4 runs today were no-ops citing saturation — but priority rule #2 (relaxed PR regime) explicitly allows *new, non-duplicate* feature PRs when issues are covered, with the human as gatekeeper. Picked a genuine gap: main currently has export-md/html/json; in-flight PRs add yaml/sql/tsv/print/sort — **none add LaTeX**. Added `--export-latex` (CSV → LaTeX `tabular`, auto-escaping `& % $ # _ { } ~ ^ \`, `-` for stdout). Serves the researcher/student persona already targeted by arxiv/pubmed/cite exts + docs/for-students.md — persona-shaped, not generic filler. `dotnet build` green (0/0); smoke-tested stdout + file with special-char CSV.
+- Bucket: E (QoL feature, main repo).
+- Outcome: PR #473 (Program.cs, GridManager.cs, docs/export-formats.md, README.md).
+- Follow-up: when PR queue drains, remaining export-format gaps are minimal — pivot back to no-op/issue-sweep unless a new uncovered issue appears. Do not add more near-identical export modes (xml/etc.) — would be padding.
+
 
 - Stars: 0 (Δ 0). Forks: 1. Swept all open issues on main (#374, #372, #321, #320, #319, #318, #158, #3) and every `quicksheet-*` ext repo (zero open ext issues). **Every qualifying main-repo issue is already covered by one or more open, unmerged PRs**: #374→#470; #320(stdin)→#397/#360/#396; #372(completion)→#378/#393; #321(--info)→#426/#394/#357; #318(NO_COLOR)→#442; #319(delimiter)→#447; #158→branch design-tabs-158; #3 Wayland=skip (needs human/display). ~30 PRs sit open on main awaiting user merge. Adding a 31st duplicate PR for any of these is exactly the manufactured-filler / re-doing-merged-work the rules and [[feedback-stop-padding]] forbid — several issues already have 3 duplicate PRs each. Bottleneck is publication/merge, not production. No-op is the correct call.
 - Bucket: none (no-op).
