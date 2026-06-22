@@ -1,3 +1,10 @@
+## 2026-06-21 (--help Examples section, Closes #374)
+
+- Stars: 0 (Δ 0). Swept main + ext issues. All other open issues (#372/#321/#320/#319/#318) already carry open duplicate feature PRs (saturation); #158 virtual-tabs is too large/risky for one run. #374 ("add usage examples to --help") had no open feature PR and no prior closed/rejected feature PR (prior runs only *logged* intent, never shipped). Smallest qualifying issue → shipped it: added an Examples block to PrintHelp() in Program.cs with six copy-pasteable invocations (empty sheet, open CSV, three export modes, stdout via `-`). Additive only, build 0/0, verified via `dotnet run -- --help`.
+- Bucket: A (product polish, single file).
+- Outcome: PR #470 — docs(help): add Examples section to --help output. Closes #374.
+- Follow-up: none. Heavy PR saturation on main (~10 open feature PRs awaiting user gate); next runs should keep defaulting to no-op unless a NEW issue lands or the queue drains.
+
 ## 2026-05-19 (no-op #31 — #139 still open, hold)
 
 - Stars: 0 (Δ 0). PR #139 still open, no other action items. Hold.
