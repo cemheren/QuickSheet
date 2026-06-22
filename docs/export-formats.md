@@ -105,6 +105,45 @@ Write docs,Pending,Low,2
 ]
 ```
 
+## LaTeX table (`--export-latex`)
+
+Convert a CSV file into a LaTeX `tabular` environment, ready to paste into a paper,
+thesis, or report. The first row becomes the header (separated by `\hline`), and
+special characters (`& % $ # _ { } ~ ^ \`) are escaped automatically so the output
+compiles cleanly.
+
+```bash
+# Export to a .tex file
+dotnet run --project ExcelConsole.csproj -- data.csv --export-latex table.tex
+
+# Pipe to stdout (e.g. straight into a clipboard or another tool)
+dotnet run --project ExcelConsole.csproj -- data.csv --export-latex -
+```
+
+**Example input** (`results.csv`):
+
+```csv
+Method,Accuracy %,Notes
+Baseline_v1,87.5,uses C&D
+Ours,94.2,$x^2$ term
+```
+
+**Output** (`table.tex`):
+
+```latex
+\begin{tabular}{lll}
+\hline
+Method & Accuracy \% & Notes \\
+\hline
+Baseline\_v1 & 87.5 & uses C\&D \\
+Ours & 94.2 & \$x\textasciicircum{}2\$ term \\
+\hline
+\end{tabular}
+```
+
+Wrap it in `\begin{table}...\end{table}` with a `\caption` and `\label` in your
+document to get a numbered, referenceable table.
+
 ## Piping and composition
 
 All export modes support `-` as the output path, writing to stdout instead of a file.
@@ -121,22 +160,25 @@ dotnet run --project ExcelConsole.csproj -- data.csv --export-json - | jq '.[0]'
 dotnet run --project ExcelConsole.csproj -- data.csv --export-html - > /tmp/report.html
 python3 -m http.server -d /tmp 8080
 
+# CSV → LaTeX → into a paper
+dotnet run --project ExcelConsole.csproj -- data.csv --export-latex - > results-table.tex
+
 # Chain with jq, awk, or other tools
 dotnet run --project ExcelConsole.csproj -- data.csv --export-md - | head -5
 ```
 
 ## Format comparison
 
-| Feature | CSV | Markdown | HTML | JSON |
-|---|---|---|---|---|
-| Human readable | ○ | ● | ● | ○ |
-| Machine parseable | ● | ○ | ○ | ● |
-| Styled output | — | — | ● | — |
-| Clickable URLs | — | ● (on GitHub) | ● | — |
-| Numeric alignment | — | — | ● | ● (native) |
-| Embeddable | — | ● (README/wiki) | ● (browser) | ● (APIs/scripts) |
-| Round-trip editable | ● | — | — | — |
-| jq / tool-friendly | — | — | — | ● |
+| Feature | CSV | Markdown | HTML | JSON | LaTeX |
+|---|---|---|---|---|---|
+| Human readable | ○ | ● | ● | ○ | ○ |
+| Machine parseable | ● | ○ | ○ | ● | ○ |
+| Styled output | — | — | ● | — | ● (typeset) |
+| Clickable URLs | — | ● (on GitHub) | ● | — | — |
+| Numeric alignment | — | — | ● | ● (native) | — |
+| Embeddable | — | ● (README/wiki) | ● (browser) | ● (APIs/scripts) | ● (papers/theses) |
+| Round-trip editable | ● | — | — | — | — |
+| jq / tool-friendly | — | — | — | ● | — |
 
 ---
 
