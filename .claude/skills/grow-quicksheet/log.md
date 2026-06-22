@@ -1114,3 +1114,27 @@ worth running when a specific persona-shaped opening appears:
 - Auto-merging PRs on main ([[feedback-no-auto-merge]]).
 - Generic primitives justified by N/M-persona counts alone — persona-shaped
   specifics required ([[feedback-quality-over-quantity]]).
+
+## 2026-06-21 (todo ext ergonomics — fixes real user issue #2)
+
+- Stars: 0 (Δ 0)
+- Action: Picked the one genuinely-actionable open issue in the whole repo family — Deskworks/quicksheet-todo#2 (user cemheren: "too cumbersome to use easily... too many cell edits"). Not a screenshot/TUI issue; a concrete UX complaint. Reduced friction in the todo extension: (1) done/undo/rm now accept a title substring, not just numeric ID — no more list-then-lookup; (2) bare `todo: done` completes top-priority pending, bare `todo: undo` reopens most-recent done; (3) `todo: add a; b; c` multi-adds from one cell; (4) ambiguous title matches list candidate #s. Refactored single-add into `ParseAndCreate` helper + shared `ResolveTask`. Build clean, smoke-tested all new paths over JSON-lines protocol. Zero new deps, CSV format unchanged.
+- Bucket: Priority rule #1 (fix smallest qualifying open issue, in the repo where it lives).
+- Outcome: PR Deskworks/quicksheet-todo#5 (Closes #2) + explanatory comment on issue #2. User gates merge.
+- Follow-up: If user says it's still too heavy after this, keep trimming (e.g. inline checkbox-style toggle is blocked by the one-shot write protocol — would need a protocol change). Otherwise re-sweep ext issues next run; main-repo PR backlog (~30 open) still bottlenecked on user merge — keep no-op'ing there.
+
+## 2026-06-21 (run, no-op)
+
+- Stars: 0 (Δ 0)
+- Action: Issue sweep across main + ext repos. All 8 open main-repo issues (#374 help-examples, #372 completions, #321 --info, #320 stdin, #319 --delimiter, #318 NO_COLOR, #158 usage-pattern, #3 Wayland) already have one or more OPEN code PRs awaiting user merge. #374 alone has 3 (#376/#379/#413). Only ext issue is Deskworks/quicksheet-todo#2 (meta question, not a code fix). Started a #374 help-examples fix, then found 3 dupes → reverted; opening a 4th would be manufactured filler (boundary violation).
+- Bucket: — (no-op)
+- Outcome: No PR. Confirmed saturation: ~30 open PRs across repo family. Bottleneck is user merge throughput, not production.
+- Follow-up: No-op future runs until backlog drains or a NEW issue/real-user report appears. Re-sweep ext-repo issues first each run per priority rule #1.
+
+## 2026-06-21 (run #2 — no-op, saturation hold confirmed)
+
+- Stars: 0 (Δ 0)
+- Action: Full issue sweep across main + entire `quicksheet-*` repo family (cemheren + Deskworks, ~120 repos). Only open issue anywhere is Deskworks/quicksheet-todo#2, already addressed by OPEN PR Deskworks/quicksheet-todo#5 (Closes #2, MERGEABLE) from last run — awaiting user merge. All 8 main-repo issues still covered by open PRs. Checked Bucket B discoverability: description, homepage (cemheren.github.io/QuickSheet), and 20 topics all already set — no gap. Main repo has 30 open PRs awaiting user merge; ext scaffolds, awesome-list drafts, and social drafts all staged and waiting on user.
+- Bucket: — (no-op)
+- Outcome: No PR. Confirmed saturation unchanged since run #1 today. Bottleneck remains user merge throughput, not production. Adding a 31st PR would violate [[feedback-stop-padding]].
+- Follow-up: Keep no-op'ing until the PR backlog drains or a NEW issue / real-user report appears. Priority rule #1 (re-sweep ext-repo issues) first each run.
