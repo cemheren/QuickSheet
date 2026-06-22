@@ -216,6 +216,7 @@ tls: github.com, 1, 4
 | `npm:` | npm package info — version, weekly downloads, license, author; multi-package compare | `ext: github:Deskworks/quicksheet-npm` |
 | `pypi:` | PyPI package info — version, license, author, Python requirement, release date | `ext: github:Deskworks/quicksheet-pypi` |
 | `crates:` | Rust crate lookup — `crates: tokio` (version, downloads, description, keywords), `crates: search async` (top 5). Via crates.io, no API key. | `ext: github:Deskworks/quicksheet-crates` |
+| `gomod:` | Go module info — latest version, publish date, version count from the Go module proxy; multi-module compare. No API key. | `ext: github:Deskworks/quicksheet-gomod` |
 | `ghtrend:` | GitHub trending repos — stars, forks, language, description by language or overall | `ext: github:Deskworks/quicksheet-gh-trends` |
 | `co2:` | Live atmospheric CO₂ from NOAA Mauna Loa — ppm, baseline, YoY, 30-day trend | `ext: github:Deskworks/quicksheet-co2` |
 | `weather:` | Live weather via Open-Meteo — temperature, conditions, wind, humidity, pressure (free, no API key) | `ext: github:Deskworks/quicksheet-openmeteo` |

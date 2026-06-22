@@ -1,0 +1,12 @@
+{
+  "name": "go module info",
+  "description": "Show the latest version and publish date of a Go module from the public Go module proxy. Supports multi-module comparison.",
+  "version": "1.0.0",
+  "prefix": "gomod:",
+  "entry": "dotnet run --project quicksheet-gomod.csproj",
+  "params": [
+    { "name": "module", "description": "Module path (e.g. github.com/gin-gonic/gin) or comma-separated list", "required": true }
+  ],
+  "width": 2,
+  "height": 5
+}
