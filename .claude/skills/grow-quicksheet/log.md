@@ -1114,3 +1114,12 @@ worth running when a specific persona-shaped opening appears:
 - Auto-merging PRs on main ([[feedback-no-auto-merge]]).
 - Generic primitives justified by N/M-persona counts alone — persona-shaped
   specifics required ([[feedback-quality-over-quantity]]).
+
+## 2026-06-22 (ext-directory sync — dict/gitlog/stocks)
+
+- Stars: (unchanged; gh reported 0 — token scope, ignore)
+- Action: Synced 3 published Deskworks extensions missing from docs/extensions.md: `dict`, `gitlog`, `stocks`.
+- Bucket: A (directory sync)
+- Outcome: PR #477 (branch grow/ext-dir-sync-dict-gitlog-stocks).
+- Notes: Issue queue fully saturated — every small good-first-issue (#374,#372,#321,#320,#319,#318) already has an open feature PR. #158 (virtual tabs) is a large save-format feature, out of autonomous bounds. #3 Wayland = help-wanted investigation. Initially duplicated #374 work before discovering PR #470 already covers it — reverted. `quicksheet-console` (no manifest), `quicksheet-moon-ext` (PR #465), `quicksheet-gomod` (PR #475), `quicksheet-health-ext`/`-stocks`-style dupes evaluated and excluded/in-flight.
+- Follow-up: Next run, re-sweep ext-repo issues first; if still saturated, consider verifying remaining Deskworks repos (`quicksheet-console`) for directory inclusion once it has a manifest.
