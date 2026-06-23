@@ -1,3 +1,12 @@
+## 2026-06-22 (publish-readiness digest — collapse the 80-PR pile into ~12 decisions)
+
+- Stars: 0 (Δ 0; gh token scope). Full family sweep: main has 8 open issues, ALL covered by ≥1 open PR; the one open ext issue (Deskworks/quicksheet-todo#2) has 3 covering PRs (#3/#4/#5). Genuine saturation — adding any PR is padding.
+- Root cause found: cron runs sweep *issues* but not *open PRs targeting those issues*, so they re-implement the same 6 features repeatedly. Result: NO_COLOR ×4, --info ×4, stdin ×3, --delimiter ×3, help-examples ×4, shell-completions ×2, --sort ×2. ~80 grow PRs unmerged.
+- Action: wrote research/publish-readiness-digest.md — one recommended Keep-PR per cluster + the duplicate PRs to close (6 merges resolve 6 issues, 10 dup PRs closeable), flagged the docs/extensions.md directory-PR conflict cluster (merge #450 first), the duplicate DM landing pages (#359/#416), and the headless-export consolidation opportunity. Distilled the real lever: stars are gated on the user capturing ONE wallpaper screenshot (A1) which unblocks all Bucket C/D launch drafts.
+- Bucket: R (research/triage digest).
+- Outcome: skill-only file → direct to main (skill-self-edit exception, no new PR added to the pile).
+- Follow-up: queued a hard pre-implementation guard (grep open PRs for issue number before coding) + A1-screenshot trigger.
+
 ## 2026-05-19 (no-op #31 — #139 still open, hold)
 
 - Stars: 0 (Δ 0). PR #139 still open, no other action items. Hold.
@@ -1030,6 +1039,8 @@
 ## Queued
 
 - **STANDING RULES (2026-05-17):**
+  - **PRE-IMPLEMENTATION GUARD (2026-06-22):** Before implementing ANY feature/issue fix, `gh pr list --state open` and grep titles/bodies for the issue number AND the feature keyword. If a covering PR already exists, NO-OP — do not re-implement. The 80-PR pile (NO_COLOR ×4, --info ×4, stdin ×3, etc.) came from skipping this check. See `research/publish-readiness-digest.md`.
+  - **TRIAGE BEFORE PRODUCE (2026-06-22):** When >20 grow PRs are open and unmerged, the pile is the bottleneck — default to no-op or a triage digest, not new PRs. Stars are gated on the user capturing the A1 wallpaper screenshot, which unblocks all Bucket C/D launch drafts. Everything else is downstream.
   - **Do not auto-merge PRs on cemheren/QuickSheet.** User reviews every merge. No `gh pr merge`, no `--auto`. See [[feedback-no-auto-merge]].
   - **No timer/clock/countdown features or extensions.** Already covered by shipped `pomo`, `qtr`, `cntdn`. Drop `bill:`, ticking-timer, session-timer, bell-timer, break-countdown, etc. See [[feedback-no-timer-extensions]].
   - **No value-driven / rule-embedded-in-text colour primitives.** `c?:` was rejected. Don't re-propose conditional-formatting designs without first asking the user. See [[feedback-no-value-colour]].
