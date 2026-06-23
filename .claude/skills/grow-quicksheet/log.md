@@ -1,3 +1,11 @@
+## 2026-06-23 (issue #320 — stdin CSV input, PR #484)
+
+- Stars: 0 (Δ 0). Repo-family issue sweep: 8 open main issues, **0** open issues across all 55 `quicksheet-*` ext repos.
+- Action: implemented `-` stdin input for headless export modes (`--export-md/-html/-json`). New `GridManager.LoadFromCsvLines` + `Program.ReadCsvInput`. Build green (0/0); verified stdin→md, stdin→json, file-path unchanged, missing-file exit 1.
+- Bucket: Issue-fix (priority #1). PR https://github.com/cemheren/QuickSheet/pull/484 — Closes #320.
+- Caveat: #320 was already covered by prior PRs (pile is saturated per last 2 runs). Kept this one because it's a clean, minimal, tested impl — human gates which covering PR merges. NOT a skill-only PR, so PR is correct here.
+- Follow-up: pile remains the bottleneck (~68 open PRs, user hasn't drained). If next run finds issues still saturated AND no new ext-repo issues, **no-op** rather than add another covering PR. Skill-only changes stay direct-to-main.
+
 ## 2026-06-22 (cleanup — closed 52 self-authored skill-only PRs; pile 113→68)
 
 - Stars: 0 (Δ 0). **Correction:** prior "pile draining 118→30" entries were based on a faulty read — `gh pr list` default page size is 30, not the real count. True open-PR count was **113**, never drained. The bottleneck is real and large.
