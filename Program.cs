@@ -36,7 +36,8 @@ public class Program
                 return;
             }
             string outPath = args[exportIdx + 1];
-            if (!File.Exists(csvPath))
+            var lines = ReadCsvInput(csvPath);
+            if (lines == null)
             {
                 Console.Error.WriteLine($"Input CSV not found: {csvPath}");
                 Environment.Exit(1);
@@ -44,7 +45,6 @@ public class Program
             }
 
             // Probe CSV for dimensions so the headless GridManager is big enough.
-            var lines = File.ReadAllLines(csvPath);
             int rows = Math.Max(1, lines.Length);
             int cols = 1;
             foreach (var line in lines)
@@ -60,7 +60,7 @@ public class Program
             }
             // Constructor derives ColumnCount from (availableWidth - 4) / columnWidth (default 20).
             var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
-            grid.LoadFromCsv(csvPath);
+            grid.LoadFromCsvLines(lines);
             if (outPath == "-")
             {
                 grid.WriteMarkdownTo(Console.Out);
@@ -83,14 +83,14 @@ public class Program
                 return;
             }
             string htmlOut = args[htmlIdx + 1];
-            if (!File.Exists(csvPath))
+            var lines = ReadCsvInput(csvPath);
+            if (lines == null)
             {
                 Console.Error.WriteLine($"Input CSV not found: {csvPath}");
                 Environment.Exit(1);
                 return;
             }
 
-            var lines = File.ReadAllLines(csvPath);
             int rows = Math.Max(1, lines.Length);
             int cols = 1;
             foreach (var line in lines)
@@ -105,7 +105,7 @@ public class Program
                 if (n > cols) cols = n;
             }
             var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
-            grid.LoadFromCsv(csvPath);
+            grid.LoadFromCsvLines(lines);
             if (htmlOut == "-")
             {
                 grid.WriteHtmlTo(Console.Out);
@@ -128,14 +128,14 @@ public class Program
                 return;
             }
             string jsonOut = args[jsonIdx + 1];
-            if (!File.Exists(csvPath))
+            var lines = ReadCsvInput(csvPath);
+            if (lines == null)
             {
                 Console.Error.WriteLine($"Input CSV not found: {csvPath}");
                 Environment.Exit(1);
                 return;
             }
 
-            var lines = File.ReadAllLines(csvPath);
             int rows = Math.Max(1, lines.Length);
             int cols = 1;
             foreach (var line in lines)
@@ -150,7 +150,7 @@ public class Program
                 if (n > cols) cols = n;
             }
             var grid = new GridManager(availableWidth: cols * 20 + 4, availableHeight: rows);
-            grid.LoadFromCsv(csvPath);
+            grid.LoadFromCsvLines(lines);
             if (jsonOut == "-")
             {
                 grid.WriteJsonTo(Console.Out);
@@ -186,6 +186,26 @@ public class Program
     }
 
     private const string Version = "0.36.0";
+
+    /// <summary>
+    /// Reads CSV input lines from a file path, or from stdin when the path is "-".
+    /// Returns null if a file path is given but does not exist.
+    /// </summary>
+    private static string[]? ReadCsvInput(string csvPath)
+    {
+        if (csvPath == "-")
+        {
+            var list = new List<string>();
+            string? line;
+            using var reader = new StringReader(Console.In.ReadToEnd());
+            while ((line = reader.ReadLine()) != null)
+                list.Add(line);
+            return list.ToArray();
+        }
+
+        if (!File.Exists(csvPath)) return null;
+        return File.ReadAllLines(csvPath);
+    }
 
     private static void PrintInstalledExtensions()
     {
@@ -258,6 +278,8 @@ public class Program
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
+        Console.WriteLine();
+        Console.WriteLine("Pass - as the input file to read CSV from stdin, e.g. `cat data.csv | ExcelConsole - --export-md -`.");
         Console.WriteLine();
         Console.WriteLine("Cell prefixes:");
         Console.WriteLine("  r: <cmd>          Runnable command. Press Enter to launch.");
