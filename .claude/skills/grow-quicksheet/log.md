@@ -1,3 +1,10 @@
+## 2026-06-24 (issue #374 — usage examples in --help)
+
+- Stars: 0 (Δ 0). Swept main + ext repos: 8 open issues on main, only meta-discussion (Deskworks/quicksheet-todo#2) on ext side. #321/#318 assume a non-existent `--info` flag; #374 is the smallest truly self-contained fix. Added an Examples block to `PrintHelp()` using only real flags (omitted the issue's `--info`/`-d` samples since those aren't implemented — kept help truthful). Build clean, verified via `--help`.
+- Bucket: A (product polish, fixes open issue).
+- Outcome: PR #486 (https://github.com/cemheren/QuickSheet/pull/486), Closes #374.
+- Follow-up: #318 (NO_COLOR) and #321 (file size/mtime in --info) both need a `--info` headless mode first — could add `--info` in a future run, then both become easy. #319 (--delimiter) is a clean standalone next pick.
+
 ## 2026-05-19 (no-op #31 — #139 still open, hold)
 
 - Stars: 0 (Δ 0). PR #139 still open, no other action items. Hold.
