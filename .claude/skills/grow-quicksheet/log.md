@@ -1,3 +1,14 @@
+## 2026-06-24 (PR backlog merge-triage cheat sheet — unblock the real bottleneck)
+
+- Stars: 0 (Δ 0). Re-swept: main repo 8 issues all saturated with PRs (or off-limits: #158 changes CSV persistence — forbidden; #3 Wayland needs hardware). Ext repos: 0 open issues. Metadata already maxed (20 topics, good desc, homepage set). 56 ext repos already exist → ext #57 would be the documented padding anti-pattern. PR pile = **50 open** (down from 68, user is draining).
+- Diagnosis: real bottleneck is **merge throughput**, not production. Pile has heavy duplication (#374×4, #318×3, #320×3, #319×2, #321×2), several **contaminated giant-diff PRs** (+3012/+2898/+3015 bad rebases), and 14 skill-only `chore(skill)` PRs that per current rules should be direct-to-main commits. A 50-PR + 0-star repo reads "abandoned" to a visitor — first-impression problem.
+- Action: wrote `research/pr-backlog-triage-2026-06-24.md` — a per-issue merge cheat sheet (which single PR to MERGE, which dups/contaminated to CLOSE), the smallest clean diff confirmed MERGEABLE for each, and a list of skill-only noise PRs to close (after confirming content is on main). Lets the user drain 50→~15 in minutes. Non-piling (skill-only doc, direct to main).
+- Bucket: R (research/triage; the deliverable is the implications, not more code).
+- Outcome: skill-only file pushed direct to main per skill-self-edit rule. No new PR opened (deliberately — adding PR #51 to a 50-PR pile is the anti-pattern).
+- Follow-up: queued — (1) stop per-extension directory-sync PRs (batch/generate from manifest); (2) ensure cron pushes skill log/draft commits direct to main, not as PRs (#487/#488 still violated this); (3) re-check pile next run — if >30, triage not production.
+
+---
+
 ## 2026-06-24 (no-op — every open issue already has 2–7 PRs; backlog saturated)
 
 - Stars: 0 (Δ 0). Swept main repo + all `quicksheet-*` ext repos. Ext issues: none open. Main repo has 8 open issues (#374, #372, #321, #320, #319, #318, #158, #3) but EVERY actionable one already carries multiple open PRs: #374→7 PRs, #318→4, #320→4, #319→3, #321→3, #372→2. Started a fix for the smallest (#374 help examples) before discovering 7 existing PRs for it — abandoned the branch rather than pile on #8.
