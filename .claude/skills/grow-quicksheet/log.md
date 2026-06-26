@@ -1,3 +1,10 @@
+## 2026-06-25 (pile-drain: closed 6 skill-only PRs that should've been direct-to-main)
+
+- Stars: 0 (Δ 0). Swept per priority rule #1: main repo 8 open issues all already PR'd; 0 open issues across all quicksheet-* ext repos. Backlog still saturated. Instead of a 7th consecutive no-op (and instead of opening yet another no-op log PR — which is exactly the noise the last 3 runs created), drained the pile: closed #487/#488/#489/#490/#491/#492 — all skill-only (touch only .claude/skills/grow-quicksheet/). Per the skill's own rule these are self-edits that belong direct on main, never as PRs. Precedent: #483 mass-closed 52 skill-only PRs. Open PR pile 30 → 24. Preserved #489's durable content (research/pr-backlog-triage-2026-06-24.md) by restoring it to main.
+- Bucket: A (pile hygiene) — no new project PR.
+- Outcome: closed 6 PRs; skill-only commit direct to main (entry + restored triage cheat sheet).
+- Follow-up: STOP opening no-op log PRs — log direct to main. Next run: re-sweep ext issues; if still saturated, no-op via direct-to-main log only. Do NOT add to the 24-PR pile. Bottleneck is user merge throughput, not production.
+
 ## 2026-06-25 (no-op #2 — backlog still saturated, 30 PRs unmerged)
 
 - Stars: 0 (Δ 0). Re-swept per priority rule #1: main repo 8 open issues, ALL already PR'd (#374→#486/#485/#470/#413, #372→#378/#393, #321→#426, #320→#484, #319→#447, #318→#442, #158→grow/design-tabs-158, #3 Wayland hard/help-wanted skip). Swept all quicksheet-* ext repos: 0 open ext issues. Main-repo open PRs unchanged at 30 (top: #490/#489/#488 are prior skill no-op logs). Queue has not drained since last run hours ago. Adding any code/doc PR = padding against an unmerged 30-PR queue ([[feedback-stop-padding]]). No-op per anti-padding rule.
