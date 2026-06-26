@@ -1,3 +1,10 @@
+## 2026-06-25 (shell completions for #372 — first uncovered issue in weeks)
+
+- Stars: 0 (Δ 0). PR backlog drained 71→30 since last run — user is actively merging, so saturation has eased. Swept per priority rule #1: of the 8 main issues, #374/#321/#320/#319/#318 all already have open PRs (#374 has FOUR dupes), but **#372 "Add shell completion scripts for bash and zsh" had NO PR** — first genuinely uncovered good-first-issue in weeks. 0 open issues across all quicksheet-* ext repos. Shipped `completions/quicksheet.bash` + `completions/quicksheet.zsh` + `docs/shell-completions.md` + README link. Only flags present on `main` today are completed (--help/-h, --version/-v, --list-extensions, --export-md/html/json) so the scripts stay truthful as future flags land. No C# touched → zero build risk, zero NuGet. bash -n + simulated COMP_WORDS test both green.
+- Bucket: A (product polish; resolves an open issue per priority rule #1).
+- Outcome: PR #495 — Closes #372.
+- Follow-up: when #319 (--delimiter) / #318 (--no-color) / #321 (--info) / #320 (--stdin) PRs merge, a small follow-up can add those flags to the completion scripts. Backlog now 31 PRs — don't pile on new feature PRs; prefer uncovered issues or wait for drain.
+
 ## 2026-06-25 (pile-drain: closed 6 skill-only PRs that should've been direct-to-main)
 
 - Stars: 0 (Δ 0). Swept per priority rule #1: main repo 8 open issues all already PR'd; 0 open issues across all quicksheet-* ext repos. Backlog still saturated. Instead of a 7th consecutive no-op (and instead of opening yet another no-op log PR — which is exactly the noise the last 3 runs created), drained the pile: closed #487/#488/#489/#490/#491/#492 — all skill-only (touch only .claude/skills/grow-quicksheet/). Per the skill's own rule these are self-edits that belong direct on main, never as PRs. Precedent: #483 mass-closed 52 skill-only PRs. Open PR pile 30 → 24. Preserved #489's durable content (research/pr-backlog-triage-2026-06-24.md) by restoring it to main.
