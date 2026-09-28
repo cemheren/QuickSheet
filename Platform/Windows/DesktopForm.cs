@@ -320,14 +320,32 @@ internal class DesktopForm : DesktopFormBase
     private bool TryRerunInlineCommand(int row, int col)
     {
         string val = _grid.GetCellValue(row, col);
-        if (!CellPrefix.IsInline(val)) return false;
+        if (!CellPrefix.IsInline(val) && !CellPrefix.IsJson(val)) return false;
 
-        string? resolved = _grid.ResolveInline(row, col);
-        if (resolved == null || !CellPrefix.IsCommand(resolved)) return false;
+        (int row, int col)? processCell = null;
+        var resolved = _grid.ResolveDynamicValue(row, col, (r, c, _) =>
+        {
+            processCell = (r, c);
+            return "";
+        });
+        if (!resolved.UsesCommand || processCell == null) return false;
 
-        _processManager.StopProcess(row, col);
+        _processManager.StopProcess(processCell.Value.row, processCell.Value.col);
         Invalidate();
         return true;
+    }
+
+    private GridManager.ResolvedDynamicValue ResolveDynamicValue(
+        int row, int col, int ptyCols = 120, int ptyRows = 30)
+    {
+        int commandCols = CellPrefix.IsJson(_grid.GetCellValue(row, col))
+            ? 4096
+            : ptyCols;
+        return _grid.ResolveDynamicValue(row, col, (processRow, processCol, command) =>
+        {
+            _processManager.EnsureRunning(processRow, processCol, command, commandCols, ptyRows);
+            return _processManager.GetOutput(processRow, processCol);
+        });
     }
 
     private void OpenAllSelected()
@@ -471,7 +489,7 @@ internal class DesktopForm : DesktopFormBase
                 string val = _grid.GetCellValue(r, c);
                 if (!CellPrefix.IsInline(val)) continue;
                 string expandedVal = CellPrefix.ExpandCellReferences(val, _grid);
-                var parsed = CellPrefix.ParseInlineRef(expandedVal);
+                var parsed = CellPrefix.ParseInlineRef(expandedVal, r, c);
                 if (parsed == null || (parsed.Value.spanCols <= 1 && parsed.Value.spanRows <= 1)) continue;
 
                 int sc = parsed.Value.spanCols, sr = parsed.Value.spanRows;
@@ -479,31 +497,15 @@ internal class DesktopForm : DesktopFormBase
                 int endRow = Math.Min(r + sr - 1, _grid.RowCount - 1);
 
                 // Resolve content
-                string? resolved = _grid.ResolveInline(r, c);
-                bool isCmd = false;
-                string content;
-                if (resolved != null && CellPrefix.IsCommand(resolved))
-                {
-                    isCmd = true;
-                    activeInlineCmds.Add((r, c));
-                    string expandedCmd = CellPrefix.ExpandCellReferences(resolved, _grid);
-                    // Calculate pty size from span dimensions (subtract padding)
-                    int ptyCols = -1; // account for 8px padding → ~1 char
-                    for (int tc = c; tc <= endCol; tc++)
-                        ptyCols += colWidths[tc];
-                    if (ptyCols < 20) ptyCols = 20;
-                    int ptyRows = Math.Max(1, (endRow - r + 1) - 1); // minus header row
-                    _processManager.EnsureRunning(r, c, expandedCmd, ptyCols, ptyRows);
-                    content = _processManager.GetOutput(r, c) ?? "[running...]";
-                }
-                else if (resolved != null)
-                {
-                    content = CellPrefix.ExpandCellReferences(resolved, _grid);
-                }
-                else
-                {
-                    content = val;
-                }
+                int ptyCols = -1; // account for 8px padding -> ~1 char
+                for (int tc = c; tc <= endCol; tc++)
+                    ptyCols += colWidths[tc];
+                if (ptyCols < 20) ptyCols = 20;
+                int ptyRows = Math.Max(1, (endRow - r + 1) - 1); // minus header row
+                var resolved = ResolveDynamicValue(r, c, ptyCols, ptyRows);
+                bool isCmd = resolved.UsesCommand;
+                string content = resolved.Value;
+                if (isCmd) activeInlineCmds.Add((r, c));
 
                 inlineSpans.Add((r, c, sc, sr, content, isCmd));
 
@@ -558,28 +560,16 @@ internal class DesktopForm : DesktopFormBase
                 string cellVal = _grid.GetCellValue(r, c);
                 string displayVal = cellVal;
                 bool isInline = CellPrefix.IsInline(cellVal);
+                bool isJson = CellPrefix.IsJson(cellVal);
                 bool isInlineCmd = false;
 
-                // Resolve inline references
-                if (isInline)
+                // Resolve inline and JSON reference chains
+                if (isInline || isJson)
                 {
-                    string? resolved = _grid.ResolveInline(r, c);
-                    if (resolved != null)
-                    {
-                        // If resolved value is a command, show process output
-                        if (CellPrefix.IsCommand(resolved))
-                        {
-                            isInlineCmd = true;
-                            activeInlineCmds.Add((r, c));
-                            string expandedCmd = CellPrefix.ExpandCellReferences(resolved, _grid);
-                            _processManager.EnsureRunning(r, c, expandedCmd);
-                            displayVal = _processManager.GetOutput(r, c) ?? "[running...]";
-                        }
-                        else
-                        {
-                            displayVal = CellPrefix.ExpandCellReferences(resolved, _grid);
-                        }
-                    }
+                    var resolved = ResolveDynamicValue(r, c);
+                    isInlineCmd = resolved.UsesCommand;
+                    displayVal = resolved.Value;
+                    if (isInlineCmd) activeInlineCmds.Add((r, c));
                 }
                 else
                 {
@@ -627,7 +617,7 @@ internal class DesktopForm : DesktopFormBase
                          : colorParsed != null ? ConsoleColorToBg(colorParsed.Value.bg)
                          : isConflict ? Color.FromArgb(100, 0, 0)
                          : isInlineCmd ? Color.FromArgb(20, 50, 20)
-                         : isInline   ? Color.FromArgb(0, 40, 50)
+                         : isInline || isJson ? Color.FromArgb(0, 40, 50)
                          : isFile     ? Color.FromArgb(0, 40, 60)
                          : isLink     ? Color.FromArgb(40, 0, 60)
                          : isCmd      ? Color.FromArgb(40, 40, 0)
@@ -780,19 +770,10 @@ internal class DesktopForm : DesktopFormBase
             if (_showResolved && !string.IsNullOrEmpty(value))
             {
                 string resolved;
-                string? inlineResult = _grid.ResolveInline(selRow, selCol);
-                if (inlineResult != null && CellPrefix.IsCommand(inlineResult))
-                {
-                    resolved = _processManager.GetOutput(selRow, selCol) ?? "[running...]";
-                }
-                else if (inlineResult != null)
-                {
-                    resolved = CellPrefix.ExpandCellReferences(inlineResult, _grid);
-                }
+                if (CellPrefix.IsInline(value) || CellPrefix.IsJson(value))
+                    resolved = ResolveDynamicValue(selRow, selCol).Value;
                 else
-                {
                     resolved = CellPrefix.ExpandCellReferences(value, _grid);
-                }
                 if (resolved != value)
                     resolvedDisplay = $" \u2192 {resolved}";
             }
@@ -845,6 +826,7 @@ internal class DesktopForm : DesktopFormBase
                 "  ║                                          ║",
                 "  ║  c:COLOR: text  Colored cell background  ║",
                 "  ║  r: cmd         Runnable command         ║",
+                "  ║  j: A1, path    Parse JSON output        ║",
                 "  ║  s: 1,2,3       Sparkline chart          ║",
                 "  ║                                          ║",
                 "  ╚══════════════════════════════════════════╝",
@@ -1131,15 +1113,8 @@ internal class DesktopForm : DesktopFormBase
                         var (curRow, curCol) = _grid.GetCurrentCell();
                         string raw = _grid.GetSelectedCellValue();
                         string display;
-                        string? resolved = _grid.ResolveSelectedInline();
-                        if (resolved != null && CellPrefix.IsCommand(resolved))
-                        {
-                            display = _processManager.GetOutput(curRow, curCol) ?? "[running...]";
-                        }
-                        else if (resolved != null)
-                        {
-                            display = CellPrefix.ExpandCellReferences(resolved, _grid);
-                        }
+                        if (CellPrefix.IsInline(raw) || CellPrefix.IsJson(raw))
+                            display = ResolveDynamicValue(curRow, curCol).Value;
                         else
                         {
                             // Normal cell — expand any {A1::C10} references

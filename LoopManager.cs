@@ -40,7 +40,7 @@ internal sealed class LoopManager : IDisposable
                 string val = _grid.GetCellValue(r, c);
                 if (!CellPrefix.IsLoop(val)) continue;
 
-                var parsed = CellPrefix.ParseLoop(val);
+                var parsed = CellPrefix.ParseLoop(val, r, c);
                 if (parsed == null) continue;
 
                 var key = (r, c);

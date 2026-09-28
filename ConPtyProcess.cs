@@ -98,7 +98,7 @@ internal sealed class ConPtyProcess : IDisposable
 
     #endregion
 
-    private const int MaxLines = 200;
+    private const int MaxLines = 5000;
 
     private IntPtr _hPC;
     private IntPtr _hProcess;
