@@ -108,6 +108,21 @@ Use `length(<path>)` to count array elements, object members, or Unicode charact
 j: A2, length($.value)
 ```
 
+Commands referenced by `j:` use a wide capture terminal so long JSON strings are
+not split by visual terminal wrapping.
+
+Cell-reference prefixes also support R1C1-style relative references. Offsets are
+resolved from the cell containing the prefix:
+
+```text
+j: R[-1]C, value[0]  # same column, one row up
+i: RC[-1]            # same row, one column left
+L: R[-1]C,1m         # rerun the cell above every minute
+```
+
+Use `R[n]` for a row offset and `C[n]` for a column offset. An omitted offset
+means zero, so `R[-2]C[3]` means two rows up and three columns right.
+
 ### Section headers in a cell
 Prefix a cell with `# ` (H1) or `## ` (H2) to create a visually distinct section header.
 - `# Work` → rendered in **gold** — ideal for top-level dashboard sections

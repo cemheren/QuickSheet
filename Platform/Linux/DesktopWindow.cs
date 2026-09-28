@@ -598,7 +598,7 @@ internal class DesktopWindow : IDisposable
                 string val = _grid.GetCellValue(r, c);
                 if (!CellPrefix.IsInline(val)) continue;
                 string expandedVal = CellPrefix.ExpandCellReferences(val, _grid);
-                var parsed = CellPrefix.ParseInlineRef(expandedVal);
+                var parsed = CellPrefix.ParseInlineRef(expandedVal, r, c);
                 if (parsed == null || (parsed.Value.spanCols <= 1 && parsed.Value.spanRows <= 1)) continue;
 
                 int sc = parsed.Value.spanCols, sr = parsed.Value.spanRows;
@@ -1872,9 +1872,12 @@ internal class DesktopWindow : IDisposable
     private GridManager.ResolvedDynamicValue ResolveDynamicValue(
         int row, int col, int ptyCols = 120, int ptyRows = 30)
     {
+        int commandCols = CellPrefix.IsJson(_grid.GetCellValue(row, col))
+            ? 4096
+            : ptyCols;
         return _grid.ResolveDynamicValue(row, col, (processRow, processCol, command) =>
         {
-            _inlineProcesses.EnsureRunning(processRow, processCol, command, ptyCols, ptyRows);
+            _inlineProcesses.EnsureRunning(processRow, processCol, command, commandCols, ptyRows);
             return _inlineProcesses.GetOutput(processRow, processCol);
         });
     }

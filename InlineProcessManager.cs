@@ -16,7 +16,7 @@ namespace ExcelConsole;
 /// </summary>
 public class InlineProcessManager : IDisposable
 {
-    private const int MaxOutputLines = 200;
+    private const int MaxOutputLines = 5000;
 
     private readonly ConcurrentDictionary<(int row, int col), ManagedProcess> _processes = new();
 

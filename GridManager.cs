@@ -785,7 +785,7 @@ public class GridManager
 
         // Expand {A1::C10} refs in the i: value before parsing the target cell
         string expanded = CellPrefix.ExpandCellReferences(value, this);
-        var target = CellPrefix.ParseInlineRef(expanded);
+        var target = CellPrefix.ParseInlineRef(expanded, row, col);
         if (target == null) return "[invalid ref]";
 
         int tr = target.Value.row, tc = target.Value.col;
@@ -824,7 +824,7 @@ public class GridManager
         if (CellPrefix.IsInline(raw))
         {
             string expanded = CellPrefix.ExpandCellReferences(raw, this);
-            var target = CellPrefix.ParseInlineRef(expanded);
+            var target = CellPrefix.ParseInlineRef(expanded, row, col);
             if (target == null) return new("[invalid ref]", false);
             if (!IsInBounds(target.Value.row, target.Value.col)) return new("[out of bounds]", false);
 
@@ -839,7 +839,7 @@ public class GridManager
 
         if (CellPrefix.IsJson(raw))
         {
-            var jsonRef = CellPrefix.ParseJsonRef(raw);
+            var jsonRef = CellPrefix.ParseJsonRef(raw, row, col);
             if (jsonRef == null) return new("[invalid json ref]", false);
             if (!IsInBounds(jsonRef.Value.row, jsonRef.Value.col)) return new("[out of bounds]", false);
 

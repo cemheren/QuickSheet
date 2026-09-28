@@ -338,9 +338,12 @@ internal class DesktopForm : DesktopFormBase
     private GridManager.ResolvedDynamicValue ResolveDynamicValue(
         int row, int col, int ptyCols = 120, int ptyRows = 30)
     {
+        int commandCols = CellPrefix.IsJson(_grid.GetCellValue(row, col))
+            ? 4096
+            : ptyCols;
         return _grid.ResolveDynamicValue(row, col, (processRow, processCol, command) =>
         {
-            _processManager.EnsureRunning(processRow, processCol, command, ptyCols, ptyRows);
+            _processManager.EnsureRunning(processRow, processCol, command, commandCols, ptyRows);
             return _processManager.GetOutput(processRow, processCol);
         });
     }
@@ -486,7 +489,7 @@ internal class DesktopForm : DesktopFormBase
                 string val = _grid.GetCellValue(r, c);
                 if (!CellPrefix.IsInline(val)) continue;
                 string expandedVal = CellPrefix.ExpandCellReferences(val, _grid);
-                var parsed = CellPrefix.ParseInlineRef(expandedVal);
+                var parsed = CellPrefix.ParseInlineRef(expandedVal, r, c);
                 if (parsed == null || (parsed.Value.spanCols <= 1 && parsed.Value.spanRows <= 1)) continue;
 
                 int sc = parsed.Value.spanCols, sr = parsed.Value.spanRows;

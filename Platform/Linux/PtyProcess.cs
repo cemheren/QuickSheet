@@ -69,7 +69,7 @@ internal sealed class PtyProcess : IDisposable
 
     #endregion
 
-    private const int MaxLines = 200;
+    private const int MaxLines = 5000;
 
     private int _masterFd = -1;
     private int _pid = -1;
