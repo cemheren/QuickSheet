@@ -102,6 +102,12 @@ A4  j: A2, value[*].id
 
 JSON cells can be chained: if `A3` contains an object or array, `j: A3, properties.name` continues parsing that result. Paths support dot properties, array indexes, `[*]` wildcards, `$` as the root, and quoted keys such as `$["api-version"]`. Omit the path (`j: A2`) to return the complete compact JSON value.
 
+Use `length(<path>)` to count array elements, object members, or Unicode characters in a string:
+
+```text
+j: A2, length($.value)
+```
+
 ### Section headers in a cell
 Prefix a cell with `# ` (H1) or `## ` (H2) to create a visually distinct section header.
 - `# Work` → rendered in **gold** — ideal for top-level dashboard sections

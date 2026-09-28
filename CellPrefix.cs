@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using System.Text.Json;
+using System.Text;
 
 namespace ExcelConsole;
 
@@ -434,7 +435,8 @@ public static class CellPrefix
 
         using (document)
         {
-            if (!TryParseJsonPath(path, out var tokens, out string? pathError))
+            bool getLength = TryUnwrapLengthFunction(path, out string selectedPath);
+            if (!TryParseJsonPath(selectedPath, out var tokens, out string? pathError))
                 return $"[json path error: {pathError}]";
 
             var current = new List<JsonElement> { document.RootElement };
@@ -469,10 +471,47 @@ public static class CellPrefix
                 current = next;
             }
 
+            if (getLength)
+                return FormatJsonLength(current);
+
             return current.Count == 1
                 ? FormatJsonValue(current[0])
                 : "[" + string.Join(",", current.Select(e => e.GetRawText())) + "]";
         }
+    }
+
+    private static bool TryUnwrapLengthFunction(string path, out string selectedPath)
+    {
+        string trimmed = path.Trim();
+        const string functionName = "length";
+        if (trimmed.Length > functionName.Length + 2 &&
+            trimmed.StartsWith(functionName + "(", StringComparison.OrdinalIgnoreCase) &&
+            trimmed.EndsWith(')'))
+        {
+            selectedPath = trimmed[(functionName.Length + 1)..^1].Trim();
+            return true;
+        }
+
+        selectedPath = path;
+        return false;
+    }
+
+    private static string FormatJsonLength(List<JsonElement> elements)
+    {
+        if (elements.Count != 1)
+            return "[json length error: path must select one value]";
+
+        JsonElement element = elements[0];
+        int? length = element.ValueKind switch
+        {
+            JsonValueKind.Array => element.GetArrayLength(),
+            JsonValueKind.Object => element.EnumerateObject().Count(),
+            JsonValueKind.String => (element.GetString() ?? "").EnumerateRunes().Count(),
+            _ => null
+        };
+
+        return length?.ToString(System.Globalization.CultureInfo.InvariantCulture)
+            ?? "[json length error: expected string, array, or object]";
     }
 
     private enum JsonPathTokenKind { Property, Index, Wildcard }
