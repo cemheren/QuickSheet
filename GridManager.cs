@@ -804,6 +804,65 @@ public class GridManager
     public string? ResolveSelectedInline(HashSet<(int, int)>? visited = null)
         => ResolveInline(_selectedRow, _selectedCol, visited);
 
+    public readonly record struct ResolvedDynamicValue(string Value, bool UsesCommand);
+
+    /// <summary>
+    /// Resolves i: and j: reference chains. Commands are captured through
+    /// <paramref name="commandOutput"/> using the i:/j: cell that owns the process.
+    /// </summary>
+    public ResolvedDynamicValue ResolveDynamicValue(
+        int row,
+        int col,
+        Func<int, int, string, string?> commandOutput,
+        HashSet<(int, int)>? visited = null)
+    {
+        visited ??= new HashSet<(int, int)>();
+        if (!visited.Add((row, col))) return new("[circular]", false);
+        if (visited.Count > 12) return new("[too deep]", false);
+
+        string raw = GetCellValue(row, col);
+        if (CellPrefix.IsInline(raw))
+        {
+            string expanded = CellPrefix.ExpandCellReferences(raw, this);
+            var target = CellPrefix.ParseInlineRef(expanded);
+            if (target == null) return new("[invalid ref]", false);
+            if (!IsInBounds(target.Value.row, target.Value.col)) return new("[out of bounds]", false);
+
+            var resolved = ResolveDynamicValue(target.Value.row, target.Value.col, commandOutput, visited);
+            if (CellPrefix.IsCommand(resolved.Value))
+            {
+                string command = CellPrefix.ExpandCellReferences(resolved.Value, this);
+                return new(commandOutput(row, col, command) ?? "[running...]", true);
+            }
+            return resolved;
+        }
+
+        if (CellPrefix.IsJson(raw))
+        {
+            var jsonRef = CellPrefix.ParseJsonRef(raw);
+            if (jsonRef == null) return new("[invalid json ref]", false);
+            if (!IsInBounds(jsonRef.Value.row, jsonRef.Value.col)) return new("[out of bounds]", false);
+
+            var source = ResolveDynamicValue(jsonRef.Value.row, jsonRef.Value.col, commandOutput, visited);
+            string json = source.Value;
+            bool usesCommand = source.UsesCommand;
+            if (CellPrefix.IsCommand(json))
+            {
+                string command = CellPrefix.ExpandCellReferences(json, this);
+                json = commandOutput(row, col, command) ?? "[running...]";
+                usesCommand = true;
+            }
+            if (json == "[running...]")
+                return new(json, usesCommand);
+            return new(CellPrefix.SelectJson(json, jsonRef.Value.path), usesCommand);
+        }
+
+        return new(CellPrefix.ExpandCellReferences(raw, this), false);
+    }
+
+    private bool IsInBounds(int row, int col) =>
+        row >= 0 && row < RowCount && col >= 0 && col < ColumnCount;
+
     /// <summary>
     /// Gets the display value for a cell, resolving inline refs if applicable.
     /// </summary>

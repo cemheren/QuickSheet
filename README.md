@@ -15,7 +15,7 @@ The data is a CSV file. Cells can run shell commands. Same file on Windows or Li
 ![GitHub release](https://img.shields.io/github/v/release/cemheren/QuickSheet?color=green)
 ![Zero Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)
 ![Extensions](https://img.shields.io/badge/extensions-69%2B-orange)
-![Cell prefixes](https://img.shields.io/badge/cell_prefixes-9-blue)
+![Cell prefixes](https://img.shields.io/badge/cell_prefixes-10-blue)
 
 ## Why this exists
 
@@ -89,6 +89,18 @@ Auto-sum (Σ) per column and auto-product (Π) per row in the status bar. Import
 Prefix a cell with `s: 1,2,3,4,5,6` to render the values as a unicode bar sparkline (`▁▂▃▄▅▆`). Handy for tracking a small series next to other notes — paste a row of numbers, get a tiny chart, no extra column.
 
 You can also point at a range of cells: `s: A1::A10` pulls numeric values from the referenced grid range and renders them. Non-numeric cells in the range are skipped.
+
+### JSON API output
+Use `j: <cell>, <path>` to extract a value from JSON returned by a command. For example:
+
+```text
+A1  r: armclient get /subscriptions
+A2  i: A1
+A3  j: A2, value[0].displayName
+A4  j: A2, value[*].id
+```
+
+JSON cells can be chained: if `A3` contains an object or array, `j: A3, properties.name` continues parsing that result. Paths support dot properties, array indexes, `[*]` wildcards, `$` as the root, and quoted keys such as `$["api-version"]`. Omit the path (`j: A2`) to return the complete compact JSON value.
 
 ### Section headers in a cell
 Prefix a cell with `# ` (H1) or `## ` (H2) to create a visually distinct section header.

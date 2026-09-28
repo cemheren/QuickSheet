@@ -605,28 +605,13 @@ internal class DesktopWindow : IDisposable
                 int endColIdx = Math.Min(c + sc - 1, _grid.ColumnCount - 1);
                 int endRowIdx = Math.Min(r + sr - 1, _grid.RowCount - 1);
 
-                string? resolved = _grid.ResolveInline(r, c);
-                bool isCmdSpan = false;
-                string content;
-                if (resolved != null && CellPrefix.IsCommand(resolved))
-                {
-                    isCmdSpan = true;
-                    string expandedCmd = CellPrefix.ExpandCellReferences(resolved, _grid);
-                    int ptyCols = -1; // padding budget
-                    for (int tc = c; tc <= endColIdx; tc++) ptyCols += colWidths[tc];
-                    if (ptyCols < 20) ptyCols = 20;
-                    int ptyRows = Math.Max(1, (endRowIdx - r + 1) - 1);
-                    _inlineProcesses.EnsureRunning(r, c, expandedCmd, ptyCols, ptyRows);
-                    content = _inlineProcesses.GetOutput(r, c) ?? "[running...]";
-                }
-                else if (resolved != null)
-                {
-                    content = CellPrefix.ExpandCellReferences(resolved, _grid);
-                }
-                else
-                {
-                    content = val;
-                }
+                int ptyCols = -1; // padding budget
+                for (int tc = c; tc <= endColIdx; tc++) ptyCols += colWidths[tc];
+                if (ptyCols < 20) ptyCols = 20;
+                int ptyRows = Math.Max(1, (endRowIdx - r + 1) - 1);
+                var resolved = ResolveDynamicValue(r, c, ptyCols, ptyRows);
+                bool isCmdSpan = resolved.UsesCommand;
+                string content = resolved.Value;
 
                 inlineSpans.Add((r, c, sc, sr, content, isCmdSpan));
 
@@ -687,26 +672,13 @@ internal class DesktopWindow : IDisposable
                 bool isEditingThisCell = _editMode.IsActive() && _editMode.EditRow == r && _editMode.EditCol == c;
                 string cellVal = _grid.GetCellValue(r, c);
 
-                // Resolve single-cell inline references for in-cell display.
+                // Resolve single-cell inline and JSON reference chains for display.
                 string displayVal = cellVal;
-                if (!isEditingThisCell && CellPrefix.IsInline(cellVal))
+                if (!isEditingThisCell && (CellPrefix.IsInline(cellVal) || CellPrefix.IsJson(cellVal)))
                 {
-                    string? resolvedCell = _grid.ResolveInline(r, c);
-                    if (resolvedCell != null)
-                    {
-                        if (CellPrefix.IsCommand(resolvedCell))
-                        {
-                            string expandedCmd = CellPrefix.ExpandCellReferences(resolvedCell, _grid);
-                            _inlineProcesses.EnsureRunning(r, c, expandedCmd);
-                            displayVal = _inlineProcesses.GetOutput(r, c) ?? "[running...]";
-                            int nl = displayVal.IndexOf('\n');
-                            if (nl >= 0) displayVal = displayVal[..nl];
-                        }
-                        else
-                        {
-                            displayVal = CellPrefix.ExpandCellReferences(resolvedCell, _grid);
-                        }
-                    }
+                    displayVal = ResolveDynamicValue(r, c).Value;
+                    int nl = displayVal.IndexOf('\n');
+                    if (nl >= 0) displayVal = displayVal[..nl];
                 }
 
                 // Render sparkline cells as unicode block-bar glyphs
@@ -928,11 +900,8 @@ internal class DesktopWindow : IDisposable
             if (_showResolved && !string.IsNullOrEmpty(value))
             {
                 string resolved;
-                string? inlineResult = _grid.ResolveInline(_selectedRow, _selectedCol);
-                if (inlineResult != null && CellPrefix.IsCommand(inlineResult))
-                    resolved = "[running...]";
-                else if (inlineResult != null)
-                    resolved = CellPrefix.ExpandCellReferences(inlineResult, _grid);
+                if (CellPrefix.IsInline(value) || CellPrefix.IsJson(value))
+                    resolved = ResolveDynamicValue(_selectedRow, _selectedCol).Value;
                 else
                     resolved = CellPrefix.ExpandCellReferences(value, _grid);
                 if (resolved != value)
@@ -1888,10 +1857,25 @@ internal class DesktopWindow : IDisposable
     private bool TryRerunInlineCommand(int row, int col)
     {
         string val = _grid.GetCellValue(row, col);
-        if (!CellPrefix.IsInline(val)) return false;
-        string? resolved = _grid.ResolveInline(row, col);
-        if (resolved == null || !CellPrefix.IsCommand(resolved)) return false;
-        _inlineProcesses.StopProcess(row, col);
+        if (!CellPrefix.IsInline(val) && !CellPrefix.IsJson(val)) return false;
+        (int row, int col)? processCell = null;
+        var resolved = _grid.ResolveDynamicValue(row, col, (r, c, _) =>
+        {
+            processCell = (r, c);
+            return "";
+        });
+        if (!resolved.UsesCommand || processCell == null) return false;
+        _inlineProcesses.StopProcess(processCell.Value.row, processCell.Value.col);
         return true;
+    }
+
+    private GridManager.ResolvedDynamicValue ResolveDynamicValue(
+        int row, int col, int ptyCols = 120, int ptyRows = 30)
+    {
+        return _grid.ResolveDynamicValue(row, col, (processRow, processCol, command) =>
+        {
+            _inlineProcesses.EnsureRunning(processRow, processCol, command, ptyCols, ptyRows);
+            return _inlineProcesses.GetOutput(processRow, processCol);
+        });
     }
 }

@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using System.Text.Json;
 
 namespace ExcelConsole;
 
@@ -14,6 +15,9 @@ public static class CellPrefix
 
     public static bool IsCommand(string value) =>
         value.StartsWith("r: ", StringComparison.OrdinalIgnoreCase);
+
+    public static bool IsJson(string value) =>
+        value.StartsWith("j: ", StringComparison.OrdinalIgnoreCase);
 
     public static bool IsHyperlink(string value) =>
         value.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
@@ -398,6 +402,284 @@ public static class CellPrefix
 
         return (cellRef.Value.row, cellRef.Value.col, spanCols, spanRows);
     }
+
+    /// <summary>
+    /// Parses "j: A1, properties.value[0].name" into a source cell and JSON path.
+    /// The path is optional; an empty path returns the complete JSON value.
+    /// </summary>
+    public static (int row, int col, string path)? ParseJsonRef(string cellValue)
+    {
+        if (!IsJson(cellValue)) return null;
+        string rest = cellValue[3..].Trim();
+        if (rest.Length == 0) return null;
+
+        int commaIdx = rest.IndexOf(',');
+        string cellPart = commaIdx >= 0 ? rest[..commaIdx].Trim() : rest;
+        string path = commaIdx >= 0 ? rest[(commaIdx + 1)..].Trim() : "";
+        var cellRef = ParseCellRef(cellPart);
+        if (cellRef == null) return null;
+
+        return (cellRef.Value.row, cellRef.Value.col, path);
+    }
+
+    /// <summary>
+    /// Selects a value from JSON using a small JSONPath subset:
+    /// property names, array indexes, wildcards, and quoted bracket keys.
+    /// Examples: properties.name, value[0].id, value[*].name, $["api-version"].
+    /// </summary>
+    public static string SelectJson(string json, string path)
+    {
+        if (!TryParseJsonOutput(json, out var document, out string? parseError))
+            return $"[json error: {parseError}]";
+
+        using (document)
+        {
+            if (!TryParseJsonPath(path, out var tokens, out string? pathError))
+                return $"[json path error: {pathError}]";
+
+            var current = new List<JsonElement> { document.RootElement };
+            foreach (var token in tokens)
+            {
+                var next = new List<JsonElement>();
+                foreach (var element in current)
+                {
+                    switch (token.Kind)
+                    {
+                        case JsonPathTokenKind.Property:
+                            if (element.ValueKind == JsonValueKind.Object &&
+                                element.TryGetProperty(token.Value!, out var property))
+                                next.Add(property);
+                            break;
+                        case JsonPathTokenKind.Index:
+                            if (element.ValueKind == JsonValueKind.Array &&
+                                token.Index >= 0 && token.Index < element.GetArrayLength())
+                                next.Add(element[token.Index]);
+                            break;
+                        case JsonPathTokenKind.Wildcard:
+                            if (element.ValueKind == JsonValueKind.Array)
+                                next.AddRange(element.EnumerateArray());
+                            else if (element.ValueKind == JsonValueKind.Object)
+                                next.AddRange(element.EnumerateObject().Select(p => p.Value));
+                            break;
+                    }
+                }
+
+                if (next.Count == 0)
+                    return $"[json path not found: {path}]";
+                current = next;
+            }
+
+            return current.Count == 1
+                ? FormatJsonValue(current[0])
+                : "[" + string.Join(",", current.Select(e => e.GetRawText())) + "]";
+        }
+    }
+
+    private enum JsonPathTokenKind { Property, Index, Wildcard }
+
+    private readonly record struct JsonPathToken(JsonPathTokenKind Kind, string? Value = null, int Index = -1);
+
+    private static bool TryParseJsonPath(string path, out List<JsonPathToken> tokens, out string? error)
+    {
+        tokens = [];
+        error = null;
+        path = path.Trim();
+        if (path.Length == 0 || path == "$") return true;
+
+        int i = path[0] == '$' ? 1 : 0;
+        if (i < path.Length && path[i] == '.') i++;
+
+        while (i < path.Length)
+        {
+            if (path[i] == '.')
+            {
+                i++;
+                if (i >= path.Length)
+                {
+                    error = "path cannot end with '.'";
+                    return false;
+                }
+            }
+
+            if (path[i] == '[')
+            {
+                int close = FindBracketClose(path, i + 1);
+                if (close < 0)
+                {
+                    error = "missing ']'";
+                    return false;
+                }
+
+                string content = path[(i + 1)..close].Trim();
+                if (content == "*")
+                    tokens.Add(new JsonPathToken(JsonPathTokenKind.Wildcard));
+                else if (int.TryParse(content, out int index) && index >= 0)
+                    tokens.Add(new JsonPathToken(JsonPathTokenKind.Index, Index: index));
+                else if (content.Length >= 2 &&
+                         ((content[0] == '"' && content[^1] == '"') ||
+                          (content[0] == '\'' && content[^1] == '\'')))
+                    tokens.Add(new JsonPathToken(JsonPathTokenKind.Property, UnescapePathKey(content[1..^1], content[0])));
+                else
+                {
+                    error = $"invalid bracket selector '{content}'";
+                    return false;
+                }
+
+                i = close + 1;
+                continue;
+            }
+
+            int start = i;
+            while (i < path.Length && path[i] != '.' && path[i] != '[') i++;
+            if (start == i)
+            {
+                error = $"unexpected character '{path[i]}'";
+                return false;
+            }
+            tokens.Add(new JsonPathToken(JsonPathTokenKind.Property, path[start..i]));
+        }
+
+        return true;
+    }
+
+    private static int FindBracketClose(string path, int start)
+    {
+        char quote = '\0';
+        bool escaped = false;
+        for (int i = start; i < path.Length; i++)
+        {
+            char ch = path[i];
+            if (quote != '\0')
+            {
+                if (escaped) escaped = false;
+                else if (ch == '\\') escaped = true;
+                else if (ch == quote) quote = '\0';
+            }
+            else if (ch == '"' || ch == '\'')
+                quote = ch;
+            else if (ch == ']')
+                return i;
+        }
+        return -1;
+    }
+
+    private static string UnescapePathKey(string key, char quote) =>
+        key.Replace("\\\\", "\\").Replace("\\" + quote, quote.ToString());
+
+    private static bool TryParseJsonOutput(string output, out JsonDocument document, out string? error)
+    {
+        document = null!;
+        error = null;
+        string candidate = output.Trim();
+        candidate = Regex.Replace(candidate, @"(?:\r?\n)?\[exited -?\d+\]\s*$", "").Trim();
+
+        if (TryParseJsonCandidate(candidate, out document, out error))
+            return true;
+
+        int firstObject = candidate.IndexOf('{');
+        int firstArray = candidate.IndexOf('[');
+        int start = firstObject < 0 ? firstArray
+            : firstArray < 0 ? firstObject
+            : Math.Min(firstObject, firstArray);
+        if (start < 0) return false;
+
+        string jsonValue = candidate[start..];
+        try
+        {
+            byte[] utf8 = System.Text.Encoding.UTF8.GetBytes(jsonValue);
+            var reader = new Utf8JsonReader(utf8);
+            document = JsonDocument.ParseValue(ref reader);
+            error = null;
+            return true;
+        }
+        catch (JsonException ex)
+        {
+            error = ex.Message.Split('\n')[0];
+        }
+
+        if (TryBalanceIncompleteJson(jsonValue, out string repaired) &&
+            TryParseJsonCandidate(repaired, out document, out _))
+        {
+            error = null;
+            return true;
+        }
+
+        document = null!;
+        return false;
+    }
+
+    private static bool TryBalanceIncompleteJson(string json, out string repaired)
+    {
+        repaired = json;
+        var stack = new Stack<char>();
+        bool inString = false;
+        bool escaped = false;
+
+        foreach (char ch in json)
+        {
+            if (inString)
+            {
+                if (escaped) escaped = false;
+                else if (ch == '\\') escaped = true;
+                else if (ch == '"') inString = false;
+                continue;
+            }
+
+            if (ch == '"')
+            {
+                inString = true;
+                continue;
+            }
+
+            if (ch == '{' || ch == '[')
+            {
+                stack.Push(ch);
+                continue;
+            }
+
+            if (ch == '}' || ch == ']')
+            {
+                if (stack.Count == 0) return false;
+                char open = stack.Pop();
+                if ((open == '{' && ch != '}') || (open == '[' && ch != ']'))
+                    return false;
+            }
+        }
+
+        if (inString || stack.Count == 0) return false;
+
+        var suffix = new System.Text.StringBuilder(stack.Count);
+        while (stack.Count > 0)
+            suffix.Append(stack.Pop() == '{' ? '}' : ']');
+        repaired = json + suffix;
+        return true;
+    }
+
+    private static bool TryParseJsonCandidate(string candidate, out JsonDocument document, out string? error)
+    {
+        try
+        {
+            document = JsonDocument.Parse(candidate);
+            error = null;
+            return true;
+        }
+        catch (JsonException ex)
+        {
+            document = null!;
+            error = ex.Message.Split('\n')[0];
+            return false;
+        }
+    }
+
+    private static string FormatJsonValue(JsonElement element) =>
+        element.ValueKind switch
+        {
+            JsonValueKind.String => element.GetString() ?? "",
+            JsonValueKind.Null => "null",
+            JsonValueKind.True => "true",
+            JsonValueKind.False => "false",
+            _ => element.GetRawText()
+        };
 
     // ── Cell reference expansion {A1::C10} ───────────────────────────
 
