@@ -1,0 +1,8 @@
+{
+  "name": "dns",
+  "version": "1.0.0",
+  "prefix": "dns",
+  "description": "DNS resolver for QuickSheet — A, AAAA, PTR lookups",
+  "entry": "dotnet run --project DnsExtension.csproj",
+  "minProtocolVersion": 1
+}

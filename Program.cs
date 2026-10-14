@@ -24,6 +24,13 @@ public class Program
             return;
         }
 
+        if (args.Contains("--info"))
+        {
+            string? infoPath = args.FirstOrDefault(a => !a.StartsWith("--"));
+            PrintInfo(infoPath);
+            return;
+        }
+
         string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
 
         int exportIdx = Array.IndexOf(args, "--export-md");
@@ -187,6 +194,52 @@ public class Program
 
     private const string Version = "0.36.0";
 
+    private static void PrintInfo(string? csvPath)
+    {
+        if (csvPath == null || !File.Exists(csvPath))
+        {
+            Console.Error.WriteLine(csvPath == null
+                ? "Usage: ExcelConsole <file.csv> --info"
+                : $"File not found: {csvPath}");
+            Environment.Exit(1);
+            return;
+        }
+
+        var fi = new FileInfo(csvPath);
+        string size = FormatFileSize(fi.Length);
+        string modified = fi.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss");
+
+        // Count rows and columns
+        var lines = File.ReadAllLines(csvPath);
+        int rows = lines.Length;
+        int cols = 0;
+        foreach (var line in lines)
+        {
+            int n = 1;
+            bool inQuotes = false;
+            foreach (char ch in line)
+            {
+                if (ch == '"') inQuotes = !inQuotes;
+                else if (ch == ',' && !inQuotes) n++;
+            }
+            if (n > cols) cols = n;
+        }
+
+        Console.WriteLine($"File:     {fi.FullName}");
+        Console.WriteLine($"Size:     {size}");
+        Console.WriteLine($"Modified: {modified}");
+        Console.WriteLine($"Rows:     {rows}");
+        Console.WriteLine($"Columns:  {cols}");
+    }
+
+    private static string FormatFileSize(long bytes)
+    {
+        if (bytes < 1024) return $"{bytes} B";
+        if (bytes < 1024 * 1024) return $"{bytes / 1024.0:F1} KB";
+        if (bytes < 1024 * 1024 * 1024) return $"{bytes / (1024.0 * 1024.0):F1} MB";
+        return $"{bytes / (1024.0 * 1024.0 * 1024.0):F1} GB";
+    }
+
     private static void PrintInstalledExtensions()
     {
         string root = Path.Combine(
@@ -257,6 +310,7 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
+        Console.WriteLine("  ExcelConsole --info                                Show file info (size, modified, dimensions)");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
         Console.WriteLine();
         Console.WriteLine("Cell prefixes:");
