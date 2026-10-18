@@ -83,6 +83,7 @@ Currently public:
 - [`quicksheet-budget`](https://github.com/Deskworks/quicksheet-budget) — budget envelope visualizer with progress bars.
 - [`quicksheet-qtr`](https://github.com/Deskworks/quicksheet-qtr) — IRS quarterly tax deadline countdown.
 - [`quicksheet-fx`](https://github.com/Deskworks/quicksheet-fx) — live currency conversion (200+ currencies, ECB rates).
+- [`quicksheet-aqi-ext`](https://github.com/cemheren/quicksheet-aqi-ext) — live air quality (US AQI, PM2.5, PM10) via Open-Meteo.
 - [`quicksheet-rate`](https://github.com/Deskworks/quicksheet-rate) — freelance hourly rate calculator (taxes, benefits, billable time).
 
 [Write your own](../README.md#build-your-own) in whatever language you want — the protocol is two message types.
