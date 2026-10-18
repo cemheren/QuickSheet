@@ -1,0 +1,28 @@
+Campaign,Session 12: The Crimson Vault,,,,
+,,,,,
+Party,HP,AC,Initiative,Conditions,Notes
+Kira (Rogue),38/45,16,,—,Has Cloak of Elvenkind
+Bron (Paladin),52/67,20,,—,2 Lay on Hands remaining
+Zeph (Wizard),22/30,13,,—,1 spell slot left (3rd)
+Nyx (Ranger),41/41,15,,—,Hunter's Mark active
+,,,,,
+Encounter: Vault Guardians,,,,,
+Enemy,HP,AC,Initiative,,
+Stone Golem,102/178,17,roll: 1d20+1,,
+Shadow Wraith,45/45,13,roll: 1d20+3,,
+Mimic (chest),58/58,12,roll: 1d20+0,,
+,,,,,
+Quick Rolls,,,,,
+roll: 1d20,roll: 1d6,roll: 1d8,roll: 2d6,roll: 1d100,roll: 4d6kh3
+,,,,,
+Loot Table,,,,,
+Item,Value (gp),Claimed By,,,
+Crimson Amulet,750,—,,,
++1 Longsword,500,Bron,,,
+Scroll of Fireball,150,Zeph,,,
+Potion of Healing x3,150,Party,,,
+,,,,,
+Session Notes,,,,,
+"Party entered the vault through the trapped corridor",,,,,
+"Kira disarmed 2/3 traps; Bron triggered the third (8 dmg)",,,,,
+"Next session: deeper vault + boss encounter",,,,,
