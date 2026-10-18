@@ -659,6 +659,84 @@ public class GridManager
                 .Replace("\n", "\\n").Replace("\r", "\\r").Replace("\t", "\\t");
     }
 
+    public void SaveToYaml(string path)
+    {
+        using var writer = new StreamWriter(path);
+        WriteYamlTo(writer);
+    }
+
+    /// <summary>
+    /// Writes the grid as a YAML sequence of mappings (first row = keys).
+    /// Used by `--export-yaml -` to write to stdout for piping.
+    /// </summary>
+    public void WriteYamlTo(TextWriter writer)
+    {
+        int lastRow = -1, lastCol = -1;
+        for (int r = 0; r < RowCount; r++)
+            for (int c = 0; c < ColumnCount; c++)
+                if (!string.IsNullOrEmpty(_data[r, c]) && !_isFile[r, c])
+                {
+                    if (r > lastRow) lastRow = r;
+                    if (c > lastCol) lastCol = c;
+                }
+        if (lastRow < 0 || lastCol < 0) { writer.WriteLine("[]"); return; }
+
+        var keys = new string[lastCol + 1];
+        for (int c = 0; c <= lastCol; c++)
+        {
+            string v = _isFile[0, c] ? "" : (_data[0, c] ?? "");
+            keys[c] = v.Length > 0 ? v : $"col{c}";
+        }
+
+        for (int r = 1; r <= lastRow; r++)
+        {
+            for (int c = 0; c <= lastCol; c++)
+            {
+                string v = _isFile[r, c] ? "" : (_data[r, c] ?? "");
+                string prefix = c == 0 ? "- " : "  ";
+                string key = YamlEscapeKey(keys[c]);
+                string val = YamlEscapeValue(v);
+                writer.WriteLine($"{prefix}{key}: {val}");
+            }
+        }
+    }
+
+    private static string YamlEscapeKey(string s)
+    {
+        if (s.Length == 0) return "\"\"";
+        if (YamlNeedsQuoting(s)) return "\"" + s.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"";
+        return s;
+    }
+
+    private static string YamlEscapeValue(string s)
+    {
+        if (s.Length == 0) return "\"\"";
+        if (double.TryParse(s, System.Globalization.NumberStyles.Any,
+            System.Globalization.CultureInfo.InvariantCulture, out _))
+            return s;
+        if (s.Equals("true", StringComparison.OrdinalIgnoreCase) ||
+            s.Equals("false", StringComparison.OrdinalIgnoreCase) ||
+            s.Equals("null", StringComparison.OrdinalIgnoreCase) ||
+            s.Equals("~", StringComparison.Ordinal))
+            return "\"" + s + "\"";
+        if (YamlNeedsQuoting(s)) return "\"" + s.Replace("\\", "\\\\").Replace("\"", "\\\"").Replace("\n", "\\n") + "\"";
+        return s;
+    }
+
+    private static bool YamlNeedsQuoting(string s)
+    {
+        if (s.Length == 0) return true;
+        char first = s[0];
+        if (first == '{' || first == '[' || first == '&' || first == '*' ||
+            first == '!' || first == '|' || first == '>' || first == '\'' ||
+            first == '"' || first == '%' || first == '@' || first == '`' ||
+            first == '#' || first == ',' || first == '-' || first == '?')
+            return true;
+        foreach (char ch in s)
+            if (ch == ':' || ch == '\n' || ch == '\r' || ch == '\t') return true;
+        return false;
+    }
+
     public void LoadFromCsv(string path)
     {
         if (!File.Exists(path)) return;
