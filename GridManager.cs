@@ -662,8 +662,16 @@ public class GridManager
     public void LoadFromCsv(string path)
     {
         if (!File.Exists(path)) return;
-        var lines = File.ReadAllLines(path);
-        for (int r = 0; r < Math.Min(lines.Length, RowCount); r++)
+        LoadFromCsvLines(File.ReadAllLines(path));
+    }
+
+    /// <summary>
+    /// Loads grid data from pre-read CSV lines. Used by headless modes that may
+    /// source their input from stdin rather than a file on disk.
+    /// </summary>
+    public void LoadFromCsvLines(IReadOnlyList<string> lines)
+    {
+        for (int r = 0; r < Math.Min(lines.Count, RowCount); r++)
         {
             var fields = ParseCsvLine(lines[r]);
             for (int c = 0; c < Math.Min(fields.Count, ColumnCount); c++)
