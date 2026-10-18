@@ -269,6 +269,14 @@ public class Program
         Console.WriteLine("  http(s)://...     Hyperlink. Highlighted, opens in browser on Enter.");
         Console.WriteLine();
         Console.WriteLine("Range references work inside text: {A1::C10}");
+        Console.WriteLine();
+        Console.WriteLine("Examples:");
+        Console.WriteLine("  ExcelConsole data.csv                              Launch desktop wallpaper with data.csv");
+        Console.WriteLine("  ExcelConsole                                       Launch with autosave (no file needed)");
+        Console.WriteLine("  ExcelConsole data.csv --export-md report.md        Convert CSV → Markdown table");
+        Console.WriteLine("  ExcelConsole data.csv --export-html - > out.html   Export as HTML to stdout");
+        Console.WriteLine("  ExcelConsole data.csv --export-json data.json      Export as JSON array of objects");
+        Console.WriteLine();
         Console.WriteLine("Tour: docs/tour.md · Issues: github.com/cemheren/QuickSheet/issues");
     }
 
