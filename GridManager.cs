@@ -593,6 +593,72 @@ public class GridManager
         writer.WriteLine("</body></html>");
     }
 
+    public void SaveToLatex(string path)
+    {
+        using var writer = new StreamWriter(path);
+        WriteLatexTo(writer);
+    }
+
+    /// <summary>
+    /// Writes the grid as a LaTeX <c>tabular</c> environment (first row as header).
+    /// Used by `--export-latex -` to write to stdout for piping into papers.
+    /// </summary>
+    public void WriteLatexTo(TextWriter writer)
+    {
+        int lastRow = -1, lastCol = -1;
+        for (int r = 0; r < RowCount; r++)
+            for (int c = 0; c < ColumnCount; c++)
+                if (!string.IsNullOrEmpty(_data[r, c]) && !_isFile[r, c])
+                {
+                    if (r > lastRow) lastRow = r;
+                    if (c > lastCol) lastCol = c;
+                }
+        if (lastRow < 0 || lastCol < 0) return;
+
+        string colSpec = new string('l', lastCol + 1);
+        writer.WriteLine("\\begin{tabular}{" + colSpec + "}");
+        writer.WriteLine("\\hline");
+
+        for (int r = 0; r <= lastRow; r++)
+        {
+            for (int c = 0; c <= lastCol; c++)
+            {
+                string v = _isFile[r, c] ? "" : (_data[r, c] ?? "");
+                if (c > 0) writer.Write(" & ");
+                writer.Write(EscapeLatex(v));
+            }
+            writer.WriteLine(" \\\\");
+            if (r == 0) writer.WriteLine("\\hline");
+        }
+
+        writer.WriteLine("\\hline");
+        writer.WriteLine("\\end{tabular}");
+    }
+
+    private static string EscapeLatex(string v)
+    {
+        v = v.Replace("\r", " ").Replace("\n", " ");
+        var sb = new System.Text.StringBuilder(v.Length + 8);
+        foreach (char ch in v)
+        {
+            switch (ch)
+            {
+                case '\\': sb.Append("\\textbackslash{}"); break;
+                case '&': sb.Append("\\&"); break;
+                case '%': sb.Append("\\%"); break;
+                case '$': sb.Append("\\$"); break;
+                case '#': sb.Append("\\#"); break;
+                case '_': sb.Append("\\_"); break;
+                case '{': sb.Append("\\{"); break;
+                case '}': sb.Append("\\}"); break;
+                case '~': sb.Append("\\textasciitilde{}"); break;
+                case '^': sb.Append("\\textasciicircum{}"); break;
+                default: sb.Append(ch); break;
+            }
+        }
+        return sb.ToString();
+    }
+
     public void SaveToJson(string path)
     {
         using var writer = new StreamWriter(path);
