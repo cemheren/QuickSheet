@@ -183,6 +183,38 @@ public class Theme
         },
         new Theme
         {
+            // Catppuccin Mocha — https://github.com/catppuccin/catppuccin
+            Name = "Catppuccin",
+            BackgroundRgb       = ( 30,  30,  46),  // base    #1e1e2e
+            ForegroundRgb       = (205, 214, 244),  // text    #cdd6f4
+            HeaderHighlightRgb  = ( 49,  50,  68),  // surface0 #313244
+            SelectionBgRgb      = ( 69,  71,  90),  // surface1 #45475a
+            SelectionFgRgb      = (205, 214, 244),  // text
+            SearchMatchBgRgb    = (249, 226, 175),  // yellow  #f9e2af
+            SearchMatchFgRgb    = ( 30,  30,  46),  // base
+            SearchSelectedBgRgb = (166, 227, 161),  // green   #a6e3a1
+            SearchSelectedFgRgb = ( 30,  30,  46),  // base
+            StatusBarBgRgb      = (203, 166, 247),  // mauve   #cba6f7
+            StatusBarFgRgb      = ( 30,  30,  46),  // base
+        },
+        new Theme
+        {
+            // Tokyo Night — https://github.com/enkia/tokyo-night-vscode-theme
+            Name = "TokyoNight",
+            BackgroundRgb       = ( 26,  27,  38),  // bg      #1a1b26
+            ForegroundRgb       = (169, 177, 214),  // fg      #a9b1d6
+            HeaderHighlightRgb  = ( 52,  59,  88),  // bg_highlight #343b58
+            SelectionBgRgb      = ( 52,  59,  88),
+            SelectionFgRgb      = (192, 202, 245),  // fg_bright #c0caf5
+            SearchMatchBgRgb    = (224, 175, 104),  // yellow  #e0af68
+            SearchMatchFgRgb    = ( 26,  27,  38),
+            SearchSelectedBgRgb = (158, 206, 106),  // green   #9ece6a
+            SearchSelectedFgRgb = ( 26,  27,  38),
+            StatusBarBgRgb      = (122, 162, 247),  // blue    #7aa2f7
+            StatusBarFgRgb      = ( 26,  27,  38),
+        },
+        new Theme
+        {
             // Hotdog Stand — Windows 3.1 cursed palette, softened to pastel
             // (salmon + butter) so it's a vibe rather than an eyesore.
             Name = "HotdogStand",
