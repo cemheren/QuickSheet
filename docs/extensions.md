@@ -72,6 +72,7 @@ A live index of QuickSheet extensions. Each one is an independent repo that regi
 | `caniuse` | Browser Compat    | Can I Use browser compatibility lookup via caniuse-db. Shows support status for CSS/HTML/JS features across Chrome, Firefox, Safari, Edge, Opera, Samsung, iOS Safari. Usage: `caniuse: css-grid` · `caniuse: flexbox` · `caniuse: webassembly`. Usage %, spec link, notes. 1h cache, no API key. | [`quicksheet-caniuse`](https://github.com/Deskworks/quicksheet-caniuse) |
 | `gem`     | Ruby Gem Lookup   | Ruby gem info and search via rubygems.org. Version, total downloads, authors, license, Ruby requirement, homepage, description. `gem: rails` (detail), `gem: search json parser` (top 5). No API key, 30-min cache, zero NuGet. | [`quicksheet-rubygems`](https://github.com/Deskworks/quicksheet-rubygems) |
 | `hackage` | Haskell Packages  | Haskell package lookup from Hackage. `hackage: aeson` shows latest version, synopsis, author, category, license, and homepage. `hackage: search json` lists top matching packages. No API key, 30-min cache, zero NuGet. | [`quicksheet-hackage`](https://github.com/Deskworks/quicksheet-hackage) |
+| `wiki`    | Wikipedia Summary | Article summaries from Wikipedia via Wikimedia REST API. `wiki: Pythagorean theorem` shows title + extract word-wrapped into cells. No API key, zero NuGet. | [`quicksheet-wiki-ext`](https://github.com/cemheren/quicksheet-wiki-ext) |
 
 ## Install
 

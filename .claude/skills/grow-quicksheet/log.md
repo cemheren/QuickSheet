@@ -1,3 +1,36 @@
+## 2026-06-14 (Bucket F: quicksheet-wiki-ext)
+
+- Stars: 0 (Δ 0).
+- Action: Created `quicksheet-wiki-ext` — Wikipedia article summaries via Wikimedia REST API (free, no auth). Fetches `/page/summary/` and word-wraps extract into grid rows. Built green, pushed to `cemheren/quicksheet-wiki-ext`. Cross-linked in README + `docs/extensions.md`.
+- Bucket: F (vertical extension).
+- Outcome: PR #405 (cross-link). Repo: https://github.com/cemheren/quicksheet-wiki-ext
+- Note: Also accidentally created `cemheren/quicksheet-fx-ext` (duplicate of existing `Deskworks/quicksheet-fx`). Cannot delete without `delete_repo` scope — user can clean up.
+- Follow-up: Add `wiki:` to `for-students.md` recommendations. Draft r/unixporn student-rice post mentioning wiki + define + cite trio.
+
+## 2026-06-14 (docs: TTRPG DM landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-dms.md` landing page + `examples/dm-dashboard.csv` targeting tabletop RPG dungeon masters. Covers combat workflow, random table recipes, extension recommendations (roll, init, cal). Pairs with existing quicksheet-roll-ext and quicksheet-init-ext repos.
+- Bucket: A (product polish — audience landing page).
+- Outcome: PR #359 updated (commit d42c83d).
+- Follow-up: Draft r/DnD or r/DMAcademy post (Bucket C) once DM page merges. Next landing page candidate: `for-dms` done; consider `for-artists` (PR #400 already open).
+
+## 2026-06-14 (research: terminal influencers & submission drafts)
+
+- Stars: 0 (Δ 0).
+- Action: Researched top 10 terminal-tool influencers/signal-boosters. Wrote `research/terminal-influencers.md` with tiered list (submission channels, individual amplifiers, community hubs) plus competitive landscape from recent HN threads. Also drafted Terminal Trove + Console.dev submission text in `drafts/terminal-trove-submission.md`.
+- Bucket: R (research) + D (directory submission drafts).
+- Outcome: skill-only files pushed to main. Key insight: Terminal Trove (form submission) and awesome-tuis (PR) are highest-ROI discovery actions once a wallpaper screenshot exists. QuickSheet's differentiator vs crowded TUI-spreadsheet space is "IS the wallpaper" — all outreach should lead with that.
+- Follow-up: User captures wallpaper screenshot → submit to Terminal Trove + PR to awesome-tuis. Queue both as gated on screenshot asset.
+
+## 2026-06-14 (docs: usage examples in --help)
+
+- Stars: 0 (Δ 0).
+- Action: Added Examples section to `PrintHelp()` showing 6 common workflows (launch with CSV, autosave default, export to MD/HTML/JSON, pipe to stdout). Single-file change in Program.cs.
+- Bucket: A (product polish — issue fix).
+- Outcome: PR #379 updated (commit 4503eab). Closes #374.
+- Follow-up: #319 (--delimiter flag) is next smallest qualifying issue without a PR.
+
 ## 2026-05-19 (no-op #31 — #139 still open, hold)
 
 - Stars: 0 (Δ 0). PR #139 still open, no other action items. Hold.
@@ -1046,6 +1079,9 @@
   7. **Bucket A: more audience landing pages**, in `docs/for-*.md` + matching `examples/*.csv`. Already shipped: `for-homelab.md` (PR #100). Next candidates that don't depend on timer/value-colour: `for-students.md`, `for-dms.md`, `for-traders.md`, `for-artists.md`. Skip `for-lawyers.md` and `for-accountants.md` until a non-timer billing/accounting angle is found.
   8. **Bucket D: awesome-list submissions.** awesome-selfhosted DROPPED (wrong fit — server software). Use the queue in `research/awesome-list-fit.md`: Awesome-Linux-Software draft now done (`drafts/awesome-linux-software.md`); next draft Awesome-Windows; then identify canonical `awesome-csv`. Skip awesome-tuis tone-rewrite until a wallpaper screenshot lands.
   9. **Bucket C: r/unixporn DM-screen and student-rice posts.** Drafts only, save when matching extensions land. r/selfhosted "Homepage.io-alternative" post after `health:` ships.
+  10. **Bucket D: Submit to Terminal Trove** (gated on wallpaper screenshot). Draft ready at `drafts/terminal-trove-submission.md`. Highest-ROI discovery action — exact audience, curated newsletter.
+  11. **Bucket D: PR to rothgar/awesome-tuis** (gated on screenshot). One-line entry, alphabetical. Draft format in `research/terminal-influencers.md`.
+  12. **Bucket D: Email Console.dev** (gated on screenshot). Draft in `drafts/terminal-trove-submission.md`.
 
 - **EXPLICITLY DROPPED from backlog (do not revive without user nod):**
   - Trinity feature programme (value-colour / ticking timer / progress bar).
