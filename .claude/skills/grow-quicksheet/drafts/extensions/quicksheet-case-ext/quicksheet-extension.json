@@ -1,0 +1,8 @@
+{
+  "name": "case",
+  "version": "1.0.0",
+  "prefix": "case",
+  "description": "US case law lookup — search citations or keywords via CourtListener's free API",
+  "entry": "dotnet run --project CaseExtension.csproj",
+  "minProtocolVersion": 1
+}
