@@ -269,6 +269,15 @@ public class Program
         Console.WriteLine("  http(s)://...     Hyperlink. Highlighted, opens in browser on Enter.");
         Console.WriteLine();
         Console.WriteLine("Range references work inside text: {A1::C10}");
+        Console.WriteLine();
+        Console.WriteLine("Examples:");
+        Console.WriteLine("  ExcelConsole data.csv                              Launch desktop wallpaper with a CSV");
+        Console.WriteLine("  ExcelConsole data.csv --export-md out.md           Convert CSV to a Markdown table");
+        Console.WriteLine("  ExcelConsole data.csv --export-html out.html       Convert CSV to a styled HTML table");
+        Console.WriteLine("  ExcelConsole data.csv --export-json out.json       Convert CSV to a JSON array of objects");
+        Console.WriteLine("  cat data.csv | ExcelConsole - --export-md -        Pipe CSV in, write Markdown to stdout");
+        Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
+        Console.WriteLine();
         Console.WriteLine("Tour: docs/tour.md · Issues: github.com/cemheren/QuickSheet/issues");
     }
 
