@@ -1,0 +1,8 @@
+{
+  "name": "npm",
+  "version": "1.0.0",
+  "prefix": "npm",
+  "description": "npm registry package lookup for QuickSheet",
+  "entry": "dotnet run --project NpmExtension.csproj",
+  "minProtocolVersion": 1
+}
