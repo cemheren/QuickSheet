@@ -1,0 +1,8 @@
+{
+  "name": "mcal",
+  "version": "1.0.0",
+  "prefix": "mcal",
+  "description": "Mini text month-view calendar for QuickSheet — always-visible date grid on your desktop",
+  "entry": "dotnet run --project CalExtension.csproj",
+  "minProtocolVersion": 1
+}
