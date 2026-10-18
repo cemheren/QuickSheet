@@ -1,3 +1,27 @@
+## 2026-06-16 (docs: accountant landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-accountants.md` landing page + `examples/accountant-dashboard.csv` starter sheet. Targets freelance accountants/bookkeepers with 1099, mileage, depreciation, margin, salestax, payroll extensions. Added README cross-link.
+- Bucket: A (audience landing page).
+- Outcome: PR #431.
+- Follow-up: None queued — all backlog landing pages now have PRs (homelab merged, traders/sre/students on main, dms/writers/artists/accountants as open PRs).
+
+## 2026-06-16 (feat: stdin pipe support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `-` as file argument to read CSV from stdin in headless export modes. Reads stdin to temp file, processes, cleans up. Added error for non-headless use. Updated --help.
+- Bucket: E (issue fix — #320).
+- Outcome: PR #396 updated (commit 48f4104). Closes #320.
+- Follow-up: #318 (NO_COLOR) or #158 (usage pattern/tabs) are next open issues.
+
+## 2026-06-16 (feat: shell completions for bash/zsh/fish)
+
+- Stars: 0 (Δ 0).
+- Action: Rewrote shell completion scripts (bash, zsh, fish) on existing PR #393 branch. Covers all CLI flags + .csv file completion. Added docs/shell-completions.md with install instructions.
+- Bucket: E (issue fix — #372).
+- Outcome: PR #393 updated (force-pushed commit d92d1d5). Closes #372.
+- Follow-up: #319 (--delimiter flag) or #320 (stdin pipe) are next smallest qualifying issues with existing PRs. No new unaddressed issues remain.
+
 ## 2026-05-19 (no-op #31 — #139 still open, hold)
 
 - Stars: 0 (Δ 0). PR #139 still open, no other action items. Hold.
