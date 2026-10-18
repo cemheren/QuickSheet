@@ -659,13 +659,13 @@ public class GridManager
                 .Replace("\n", "\\n").Replace("\r", "\\r").Replace("\t", "\\t");
     }
 
-    public void LoadFromCsv(string path)
+    public void LoadFromCsv(string path, char delimiter = ',')
     {
         if (!File.Exists(path)) return;
         var lines = File.ReadAllLines(path);
         for (int r = 0; r < Math.Min(lines.Length, RowCount); r++)
         {
-            var fields = ParseCsvLine(lines[r]);
+            var fields = ParseCsvLine(lines[r], delimiter);
             for (int c = 0; c < Math.Min(fields.Count, ColumnCount); c++)
                 _data[r, c] = fields[c];
         }
@@ -718,7 +718,7 @@ public class GridManager
         return field;
     }
 
-    private static List<string> ParseCsvLine(string line)
+    private static List<string> ParseCsvLine(string line, char delimiter = ',')
     {
         var fields = new List<string>();
         int i = 0;
@@ -753,15 +753,15 @@ public class GridManager
                     }
                 }
                 fields.Add(field.ToString());
-                if (i < line.Length && line[i] == ',') i++; // skip comma
+                if (i < line.Length && line[i] == delimiter) i++;
             }
             else
             {
                 // Unquoted field
                 int start = i;
-                while (i < line.Length && line[i] != ',') i++;
+                while (i < line.Length && line[i] != delimiter) i++;
                 fields.Add(line[start..i]);
-                if (i < line.Length) i++; // skip comma
+                if (i < line.Length) i++; // skip delimiter
             }
         }
         return fields;
