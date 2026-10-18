@@ -3,6 +3,12 @@ using ExcelConsole;
 
 public class Program
 {
+    /// <summary>
+    /// True when the NO_COLOR environment variable is set (any value), per https://no-color.org/.
+    /// Suppresses ANSI color/style escape codes in terminal output.
+    /// </summary>
+    public static bool NoColor { get; } = Environment.GetEnvironmentVariable("NO_COLOR") != null;
+
     [STAThread]
     public static void Main(string[] args)
     {
@@ -269,6 +275,10 @@ public class Program
         Console.WriteLine("  http(s)://...     Hyperlink. Highlighted, opens in browser on Enter.");
         Console.WriteLine();
         Console.WriteLine("Range references work inside text: {A1::C10}");
+        Console.WriteLine();
+        Console.WriteLine("Environment:");
+        Console.WriteLine("  NO_COLOR          When set (any value), suppresses color output (https://no-color.org).");
+        Console.WriteLine();
         Console.WriteLine("Tour: docs/tour.md · Issues: github.com/cemheren/QuickSheet/issues");
     }
 
