@@ -1,3 +1,43 @@
+## 2026-06-16 (research: GitHub discoverability levers)
+
+- Stars: 0 (Δ 0).
+- Action: Researched GitHub Trending algorithm mechanics, Explore curated collections, social preview images, and launch day timing. Key finding: GitHub Explore `productivity-tools` collection (github/explore repo) is an untapped channel — anyone can submit a PR to add a repo. QuickSheet fits alongside Terminal, ripgrep, bat, zoxide. C# Trending threshold is ~10-20 stars/day; a coordinated launch pushing 50-100 stars in 24h would likely land it. Drafted submission for `productivity-tools` collection.
+- Bucket: R (deep research).
+- Outcome: research/github-discoverability-levers.md + drafts/github-explore-productivity.md.
+- Follow-up: User submits PR to github/explore. User creates 1280×640px social preview image. Launch day coordination when user is ready to publish social drafts.
+
+## 2026-06-16 (feat: NO_COLOR support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented NO_COLOR environment variable support (https://no-color.org/) and `--no-color` CLI flag. Added `AppSettings.cs` with global `NoColor` property. Updated `--help` output. Desktop rendering unaffected.
+- Bucket: E (issue fix — #318).
+- Outcome: PR #442. Closes #318.
+- Follow-up: #319 (--delimiter flag) or #158 (usage pattern) are next open issues without PRs.
+
+## 2026-06-16 (docs: accountant landing page)
+
+- Stars: 0 (Δ 0).
+- Action: Created `docs/for-accountants.md` landing page + `examples/accountant-dashboard.csv` starter sheet. Targets freelance accountants/bookkeepers with 1099, mileage, depreciation, margin, salestax, payroll extensions. Added README cross-link.
+- Bucket: A (audience landing page).
+- Outcome: PR #431.
+- Follow-up: None queued — all backlog landing pages now have PRs (homelab merged, traders/sre/students on main, dms/writers/artists/accountants as open PRs).
+
+## 2026-06-16 (feat: stdin pipe support)
+
+- Stars: 0 (Δ 0).
+- Action: Implemented `-` as file argument to read CSV from stdin in headless export modes. Reads stdin to temp file, processes, cleans up. Added error for non-headless use. Updated --help.
+- Bucket: E (issue fix — #320).
+- Outcome: PR #396 updated (commit 48f4104). Closes #320.
+- Follow-up: #318 (NO_COLOR) or #158 (usage pattern/tabs) are next open issues.
+
+## 2026-06-16 (feat: shell completions for bash/zsh/fish)
+
+- Stars: 0 (Δ 0).
+- Action: Rewrote shell completion scripts (bash, zsh, fish) on existing PR #393 branch. Covers all CLI flags + .csv file completion. Added docs/shell-completions.md with install instructions.
+- Bucket: E (issue fix — #372).
+- Outcome: PR #393 updated (force-pushed commit d92d1d5). Closes #372.
+- Follow-up: #319 (--delimiter flag) or #320 (stdin pipe) are next smallest qualifying issues with existing PRs. No new unaddressed issues remain.
+
 ## 2026-05-19 (no-op #31 — #139 still open, hold)
 
 - Stars: 0 (Δ 0). PR #139 still open, no other action items. Hold.
@@ -1062,7 +1102,8 @@
   - More Bucket F verticals: finance (yfinance), real estate (Zillow), email (gravatar/MX).
   - Demo GIF (needs human).
   - Audit screenshot filenames (`image.png`, `image-1.png`).
-  - Set social preview image (openGraphImage).
+  - Set social preview image (openGraphImage) — spec: 1280×640px PNG, dark bg, grid screenshot, "Your desktop is a spreadsheet" tagline.
+  - Submit PR to `github/explore` productivity-tools collection (draft ready: `drafts/github-explore-productivity.md`).
   - Sparkline range refs already shipped.
 - **From #15 accounting research (2026-05-15)** — next 3 Bucket F picks in order:
   1. `quicksheet-mileage-ext` — IRS std-mileage (business/medical/charity).
@@ -1114,3 +1155,11 @@ worth running when a specific persona-shaped opening appears:
 - Auto-merging PRs on main ([[feedback-no-auto-merge]]).
 - Generic primitives justified by N/M-persona counts alone — persona-shaped
   specifics required ([[feedback-quality-over-quantity]]).
+
+## 2026-06-16 (feat: usage examples in --help)
+
+- Stars: 0 (Δ 0).
+- Action: Added Examples section to `--help` output showing 5 common workflows: launch desktop with CSV, export to Markdown/HTML/JSON, show file stats. Single-method change in `Program.cs`, zero warnings/errors.
+- Bucket: E (issue fix — #374).
+- Outcome: PR #379 updated (commit 3729be7). Closes #374.
+- Follow-up: #321 (show file size and last-modified in --info) is next smallest qualifying issue. Other open issues: #158 (usage pattern), #3 (Wayland investigation — needs OS-level research, not a quick fix).
