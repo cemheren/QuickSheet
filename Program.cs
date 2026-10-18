@@ -26,6 +26,53 @@ public class Program
 
         string? csvPath = args.FirstOrDefault(a => !a.StartsWith("--"));
 
+        // --head N: print header + first N data rows as CSV to stdout
+        int headIdx = Array.IndexOf(args, "--head");
+        if (headIdx >= 0)
+        {
+            if (csvPath == null || headIdx + 1 >= args.Length || !int.TryParse(args[headIdx + 1], out int headN) || headN < 0)
+            {
+                Console.Error.WriteLine("Usage: ExcelConsole <input.csv> --head <N>");
+                Environment.Exit(2);
+                return;
+            }
+            if (!File.Exists(csvPath))
+            {
+                Console.Error.WriteLine($"Input CSV not found: {csvPath}");
+                Environment.Exit(1);
+                return;
+            }
+            var lines = File.ReadAllLines(csvPath);
+            if (lines.Length > 0) Console.WriteLine(lines[0]); // header
+            for (int i = 1; i <= Math.Min(headN, lines.Length - 1); i++)
+                Console.WriteLine(lines[i]);
+            return;
+        }
+
+        // --tail N: print header + last N data rows as CSV to stdout
+        int tailIdx = Array.IndexOf(args, "--tail");
+        if (tailIdx >= 0)
+        {
+            if (csvPath == null || tailIdx + 1 >= args.Length || !int.TryParse(args[tailIdx + 1], out int tailN) || tailN < 0)
+            {
+                Console.Error.WriteLine("Usage: ExcelConsole <input.csv> --tail <N>");
+                Environment.Exit(2);
+                return;
+            }
+            if (!File.Exists(csvPath))
+            {
+                Console.Error.WriteLine($"Input CSV not found: {csvPath}");
+                Environment.Exit(1);
+                return;
+            }
+            var lines = File.ReadAllLines(csvPath);
+            if (lines.Length > 0) Console.WriteLine(lines[0]); // header
+            int start = Math.Max(1, lines.Length - tailN);
+            for (int i = start; i < lines.Length; i++)
+                Console.WriteLine(lines[i]);
+            return;
+        }
+
         int exportIdx = Array.IndexOf(args, "--export-md");
         if (exportIdx >= 0)
         {
@@ -255,6 +302,8 @@ public class Program
         Console.WriteLine("  ExcelConsole <file.csv> --export-md <out.md>       Headless: CSV → Markdown table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-html <out.html>   Headless: CSV → styled HTML table (use - for stdout)");
         Console.WriteLine("  ExcelConsole <file.csv> --export-json <out.json>   Headless: CSV → JSON array of objects (use - for stdout)");
+        Console.WriteLine("  ExcelConsole <file.csv> --head <N>                 Print header + first N rows as CSV");
+        Console.WriteLine("  ExcelConsole <file.csv> --tail <N>                 Print header + last N rows as CSV");
         Console.WriteLine("  ExcelConsole --help                                Show this help");
         Console.WriteLine("  ExcelConsole --version                             Show version");
         Console.WriteLine("  ExcelConsole --list-extensions                     List installed extensions");
