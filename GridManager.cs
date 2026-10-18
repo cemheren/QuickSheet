@@ -420,6 +420,71 @@ public class GridManager
         return hasNumber ? product : null;
     }
 
+    /// <summary>
+    /// Sorts data rows (1..lastRow) by the specified column name (row 0 = headers).
+    /// Numeric values are compared as numbers; everything else is compared as strings.
+    /// </summary>
+    public bool SortByColumn(string columnName, bool descending = false)
+    {
+        // Find the used range.
+        int lastRow = -1, lastCol = -1;
+        for (int r = 0; r < RowCount; r++)
+            for (int c = 0; c < ColumnCount; c++)
+                if (!string.IsNullOrEmpty(_data[r, c]))
+                {
+                    if (r > lastRow) lastRow = r;
+                    if (c > lastCol) lastCol = c;
+                }
+        if (lastRow < 1 || lastCol < 0) return false; // need header + at least 1 data row
+
+        // Find column index by header name (case-insensitive).
+        int sortCol = -1;
+        for (int c = 0; c <= lastCol; c++)
+        {
+            if (string.Equals(_data[0, c]?.Trim(), columnName.Trim(),
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                sortCol = c;
+                break;
+            }
+        }
+        if (sortCol < 0) return false;
+
+        // Collect data rows as arrays.
+        int dataRowCount = lastRow; // rows 1..lastRow
+        var rows = new string[dataRowCount][];
+        for (int r = 0; r < dataRowCount; r++)
+        {
+            rows[r] = new string[lastCol + 1];
+            for (int c = 0; c <= lastCol; c++)
+                rows[r][c] = _data[r + 1, c] ?? "";
+        }
+
+        // Sort: try numeric comparison first, fall back to string.
+        Array.Sort(rows, (a, b) =>
+        {
+            string va = sortCol < a.Length ? a[sortCol] : "";
+            string vb = sortCol < b.Length ? b[sortCol] : "";
+            bool aNum = double.TryParse(va, System.Globalization.NumberStyles.Any,
+                System.Globalization.CultureInfo.InvariantCulture, out double da);
+            bool bNum = double.TryParse(vb, System.Globalization.NumberStyles.Any,
+                System.Globalization.CultureInfo.InvariantCulture, out double db);
+            int cmp;
+            if (aNum && bNum)
+                cmp = da.CompareTo(db);
+            else
+                cmp = string.Compare(va, vb, StringComparison.OrdinalIgnoreCase);
+            return descending ? -cmp : cmp;
+        });
+
+        // Write sorted rows back.
+        for (int r = 0; r < dataRowCount; r++)
+            for (int c = 0; c <= lastCol; c++)
+                _data[r + 1, c] = rows[r][c];
+
+        return true;
+    }
+
     public void SaveToCsv(string path)
     {
         // Read existing file to preserve rows/columns beyond the grid bounds
