@@ -663,6 +663,11 @@ public class GridManager
     {
         if (!File.Exists(path)) return;
         var lines = File.ReadAllLines(path);
+        LoadFromCsvLines(lines);
+    }
+
+    public void LoadFromCsvLines(string[] lines)
+    {
         for (int r = 0; r < Math.Min(lines.Length, RowCount); r++)
         {
             var fields = ParseCsvLine(lines[r]);
