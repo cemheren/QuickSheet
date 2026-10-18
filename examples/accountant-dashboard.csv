@@ -1,0 +1,14 @@
+Quarterly Tax Estimates,,Mileage Deductions,,Equipment Depreciation,,Quick Ref
+ext: github:Deskworks/quicksheet-1099-ext,,ext: github:Deskworks/quicksheet-mileage-ext,,ext: github:Deskworks/quicksheet-depr-ext,,ext: github:cemheren/quicksheet-salestax-ext
+,,,,,,,
+Q1 Gross Income,,Business Miles YTD,,Laptop (5yr SL),,Sales Tax
+1099: 25000,,mileage: 4200 2025 business,,depr: 3200 5 straight,,tax: CA
+,,,,,,,
+Q2 Gross Income,,Medical Miles,,Vehicle (MACRS 5yr),,
+1099: 32000,,mileage: 180 2025 medical,,depr: 28000 5 macrs,,
+,,,,,,,
+Q3 Gross Income,,Charity Miles,,Office Furniture,,Break-Even
+1099: 48000,,mileage: 120 2025 charity,,depr: 1200 7 straight,,ext: github:Deskworks/quicksheet-margin-ext
+,,,,,,,
+Q4 Gross Income,,,,,,margin: 5000 45 120
+1099: 65000,,,,,,
