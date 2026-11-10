@@ -151,8 +151,8 @@ jobs:
           set -euo pipefail
           lib="$RUNNER_TEMP/out/$BUILT_NAME"
           file "$lib" || true
-          readelf --dyn-syms "$lib" | grep -w ghostty_terminal_new
-          max="$(readelf -V "$lib" | grep -o 'GLIBC_[0-9][0-9.]*' | sed 's/GLIBC_//' | sort -uV | tail -1 || true)"
+          readelf -W --dyn-syms "$lib" | grep -w ghostty_terminal_new
+          max="$(readelf -W -V "$lib" | grep -o 'GLIBC_[0-9][0-9.]*' | sed 's/GLIBC_//' | sort -uV | tail -1 || true)"
           echo "highest required glibc symbol version: ${max:-none}"
           if [ -n "$max" ]; then
             top="$(printf '%s\n2.28\n' "$max" | sort -V | tail -1)"

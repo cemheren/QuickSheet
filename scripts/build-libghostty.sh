@@ -110,7 +110,9 @@ DEPS_DIR="$WORK/deps/libghostty-vt-${LIBGHOSTTY_VERSION}-deps"
 echo "Building libghostty-vt ${LIBGHOSTTY_VERSION} for ${RID} (this can take a few minutes)"
 (
     cd "$SRC_DIR"
-    ZIG_ARGS=(--prefix "$STAGE" --system "$DEPS_DIR" -Demit-lib-vt
+    # Absolute local cache dir: Zig passes cache paths to helper executables it
+    # runs during the build; relative ones break on Windows (see the .ps1).
+    ZIG_ARGS=(--cache-dir "$WORK/zig-local-cache" --prefix "$STAGE" --system "$DEPS_DIR" -Demit-lib-vt
               -Doptimize=ReleaseFast -Dcpu=baseline -Dstrip=true)
     if [[ -n "${ZIG_TARGET:-}" ]]; then
         echo "Zig target override: ${ZIG_TARGET}"

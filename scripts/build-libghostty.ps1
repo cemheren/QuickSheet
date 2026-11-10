@@ -116,7 +116,12 @@ try {
     $env:ZIG_GLOBAL_CACHE_DIR = $ZigCache
     Push-Location $SrcDir
     try {
-        $zigArgs = @('build', '--prefix', $Stage, '--system', $DepsDir,
+        # Absolute local cache dir. With the default relative .zig-cache, Zig 0.17
+        # rewrites helper-exe paths relative to the helper's cwd, and Windows
+        # CreateProcess resolves them against *our* cwd -> "FileNotFound" for
+        # uucode_generate.exe. Absolute paths are passed through unchanged.
+        $zigArgs = @('build', '--cache-dir', (Join-Path $Work 'zig-local-cache'),
+                     '--prefix', $Stage, '--system', $DepsDir,
                      '-Demit-lib-vt', '-Doptimize=ReleaseFast', '-Dcpu=baseline', '-Dstrip=true')
         if ($env:ZIG_TARGET) {
             Write-Host "Zig target override: $env:ZIG_TARGET"
