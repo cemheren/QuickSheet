@@ -1,7 +1,6 @@
 #if PLATFORM_LINUX
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Text.RegularExpressions;
+using ExcelConsole.Terminal;
 
 namespace ExcelConsole.Platform.Linux;
 
@@ -10,6 +9,9 @@ namespace ExcelConsole.Platform.Linux;
 /// Linux equivalent of Windows ConPTY: gives child a real tty, so streaming/TUI
 /// programs (e.g. claude, top, progress bars) emit live output instead of
 /// detecting a pipe and going to fully-buffered mode.
+///
+/// Raw output bytes are fed to a VT emulator (<see cref="IVtScreen"/>) which keeps
+/// the final screen + scrollback.
 ///
 /// Only libutil.so.1 + libc.so.6 — both present on every Linux. Zero NuGet deps
 /// per project policy.
@@ -78,11 +80,14 @@ internal sealed class PtyProcess : IDisposable
     private volatile bool _exited;
     private int _exitCode = -1;
 
-    private readonly object _lock = new();
-    private readonly List<string> _outputLines = new();
-    private volatile bool _hasNewOutput;
+    private IVtScreen? _screen;
+    // Exit marker / error text live outside the emulator on purpose: a TUI may have
+    // left the cursor mid-screen, so we never feed synthetic text into it.
+    private volatile string? _exitMarker;
+    private volatile bool _markerPending;
+    private string? _errorText;
 
-    public bool HasNewOutput => _hasNewOutput;
+    public bool HasNewOutput => (_screen?.IsDirty ?? false) || _markerPending;
 
     public bool HasExited
     {
@@ -108,7 +113,8 @@ internal sealed class PtyProcess : IDisposable
     {
         var p = new PtyProcess();
         p._exited = true;
-        p.AppendLine(message);
+        p._errorText = message;
+        p._markerPending = true;
         return p;
     }
 
@@ -190,6 +196,8 @@ internal sealed class PtyProcess : IDisposable
         _masterFd = master;
         _pid = pid;
 
+        _screen = VtScreen.Create(Math.Max(1, cols), Math.Max(1, rows), MaxLines);
+
         _readerThread = new Thread(ReadLoop) { IsBackground = true, Name = "PTY-Reader" };
         _readerThread.Start();
         return true;
@@ -203,41 +211,13 @@ internal sealed class PtyProcess : IDisposable
     private void ReadLoop()
     {
         var buf = new byte[4096];
-        var line = new StringBuilder();
         try
         {
             while (!_disposed)
             {
                 long n = read(_masterFd, buf, (ulong)buf.Length);
                 if (n <= 0) break; // EOF or EIO (slave hung up) → child exited
-
-                string text = Encoding.UTF8.GetString(buf, 0, (int)n);
-                foreach (char ch in text)
-                {
-                    if (ch == '\n')
-                    {
-                        string l = StripAnsi(line.ToString().TrimEnd('\r'));
-                        if (l.Length > 0) AppendLine(l);
-                        line.Clear();
-                    }
-                    else if (ch == '\r')
-                    {
-                        // CR without LF: programs that update a single line (progress bars)
-                        // overwrite from the start. Treat as flush + reset.
-                        string l = StripAnsi(line.ToString());
-                        if (l.Length > 0) ReplaceLastLine(l);
-                        line.Clear();
-                    }
-                    else
-                    {
-                        line.Append(ch);
-                    }
-                }
-            }
-            if (line.Length > 0)
-            {
-                string l = StripAnsi(line.ToString().TrimEnd('\r'));
-                if (l.Length > 0) AppendLine(l);
+                _screen?.Write(buf.AsSpan(0, (int)n));
             }
         }
         catch { }
@@ -249,42 +229,26 @@ internal sealed class PtyProcess : IDisposable
             int r = waitpid(_pid, out int status, 0);
             if (r == _pid) _exitCode = (status >> 8) & 0xff;
         }
-        AppendLine($"[exited {_exitCode}]");
-    }
-
-    private void AppendLine(string l)
-    {
-        lock (_lock)
-        {
-            _outputLines.Add(l);
-            while (_outputLines.Count > MaxLines) _outputLines.RemoveAt(0);
-            _hasNewOutput = true;
-        }
-    }
-
-    private void ReplaceLastLine(string l)
-    {
-        lock (_lock)
-        {
-            if (_outputLines.Count > 0) _outputLines[^1] = l;
-            else _outputLines.Add(l);
-            _hasNewOutput = true;
-        }
+        _exitMarker = $"[exited {_exitCode}]";
+        _markerPending = true;
     }
 
     public string? GetOutput()
     {
-        lock (_lock)
-        {
-            _hasNewOutput = false;
-            if (_outputLines.Count == 0) return null;
-            return string.Join("\n", _outputLines);
-        }
+        // Clear first so a marker set concurrently re-arms the flag.
+        _markerPending = false;
+        if (_errorText is { } err) return err;
+
+        string text = _screen?.GetText() ?? "";
+        string? marker = _exitMarker;
+        if (marker is null) return text.Length == 0 ? null : text;
+        return text.Length == 0 ? marker : text + "\n" + marker;
     }
 
     /// <summary>Resize the PTY's window. Programs receive SIGWINCH.</summary>
     public void Resize(int cols, int rows)
     {
+        _screen?.Resize(cols, rows);
         if (_masterFd < 0) return;
         var ws = new Winsize { ws_row = (ushort)Math.Max(1, rows), ws_col = (ushort)Math.Max(1, cols) };
         IntPtr p = Marshal.AllocHGlobal(Marshal.SizeOf<Winsize>());
@@ -295,12 +259,6 @@ internal sealed class PtyProcess : IDisposable
         }
         finally { Marshal.FreeHGlobal(p); }
     }
-
-    private static readonly Regex AnsiPattern = new(
-        @"\x1b(?:\[[0-9;?]*[A-Za-z@~]|\][^\x07]*\x07|\([A-Z0-9]|[A-Z=<>7-9])|[\x00-\x08\x0e-\x1f]",
-        RegexOptions.Compiled);
-
-    private static string StripAnsi(string text) => AnsiPattern.Replace(text, "");
 
     public void Dispose()
     {
@@ -322,6 +280,9 @@ internal sealed class PtyProcess : IDisposable
 
         if (_masterFd >= 0) { close(_masterFd); _masterFd = -1; }
         _readerThread?.Join(500);
+
+        _screen?.Dispose();
+        _screen = null;
     }
 }
 #endif

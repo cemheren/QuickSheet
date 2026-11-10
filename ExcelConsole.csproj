@@ -35,4 +35,28 @@
     <None Remove="Platform/Linux/**" />
   </ItemGroup>
 
+  <!-- Build helper trees are never compiled or shipped as content. -->
+  <ItemGroup>
+    <Compile Remove="native/**;scripts/**" />
+    <None Remove="native/**;scripts/**" />
+  </ItemGroup>
+
+  <!-- libghostty-vt native library (optional; built by scripts/build-libghostty.*). Not a NuGet package.
+       Only the folder matching this OS and architecture is copied, flattened into the output root. -->
+  <PropertyGroup>
+    <QsNativeArch>$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)</QsNativeArch>
+    <QsNativeArch Condition="'$(QsNativeArch)' == 'X64'">x64</QsNativeArch>
+    <QsNativeArch Condition="'$(QsNativeArch)' == 'Arm64'">arm64</QsNativeArch>
+  </PropertyGroup>
+
+  <ItemGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+    <None Include="native/win-$(QsNativeArch)/ghostty-vt.dll"
+          CopyToOutputDirectory="PreserveNewest" Link="%(Filename)%(Extension)" Visible="false" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$([MSBuild]::IsOSPlatform('Linux'))">
+    <None Include="native/linux-$(QsNativeArch)/libghostty-vt.so*"
+          CopyToOutputDirectory="PreserveNewest" Link="%(Filename)%(Extension)" Visible="false" />
+  </ItemGroup>
+
 </Project>

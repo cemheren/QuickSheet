@@ -1,7 +1,6 @@
 #if PLATFORM_WINDOWS
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Text.RegularExpressions;
+using ExcelConsole.Terminal;
 using Microsoft.Win32.SafeHandles;
 
 namespace ExcelConsole;
@@ -9,6 +8,8 @@ namespace ExcelConsole;
 /// <summary>
 /// Runs a command inside a Windows Pseudo Console (ConPTY), capturing all output
 /// including from programs that use Console APIs directly (TUI/interactive apps).
+/// Raw output bytes are fed to a VT emulator (<see cref="IVtScreen"/>) which maintains
+/// the final screen + scrollback.
 /// </summary>
 internal sealed class ConPtyProcess : IDisposable
 {
@@ -70,6 +71,9 @@ internal sealed class ConPtyProcess : IDisposable
     private static extern int CreatePseudoConsole(COORD size, IntPtr hInput, IntPtr hOutput,
         uint dwFlags, out IntPtr phPC);
 
+    [DllImport("kernel32.dll")]
+    private static extern int ResizePseudoConsole(IntPtr hPC, COORD size);
+
     [DllImport("kernel32.dll", SetLastError = true)]
     private static extern void ClosePseudoConsole(IntPtr hPC);
 
@@ -109,10 +113,9 @@ internal sealed class ConPtyProcess : IDisposable
     private Thread? _readerThread;
     private volatile bool _disposed;
 
-    private readonly object _lock = new();
-    private readonly List<string> _outputLines = new();
+    private IVtScreen? _screen;
 
-    public bool HasNewOutput { get; set; }
+    public bool HasNewOutput => _screen?.IsDirty ?? false;
 
     public bool HasExited
     {
@@ -150,7 +153,7 @@ internal sealed class ConPtyProcess : IDisposable
         _outputReadPipe = outRead;
         _inputWritePipe = inWrite;
 
-        var size = new COORD { X = (short)cols, Y = (short)rows };
+        var size = new COORD { X = (short)Math.Clamp(cols, 1, short.MaxValue), Y = (short)Math.Clamp(rows, 1, short.MaxValue) };
         int hr = CreatePseudoConsole(size, inRead, outWrite, 0, out _hPC);
 
         // These ends now belong to the pseudo console
@@ -196,6 +199,10 @@ internal sealed class ConPtyProcess : IDisposable
         _hProcess = pi.hProcess;
         _hThread = pi.hThread;
 
+        cols = Math.Clamp(cols, 1, short.MaxValue);
+        rows = Math.Clamp(rows, 1, short.MaxValue);
+        _screen = VtScreen.Create(cols, rows, MaxLines);
+
         _readerThread = new Thread(ReadOutput) { IsBackground = true, Name = "ConPTY-Reader" };
         _readerThread.Start();
 
@@ -209,7 +216,6 @@ internal sealed class ConPtyProcess : IDisposable
             using var handle = new SafeFileHandle(_outputReadPipe, ownsHandle: false);
             using var stream = new FileStream(handle, FileAccess.Read, 4096, false);
             var buffer = new byte[4096];
-            var lineBuffer = new StringBuilder();
 
             while (!_disposed)
             {
@@ -218,62 +224,27 @@ internal sealed class ConPtyProcess : IDisposable
                 catch { break; }
                 if (n == 0) break;
 
-                string text = Encoding.UTF8.GetString(buffer, 0, n);
-
-                foreach (char ch in text)
-                {
-                    if (ch == '\n')
-                    {
-                        string line = StripAnsi(lineBuffer.ToString().TrimEnd('\r'));
-                        if (!string.IsNullOrEmpty(line))
-                            AppendLine(line);
-                        lineBuffer.Clear();
-                    }
-                    else
-                    {
-                        lineBuffer.Append(ch);
-                    }
-                }
-            }
-
-            if (lineBuffer.Length > 0)
-            {
-                string final = StripAnsi(lineBuffer.ToString().TrimEnd('\r'));
-                if (!string.IsNullOrEmpty(final))
-                    AppendLine(final);
+                _screen?.Write(buffer.AsSpan(0, n));
             }
         }
         catch { }
     }
 
-    private void AppendLine(string line)
-    {
-        lock (_lock)
-        {
-            _outputLines.Add(line);
-            while (_outputLines.Count > MaxLines)
-                _outputLines.RemoveAt(0);
-            HasNewOutput = true;
-        }
-    }
-
     public string? GetOutput()
     {
-        lock (_lock)
-        {
-            HasNewOutput = false;
-            if (_outputLines.Count == 0) return null;
-            return string.Join("\n", _outputLines);
-        }
+        var t = _screen?.GetText();
+        return string.IsNullOrEmpty(t) ? null : t;
     }
 
-    // Strips ANSI/VT100 escape sequences and control chars
-    private static readonly Regex AnsiPattern = new(
-        @"\x1b(?:\[[0-9;?]*[A-Za-z@~]|\][^\x07]*\x07|\([A-Z0-9]|[A-Z=<>7-9])|[\x00-\x08\x0e-\x1f]",
-        RegexOptions.Compiled);
-
-    private static string StripAnsi(string text) =>
-        AnsiPattern.Replace(text, "");
+    /// <summary>Resize the pseudo console and the emulator screen.</summary>
+    public void Resize(int cols, int rows)
+    {
+        cols = Math.Clamp(cols, 1, short.MaxValue);
+        rows = Math.Clamp(rows, 1, short.MaxValue);
+        if (_hPC != IntPtr.Zero)
+            ResizePseudoConsole(_hPC, new COORD { X = (short)cols, Y = (short)rows });
+        _screen?.Resize(cols, rows);
+    }
 
     private void Cleanup()
     {
@@ -297,6 +268,9 @@ internal sealed class ConPtyProcess : IDisposable
         if (_hPC != IntPtr.Zero) { ClosePseudoConsole(_hPC); _hPC = IntPtr.Zero; }
 
         _readerThread?.Join(2000);
+
+        _screen?.Dispose();
+        _screen = null;
 
         if (_hProcess != IntPtr.Zero) { CloseHandle(_hProcess); _hProcess = IntPtr.Zero; }
         if (_hThread != IntPtr.Zero) { CloseHandle(_hThread); _hThread = IntPtr.Zero; }

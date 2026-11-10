@@ -12,6 +12,7 @@ dotnet run --project ExcelConsole.csproj                          # Run as deskt
 dotnet run --project ExcelConsole.csproj -- data.csv              # With a specific CSV
 dotnet run -c Release --project ExcelConsole.csproj               # Release (recommended)
 dotnet run --project ExcelConsole.csproj -- data.csv --export-md data.md  # Headless: CSV → Markdown
+./scripts/build-libghostty.sh   # optional: build libghostty-vt (Zig 0.17) into native/ (Linux; .ps1 on Windows)
 ```
 
 `Program.cs` always launches the platform `IDesktopHost` (after handling headless `--export-*` flags). There is no TUI mode — the project is desktop-wallpaper only.
@@ -23,7 +24,8 @@ dotnet run --project ExcelConsole.csproj -- data.csv --export-md data.md  # Head
 - **`Platform/Windows/`** — WinForms host. `DesktopFormBase` does Z-order locking, Alt+Tab hide, Win+D detection. `NativeMethods.cs` Win32 P/Invoke. `WorkerW` embedding.
 - **`Platform/Linux/`** — raw X11 P/Invoke (`libX11.so.6`, `libXft.so.2`). Sets `_NET_WM_WINDOW_TYPE_DESKTOP`. Requires X11 (Wayland warning emitted).
 - **`Features/IMode.cs`** — modal input interface (Enter/Exit/Commit/HandleKeyEvent).
-- **`InlineProcessManager`** — live subprocesses for `i:` cells. ConPTY on Windows, pipe redirect on Linux. Thread-safe (UI reads, bg threads write). Output capped at 5,000 lines.
+- **`InlineProcessManager`** — live subprocesses for `i:` cells. ConPTY on Windows, openpty + posix_spawn on Linux. PTY bytes are fed into an `IVtScreen`. Thread-safe (UI reads, bg threads write). Output capped at 5,000 lines.
+- **`Terminal/`** — `IVtScreen` screen model for PTY output. `GhosttyVtScreen` wraps libghostty-vt (hand-written P/Invoke in `GhosttyNative`, loaded from `QUICKSHEET_LIBGHOSTTY`, next to the exe, or system path); `LegacyVtScreen` is the regex fallback when the lib is absent. `VtScreen.Create` picks between them.
 - **`CellPrefix`** — parses `i: ` (inline output), `r: ` (runnable), `s: ` (sparkline render), `http(s)://` (hyperlink), and `{A1::C10}` cell-range refs.
 
 ## Cross-platform build
@@ -40,4 +42,5 @@ In shared files use `#if PLATFORM_WINDOWS` / `#elif PLATFORM_LINUX` (see `Progra
 - **Zero NuGet deps.** Hard policy — supply chain risk. All native interop is hand-written P/Invoke. Do not add packages.
 - **CSV is the persistence format.** No DB, no JSON state.
 - **Cell prefixes drive behavior.** `r: cmd` runnable, `i: cmd` inline-process output, URLs auto-detected.
-- **Namespaces.** `ExcelConsole` root; `ExcelConsole.Platform.{Windows,Linux}` for platform code; `ExcelConsole.Features` for mode interfaces.
+- **Namespaces.** `ExcelConsole` root; `ExcelConsole.Platform.{Windows,Linux}` for platform code; `ExcelConsole.Features` for mode interfaces; `ExcelConsole.Terminal` for the VT screen models.
+- **Native libs are optional.** libghostty-vt is built by `scripts/build-libghostty.*` from pinned, checksummed source into `native/` (gitignored). Never commit native binaries, and the app must run without them.

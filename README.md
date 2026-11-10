@@ -41,6 +41,18 @@ Requires [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0). Release
 
 Tip: add it to your startup applications so your notes, links, and launchers are there every time you log in. See [docs/install-startup.md](docs/install-startup.md) for Windows (Task Scheduler / Startup folder + an opt-in `-Update` flag) and Linux (XDG autostart) walkthroughs.
 
+### Optional: libghostty-vt
+
+Inline `i:` command output is rendered by [libghostty-vt](https://github.com/ghostty-org/ghostty), the terminal emulator library from Ghostty, so cursor movement, `\r` progress bars, and full-screen TUIs show their real final screen. It is an optional native library, built from a pinned, checksum-verified source tarball (needs [Zig 0.17](https://ziglang.org/download/)):
+
+```bash
+scripts/build-libghostty.sh     # Linux (x86_64 or aarch64): builds into native/<rid>/
+scripts/build-libghostty.ps1    # Windows (PowerShell 5.1+ or 7)
+dotnet build ExcelConsole.csproj   # copies the library next to the executable
+```
+
+Without it, QuickSheet falls back to basic ANSI stripping and prints a one-line note to stderr. Set `QUICKSHEET_LIBGHOSTTY` to a full path to use a library from elsewhere.
+
 Want to export your data? Render any CSV as a GitHub-flavored Markdown table:
 
 ```bash
@@ -57,7 +69,7 @@ Audience-specific guides: [for homelabbers](docs/for-homelab.md) (Plex / Pi-hole
 
 ## A note on the code
 
-This is a side project, and a lot of it was written with AI assistance. The hard rule the project keeps is **zero NuGet dependencies** — all native interop (X11, WinForms, ConPTY) is hand-written P/Invoke. That keeps the supply-chain surface area minimal: clone, build, run.
+This is a side project, and a lot of it was written with AI assistance. The hard rule the project keeps is **zero NuGet dependencies** — all native interop (X11, WinForms, ConPTY) is hand-written P/Invoke. That keeps the supply-chain surface area minimal: clone, build, run. Inline-command output is rendered by **libghostty-vt** (Ghostty's terminal emulator library), an optional native library built from a pinned, checksum-verified source with `scripts/build-libghostty.sh` / `.ps1`; without it QuickSheet falls back to basic ANSI stripping.
 
 ## Desktop environment for developers 
 ### Type directly into cells 

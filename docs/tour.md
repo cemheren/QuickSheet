@@ -100,7 +100,7 @@ This makes QuickSheet useful in scripts and CI pipelines, not just at the deskto
 
 ## 6. The hard rules
 
-- **Zero NuGet dependencies.** All native interop (X11, WinForms, ConPTY) is hand-written P/Invoke. Clone, build, run. No supply chain.
+- **Zero NuGet dependencies.** All native interop (X11, WinForms, ConPTY) is hand-written P/Invoke. Clone, build, run. No supply chain. Inline-command output is rendered by **libghostty-vt** (Ghostty's terminal emulator library), an optional native library built from a pinned, checksum-verified source with `scripts/build-libghostty.sh` / `.ps1` (needs Zig 0.17); without it QuickSheet falls back to basic ANSI stripping.
 - **CSV is the format.** Open the file in Excel or vim. Same data.
 - **Windows and Linux.** Windows uses WinForms + the WorkerW desktop trick. Linux uses raw X11 (`_NET_WM_WINDOW_TYPE_DESKTOP`). Wayland prints a warning.
 

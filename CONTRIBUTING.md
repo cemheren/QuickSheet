@@ -21,6 +21,7 @@ Hard rules that keep the project lean. Please follow them in PRs:
 | Rule | Why |
 |------|-----|
 | **Zero NuGet dependencies** | Supply-chain safety. All native interop (X11, WinForms, ConPTY) is hand-written P/Invoke. If you think you need a package, ask in an issue first — there's almost always a stdlib path. |
+| **Native libraries are optional and built, not committed** | libghostty-vt is built by `scripts/build-libghostty.sh` / `.ps1` from a pinned, checksum-verified source tarball. Never commit native binaries (`native/` is gitignored), and the app must keep working without them. |
 | **CSV is the only persistence format** | No JSON state, no SQLite, no sidecars. Users can open the file in Excel or vim. |
 | **Cross-platform conditional compilation** | Platform code lives under `Platform/Windows/` or `Platform/Linux/`. The `.csproj` excludes the other OS via `<Compile Remove>`. In shared files use `#if PLATFORM_WINDOWS` / `#elif PLATFORM_LINUX`. |
 | **Don't break existing behavior** | Keybindings, CLI flags, CSV format, autosave path — keep them stable. Additive changes are the easiest to land. |

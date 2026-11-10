@@ -12,7 +12,7 @@ VisiData and sc-im are excellent **data-analysis** TUIs — you load a CSV and s
 
 ## Why .NET?
 
-The project started in C# because the author was using Windows daily and wanted WorkerW desktop embedding without a heavy GUI framework. .NET 9 ships a small AOT-friendly runtime that handles cross-platform builds via OS-conditional TFMs in the csproj. The hard rule is **zero NuGet dependencies** — all native interop (X11, WinForms, ConPTY) is hand-written P/Invoke, so the dependency surface is just the .NET SDK itself.
+The project started in C# because the author was using Windows daily and wanted WorkerW desktop embedding without a heavy GUI framework. .NET 9 ships a small AOT-friendly runtime that handles cross-platform builds via OS-conditional TFMs in the csproj. The hard rule is **zero NuGet dependencies** — all native interop (X11, WinForms, ConPTY) is hand-written P/Invoke, so the dependency surface is just the .NET SDK itself. Inline-command output is rendered by **libghostty-vt** (Ghostty's terminal emulator library), an optional native library built from a pinned, checksum-verified source with `scripts/build-libghostty.sh` / `.ps1` (needs Zig 0.17); without it QuickSheet falls back to basic ANSI stripping.
 
 ## Will this run on macOS?
 
