@@ -5,9 +5,10 @@ namespace ExcelConsole.Terminal;
 
 /// <summary>
 /// Raw P/Invoke bindings for libghostty-vt (Ghostty's VT emulator C library, stable C ABI v1.0, tag vt-1.0.0).
-/// libghostty-vt is NOT a NuGet package: it is a native library built from a pinned, checksum-verified
-/// source tarball by scripts/build-libghostty.sh / .ps1 and copied next to the executable
-/// (native/ folder -> output dir). If it is absent, QuickSheet falls back to LegacyVtScreen.
+/// libghostty-vt is NOT a NuGet package. `dotnet build` downloads it from this repository's CI-built release
+/// (pinned SHA-256 in libghostty.props), or it comes from a local native/&lt;rid&gt;/ build made by
+/// scripts/build-libghostty.sh / .ps1, or from the path in QUICKSHEET_LIBGHOSTTY; it ends up next to the
+/// executable. If it is absent, QuickSheet falls back to LegacyVtScreen.
 /// </summary>
 internal static class GhosttyNative
 {
@@ -116,6 +117,8 @@ internal static class GhosttyNative
 
     public static bool IsAvailable => _available.Value;
     public static string? Version { get { _ = _available.Value; return _version; } }
+    /// <summary>Path or name of the library that was actually loaded (null if none).</summary>
+    public static string? LoadedPath { get; private set; }
     public static string? LoadError { get { _ = _available.Value; return _loadError; } }
 
     private static bool Init()
@@ -173,7 +176,10 @@ internal static class GhosttyNative
         string? env = Environment.GetEnvironmentVariable("QUICKSHEET_LIBGHOSTTY");
         // Only absolute paths: a relative name would be searched via CWD/PATH.
         if (!string.IsNullOrWhiteSpace(env) && Path.IsPathFullyQualified(env) && NativeLibrary.TryLoad(env, out IntPtr h1))
+        {
+            LoadedPath = env;
             return h1;
+        }
 
         string[] names;
         if (OperatingSystem.IsWindows()) names = new[] { "ghostty-vt.dll" };
@@ -185,7 +191,10 @@ internal static class GhosttyNative
         {
             string full = Path.Combine(baseDir, n);
             if (File.Exists(full) && NativeLibrary.TryLoad(full, out IntPtr h2))
+            {
+                LoadedPath = full;
                 return h2;
+            }
         }
         // Bare-name system probe is skipped on Windows: it would search PATH and the CWD (DLL hijack).
         if (!OperatingSystem.IsWindows())
@@ -193,7 +202,10 @@ internal static class GhosttyNative
             foreach (var n in names)
             {
                 if (NativeLibrary.TryLoad(n, out IntPtr h3))
+                {
+                    LoadedPath = n;
                     return h3;
+                }
             }
         }
         return IntPtr.Zero;

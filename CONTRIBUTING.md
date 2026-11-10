@@ -1,6 +1,6 @@
 # Contributing to QuickSheet
 
-Thanks for your interest! QuickSheet is a zero-dependency .NET 9 spreadsheet that runs in the terminal *and* as a desktop wallpaper. Contributions are welcome — from bug reports to new extensions.
+Thanks for your interest! QuickSheet is a .NET 9 spreadsheet with zero NuGet packages and one native dependency (libghostty-vt) that runs in the terminal *and* as a desktop wallpaper. Contributions are welcome — from bug reports to new extensions.
 
 ## Quick start
 
@@ -20,11 +20,21 @@ Hard rules that keep the project lean. Please follow them in PRs:
 
 | Rule | Why |
 |------|-----|
-| **Zero NuGet dependencies** | Supply-chain safety. All native interop (X11, WinForms, ConPTY) is hand-written P/Invoke. If you think you need a package, ask in an issue first — there's almost always a stdlib path. |
-| **Native libraries are optional and built, not committed** | libghostty-vt is built by `scripts/build-libghostty.sh` / `.ps1` from a pinned, checksum-verified source tarball. Never commit native binaries (`native/` is gitignored), and the app must keep working without them. |
+| **Zero NuGet packages** | Supply-chain safety. All native interop (X11, WinForms, ConPTY) is hand-written P/Invoke. The only external dependency is libghostty-vt. Any new dependency needs an issue first — there's almost always a stdlib path. |
+| **libghostty-vt is the one native dependency** | CI builds it from Ghostty's official, SHA-256-pinned source tarball and publishes the binaries as a GitHub Release. `dotnet build` downloads them and verifies the hashes pinned in `libghostty.props`. To bump it, see [Updating libghostty-vt](#updating-libghostty-vt). Never commit native binaries (`native/` is gitignored), and the app must keep working when the library is absent (ANSI-stripping fallback). |
 | **CSV is the only persistence format** | No JSON state, no SQLite, no sidecars. Users can open the file in Excel or vim. |
 | **Cross-platform conditional compilation** | Platform code lives under `Platform/Windows/` or `Platform/Linux/`. The `.csproj` excludes the other OS via `<Compile Remove>`. In shared files use `#if PLATFORM_WINDOWS` / `#elif PLATFORM_LINUX`. |
 | **Don't break existing behavior** | Keybindings, CLI flags, CSV format, autosave path — keep them stable. Additive changes are the easiest to land. |
+
+### Updating libghostty-vt
+
+A bump touches several files, so change them together in one PR:
+
+1. Set the new version and its source/deps SHA-256 pins in `scripts/build-libghostty.sh` and `scripts/build-libghostty.ps1`.
+2. Set `RELEASE_TAG` and the version/source-SHA env vars in `.github/workflows/libghostty.yml`.
+3. Set `LibGhosttyReleaseTag` in `libghostty.props`.
+4. Push. The workflow publishes an immutable GitHub Release only if the tag doesn't exist yet. To rebuild the same upstream version, bump the trailing `-N` of the tag (e.g. `libghostty-vt-1.0.0-2`).
+5. Paste the four hashes from the workflow run summary into `libghostty.props` and push that too.
 
 ## What's helpful
 

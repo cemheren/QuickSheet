@@ -1,0 +1,334 @@
+name: libghostty-vt
+
+# Builds libghostty-vt from the official, SHA-256-pinned source tarball (via
+# scripts/build-libghostty.*), smoke-tests it through QuickSheet's real P/Invoke
+# bindings, and publishes the binaries to an immutable GitHub Release.
+# Bump the trailing "-N" of RELEASE_TAG to rebuild/republish.
+
+on:
+  push:
+    branches: ['**']   # branches only: a tag push must never trigger a publish
+    paths:
+      - 'libghostty.props'
+      - 'scripts/build-libghostty.*'
+      - 'scripts/libghostty-smoke/**'
+      - 'Terminal/**'
+      - '.github/workflows/libghostty.yml'
+  pull_request:
+    paths:
+      - 'libghostty.props'
+      - 'scripts/build-libghostty.*'
+      - 'scripts/libghostty-smoke/**'
+      - 'Terminal/**'
+      - '.github/workflows/libghostty.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  RELEASE_TAG: libghostty-vt-1.0.0-1
+  LIBGHOSTTY_VERSION: 1.0.0
+  LIBGHOSTTY_SRC_SHA256: 4a6ef758be721923e1969e7b81b443dcc92d8dd3fb5a39600c03a8817a753676
+
+jobs:
+  build:
+    name: build (${{ matrix.rid }})
+    runs-on: ${{ matrix.runs-on }}
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rid: linux-x64
+            runs-on: ubuntu-24.04
+            zig-asset: zig-x86_64-linux-0.17.0.tar.xz
+            zig-sha256: 1cbe9df9f27e6b78d14ccbca43b6703a404ef79ef1c463de901d7f088d4e2026
+            zig-target: x86_64-linux-gnu.2.28
+            built-name: libghostty-vt.so.1
+            asset-name: libghostty-vt-linux-x64.so.1
+          - rid: linux-arm64
+            runs-on: ubuntu-24.04-arm
+            zig-asset: zig-aarch64-linux-0.17.0.tar.xz
+            zig-sha256: 9e8d11661d4ae3bd57702a3832781e23ad151dde5798e16a5ccd503f65234ff8
+            zig-target: aarch64-linux-gnu.2.28
+            built-name: libghostty-vt.so.1
+            asset-name: libghostty-vt-linux-arm64.so.1
+          - rid: win-x64
+            runs-on: windows-2025
+            zig-asset: zig-x86_64-windows-0.17.0.zip
+            zig-sha256: b5663f69581dcf391293fbf16c06cb80d81d806545ce618b4d0bab7f0eb8c428
+            zig-target: x86_64-windows-gnu   # 1.0.0 defaults to the MSVC ABI on Windows; we ship the GNU ABI (no VC runtime dependency)
+            built-name: ghostty-vt.dll
+            asset-name: ghostty-vt-win-x64.dll
+          - rid: win-arm64
+            runs-on: windows-11-arm
+            zig-asset: zig-aarch64-windows-0.17.0.zip
+            zig-sha256: 0a59d91fa1cb40cf068e9b0954434ce973500c7a2ea749f1e01af62cdab52d26
+            zig-target: aarch64-windows-gnu
+            built-name: ghostty-vt.dll
+            asset-name: ghostty-vt-win-arm64.dll
+    env:
+      ZIG_ASSET: ${{ matrix.zig-asset }}
+      ZIG_SHA256: ${{ matrix.zig-sha256 }}
+      ZIG_TARGET: ${{ matrix.zig-target }}
+      BUILT_NAME: ${{ matrix.built-name }}
+      ASSET_NAME: ${{ matrix.asset-name }}
+
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+
+      - name: Install Zig 0.17.0 (Linux)
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          set -euo pipefail
+          dest="$RUNNER_TEMP/zig-dl"
+          mkdir -p "$dest"
+          curl -fsSL "https://ziglang.org/download/0.17.0/$ZIG_ASSET" -o "$dest/$ZIG_ASSET"
+          echo "$ZIG_SHA256  $dest/$ZIG_ASSET" | sha256sum -c -
+          tar -xJf "$dest/$ZIG_ASSET" -C "$dest"
+          zigdir="$dest/${ZIG_ASSET%.tar.xz}"
+          test -x "$zigdir/zig"
+          echo "$zigdir" >> "$GITHUB_PATH"
+
+      - name: Install Zig 0.17.0 (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $ProgressPreference = 'SilentlyContinue'
+          $dest = Join-Path $env:RUNNER_TEMP 'zig-dl'
+          New-Item -ItemType Directory -Path $dest -Force | Out-Null
+          $zip = Join-Path $dest $env:ZIG_ASSET
+          Invoke-WebRequest -Uri "https://ziglang.org/download/0.17.0/$($env:ZIG_ASSET)" -OutFile $zip
+          $actual = (Get-FileHash -Algorithm SHA256 -Path $zip).Hash
+          if ($actual -ine $env:ZIG_SHA256) { throw "Zig SHA-256 mismatch: expected $($env:ZIG_SHA256), got $actual" }
+          Expand-Archive -Path $zip -DestinationPath $dest -Force
+          $zigdir = Join-Path $dest ([System.IO.Path]::GetFileNameWithoutExtension($env:ZIG_ASSET))
+          if (-not (Test-Path (Join-Path $zigdir 'zig.exe'))) { throw "zig.exe not found in $zigdir" }
+          Add-Content -Path $env:GITHUB_PATH -Value $zigdir
+
+      - name: Build libghostty-vt (Linux)
+        if: runner.os == 'Linux'
+        shell: bash
+        env:
+          LIBGHOSTTY_OUT: ${{ runner.temp }}/out
+        run: |
+          set -euo pipefail
+          zig version
+          bash scripts/build-libghostty.sh
+
+      - name: Build libghostty-vt (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        env:
+          LIBGHOSTTY_OUT: ${{ runner.temp }}\out
+        run: |
+          $ErrorActionPreference = 'Stop'
+          zig version
+          pwsh -NoProfile -File scripts/build-libghostty.ps1
+          if ($LASTEXITCODE -ne 0) { throw "build-libghostty.ps1 failed ($LASTEXITCODE)" }
+
+      - name: Dependency allowlist (Linux)
+        if: runner.os == 'Linux'
+        shell: bash
+        run: python3 -I scripts/libghostty-smoke/check_deps.py elf "$RUNNER_TEMP/out/$BUILT_NAME"
+
+      - name: Dependency allowlist (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          python -I scripts/libghostty-smoke/check_deps.py pe (Join-Path $env:RUNNER_TEMP 'out\ghostty-vt.dll')
+          if ($LASTEXITCODE -ne 0) { throw "dependency allowlist check failed ($LASTEXITCODE)" }
+
+      - name: Sanity checks (symbols, glibc floor)
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          set -euo pipefail
+          lib="$RUNNER_TEMP/out/$BUILT_NAME"
+          file "$lib" || true
+          readelf --dyn-syms "$lib" | grep -w ghostty_terminal_new
+          max="$(readelf -V "$lib" | grep -o 'GLIBC_[0-9][0-9.]*' | sed 's/GLIBC_//' | sort -uV | tail -1 || true)"
+          echo "highest required glibc symbol version: ${max:-none}"
+          if [ -n "$max" ]; then
+            top="$(printf '%s\n2.28\n' "$max" | sort -V | tail -1)"
+            if [ "$top" != "2.28" ]; then
+              echo "::error::library requires glibc $max (> 2.28)"
+              exit 1
+            fi
+          fi
+
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Smoke test through QuickSheet bindings (Linux)
+        if: runner.os == 'Linux'
+        shell: bash
+        env:
+          QUICKSHEET_LIBGHOSTTY: ${{ runner.temp }}/out/libghostty-vt.so.1
+        run: dotnet run --project scripts/libghostty-smoke/libghostty-smoke.csproj -c Release
+
+      - name: Smoke test through QuickSheet bindings (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        env:
+          QUICKSHEET_LIBGHOSTTY: ${{ runner.temp }}\out\ghostty-vt.dll
+        run: |
+          dotnet run --project scripts/libghostty-smoke/libghostty-smoke.csproj -c Release
+          if ($LASTEXITCODE -ne 0) { throw "smoke test failed ($LASTEXITCODE)" }
+
+      - name: Stage release asset
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/asset"
+          cp "$RUNNER_TEMP/out/$BUILT_NAME" "$RUNNER_TEMP/asset/$ASSET_NAME"
+          ls -l "$RUNNER_TEMP/asset"
+
+      - name: Require license notice (linux-x64 leg)
+        if: matrix.rid == 'linux-x64'
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s "$RUNNER_TEMP/out/libghostty-vt-LICENSE.txt"
+          ls -l "$RUNNER_TEMP/out"
+
+      - name: Upload license notices (linux-x64 leg)
+        if: matrix.rid == 'linux-x64'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: notices
+          path: |
+            ${{ runner.temp }}/out/libghostty-vt-LICENSE.txt
+            ${{ runner.temp }}/out/libghostty-vt-third-party.json
+          if-no-files-found: warn
+          retention-days: 14
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ${{ matrix.rid }}
+          path: ${{ runner.temp }}/asset/${{ matrix.asset-name }}
+          if-no-files-found: error
+          retention-days: 14
+
+  publish:
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref_type == 'branch'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    concurrency:
+      group: libghostty-publish
+      cancel-in-progress: false
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          path: artifacts
+
+      - name: Publish release (immutable) and print hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          assets=(libghostty-vt-linux-x64.so.1 libghostty-vt-linux-arm64.so.1 ghostty-vt-win-x64.dll ghostty-vt-win-arm64.dll)
+          mkdir -p out
+
+          prop() { sed -n "s#.*<$1>\(.*\)</$1>.*#\1#p" libghostty.props | head -n1 | tr -d '[:space:]'; }
+
+          props_tag="$(prop LibGhosttyReleaseTag)"
+          if [ "$props_tag" != "$RELEASE_TAG" ]; then
+            echo "::error::LibGhosttyReleaseTag in libghostty.props ($props_tag) != workflow RELEASE_TAG ($RELEASE_TAG)"
+            exit 1
+          fi
+
+          # Collect and vet every binary before anything is published.
+          for a in "${assets[@]}"; do
+            f="$(find artifacts -type f -name "$a" | head -n1)"
+            [ -n "$f" ] || { echo "::error::missing artifact $a"; exit 1; }
+            cp "$f" "out/$a"
+            case "$a" in
+              *.dll) python3 -I scripts/libghostty-smoke/check_deps.py pe "out/$a" ;;
+              *)     python3 -I scripts/libghostty-smoke/check_deps.py elf "out/$a" ;;
+            esac
+          done
+          lic="$(find artifacts -type f -name libghostty-vt-LICENSE.txt | head -n1)"
+          [ -n "$lic" ] || { echo "::error::missing libghostty-vt-LICENSE.txt"; exit 1; }
+          cp "$lic" out/libghostty-vt-LICENSE.txt
+          notices=(libghostty-vt-LICENSE.txt)
+          tp="$(find artifacts -type f -name libghostty-vt-third-party.json | head -n1)"
+          if [ -n "$tp" ]; then
+            cp "$tp" out/libghostty-vt-third-party.json
+            notices+=(libghostty-vt-third-party.json)
+          else
+            echo "::warning::libghostty-vt-third-party.json not found in the source tarball; not attached"
+          fi
+
+          if gh release view "$RELEASE_TAG" --repo "$REPO" >/dev/null 2>&1; then
+            echo "Release $RELEASE_TAG exists; immutable, not overwriting."
+            draft="$(gh release view "$RELEASE_TAG" --repo "$REPO" --json isDraft -q .isDraft)"
+            if [ "$draft" = "true" ]; then
+              echo "::error::draft release left over from a failed publish; delete it and re-run"
+              exit 1
+            fi
+            rm -rf existing && mkdir existing
+            gh release download "$RELEASE_TAG" --repo "$REPO" -p SHA256SUMS -D existing
+            cp existing/SHA256SUMS out/SHA256SUMS
+            hx() { awk -v n="$1" '$2 == n || $2 == "*" n { print $1 }' existing/SHA256SUMS; }
+            fail=0
+            for pair in "linux_x64:libghostty-vt-linux-x64.so.1" "linux_arm64:libghostty-vt-linux-arm64.so.1" \
+                        "win_x64:ghostty-vt-win-x64.dll" "win_arm64:ghostty-vt-win-arm64.dll"; do
+              pin="$(prop "LibGhosttySha256_${pair%:*}" | tr 'A-F' 'a-f')"
+              [ -n "$pin" ] || continue
+              rel="$(hx "${pair#*:}" | tr 'A-F' 'a-f')"
+              if [ "$pin" != "$rel" ]; then
+                echo "::error::libghostty.props pin for ${pair%:*} ($pin) does not match the published release ($rel)"
+                fail=1
+              fi
+            done
+            [ "$fail" = 0 ] || exit 1
+          else
+            (cd out && sha256sum "${assets[@]}" "${notices[@]}" > SHA256SUMS && cat SHA256SUMS)
+
+            notes="Built by this repository's GitHub Actions workflow ($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID) from the official libghostty-vt $LIBGHOSTTY_VERSION source tarball (sha256 $LIBGHOSTTY_SRC_SHA256), built offline with the official deps tarball.
+
+          Zig 0.17.0, flags: -Doptimize=ReleaseFast -Dcpu=baseline -Dstrip=true. Linux binaries target glibc >= 2.28 (Debian 10+, Ubuntu 20.04+, RHEL 8+). Windows binaries use the GNU ABI (no Visual C++ runtime needed). Imported libraries are checked against an allowlist before publishing.
+
+          License notices for the linked code are attached: libghostty-vt-LICENSE.txt and libghostty-vt-third-party.json.
+
+          Verify downloads against SHA256SUMS; QuickSheet pins these hashes in its build. This release is immutable: to rebuild, bump the revision in the workflow tag."
+
+            files=()
+            for a in "${assets[@]}" "${notices[@]}"; do files+=("out/$a"); done
+            gh release create "$RELEASE_TAG" \
+              --repo "$REPO" \
+              --target "$GITHUB_SHA" \
+              --title "libghostty-vt $LIBGHOSTTY_VERSION (QuickSheet build ${RELEASE_TAG##*-})" \
+              --notes "$notes" \
+              --prerelease=false \
+              --latest=false \
+              "${files[@]}" out/SHA256SUMS
+          fi
+
+          h() { awk -v n="$1" '$2 == n || $2 == "*" n { print $1 }' out/SHA256SUMS; }
+          {
+            echo "### MSBuild hashes for $RELEASE_TAG"
+            echo
+            echo '```xml'
+            echo "<LibGhosttySha256_linux_x64>$(h libghostty-vt-linux-x64.so.1)</LibGhosttySha256_linux_x64>"
+            echo "<LibGhosttySha256_linux_arm64>$(h libghostty-vt-linux-arm64.so.1)</LibGhosttySha256_linux_arm64>"
+            echo "<LibGhosttySha256_win_x64>$(h ghostty-vt-win-x64.dll)</LibGhosttySha256_win_x64>"
+            echo "<LibGhosttySha256_win_arm64>$(h ghostty-vt-win-arm64.dll)</LibGhosttySha256_win_arm64>"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"

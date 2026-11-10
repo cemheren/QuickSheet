@@ -33,7 +33,7 @@ A few constraints I'm holding to:
 
 Repo: https://github.com/cemheren/QuickSheet
 
-Honest about the state: it's a side project, mostly written with AI assist, but the zero-deps rule keeps the surface area sane. Working examples + screenshots in the README. Wayland support is the obvious gap.
+Honest about the state: it's a side project, mostly written with AI assist, but the zero-NuGet rule keeps the surface area sane. Working examples + screenshots in the README. Wayland support is the obvious gap.
 
 Curious whether anyone else has tried the "wallpaper does something" thing — I haven't found a prior art that's interactive.
 ```

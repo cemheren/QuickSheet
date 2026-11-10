@@ -38,7 +38,7 @@ Use `#if PLATFORM_WINDOWS` / `#elif PLATFORM_LINUX` guards for any platform-cond
 
 ## Key Conventions
 
-- **Zero external NuGet dependencies** — Intentional policy to avoid supply chain risk. All platform interop is done via raw P/Invoke. Do not add NuGet packages.
+- **Zero NuGet packages; one native dependency** — Intentional policy to avoid supply chain risk. All platform interop is done via raw P/Invoke. The only external dependency is libghostty-vt, downloaded by `dotnet build` with a pinned SHA-256 (see `libghostty.props`). Do not add NuGet packages or other dependencies.
 - **Cell prefixes drive behavior** — `r: ` prefix makes a cell a runnable command; URLs are auto-detected as hyperlinks.
 - **Autosave** — Console mode autosaves to `%APPDATA%/ExcelConsole/autosave.csv`. Desktop mode autosaves every 5 seconds to its CSV.
 - **CSV as persistence format** — All data is stored as CSV. `GridManager.SaveToCsv` preserves rows/columns beyond the visible grid when rewriting files.

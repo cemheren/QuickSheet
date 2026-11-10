@@ -27,7 +27,10 @@ All notable changes to QuickSheet. Format roughly follows [Keep a Changelog](htt
 ## Unreleased
 
 ### Changed
-- **Inline `i:` command output runs through libghostty-vt.** Cursor movement, clear-screen, progress bars (`\r`), and full-screen TUIs now show the real final screen plus scrollback instead of regex-stripped text. Also fixes UTF-8 characters split across reads. libghostty-vt is an optional native library built from a pinned, checksum-verified source with `scripts/build-libghostty.sh` / `.ps1` (Zig 0.17); without it QuickSheet falls back to the old stripper.
+- **Inline `i:` command output runs through libghostty-vt.** Cursor movement, clear-screen, progress bars (`\r`), and full-screen TUIs now show the real final screen plus scrollback instead of regex-stripped text. Also fixes UTF-8 characters split across reads. libghostty-vt is downloaded automatically by `dotnet build`: CI builds it from Ghostty's pinned source with a SHA-256-verified download, so no Zig is needed. Without it QuickSheet falls back to the old stripper.
+
+### Dependencies
+- QuickSheet now has one external dependency, libghostty-vt (still no NuGet packages).
 
 ## 0.24.0 — 2026-05-18
 

@@ -37,7 +37,7 @@
 ## Implications
 
 1. **Drop `awesome-selfhosted` PR draft from queue.** Will be rejected; wastes a contribution slot in the list's review queue and signals not-understanding-the-list.
-2. **Write a new draft (this run): `drafts/awesome-linux-software.md`** — Awesome-Linux-Software submission. Productivity section. Lead with `--desktop` wallpaper mode, mention CSV/extensions, MIT, zero deps. Most novel of the additions and highest hit-prob.
+2. **Write a new draft (this run): `drafts/awesome-linux-software.md`** — Awesome-Linux-Software submission. Productivity section. Lead with `--desktop` wallpaper mode, mention CSV/extensions, MIT, zero NuGet packages. Most novel of the additions and highest hit-prob.
 3. **Future run: draft `awesome-windows.md`** — Awesome-Windows submission. Same pitch with WorkerW emphasis.
 4. **Future run: identify the canonical `awesome-csv` list** (a few exist) and draft a row for the best-maintained one.
 5. **Skip the rice-list submissions** until a real wallpaper screenshot exists; rice lists are screenshot-driven and a text-only PR would land flat.

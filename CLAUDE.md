@@ -12,7 +12,7 @@ dotnet run --project ExcelConsole.csproj                          # Run as deskt
 dotnet run --project ExcelConsole.csproj -- data.csv              # With a specific CSV
 dotnet run -c Release --project ExcelConsole.csproj               # Release (recommended)
 dotnet run --project ExcelConsole.csproj -- data.csv --export-md data.md  # Headless: CSV → Markdown
-./scripts/build-libghostty.sh   # optional: build libghostty-vt (Zig 0.17) into native/ (Linux; .ps1 on Windows)
+./scripts/build-libghostty.sh   # optional (dotnet build downloads a prebuilt copy): build libghostty-vt (Zig 0.17) into native/ (Linux; .ps1 on Windows)
 ```
 
 `Program.cs` always launches the platform `IDesktopHost` (after handling headless `--export-*` flags). There is no TUI mode — the project is desktop-wallpaper only.
@@ -39,8 +39,8 @@ In shared files use `#if PLATFORM_WINDOWS` / `#elif PLATFORM_LINUX` (see `Progra
 
 ## Conventions
 
-- **Zero NuGet deps.** Hard policy — supply chain risk. All native interop is hand-written P/Invoke. Do not add packages.
+- **Zero NuGet packages; one native dependency.** libghostty-vt is the only external dependency (see `libghostty.props`, `.github/workflows/libghostty.yml`). Do not add packages or other dependencies.
 - **CSV is the persistence format.** No DB, no JSON state.
 - **Cell prefixes drive behavior.** `r: cmd` runnable, `i: cmd` inline-process output, URLs auto-detected.
 - **Namespaces.** `ExcelConsole` root; `ExcelConsole.Platform.{Windows,Linux}` for platform code; `ExcelConsole.Features` for mode interfaces; `ExcelConsole.Terminal` for the VT screen models.
-- **Native libs are optional.** libghostty-vt is built by `scripts/build-libghostty.*` from pinned, checksummed source into `native/` (gitignored). Never commit native binaries, and the app must run without them.
+- **libghostty-vt delivery.** CI (`.github/workflows/libghostty.yml`) builds it from Ghostty's pinned, SHA-256-verified source and publishes GitHub Release binaries. The csproj downloads the right one and verifies it against hashes in `libghostty.props` (skip with `-p:QuickSheetLibGhosttyDownload=false`). A library in `native/<rid>/` overrides the download. Never commit native binaries, and the app must still run without it (`LegacyVtScreen` fallback).

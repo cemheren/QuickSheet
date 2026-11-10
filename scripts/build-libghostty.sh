@@ -6,6 +6,10 @@
 # Requires: Zig 0.17.x on PATH, curl, tar, sha256sum (or shasum), and
 # optionally minisign (signature check is skipped with a note if absent).
 #
+# Optional environment:
+#   ZIG_TARGET     passed as -Dtarget=... to zig build (e.g. x86_64-linux-gnu.2.28)
+#   LIBGHOSTTY_OUT output directory (default: <repo>/native/<rid>)
+#
 # Usage: scripts/build-libghostty.sh
 set -euo pipefail
 
@@ -106,13 +110,13 @@ DEPS_DIR="$WORK/deps/libghostty-vt-${LIBGHOSTTY_VERSION}-deps"
 echo "Building libghostty-vt ${LIBGHOSTTY_VERSION} for ${RID} (this can take a few minutes)"
 (
     cd "$SRC_DIR"
-    ZIG_GLOBAL_CACHE_DIR="$WORK/zig-cache" zig build \
-        --prefix "$STAGE" \
-        --system "$DEPS_DIR" \
-        -Demit-lib-vt \
-        -Doptimize=ReleaseFast \
-        -Dcpu=baseline \
-        -Dstrip=true
+    ZIG_ARGS=(--prefix "$STAGE" --system "$DEPS_DIR" -Demit-lib-vt
+              -Doptimize=ReleaseFast -Dcpu=baseline -Dstrip=true)
+    if [[ -n "${ZIG_TARGET:-}" ]]; then
+        echo "Zig target override: ${ZIG_TARGET}"
+        ZIG_ARGS+=("-Dtarget=${ZIG_TARGET}")
+    fi
+    ZIG_GLOBAL_CACHE_DIR="$WORK/zig-cache" zig build "${ZIG_ARGS[@]}"
 )
 
 # The SONAME symlink (libghostty-vt.so.1) is stable across 1.x; it points at
@@ -121,11 +125,20 @@ LIB_REAL="$STAGE/lib/libghostty-vt.so.1"
 [[ -e "$LIB_REAL" ]] || die "build did not produce $LIB_REAL"
 
 # ---- Install ----------------------------------------------------------------
-DEST_DIR="$REPO_ROOT/native/$RID"
+DEST_DIR="${LIBGHOSTTY_OUT:-$REPO_ROOT/native/$RID}"
 mkdir -p "$DEST_DIR"
 # cp -L dereferences symlinks so the tree holds one real file, no links.
 cp -L "$LIB_REAL" "$DEST_DIR/libghostty-vt.so.1"
 chmod 0644 "$DEST_DIR/libghostty-vt.so.1"
+
+# License notices for what is linked into the binary (libghostty MIT + bundled third-party list).
+[[ -f "$SRC_DIR/LICENSE" ]] || die "source tarball has no LICENSE"
+cp "$SRC_DIR/LICENSE" "$DEST_DIR/libghostty-vt-LICENSE.txt"
+if [[ -f "$SRC_DIR/deps/libghostty-vt-third-party.json" ]]; then
+    cp "$SRC_DIR/deps/libghostty-vt-third-party.json" "$DEST_DIR/libghostty-vt-third-party.json"
+else
+    echo "note: deps/libghostty-vt-third-party.json not present in the source tarball"
+fi
 
 echo
 echo "Installed: $DEST_DIR/libghostty-vt.so.1"

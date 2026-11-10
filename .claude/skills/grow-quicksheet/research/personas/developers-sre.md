@@ -77,7 +77,7 @@ Hero image = **full screen, three windows open (VSCode, Slack, browser), QuickSh
 Headlines that land:
 
 - "[Linux/Hyprland] My wallpaper is an interactive spreadsheet that shows incidents + CI"
-- "I replaced my second-monitor Grafana TV with a wallpaper grid (zero deps, open source)"
+- "I replaced my second-monitor Grafana TV with a wallpaper grid (zero NuGet, open source)"
 - "Rainmeter is great but I wanted CSV-first: built a wallpaper-grid with an extension protocol"
 
 Avoid: TUI screenshots, terminal-only demos, lazygit/k9s comparisons.

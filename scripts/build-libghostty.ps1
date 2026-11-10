@@ -6,9 +6,14 @@
 # minisign (signature check is skipped with a note if absent).
 # Compatible with Windows PowerShell 5.1 and PowerShell 7.
 #
+# Optional environment:
+#   $env:ZIG_TARGET      passed as -Dtarget=... to zig build
+#   $env:LIBGHOSTTY_OUT  output directory (default: <repo>\native\<rid>)
+#
 # Usage: powershell -ExecutionPolicy Bypass -File scripts\build-libghostty.ps1
 
 $ErrorActionPreference = 'Stop'
+$ProgressPreference = 'SilentlyContinue'   # Invoke-WebRequest is very slow in 5.1 with progress
 
 # ---- Pinned release (bump here only) ---------------------------------------
 $LibghosttyVersion = '1.0.0'
@@ -22,22 +27,28 @@ $ZigDownloadUrl = 'https://ziglang.org/download/'
 # -----------------------------------------------------------------------------
 
 function Fail([string]$Message) {
-    Write-Error "error: $Message"
+    [Console]::Error.WriteLine("error: $Message")
     exit 1
 }
 
 $RepoRoot = Split-Path -Parent $PSScriptRoot
 
 # ---- Platform -> rid --------------------------------------------------------
-switch ($env:PROCESSOR_ARCHITECTURE) {
+$Arch = $env:PROCESSOR_ARCHITEW6432
+if (-not $Arch) { $Arch = $env:PROCESSOR_ARCHITECTURE }
+switch ($Arch) {
     'AMD64' { $Rid = 'win-x64' }
     'ARM64' { $Rid = 'win-arm64' }
-    default { Fail "unsupported architecture: $env:PROCESSOR_ARCHITECTURE" }
+    default { Fail "unsupported architecture: $Arch" }
 }
 
 # ---- Toolchain checks -------------------------------------------------------
-if (-not (Get-Command tar.exe -ErrorAction SilentlyContinue)) {
-    Fail "tar.exe not found (ships with Windows 10 and later)"
+# Prefer the inbox bsdtar: a GNU tar (e.g. from Git for Windows) can misread C:\ paths.
+$Tar = Join-Path $env:SystemRoot 'System32\tar.exe'
+if (-not (Test-Path $Tar)) {
+    $tarCmd = Get-Command tar.exe -ErrorAction SilentlyContinue
+    if (-not $tarCmd) { Fail "tar.exe not found (ships with Windows 10 and later)" }
+    $Tar = $tarCmd.Source
 }
 
 $zigCmd = Get-Command zig -ErrorAction SilentlyContinue
@@ -68,7 +79,7 @@ try {
         Invoke-WebRequest -Uri $Url -OutFile $dest -UseBasicParsing
 
         $actual = (Get-FileHash -Algorithm SHA256 -Path $dest).Hash
-        if ($actual -ne $Sha.ToUpperInvariant()) {
+        if ($actual -ine $Sha) {
             Fail "SHA-256 mismatch for $name : expected $Sha, got $actual"
         }
         Write-Host "  sha256 OK: $name"
@@ -90,9 +101,9 @@ try {
     $SrcRoot  = Join-Path $Work 'src'
     $DepsRoot = Join-Path $Work 'deps'
     New-Item -ItemType Directory -Path $SrcRoot, $DepsRoot | Out-Null
-    & tar.exe -xzf $SrcTar -C $SrcRoot
+    & $Tar -xzf $SrcTar -C $SrcRoot
     if ($LASTEXITCODE -ne 0) { Fail "failed to extract $SrcTar" }
-    & tar.exe -xzf $DepsTar -C $DepsRoot
+    & $Tar -xzf $DepsTar -C $DepsRoot
     if ($LASTEXITCODE -ne 0) { Fail "failed to extract $DepsTar" }
 
     $SrcDir  = Join-Path $SrcRoot "libghostty-vt-$LibghosttyVersion"
@@ -105,26 +116,42 @@ try {
     $env:ZIG_GLOBAL_CACHE_DIR = $ZigCache
     Push-Location $SrcDir
     try {
-        & zig build `
-            --prefix $Stage `
-            --system $DepsDir `
-            -Demit-lib-vt `
-            -Doptimize=ReleaseFast `
-            -Dcpu=baseline `
-            -Dstrip=true
+        $zigArgs = @('build', '--prefix', $Stage, '--system', $DepsDir,
+                     '-Demit-lib-vt', '-Doptimize=ReleaseFast', '-Dcpu=baseline', '-Dstrip=true')
+        if ($env:ZIG_TARGET) {
+            Write-Host "Zig target override: $env:ZIG_TARGET"
+            $zigArgs += "-Dtarget=$($env:ZIG_TARGET)"
+        }
+        & zig @zigArgs
         if ($LASTEXITCODE -ne 0) { Fail "zig build failed (exit $LASTEXITCODE)" }
     } finally {
         Pop-Location
     }
 
     $LibDll = Join-Path $Stage 'bin\ghostty-vt.dll'
-    if (-not (Test-Path $LibDll)) { Fail "build did not produce $LibDll" }
+    if (-not (Test-Path $LibDll)) {
+        $found = Get-ChildItem -Path $Stage -Recurse -Filter 'ghostty-vt*.dll' -File | Select-Object -First 1
+        if (-not $found) { Fail "build did not produce ghostty-vt.dll under $Stage" }
+        $LibDll = $found.FullName
+    }
 
     # ---- Install ------------------------------------------------------------
-    $DestDir = Join-Path $RepoRoot "native\$Rid"
+    if ($env:LIBGHOSTTY_OUT) { $DestDir = $env:LIBGHOSTTY_OUT }
+    else { $DestDir = Join-Path $RepoRoot "native\$Rid" }
     New-Item -ItemType Directory -Path $DestDir -Force | Out-Null
     $Dest = Join-Path $DestDir 'ghostty-vt.dll'
     Copy-Item -Path $LibDll -Destination $Dest -Force
+
+    # License notices for what is linked into the binary (libghostty MIT + bundled third-party list).
+    $LicSrc = Join-Path $SrcDir 'LICENSE'
+    if (-not (Test-Path $LicSrc)) { Fail "source tarball has no LICENSE" }
+    Copy-Item -Path $LicSrc -Destination (Join-Path $DestDir 'libghostty-vt-LICENSE.txt') -Force
+    $ThirdParty = Join-Path $SrcDir 'deps\libghostty-vt-third-party.json'
+    if (Test-Path $ThirdParty) {
+        Copy-Item -Path $ThirdParty -Destination (Join-Path $DestDir 'libghostty-vt-third-party.json') -Force
+    } else {
+        Write-Host 'note: deps/libghostty-vt-third-party.json not present in the source tarball'
+    }
 
     Write-Host ''
     Write-Host "Installed: $Dest"

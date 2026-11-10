@@ -126,7 +126,7 @@ dotnet run --project ExcelConsole.csproj -- data.csv</code></pre>
 <section class="trust">
   <h2>Why you can trust the binary.</h2>
   <ul>
-    <li><strong>Zero NuGet dependencies.</strong> Every line is in the repo. Native interop is hand-written P/Invoke (<code>libX11</code>, Win32).</li>
+    <li><strong>Zero NuGet packages.</strong> All of QuickSheet's code is in the repo; native interop is hand-written P/Invoke (<code>libX11</code>, Win32). The one native dependency, libghostty-vt, is built from Ghostty's pinned source by our CI and hash-verified on download.</li>
     <li><strong>Local-first.</strong> No telemetry. No accounts. No sync server. No network calls at all in the core.</li>
     <li><strong>CSV is the only state.</strong> No hidden database, no opaque format. Open it in any editor.</li>
     <li><strong>MIT-licensed.</strong> Read it, fork it, ship it. The repo is the whole product.</li>

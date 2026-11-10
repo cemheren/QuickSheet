@@ -20,7 +20,7 @@ QuickSheet is a desktop side project that runs as the current user. The threat m
 
 ## Dependencies
 
-QuickSheet's core has **zero NuGet dependencies** as a deliberate policy. Supply-chain vulnerabilities in third-party packages are not a concern for the core. Reference extensions follow the same rule.
+QuickSheet's core has **zero NuGet packages** as a deliberate policy. Its one native dependency is [libghostty-vt](https://github.com/ghostty-org/ghostty), which renders inline `i:` output and parses the PTY bytes those commands produce, so it is in scope. Vulnerabilities in libghostty-vt itself are in scope, and so are flaws in how QuickSheet builds, downloads, verifies or loads it: the `.github/workflows/libghostty.yml` build from Ghostty's pinned source, the SHA-256 pins in `libghostty.props`, and `QUICKSHEET_LIBGHOSTTY` loading. Other third-party packages are not a concern for the core. Reference extensions follow the same NuGet rule.
 
 ## Disclosure
 

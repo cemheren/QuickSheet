@@ -79,7 +79,7 @@ Hero image = **a Linux desktop with i3/Hyprland + a Plex window + a terminal sho
 
 Headlines that land:
 
-- "[r/selfhosted] Replaced Homepage.io with a wallpaper-grid dashboard (zero deps, MIT, extension protocol)"
+- "[r/selfhosted] Replaced Homepage.io with a wallpaper-grid dashboard (zero NuGet, MIT, extension protocol)"
 - "Conky on steroids: an interactive CSV grid that lives on your wallpaper"
 - "[r/unixporn] Hyprland + wallpaper dashboard for my homelab"
 - "I built a Homepage.io alternative that runs as your desktop wallpaper"
