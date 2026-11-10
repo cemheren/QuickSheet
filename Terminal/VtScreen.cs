@@ -27,9 +27,6 @@ internal static class VtScreen
         return new LegacyVtScreen(cols, rows, maxScrollbackLines);
     }
 
-    /// <summary>True if libghostty-vt was loaded (evaluated once, lazily).</summary>
-    public static bool UsingGhostty => GhosttyNative.IsAvailable;
-
     private static void Report(string msg)
     {
         if (Interlocked.Exchange(ref _reported, 1) != 0) return;

@@ -47,7 +47,7 @@ Inline `i:` command output is rendered by [libghostty-vt](https://github.com/gho
 
 ```bash
 scripts/build-libghostty.sh     # Linux (x86_64 or aarch64): builds into native/<rid>/
-scripts/build-libghostty.ps1    # Windows (PowerShell 5.1+ or 7)
+powershell -ExecutionPolicy Bypass -File scripts/build-libghostty.ps1    # Windows (PowerShell 5.1+ or 7)
 dotnet build ExcelConsole.csproj   # copies the library next to the executable
 ```
 

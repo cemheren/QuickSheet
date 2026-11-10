@@ -44,13 +44,14 @@
   <!-- libghostty-vt native library (optional; built by scripts/build-libghostty.*). Not a NuGet package.
        Only the folder matching this OS and architecture is copied, flattened into the output root. -->
   <PropertyGroup>
-    <QsNativeArch>$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)</QsNativeArch>
-    <QsNativeArch Condition="'$(QsNativeArch)' == 'X64'">x64</QsNativeArch>
-    <QsNativeArch Condition="'$(QsNativeArch)' == 'Arm64'">arm64</QsNativeArch>
+    <!-- Target architecture: taken from RuntimeIdentifier when set (e.g. win-arm64 -> arm64), else the host architecture. -->
+    <QsNativeArch Condition="'$(RuntimeIdentifier)' != '' AND $(RuntimeIdentifier.Contains('-'))">$(RuntimeIdentifier.Substring($([MSBuild]::Add($(RuntimeIdentifier.LastIndexOf('-')), 1))))</QsNativeArch>
+    <QsNativeArch Condition="'$(QsNativeArch)' == ''">$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString().ToLowerInvariant())</QsNativeArch>
   </PropertyGroup>
 
   <ItemGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
     <None Include="native/win-$(QsNativeArch)/ghostty-vt.dll"
+          Condition="Exists('native/win-$(QsNativeArch)/ghostty-vt.dll')"
           CopyToOutputDirectory="PreserveNewest" Link="%(Filename)%(Extension)" Visible="false" />
   </ItemGroup>
 

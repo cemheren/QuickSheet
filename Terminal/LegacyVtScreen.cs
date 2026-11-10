@@ -13,6 +13,10 @@ internal sealed class LegacyVtScreen : IVtScreen
         @"\x1b(?:\[[0-9;?]*[A-Za-z@~]|\][^\x07]*\x07|\([A-Z0-9]|[A-Z=<>7-9])|[\x00-\x08\x0e-\x1f]",
         RegexOptions.Compiled);
 
+    private static readonly Regex IncompleteEscape = new(
+        @"\x1b(?:\[[0-9;?]*|\][^\x07]*|\(?)$", RegexOptions.Compiled);
+    private const int MaxPartialChars = 64 * 1024;
+
     private readonly object _lock = new();
     private readonly Decoder _decoder = Encoding.UTF8.GetDecoder();
     private readonly List<string> _lines = new();
@@ -54,6 +58,8 @@ internal sealed class LegacyVtScreen : IVtScreen
                 {
                     if (_pendingCr) { _current.Clear(); _pendingCr = false; }
                     _current.Append(ch);
+                    if (_current.Length > MaxPartialChars)
+                        _current.Remove(0, _current.Length - MaxPartialChars);
                 }
             }
             if (_lines.Count > _max)
@@ -78,7 +84,7 @@ internal sealed class LegacyVtScreen : IVtScreen
                 if (sb.Length > 0) sb.Append('\n');
                 sb.Append(l.TrimEnd());
             }
-            string partial = Strip(_current.ToString());
+            string partial = Strip(IncompleteEscape.Replace(_current.ToString(), ""));
             if (partial.Length > 0)
             {
                 if (sb.Length > 0) sb.Append('\n');

@@ -89,9 +89,11 @@ public class InlineProcessManager : IDisposable
 
     /// <summary>
     /// Starts or restarts a process for the given pointer cell.
-    /// ptyCols/ptyRows set the pseudo console size to match the visual span.
+    /// ptyCols/ptyRows set the pseudo console size used to start the process. A process that is
+    /// already running is only resized when <paramref name="resize"/> is true: only the span
+    /// pre-scan (the authoritative visual size) may resize a running process.
     /// </summary>
-    public void EnsureRunning(int pointerRow, int pointerCol, string command, int ptyCols = 120, int ptyRows = 30)
+    public void EnsureRunning(int pointerRow, int pointerCol, string command, int ptyCols = 120, int ptyRows = 30, bool resize = false)
     {
         var key = (pointerRow, pointerCol);
 
@@ -99,8 +101,8 @@ public class InlineProcessManager : IDisposable
         {
             if (existing.Command == command)
             {
-                // same command — keep it and its output, but let the emulator reflow
-                existing.Resize(ptyCols, ptyRows);
+                // same command — keep it and its output; reflow only if the caller is authoritative
+                if (resize) existing.Resize(ptyCols, ptyRows);
                 return;
             }
             StopProcess(pointerRow, pointerCol);

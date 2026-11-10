@@ -1,5 +1,4 @@
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace ExcelConsole.Terminal;
 
@@ -13,11 +12,14 @@ internal sealed class GhosttyVtScreen : IVtScreen
     private bool _dirty = true;
     private string? _cache;
     private bool _disposed;
+    private readonly int _maxScrollbackLines;
+    private int _formatFailures;
 
     public GhosttyVtScreen(int cols, int rows, int maxScrollbackLines)
     {
         _cols = Clamp(cols);
         _rows = Clamp(rows);
+        _maxScrollbackLines = Math.Max(0, maxScrollbackLines);
         int r = GhosttyNative.ghostty_terminal_new(IntPtr.Zero, out _terminal, (ushort)_cols, (ushort)_rows);
         if (r != GhosttyNative.Success || _terminal == IntPtr.Zero)
         {
@@ -29,7 +31,12 @@ internal sealed class GhosttyVtScreen : IVtScreen
             Check(GhosttyNative.TerminalSetNuint(_terminal, GhosttyNative.OptScrollbackMaxLines,
                 (nuint)Math.Max(0, maxScrollbackLines)), "set SCROLLBACK_MAX_LINES");
             Check(GhosttyNative.TerminalSetNuint(_terminal, GhosttyNative.OptScrollbackMaxBytes,
-                (nuint)(64UL * 1024 * 1024)), "set SCROLLBACK_MAX_BYTES");
+                ScrollbackBytes(_cols, _rows, _maxScrollbackLines)), "set SCROLLBACK_MAX_BYTES");
+#if PLATFORM_WINDOWS
+            // ConPTY keeps its own screen buffer without scrollback; don't pull scrollback on resize.
+            // Tuning option only: ignore failure.
+            _ = GhosttyNative.TerminalSetBool(_terminal, GhosttyNative.OptResizePullScrollback, false);
+#endif
             Check(GhosttyNative.ghostty_formatter_terminal_new(IntPtr.Zero, out _formatter, _terminal),
                 "ghostty_formatter_terminal_new");
             Check(GhosttyNative.FormatterSetInt(_formatter, GhosttyNative.FormatterOptEmit, GhosttyNative.FormatPlain), "set EMIT");
@@ -41,6 +48,16 @@ internal sealed class GhosttyVtScreen : IVtScreen
             FreeHandles();
             throw;
         }
+    }
+
+    // A ghostty cell is 8 bytes and rows are full width, so a fixed byte cap would truncate wide
+    // (e.g. 4096-col JSON) terminals well below the line target. Scale the cap with the size;
+    // x2 leaves slack for style/grapheme metadata.
+    private static nuint ScrollbackBytes(int cols, int rows, int maxLines)
+    {
+        ulong bytes = (ulong)cols * 8 * 2 * (ulong)(maxLines + rows);
+        const ulong min = 8UL * 1024 * 1024, max = 512UL * 1024 * 1024;
+        return (nuint)Math.Clamp(bytes, min, max);
     }
 
     private static int Clamp(int v) => v < 1 ? 1 : v > 65535 ? 65535 : v;
@@ -79,6 +96,9 @@ internal sealed class GhosttyVtScreen : IVtScreen
             if (_disposed || (cols == _cols && rows == _rows)) return;
             if (GhosttyNative.ghostty_terminal_resize(_terminal, (ushort)cols, (ushort)rows, 8, 16) == GhosttyNative.Success)
             {
+                if (cols != _cols)
+                    GhosttyNative.TerminalSetNuint(_terminal, GhosttyNative.OptScrollbackMaxBytes,
+                        ScrollbackBytes(cols, rows, _maxScrollbackLines));
                 _cols = cols;
                 _rows = rows;
             }
@@ -100,21 +120,21 @@ internal sealed class GhosttyVtScreen : IVtScreen
                 try
                 {
                     if (len > 0)
-                    {
-                        var bytes = new byte[(int)len];
-                        Marshal.Copy(ptr, bytes, 0, bytes.Length);
-                        text = Encoding.UTF8.GetString(bytes);
-                    }
+                        text = Marshal.PtrToStringUTF8(ptr, checked((int)len));
                 }
                 finally { GhosttyNative.ghostty_free(IntPtr.Zero, ptr, len); }
             }
             else if (r != GhosttyNative.Success)
             {
-                // keep previous cache on failure; stay dirty so we retry
+                // keep previous cache on failure; retry while dirty, but give up after 3 in a row
+                // so the render loop can idle
+                if (++_formatFailures >= 3) _dirty = false;
                 return _cache ?? "";
             }
 
-            text = text.Replace("\r", "").TrimEnd('\n', ' ');
+            _formatFailures = 0;
+            // The formatter emits leading blank rows; single-cell renderers show up to the first '\n'.
+            text = text.Replace("\r", "").TrimStart('\n').TrimEnd('\n', ' ');
             _cache = text;
             _dirty = false;
             return text;

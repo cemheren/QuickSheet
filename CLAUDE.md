@@ -24,7 +24,7 @@ dotnet run --project ExcelConsole.csproj -- data.csv --export-md data.md  # Head
 - **`Platform/Windows/`** — WinForms host. `DesktopFormBase` does Z-order locking, Alt+Tab hide, Win+D detection. `NativeMethods.cs` Win32 P/Invoke. `WorkerW` embedding.
 - **`Platform/Linux/`** — raw X11 P/Invoke (`libX11.so.6`, `libXft.so.2`). Sets `_NET_WM_WINDOW_TYPE_DESKTOP`. Requires X11 (Wayland warning emitted).
 - **`Features/IMode.cs`** — modal input interface (Enter/Exit/Commit/HandleKeyEvent).
-- **`InlineProcessManager`** — live subprocesses for `i:` cells. ConPTY on Windows, openpty + posix_spawn on Linux. PTY bytes are fed into an `IVtScreen`. Thread-safe (UI reads, bg threads write). Output capped at 5,000 lines.
+- **`InlineProcessManager`** — live subprocesses for `i:` cells. ConPTY on Windows, openpty + posix_spawn on Linux. PTY bytes are fed into an `IVtScreen`. Thread-safe (UI reads, bg threads write). Scrollback capped at ~5,000 lines (page-granular in libghostty).
 - **`Terminal/`** — `IVtScreen` screen model for PTY output. `GhosttyVtScreen` wraps libghostty-vt (hand-written P/Invoke in `GhosttyNative`, loaded from `QUICKSHEET_LIBGHOSTTY`, next to the exe, or system path); `LegacyVtScreen` is the regex fallback when the lib is absent. `VtScreen.Create` picks between them.
 - **`CellPrefix`** — parses `i: ` (inline output), `r: ` (runnable), `s: ` (sparkline render), `http(s)://` (hyperlink), and `{A1::C10}` cell-range refs.
 

@@ -15,6 +15,7 @@ internal static class GhosttyNative
 
     public const int OptScrollbackMaxBytes = 28;
     public const int OptScrollbackMaxLines = 29;
+    public const int OptResizePullScrollback = 41;
     public const int FormatterOptEmit = 1;
     public const int FormatterOptUnwrap = 2;
     public const int FormatterOptTrim = 3;
@@ -64,6 +65,18 @@ internal static class GhosttyNative
         try
         {
             Marshal.WriteIntPtr(p, unchecked((IntPtr)(nint)value));
+            return ghostty_terminal_set(terminal, option, p);
+        }
+        finally { Marshal.FreeHGlobal(p); }
+    }
+
+    /// <summary>Sets a C `bool` terminal option (1 byte).</summary>
+    public static int TerminalSetBool(IntPtr terminal, int option, bool value)
+    {
+        IntPtr p = Marshal.AllocHGlobal(1);
+        try
+        {
+            Marshal.WriteByte(p, value ? (byte)1 : (byte)0);
             return ghostty_terminal_set(terminal, option, p);
         }
         finally { Marshal.FreeHGlobal(p); }
@@ -141,12 +154,6 @@ internal static class GhosttyNative
             }
             return true;
         }
-        catch (Exception ex) when (ex is DllNotFoundException or EntryPointNotFoundException
-                                       or BadImageFormatException or InvalidOperationException)
-        {
-            _loadError = $"{ex.GetType().Name}: {ex.Message}";
-            return false;
-        }
         catch (Exception ex)
         {
             _loadError = $"{ex.GetType().Name}: {ex.Message}";
@@ -164,7 +171,8 @@ internal static class GhosttyNative
     private static IntPtr ProbeLoad()
     {
         string? env = Environment.GetEnvironmentVariable("QUICKSHEET_LIBGHOSTTY");
-        if (!string.IsNullOrWhiteSpace(env) && NativeLibrary.TryLoad(env, out IntPtr h1))
+        // Only absolute paths: a relative name would be searched via CWD/PATH.
+        if (!string.IsNullOrWhiteSpace(env) && Path.IsPathFullyQualified(env) && NativeLibrary.TryLoad(env, out IntPtr h1))
             return h1;
 
         string[] names;
@@ -179,10 +187,14 @@ internal static class GhosttyNative
             if (File.Exists(full) && NativeLibrary.TryLoad(full, out IntPtr h2))
                 return h2;
         }
-        foreach (var n in names)
+        // Bare-name system probe is skipped on Windows: it would search PATH and the CWD (DLL hijack).
+        if (!OperatingSystem.IsWindows())
         {
-            if (NativeLibrary.TryLoad(n, out IntPtr h3))
-                return h3;
+            foreach (var n in names)
+            {
+                if (NativeLibrary.TryLoad(n, out IntPtr h3))
+                    return h3;
+            }
         }
         return IntPtr.Zero;
     }
