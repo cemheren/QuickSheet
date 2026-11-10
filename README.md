@@ -13,7 +13,7 @@ The data is a CSV file. Cells can run shell commands. Same file on Windows or Li
 ![Windows](https://img.shields.io/badge/platform-Windows-0078D6?logo=windows)
 ![Linux](https://img.shields.io/badge/platform-Linux-FCC624?logo=linux&logoColor=black)
 ![GitHub release](https://img.shields.io/github/v/release/cemheren/QuickSheet?color=green)
-![Zero Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)
+![Zero NuGet packages](https://img.shields.io/badge/NuGet_packages-0-brightgreen)
 ![Extensions](https://img.shields.io/badge/extensions-69%2B-orange)
 ![Cell prefixes](https://img.shields.io/badge/cell_prefixes-10-blue)
 
@@ -25,7 +25,7 @@ Most developers have a second monitor — or at least a desktop — that shows a
 - **App launcher.** Prefix a cell with `r: code .` and hit Enter. Multi-select cells to launch your whole morning stack in one keystroke.
 - **Link dashboard.** Paste URLs into cells. They're highlighted and open on Enter — a personal start page that lives behind your windows.
 - **Live data.** Column sums, sparklines, inline subprocesses (`i: top`), and 69+ extensions for weather, stocks, RSS, system monitoring, and more.
-- **Zero dependencies.** Clone → `dotnet build` → run. No NuGet packages, no npm, no Docker. The entire supply chain is the .NET SDK.
+- **One dependency.** Clone → `dotnet build` → run. No NuGet packages, no npm, no Docker. The only dependency is libghostty-vt, built from Ghostty's pinned source by our CI and hash-verified on download.
 
 If you spend your day in a terminal or IDE and want your desktop to *do* something, QuickSheet is for you.
 
@@ -40,6 +40,16 @@ dotnet run -c Release --project ExcelConsole.csproj -- --desktop
 Requires [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0). Release mode is recommended — it feels noticeably snappier.
 
 Tip: add it to your startup applications so your notes, links, and launchers are there every time you log in. See [docs/install-startup.md](docs/install-startup.md) for Windows (Task Scheduler / Startup folder + an opt-in `-Update` flag) and Linux (XDG autostart) walkthroughs.
+
+### Terminal rendering (libghostty-vt)
+
+Inline `i:` command output is rendered by [libghostty-vt](https://github.com/ghostty-org/ghostty), the terminal emulator library from Ghostty, so cursor movement, `\r` progress bars, and full-screen TUIs show their real final screen. `dotnet build` downloads a prebuilt copy for your platform (linux-x64, linux-arm64, win-x64, win-arm64) from this repo's GitHub Releases and verifies its SHA-256 against hashes pinned in `libghostty.props`. No Zig or other tools are needed.
+
+- **Opt out** (offline builds, or to skip the download): `dotnet build ExcelConsole.csproj -p:QuickSheetLibGhosttyDownload=false`
+- **Build it yourself** (Zig 0.17 required): `scripts/build-libghostty.sh` on Linux, or `powershell -ExecutionPolicy Bypass -File scripts/build-libghostty.ps1` on Windows. A library in `native/<rid>/` takes precedence over the download.
+- **Point at a specific library:** set `QUICKSHEET_LIBGHOSTTY` to a full path.
+
+If the library is missing or fails to load (offline first build, macOS, unsupported architecture), QuickSheet falls back to basic ANSI stripping and prints a one-line note to stderr.
 
 Want to export your data? Render any CSV as a GitHub-flavored Markdown table:
 
@@ -57,7 +67,7 @@ Audience-specific guides: [for homelabbers](docs/for-homelab.md) (Plex / Pi-hole
 
 ## A note on the code
 
-This is a side project, and a lot of it was written with AI assistance. The hard rule the project keeps is **zero NuGet dependencies** — all native interop (X11, WinForms, ConPTY) is hand-written P/Invoke. That keeps the supply-chain surface area minimal: clone, build, run.
+This is a side project, and a lot of it was written with AI assistance. The hard rules the project keeps are **zero NuGet packages** and **one native dependency**. All native interop (X11, WinForms, ConPTY) is hand-written P/Invoke. The only external dependency is **libghostty-vt** (Ghostty's terminal emulator library), which renders inline-command output. CI builds it from Ghostty's pinned source, and `dotnet build` downloads it with a verified SHA-256. Without it QuickSheet falls back to basic ANSI stripping. Clone, build, run.
 
 ## Desktop environment for developers 
 ### Type directly into cells 

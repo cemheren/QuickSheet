@@ -9,3 +9,6 @@ obj/
 !.claude/skills/
 .mcp.json
 logs/
+
+# native libraries are built from pinned, checksummed source by scripts/build-libghostty.*; never commit binaries
+native/

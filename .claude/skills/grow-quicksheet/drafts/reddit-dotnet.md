@@ -1,6 +1,6 @@
 # Reddit r/dotnet draft — QuickSheet
 
-Drafted 2026-05-14. r/dotnet rewards .NET-specific angles: P/Invoke, conditional compilation, zero-dependency code. Lead with the technical hook, not the UX hook.
+Drafted 2026-05-14. r/dotnet rewards .NET-specific angles: P/Invoke, conditional compilation, zero-NuGet code. Lead with the technical hook, not the UX hook.
 
 ## Title
 
@@ -32,7 +32,7 @@ The codebase is small enough that the P/Invoke files are good reading if you wan
 - `InlineProcessManager.cs` — ConPTY vs pipe redirect.
 - `Program.cs` — the conditional-compilation dispatch.
 
-Honest about the state: it's a side project, written with significant AI assist. The zero-deps rule keeps the design honest — you can't paper over a bad idea with a package.
+Honest about the state: it's a side project, written with significant AI assist. The zero-NuGet rule keeps the design honest — you can't paper over a bad idea with a package.
 
 Curious if anyone else here ships pure-BCL .NET apps and what your favorite tricks are.
 ```
@@ -40,7 +40,7 @@ Curious if anyone else here ships pure-BCL .NET apps and what your favorite tric
 ## Tips
 
 - Post **Tue–Thu morning Pacific**. r/dotnet has a more US/EU mix than r/commandline.
-- Lead the post with **two screenshots**: the wallpaper-mode screenshot AND the `dotnet build` output showing 0 warnings (proves the zero-deps claim).
+- Lead the post with **two screenshots**: the wallpaper-mode screenshot AND the `dotnet build` output showing 0 warnings (proves the zero-NuGet claim).
 - Linkbait the comment section by asking a real question at the bottom ("anyone else here ship pure-BCL .NET? favorite tricks?"). r/dotnet rewards engagement.
 - Be ready for "why not use Spectre.Console / Terminal.Gui?" — answer: those are great libraries, the design rule here is no packages at all, and the wallpaper embedding isn't something either of them does anyway.
 - Be ready for "WorkerW is fragile" — yes, that's true, the project handles Win+D and Alt+Tab edge cases in `DesktopFormBase.cs`. Link directly.

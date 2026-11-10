@@ -40,7 +40,7 @@ Notes:
 ## console.dev (weekly newsletter)
 
 **To:** the contact-form email on `console.dev/contact` (currently obfuscated via Cloudflare; resolve at send-time).
-**Subject:** `Suggestion for Console: QuickSheet (TUI spreadsheet, wallpaper mode, zero deps)`
+**Subject:** `Suggestion for Console: QuickSheet (TUI spreadsheet, wallpaper mode, zero NuGet)`
 
 ```
 Hi Console team,

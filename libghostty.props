@@ -1,0 +1,15 @@
+<Project>
+  <!-- libghostty-vt: QuickSheet's single external dependency. Built by .github/workflows/libghostty.yml
+       from Ghostty's official, SHA-256-pinned source tarball and published as release assets of this repo.
+       ExcelConsole.csproj downloads the matching asset at build time and verifies it against the pins below.
+       Bump LibGhosttyReleaseTag + the four hashes together (the workflow's run summary prints them).
+       An empty hash means "not pinned yet": the download is skipped. -->
+  <PropertyGroup>
+    <LibGhosttyReleaseTag>libghostty-vt-1.0.0-1</LibGhosttyReleaseTag>
+    <LibGhosttyBaseUrl>https://github.com/cemheren/QuickSheet/releases/download/$(LibGhosttyReleaseTag)/</LibGhosttyBaseUrl>
+    <LibGhosttySha256_linux_x64>811da3fefeef7cb3439cb3e9d7128aef599590280350af718466583b2de78fc3</LibGhosttySha256_linux_x64>
+    <LibGhosttySha256_linux_arm64>994605c2e263110b8f3899799a0386fa2c1379dbcbf337b3c561c874a1dedea0</LibGhosttySha256_linux_arm64>
+    <LibGhosttySha256_win_x64>f6ba287901a7f1a6205af07e0715b843132929192a39bd9318e07dd17466de06</LibGhosttySha256_win_x64>
+    <LibGhosttySha256_win_arm64>657526eac6ac3051a63fc26f013071db14e5853aab38a9e40c116b609476d7c2</LibGhosttySha256_win_arm64>
+  </PropertyGroup>
+</Project>

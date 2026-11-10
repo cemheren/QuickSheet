@@ -43,7 +43,7 @@ A few constraints I held to and am glad I did:
 - CSV is the only persistence format. Open it in Excel or vim, same data.
 - Cross-platform via OS-conditional `#if`s in shared files and per-OS folders excluded by the csproj, not an abstraction layer.
 
-Honest disclosures: side project, written largely with AI assist (the zero-deps rule kept the design honest because you can't paper over a bad idea with a package). Wayland is the open problem — XWayland passes the X11 hint through but compositors don't honor it; layer-shell is the path forward and I haven't shipped that yet (issue #3 on the repo).
+Honest disclosures: side project, written largely with AI assist (the zero-NuGet rule kept the design honest because you can't paper over a bad idea with a package). Wayland is the open problem — XWayland passes the X11 hint through but compositors don't honor it; layer-shell is the path forward and I haven't shipped that yet (issue #3 on the repo).
 
 Repo: https://github.com/cemheren/QuickSheet
 60-second tour: https://github.com/cemheren/QuickSheet/blob/main/docs/tour.md
