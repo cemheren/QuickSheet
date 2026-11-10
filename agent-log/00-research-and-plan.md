@@ -86,3 +86,7 @@ internal static class VtScreen {
 | `report-N-*.md` | Each subagent's final report |
 
 Raw JSONL transcripts are deliberately not included: they carry session/account metadata and this repo is public. Ask if you want scrubbed copies.
+
+## Phase 2
+
+See `01-phase2-dependency-delivery.md`: the decision to take one dependency on libghostty-vt, NuGet research, the CI-built + pinned-download design, agents 6–11, the Windows-ABI catch, and the CI runs that published `libghostty-vt-1.0.0-1`.
