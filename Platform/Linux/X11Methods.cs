@@ -189,6 +189,10 @@ internal static class X11Methods
     [DllImport(LibX11)]
     public static extern ulong XLookupKeysym(ref XKeyEvent keyEvent, int index);
 
+    /// <summary>With detectable auto-repeat a held key sends repeated KeyPress and one KeyRelease.</summary>
+    [DllImport(LibX11)]
+    public static extern int XkbSetDetectableAutoRepeat(IntPtr display, int detectable, out int supported);
+
     [DllImport(LibX11)]
     public static extern int XLookupString(ref XKeyEvent eventStruct,
         IntPtr bufferReturn, int bytesBuffer, out ulong keysymReturn, IntPtr composeStatus);
@@ -200,6 +204,9 @@ internal static class X11Methods
 
     [DllImport(LibXft)]
     public static extern void XftFontClose(IntPtr display, IntPtr font);
+
+    [DllImport(LibXft)]
+    public static extern int XftCharExists(IntPtr display, IntPtr font, uint ucs4);
 
     [DllImport(LibXft)]
     public static extern IntPtr XftDrawCreate(IntPtr display, IntPtr drawable,

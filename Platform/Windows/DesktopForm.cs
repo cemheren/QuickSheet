@@ -69,6 +69,26 @@ internal class DesktopForm : DesktopFormBase
     private const int RowHeaderWidth = 4;
 
     private readonly InlineProcessManager _processManager = new();
+
+    // Interactive terminal panes (t: cells). While one is focused, every key goes to its shell;
+    // hold Esc and press q (or Ctrl+`) to give the keyboard back to the grid.
+    private readonly Terminal.TerminalPaneManager _terminals = new((cols, rows, onOutput) =>
+    {
+        var pty = new ConPtyProcess();
+        if (pty.StartShell(cols, rows, onOutput)) return pty;
+        pty.Dispose();
+        return null;
+    });
+    private readonly WindowsTerminalInput _terminalInput = new();
+    private readonly System.Windows.Forms.Timer _terminalTimer = new() { Interval = 15 };
+    private (int row, int col)? _focusedTerminal;
+    private bool _escHeld;       // Esc is down while a terminal is focused (not yet sent)
+    private bool _escUsed;       // the held Esc was used for a chord; don't send it on release
+    private readonly List<TerminalRect> _terminalRects = new();
+    private record struct TerminalRect(int Row, int Col, int SpanCols, int SpanRows, int X, int Y, int W, int H);
+    private const int DefaultTerminalCols = 2;
+    private const int DefaultTerminalChars = 100;
+    private const int DefaultTerminalRows = 20;
     private readonly Extensions.ExtensionManager _extensionManager;
     private System.Threading.Timer? _inlineRefreshTimer;
     private readonly LoopManager _loopManager;
@@ -133,6 +153,15 @@ internal class DesktopForm : DesktopFormBase
 
         KeyDown += OnFormKeyDown;
         KeyPress += OnFormKeyPress;
+        KeyUp += OnFormKeyUp;
+        MouseWheel += OnFormMouseWheel;
+
+        // Terminal panes repaint as soon as their program prints (typing echo, spinners).
+        _terminalTimer.Tick += (_, _) =>
+        {
+            if (_terminals.Count > 0 && _terminals.AnyNeedsRedraw()) Invalidate();
+        };
+        _terminalTimer.Start();
         MouseDown += OnFormMouseDown;
         MouseMove += OnFormMouseMove;
         MouseUp += OnFormMouseUp;
@@ -376,6 +405,13 @@ internal class DesktopForm : DesktopFormBase
         if (row < 0 || row >= _grid.RowCount || col < 0 || col >= _grid.ColumnCount)
             return false;
 
+        // Enter on a terminal pane gives it the keyboard.
+        if (TerminalAt(row, col) is { } term)
+        {
+            FocusTerminal(term.Row, term.Col);
+            return true;
+        }
+
         _extensionManager.ReactivateCell(row, col);
 
         if (TryRerunInlineCommand(row, col))
@@ -517,6 +553,9 @@ internal class DesktopForm : DesktopFormBase
                             occludedCells.Add((wr, wc));
             }
         }
+
+        // Terminal panes (t: cells) cover their whole block, anchor included.
+        CollectTerminalPanes(colWidths, occludedCells, formHeight);
 
         // Column headers
         DrawText(g, new string(' ', RowHeaderWidth), 0, y, themeFg, themeBg);
@@ -735,10 +774,17 @@ internal class DesktopForm : DesktopFormBase
             }
         }
 
+        foreach (var rect in _terminalRects)
+            DrawTerminalPane(g, rect, selRow, selCol);
+
         // Status bar
         int maxChars = formWidth / cw;
         string status;
-        if (_replacePhase != ReplacePhase.None)
+        if (_focusedTerminal is { } ft)
+        {
+            status = $" TERMINAL {_grid.GetCellReference(ft.row, ft.col)}  |  Hold Esc + q (or Ctrl+`): back to grid   Ctrl+Shift+V: paste   Shift+PgUp/PgDn: scroll";
+        }
+        else if (_replacePhase != ReplacePhase.None)
         {
             status = _replacePhase switch
             {
@@ -823,6 +869,8 @@ internal class DesktopForm : DesktopFormBase
                 "  ║  Ctrl+Y         Redo                     ║",
                 "  ║  Ctrl+T         Cycle theme               ║",
                 "  ║  Ctrl+H         Show this help            ║",
+                "  ║  Ctrl+`         Terminal pane (selection) ║",
+                "  ║  Esc held + q   Leave terminal pane       ║",
                 "  ║  Ctrl+Q         Quit                     ║",
                 "  ║                                          ║",
                 "  ║  c:COLOR: text  Colored cell background  ║",
@@ -846,6 +894,333 @@ internal class DesktopForm : DesktopFormBase
                 DrawText(g, line, ox, oy + i * ch, Color.White, Color.Black);
             }
         }
+    }
+
+    // ── Terminal panes ───────────────────────────────────────────────
+
+    /// <summary>
+    /// Finds every t: cell, computes its on-screen block, starts/resizes its shell, and marks the
+    /// covered cells occluded. Closes panes whose t: cell is gone.
+    /// </summary>
+    private void CollectTerminalPanes(int[] colWidths, HashSet<(int, int)> occludedCells, int formHeight)
+    {
+        _terminalRects.Clear();
+        var live = new HashSet<(int row, int col)>();
+        int cw = _charWidth, ch = _charHeight;
+        int statusY = formHeight - ch;
+        const int headerRows = 2;
+        var (fgR, fgG, fgB) = Theme.Current.ForegroundRgb;
+        var (bgR, bgG, bgB) = Theme.Current.BackgroundRgb;
+        int defFg = (fgR << 16) | (fgG << 8) | fgB;
+        int defBg = (bgR << 16) | (bgG << 8) | bgB;
+
+        for (int r = 0; r < _grid.RowCount; r++)
+        {
+            for (int c = 0; c < _grid.ColumnCount; c++)
+            {
+                if (occludedCells.Contains((r, c))) continue;
+                var size = CellPrefix.ParseTerminal(_grid.GetCellValue(r, c));
+                if (size == null) continue;
+
+                int endCol = Math.Min(c + size.Value.cols - 1, _grid.ColumnCount - 1);
+                int endRow = Math.Min(r + size.Value.rows - 1, _grid.RowCount - 1);
+                int x = RowHeaderWidth * cw;
+                for (int i = 0; i < c; i++) x += colWidths[i] * cw;
+                int w = 0;
+                for (int i = c; i <= endCol; i++) w += colWidths[i] * cw;
+                int y = (headerRows + r) * ch;
+                int h = Math.Min((endRow - r + 1) * ch, statusY - y);
+                if (w <= 0 || h < 2 * ch) continue;   // needs a title row + at least one terminal row
+
+                for (int wr = r; wr <= endRow; wr++)
+                    for (int wc = c; wc <= endCol; wc++)
+                        occludedCells.Add((wr, wc));
+
+                live.Add((r, c));
+                _terminalRects.Add(new TerminalRect(r, c, endCol - c + 1, endRow - r + 1, x, y, w, h));
+                _terminals.Ensure(r, c, Math.Max(1, (w - 2) / cw), Math.Max(1, (h - ch) / ch), cw, ch, defFg, defBg);
+            }
+        }
+
+        _terminals.Sync(live);
+        if (_focusedTerminal is { } f && !live.Contains(f))
+            _focusedTerminal = null;
+    }
+
+    private void DrawTerminalPane(Graphics g, TerminalRect rect, int selRow, int selCol)
+    {
+        int cw = _charWidth, ch = _charHeight;
+        bool focused = _focusedTerminal == (rect.Row, rect.Col);
+        bool cursorInside = selRow >= rect.Row && selRow < rect.Row + rect.SpanRows
+                         && selCol >= rect.Col && selCol < rect.Col + rect.SpanCols;
+        var pane = _terminals.Get(rect.Row, rect.Col);
+        var theme = Theme.Current;
+        Color themeBg = ToColor(theme.BackgroundRgb);
+
+        // Title bar: cell ref, program title, state.
+        Color hBg = ToColor(focused ? theme.SelectionBgRgb : theme.HeaderHighlightRgb);
+        Color hFg = ToColor(focused ? theme.SelectionFgRgb : theme.ForegroundRgb);
+        string state = pane == null ? "needs libghostty-vt"
+            : pane.HasExited ? $"exited {pane.ExitCode} · Enter: restart"
+            : focused ? "typing · hold Esc+q to leave"
+            : "Enter: type";
+        string title = pane?.Title is { Length: > 0 } t ? t : "terminal";
+        int titleChars = Math.Max(1, rect.W / cw);
+        string left = $" {_grid.GetCellReference(rect.Row, rect.Col)}  {title}";
+        string right = $"{state} ";
+        string bar = left.Length + right.Length + 1 <= titleChars
+            ? left + new string(' ', titleChars - left.Length - right.Length) + right
+            : (left.Length > titleChars ? left[..titleChars] : left.PadRight(titleChars));
+        DrawText(g, bar, rect.X, rect.Y, hFg, hBg);
+
+        int top = rect.Y + ch;
+        int left0 = rect.X + 1;
+        int bodyH = rect.H - ch;
+        using (var bodyBrush = new SolidBrush(themeBg))
+            g.FillRectangle(bodyBrush, rect.X, top, rect.W, bodyH);
+
+        var frame = pane?.Snapshot();
+        if (frame != null)
+        {
+            int rows = Math.Min(frame.Rows, bodyH / ch);
+            int cols = Math.Min(frame.Cols, (rect.W - 2) / cw);
+            for (int y = 0; y < rows; y++)
+                DrawTerminalRow(g, frame, y, cols, left0, top + y * ch);
+
+            if (frame.CursorVisible && frame.CursorY < rows && frame.CursorX < cols && !pane!.HasExited)
+            {
+                var cell = frame[frame.CursorY, frame.CursorX];
+                int cx = left0 + frame.CursorX * cw, cy = top + frame.CursorY * ch;
+                Color cFg = RgbColor(cell.Fg), cBg = RgbColor(cell.Bg);
+                if (focused)
+                {
+                    using (var cur = new SolidBrush(cFg)) g.FillRectangle(cur, cx, cy, cw, ch);
+                    if (cell.Text is { } txt && txt != " ")
+                        TextRenderer.DrawText(g, txt, (cell.Attr & Terminal.CellAttr.Bold) != 0 ? _boldFont ?? _monoFont : _monoFont,
+                            new Point(cx, cy), cBg, TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix);
+                }
+                else
+                {
+                    using var pen = new Pen(cFg, 1);
+                    g.DrawRectangle(pen, cx, cy, cw - 1, ch - 1);
+                }
+            }
+        }
+        else if (pane == null)
+        {
+            DrawText(g, " t: panes need libghostty-vt (see README)", left0, top, ToColor(theme.ForegroundRgb), themeBg);
+        }
+
+        // Border: bright when focused or when the grid cursor is on the pane (typing will go here).
+        Color border = ToColor(focused || cursorInside ? theme.SelectionBgRgb : theme.HeaderHighlightRgb);
+        using (var pen = new Pen(border, 1))
+        {
+            g.DrawRectangle(pen, rect.X, rect.Y, rect.W - 1, rect.H - 1);
+            if (focused) g.DrawRectangle(pen, rect.X + 1, rect.Y + 1, rect.W - 3, rect.H - 3);
+        }
+    }
+
+    /// <summary>Draw one terminal row: background runs first, then text runs, so wide glyphs aren't clipped.</summary>
+    private void DrawTerminalRow(Graphics g, Terminal.TerminalFrame frame, int y, int cols, int x0, int py)
+    {
+        int cw = _charWidth, ch = _charHeight;
+        for (int x = 0; x < cols;)
+        {
+            int bg = frame[y, x].Bg;
+            int start = x;
+            while (x < cols && frame[y, x].Bg == bg) x++;
+            if (bg == frame.DefaultBg) continue;
+            using var brush = new SolidBrush(RgbColor(bg));
+            g.FillRectangle(brush, x0 + start * cw, py, (x - start) * cw, ch);
+        }
+
+        const TextFormatFlags flags = TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix;
+        var run = new System.Text.StringBuilder();
+        for (int x = 0; x < cols;)
+        {
+            ref var cell = ref frame[y, x];
+            if (cell.Text == null || cell.Text == " " || (cell.Attr & Terminal.CellAttr.Invisible) != 0) { x++; continue; }
+
+            int fg = cell.Fg;
+            bool bold = (cell.Attr & Terminal.CellAttr.Bold) != 0;
+            bool underline = (cell.Attr & Terminal.CellAttr.Underline) != 0;
+            Font font = bold ? _boldFont ?? _monoFont : _monoFont;
+            int start = x;
+            if (!IsGridNarrow(cell.Text))
+            {
+                // GDI font linking supplies glyphs the grid font lacks; place each at its own cell.
+                TextRenderer.DrawText(g, cell.Text, font, new Point(x0 + x * cw, py), RgbColor(fg), flags);
+                x++;
+            }
+            else
+            {
+                run.Clear();
+                while (x < cols)
+                {
+                    ref var c2 = ref frame[y, x];
+                    if (c2.Text != null && (c2.Fg != fg || ((c2.Attr & Terminal.CellAttr.Bold) != 0) != bold
+                        || ((c2.Attr & Terminal.CellAttr.Underline) != 0) != underline || !IsGridNarrow(c2.Text))) break;
+                    run.Append((c2.Attr & Terminal.CellAttr.Invisible) != 0 ? " " : c2.Text ?? " ");
+                    x++;
+                }
+                string s = run.ToString().TrimEnd();
+                if (s.Length > 0) TextRenderer.DrawText(g, s, font, new Point(x0 + start * cw, py), RgbColor(fg), flags);
+            }
+            if (underline)
+            {
+                using var pen = new Pen(RgbColor(fg), 1);
+                g.DrawLine(pen, x0 + start * cw, py + ch - 2, x0 + x * cw - 1, py + ch - 2);
+            }
+        }
+    }
+
+    private static bool IsGridNarrow(string text) =>
+        text.Length == 1 && (text[0] < 0x0250 || (text[0] >= 0x2500 && text[0] <= 0x259F));
+
+    private static Color RgbColor(int rgb) => Color.FromArgb((rgb >> 16) & 0xff, (rgb >> 8) & 0xff, rgb & 0xff);
+
+    private TerminalRect? TerminalAt(int row, int col)
+    {
+        foreach (var t in _terminalRects)
+            if (row >= t.Row && row < t.Row + t.SpanRows && col >= t.Col && col < t.Col + t.SpanCols)
+                return t;
+        return null;
+    }
+
+    private TerminalRect? TerminalAtPixel(int px, int py)
+    {
+        foreach (var t in _terminalRects)
+            if (px >= t.X && px < t.X + t.W && py >= t.Y && py < t.Y + t.H)
+                return t;
+        return null;
+    }
+
+    /// <summary>Give the keyboard to a pane (restarting its shell if it exited).</summary>
+    private void FocusTerminal(int row, int col)
+    {
+        var pane = _terminals.Get(row, col);
+        if (pane != null && pane.HasExited) _terminals.Restart(row, col);
+        _focusedTerminal = (row, col);
+        _escHeld = _escUsed = false;
+        _selection.Clear();
+        _grid.SelectCell(row, col);
+    }
+
+    private void UnfocusTerminal()
+    {
+        _focusedTerminal = null;
+        _escHeld = _escUsed = false;
+    }
+
+    /// <summary>
+    /// Ctrl+` on the grid: turn the selected block (or a default-sized block at the cursor) into a
+    /// terminal pane and focus it. On a cell already inside a pane, just focus that pane.
+    /// </summary>
+    private void CreateTerminalFromSelection()
+    {
+        var (curRow, curCol) = _grid.GetCurrentCell();
+        if (TerminalAt(curRow, curCol) is { } existing)
+        {
+            FocusTerminal(existing.Row, existing.Col);
+            return;
+        }
+
+        int r1 = curRow, r2 = curRow, c1 = curCol, c2 = curCol;
+        foreach (var (r, c) in _selection)
+        {
+            r1 = Math.Min(r1, r); r2 = Math.Max(r2, r);
+            c1 = Math.Min(c1, c); c2 = Math.Max(c2, c);
+        }
+        int cols = c2 - c1 + 1, rows = r2 - r1 + 1;
+        if (cols == 1 && rows == 1)
+        {
+            // Default block: wide enough for a comfortable terminal (columns auto-fit their
+            // content, so a fixed column count can be very narrow), DefaultTerminalRows tall.
+            int[] widths = GetColumnWidths();
+            int chars = widths[c1];
+            cols = 1;
+            while (c1 + cols < _grid.ColumnCount && (chars < DefaultTerminalChars || cols < DefaultTerminalCols))
+                chars += widths[c1 + cols++];
+            rows = Math.Min(DefaultTerminalRows, _grid.RowCount - r1);
+        }
+        if (rows < 2) rows = Math.Min(2, _grid.RowCount - r1);   // title row + one terminal row
+        if (rows < 2) return;
+
+        _grid.SetCellValue(r1, c1, CellPrefix.FormatTerminal(cols, rows));
+        FocusTerminal(r1, c1);
+    }
+
+    /// <summary>Keys while a pane is focused. Everything goes to the shell except the leave chords.</summary>
+    private void HandleTerminalKeyDown(KeyEventArgs e)
+    {
+        var (row, col) = _focusedTerminal!.Value;
+        var pane = _terminals.Get(row, col);
+        e.Handled = true;
+
+        if (e.KeyCode == Keys.Escape)
+        {
+            // Held Esc (auto-repeat) is ignored; a tap is sent on release so Esc+q never reaches the shell.
+            if (!_escHeld) { _escHeld = true; _escUsed = false; }
+            e.SuppressKeyPress = true;
+            return;
+        }
+        if (_escHeld && e.KeyCode == Keys.Q)
+        {
+            _escUsed = true;
+            e.SuppressKeyPress = true;
+            UnfocusTerminal();
+            return;
+        }
+        if (_escHeld && !_escUsed)
+        {
+            // Esc then another key while Esc is still down: deliver the Esc first, in order.
+            _escUsed = true;
+            pane?.SendKey(Terminal.TermKey.Escape, Terminal.TermMods.None, "", 0);
+        }
+
+        if (e.Control && e.KeyCode == Keys.Oemtilde) { e.SuppressKeyPress = true; UnfocusTerminal(); return; }
+        if (pane == null) { e.SuppressKeyPress = true; return; }
+
+        if (pane.HasExited)
+        {
+            if (e.KeyCode == Keys.Enter) _terminals.Restart(row, col);
+            e.SuppressKeyPress = true;
+            return;
+        }
+
+        if ((e.Control && e.Shift && e.KeyCode == Keys.V) || (e.Shift && e.KeyCode == Keys.Insert))
+        {
+            e.SuppressKeyPress = true;
+            if (Clipboard.ContainsText()) pane.Paste(Clipboard.GetText());
+            return;
+        }
+        if (e.Shift && !e.Control && e.KeyCode is Keys.PageUp or Keys.PageDown)
+        {
+            e.SuppressKeyPress = true;
+            int half = Math.Max(1, pane.Rows / 2);
+            pane.Scroll(e.KeyCode == Keys.PageUp ? -half : half);
+            return;
+        }
+
+        if (_terminalInput.KeyDown(pane, e)) e.SuppressKeyPress = true;
+    }
+
+    private void OnFormKeyUp(object? sender, KeyEventArgs e)
+    {
+        if (_focusedTerminal is not { } f) { _escHeld = false; return; }
+        if (e.KeyCode != Keys.Escape || !_escHeld) return;
+        _escHeld = false;
+        if (!_escUsed)
+            _terminals.Get(f.row, f.col)?.SendKey(Terminal.TermKey.Escape, Terminal.TermMods.None, "", 0);
+        _escUsed = false;
+    }
+
+    private void OnFormMouseWheel(object? sender, MouseEventArgs e)
+    {
+        if (TerminalAtPixel(e.X, e.Y) is not { } term) return;
+        int lines = Math.Max(1, Math.Abs(e.Delta) / 120 * 3);
+        _terminals.Get(term.Row, term.Col)?.Scroll(e.Delta > 0 ? -lines : lines);
+        Invalidate();
     }
 
     private static Color ToColor((int r, int g, int b) rgb)
@@ -921,6 +1296,14 @@ internal class DesktopForm : DesktopFormBase
     
     private void OnFormKeyDown(object? sender, KeyEventArgs e)
     {
+        // A focused terminal pane owns the keyboard.
+        if (_focusedTerminal != null)
+        {
+            HandleTerminalKeyDown(e);
+            Invalidate();
+            return;
+        }
+
         // Find & Replace state machine
         if (_replacePhase != ReplacePhase.None)
         {
@@ -1103,6 +1486,9 @@ internal class DesktopForm : DesktopFormBase
         {
             switch (e.KeyCode)
             {
+                case Keys.Oemtilde:
+                    CreateTerminalFromSelection();
+                    break;
                 case Keys.Q: Close(); return;
                 case Keys.D:
                     _grid.DeleteSelectedRow();
@@ -1261,6 +1647,11 @@ internal class DesktopForm : DesktopFormBase
                         RebuildGrid();
                     }
                     break;
+                case Keys.Back when _selection.Count == 0 && TerminalAt(_grid.GetCurrentCell().row, _grid.GetCurrentCell().col) is { } bsPane:
+                    // A stray Backspace must not rewrite the hidden t: cell; it goes to the shell.
+                    FocusTerminal(bsPane.Row, bsPane.Col);
+                    HandleTerminalKeyDown(e);
+                    return;
                 case Keys.Back:
                     {
                         var val = _grid.GetSelectedCellValue();
@@ -1366,6 +1757,28 @@ internal class DesktopForm : DesktopFormBase
 
     private void OnFormKeyPress(object? sender, KeyPressEventArgs e)
     {
+        if (_focusedTerminal is { } ft)
+        {
+            if (_terminals.Get(ft.row, ft.col) is { HasExited: false } pane)
+                _terminalInput.KeyPress(pane, e.KeyChar);
+            e.Handled = true;
+            return;
+        }
+
+        // Typing on a terminal pane goes to its shell instead of editing the hidden t: cell
+        // (a stray keystroke must not rewrite the cell and kill the session). F2 still edits it.
+        if (e.KeyChar >= 32 && _replacePhase == ReplacePhase.None && !_gotoMode && !_searching
+            && !_editMode.IsActive() && _selection.Count == 0
+            && TerminalAt(_grid.GetCurrentCell().row, _grid.GetCurrentCell().col) is { } typedPane)
+        {
+            FocusTerminal(typedPane.Row, typedPane.Col);
+            if (_terminals.Get(typedPane.Row, typedPane.Col) is { HasExited: false } pane)
+                _terminalInput.KeyPress(pane, e.KeyChar);
+            e.Handled = true;
+            Invalidate();
+            return;
+        }
+
         if (e.KeyChar >= 32 && e.KeyChar <= 126)
         {
             if (_replacePhase == ReplacePhase.FindInput)
@@ -1428,6 +1841,15 @@ internal class DesktopForm : DesktopFormBase
 
     private void OnFormMouseDown(object? sender, MouseEventArgs e)
     {
+        // Clicking a terminal pane focuses it; clicking elsewhere leaves it.
+        if (TerminalAtPixel(e.X, e.Y) is { } term)
+        {
+            if (e.Button == MouseButtons.Left) FocusTerminal(term.Row, term.Col);
+            Invalidate();
+            return;
+        }
+        if (_focusedTerminal != null) UnfocusTerminal();
+
         var cell = HitTestCell(e.X, e.Y);
         if (cell is null) return;
         var (row, col) = cell.Value;
@@ -1486,6 +1908,8 @@ internal class DesktopForm : DesktopFormBase
     {
         base.OnFormClosing(sender, e);
         _processManager.StopAll();
+        _terminalTimer.Stop();
+        _terminals.Dispose();
         _grid.SaveToCsv(AutoSavePath);
         _trayIcon.Visible = false;
     }
@@ -1499,6 +1923,8 @@ internal class DesktopForm : DesktopFormBase
             _autoSaveTimer?.Dispose();
             _csvReloadTimer?.Dispose();
             _processManager.Dispose();
+            _terminalTimer.Dispose();
+            _terminals.Dispose();
             _extensionManager.Dispose();
             _monoFont.Dispose();
             _boldFont?.Dispose();

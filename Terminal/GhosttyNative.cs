@@ -58,6 +58,197 @@ internal static class GhosttyNative
     [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern IntPtr ghostty_version();
 
+    // ==== Interactive terminal panes (t: cells) ====
+    // Everything below binds the parts of libghostty-vt an interactive terminal needs: effects
+    // (replies to the pty), the render state (styled cells + cursor), the key encoder and paste
+    // encoding. Values are from include/ghostty/vt/*.h of vt-1.0.0.
+
+    public const int NoValue = -4;
+    public const int OutOfSpace = -3;
+
+    // GhosttyTerminalOption
+    public const int OptUserdata = 1;
+    public const int OptWritePty = 2;
+    public const int OptTitleChanged = 6;
+    public const int OptColorForeground = 12;
+    public const int OptColorBackground = 13;
+
+    // GhosttyTerminalData
+    public const int DataMode = 37;
+
+    // GhosttyRenderStateData
+    public const int RsDataCols = 1;
+    public const int RsDataRows = 2;
+    public const int RsDataRowIterator = 4;
+    public const int RsDataColorBackground = 5;
+    public const int RsDataColorForeground = 6;
+    public const int RsDataCursorVisible = 11;
+    public const int RsDataCursorViewportHasValue = 14;
+    public const int RsDataCursorViewportX = 15;
+    public const int RsDataCursorViewportY = 16;
+
+    // GhosttyRenderStateRowData
+    public const int RsRowDataCells = 3;
+
+    // GhosttyRenderStateRowCellsData
+    public const int RsCellStyle = 2;
+    public const int RsCellBgColor = 5;
+    public const int RsCellFgColor = 6;
+    public const int RsCellHasStyling = 8;
+    public const int RsCellGraphemesUtf8 = 9;
+
+    // GhosttyStyleFlags
+    public const ushort StyleBold = 1 << 0;
+    public const ushort StyleItalic = 1 << 1;
+    public const ushort StyleFaint = 1 << 2;
+    public const ushort StyleInverse = 1 << 4;
+    public const ushort StyleInvisible = 1 << 5;
+    public const ushort StyleStrikethrough = 1 << 6;
+    public const int StyleUnderlineShift = 8;
+    public const ushort StyleUnderlineMask = 0x7 << 8;
+
+    // GhosttyKeyAction
+    public const int KeyActionRelease = 0;
+    public const int KeyActionPress = 1;
+    public const int KeyActionRepeat = 2;
+
+    // GhosttyMods
+    public const ushort ModShift = 1 << 0;
+    public const ushort ModCtrl = 1 << 1;
+    public const ushort ModAlt = 1 << 2;
+    public const ushort ModSuper = 1 << 3;
+
+    // GhosttyTerminalScrollViewportTag
+    public const int ScrollViewportBottom = 1;
+    public const int ScrollViewportDelta = 2;
+
+    // DEC private mode 2004 (bracketed paste), as a GhosttyMode (ansi bit clear).
+    public const ushort ModeBracketedPaste = 2004;
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct ColorRgb { public byte R, G, B; }
+
+    /// <summary>GhosttyStyle: three 4-byte GhosttyStyleColor values, then flags + reserved (16 bytes).</summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Style
+    {
+        public byte FgTag, FgV0, FgV1, FgV2;
+        public byte BgTag, BgV0, BgV1, BgV2;
+        public byte UlTag, UlV0, UlV1, UlV2;
+        public ushort Flags;
+        public ushort Reserved;
+    }
+
+    /// <summary>GhosttyBuffer.</summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct GBuffer { public IntPtr Ptr; public nuint Cap; public nuint Len; }
+
+    /// <summary>GhosttyString.</summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct GString { public IntPtr Ptr; public nuint Len; }
+
+    /// <summary>GhosttyTerminalModeConfig.</summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct ModeConfig { public ushort Mode; [MarshalAs(UnmanagedType.U1)] public bool Value; }
+
+    /// <summary>GhosttyTerminalScrollViewport: enum tag + 16-byte union.</summary>
+    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    public struct ScrollViewport
+    {
+        [FieldOffset(0)] public int Tag;
+        [FieldOffset(8)] public nint Delta;
+    }
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void WritePtyFn(IntPtr terminal, IntPtr userdata, IntPtr data, nuint len);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void TitleChangedFn(IntPtr terminal, IntPtr userdata);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern int ghostty_terminal_get(IntPtr terminal, int data, IntPtr outValue);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern int ghostty_terminal_scroll_viewport(IntPtr terminal, ScrollViewport behavior);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern int ghostty_render_state_new(IntPtr allocator, out IntPtr state);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern void ghostty_render_state_free(IntPtr state);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern int ghostty_render_state_update(IntPtr state, IntPtr terminal);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern int ghostty_render_state_get(IntPtr state, int data, IntPtr outValue);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern int ghostty_render_state_row_iterator_new(IntPtr allocator, out IntPtr iterator);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern void ghostty_render_state_row_iterator_free(IntPtr iterator);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    [return: MarshalAs(UnmanagedType.U1)]
+    public static extern bool ghostty_render_state_row_iterator_next(IntPtr iterator);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern int ghostty_render_state_row_get(IntPtr iterator, int data, IntPtr outValue);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern int ghostty_render_state_row_cells_new(IntPtr allocator, out IntPtr cells);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    [return: MarshalAs(UnmanagedType.U1)]
+    public static extern bool ghostty_render_state_row_cells_next(IntPtr cells);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern int ghostty_render_state_row_cells_get(IntPtr cells, int data, IntPtr outValue);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern void ghostty_render_state_row_cells_free(IntPtr cells);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern int ghostty_key_encoder_new(IntPtr allocator, out IntPtr encoder);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern void ghostty_key_encoder_free(IntPtr encoder);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern int ghostty_key_encoder_set_from_terminal(IntPtr encoder, IntPtr terminal);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern int ghostty_key_encoder_encode(IntPtr encoder, IntPtr keyEvent, byte[] buf, nuint bufLen, out nuint written);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern int ghostty_key_event_new(IntPtr allocator, out IntPtr keyEvent);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern void ghostty_key_event_free(IntPtr keyEvent);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern int ghostty_key_event_set_action(IntPtr keyEvent, int action);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern int ghostty_key_event_set_key(IntPtr keyEvent, int key);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern int ghostty_key_event_set_mods(IntPtr keyEvent, ushort mods);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern int ghostty_key_event_set_consumed_mods(IntPtr keyEvent, ushort mods);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern int ghostty_key_event_set_utf8(IntPtr keyEvent, GString utf8);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern int ghostty_key_event_set_unshifted_codepoint(IntPtr keyEvent, uint codepoint);
+
+    [DllImport(Lib, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern int ghostty_paste_encode(byte[] data, nuint dataLen, [MarshalAs(UnmanagedType.U1)] bool bracketed,
+        byte[]? buf, nuint bufLen, out nuint written);
+
     // ---- helpers: pass a value by pointer ----
 
     public static int TerminalSetNuint(IntPtr terminal, int option, nuint value)

@@ -11,7 +11,7 @@ namespace ExcelConsole;
 /// Raw output bytes are fed to a VT emulator (<see cref="IVtScreen"/>) which maintains
 /// the final screen + scrollback.
 /// </summary>
-internal sealed class ConPtyProcess : IDisposable
+internal sealed class ConPtyProcess : ITerminalPty
 {
     #region P/Invoke
 
@@ -115,6 +115,23 @@ internal sealed class ConPtyProcess : IDisposable
 
     private IVtScreen? _screen;
 
+    // Interactive (t: pane) mode: raw output goes to this sink instead of a VtScreen.
+    private Action<byte[], int>? _outputSink;
+    private FileStream? _input;
+    private readonly object _writeLock = new();
+
+    private const uint CREATE_UNICODE_ENVIRONMENT = 0x00000400;
+
+    public int ExitCode
+    {
+        get
+        {
+            if (_hProcess == IntPtr.Zero) return -1;
+            GetExitCodeProcess(_hProcess, out uint code);
+            return code == STILL_ACTIVE ? -1 : unchecked((int)code);
+        }
+    }
+
     public bool HasNewOutput => _screen?.IsDirty ?? false;
 
     public bool HasExited
@@ -130,7 +147,59 @@ internal sealed class ConPtyProcess : IDisposable
     /// <summary>
     /// Starts the command in a pseudo console. Returns true on success.
     /// </summary>
-    public bool Start(string command, int cols = 120, int rows = 30)
+    public bool Start(string command, int cols = 120, int rows = 30) =>
+        StartCore($"cmd.exe /c {command}", cols, rows, null, null);
+
+    /// <summary>
+    /// Start an interactive shell for a t: pane: pwsh if installed, else Windows PowerShell, else
+    /// %COMSPEC%. Output goes to <paramref name="onOutput"/> (reader thread, reused buffer).
+    /// The shell starts in the user profile directory and inherits QuickSheet's environment minus
+    /// parent agent-session variables.
+    /// </summary>
+    public bool StartShell(int cols, int rows, Action<byte[], int> onOutput)
+    {
+        _outputSink = onOutput;
+        string shell = FindShell();
+        string home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        return StartCore(shell, cols, rows, BuildEnvironmentBlock(), Directory.Exists(home) ? home : null);
+    }
+
+    private static string FindShell()
+    {
+        foreach (var exe in new[] { "pwsh.exe", "powershell.exe" })
+        {
+            foreach (var dir in (Environment.GetEnvironmentVariable("PATH") ?? "").Split(';', StringSplitOptions.RemoveEmptyEntries))
+            {
+                try
+                {
+                    string full = Path.Combine(dir.Trim(), exe);
+                    if (Path.IsPathFullyQualified(full) && File.Exists(full)) return $"\"{full}\" -NoLogo";
+                }
+                catch { }
+            }
+        }
+        return Environment.GetEnvironmentVariable("COMSPEC") is { Length: > 0 } c ? $"\"{c}\"" : "cmd.exe";
+    }
+
+    /// <summary>Unicode environment block: sorted "K=V\0" entries, then a final "\0".</summary>
+    private static string BuildEnvironmentBlock()
+    {
+        var vars = new SortedDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        foreach (System.Collections.DictionaryEntry e in Environment.GetEnvironmentVariables())
+        {
+            string k = (string)e.Key;
+            if (k.Length == 0 || k.Contains('=') || ShellEnvironment.IsExcluded(k)) continue;
+            vars[k] = (string?)e.Value ?? "";
+        }
+        vars["TERM_PROGRAM"] = "QuickSheet";
+        vars["COLORTERM"] = "truecolor";
+        var sb = new System.Text.StringBuilder();
+        foreach (var (k, v) in vars) sb.Append(k).Append('=').Append(v).Append('\0');
+        sb.Append('\0');
+        return sb.ToString();
+    }
+
+    private bool StartCore(string cmdLine, int cols, int rows, string? environment, string? workingDir)
     {
         var sa = new SECURITY_ATTRIBUTES
         {
@@ -187,10 +256,20 @@ internal sealed class ConPtyProcess : IDisposable
         si.StartupInfo.cb = Marshal.SizeOf<STARTUPINFOEX>();
         si.lpAttributeList = _attrList;
 
-        string cmdLine = $"cmd.exe /c {command}";
-
-        if (!CreateProcessW(null, cmdLine, IntPtr.Zero, IntPtr.Zero, false,
-            EXTENDED_STARTUPINFO_PRESENT, IntPtr.Zero, null, ref si, out var pi))
+        IntPtr envBlock = environment == null ? IntPtr.Zero : Marshal.StringToHGlobalUni(environment);
+        bool created;
+        PROCESS_INFORMATION pi;
+        try
+        {
+            uint flags = EXTENDED_STARTUPINFO_PRESENT | (envBlock != IntPtr.Zero ? CREATE_UNICODE_ENVIRONMENT : 0);
+            created = CreateProcessW(null, cmdLine, IntPtr.Zero, IntPtr.Zero, false,
+                flags, envBlock, workingDir, ref si, out pi);
+        }
+        finally
+        {
+            if (envBlock != IntPtr.Zero) Marshal.FreeHGlobal(envBlock);
+        }
+        if (!created)
         {
             Cleanup();
             return false;
@@ -201,7 +280,10 @@ internal sealed class ConPtyProcess : IDisposable
 
         cols = Math.Clamp(cols, 1, short.MaxValue);
         rows = Math.Clamp(rows, 1, short.MaxValue);
-        _screen = VtScreen.Create(cols, rows, MaxLines);
+        if (_outputSink == null)
+            _screen = VtScreen.Create(cols, rows, MaxLines);
+        else
+            _input = new FileStream(new SafeFileHandle(_inputWritePipe, ownsHandle: false), FileAccess.Write, 1, false);
 
         _readerThread = new Thread(ReadOutput) { IsBackground = true, Name = "ConPTY-Reader" };
         _readerThread.Start();
@@ -224,7 +306,8 @@ internal sealed class ConPtyProcess : IDisposable
                 catch { break; }
                 if (n == 0) break;
 
-                _screen?.Write(buffer.AsSpan(0, n));
+                if (_outputSink is { } sink) sink(buffer, n);
+                else _screen?.Write(buffer.AsSpan(0, n));
             }
         }
         catch { }
@@ -234,6 +317,16 @@ internal sealed class ConPtyProcess : IDisposable
     {
         var t = _screen?.GetText();
         return string.IsNullOrEmpty(t) ? null : t;
+    }
+
+    /// <summary>Write input to the shell (keys, pastes, terminal replies). Thread-safe.</summary>
+    public void Write(ReadOnlySpan<byte> data)
+    {
+        lock (_writeLock)
+        {
+            if (_disposed || _input == null) return;
+            try { _input.Write(data); _input.Flush(); } catch { }
+        }
     }
 
     /// <summary>Resize the pseudo console and the emulator screen.</summary>
@@ -263,6 +356,8 @@ internal sealed class ConPtyProcess : IDisposable
     {
         if (_disposed) return;
         _disposed = true;
+
+        lock (_writeLock) { _input?.Dispose(); _input = null; }
 
         // Close pseudo console first — breaks the reader pipe
         if (_hPC != IntPtr.Zero) { ClosePseudoConsole(_hPC); _hPC = IntPtr.Zero; }
