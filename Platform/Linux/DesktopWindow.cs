@@ -1870,14 +1870,15 @@ internal class DesktopWindow : IDisposable
     }
 
     private GridManager.ResolvedDynamicValue ResolveDynamicValue(
-        int row, int col, int ptyCols = 120, int ptyRows = 30)
+        int row, int col, int? ptyCols = null, int? ptyRows = null)
     {
-        int commandCols = CellPrefix.IsJson(_grid.GetCellValue(row, col))
-            ? 4096
-            : ptyCols;
+        bool isJson = CellPrefix.IsJson(_grid.GetCellValue(row, col));
+        int commandCols = isJson ? 4096 : (ptyCols ?? 120);
+        int commandRows = ptyRows ?? 30;
+        bool resize = ptyCols.HasValue && !isJson;
         return _grid.ResolveDynamicValue(row, col, (processRow, processCol, command) =>
         {
-            _inlineProcesses.EnsureRunning(processRow, processCol, command, commandCols, ptyRows);
+            _inlineProcesses.EnsureRunning(processRow, processCol, command, commandCols, commandRows, resize);
             return _inlineProcesses.GetOutput(processRow, processCol);
         });
     }

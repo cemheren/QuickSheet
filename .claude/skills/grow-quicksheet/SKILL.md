@@ -9,8 +9,8 @@ description: >
 
 # Mission
 
-Grow GitHub stars on github.com/cemheren/QuickSheet. The project is a zero-dependency
-.NET terminal spreadsheet that also runs as a Linux/Windows desktop wallpaper. It is
+Grow GitHub stars on github.com/cemheren/QuickSheet. The project is a zero-NuGet
+.NET terminal spreadsheet (one native dependency: libghostty-vt) that also runs as a Linux/Windows desktop wallpaper. It is
 genuinely useful — job is to make more people aware of it and make the first-touch
 experience better.
 

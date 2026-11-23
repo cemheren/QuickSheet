@@ -35,4 +35,113 @@
     <None Remove="Platform/Linux/**" />
   </ItemGroup>
 
+  <!-- Build helper trees are never compiled or shipped as content. -->
+  <ItemGroup>
+    <Compile Remove="native/**;scripts/**" />
+    <None Remove="native/**;scripts/**" />
+  </ItemGroup>
+
+  <!-- libghostty-vt native library (optional; the app falls back to basic ANSI stripping without it). Not a NuGet package.
+       Source, in priority order:
+         1. native/<rid>/<file> from scripts/build-libghostty.* (local override, never downloaded over);
+         2. the release asset pinned in libghostty.props, downloaded and SHA-256 verified into obj/libghostty/.
+       Opt out of downloading with -p:QuickSheetLibGhosttyDownload=false. Network/verification problems never fail the build. -->
+  <Import Project="libghostty.props" />
+
+  <PropertyGroup>
+    <QuickSheetLibGhosttyDownload Condition="'$(QuickSheetLibGhosttyDownload)' == ''">true</QuickSheetLibGhosttyDownload>
+
+    <!-- Not an error when the download fails (offline builds), even with -warnaserror. -->
+    <MSBuildWarningsAsMessages>$(MSBuildWarningsAsMessages);MSB3923</MSBuildWarningsAsMessages>
+
+    <!-- Target OS and architecture. With a RuntimeIdentifier: OS from its prefix (win-*, linux-*; musl/bionic and
+         anything else are unsupported), arch = part after the last '-'. Without one: host OS, and the SDK's host
+         RID (falling back to the process architecture) for the arch. -->
+    <_QsRid>$(RuntimeIdentifier)</_QsRid>
+    <QsNativeOs Condition="'$(_QsRid)' != '' AND $(_QsRid.StartsWith('win-'))">windows</QsNativeOs>
+    <QsNativeOs Condition="'$(_QsRid)' != '' AND $(_QsRid.StartsWith('linux-')) AND !$(_QsRid.StartsWith('linux-musl-')) AND !$(_QsRid.StartsWith('linux-bionic-'))">linux</QsNativeOs>
+    <QsNativeOs Condition="'$(_QsRid)' == '' AND $([MSBuild]::IsOSPlatform('Windows'))">windows</QsNativeOs>
+    <QsNativeOs Condition="'$(_QsRid)' == '' AND $([MSBuild]::IsOSPlatform('Linux'))">linux</QsNativeOs>
+
+    <_QsArchRid Condition="'$(_QsRid)' != ''">$(_QsRid)</_QsArchRid>
+    <_QsArchRid Condition="'$(_QsRid)' == ''">$(NetCoreSdkRuntimeIdentifier)</_QsArchRid>
+    <QsNativeArch Condition="$(_QsArchRid.Contains('-'))">$(_QsArchRid.Substring($([MSBuild]::Add($(_QsArchRid.LastIndexOf('-')), 1))))</QsNativeArch>
+    <QsNativeArch Condition="'$(QsNativeArch)' == '' AND '$(_QsRid)' == ''">$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString().ToLowerInvariant())</QsNativeArch>
+
+    <!-- Only x64 and arm64 on Windows/Linux are supported; everything else gets no native library and no warning. -->
+    <QsNativeSupportedArch Condition="'$(QsNativeArch)' == 'x64' OR '$(QsNativeArch)' == 'arm64'">true</QsNativeSupportedArch>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(QsNativeSupportedArch)' == 'true' AND '$(QsNativeOs)' == 'windows'">
+    <QsNativeRid>win-$(QsNativeArch)</QsNativeRid>
+    <QsNativeFileName>ghostty-vt.dll</QsNativeFileName>
+    <QsNativeAsset>ghostty-vt-win-$(QsNativeArch).dll</QsNativeAsset>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(QsNativeSupportedArch)' == 'true' AND '$(QsNativeOs)' == 'linux'">
+    <QsNativeRid>linux-$(QsNativeArch)</QsNativeRid>
+    <QsNativeFileName>libghostty-vt.so.1</QsNativeFileName>
+    <QsNativeAsset>libghostty-vt-linux-$(QsNativeArch).so.1</QsNativeAsset>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(QsNativeRid)' != ''">
+    <!-- = LibGhosttySha256_<rid with '-' -> '_'>; MSBuild has no indirect property lookup, so select explicitly. -->
+    <QsNativeSha256 Condition="'$(QsNativeRid)' == 'linux-x64'">$(LibGhosttySha256_linux_x64)</QsNativeSha256>
+    <QsNativeSha256 Condition="'$(QsNativeRid)' == 'linux-arm64'">$(LibGhosttySha256_linux_arm64)</QsNativeSha256>
+    <QsNativeSha256 Condition="'$(QsNativeRid)' == 'win-x64'">$(LibGhosttySha256_win_x64)</QsNativeSha256>
+    <QsNativeSha256 Condition="'$(QsNativeRid)' == 'win-arm64'">$(LibGhosttySha256_win_arm64)</QsNativeSha256>
+    <QsNativeLocalPath>$(MSBuildProjectDirectory)/native/$(QsNativeRid)/$(QsNativeFileName)</QsNativeLocalPath>
+    <QsNativeCacheDir>$([MSBuild]::NormalizeDirectory('$(MSBuildProjectDirectory)', '$(BaseIntermediateOutputPath)', 'libghostty', '$(LibGhosttyReleaseTag)', '$(QsNativeRid)'))</QsNativeCacheDir>
+  </PropertyGroup>
+
+  <!-- Local override from the build script. -->
+  <ItemGroup Condition="'$(QsNativeRid)' != '' AND Exists('$(QsNativeLocalPath)')">
+    <None Include="$(QsNativeLocalPath)" Link="$(QsNativeFileName)"
+          CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" Visible="false" />
+  </ItemGroup>
+
+  <Target Name="QsFetchLibGhostty" BeforeTargets="AssignTargetPaths"
+          Condition="'$(QsNativeRid)' != '' AND '$(QuickSheetLibGhosttyDownload)' != 'false' AND '$(DesignTimeBuild)' != 'true' AND !Exists('$(QsNativeLocalPath)')">
+    <PropertyGroup>
+      <_QsCache>$(QsNativeCacheDir)$(QsNativeFileName)</_QsCache>
+      <_QsTmpDir>$(QsNativeCacheDir)tmp/</_QsTmpDir>
+      <_QsTmp>$(_QsTmpDir)$(QsNativeAsset)</_QsTmp>
+      <_QsPin>$(QsNativeSha256.Trim().ToUpperInvariant())</_QsPin>
+    </PropertyGroup>
+
+    <Message Importance="high" Condition="'$(_QsPin)' == ''"
+             Text="libghostty-vt: no pinned hash for $(QsNativeRid) yet; skipping download (basic ANSI stripping will be used)." />
+
+    <!-- Re-verify a cached copy on every build; a bad one is deleted and re-downloaded below. -->
+    <GetFileHash Files="$(_QsCache)" Algorithm="SHA256" Condition="'$(_QsPin)' != '' AND Exists('$(_QsCache)')">
+      <Output TaskParameter="Hash" PropertyName="_QsCachedHash" />
+    </GetFileHash>
+    <Delete Files="$(_QsCache)" Condition="'$(_QsPin)' != '' AND Exists('$(_QsCache)') AND '$(_QsCachedHash.ToUpperInvariant())' != '$(_QsPin)'" />
+
+    <!-- Download into a temp name; only a verified file is moved to the cache path. -->
+    <Delete Files="$(_QsTmp)" Condition="'$(_QsPin)' != '' AND !Exists('$(_QsCache)')" />
+    <DownloadFile SourceUrl="$(LibGhosttyBaseUrl)$(QsNativeAsset)" DestinationFolder="$(_QsTmpDir)" DestinationFileName="$(QsNativeAsset)"
+                  Retries="2" Timeout="20000" ContinueOnError="true"
+                  Condition="'$(_QsPin)' != '' AND !Exists('$(_QsCache)')" />
+    <PropertyGroup>
+      <_QsDownloadOk Condition="'$(_QsPin)' != '' AND '$(MSBuildLastTaskResult)' == 'true' AND Exists('$(_QsTmp)')">true</_QsDownloadOk>
+    </PropertyGroup>
+    <Message Importance="high" Condition="'$(_QsPin)' != '' AND !Exists('$(_QsCache)') AND '$(_QsDownloadOk)' != 'true'"
+             Text="Could not download libghostty-vt ($(LibGhosttyBaseUrl)$(QsNativeAsset)); inline commands will use basic ANSI stripping. Build offline with -p:QuickSheetLibGhosttyDownload=false to silence." />
+
+    <GetFileHash Files="$(_QsTmp)" Algorithm="SHA256" Condition="'$(_QsDownloadOk)' == 'true'">
+      <Output TaskParameter="Hash" PropertyName="_QsTmpHash" />
+    </GetFileHash>
+    <Warning Condition="'$(_QsDownloadOk)' == 'true' AND '$(_QsTmpHash.ToUpperInvariant())' != '$(_QsPin)'"
+             Text="libghostty-vt: SHA-256 mismatch for $(QsNativeAsset) (expected $(_QsPin), got $(_QsTmpHash.ToUpperInvariant())); the downloaded file was discarded and NOT used. Inline commands will use basic ANSI stripping." />
+    <Copy SourceFiles="$(_QsTmp)" DestinationFiles="$(_QsCache)" ContinueOnError="true"
+          Condition="'$(_QsDownloadOk)' == 'true' AND '$(_QsTmpHash.ToUpperInvariant())' == '$(_QsPin)'" />
+    <Delete Files="$(_QsTmp)" Condition="Exists('$(_QsTmp)')" />
+
+    <ItemGroup Condition="'$(_QsPin)' != '' AND Exists('$(_QsCache)')">
+      <None Include="$(_QsCache)" Link="$(QsNativeFileName)"
+            CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" Visible="false" />
+    </ItemGroup>
+  </Target>
+
 </Project>

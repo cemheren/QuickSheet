@@ -14,7 +14,7 @@ Pick whichever the maintainer's current line style is. Two variants:
 
 **Compact:**
 ```markdown
-* [QuickSheet](https://github.com/cemheren/QuickSheet) — Interactive desktop wallpaper that's a live CSV spreadsheet grid. Cells run shell commands, sparklines, color highlights, and 40+ extensions over a JSON-lines protocol. MIT, zero deps, X11. `OpenSource`
+* [QuickSheet](https://github.com/cemheren/QuickSheet) — Interactive desktop wallpaper that's a live CSV spreadsheet grid. Cells run shell commands, sparklines, color highlights, and 40+ extensions over a JSON-lines protocol. MIT, zero NuGet packages, X11. `OpenSource`
 ```
 
 **Slightly longer with badges (some sections do this):**

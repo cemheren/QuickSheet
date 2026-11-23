@@ -14,7 +14,7 @@ Contribution: maintainer references `contributing.md` — submitter should skim 
 The list's existing style: `[Tool Name](link) - Brief description, sentence-case.`
 
 ```markdown
-* [QuickSheet](https://github.com/cemheren/QuickSheet) - Interactive CSV grid that doubles as your desktop wallpaper. Cells run shell commands, sparklines, hyperlinks. Cross-platform (Windows WorkerW, Linux X11). MIT, .NET 9, zero dependencies.
+* [QuickSheet](https://github.com/cemheren/QuickSheet) - Interactive CSV grid that doubles as your desktop wallpaper. Cells run shell commands, sparklines, hyperlinks. Cross-platform (Windows WorkerW, Linux X11). MIT, .NET 9, zero NuGet packages.
 ```
 
 Shorter variant (if the maintainer prefers terser entries):
@@ -36,7 +36,7 @@ Add QuickSheet (interactive CSV grid as desktop wallpaper)
 ```markdown
 Adds QuickSheet to the Tools section.
 
-QuickSheet is an open-source (.NET 9, MIT, zero dependencies) CSV editor that runs in two modes:
+QuickSheet is an open-source (.NET 9, MIT, zero NuGet packages) CSV editor that runs in two modes:
 
 - A normal terminal TUI in any shell — view/edit a CSV like sc-im / VisiData.
 - A `--desktop` mode that embeds the same CSV grid as your **interactive wallpaper** (Win32 WorkerW on Windows, `_NET_WM_WINDOW_TYPE_DESKTOP` on X11).

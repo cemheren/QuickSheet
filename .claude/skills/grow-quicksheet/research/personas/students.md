@@ -80,7 +80,7 @@ Headlines that land:
 - "[r/unixporn] [Hyprland] My CS-student wallpaper has my schedule, LeetCode streak, GitHub today, and grade tracker"
 - "I built a free, open-source student dashboard — it's your wallpaper"
 - "Stop opening Notion. Your assignments are on your wallpaper now."
-- "[r/csMajors] A free assignment + grade tracker that lives on your wallpaper (zero deps, MIT)"
+- "[r/csMajors] A free assignment + grade tracker that lives on your wallpaper (zero NuGet, MIT)"
 
 Avoid: "productivity" jargon, anything that sounds like a Notion competitor, AI-feature claims.
 

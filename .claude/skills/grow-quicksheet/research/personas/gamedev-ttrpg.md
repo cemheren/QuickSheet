@@ -103,7 +103,7 @@ Hero images — **two different ones**, because this is two personas under one p
 Headlines that land:
 
 - "I built a free, local-first DM screen for D&D — your wallpaper as your GM tools"
-- "Steam wishlist + itch revenue on my desktop wallpaper (zero deps, MIT)"
+- "Steam wishlist + itch revenue on my desktop wallpaper (zero NuGet, MIT)"
 - "Roll20 was eating my soul. Now my GM tools are 200 lines on my wallpaper."
 
 The OGL backlash + Roll20-fatigue is a real conversation hook for the GM half. **Frame as "your campaign data stays on your laptop."**
