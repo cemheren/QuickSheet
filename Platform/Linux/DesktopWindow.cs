@@ -1427,6 +1427,16 @@ internal class DesktopWindow : IDisposable
                 widths[c] = Math.Max(MinW, (int)(widths[c] * scale));
         }
 
+        // Stretch to fill the screen: widen the narrowest columns first so empty
+        // columns end up equal-width and content-sized columns keep their width.
+        int slack = availableChars - widths.Sum();
+        while (slack > 0 && widths.Length > 0)
+        {
+            int min = widths.Min();
+            for (int c = 0; c < widths.Length && slack > 0; c++)
+                if (widths[c] == min) { widths[c]++; slack--; }
+        }
+
         return widths;
     }
 
