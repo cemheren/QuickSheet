@@ -16,7 +16,7 @@ namespace ExcelConsole.Platform.Linux;
 /// Only libutil.so.1 + libc.so.6 — both present on every Linux. Zero NuGet deps
 /// per project policy.
 /// </summary>
-internal sealed class PtyProcess : IDisposable
+internal sealed class PtyProcess : ITerminalPty
 {
     #region P/Invoke
 
@@ -33,6 +33,7 @@ internal sealed class PtyProcess : IDisposable
     private const int WNOHANG = 1;
     private const int SIGTERM = 15;
     private const int SIGKILL = 9;
+    private const int SIGHUP = 1;
 
     [DllImport("libutil.so.1", SetLastError = true)]
     private static extern int openpty(out int amaster, out int aslave,
@@ -68,8 +69,30 @@ internal sealed class PtyProcess : IDisposable
 
     private static readonly IntPtr s_devNullPath = Marshal.StringToHGlobalAnsi("/dev/null");
     private const int O_RDONLY = 0;
+    private const int O_RDWR = 2;
+
+    [DllImport("libc.so.6", SetLastError = true)] private static extern long write(int fd, ref byte buf, ulong count);
+    [DllImport("libc.so.6", SetLastError = true)] private static extern int fcntl(int fd, int cmd, int arg);
+    [DllImport("libc.so.6", SetLastError = true)] private static extern int ptsname_r(int fd, byte[] buf, ulong buflen);
+    [DllImport("libc.so.6", SetLastError = true)] private static extern int posix_spawnattr_init(IntPtr attr);
+    [DllImport("libc.so.6", SetLastError = true)] private static extern int posix_spawnattr_destroy(IntPtr attr);
+    [DllImport("libc.so.6", SetLastError = true)] private static extern int posix_spawnattr_setflags(IntPtr attr, short flags);
+    [DllImport("libc.so.6", SetLastError = true)]
+    private static extern int posix_spawn_file_actions_addchdir_np(IntPtr fileActions, IntPtr path);
+
+    private const int F_SETFD = 2;
+    private const int FD_CLOEXEC = 1;
+    private const int EINTR = 4;
+    private const int EAGAIN = 11;
+    // glibc: new session for the child (setsid) before file actions run, so opening the
+    // pty slave makes it the controlling terminal (Ctrl+C → SIGINT, job control).
+    private const short POSIX_SPAWN_SETSID = 0x80;
 
     #endregion
+
+    // Interactive (t: pane) mode: raw output goes to this sink instead of a VtScreen.
+    private Action<byte[], int>? _outputSink;
+    private readonly object _writeLock = new();
 
     private const int MaxLines = 5000;
 
@@ -203,6 +226,104 @@ internal sealed class PtyProcess : IDisposable
         return true;
     }
 
+    /// <summary>
+    /// Start the user's interactive shell ($SHELL, else /bin/bash) in a new session with the pty
+    /// as its controlling terminal and stdin/stdout/stderr, for a t: pane. Output bytes go to
+    /// <paramref name="onOutput"/> (called on the reader thread with a reused buffer).
+    /// The child inherits QuickSheet's environment, with TERM/COLORTERM set for a 256/truecolor
+    /// xterm, and starts in $HOME.
+    /// </summary>
+    public bool StartShell(int cols, int rows, Action<byte[], int> onOutput)
+    {
+        _outputSink = onOutput;
+        var ws = new Winsize { ws_row = (ushort)Math.Max(1, rows), ws_col = (ushort)Math.Max(1, cols) };
+        if (openpty(out int master, out int slave, IntPtr.Zero, IntPtr.Zero, ref ws) != 0)
+            return false;
+        // Don't leak this pane's master into other panes' shells (that would keep the pty
+        // alive after its own shell exits).
+        fcntl(master, F_SETFD, FD_CLOEXEC);
+        fcntl(slave, F_SETFD, FD_CLOEXEC);
+
+        var nameBuf = new byte[128];
+        if (ptsname_r(master, nameBuf, (ulong)nameBuf.Length) != 0) { close(master); close(slave); return false; }
+        int nul = Array.IndexOf(nameBuf, (byte)0);
+        string slavePath = System.Text.Encoding.ASCII.GetString(nameBuf, 0, nul < 0 ? nameBuf.Length : nul);
+
+        string shell = Environment.GetEnvironmentVariable("SHELL") is { Length: > 0 } s && File.Exists(s) ? s : "/bin/bash";
+        string home = Environment.GetEnvironmentVariable("HOME") ?? "/";
+
+        var env = new List<string>();
+        foreach (System.Collections.DictionaryEntry e in Environment.GetEnvironmentVariables())
+        {
+            string k = (string)e.Key;
+            if (ShellEnvironment.IsExcluded(k)) continue;
+            env.Add($"{k}={e.Value}");
+        }
+        env.Add("TERM=xterm-256color");
+        env.Add("COLORTERM=truecolor");
+        env.Add("TERM_PROGRAM=QuickSheet");
+
+        var toFree = new List<IntPtr>();
+        IntPtr Str(string v) { var p = Marshal.StringToHGlobalAnsi(v); toFree.Add(p); return p; }
+        // StringToHGlobalAnsi is UTF-8 on Linux, so non-ASCII env values survive.
+        IntPtr pPath = Str(shell);
+        IntPtr[] argv = { Str(Path.GetFileName(shell)), IntPtr.Zero };
+        var envp = new IntPtr[env.Count + 1];
+        for (int i = 0; i < env.Count; i++) envp[i] = Str(env[i]);
+        IntPtr pSlave = Str(slavePath);
+        IntPtr pHome = Str(home);
+
+        IntPtr fa = Marshal.AllocHGlobal(256);
+        IntPtr attr = Marshal.AllocHGlobal(512);
+        int spawnRc = -1, pid = -1;
+        try
+        {
+            if (posix_spawn_file_actions_init(fa) != 0 || posix_spawnattr_init(attr) != 0)
+            { close(master); close(slave); return false; }
+            posix_spawnattr_setflags(attr, POSIX_SPAWN_SETSID);
+            // fd 0 = slave opened by path after setsid → becomes the controlling tty.
+            posix_spawn_file_actions_addopen(fa, 0, pSlave, O_RDWR, 0);
+            posix_spawn_file_actions_adddup2(fa, 0, 1);
+            posix_spawn_file_actions_adddup2(fa, 0, 2);
+            try { posix_spawn_file_actions_addchdir_np(fa, pHome); } catch (EntryPointNotFoundException) { }
+            spawnRc = posix_spawn(out pid, pPath, fa, attr, argv, envp);
+            posix_spawn_file_actions_destroy(fa);
+            posix_spawnattr_destroy(attr);
+        }
+        finally
+        {
+            Marshal.FreeHGlobal(fa);
+            Marshal.FreeHGlobal(attr);
+            foreach (var p in toFree) Marshal.FreeHGlobal(p);
+        }
+
+        close(slave);
+        if (spawnRc != 0) { close(master); return false; }
+
+        _masterFd = master;
+        _pid = pid;
+        _readerThread = new Thread(ReadLoop) { IsBackground = true, Name = "PTY-Shell-Reader" };
+        _readerThread.Start();
+        return true;
+    }
+
+    /// <summary>Write input to the program (keys, pastes, terminal replies). Thread-safe.</summary>
+    public void Write(ReadOnlySpan<byte> data)
+    {
+        lock (_writeLock)
+        {
+            int off = 0;
+            while (off < data.Length && _masterFd >= 0 && !_disposed)
+            {
+                long n = write(_masterFd, ref MemoryMarshal.GetReference(data[off..]), (ulong)(data.Length - off));
+                if (n > 0) { off += (int)n; continue; }
+                int err = Marshal.GetLastPInvokeError();
+                if (n < 0 && (err == EINTR || err == EAGAIN)) { Thread.Sleep(1); continue; }
+                break;
+            }
+        }
+    }
+
     private static void FreeAll(params IntPtr[] ptrs)
     {
         foreach (var p in ptrs) if (p != IntPtr.Zero) Marshal.FreeHGlobal(p);
@@ -217,7 +338,8 @@ internal sealed class PtyProcess : IDisposable
             {
                 long n = read(_masterFd, buf, (ulong)buf.Length);
                 if (n <= 0) break; // EOF or EIO (slave hung up) → child exited
-                _screen?.Write(buf.AsSpan(0, (int)n));
+                if (_outputSink is { } sink) sink(buf, (int)n);
+                else _screen?.Write(buf.AsSpan(0, (int)n));
             }
         }
         catch { }
@@ -265,7 +387,19 @@ internal sealed class PtyProcess : IDisposable
         if (_disposed) return;
         _disposed = true;
 
-        if (_pid > 0 && !_exited)
+        if (_pid > 0 && !_exited && _outputSink != null)
+        {
+            // Interactive shell: it ignores SIGTERM. Hang up its whole session (process group
+            // == pid after setsid), like closing a terminal window does.
+            kill(-_pid, SIGHUP);
+            for (int i = 0; i < 8 && !_exited; i++)
+            {
+                if (waitpid(_pid, out _, WNOHANG) == _pid) { _exited = true; break; }
+                Thread.Sleep(25);
+            }
+            if (!_exited) kill(-_pid, SIGKILL);
+        }
+        else if (_pid > 0 && !_exited)
         {
             kill(_pid, SIGTERM);
             // Brief grace period.

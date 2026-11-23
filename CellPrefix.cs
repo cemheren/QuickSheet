@@ -20,6 +20,28 @@ public static class CellPrefix
     public static bool IsJson(string value) =>
         value.StartsWith("j: ", StringComparison.OrdinalIgnoreCase);
 
+    /// <summary>"t: 6,20" — an interactive terminal pane anchored here, 6 columns × 20 rows of cells.</summary>
+    public static bool IsTerminal(string value) =>
+        value.StartsWith("t: ", StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// Parses "t: cols,rows" into the pane's size in grid cells (both ≥ 1).
+    /// "t: " with no size is a 1×1 pane. Returns null if the cell is not a t: cell or the size is malformed.
+    /// </summary>
+    public static (int cols, int rows)? ParseTerminal(string value)
+    {
+        if (!IsTerminal(value)) return null;
+        string rest = value[3..].Trim();
+        if (rest.Length == 0) return (1, 1);
+        string[] parts = rest.Split(',', StringSplitOptions.TrimEntries);
+        if (parts.Length != 2 || !int.TryParse(parts[0], out int cols) || !int.TryParse(parts[1], out int rows))
+            return null;
+        if (cols < 1 || rows < 1 || cols > 1000 || rows > 1000) return null;
+        return (cols, rows);
+    }
+
+    public static string FormatTerminal(int cols, int rows) => $"t: {cols},{rows}";
+
     public static bool IsHyperlink(string value) =>
         value.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
         value.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
